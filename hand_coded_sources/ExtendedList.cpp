@@ -448,11 +448,11 @@ TC_unique_grow_array <cReadyAtThisInstant>  oReadyAtThisInstant ;
  
    for ( sint32 index = 0; index < interindex ; index ++) {
   	sint32 minStarting = SINT32_MAX;
-  	for ( sint32 interindex = 0; interindex < sizeofStarting ; interindex ++) {
-    	if ( !oReadyAtThisInstant (interindex COMMA_HERE).mMarked){
-    		if ( (minStarting=min(minStarting,oReadyAtThisInstant (interindex COMMA_HERE).mThisInstant))==
-    			oReadyAtThisInstant (interindex COMMA_HERE).mThisInstant ){
-    		  lIndex=interindex;	
+  	for (sint32 i = 0; i < sizeofStarting ; i ++) {
+    	if ( !oReadyAtThisInstant (i COMMA_HERE).mMarked){
+    		if ( (minStarting=min(minStarting,oReadyAtThisInstant (i COMMA_HERE).mThisInstant))==
+    			oReadyAtThisInstant (i COMMA_HERE).mThisInstant ){
+    		  lIndex=i;	
     		}
     	}
     }

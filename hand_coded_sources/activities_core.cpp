@@ -209,12 +209,12 @@ class cResourceSchedule {
   public : cResourceSchedule (const sint32 inResourceCount) ;
 
   public : inline void hash (const sint32 inResourceCount) {
-    uint32 hash = mArray (0 COMMA_HERE).hash () ;
+    uint32 hashValue = mArray (0 COMMA_HERE).hash () ;
     for (sint32 i=1 ; i<inResourceCount ; i++) {
-      hash <<= 3 ;
-      hash ^= mArray (i COMMA_HERE).hash () ;
+      hashValue <<= 3 ;
+      hashValue ^= mArray (i COMMA_HERE).hash () ;
     }
-    mHash = hash ;  
+    mHash = hashValue ;  
   }
 
 } ;
@@ -823,7 +823,7 @@ HasToAddSuccessors (const cResourceSchedule * inPtr,
                     const TC_unique_grow_array <cActivity> & inActivities ) {
   
   bool HasToAdd= false ; 
-  sint32 leastBusyPeriod = 0 ;  
+  sint32 LeastBusyPeriod = 0 ;  
   const sint32 SuccessorIndex = inActivities (inActivityIndex COMMA_HERE).mSuccessorId ;
   //--- Is any successor ?
   if (SuccessorIndex >= 0){ 
@@ -833,11 +833,11 @@ HasToAddSuccessors (const cResourceSchedule * inPtr,
 	    sint32 SuccessorPriority = inActivities (SuccessorIndex COMMA_HERE).mPriority ;
       const sint32 currentActivityOnSuccessurResource = inPtr->mArray (SuccessorResource COMMA_HERE).mCurrentActivity ;
       //--- Get the busy duration on the successor resource
-      leastBusyPeriod = 
+      LeastBusyPeriod = 
         inPtr->mArray (SuccessorResource COMMA_HERE).mActivitiesToScheduleList.getMinimumBusyPeriod4Activity (SuccessorIndex,
                      inActivities);
                      
-      leastBusyPeriod = LeastBusyDuration (inPtr, leastBusyPeriod, inCurrentInstant,
+      LeastBusyPeriod = LeastBusyDuration (inPtr, LeastBusyPeriod, inCurrentInstant,
                                          inAdditionIndex, SuccessorIndex,
                                          inResourceCount,
                                          inReadyAtThisInstant, inActivities);   
@@ -855,7 +855,7 @@ HasToAddSuccessors (const cResourceSchedule * inPtr,
 			    HasToAdd= true;
 		    } 	
       }else if( (inPtr->mArray (SuccessorResource COMMA_HERE).mExecutionCounter + SuccessorOffset) >=
-    			(inActivities (currentActivityOnSuccessurResource COMMA_HERE).mMinDuration + leastBusyPeriod) ){
+    			(inActivities (currentActivityOnSuccessurResource COMMA_HERE).mMinDuration + LeastBusyPeriod) ){
         //--- If it may be free, Test if any ready activity (at the addition instant) on that resource
         const bool AnyReadyAt= 
     	    inPtr->mArray (SuccessorResource COMMA_HERE).mActivitiesToScheduleList.AnyReadyToScheduleAt (inCurrentInstant) ;
@@ -1520,7 +1520,7 @@ scheduleActivities (const sint32 NoInterButUseB,
   cScheduleMap scheduleMap (inResourceCount, lastActivityScheduleInstant, inActivities) ;
   sint32 AdditionIndex=0;
 //--- Perform activities scheduling
-  C_timer timer ;
+  C_timer Timer ;
   while (scheduleMap.moreWorkToDo ()) {
     
     cResourceSchedule * list = scheduleMap.retrieveResourceList () ;
@@ -1591,9 +1591,8 @@ scheduleActivities (const sint32 NoInterButUseB,
     const sint32 currentInstant = scheduleMap.getCurrentInstant () ;
     if ( (currentInstant != 0) && ((currentInstant % devisor) == 0)) {
       printf ("currentInstant %ld, %ld resource nodes, ", currentInstant, nodeCount) ;
-      timer.printTimer (stdout) ;
+      Timer.printTimer (stdout) ;
       printf ("\n") ;
-       C_timer timer ;
       fflush (stdout) ;
     }
     scheduleMap.advanceToNextInstant () ;
