@@ -1,8 +1,8 @@
 system
 
-processor  p1 scalingfactor  4;
-processor  p2 scalingfactor 3;
-processor  p3 scalingfactor  4;
+processor  p1 scalingfactor 4 ;
+processor  p2 scalingfactor 3 ;
+processor  p3 scalingfactor 4 ;
 can network net  scalingfactor 12;
 
 # independents tasks
