@@ -1,0 +1,25 @@
+system
+processor Proc1;
+
+#--- independant task
+task t1 priority 2 duration 90..100 offset 740 period 1000 processor Proc1 ;
+task t4 priority 4 duration 75..90 offset 0 period 3750 processor Proc1 ;
+task t5 priority 1 duration 90..100 offset 0 period 5000 processor Proc1 ;
+task t13 priority 3 duration 120..140 offset 0 period 2500 processor Proc1 ;
+
+#--- dependent task
+task t2 priority 6 duration 75..80 offset 0 on task t1 ;
+task t3 priority 9 duration 40..45 offset 0 on task t2 ;
+task t6 priority 7 duration 60..62 offset 0 on task t5 ;
+task t7 priority 10 duration 44..45 offset 0 on task t6 ;
+task t8 priority 11 duration 50..55 offset 0 on task t6 ;
+task t9 priority 14 duration 50..55 offset 0 on task t8 ;
+task t10 priority 8 duration 40..42 offset 0 on task t5 every 2;
+task t11 priority 12 duration 40..44 offset 0 on task t10 ;
+task t12 priority 13 duration 45..45 offset 0 on task t10 every 1;
+task t14 priority 5 duration 60..80 offset 0 on task t13 ;
+
+
+end
+
+

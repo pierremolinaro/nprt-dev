@@ -1,0 +1,23 @@
+system
+
+processor  p1 step  4;
+processor  p2 step 3;
+processor  p3 step  4;
+can network net  factor 12;
+
+# independents tasks
+task t1 priority 1 duration 500..500 period 2400 processor p1 ;
+task t3 priority 1 duration 440..450 period 1600 processor p2 ;
+task t5 priority 1 duration 450..455 period 1200 processor p3 ;
+
+# dependents messages
+standard message m1 network net length 1 priority 1 on task t1 ;
+standard message m2 network net length 1 priority 3 on task t3 ;
+standard message m3 network net length 1 priority 2 on task t5 ;
+
+# dependents tasks
+task t2 priority 2 duration 350..360 on message m3 processor p1 ;
+task t4 priority 2 duration 600..610 on message m1 processor p2 ;
+task t6 priority 2 duration 350..360 on message m2 processor p3 ;
+
+end
