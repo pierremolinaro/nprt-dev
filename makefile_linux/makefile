@@ -23,7 +23,7 @@ RELEASE_OPTIONS := -DDO_NOT_GENERATE_MEMORY_CHECK_CODE
 
 #---------------------------------------------------------------*
 
-include ../common_files_for_make/makefile.mke
+include ../common_files_for_make/common_sources_makefile.mke
 
 #---------------------------------------------------------------*
 #                                                               *
