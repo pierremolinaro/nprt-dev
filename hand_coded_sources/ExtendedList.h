@@ -5,8 +5,6 @@ extern "C" {
 #ifndef EXTENDEDLIST_H
 #define EXTENDEDLIST_H
 
-#include "streams/C_string_input_stream.h"
-
 class C_html_file_write ;
 
 #define min(x, y)   ((x) < (y) ? (x) : (y))

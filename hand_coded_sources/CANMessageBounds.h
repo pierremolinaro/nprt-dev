@@ -5,8 +5,7 @@ extern "C" {
 #ifndef CANMESSAGEBOUNDS_H
 #define CANMESSAGEBOUNDS_H
 
-#include "streams/C_string_input_stream.h"
-
+#include "utilities/M_machine.h"
 
 sint32 minCANMessageTime(const char c, const uint32 priority, const uint32 Num_Bytes) ;
 
