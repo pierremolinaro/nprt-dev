@@ -63,7 +63,8 @@ CalculateHyperPeriod (const TC_unique_grow_array <cElement> & Element) {
 
 /*----------------------------------------------------------------------*/
 
-static sint32 
+// Unused function : commented out by PM 17/1/2005
+/* static sint32 
 CalculateExtendedListLength (const TC_unique_grow_array <cElement> & Element,
                              const uint64 inHyperPeriod) {
   
@@ -74,6 +75,8 @@ CalculateExtendedListLength (const TC_unique_grow_array <cElement> & Element,
   }
   return ExtendedListLength;
 }
+*/
+
 /*-----------------------------------------------------------------------------*/
 static void
 ExtractResourceMinDuration (TC_unique_grow_array <cElement> & Element,
@@ -316,7 +319,7 @@ DeployElements (TC_unique_grow_array <cElement> & ArrangedElement,
         MTelement.mMaxDuration = ArrangedElement (index COMMA_HERE).mMaxDuration ;
         
         if (ArrangedElement (index COMMA_HERE).mDeadline == SINT32_MAX) {
-		     	MTelement.mDeadline = UINT32_MAX;
+		     	MTelement.mDeadline = SINT32_MAX;
 		    }else{
 		     	MTelement.mDeadline = clicktime +	ArrangedElement (index COMMA_HERE).mDeadline ;
 		    }
@@ -387,7 +390,7 @@ TC_unique_grow_array <cReadyAtThisInstant>  oReadyAtThisInstant ;
   for ( sint32 index = 0; index < ArrangedElement.getCount(); index ++) {
    	if ( ArrangedElement (index COMMA_HERE).mPredecessorId < 0){
    	   sint32 NextOccurrence = ArrangedElement (index COMMA_HERE).mOffset ;
-   	   while (NextOccurrence <= (ArrangedElement (index COMMA_HERE).mOffset+inHyperPeriod- ArrangedElement (index COMMA_HERE).mPeriod)) {
+   	   while (NextOccurrence <= (ArrangedElement (index COMMA_HERE).mOffset+ ((sint32)inHyperPeriod) - ArrangedElement (index COMMA_HERE).mPeriod)) {
    	     bool theSameInstantIsFound = false;
    	     sint32 interindex=0;
    	     while( (interindex < Num_ofIndepStaringInstant) 
@@ -427,7 +430,7 @@ TC_unique_grow_array <cReadyAtThisInstant>  oReadyAtThisInstant ;
   while ( (interindex < Num_ofIndepStaringInstant)
            &&
            (oReadyAtThisInstant (interindex COMMA_HERE).mThisInstant != -1) ){
-    sint32 ActivityIndex = oReadyAtThisInstant (interindex COMMA_HERE).mActivityIndex;
+  //  sint32 ActivityIndex = oReadyAtThisInstant (interindex COMMA_HERE).mActivityIndex; // Commented out PM 17/1/2005
     /*printf("Activitites ready at : %ld are:\n",Activity (ActivityIndex COMMA_HERE).mOffset);
     printf("Activity : %ld & ",ActivityIndex);
     fflush(stdout); */
@@ -441,7 +444,7 @@ TC_unique_grow_array <cReadyAtThisInstant>  oReadyAtThisInstant ;
     interindex ++;
   }
 
-  sint32 lIndex;
+  sint32 lIndex = 0 ;
  
    for ( sint32 index = 0; index < interindex ; index ++) {
   	sint32 minStarting = SINT32_MAX;
@@ -540,7 +543,7 @@ BuildExtendedList (TC_unique_grow_array <cReadyAtThisInstant> & oReadyAtThisInst
   																			Nu_ofTasks,Nu_ofMessages);
   
   FindSuccessors (ArrangedElement);
-  const sint32 ActivitiesNumber = CalculateExtendedListLength(Element, HyperPeriod) ;
+ // const sint32 ActivitiesNumber = CalculateExtendedListLength(Element, HyperPeriod) ; // Commented out PM 17/1/2005
 	const sint32 Num_of_Activties = 
 	      DeployElements (ArrangedElement, exElement, outMTElement, HyperPeriod);
  	

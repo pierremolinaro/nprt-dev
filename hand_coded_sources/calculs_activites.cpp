@@ -1,6 +1,5 @@
 /*--------------------------------------------------------------------------*/
 #include<stdlib.h> 
-#include "files/C_cpp_text_file_write.h"
 #include "files/C_html_file_write.h"
 
 #include "oa_semantics.h"
@@ -257,9 +256,8 @@ performComputations (C_lexique & inLexique,
   TC_unique_grow_array <cResource> Resource ;
   TC_unique_grow_array <cElement> Element ;
 
-  const bool CreateIntermediateFiles = inLexique.getBoolOptionValueFromKeys ("oa_cli_options", "createIntermediateFiles") ;
- // bool forceBalgorithm = inLexique.getBoolOptionValueFromKeys ("oa_cli_options", "forceBalgorithm") ;
-  const bool useCANmaxLengthOnly = inLexique.getBoolOptionValueFromKeys ("oa_cli_options", "useCANmaxLegth") ;
+  const bool CreateIntermediateFiles = inLexique.getBoolOptionValueFromKeys ("oa_cli_options", "createIntermediateFiles", true) ;
+  const bool useCANmaxLengthOnly = inLexique.getBoolOptionValueFromKeys ("oa_cli_options", "useCANmaxLegth", true) ;
   bool forceBalgorithm = true ;
   const C_string sourceFile = inLexique.getSourceFile () ;
   
@@ -377,7 +375,7 @@ performComputations (C_lexique & inLexique,
                           ? element.mMaxDuration :(Sca*(sint32)  task->mInfo.mDurationMin.getValue ());
         
     element.mDeadline = (sint32) task->mInfo.mDeadline.getValue ();
-    if ( element.mDeadline !=  UINT32_MAX){
+    if ( element.mDeadline !=  SINT32_MAX){ // UINT32_MAX -> SINT32_MAX by PM, 17/1/2005
     	 element.mDeadline = Sca*element.mDeadline;
     }  
  //................................................   
@@ -467,7 +465,7 @@ performComputations (C_lexique & inLexique,
 		}
 		
     element.mDeadline =  (sint32) message->mInfo.mDeadline.getValue ();
-    if ( element.mDeadline !=  UINT32_MAX){
+    if ( element.mDeadline !=  SINT32_MAX){ // UINT32_MAX -> SINT32_MAX by PM, 17/1/2005
     	 element.mDeadline = ScalingFactor *element.mDeadline;
     }  
  //...........................................................................

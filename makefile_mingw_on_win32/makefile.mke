@@ -1,0 +1,41 @@
+#---------------------------------------------------------------*
+#                                                               *
+# MAKEFILE for building NPTR command line tools                 *
+#  For Win32, compiled on Win32                                 *
+#                                                               *
+#---------------------------------------------------------------*
+
+#--- Release and debug versions
+EXECUTABLE := markg.exe
+EXECUTABLE_DEBUG := markg_debug.exe
+
+#---------------------------------------------------------------*
+
+RELEASE_OPTIONS := -DDO_NOT_GENERATE_MEMORY_CHECK_CODE
+
+#---------------------------------------------------------------*
+
+#--- Linker libraries
+LINKER_OPTIONS := -lstdc++ -lm -lcomdlg32
+
+#---------------------------------------------------------------*
+
+include ../common_files_for_make/common_sources_makefile.mke
+
+#---------------------------------------------------------------*
+#                                                               *
+#     Include MinGW gcc tools definitions for Win32             *
+#                                                               *
+#---------------------------------------------------------------*
+
+include $(LIB_PM_PATH)/included_makefiles/mingw_msys_on_win32.mke
+
+#---------------------------------------------------------------*
+#                                                               *
+#     Include makefile that performs actual work                *
+#                                                               *
+#---------------------------------------------------------------*
+
+include $(LIB_PM_PATH)/included_makefiles/generic_makefile.mke
+
+#---------------------------------------------------------------*

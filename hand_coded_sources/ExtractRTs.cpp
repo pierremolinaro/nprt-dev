@@ -114,7 +114,7 @@ ExtractWorstBestRT (const TC_unique_grow_array <cActivity> & exElement,
     sint32 resourceStep = Resource (resourceIndex COMMA_HERE).mStep ;
     
     MTElement ( index COMMA_HERE).mPeriod = MTElement ( index COMMA_HERE).mPeriod / resourceStep ;
-    if ( MTElement ( index COMMA_HERE).mDeadline !=  UINT32_MAX){
+    if ( MTElement ( index COMMA_HERE).mDeadline !=  SINT32_MAX){ // UINT32_MAX -> SINT32_MAX by PM 17/1/2005
          MTElement ( index COMMA_HERE).mDeadline = MTElement ( index COMMA_HERE).mDeadline / resourceStep ;
     }
     MTElement ( index COMMA_HERE).mBestResponseTime = 
@@ -161,7 +161,7 @@ ExtractWorstBestRT (const TC_unique_grow_array <cActivity> & exElement,
 		    in_htmlFile << MTElement ( i COMMA_HERE).mPeriod * MTElement ( i COMMA_HERE).mEvery ;
 		    in_htmlFile.outputRawData ("</td><td>") ;
 		    
-		    if (MTElement ( i COMMA_HERE).mDeadline ==  UINT32_MAX){
+		    if (MTElement ( i COMMA_HERE).mDeadline ==  SINT32_MAX){// UINT32_MAX -> SINT32_MAX by PM 17/1/2005
   				in_htmlFile.outputRawData ("Unkown</td><td>&nbsp;</td></tr>") ;
   			}else{
         	in_htmlFile << MTElement ( i COMMA_HERE).mDeadline ;

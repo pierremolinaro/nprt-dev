@@ -1043,7 +1043,7 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
     }else{
       sint32 MinimumHPBusyPeriod = 0;
       sint32 MinimumBusyPeriod = 0;
-      sint32 PreviousPriority = SINT32_MAX;
+     //  sint32 PreviousPriority = SINT32_MAX; // Unused var ; commented out 1/1/2005
 	    sint32 MaximumBusyPeriod = inActivities (currentActivity COMMA_HERE).mMaxDuration -
 	                               inPtr->mArray (inResourceIndex COMMA_HERE).mExecutionCounter;
 	    MaximumBusyPeriod += 

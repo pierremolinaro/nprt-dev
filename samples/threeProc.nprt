@@ -6,9 +6,6 @@ can network r1;
 
 #--- independant task
 task t11 priority 1 duration 60..65 period 500 processor proc1 ;
-#task t12 priority 2 duration 65..70 period 500 processor proc1 ;
-
-#task t21 priority 1 duration 10..10 period 500 processor proc2 ;
 
 task t31 priority 1 duration 40..40 period 500 processor proc3 ;
 

@@ -1,9 +1,9 @@
 system
 
-processor  p1 step  4;
-processor  p2 step 3;
-processor  p3 step  4;
-can network net  factor 12;
+processor  p1 scalingfactor  4;
+processor  p2 scalingfactor 3;
+processor  p3 scalingfactor  4;
+can network net  scalingfactor 12;
 
 # independents tasks
 task t1 priority 1 duration 500..500 period 2400 processor p1 ;

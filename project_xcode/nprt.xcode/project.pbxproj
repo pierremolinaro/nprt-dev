@@ -255,6 +255,7 @@
 				WRAPPER_EXTENSION = app;
 			};
 			dependencies = (
+				CF9C7030079BFFFA00797E14,
 			);
 			isa = PBXNativeTarget;
 			name = cocoa_nprt;
@@ -2729,6 +2730,18 @@
 			path = galgas/C_galgas_cocoa_io.cpp;
 			refType = 4;
 			sourceTree = "<group>";
+		};
+		CF9C702F079BFFFA00797E14 = {
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 8DD76F620486A84900D96B5E;
+			remoteInfo = nprt;
+		};
+		CF9C7030079BFFFA00797E14 = {
+			isa = PBXTargetDependency;
+			target = 8DD76F620486A84900D96B5E;
+			targetProxy = CF9C702F079BFFFA00797E14;
 		};
 		CF9D5F1905F3829F00E53A6F = {
 			fileRef = CFF53858057A552C00854C83;
