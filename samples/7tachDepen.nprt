@@ -1,0 +1,16 @@
+system
+processor proc1;
+
+#--- independant task
+task t1 priority 1 duration 4..5 offset 0 period 30 processor proc1 ;
+task t2 priority 5 duration 3..4 offset 0 period 30 processor proc1 ;
+task t3 priority 7 duration 4..6 offset 0 period 30 processor proc1 ;
+task t4 priority 2 duration 4..5 offset 5 period 30 processor proc1 ;
+task t5 priority 3 duration 5..5 offset 35 period 60 processor proc1 ;
+task t6 priority 4 duration 4..5 offset 5 period 30 processor proc1 ;
+task t7 priority 6 duration 4..5 offset 35 period 60 processor proc1 ;
+
+
+end
+
+

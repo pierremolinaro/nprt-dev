@@ -1,0 +1,24 @@
+system
+processor proc1;
+processor proc2;
+processor proc3;
+can network r1;
+
+#--- independant task
+task t11 priority 1 duration 60..65 period 500 processor proc1 ;
+#task t12 priority 2 duration 65..70 period 500 processor proc1 ;
+
+#task t21 priority 1 duration 10..10 period 500 processor proc2 ;
+
+task t31 priority 1 duration 40..40 period 500 processor proc3 ;
+
+#dependent message
+standard message m1 network r1 length 1 priority 2 on task t11 ;
+standard message m2 network r1 length 1 priority 1 period 500 ;
+
+#--- dependent task
+task t21 priority 2 duration 10..10 deadline 500 on message m1 processor proc2 ;
+
+end
+
+

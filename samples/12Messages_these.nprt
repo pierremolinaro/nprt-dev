@@ -1,0 +1,22 @@
+system
+
+can network r1 ;
+
+
+
+#--- independant messages
+
+standard message m1 network r1 length 8 priority 1 offset 0 deadline 2500 period 2500 ; 
+standard message m2 network r1 length 3 priority 2 offset 0 deadline 3500 period 3500 ; 
+standard message m3 network r1 length 3 priority 5 offset 0 deadline 5000 period 5000 ; 
+standard message m4 network r1 length 2 priority 3 offset 0 deadline 3750 period 3750 ; 
+standard message m5 network r1 length 5 priority 6 offset 0 deadline 5000 period 5000 ; 
+standard message m6 network r1 length 5 priority 8 offset 0 deadline 10000 period 10000 ; 
+standard message m7 network r1 length 4 priority 4 offset 0 deadline 3750 period  3750 ; 
+standard message m8 network r1 length 5 priority 9 offset 0 deadline  12500 period 12500 ; 
+standard message m9 network r1 length 4 priority 7 offset 0 deadline  5000 period  5000 ; 
+standard message m10 network r1 length 7 priority 11 offset 0 deadline 25000 period 25000 ; 
+standard message m11 network r1 length 5 priority 10 offset 0 deadline 12500 period  12500 ; 
+standard message m12 network r1 length 1 priority 12 offset 0 deadline  25000 period 25000 ; 
+
+end
