@@ -300,6 +300,8 @@
 				CF3115F70622ABE200882F85,
 				CF505BC607BF780A0059963C,
 				CF505BC707BF780A0059963C,
+				CFED7CCF0800363C000CACEE,
+				CFED7CD00800363C000CACEE,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3080,6 +3082,8 @@
 		CFAD482E0591BCF700BF8381 = {
 			children = (
 				CF505BC407BF780A0059963C,
+				CFED7CCD0800363C000CACEE,
+				CFED7CCE0800363C000CACEE,
 				CF505BC507BF780A0059963C,
 				CF6702F605C072FF0065267C,
 				CFA48FD30591D6D200D787ED,
@@ -3205,6 +3209,34 @@
 		};
 		CFD7E27D059B5BBF00410349 = {
 			fileRef = CFD7E277059B5BBF00410349;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		CFED7CCD0800363C000CACEE = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = fenetre.png;
+			path = cocoa_galgas/fenetre.png;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		CFED7CCE0800363C000CACEE = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = saveas.png;
+			path = cocoa_galgas/saveas.png;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		CFED7CCF0800363C000CACEE = {
+			fileRef = CFED7CCD0800363C000CACEE;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		CFED7CD00800363C000CACEE = {
+			fileRef = CFED7CCE0800363C000CACEE;
 			isa = PBXBuildFile;
 			settings = {
 			};
