@@ -21,7 +21,6 @@
 #include "generic_arraies/TC_unique_grow_array.h"
 #include "generic_arraies/TC_unique_dyn_array.h"
 #include "streams/C_console_out.h"
-#include "streams/C_string_input_stream.h"
 #include "command_line_interface/F_analyze_command_line_opts.h"
 #include "command_line_interface/myMain.h"
 #include "time/C_timer.h"
