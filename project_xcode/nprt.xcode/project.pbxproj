@@ -258,7 +258,7 @@
 				CF9C7030079BFFFA00797E14,
 			);
 			isa = PBXNativeTarget;
-			name = cocoa_nprt;
+			name = "NPRT Cocoa";
 			productInstallPath = "$(HOME)/Applications";
 			productName = essai_cocoa;
 			productReference = CF4518F805FCAE44008D4817;
@@ -395,7 +395,7 @@
 			dependencies = (
 			);
 			isa = PBXNativeTarget;
-			name = nprt;
+			name = "NPRT Tool";
 			productInstallPath = "$(HOME)/bin";
 			productName = galgas;
 			productReference = CF4518F605FCAE44008D4817;
@@ -2269,7 +2269,7 @@
 			dependencies = (
 			);
 			isa = PBXNativeTarget;
-			name = nprtDebug;
+			name = "NPRT Tool Debug";
 			productName = galgasDebug;
 			productReference = CF4518FA05FCAE44008D4817;
 			productType = "com.apple.product-type.tool";
