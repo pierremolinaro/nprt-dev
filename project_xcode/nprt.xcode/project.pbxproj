@@ -375,6 +375,7 @@
 				8DD76F690486A84900D96B5E,
 			);
 			buildRules = (
+				CF2AA3C108352537007DE3CB,
 			);
 			buildSettings = {
 				DEPLOYMENT_LOCATION = NO;
@@ -425,8 +426,6 @@
 				CF2A8855058CCF55003EF2F4,
 				CF2A8857058CCF57003EF2F4,
 				CF2A8859058CCF59003EF2F4,
-				CF2A885C058CCF5C003EF2F4,
-				CF2A885D058CCF5D003EF2F4,
 				CF2A885E058CCF5E003EF2F4,
 				CF2A885F058CCF5E003EF2F4,
 				CF2A8860058CCF61003EF2F4,
@@ -455,6 +454,7 @@
 				CF41061C0622B1AC006338F8,
 				CF4106200622B1AC006338F8,
 				CF4F5CF107A16DBE007B95A7,
+				CFC9AA2D0835056A006FFF31,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -867,18 +867,6 @@
 			settings = {
 			};
 		};
-		CF2A885C058CCF5C003EF2F4 = {
-			fileRef = CF3FF0CD05877B62000D2F8C;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		CF2A885D058CCF5D003EF2F4 = {
-			fileRef = CF3FF0CF05877B62000D2F8C;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		CF2A885E058CCF5E003EF2F4 = {
 			fileRef = CF3FF14205878B54000D2F8C;
 			isa = PBXBuildFile;
@@ -921,6 +909,22 @@
 			settings = {
 			};
 		};
+		CF2AA3C108352537007DE3CB = {
+			compilerSpec = com.apple.compilers.gcc.3_3;
+			fileType = sourcecode.c;
+			isEditable = 1;
+			isa = PBXBuildRule;
+			outputFiles = (
+			);
+		};
+		CF2AA3C208352562007DE3CB = {
+			compilerSpec = com.apple.compilers.gcc.3_3;
+			fileType = sourcecode.c;
+			isEditable = 1;
+			isa = PBXBuildRule;
+			outputFiles = (
+			);
+		};
 		CF3115F40622ABE200882F85 = {
 			isa = PBXFileReference;
 			lastKnownFileType = image.icns;
@@ -961,7 +965,7 @@
 				CF31E0FD0598DF9E00814123,
 			);
 			isa = PBXGroup;
-			name = "Command Line Interface";
+			path = command_line_interface;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -969,8 +973,7 @@
 			explicitFileType = sourcecode.cpp.cpp;
 			fileEncoding = 5;
 			isa = PBXFileReference;
-			name = AC_cli_options.cpp;
-			path = command_line_interface/AC_cli_options.cpp;
+			path = AC_cli_options.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -978,8 +981,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = AC_cli_options.h;
-			path = command_line_interface/AC_cli_options.h;
+			path = AC_cli_options.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -987,8 +989,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_generic_cli_options.cpp;
-			path = command_line_interface/C_generic_cli_options.cpp;
+			path = C_generic_cli_options.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -996,8 +997,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = C_generic_cli_options.h;
-			path = command_line_interface/C_generic_cli_options.h;
+			path = C_generic_cli_options.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1005,8 +1005,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = F_analyze_command_line_opts.cpp;
-			path = command_line_interface/F_analyze_command_line_opts.cpp;
+			path = F_analyze_command_line_opts.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1014,8 +1013,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = F_analyze_command_line_opts.h;
-			path = command_line_interface/F_analyze_command_line_opts.h;
+			path = F_analyze_command_line_opts.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1023,8 +1021,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = main.cpp;
-			path = command_line_interface/main.cpp;
+			path = main.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1032,8 +1029,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = myMain.h;
-			path = command_line_interface/myMain.h;
+			path = myMain.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1187,8 +1183,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = AC_galgas_io.h;
-			path = galgas/AC_galgas_io.h;
+			path = AC_galgas_io.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1196,8 +1191,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = C_galgas_stringset.h;
-			path = galgas/C_galgas_stringset.h;
+			path = C_galgas_stringset.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1205,8 +1199,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = C_galgas_uint_array.h;
-			path = galgas/C_galgas_uint_array.h;
+			path = C_galgas_uint_array.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1214,8 +1207,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = C_lexique.h;
-			path = galgas/C_lexique.h;
+			path = C_lexique.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1223,8 +1215,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = galgas_header.h;
-			path = galgas/galgas_header.h;
+			path = galgas_header.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1232,8 +1223,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = GGS_bool.h;
-			path = galgas/GGS_bool.h;
+			path = GGS_bool.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1241,8 +1231,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = GGS_char.h;
-			path = galgas/GGS_char.h;
+			path = GGS_char.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1250,8 +1239,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = GGS_dfloat.h;
-			path = galgas/GGS_dfloat.h;
+			path = GGS_dfloat.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1259,8 +1247,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = GGS_lbool.h;
-			path = galgas/GGS_lbool.h;
+			path = GGS_lbool.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1268,8 +1255,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = GGS_lchar.h;
-			path = galgas/GGS_lchar.h;
+			path = GGS_lchar.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1277,8 +1263,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = GGS_ldfloat.h;
-			path = galgas/GGS_ldfloat.h;
+			path = GGS_ldfloat.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1286,8 +1271,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = GGS_location.h;
-			path = galgas/GGS_location.h;
+			path = GGS_location.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1295,8 +1279,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = GGS_lstring.h;
-			path = galgas/GGS_lstring.h;
+			path = GGS_lstring.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1304,8 +1287,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = GGS_luint.h;
-			path = galgas/GGS_luint.h;
+			path = GGS_luint.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1313,8 +1295,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = GGS_string.h;
-			path = galgas/GGS_string.h;
+			path = GGS_string.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1322,8 +1303,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = GGS_uint.h;
-			path = galgas/GGS_uint.h;
+			path = GGS_uint.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1331,26 +1311,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = lexical_actions.h;
-			path = galgas/lexical_actions.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		CF3FF0CD05877B62000D2F8C = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = TC_avl_tree_map.h;
-			path = galgas/TC_avl_tree_map.h;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		CF3FF0CF05877B62000D2F8C = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = TC_binary_tree_map.h;
-			path = galgas/TC_binary_tree_map.h;
+			path = lexical_actions.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1366,7 +1327,7 @@
 				CF3FF14805878B54000D2F8C,
 			);
 			isa = PBXGroup;
-			name = "Generic arraies";
+			path = generic_arraies;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1374,8 +1335,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = ATC_array.h;
-			path = generic_arraies/ATC_array.h;
+			path = ATC_array.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1383,8 +1343,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = TC_fix_array.h;
-			path = generic_arraies/TC_fix_array.h;
+			path = TC_fix_array.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1392,8 +1351,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = TC_grow_array.h;
-			path = generic_arraies/TC_grow_array.h;
+			path = TC_grow_array.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1401,8 +1359,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = TC_grow_array2.h;
-			path = generic_arraies/TC_grow_array2.h;
+			path = TC_grow_array2.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1410,8 +1367,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = TC_shared_array.h;
-			path = generic_arraies/TC_shared_array.h;
+			path = TC_shared_array.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1419,8 +1375,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = TC_unique_dyn_array.h;
-			path = generic_arraies/TC_unique_dyn_array.h;
+			path = TC_unique_dyn_array.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1428,8 +1383,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = TC_unique_fix_array.h;
-			path = generic_arraies/TC_unique_fix_array.h;
+			path = TC_unique_fix_array.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1437,8 +1391,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = TC_unique_grow_array.h;
-			path = generic_arraies/TC_unique_grow_array.h;
+			path = TC_unique_grow_array.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1608,8 +1561,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = TC_prime_cache2.h;
-			path = cache/TC_prime_cache2.h;
+			path = TC_prime_cache2.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -1628,16 +1580,14 @@
 		CF505BC407BF780A0059963C = {
 			isa = PBXFileReference;
 			lastKnownFileType = image.tiff;
-			name = action.tiff;
-			path = cocoa_galgas/action.tiff;
+			path = action.tiff;
 			refType = 4;
 			sourceTree = "<group>";
 		};
 		CF505BC507BF780A0059963C = {
 			isa = PBXFileReference;
 			lastKnownFileType = image.tiff;
-			name = stop_aqua.tiff;
-			path = cocoa_galgas/stop_aqua.tiff;
+			path = stop_aqua.tiff;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2109,8 +2059,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = cocoa_wrapper_for_galgas.h;
-			path = cocoa_galgas/cocoa_wrapper_for_galgas.h;
+			path = cocoa_wrapper_for_galgas.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2163,8 +2112,6 @@
 				CF7A14A1058D0122007126C1,
 				CF7A14A3058D0124007126C1,
 				CF7A14A5058D0126007126C1,
-				CF7A14A9058D012A007126C1,
-				CF7A14AA058D012B007126C1,
 				CF7A14AB058D012C007126C1,
 				CF7A14AC058D012D007126C1,
 				CF7A14AD058D012D007126C1,
@@ -2192,6 +2139,7 @@
 				CF41060A0622B1AC006338F8,
 				CF41060E0622B1AC006338F8,
 				CF4F5CF207A16DBE007B95A7,
+				CFC9AA2E0835056A006FFF31,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2264,6 +2212,7 @@
 				CF7A1401058CEFE2007126C1,
 			);
 			buildRules = (
+				CF2AA3C208352562007DE3CB,
 			);
 			buildSettings = {
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2612,18 +2561,6 @@
 			settings = {
 			};
 		};
-		CF7A14A9058D012A007126C1 = {
-			fileRef = CF3FF0CD05877B62000D2F8C;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		CF7A14AA058D012B007126C1 = {
-			fileRef = CF3FF0CF05877B62000D2F8C;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
 		CF7A14AB058D012C007126C1 = {
 			fileRef = CF3FF14205878B54000D2F8C;
 			isa = PBXBuildFile;
@@ -2670,8 +2607,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_galgas_null_io.cpp;
-			path = galgas/C_galgas_null_io.cpp;
+			path = C_galgas_null_io.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2679,8 +2615,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = C_galgas_null_io.h;
-			path = galgas/C_galgas_null_io.h;
+			path = C_galgas_null_io.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2688,8 +2623,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_galgas_terminal_io.cpp;
-			path = galgas/C_galgas_terminal_io.cpp;
+			path = C_galgas_terminal_io.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2697,8 +2631,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = C_galgas_terminal_io.h;
-			path = galgas/C_galgas_terminal_io.h;
+			path = C_galgas_terminal_io.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2706,8 +2639,7 @@
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = cocoaGalgasBuildWindowController.h;
-			path = cocoa_galgas/cocoaGalgasBuildWindowController.h;
+			path = cocoaGalgasBuildWindowController.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2715,8 +2647,7 @@
 			fileEncoding = 4;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
-			name = cocoaGalgasBuildWindowController.mm;
-			path = cocoa_galgas/cocoaGalgasBuildWindowController.mm;
+			path = cocoaGalgasBuildWindowController.mm;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2742,8 +2673,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = C_galgas_cocoa_io.h;
-			path = galgas/C_galgas_cocoa_io.h;
+			path = C_galgas_cocoa_io.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2751,8 +2681,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_galgas_cocoa_io.cpp;
-			path = galgas/C_galgas_cocoa_io.cpp;
+			path = C_galgas_cocoa_io.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2808,8 +2737,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = cocoaGalgasDocument.h;
-			path = cocoa_galgas/cocoaGalgasDocument.h;
+			path = cocoaGalgasDocument.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2817,8 +2745,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
-			name = cocoaGalgasDocument.mm;
-			path = cocoa_galgas/cocoaGalgasDocument.mm;
+			path = cocoaGalgasDocument.mm;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2826,8 +2753,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = cocoaGalgasRulerView.h;
-			path = cocoa_galgas/cocoaGalgasRulerView.h;
+			path = cocoaGalgasRulerView.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2835,8 +2761,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
-			name = cocoaGalgasRulerView.mm;
-			path = cocoa_galgas/cocoaGalgasRulerView.mm;
+			path = cocoaGalgasRulerView.mm;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2844,8 +2769,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = cocoaGalgasTextView.h;
-			path = cocoa_galgas/cocoaGalgasTextView.h;
+			path = cocoaGalgasTextView.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2883,8 +2807,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = cocoaGalgasPreferencesController.h;
-			path = cocoa_galgas/cocoaGalgasPreferencesController.h;
+			path = cocoaGalgasPreferencesController.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2892,8 +2815,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
-			name = cocoaGalgasPreferencesController.mm;
-			path = cocoa_galgas/cocoaGalgasPreferencesController.mm;
+			path = cocoaGalgasPreferencesController.mm;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2901,8 +2823,7 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = cocoaGalgasPrefix.pch;
-			path = cocoa_galgas/cocoaGalgasPrefix.pch;
+			path = cocoaGalgasPrefix.pch;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2929,8 +2850,7 @@
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			lineEnding = 2;
-			name = cliGalgasPrefix.pch;
-			path = cocoa_galgas/cliGalgasPrefix.pch;
+			path = cliGalgasPrefix.pch;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2947,8 +2867,8 @@
 		CFA490160591D96B00D787ED = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.nib;
-			name = English;
-			path = cocoa_galgas/English.lproj/cocoaGalgasDocument.nib;
+			name = cocoaGalgasDocument.nib;
+			path = English.lproj/cocoaGalgasDocument.nib;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3062,8 +2982,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = AC_galgas_map.cpp;
-			path = galgas/AC_galgas_map.cpp;
+			path = AC_galgas_map.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3102,7 +3021,7 @@
 				CFA490150591D96B00D787ED,
 			);
 			isa = PBXGroup;
-			name = "Cocoa Galgas";
+			path = cocoa_galgas;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3119,8 +3038,8 @@
 		CFAD48610591BE8B00BF8381 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.nib;
-			name = English;
-			path = cocoa_galgas/English.lproj/MainMenu.nib;
+			name = MainMenu.nib;
+			path = English.lproj/MainMenu.nib;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3144,12 +3063,40 @@
 			settings = {
 			};
 		};
+		CFC9AA2B08350530006FFF31 = {
+			children = (
+				CFC9AA2C0835056A006FFF31,
+			);
+			isa = PBXGroup;
+			path = generic_maps;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		CFC9AA2C0835056A006FFF31 = {
+			fileEncoding = 5;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = TC_blockavltree_for_collision.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		CFC9AA2D0835056A006FFF31 = {
+			fileRef = CFC9AA2C0835056A006FFF31;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		CFC9AA2E0835056A006FFF31 = {
+			fileRef = CFC9AA2C0835056A006FFF31;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		CFD4680F066739A300573CE6 = {
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
-			name = cocoaGalgasTextView.mm;
-			path = cocoa_galgas/cocoaGalgasTextView.mm;
+			path = cocoaGalgasTextView.mm;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3163,8 +3110,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_cli_options_group.cpp;
-			path = command_line_interface/C_cli_options_group.cpp;
+			path = C_cli_options_group.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3172,8 +3118,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = C_cli_options_group.h;
-			path = command_line_interface/C_cli_options_group.h;
+			path = C_cli_options_group.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3216,16 +3161,14 @@
 		CFED7CCD0800363C000CACEE = {
 			isa = PBXFileReference;
 			lastKnownFileType = image.png;
-			name = fenetre.png;
-			path = cocoa_galgas/fenetre.png;
+			path = fenetre.png;
 			refType = 4;
 			sourceTree = "<group>";
 		};
 		CFED7CCE0800363C000CACEE = {
 			isa = PBXFileReference;
 			lastKnownFileType = image.png;
-			name = saveas.png;
-			path = cocoa_galgas/saveas.png;
+			path = saveas.png;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3297,6 +3240,7 @@
 				CFF538CC057A559D00854C83,
 				CFF53871057A555E00854C83,
 				CF3FF14005878B33000D2F8C,
+				CFC9AA2B08350530006FFF31,
 				CFF53868057A553800854C83,
 				CFF53851057A54FB00854C83,
 				CFF53846057A54DF00854C83,
@@ -3317,7 +3261,7 @@
 				CFF5382A057A54D200854C83,
 			);
 			isa = PBXGroup;
-			name = Utilities;
+			path = utilities;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3325,8 +3269,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_exception.cpp;
-			path = utilities/C_exception.cpp;
+			path = C_exception.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3334,8 +3277,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = F_display_exception.cpp;
-			path = utilities/F_display_exception.cpp;
+			path = F_display_exception.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3343,8 +3285,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = F_get_prime.cpp;
-			path = utilities/F_get_prime.cpp;
+			path = F_get_prime.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3352,8 +3293,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = M_assert.cpp;
-			path = utilities/M_assert.cpp;
+			path = M_assert.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3363,7 +3303,7 @@
 				CFF5384B057A54EE00854C83,
 			);
 			isa = PBXGroup;
-			name = Time;
+			path = time;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3371,8 +3311,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_datetime.cpp;
-			path = time/C_datetime.cpp;
+			path = C_datetime.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3380,8 +3319,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_timer.cpp;
-			path = time/C_timer.cpp;
+			path = C_timer.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3392,7 +3330,7 @@
 				CFF5385A057A552C00854C83,
 			);
 			isa = PBXGroup;
-			name = Streams;
+			path = streams;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3400,8 +3338,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = AC_output_stream.cpp;
-			path = streams/AC_output_stream.cpp;
+			path = AC_output_stream.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3409,8 +3346,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_console_out.cpp;
-			path = streams/C_console_out.cpp;
+			path = C_console_out.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3418,8 +3354,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_indirect_out.cpp;
-			path = streams/C_indirect_out.cpp;
+			path = C_indirect_out.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3429,7 +3364,7 @@
 				CFF5386B057A555000854C83,
 			);
 			isa = PBXGroup;
-			name = Memory;
+			path = memory;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3437,8 +3372,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_reference_count.cpp;
-			path = memory/C_reference_count.cpp;
+			path = C_reference_count.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3446,8 +3380,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = M_memory_control.cpp;
-			path = memory/M_memory_control.cpp;
+			path = M_memory_control.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3493,11 +3426,9 @@
 				CF3FF0CA05877B62000D2F8C,
 				CF3FF0CB05877B62000D2F8C,
 				CF3FF0CC05877B62000D2F8C,
-				CF3FF0CD05877B62000D2F8C,
-				CF3FF0CF05877B62000D2F8C,
 			);
 			isa = PBXGroup;
-			name = Galgas;
+			path = galgas;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3505,8 +3436,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = AC_galgas_io.cpp;
-			path = galgas/AC_galgas_io.cpp;
+			path = AC_galgas_io.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3514,8 +3444,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_galgas_stringset.cpp;
-			path = galgas/C_galgas_stringset.cpp;
+			path = C_galgas_stringset.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3523,8 +3452,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_galgas_uint_array.cpp;
-			path = galgas/C_galgas_uint_array.cpp;
+			path = C_galgas_uint_array.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3532,8 +3460,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_lexique.cpp;
-			path = galgas/C_lexique.cpp;
+			path = C_lexique.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3541,8 +3468,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = GGS_bool.cpp;
-			path = galgas/GGS_bool.cpp;
+			path = GGS_bool.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3550,8 +3476,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = GGS_char.cpp;
-			path = galgas/GGS_char.cpp;
+			path = GGS_char.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3559,8 +3484,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = GGS_dfloat.cpp;
-			path = galgas/GGS_dfloat.cpp;
+			path = GGS_dfloat.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3568,8 +3492,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = GGS_lbool.cpp;
-			path = galgas/GGS_lbool.cpp;
+			path = GGS_lbool.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3577,8 +3500,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = GGS_lchar.cpp;
-			path = galgas/GGS_lchar.cpp;
+			path = GGS_lchar.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3586,8 +3508,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = GGS_ldfloat.cpp;
-			path = galgas/GGS_ldfloat.cpp;
+			path = GGS_ldfloat.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3595,8 +3516,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = GGS_location.cpp;
-			path = galgas/GGS_location.cpp;
+			path = GGS_location.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3604,8 +3524,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = GGS_lstring.cpp;
-			path = galgas/GGS_lstring.cpp;
+			path = GGS_lstring.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3613,8 +3532,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = GGS_luint.cpp;
-			path = galgas/GGS_luint.cpp;
+			path = GGS_luint.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3622,8 +3540,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = GGS_string.cpp;
-			path = galgas/GGS_string.cpp;
+			path = GGS_string.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3631,8 +3548,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = GGS_uint.cpp;
-			path = galgas/GGS_uint.cpp;
+			path = GGS_uint.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3640,8 +3556,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = lexical_actions.cpp;
-			path = galgas/lexical_actions.cpp;
+			path = lexical_actions.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3651,7 +3566,7 @@
 				CFF538D7057A55C000854C83,
 			);
 			isa = PBXGroup;
-			name = Files;
+			path = files;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3659,8 +3574,7 @@
 			fileEncoding = 12;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_html_file_write.cpp;
-			path = files/C_html_file_write.cpp;
+			path = C_html_file_write.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3668,8 +3582,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_text_file_write.cpp;
-			path = files/C_text_file_write.cpp;
+			path = C_text_file_write.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3677,8 +3590,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_string.cpp;
-			path = utilities/C_string.cpp;
+			path = C_string.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3689,7 +3601,7 @@
 				CFF538F1057A560500854C83,
 			);
 			isa = PBXGroup;
-			name = Cache;
+			path = cache;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3697,8 +3609,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_prime_cache2.cpp;
-			path = cache/C_prime_cache2.cpp;
+			path = C_prime_cache2.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -3706,8 +3617,7 @@
 			fileEncoding = 5;
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = C_prime_cache3.cpp;
-			path = cache/C_prime_cache3.cpp;
+			path = C_prime_cache3.cpp;
 			refType = 4;
 			sourceTree = "<group>";
 		};
