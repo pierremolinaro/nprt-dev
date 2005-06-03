@@ -94,6 +94,8 @@
 //2A4
 		2A37F4A9FDCFA73011CA2CEA = {
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.3;
+				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;
 			};
 			buildStyles = (
 				CFA7AB90058DAD29009AC1FE,
@@ -301,7 +303,7 @@
 				CF505BC607BF780A0059963C,
 				CF505BC707BF780A0059963C,
 				CFED7CCF0800363C000CACEE,
-				CFED7CD00800363C000CACEE,
+				CF8C666B08507D7E00BFE117,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,7 +409,6 @@
 		8DD76F630486A84900D96B5E = {
 			buildActionMask = 2147483647;
 			files = (
-				CF2A8817058CCF07003EF2F4,
 				CF2A8828058CCF2B003EF2F4,
 				CF2A882C058CCF2E003EF2F4,
 				CF2A882E058CCF30003EF2F4,
@@ -557,12 +558,6 @@
 //CF4
 		CF2A8816058CCF06003EF2F4 = {
 			fileRef = CFF53856057A552C00854C83;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		CF2A8817058CCF07003EF2F4 = {
-			fileRef = CF3FF14105878B54000D2F8C;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -1317,7 +1312,6 @@
 		};
 		CF3FF14005878B33000D2F8C = {
 			children = (
-				CF3FF14105878B54000D2F8C,
 				CF3FF14205878B54000D2F8C,
 				CF3FF14305878B54000D2F8C,
 				CF3FF14405878B54000D2F8C,
@@ -1328,14 +1322,6 @@
 			);
 			isa = PBXGroup;
 			path = generic_arraies;
-			refType = 4;
-			sourceTree = "<group>";
-		};
-		CF3FF14105878B54000D2F8C = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = ATC_array.h;
 			refType = 4;
 			sourceTree = "<group>";
 		};
@@ -2092,7 +2078,6 @@
 		CF7A1400058CEFE2007126C1 = {
 			buildActionMask = 2147483647;
 			files = (
-				CF7A1461058D0081007126C1,
 				CF7A1471058D00B2007126C1,
 				CF7A1475058D00B5007126C1,
 				CF7A1477058D00B7007126C1,
@@ -2239,12 +2224,6 @@
 		};
 		CF7A1460058D007C007126C1 = {
 			fileRef = CFF53856057A552C00854C83;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		CF7A1461058D0081007126C1 = {
-			fileRef = CF3FF14105878B54000D2F8C;
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -2669,6 +2648,19 @@
 			settings = {
 			};
 		};
+		CF8C666A08507D7E00BFE117 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
+			path = saveas.tiff;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		CF8C666B08507D7E00BFE117 = {
+			fileRef = CF8C666A08507D7E00BFE117;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		CF9041F0057F687D007362F4 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
@@ -3000,9 +2992,9 @@
 		};
 		CFAD482E0591BCF700BF8381 = {
 			children = (
+				CF8C666A08507D7E00BFE117,
 				CF505BC407BF780A0059963C,
 				CFED7CCD0800363C000CACEE,
-				CFED7CCE0800363C000CACEE,
 				CF505BC507BF780A0059963C,
 				CF6702F605C072FF0065267C,
 				CFA48FD30591D6D200D787ED,
@@ -3165,21 +3157,8 @@
 			refType = 4;
 			sourceTree = "<group>";
 		};
-		CFED7CCE0800363C000CACEE = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.png;
-			path = saveas.png;
-			refType = 4;
-			sourceTree = "<group>";
-		};
 		CFED7CCF0800363C000CACEE = {
 			fileRef = CFED7CCD0800363C000CACEE;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		CFED7CD00800363C000CACEE = {
-			fileRef = CFED7CCE0800363C000CACEE;
 			isa = PBXBuildFile;
 			settings = {
 			};

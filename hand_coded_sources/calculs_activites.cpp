@@ -1,6 +1,8 @@
 /*--------------------------------------------------------------------------*/
+
 #include<stdlib.h> 
 #include "files/C_html_file_write.h"
+#include "memory/M_memory_control.h"
 
 #include "oa_semantics.h"
 #include "CANMessageBounds.h"
@@ -253,8 +255,8 @@ performComputations (C_lexique & inLexique,
                      GGS_M_network & inNetworkMap,
                      GGS_M_messages & inMessagesMap,
                      GGS_M_tasks & inTasksMap) {  
-  TC_unique_grow_array <cResource> Resource ;
-  TC_unique_grow_array <cElement> Element ;
+  TCUniqueArray <cResource> Resource ;
+  TCUniqueArray <cElement> Element ;
 
   const bool CreateIntermediateFiles = inLexique.getBoolOptionValueFromKeys ("oa_cli_options", "createIntermediateFiles", true) ;
   const bool useCANmaxLengthOnly = inLexique.getBoolOptionValueFromKeys ("oa_cli_options", "useCANmaxLegth", true) ;
@@ -307,7 +309,7 @@ performComputations (C_lexique & inLexique,
   	resource.mResourceType= 2; // Processor = 2
    	resource.mStep = (sint32) processor->mInfo.mStep.getValue () ;
     
-    Resource.appendByCopy (resource COMMA_HERE) ;
+    Resource.addObject (resource) ;
     processor = processor->getNextItem () ;
     index ++ ;
   }
@@ -348,7 +350,7 @@ performComputations (C_lexique & inLexique,
     resource.mStep = (sint32) network->mInfo.mScalingFactor.getValue () ;		
  		min_NetworkStep = min (min_NetworkStep, resource.mStep);
  	 	
- 	 	Resource.appendByCopy (resource COMMA_HERE) ;
+ 	 	Resource.addObject (resource) ;
     network = network->getNextItem () ;
     index ++ ;
   }
@@ -407,7 +409,7 @@ performComputations (C_lexique & inLexique,
     if (!element.mIsIndependant && (element.mOffset != 0)){
       DependentHasOffset = DependentHasOffset || true ;
     }
-    Element.appendByCopy (element COMMA_HERE) ;
+    Element.addObject (element) ;
 		task = task->getNextItem () ;
     index ++ ;
   }
@@ -499,7 +501,7 @@ performComputations (C_lexique & inLexique,
     if (!element.mIsIndependant && (element.mOffset != 0)){
       DependentHasOffset = DependentHasOffset || true ;
     }
-    Element.appendByCopy (element COMMA_HERE) ;
+    Element.addObject (element) ;
 	  message = message->getNextItem () ;
     index ++ ;
   }
@@ -649,10 +651,10 @@ performComputations (C_lexique & inLexique,
 
   if (NecessaryConditions_OK (inLexique, Element, Resource) ){
   
-  	TC_unique_grow_array <cActivity> exElement ;
-  	TC_unique_grow_array <cResponseTime> responseTimeArray ;
-  	TC_unique_grow_array <cMTElement> MTElement ;
-  	TC_unique_grow_array <cReadyAtThisInstant>  ReadyAtThisInstant;
+  	TCUniqueArray <cActivity> exElement ;
+  	TCUniqueArray <cResponseTime> responseTimeArray ;
+  	TCUniqueArray <cMTElement> MTElement ;
+  	TCUniqueArray <cReadyAtThisInstant>  ReadyAtThisInstant;
    
    sint32 NoInterButUseB = 
          BuildExtendedList (ReadyAtThisInstant, Element, 

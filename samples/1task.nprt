@@ -9,5 +9,3 @@ task t1 priority 3 duration 110..120 period 500 processor outstation ;
 
 
 end
-
-

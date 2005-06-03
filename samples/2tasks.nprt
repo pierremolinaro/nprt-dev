@@ -1,7 +1,1 @@
-system
-processor proc1 ;
-processor proc2 ;
-#--- independant task
-task t1 priority 3 duration 2..5 period 10 processor proc1 ;
-task t2 priority 4 duration 2..3 period 10 processor proc2 ;
-end
+systemprocessor proc1 ;processor proc2 ;#--- independant tasktask t1 priority 3 duration 2..5 period 10 processor proc1 ;task t2 priority 4 duration 2..3 period 10 processor proc2 ;end

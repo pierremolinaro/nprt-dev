@@ -12,5 +12,3 @@ task t7 priority 6 duration 4..5 offset 35 period 60 processor proc1 ;
 
 
 end
-
-

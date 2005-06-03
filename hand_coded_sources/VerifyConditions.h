@@ -7,8 +7,8 @@ extern "C" {
 
 bool 
 NecessaryConditions_OK (C_lexique & inLexique,
-                        const TC_unique_grow_array <cElement> & Element,
-                        const TC_unique_grow_array <cResource> & Resource);
+                        const TCUniqueArray <cElement> & Element,
+                        const TCUniqueArray <cResource> & Resource);
 
 #endif
 

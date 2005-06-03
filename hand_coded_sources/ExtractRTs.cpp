@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "generic_arraies/TC_unique_grow_array.h"
+#include "generic_arraies/TCUniqueArray.h"
 #include "files/C_html_file_write.h"
 
 #include "ExtendedList.h"
@@ -13,17 +13,17 @@
 //Extract absolut min=best & max =worst response times from the o/p extended list
 
 void
-ExtractWorstBestRT (const TC_unique_grow_array <cActivity> & exElement,
-          const TC_unique_grow_array <cResource> & Resource,
-          TC_unique_grow_array <cMTElement> & MTElement,
-          const TC_unique_grow_array <cResponseTime> & inResponseTimeArray,
+ExtractWorstBestRT (const TCUniqueArray <cActivity> & exElement,
+          const TCUniqueArray <cResource> & Resource,
+          TCUniqueArray <cMTElement> & MTElement,
+          const TCUniqueArray <cResponseTime> & inResponseTimeArray,
           bool CreateIntermediateFiles, 
    				const C_string & raw_outputHTMLFileName,
           C_html_file_write & in_htmlFile) {
 
 
- 	const sint32 Num_ofResources = Resource.getCount () ;
-  const sint32 Num_ofElements = MTElement.getCount () ;
+ 	const sint32 Num_ofResources = Resource.count () ;
+  const sint32 Num_ofElements = MTElement.count () ;
   
   sint32 Smallest_bit_time = SINT32_MAX ;
   for (sint32 i=0 ; i < Num_ofResources ; i++ ){
@@ -44,7 +44,7 @@ ExtractWorstBestRT (const TC_unique_grow_array <cActivity> & exElement,
   	raw_file.outputRawData ("Offset</td><td>BRT</td><td>WRT</td></tr>") ;
 		
 		
-		for (sint32 i=0 ; i<inResponseTimeArray.getCount () ; i++) {
+		for (sint32 i=0 ; i<inResponseTimeArray.count () ; i++) {
 		  if ( (exElement (i COMMA_HERE).mOccurrence % exElement (i COMMA_HERE).mEvery) == 0 ){
 				raw_file.outputRawData ("<tr class=\"result_line\"><td>") ;
 		    raw_file << i ;
