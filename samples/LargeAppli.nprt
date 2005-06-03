@@ -21,5 +21,3 @@ task t14 priority 5 duration 60..80 on task t13 ;
 
 
 end
-
-

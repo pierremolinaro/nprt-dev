@@ -17,5 +17,3 @@ standard message m2 network r1 length 1 priority 1 period 500 ;
 task t21 priority 2 duration 10..10 deadline 500 on message m1 processor proc2 ;
 
 end
-
-

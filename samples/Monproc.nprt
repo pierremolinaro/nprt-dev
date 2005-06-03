@@ -13,5 +13,3 @@ task t2 priority 2 duration 14..15 offset 22 deadline 50 period 50 processor Pro
 task t3 priority 3 duration 9..10 deadline 50 on task t1 ;
 
 end
-
-

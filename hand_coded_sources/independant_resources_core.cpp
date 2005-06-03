@@ -18,7 +18,7 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#include "generic_arraies/TC_unique_grow_array.h"
+#include "generic_arraies/TCUniqueArray.h"
 #include "streams/C_console_out.h"
 #include "command_line_interface/F_analyze_command_line_opts.h"
 #include "command_line_interface/myMain.h"
@@ -73,7 +73,7 @@ class cIndependantResourceSchedule  {
 //---------------------------------------------------------------------------*
 
 class cIndependantResourcesScheduleMap {
-  private : TC_unique_grow_array <cIndependantResourceSchedule  *> mResourceScheduleArray ;
+  private : TCUniqueArray <cIndependantResourceSchedule  *> mResourceScheduleArray ;
   private : sint32 mCurrentInstant ;
   private : sint32 mLatestInstant ;
 
@@ -96,7 +96,7 @@ class cIndependantResourcesScheduleMap {
   public : void dumpStructure (void) ;
   public : void insertAtInstant (cIndependantResourceSchedule  * inResource,
                                  const sint32 inInstant) ;
-  public : void computeBestAndWorstResponseTime (TC_unique_grow_array <cResponseTime> & ioResponseTimeArray) ;
+  public : void computeBestAndWorstResponseTime (TCUniqueArray <cResponseTime> & ioResponseTimeArray) ;
   protected : void reallocIfNeeded (const sint32 inInstant) ;
 
 } ;
@@ -144,13 +144,10 @@ cIndependantResourcesScheduleMap::cIndependantResourcesScheduleMap (void) {
 void cIndependantResourcesScheduleMap::
 reallocIfNeeded (const sint32 inInstant) {
 //--- Realloc schedule map ?
-  if (inInstant >= mResourceScheduleArray.getCount ()) {
-    const sint32 actualCount = mResourceScheduleArray.getCount () ;
-    mResourceScheduleArray.reallocArray (inInstant + EXTRA + 1 COMMA_HERE) ;
-    const sint32 newCount = mResourceScheduleArray.getCount () ;
-    for (sint32 i=actualCount ; i<newCount ; i++) {
-      mResourceScheduleArray (i COMMA_HERE) = NULL ;
-    }
+  if (inInstant >= mResourceScheduleArray.count ()) {
+    const sint32 actualCount = mResourceScheduleArray.count () ;
+    const sint32 newCount = inInstant + EXTRA + 1 ;
+    mResourceScheduleArray.addObjects (newCount - actualCount, NULL) ;
   }
 }
 
@@ -278,7 +275,7 @@ static void unMark (void) {
 //---------------------------------------------------------------------------*
 
 void cIndependantResourcesScheduleMap::
-computeBestAndWorstResponseTime (TC_unique_grow_array <cResponseTime> & ioResponseTimeArray) {
+computeBestAndWorstResponseTime (TCUniqueArray <cResponseTime> & ioResponseTimeArray) {
   cIndependantResourcesActivitySchedule * p = gPtrNodeList ;
   while (p != NULL) {
     const sint32 activityIndex = p->mActivityIndex ;
@@ -349,12 +346,12 @@ dumpStructure (void) {
 //---------------------------------------------------------------------------*
 
 void
-independantResourcesScheduleActivities (const TC_unique_grow_array <cActivity> & inActivities,
-                                        TC_unique_grow_array <cResponseTime> & outResponseTimeArray) {
+independantResourcesScheduleActivities (const TCUniqueArray <cActivity> & inActivities,
+                                        TCUniqueArray <cResponseTime> & outResponseTimeArray) {
 //--- Schedule map
   cIndependantResourcesScheduleMap scheduleMap ;
 //--- Enter independant activities
-  const sint32 activitiesCount = inActivities.getCount () ;
+  const sint32 activitiesCount = inActivities.count () ;
   printf ("%ld activities\n", activitiesCount) ;
   fflush (stdout);
   for (sint32 i=0 ; i<activitiesCount ; i++) {
@@ -442,11 +439,9 @@ independantResourcesScheduleActivities (const TC_unique_grow_array <cActivity> &
 //--- Dump data structure
 //  scheduleMap.dumpStructure () ;
 //--- Build response time array
-  outResponseTimeArray.reallocArray (activitiesCount COMMA_HERE) ;
-  for (sint32 i=0 ; i<activitiesCount ; i++) {
-    outResponseTimeArray (i COMMA_HERE).mBestResponseTime = SINT32_MAX ;
-    outResponseTimeArray (i COMMA_HERE).mWorstResponseTime = 0 ;
-  }
+  outResponseTimeArray.clear () ;
+  outResponseTimeArray.makeRoom (activitiesCount) ;
+  outResponseTimeArray.addObjects (activitiesCount, cResponseTime ()) ;
   scheduleMap.computeBestAndWorstResponseTime (outResponseTimeArray) ;
   
   printf ("%ld resource nodes used, %ld allocated.\n", gUsedResourceNodesCount, gAllocatedResourceNodesCount) ;

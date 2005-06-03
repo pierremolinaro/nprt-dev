@@ -6,11 +6,11 @@
 
 bool
 NecessaryConditions_OK (C_lexique & inLexique,
-                        const TC_unique_grow_array <cElement> & Element,
-            						const TC_unique_grow_array <cResource> & Resource){
+                        const TCUniqueArray <cElement> & Element,
+            						const TCUniqueArray <cResource> & Resource){
                         
-  const sint32 NumOfElements = Element.getCount ();
-  const sint32 NumOfResources = Resource.getCount ();            
+  const sint32 NumOfElements = Element.count ();
+  const sint32 NumOfResources = Resource.count ();            
 	
   bool NecessaryConditionOK = true ;
   

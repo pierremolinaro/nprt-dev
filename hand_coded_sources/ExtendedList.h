@@ -29,6 +29,7 @@ class cActivity {
 class cResponseTime {
   public : sint32 mBestResponseTime;
   public : sint32 mWorstResponseTime;
+  public : cResponseTime (void) ;
 } ;
 
 class cReadyAtThisInstant {
@@ -83,11 +84,11 @@ class cMTElement {
 
 
 sint32
-BuildExtendedList (TC_unique_grow_array < cReadyAtThisInstant> & ReadyAtThisInstant,
-                   TC_unique_grow_array <cElement> & Element,
-                   const TC_unique_grow_array <cResource> & Resource,
-                  TC_unique_grow_array <cActivity> & exElement,
-                  TC_unique_grow_array <cMTElement> & outMTElement,
+BuildExtendedList (TCUniqueArray < cReadyAtThisInstant> & ReadyAtThisInstant,
+                   TCUniqueArray <cElement> & Element,
+                   const TCUniqueArray <cResource> & Resource,
+                  TCUniqueArray <cActivity> & exElement,
+                  TCUniqueArray <cMTElement> & outMTElement,
                   const sint32 Nu_oftasks, const sint32 Nu_ofMessages,
                   bool CreateIntermediateFiles,
                   bool & ioUseBalgorithm,
@@ -95,10 +96,10 @@ BuildExtendedList (TC_unique_grow_array < cReadyAtThisInstant> & ReadyAtThisInst
                    
 
 void
-ExtractWorstBestRT (const TC_unique_grow_array <cActivity> & exElement,
-          					const TC_unique_grow_array <cResource> & Resource,
-          					TC_unique_grow_array <cMTElement> & MTElement,
-                    const TC_unique_grow_array <cResponseTime> & inResponseTimeArray,
+ExtractWorstBestRT (const TCUniqueArray <cActivity> & exElement,
+          					const TCUniqueArray <cResource> & Resource,
+          					TCUniqueArray <cMTElement> & MTElement,
+                    const TCUniqueArray <cResponseTime> & inResponseTimeArray,
                     bool CreateIntermediateFiles, 
    									const C_string & raw_outputHTMLFileName,
                     C_html_file_write & in_htmlFile);

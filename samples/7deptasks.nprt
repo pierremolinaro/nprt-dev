@@ -15,5 +15,3 @@ task t6 priority 5 duration 9..10 deadline 400 on task t5 ;
 task t7 priority 7 duration 9..10 deadline 400 on task t5 ;
 
 end
-
-

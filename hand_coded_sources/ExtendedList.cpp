@@ -1,4 +1,4 @@
-#include "generic_arraies/TC_unique_grow_array.h"
+#include "generic_arraies/TCUniqueArray.h"
 #include "files/C_html_file_write.h"
 #include <stdio.h>
 #include <math.h>
@@ -6,6 +6,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ExtendedList.h"
+
+
+/*-----------------------------------------------------------------------------*/
+
+cResponseTime::cResponseTime (void) {
+  mBestResponseTime = SINT32_MAX ;
+  mWorstResponseTime = 0 ;
+} ;
 
 /*-----------------------------------------------------------------------------*/
 
@@ -21,14 +29,14 @@ static uint64 GCD(uint64 a, uint64 b) {
 
 /*---------------------------------------------------------------------------*/ 
 static uint64
-CalculateHyperPeriod (const TC_unique_grow_array <cElement> & Element) {
+CalculateHyperPeriod (const TCUniqueArray <cElement> & Element) {
   
   sint32 minimumOffset = SINT32_MAX ;
   uint64 LCM = 0 ;
   sint32 maximumOffset= 0 ;
 
 // Calculate the LCM for independent elements only since dependent ones inherit periods  
-  const sint32 Nu_ofElements = Element.getCount () ;
+  const sint32 Nu_ofElements = Element.count () ;
   for (sint32 index = 0 ; index < Nu_ofElements; index++) {
     if (Element (index COMMA_HERE).mIsIndependant
         || 
@@ -64,11 +72,11 @@ CalculateHyperPeriod (const TC_unique_grow_array <cElement> & Element) {
 
 // Unused function : commented out by PM 17/1/2005
 /* static sint32 
-CalculateExtendedListLength (const TC_unique_grow_array <cElement> & Element,
+CalculateExtendedListLength (const TCUniqueArray <cElement> & Element,
                              const uint64 inHyperPeriod) {
   
   sint32 ExtendedListLength=0;
-  const sint32 N_Elements = Element.getCount () ;
+  const sint32 N_Elements = Element.count () ;
   for(sint32 index =0; index < N_Elements; index ++){
     ExtendedListLength += sint32 ( inHyperPeriod / Element (index COMMA_HERE).mPeriod) ;
   }
@@ -78,11 +86,11 @@ CalculateExtendedListLength (const TC_unique_grow_array <cElement> & Element,
 
 /*-----------------------------------------------------------------------------*/
 static void
-ExtractResourceMinDuration (TC_unique_grow_array <cElement> & Element,
-																const TC_unique_grow_array <cResource> & Resource){
+ExtractResourceMinDuration (TCUniqueArray <cElement> & Element,
+																const TCUniqueArray <cResource> & Resource){
 
-sint32 NumOfResources = Resource.getCount();
-sint32 NumOfElements = Element.getCount();
+sint32 NumOfResources = Resource.count();
+sint32 NumOfElements = Element.count();
 sint32 minDuration=SINT32_MAX;
 
 	for (sint32 index = 0; index < NumOfResources ;index++){
@@ -97,8 +105,8 @@ sint32 minDuration=SINT32_MAX;
 
 /*----------------------------------------------------------------------------*/
 static void 
-InsertInOrderedList(const TC_unique_grow_array <cElement> & Element,
-	                  TC_unique_grow_array <cElement> & ArrangedElement,
+InsertInOrderedList(const TCUniqueArray <cElement> & Element,
+	                  TCUniqueArray <cElement> & ArrangedElement,
                     const sint32 ElementCounter) {  
   cElement element;
    
@@ -137,14 +145,14 @@ InsertInOrderedList(const TC_unique_grow_array <cElement> & Element,
   }    
   element.mOtherHeirId= -1; 
   
-  ArrangedElement.appendByCopy(element COMMA_HERE);  
+  ArrangedElement.addObject (element);  
 }    
 
 /*---------------------------------------------------------------------------*/ 
 static void
 ArrangingAccodingPrecedenceRelations(
-                   const TC_unique_grow_array <cElement> & Element,
-                   TC_unique_grow_array <cElement> & ArrangedElement,
+                   const TCUniqueArray <cElement> & Element,
+                   TCUniqueArray <cElement> & ArrangedElement,
                    const sint32 Nu_ofTasks,
                    const sint32 Nu_ofMessages) {
                              
@@ -193,8 +201,8 @@ ArrangingAccodingPrecedenceRelations(
     
 /*----------------------------------------------------------------------------*/
 static bool 
-VerifyInterDependence (TC_unique_grow_array <cElement> & Element){
- 	const sint32 Nu_ofElements = Element.getCount () ;
+VerifyInterDependence (TCUniqueArray <cElement> & Element){
+ 	const sint32 Nu_ofElements = Element.count () ;
  	bool interDependence=false;
   for (sint32 i = 0; (i < Nu_ofElements)  && !interDependence ;i++){
   	if( (Element (i COMMA_HERE).mPredecessorId >=0 )
@@ -211,9 +219,9 @@ VerifyInterDependence (TC_unique_grow_array <cElement> & Element){
 /*--------------------------------------------------------------------------*/
 
 static void 
-FindSuccessors (TC_unique_grow_array <cElement> & Element){
+FindSuccessors (TCUniqueArray <cElement> & Element){
   
-  const sint32 Nu_ofElements = Element.getCount () ;
+  const sint32 Nu_ofElements = Element.count () ;
   Element (Nu_ofElements-1 COMMA_HERE).mSuccessorId = -1;
   Element (Nu_ofElements-1 COMMA_HERE).mOtherHeirId= -1;
   
@@ -240,9 +248,9 @@ FindSuccessors (TC_unique_grow_array <cElement> & Element){
 
 /*---------------------------------------------------------------------------*/
 static sint32
-DeployElements (TC_unique_grow_array <cElement> & ArrangedElement,
-                TC_unique_grow_array <cActivity> & exElement,
-                TC_unique_grow_array <cMTElement> & outMTElement,
+DeployElements (TCUniqueArray <cElement> & ArrangedElement,
+                TCUniqueArray <cActivity> & exElement,
+                TCUniqueArray <cMTElement> & outMTElement,
                 const uint64 inHyperPeriod){
 
 //Arrange elements according to their precedence relations
@@ -252,7 +260,7 @@ DeployElements (TC_unique_grow_array <cElement> & ArrangedElement,
   sint32 SuccessorGap;
   sint32 OtherHeirGap;
         
-  const sint32 Nu_ofElements = ArrangedElement.getCount () ;
+  const sint32 Nu_ofElements = ArrangedElement.count () ;
   sint32 Num_of_Activties = 0 ;
   for ( sint32 index = 0; index < Nu_ofElements; index ++) {
     cMTElement element;
@@ -290,7 +298,7 @@ DeployElements (TC_unique_grow_array <cElement> & ArrangedElement,
        element.mOffset = outMTElement (predecessorId COMMA_HERE).mOffset;
      }
     
-    outMTElement.appendByCopy (element COMMA_HERE);
+    outMTElement.addObject (element);
     
     
     sint32 Repetition =0;
@@ -347,7 +355,7 @@ DeployElements (TC_unique_grow_array <cElement> & ArrangedElement,
         }else{
           MTelement.mOtherHeirId = -1;
         }  
-      	exElement.appendByCopy (MTelement COMMA_HERE) ;
+      	exElement.addObject (MTelement) ;
       	if ( (MTelement.mOccurrence %MTelement.mEvery) == 0){
       		Num_of_Activties ++;
       	}
@@ -360,16 +368,16 @@ DeployElements (TC_unique_grow_array <cElement> & ArrangedElement,
 /*-------------------------------------------------------------------------*/
 
 static void 
-DisposeReadyAtRelations(const TC_unique_grow_array <cElement> & ArrangedElement,
-                        TC_unique_grow_array <cActivity> & Activity,
-                        TC_unique_grow_array <cReadyAtThisInstant> & ReadyAtThisInstant,
+DisposeReadyAtRelations(const TCUniqueArray <cElement> & ArrangedElement,
+                        TCUniqueArray <cActivity> & Activity,
+                        TCUniqueArray <cReadyAtThisInstant> & ReadyAtThisInstant,
                         const uint64 inHyperPeriod){
 
-TC_unique_grow_array <cReadyAtThisInstant>  oReadyAtThisInstant ;	
+TCUniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;	
 
 	//--- calculate max size
 	sint32 Num_ofIndepStaringInstant=0;
-	for ( sint32 index = 0; index < ArrangedElement.getCount(); index ++) {
+	for ( sint32 index = 0; index < ArrangedElement.count(); index ++) {
    	if ( ArrangedElement (index COMMA_HERE).mPredecessorId < 0){
    	   Num_ofIndepStaringInstant += inHyperPeriod/ArrangedElement (index COMMA_HERE).mPeriod  ;
    	}
@@ -380,13 +388,13 @@ TC_unique_grow_array <cReadyAtThisInstant>  oReadyAtThisInstant ;
       readyAtThisInstant.mThisInstant=-1;
       readyAtThisInstant.mActivityIndex=-1; 
       readyAtThisInstant.mMarked = false;  
-    oReadyAtThisInstant.appendByCopy(readyAtThisInstant COMMA_HERE); 
+    oReadyAtThisInstant.addObject(readyAtThisInstant); 
 	}
   
     
 	sint32 IdInList = 0;
   
-  for ( sint32 index = 0; index < ArrangedElement.getCount(); index ++) {
+  for ( sint32 index = 0; index < ArrangedElement.count(); index ++) {
    	if ( ArrangedElement (index COMMA_HERE).mPredecessorId < 0){
    	   sint32 NextOccurrence = ArrangedElement (index COMMA_HERE).mOffset ;
    	   while (NextOccurrence <= (ArrangedElement (index COMMA_HERE).mOffset+ ((sint32)inHyperPeriod) - ArrangedElement (index COMMA_HERE).mPeriod)) {
@@ -462,7 +470,7 @@ TC_unique_grow_array <cReadyAtThisInstant>  oReadyAtThisInstant ;
     	readyAtThisInstant.mMarked = false;
     	
    // 	printf ("index : %ld Instant %ld\n",index,oReadyAtThisInstant (lIndex COMMA_HERE).mThisInstant);
-    ReadyAtThisInstant.appendByCopy(readyAtThisInstant COMMA_HERE); 
+    ReadyAtThisInstant.addObject(readyAtThisInstant); 
   }
 /*  for ( sint32 i = 0; i < sizeofStarting ; i ++) {
   	printf("------Activitites at : %ld are:\n",ReadyAtThisInstant (i COMMA_HERE).mThisInstant);
@@ -477,10 +485,10 @@ TC_unique_grow_array <cReadyAtThisInstant>  oReadyAtThisInstant ;
 
 /*-------------------------------------------------------------------------*/
 static void
-CreateActivitiesFile (const TC_unique_grow_array <cActivity> & exElement,
+CreateActivitiesFile (const TCUniqueArray <cActivity> & exElement,
 							      	const C_string & activitiesHTMLFileName){
 
-  const sint32 NumberOfElements = exElement.getCount () ;
+  const sint32 NumberOfElements = exElement.count () ;
   printf ("Extended activities list is stored in %s file.\n", activitiesHTMLFileName.getStringPtr ()) ;
   C_html_file_write act_htmlFile (activitiesHTMLFileName,
                               "Extended List Activities",
@@ -522,11 +530,11 @@ CreateActivitiesFile (const TC_unique_grow_array <cActivity> & exElement,
 	
 /*----------------------------------------------------------------------------*/
 sint32
-BuildExtendedList (TC_unique_grow_array <cReadyAtThisInstant> & oReadyAtThisInstant,
-                   TC_unique_grow_array <cElement> & Element,
-                   const TC_unique_grow_array <cResource> & Resource,
-                   TC_unique_grow_array <cActivity> & exElement,
-                   TC_unique_grow_array <cMTElement> & outMTElement,
+BuildExtendedList (TCUniqueArray <cReadyAtThisInstant> & oReadyAtThisInstant,
+                   TCUniqueArray <cElement> & Element,
+                   const TCUniqueArray <cResource> & Resource,
+                   TCUniqueArray <cActivity> & exElement,
+                   TCUniqueArray <cMTElement> & outMTElement,
                    const sint32 Nu_ofTasks, sint32 Nu_ofMessages,
                    bool CreateIntermediateFiles,
                    bool & ioUseBalgorithm,
@@ -535,8 +543,8 @@ BuildExtendedList (TC_unique_grow_array <cReadyAtThisInstant> & oReadyAtThisInst
       
   ExtractResourceMinDuration(Element, Resource);
   const uint64 HyperPeriod = CalculateHyperPeriod (Element) ;
-  const sint32 Number_ofResources = Resource.getCount();
-  TC_unique_grow_array <cElement> ArrangedElement;
+  const sint32 Number_ofResources = Resource.count();
+  TCUniqueArray <cElement> ArrangedElement;
   sint32 NoInterDependenceButUseB = 0;
   ArrangingAccodingPrecedenceRelations (Element, ArrangedElement,
   																			Nu_ofTasks,Nu_ofMessages);
