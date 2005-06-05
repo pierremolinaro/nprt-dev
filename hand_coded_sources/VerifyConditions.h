@@ -6,9 +6,9 @@ extern "C" {
 #endif
 
 bool 
-NecessaryConditions_OK (C_lexique & inLexique,
-                        const TCUniqueArray <cElement> & Element,
-                        const TCUniqueArray <cResource> & Resource);
+NecessaryConditions_OK (C_Lexique & inLexique,
+                        const TC_UniqueArray <cElement> & Element,
+                        const TC_UniqueArray <cResource> & Resource);
 
 #endif
 

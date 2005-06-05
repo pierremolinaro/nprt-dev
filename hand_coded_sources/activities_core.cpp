@@ -18,14 +18,14 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#include "generic_arraies/TCUniqueArray.h"
-#include "streams/C_console_out.h"
-#include "command_line_interface/F_analyze_command_line_opts.h"
-#include "command_line_interface/myMain.h"
-#include "time/C_timer.h"
+#include "generic_arraies/TC_UniqueArray.h"
+#include "streams/C_ConsoleOut.h"
+#include "command_line_interface/F_Analyze_CLI_Options.h"
+#include "command_line_interface/mainForLIBPM.h"
+#include "time/C_Timer.h"
 #include "utilities/TF_sup.h"
 #include "utilities/TF_inf.h"
-#include "utilities/F_get_prime.h"
+#include "utilities/F_GetPrime.h"
 #include "ExtendedList.h"
 #include "C_activitiesToSchedule.h"
 #include "activities_core.h"
@@ -83,7 +83,7 @@
   
     public : static void dumpSchedule (class cResourceSchedule * inPtr) ;
 
-    public : static void computeBestAndWorstResponseTime (TCUniqueArray <cResponseTime> & ioResponseTimeArray) ;
+    public : static void computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & ioResponseTimeArray) ;
 
   } ;
 #endif
@@ -194,7 +194,7 @@ class cResource2 {
 //---------------------------------------------------------------------------*
 
 class cResourceSchedule {
-  public : TCUniqueArray <cResource2> mArray ;
+  public : TC_UniqueArray <cResource2> mArray ;
   public : cResourceSchedule * mPtrToOtherResource ;
   #ifndef FORGET_ACTIVITY_NODES
     public : cActivityList mActivityList ;
@@ -237,7 +237,7 @@ mBalance (0) {
 
 class cScheduleMap {
   #ifdef HASH_MAP
-    private : TCUniqueArray <cResourceSchedule *> mResourceNodesAVLtree ;
+    private : TC_UniqueArray <cResourceSchedule *> mResourceNodesAVLtree ;
     public : sint32 mArraySize ;
   #else
     private : cResourceSchedule * mResourceNodesAVLtree ;
@@ -249,10 +249,10 @@ class cScheduleMap {
 //--- Constructor
   public : cScheduleMap (const sint32 inResourceCount,
                          const sint32 inLastIndependantActivityScheduleInstant,
-                         const TCUniqueArray <cActivity> & inActivities) ;
+                         const TC_UniqueArray <cActivity> & inActivities) ;
   public : void AddToScheduleMap (cResourceSchedule * inPtr,
                                   const sint32 index,
-                                  const TCUniqueArray <cActivity> & inActivities);
+                                  const TC_UniqueArray <cActivity> & inActivities);
 
 //--- More work ?
   public : bool moreWorkToDo (void) const ;
@@ -268,7 +268,7 @@ class cScheduleMap {
 
   #ifndef FORGET_ACTIVITY_NODES
     public : void dumpStructure (void) ;
-    public : void computeBestAndWorstResponseTime (TCUniqueArray <cResponseTime> & ioResponseTimeArray,
+    public : void computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & ioResponseTimeArray,
                                                    const sint32 inActivitiesCount) ;
   #endif
 } ;
@@ -307,7 +307,7 @@ static inline void disposeResourceNode (cResourceSchedule * inPtr) {
 cScheduleMap::
 cScheduleMap (const sint32 /*inResourceCount */,
               const sint32 inLastIndependantActivityScheduleInstant,
-              const TCUniqueArray <cActivity> & /*inActivities*/) {
+              const TC_UniqueArray <cActivity> & /*inActivities*/) {
   
    mCurrentInstant =0;
    mResourceNodesList = NULL ;
@@ -339,7 +339,7 @@ cScheduleMap (const sint32 /*inResourceCount */,
 void cScheduleMap::
 AddToScheduleMap (cResourceSchedule * inPtr,
                   const sint32 inIndex,
-							    const TCUniqueArray <cActivity> & inActivities) {
+							    const TC_UniqueArray <cActivity> & inActivities) {
   sint32 index = inIndex;
    do{
 		  const sint32 readyAt = inActivities (index COMMA_HERE).mOffset ;
@@ -542,7 +542,7 @@ insert (const sint32 inResourceCount,
 
 #ifndef FORGET_ACTIVITY_NODES
   static void
-  internalComputeBestAndWorstResponseTime (TCUniqueArray <cResponseTime> & ioResponseTimeArray,
+  internalComputeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & ioResponseTimeArray,
                                            cActivitySchedule * inPtr) {
     cActivitySchedule * p = inPtr ;
     while (p != NULL) {
@@ -567,7 +567,7 @@ insert (const sint32 inResourceCount,
 
 #ifndef FORGET_ACTIVITY_NODES
   void cActivityList::
-  computeBestAndWorstResponseTime (TCUniqueArray <cResponseTime> & ioResponseTimeArray) {
+  computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & ioResponseTimeArray) {
     unMark () ;
     internalComputeBestAndWorstResponseTime (ioResponseTimeArray, gScheduleResults.mPtrToFirstActivity) ;
   }
@@ -577,9 +577,9 @@ insert (const sint32 inResourceCount,
 
 #ifndef FORGET_ACTIVITY_NODES
 void cScheduleMap::
-computeBestAndWorstResponseTime (TCUniqueArray <cResponseTime> & outResponseTimeArray,
+computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & outResponseTimeArray,
                                  const sint32 inActivitiesCount) {
-  TCUniqueArray <cResponseTime> otherMethodResponseTimeArray (inActivitiesCount COMMA_HERE) ;
+  TC_UniqueArray <cResponseTime> otherMethodResponseTimeArray (inActivitiesCount COMMA_HERE) ;
   for (sint32 i=0 ; i<inActivitiesCount ; i++) {
     otherMethodResponseTimeArray (i COMMA_HERE).mBestResponseTime = SINT32_MAX ;
     otherMethodResponseTimeArray (i COMMA_HERE).mWorstResponseTime = 0 ;
@@ -686,7 +686,7 @@ WillRecieveHigherActivation(const cResourceSchedule * inPtr,
 			                       const sint32 inResourceCount,
 			                       const sint32 inSuccessorIndex,
 			                       const sint32 inCurrentInstant,
-			                       const TCUniqueArray <cActivity> & inActivities ) {
+			                       const TC_UniqueArray <cActivity> & inActivities ) {
   
   bool WillReceive= false ;
    
@@ -748,8 +748,8 @@ LeastBusyDuration (const cResourceSchedule * inPtr,
                    const sint32 inAdditionIndex,
                    const sint32 inActivityIndex,
                    const sint32 inResourceCount,
-                   const TCUniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
-                   const TCUniqueArray <cActivity> & inActivities){
+                   const TC_UniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
+                   const TC_UniqueArray <cActivity> & inActivities){
  
   sint32 leastBusy =leastBusyDuration;
   sint32 additionIndex = inAdditionIndex ;
@@ -818,10 +818,10 @@ static bool
 HasToAddSuccessors (const cResourceSchedule * inPtr,
                     const sint32 inResourceCount,
                     const sint32 inAdditionIndex,
-                    const TCUniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
+                    const TC_UniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
 			              const sint32 inActivityIndex,
 			              const sint32 inCurrentInstant,
-                    const TCUniqueArray <cActivity> & inActivities ) {
+                    const TC_UniqueArray <cActivity> & inActivities ) {
   
   bool HasToAdd= false ; 
   sint32 LeastBusyPeriod = 0 ;  
@@ -931,7 +931,7 @@ HasToAddSuccessors (const cResourceSchedule * inPtr,
 static void
 addSuccessors (cResourceSchedule * inPtr,
 			         const sint32 inActivityIndex,
-               const TCUniqueArray <cActivity> & inActivities,
+               const TC_UniqueArray <cActivity> & inActivities,
                const sint32 inCurrentInstant) {
              
   const sint32 successorIndex = inActivities (inActivityIndex COMMA_HERE).mSuccessorId ;
@@ -962,7 +962,7 @@ addSuccessors (cResourceSchedule * inPtr,
 //---------------------------------------------------------------------------*
 static bool 
 IsOffsetTimeGTNextMinDur (const cResourceSchedule * inPtr, 
-                          const TCUniqueArray <cActivity> & inActivities,
+                          const TC_UniqueArray <cActivity> & inActivities,
                           const sint32 inResourceIndex,
                           const sint32 inCurrentInstant){
                           
@@ -1007,8 +1007,8 @@ IsOffsetTimeGTNextMinDur (const cResourceSchedule * inPtr,
 //---------------------------------------------------------------------------*
 static bool 
 NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr, 
-                               const TCUniqueArray <cActivity> & inActivities,
-                               const TCUniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
+                               const TC_UniqueArray <cActivity> & inActivities,
+                               const TC_UniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
                                const sint32 inAdditionIndex,
                                const sint32 inResourceIndex,
                                const sint32 inResourceCount,
@@ -1174,12 +1174,12 @@ static void
 recursiveOP (cResourceSchedule * inPtr,
              const sint32 inResourceIndex,
              const sint32 inAdditionIndex,
-             const TCUniqueArray <cActivity> & inActivities,
+             const TC_UniqueArray <cActivity> & inActivities,
              const sint32 inCurrentInstant,
-             const TCUniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
+             const TC_UniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
              cScheduleMap & ioScheduleMap,
              #ifdef FORGET_ACTIVITY_NODES
-               TCUniqueArray <cResponseTime> & ioResponseTimeArray,
+               TC_UniqueArray <cResponseTime> & ioResponseTimeArray,
              #endif
              const sint32 inResourceCount) {
            
@@ -1492,10 +1492,10 @@ recursiveOP (cResourceSchedule * inPtr,
 void
 scheduleActivities (const sint32 NoInterButUseB,
                     const bool DependentHasOffset,
-                    const TCUniqueArray <cReadyAtThisInstant> & ReadyAtThisInstant, 
-                    const TCUniqueArray <cActivity> & inActivities,
-                    const TCUniqueArray <cResource> & inResource,
-                    TCUniqueArray <cResponseTime> & outResponseTimeArray) {
+                    const TC_UniqueArray <cReadyAtThisInstant> & ReadyAtThisInstant, 
+                    const TC_UniqueArray <cActivity> & inActivities,
+                    const TC_UniqueArray <cResource> & inResource,
+                    TC_UniqueArray <cResponseTime> & outResponseTimeArray) {
  
   const sint32 inResourceCount = inResource.count ();
   const sint32 activitiesCount = inActivities.count () ;
@@ -1518,7 +1518,7 @@ scheduleActivities (const sint32 NoInterButUseB,
   cScheduleMap scheduleMap (inResourceCount, lastActivityScheduleInstant, inActivities) ;
   sint32 AdditionIndex=0;
 //--- Perform activities scheduling
-  C_timer Timer ;
+  C_Timer Timer ;
   while (scheduleMap.moreWorkToDo ()) {
     
     cResourceSchedule * list = scheduleMap.retrieveResourceList () ;

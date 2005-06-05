@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "generic_arraies/TCUniqueArray.h"
-#include "files/C_html_file_write.h"
+#include "generic_arraies/TC_UniqueArray.h"
+#include "files/C_HTML_FileWrite.h"
 
 #include "ExtendedList.h"
 
@@ -13,13 +13,13 @@
 //Extract absolut min=best & max =worst response times from the o/p extended list
 
 void
-ExtractWorstBestRT (const TCUniqueArray <cActivity> & exElement,
-          const TCUniqueArray <cResource> & Resource,
-          TCUniqueArray <cMTElement> & MTElement,
-          const TCUniqueArray <cResponseTime> & inResponseTimeArray,
+ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
+          const TC_UniqueArray <cResource> & Resource,
+          TC_UniqueArray <cMTElement> & MTElement,
+          const TC_UniqueArray <cResponseTime> & inResponseTimeArray,
           bool CreateIntermediateFiles, 
-   				const C_string & raw_outputHTMLFileName,
-          C_html_file_write & in_htmlFile) {
+   				const C_String & raw_outputHTMLFileName,
+          C_HTML_FileWrite & in_htmlFile) {
 
 
  	const sint32 Num_ofResources = Resource.count () ;
@@ -32,7 +32,7 @@ ExtractWorstBestRT (const TCUniqueArray <cActivity> & exElement,
   
   if(CreateIntermediateFiles){
     printf ("Raw output results are stored in %s file.\n", raw_outputHTMLFileName.getStringPtr ()) ;
-			C_html_file_write raw_file (raw_outputHTMLFileName,
+			C_HTML_FileWrite raw_file (raw_outputHTMLFileName,
                               	  "Activities Outputs",
                               	  "style.css"
                               		COMMA_SAFARI_CREATOR) ;

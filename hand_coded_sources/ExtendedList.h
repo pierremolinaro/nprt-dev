@@ -5,7 +5,7 @@ extern "C" {
 #ifndef EXTENDEDLIST_H
 #define EXTENDEDLIST_H
 
-class C_html_file_write ;
+class C_HTML_FileWrite ;
 
 #define min(x, y)   ((x) < (y) ? (x) : (y))
 #define MAX(x, y)   ((x) > (y) ? (x) : (y))
@@ -84,25 +84,25 @@ class cMTElement {
 
 
 sint32
-BuildExtendedList (TCUniqueArray < cReadyAtThisInstant> & ReadyAtThisInstant,
-                   TCUniqueArray <cElement> & Element,
-                   const TCUniqueArray <cResource> & Resource,
-                  TCUniqueArray <cActivity> & exElement,
-                  TCUniqueArray <cMTElement> & outMTElement,
+BuildExtendedList (TC_UniqueArray < cReadyAtThisInstant> & ReadyAtThisInstant,
+                   TC_UniqueArray <cElement> & Element,
+                   const TC_UniqueArray <cResource> & Resource,
+                  TC_UniqueArray <cActivity> & exElement,
+                  TC_UniqueArray <cMTElement> & outMTElement,
                   const sint32 Nu_oftasks, const sint32 Nu_ofMessages,
                   bool CreateIntermediateFiles,
                   bool & ioUseBalgorithm,
-                  const C_string & activitiesHTMLFileName);
+                  const C_String & activitiesHTMLFileName);
                    
 
 void
-ExtractWorstBestRT (const TCUniqueArray <cActivity> & exElement,
-          					const TCUniqueArray <cResource> & Resource,
-          					TCUniqueArray <cMTElement> & MTElement,
-                    const TCUniqueArray <cResponseTime> & inResponseTimeArray,
+ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
+          					const TC_UniqueArray <cResource> & Resource,
+          					TC_UniqueArray <cMTElement> & MTElement,
+                    const TC_UniqueArray <cResponseTime> & inResponseTimeArray,
                     bool CreateIntermediateFiles, 
-   									const C_string & raw_outputHTMLFileName,
-                    C_html_file_write & in_htmlFile);
+   									const C_String & raw_outputHTMLFileName,
+                    C_HTML_FileWrite & in_htmlFile);
 
 
 #endif

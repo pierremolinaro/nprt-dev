@@ -21,7 +21,7 @@
 #ifndef ACTIVITIES_CORE_DEFINED
 #define ACTIVITIES_CORE_DEFINED
 
-#include "generic_arraies/TCUniqueArray.h"
+#include "generic_arraies/TC_UniqueArray.h"
 #include "ExtendedList.h"
 
 //---------------------------------------------------------------------------*
@@ -29,14 +29,14 @@
 void
 scheduleActivities (const sint32 NoInterButUseB,
                     const bool DependentHasOffset,
-                    const TCUniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
-                    const TCUniqueArray <cActivity> & inActivities,
-                    const TCUniqueArray <cResource> & inResource,
-                    TCUniqueArray <cResponseTime> & outResponseTimeArray) ;
+                    const TC_UniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
+                    const TC_UniqueArray <cActivity> & inActivities,
+                    const TC_UniqueArray <cResource> & inResource,
+                    TC_UniqueArray <cResponseTime> & outResponseTimeArray) ;
 
 void
-independantResourcesScheduleActivities (const TCUniqueArray <cActivity> & inActivities,
-                                        TCUniqueArray <cResponseTime> & outResponseTimeArray) ;
+independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inActivities,
+                                        TC_UniqueArray <cResponseTime> & outResponseTimeArray) ;
 
 //---------------------------------------------------------------------------*
 

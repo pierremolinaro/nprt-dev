@@ -20,13 +20,13 @@
 
 //--- END OF USER ZONE 1
 
-#include "utilities/F_display_exception.h"
-#include "time/C_timer.h"
-#include "generic_arraies/TCUniqueArray.h"
-#include "command_line_interface/F_analyze_command_line_opts.h"
-#include "command_line_interface/myMain.h"
-#include "command_line_interface/C_generic_cli_options.h"
-#include "command_line_interface/C_cli_options_group.h"
+#include "utilities/F_DisplayException.h"
+#include "time/C_Timer.h"
+#include "generic_arraies/TC_UniqueArray.h"
+#include "command_line_interface/F_Analyze_CLI_Options.h"
+#include "command_line_interface/mainForLIBPM.h"
+#include "command_line_interface/C_builtin_CLI_Options.h"
+#include "command_line_interface/C_CLI_OptionGroup.h"
 #include "oa_cli_options.h"
 
 //---------------------------------------------------------------------------*
@@ -40,12 +40,12 @@
 
 //--- END OF USER ZONE 2
 
-class C_options_for_oa_main : public C_cli_options_group {
+class C_options_for_oa_main : public C_CLI_OptionGroup {
 //--- Constructor
   public : C_options_for_oa_main (const bool inAcceptsDebugOption) ;
 
 //--- Included options
-  private : C_generic_cli_options mGenericOptions ;
+  private : C_builtin_CLI_Options mBuiltinOptions ;
   private : oa_cli_options mOptions_oa_cli_options; 
 } ;
 
@@ -57,8 +57,8 @@ class C_options_for_oa_main : public C_cli_options_group {
 
 C_options_for_oa_main::
 C_options_for_oa_main (const bool inAcceptsDebugOption)
-:mGenericOptions (inAcceptsDebugOption) {
-  add (& mGenericOptions) ;
+:mBuiltinOptions (inAcceptsDebugOption) {
+  add (& mBuiltinOptions) ;
   add (& mOptions_oa_cli_options) ;
 }
 
@@ -78,9 +78,9 @@ mScanner_ (& mTerminalIO), mTerminalIO (inIOparameters) {
 //---------------------------------------------------------------------------*
 
 void oa_main
-::doCompilation (const C_string & inSourceFileName_,
+::doCompilation (const C_String & inSourceFileName_,
                  sint16 & returnCode) {
-  C_timer timer ;
+  C_Timer timer ;
   try{
     if (mTerminalIO.versionModeOn ()) {
       ::printf ("Reading '%s'\n", inSourceFileName_.getStringPtr ()) ;
@@ -127,7 +127,7 @@ void oa_main
 
 //---------------------------------------------------------------------------*
 
-int myMain  (const int argc, const char * argv []) {
+int mainForLIBPM  (const int argc, const char * argv []) {
   sint16 returnCode = 0 ; // No error
 //--- Input/output parameters
   C_options_for_oa_main options (false) ;
@@ -135,14 +135,14 @@ int myMain  (const int argc, const char * argv []) {
   IOparameters.mCompilerVersion = "version 1.1.9" ;
   IOparameters.mMaxErrorsCount = 100 ;
   IOparameters.mMaxWarningsCount = 100 ;
-  TCUniqueArray <C_string> sourceFilesArray ;
+  TC_UniqueArray <C_String> sourceFilesArray ;
   #ifdef TARGET_API_MAC_CARBON
     printf ("%s\n", IOparameters.mCompilerVersion.getStringPtr ()) ;
   #endif
   #ifdef COMPILE_FOR_WIN32
     printf ("%s\n", IOparameters.mCompilerVersion.getStringPtr ()) ;
   #endif
-  F_analyze_command_line_opts (argc, argv,
+  F_Analyze_CLI_Options (argc, argv,
                                "version 1.1.9",
                                options,
                                sourceFilesArray,

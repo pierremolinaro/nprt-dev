@@ -1,8 +1,8 @@
 /*--------------------------------------------------------------------------*/
 
 #include<stdlib.h> 
-#include "files/C_html_file_write.h"
-#include "memory/M_memory_control.h"
+#include "files/C_HTML_FileWrite.h"
+#include "utilities/MF_MemoryControl.h"
 
 #include "oa_semantics.h"
 #include "CANMessageBounds.h"
@@ -167,11 +167,11 @@ uint32 cPtr_C_taskDependsFromMessage::getTaskEveryParameter (void) const {
 //--------------------------------------------------------------------------*
 
 
-static void buildCSSfile (const C_string & inDirectory) {
+static void buildCSSfile (const C_String & inDirectory) {
 //--- Style file name
-  const C_string styleFileName = inDirectory + "/style.css" ;
+  const C_String styleFileName = inDirectory + "/style.css" ;
 //--- Build file
-  C_text_file_write f (styleFileName COMMA_SAFARI_CREATOR) ;
+  C_TextFileWrite f (styleFileName COMMA_SAFARI_CREATOR) ;
   f << "body {\n"
        "  font-family: Helvetica, sans-serif ;\n"
        "	font-size: small ;\n"
@@ -250,26 +250,26 @@ static void buildCSSfile (const C_string & inDirectory) {
 //--------------------------------------------------------------------------*
 
 void
-performComputations (C_lexique & inLexique,
+performComputations (C_Lexique & inLexique,
                      GGS_M_processor & inProcessorMap,
                      GGS_M_network & inNetworkMap,
                      GGS_M_messages & inMessagesMap,
                      GGS_M_tasks & inTasksMap) {  
-  TCUniqueArray <cResource> Resource ;
-  TCUniqueArray <cElement> Element ;
+  TC_UniqueArray <cResource> Resource ;
+  TC_UniqueArray <cElement> Element ;
 
   const bool CreateIntermediateFiles = inLexique.getBoolOptionValueFromKeys ("oa_cli_options", "createIntermediateFiles", true) ;
   const bool useCANmaxLengthOnly = inLexique.getBoolOptionValueFromKeys ("oa_cli_options", "useCANmaxLegth", true) ;
   bool forceBalgorithm = true ;
-  const C_string sourceFile = inLexique.getSourceFile () ;
+  const C_String sourceFile = inLexique.getSourceFile () ;
   
 
-  const C_string htmlFileName = sourceFile.getPath () + "/" + sourceFile.getFileNameWithoutSuffix () + ".html" ;
-  const C_string activitiesHTMLFileName = sourceFile.getPath () + "/" + sourceFile.getFileNameWithoutSuffix () + "_activities.html" ;
-  const C_string raw_outputHTMLFileName = sourceFile.getPath () + "/" + sourceFile.getFileNameWithoutSuffix () + "_raw_output.html" ;
+  const C_String htmlFileName = sourceFile.getPath () + "/" + sourceFile.getFileNameWithoutSuffix () + ".html" ;
+  const C_String activitiesHTMLFileName = sourceFile.getPath () + "/" + sourceFile.getFileNameWithoutSuffix () + "_activities.html" ;
+  const C_String raw_outputHTMLFileName = sourceFile.getPath () + "/" + sourceFile.getFileNameWithoutSuffix () + "_raw_output.html" ;
 
   buildCSSfile (sourceFile.getPath ()) ;
-  C_html_file_write htmlFile ( htmlFileName,
+  C_HTML_FileWrite htmlFile ( htmlFileName,
                               sourceFile.getFileNameWithSuffix () + " results",
                               "style.css"
                               COMMA_SAFARI_CREATOR) ;
@@ -651,10 +651,10 @@ performComputations (C_lexique & inLexique,
 
   if (NecessaryConditions_OK (inLexique, Element, Resource) ){
   
-  	TCUniqueArray <cActivity> exElement ;
-  	TCUniqueArray <cResponseTime> responseTimeArray ;
-  	TCUniqueArray <cMTElement> MTElement ;
-  	TCUniqueArray <cReadyAtThisInstant>  ReadyAtThisInstant;
+  	TC_UniqueArray <cActivity> exElement ;
+  	TC_UniqueArray <cResponseTime> responseTimeArray ;
+  	TC_UniqueArray <cMTElement> MTElement ;
+  	TC_UniqueArray <cReadyAtThisInstant>  ReadyAtThisInstant;
    
    sint32 NoInterButUseB = 
          BuildExtendedList (ReadyAtThisInstant, Element, 

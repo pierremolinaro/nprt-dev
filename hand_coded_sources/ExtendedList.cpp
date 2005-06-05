@@ -1,5 +1,5 @@
-#include "generic_arraies/TCUniqueArray.h"
-#include "files/C_html_file_write.h"
+#include "generic_arraies/TC_UniqueArray.h"
+#include "files/C_HTML_FileWrite.h"
 #include <stdio.h>
 #include <math.h>
 #include <limits.h>
@@ -29,7 +29,7 @@ static uint64 GCD(uint64 a, uint64 b) {
 
 /*---------------------------------------------------------------------------*/ 
 static uint64
-CalculateHyperPeriod (const TCUniqueArray <cElement> & Element) {
+CalculateHyperPeriod (const TC_UniqueArray <cElement> & Element) {
   
   sint32 minimumOffset = SINT32_MAX ;
   uint64 LCM = 0 ;
@@ -72,7 +72,7 @@ CalculateHyperPeriod (const TCUniqueArray <cElement> & Element) {
 
 // Unused function : commented out by PM 17/1/2005
 /* static sint32 
-CalculateExtendedListLength (const TCUniqueArray <cElement> & Element,
+CalculateExtendedListLength (const TC_UniqueArray <cElement> & Element,
                              const uint64 inHyperPeriod) {
   
   sint32 ExtendedListLength=0;
@@ -86,8 +86,8 @@ CalculateExtendedListLength (const TCUniqueArray <cElement> & Element,
 
 /*-----------------------------------------------------------------------------*/
 static void
-ExtractResourceMinDuration (TCUniqueArray <cElement> & Element,
-																const TCUniqueArray <cResource> & Resource){
+ExtractResourceMinDuration (TC_UniqueArray <cElement> & Element,
+																const TC_UniqueArray <cResource> & Resource){
 
 sint32 NumOfResources = Resource.count();
 sint32 NumOfElements = Element.count();
@@ -105,8 +105,8 @@ sint32 minDuration=SINT32_MAX;
 
 /*----------------------------------------------------------------------------*/
 static void 
-InsertInOrderedList(const TCUniqueArray <cElement> & Element,
-	                  TCUniqueArray <cElement> & ArrangedElement,
+InsertInOrderedList(const TC_UniqueArray <cElement> & Element,
+	                  TC_UniqueArray <cElement> & ArrangedElement,
                     const sint32 ElementCounter) {  
   cElement element;
    
@@ -151,8 +151,8 @@ InsertInOrderedList(const TCUniqueArray <cElement> & Element,
 /*---------------------------------------------------------------------------*/ 
 static void
 ArrangingAccodingPrecedenceRelations(
-                   const TCUniqueArray <cElement> & Element,
-                   TCUniqueArray <cElement> & ArrangedElement,
+                   const TC_UniqueArray <cElement> & Element,
+                   TC_UniqueArray <cElement> & ArrangedElement,
                    const sint32 Nu_ofTasks,
                    const sint32 Nu_ofMessages) {
                              
@@ -201,7 +201,7 @@ ArrangingAccodingPrecedenceRelations(
     
 /*----------------------------------------------------------------------------*/
 static bool 
-VerifyInterDependence (TCUniqueArray <cElement> & Element){
+VerifyInterDependence (TC_UniqueArray <cElement> & Element){
  	const sint32 Nu_ofElements = Element.count () ;
  	bool interDependence=false;
   for (sint32 i = 0; (i < Nu_ofElements)  && !interDependence ;i++){
@@ -219,7 +219,7 @@ VerifyInterDependence (TCUniqueArray <cElement> & Element){
 /*--------------------------------------------------------------------------*/
 
 static void 
-FindSuccessors (TCUniqueArray <cElement> & Element){
+FindSuccessors (TC_UniqueArray <cElement> & Element){
   
   const sint32 Nu_ofElements = Element.count () ;
   Element (Nu_ofElements-1 COMMA_HERE).mSuccessorId = -1;
@@ -248,9 +248,9 @@ FindSuccessors (TCUniqueArray <cElement> & Element){
 
 /*---------------------------------------------------------------------------*/
 static sint32
-DeployElements (TCUniqueArray <cElement> & ArrangedElement,
-                TCUniqueArray <cActivity> & exElement,
-                TCUniqueArray <cMTElement> & outMTElement,
+DeployElements (TC_UniqueArray <cElement> & ArrangedElement,
+                TC_UniqueArray <cActivity> & exElement,
+                TC_UniqueArray <cMTElement> & outMTElement,
                 const uint64 inHyperPeriod){
 
 //Arrange elements according to their precedence relations
@@ -368,12 +368,12 @@ DeployElements (TCUniqueArray <cElement> & ArrangedElement,
 /*-------------------------------------------------------------------------*/
 
 static void 
-DisposeReadyAtRelations(const TCUniqueArray <cElement> & ArrangedElement,
-                        TCUniqueArray <cActivity> & Activity,
-                        TCUniqueArray <cReadyAtThisInstant> & ReadyAtThisInstant,
+DisposeReadyAtRelations(const TC_UniqueArray <cElement> & ArrangedElement,
+                        TC_UniqueArray <cActivity> & Activity,
+                        TC_UniqueArray <cReadyAtThisInstant> & ReadyAtThisInstant,
                         const uint64 inHyperPeriod){
 
-TCUniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;	
+TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;	
 
 	//--- calculate max size
 	sint32 Num_ofIndepStaringInstant=0;
@@ -485,12 +485,12 @@ TCUniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;
 
 /*-------------------------------------------------------------------------*/
 static void
-CreateActivitiesFile (const TCUniqueArray <cActivity> & exElement,
-							      	const C_string & activitiesHTMLFileName){
+CreateActivitiesFile (const TC_UniqueArray <cActivity> & exElement,
+							      	const C_String & activitiesHTMLFileName){
 
   const sint32 NumberOfElements = exElement.count () ;
   printf ("Extended activities list is stored in %s file.\n", activitiesHTMLFileName.getStringPtr ()) ;
-  C_html_file_write act_htmlFile (activitiesHTMLFileName,
+  C_HTML_FileWrite act_htmlFile (activitiesHTMLFileName,
                               "Extended List Activities",
                               "style.css"
                               COMMA_SAFARI_CREATOR) ;
@@ -530,21 +530,21 @@ CreateActivitiesFile (const TCUniqueArray <cActivity> & exElement,
 	
 /*----------------------------------------------------------------------------*/
 sint32
-BuildExtendedList (TCUniqueArray <cReadyAtThisInstant> & oReadyAtThisInstant,
-                   TCUniqueArray <cElement> & Element,
-                   const TCUniqueArray <cResource> & Resource,
-                   TCUniqueArray <cActivity> & exElement,
-                   TCUniqueArray <cMTElement> & outMTElement,
+BuildExtendedList (TC_UniqueArray <cReadyAtThisInstant> & oReadyAtThisInstant,
+                   TC_UniqueArray <cElement> & Element,
+                   const TC_UniqueArray <cResource> & Resource,
+                   TC_UniqueArray <cActivity> & exElement,
+                   TC_UniqueArray <cMTElement> & outMTElement,
                    const sint32 Nu_ofTasks, sint32 Nu_ofMessages,
                    bool CreateIntermediateFiles,
                    bool & ioUseBalgorithm,
-                   const C_string & activitiesHTMLFileName) {
+                   const C_String & activitiesHTMLFileName) {
 
       
   ExtractResourceMinDuration(Element, Resource);
   const uint64 HyperPeriod = CalculateHyperPeriod (Element) ;
   const sint32 Number_ofResources = Resource.count();
-  TCUniqueArray <cElement> ArrangedElement;
+  TC_UniqueArray <cElement> ArrangedElement;
   sint32 NoInterDependenceButUseB = 0;
   ArrangingAccodingPrecedenceRelations (Element, ArrangedElement,
   																			Nu_ofTasks,Nu_ofMessages);
