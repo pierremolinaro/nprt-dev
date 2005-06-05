@@ -18,11 +18,11 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#include "generic_arraies/TCUniqueArray.h"
-#include "streams/C_console_out.h"
-#include "command_line_interface/F_analyze_command_line_opts.h"
-#include "command_line_interface/myMain.h"
-#include "time/C_timer.h"
+#include "generic_arraies/TC_UniqueArray.h"
+#include "streams/C_ConsoleOut.h"
+#include "command_line_interface/F_Analyze_CLI_Options.h"
+#include "command_line_interface/mainForLIBPM.h"
+#include "time/C_Timer.h"
 #include "utilities/TF_sup.h"
 #include "utilities/TF_inf.h"
 
@@ -73,7 +73,7 @@ class cIndependantResourceSchedule  {
 //---------------------------------------------------------------------------*
 
 class cIndependantResourcesScheduleMap {
-  private : TCUniqueArray <cIndependantResourceSchedule  *> mResourceScheduleArray ;
+  private : TC_UniqueArray <cIndependantResourceSchedule  *> mResourceScheduleArray ;
   private : sint32 mCurrentInstant ;
   private : sint32 mLatestInstant ;
 
@@ -96,7 +96,7 @@ class cIndependantResourcesScheduleMap {
   public : void dumpStructure (void) ;
   public : void insertAtInstant (cIndependantResourceSchedule  * inResource,
                                  const sint32 inInstant) ;
-  public : void computeBestAndWorstResponseTime (TCUniqueArray <cResponseTime> & ioResponseTimeArray) ;
+  public : void computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & ioResponseTimeArray) ;
   protected : void reallocIfNeeded (const sint32 inInstant) ;
 
 } ;
@@ -275,7 +275,7 @@ static void unMark (void) {
 //---------------------------------------------------------------------------*
 
 void cIndependantResourcesScheduleMap::
-computeBestAndWorstResponseTime (TCUniqueArray <cResponseTime> & ioResponseTimeArray) {
+computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & ioResponseTimeArray) {
   cIndependantResourcesActivitySchedule * p = gPtrNodeList ;
   while (p != NULL) {
     const sint32 activityIndex = p->mActivityIndex ;
@@ -346,8 +346,8 @@ dumpStructure (void) {
 //---------------------------------------------------------------------------*
 
 void
-independantResourcesScheduleActivities (const TCUniqueArray <cActivity> & inActivities,
-                                        TCUniqueArray <cResponseTime> & outResponseTimeArray) {
+independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inActivities,
+                                        TC_UniqueArray <cResponseTime> & outResponseTimeArray) {
 //--- Schedule map
   cIndependantResourcesScheduleMap scheduleMap ;
 //--- Enter independant activities

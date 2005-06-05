@@ -22,7 +22,7 @@
 
 #ifndef oa_scanner_0_DEFINED
 #define oa_scanner_0_DEFINED
-#include "galgas/C_lexique.h"
+#include "galgas/C_Lexique.h"
 
 //--- START OF USER ZONE 2
 
@@ -35,7 +35,7 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-class oa_scanner : public C_lexique {
+class oa_scanner : public C_Lexique {
 // Terminal symbols enumeration
   public : enum {oa_scanner_1_,
   oa_scanner_1_identifier,
@@ -66,21 +66,21 @@ class oa_scanner : public C_lexique {
 //--- Key words table 'keyWordList'
   public : static const sint16 oa_scanner_table_size_keyWordList ;
   private : static const C_lexique_table_entry oa_scanner_table_for_keyWordList [19] ;
-  public : static sint16 search_into_keyWordList (const C_string & inSearchedString) ;
+  public : static sint16 search_into_keyWordList (const C_String & inSearchedString) ;
 
 //--- Key words table 'delimitorsList'
   public : static const sint16 oa_scanner_table_size_delimitorsList ;
   private : static const C_lexique_table_entry oa_scanner_table_for_delimitorsList [3] ;
-  public : static sint16 search_into_delimitorsList (const C_string & inSearchedString) ;
+  public : static sint16 search_into_delimitorsList (const C_String & inSearchedString) ;
 
   protected : virtual void parseLexicalToken (const bool inPropagateLexicaleErrorException) ;
   protected : virtual void appendTerminalMessageToSyntaxErrorMessage (const sint16 numeroTerminal,
-                                                              C_string & messageErreur) ;
+                                                              C_String & messageErreur) ;
 
 //--- Constructor
   public : oa_scanner (AC_galgas_io * inGalgasInputOutput) ;
   public : uint32 ulongValue ; // user defined attribute
-  public : C_string identifierString ; // user defined attribute
+  public : C_String identifierString ; // user defined attribute
   public : virtual sint16 getTerminalVocabularyCount_ (void) const { return 24 ; }
 
   public : static sint32 getStylesCount (void) ;

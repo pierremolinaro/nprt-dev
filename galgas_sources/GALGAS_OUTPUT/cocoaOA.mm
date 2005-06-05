@@ -22,9 +22,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-#include "cocoa_wrapper_for_galgas.h"
-#include "command_line_interface/C_cli_options_group.h"
-#include "command_line_interface/C_generic_cli_options.h"
+#include "F_CocoaWrapperForGalgas.h"
+#include "command_line_interface/C_CLI_OptionGroup.h"
+#include "command_line_interface/C_builtin_CLI_Options.h"
 #include "galgas/C_galgas_null_io.h"
 #include "oa_scanner.h"
 #include "oa_cli_options.h"
@@ -44,9 +44,9 @@
 //---------------------------------------------------------------------------*
 
 
-static C_generic_cli_options gGenericOptions (false) ;
+static C_builtin_CLI_Options gGenericOptions (false) ;
 static oa_cli_options gOption0 ;
-static C_cli_options_group gCommandLineOptions (& gGenericOptions, & gOption0, NULL) ;
+static C_CLI_OptionGroup gCommandLineOptions (& gGenericOptions, & gOption0, NULL) ;
 static C_galgas_io_parameters IOparameters (& gCommandLineOptions) ;
 static C_galgas_null_io gNullIO (IOparameters) ;
 static oa_scanner gScanner (& gNullIO) ;
@@ -129,11 +129,11 @@ sint32 getStringOptionsCount (void) {
   return gCommandLineOptions.getStringOptionsCount () ;
 }
 
-C_string getStringOptionValue (const sint32 inIndex COMMA_LOCATION_ARGS) {
+C_String getStringOptionValue (const sint32 inIndex COMMA_LOCATION_ARGS) {
   return gCommandLineOptions.getStringOptionValue (inIndex COMMA_THERE) ;
 }
 
-void setStringOptionValue (const sint32 inIndex, const C_string & inValue COMMA_LOCATION_ARGS) {
+void setStringOptionValue (const sint32 inIndex, const C_String & inValue COMMA_LOCATION_ARGS) {
   gCommandLineOptions.setStringOptionValue (inIndex, inValue COMMA_THERE) ;
 }
 
@@ -177,7 +177,7 @@ const char * getStyleName (const sint32 inIndex) {
 
 void scanThenGetStyledRangeArray (const char * inSourceString,
                                   const char * inSourceFileName,
-                                  TCUniqueArray <C_styledRange> & ioStyledRangeArray,
+                                  TC_UniqueArray <C_styledRange> & ioStyledRangeArray,
                                   const sint32 inAffectedRangeLocation,
                                   const sint32 inAffectedRangeLength,
                                   const sint32 inReplacementStringLength,

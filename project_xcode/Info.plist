@@ -24,7 +24,7 @@
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSDocumentClass</key>
-			<string>cocoaGalgasDocument</string>
+			<string>OC_GGS_Document</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -40,7 +40,7 @@
 	<key>CFBundleSignature</key>
 	<string>NPRX</string>
 	<key>CFBundleVersion</key>
-	<string>16, libpm v45</string>
+	<string>19, libpm v57</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

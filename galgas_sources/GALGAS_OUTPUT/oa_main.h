@@ -37,7 +37,7 @@
 class oa_main : public C_defaultUserSemanticActions {
   protected : oa_scanner mScanner_ ;
   protected : C_galgas_terminal_io mTerminalIO ;
-  protected : C_string mSourceFileExtension_ ;
+  protected : C_String mSourceFileExtension_ ;
 
 //--- Command line options
   protected : bool mOption_oa_cli_options_createIntermediateFiles ;
@@ -47,7 +47,7 @@ class oa_main : public C_defaultUserSemanticActions {
 //--- Constructor
   public : oa_main (const C_galgas_io_parameters & inIOparameters) ;
 
-  public : void doCompilation (const C_string & inSourceFileName_,
+  public : void doCompilation (const C_String & inSourceFileName_,
                                sint16 & returnCode) ;
 } ;
 
