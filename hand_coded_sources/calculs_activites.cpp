@@ -171,7 +171,7 @@ static void buildCSSfile (const C_String & inDirectory) {
 //--- Style file name
   const C_String styleFileName = inDirectory + "/style.css" ;
 //--- Build file
-  C_TextFileWrite f (styleFileName COMMA_SAFARI_CREATOR) ;
+  C_TextFileWrite f (styleFileName COMMA_SAFARI_CREATOR COMMA_HERE) ;
   f << "body {\n"
        "  font-family: Helvetica, sans-serif ;\n"
        "	font-size: small ;\n"
@@ -272,7 +272,8 @@ performComputations (C_Lexique & inLexique,
   C_HTML_FileWrite htmlFile ( htmlFileName,
                               sourceFile.getFileNameWithSuffix () + " results",
                               "style.css"
-                              COMMA_SAFARI_CREATOR) ;
+                              COMMA_SAFARI_CREATOR
+                              COMMA_HERE) ;
   if(useCANmaxLengthOnly){
   	printf("Elements have their upper duration bounds.\n"); 
   }
