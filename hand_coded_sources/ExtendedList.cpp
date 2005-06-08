@@ -493,7 +493,8 @@ CreateActivitiesFile (const TC_UniqueArray <cActivity> & exElement,
   C_HTML_FileWrite act_htmlFile (activitiesHTMLFileName,
                               "Extended List Activities",
                               "style.css"
-                              COMMA_SAFARI_CREATOR) ;
+                              COMMA_SAFARI_CREATOR
+                              COMMA_HERE) ;
 		
 	act_htmlFile.writeTitleComment ("raw Activities map", "title") ;
 	act_htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
