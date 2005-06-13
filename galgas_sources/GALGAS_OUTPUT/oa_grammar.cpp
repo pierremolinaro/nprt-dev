@@ -409,7 +409,7 @@ void oa_grammar::startParsing_ (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_repeat_oa_parser_0 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -420,7 +420,7 @@ sint16 oa_grammar::select_repeat_oa_parser_0 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_1 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -431,7 +431,7 @@ sint16 oa_grammar::select_oa_parser_1 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_2 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -442,7 +442,7 @@ sint16 oa_grammar::select_oa_parser_2 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_3 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -453,7 +453,7 @@ sint16 oa_grammar::select_oa_parser_3 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_4 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -464,7 +464,7 @@ sint16 oa_grammar::select_oa_parser_4 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_5 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -475,7 +475,7 @@ sint16 oa_grammar::select_oa_parser_5 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_6 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -486,7 +486,7 @@ sint16 oa_grammar::select_oa_parser_6 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_7 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -497,7 +497,7 @@ sint16 oa_grammar::select_oa_parser_7 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_8 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -508,7 +508,7 @@ sint16 oa_grammar::select_oa_parser_8 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_9 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -519,7 +519,7 @@ sint16 oa_grammar::select_oa_parser_9 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_10 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -530,7 +530,7 @@ sint16 oa_grammar::select_oa_parser_10 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_11 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -541,7 +541,7 @@ sint16 oa_grammar::select_oa_parser_11 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_12 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -552,7 +552,7 @@ sint16 oa_grammar::select_oa_parser_12 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_13 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -563,7 +563,7 @@ sint16 oa_grammar::select_oa_parser_13 (oa_scanner & lexique_var_) {
 
 
 sint16 oa_grammar::select_oa_parser_14 (oa_scanner & lexique_var_) {
-  return lexique_var_.getNextProductionIndex () ;
+  return lexique_var_.nextProductionIndex () ;
 }
 
 //---------------------------------------------------------------------------*

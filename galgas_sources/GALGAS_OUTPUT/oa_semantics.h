@@ -66,19 +66,19 @@ class GGS_M_processor : public AC_galgas_map {
   //--- Method for key compare
     public : virtual sint32 compareKeys (void * inKey) const ;
   //--- Method for getting key as C_String
-    public : virtual C_String getStringForKey (void) const ;
+    public : virtual C_String stringForKey (void) const ;
   //--- Get pointers
-    public : inline element_type * getNextItem (void) const { return (element_type *) mNextItem ; }
-    public : inline element_type * getInfPtr (void) const { return (element_type *) mInfPtr ; }
-    public : inline element_type * getSupPtr (void) const { return (element_type *) mSupPtr ; }
+    public : inline element_type * nextObject (void) const { return (element_type *) mNextItem ; }
+    public : inline element_type * infObject (void) const { return (element_type *) mInfPtr ; }
+    public : inline element_type * supObject (void) const { return (element_type *) mSupPtr ; }
   //--- Data members
     public : const GGS_lstring mKey ;
     public : e_M_processor mInfo ;
   } ;
 //--- Get pointers
-  public : inline element_type * getRoot (void) const { return (element_type *) mRoot ; }
-  public : inline element_type * getFirstItem (void) const { return (element_type *) mFirstItem ; }
-  public : inline element_type * getLastItem (void) const { return (element_type *) mLastItem ; }
+  public : inline element_type * rootObject (void) const { return (element_type *) mRoot ; }
+  public : inline element_type * firstObject (void) const { return (element_type *) mFirstItem ; }
+  public : inline element_type * lastObject (void) const { return (element_type *) mLastItem ; }
 //--- Create a new element
   protected : virtual AC_galgas_map_element * new_element (void * inKey, void * inInfo) ;
 //--- 'empty' constructor
@@ -140,19 +140,19 @@ class GGS_M_network : public AC_galgas_map {
   //--- Method for key compare
     public : virtual sint32 compareKeys (void * inKey) const ;
   //--- Method for getting key as C_String
-    public : virtual C_String getStringForKey (void) const ;
+    public : virtual C_String stringForKey (void) const ;
   //--- Get pointers
-    public : inline element_type * getNextItem (void) const { return (element_type *) mNextItem ; }
-    public : inline element_type * getInfPtr (void) const { return (element_type *) mInfPtr ; }
-    public : inline element_type * getSupPtr (void) const { return (element_type *) mSupPtr ; }
+    public : inline element_type * nextObject (void) const { return (element_type *) mNextItem ; }
+    public : inline element_type * infObject (void) const { return (element_type *) mInfPtr ; }
+    public : inline element_type * supObject (void) const { return (element_type *) mSupPtr ; }
   //--- Data members
     public : const GGS_lstring mKey ;
     public : e_M_network mInfo ;
   } ;
 //--- Get pointers
-  public : inline element_type * getRoot (void) const { return (element_type *) mRoot ; }
-  public : inline element_type * getFirstItem (void) const { return (element_type *) mFirstItem ; }
-  public : inline element_type * getLastItem (void) const { return (element_type *) mLastItem ; }
+  public : inline element_type * rootObject (void) const { return (element_type *) mRoot ; }
+  public : inline element_type * firstObject (void) const { return (element_type *) mFirstItem ; }
+  public : inline element_type * lastObject (void) const { return (element_type *) mLastItem ; }
 //--- Create a new element
   protected : virtual AC_galgas_map_element * new_element (void * inKey, void * inInfo) ;
 //--- 'empty' constructor
@@ -251,19 +251,19 @@ class GGS_M_messages : public AC_galgas_map {
   //--- Method for key compare
     public : virtual sint32 compareKeys (void * inKey) const ;
   //--- Method for getting key as C_String
-    public : virtual C_String getStringForKey (void) const ;
+    public : virtual C_String stringForKey (void) const ;
   //--- Get pointers
-    public : inline element_type * getNextItem (void) const { return (element_type *) mNextItem ; }
-    public : inline element_type * getInfPtr (void) const { return (element_type *) mInfPtr ; }
-    public : inline element_type * getSupPtr (void) const { return (element_type *) mSupPtr ; }
+    public : inline element_type * nextObject (void) const { return (element_type *) mNextItem ; }
+    public : inline element_type * infObject (void) const { return (element_type *) mInfPtr ; }
+    public : inline element_type * supObject (void) const { return (element_type *) mSupPtr ; }
   //--- Data members
     public : const GGS_lstring mKey ;
     public : e_M_messages mInfo ;
   } ;
 //--- Get pointers
-  public : inline element_type * getRoot (void) const { return (element_type *) mRoot ; }
-  public : inline element_type * getFirstItem (void) const { return (element_type *) mFirstItem ; }
-  public : inline element_type * getLastItem (void) const { return (element_type *) mLastItem ; }
+  public : inline element_type * rootObject (void) const { return (element_type *) mRoot ; }
+  public : inline element_type * firstObject (void) const { return (element_type *) mFirstItem ; }
+  public : inline element_type * lastObject (void) const { return (element_type *) mLastItem ; }
 //--- Create a new element
   protected : virtual AC_galgas_map_element * new_element (void * inKey, void * inInfo) ;
 //--- 'empty' constructor
@@ -386,19 +386,19 @@ class GGS_M_tasks : public AC_galgas_map {
   //--- Method for key compare
     public : virtual sint32 compareKeys (void * inKey) const ;
   //--- Method for getting key as C_String
-    public : virtual C_String getStringForKey (void) const ;
+    public : virtual C_String stringForKey (void) const ;
   //--- Get pointers
-    public : inline element_type * getNextItem (void) const { return (element_type *) mNextItem ; }
-    public : inline element_type * getInfPtr (void) const { return (element_type *) mInfPtr ; }
-    public : inline element_type * getSupPtr (void) const { return (element_type *) mSupPtr ; }
+    public : inline element_type * nextObject (void) const { return (element_type *) mNextItem ; }
+    public : inline element_type * infObject (void) const { return (element_type *) mInfPtr ; }
+    public : inline element_type * supObject (void) const { return (element_type *) mSupPtr ; }
   //--- Data members
     public : const GGS_lstring mKey ;
     public : e_M_tasks mInfo ;
   } ;
 //--- Get pointers
-  public : inline element_type * getRoot (void) const { return (element_type *) mRoot ; }
-  public : inline element_type * getFirstItem (void) const { return (element_type *) mFirstItem ; }
-  public : inline element_type * getLastItem (void) const { return (element_type *) mLastItem ; }
+  public : inline element_type * rootObject (void) const { return (element_type *) mRoot ; }
+  public : inline element_type * firstObject (void) const { return (element_type *) mFirstItem ; }
+  public : inline element_type * lastObject (void) const { return (element_type *) mLastItem ; }
 //--- Create a new element
   protected : virtual AC_galgas_map_element * new_element (void * inKey, void * inInfo) ;
 //--- 'empty' constructor

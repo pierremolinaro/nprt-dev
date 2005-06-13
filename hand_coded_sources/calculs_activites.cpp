@@ -258,19 +258,19 @@ performComputations (C_Lexique & inLexique,
   TC_UniqueArray <cResource> Resource ;
   TC_UniqueArray <cElement> Element ;
 
-  const bool CreateIntermediateFiles = inLexique.getBoolOptionValueFromKeys ("oa_cli_options", "createIntermediateFiles", true) ;
-  const bool useCANmaxLengthOnly = inLexique.getBoolOptionValueFromKeys ("oa_cli_options", "useCANmaxLegth", true) ;
+  const bool CreateIntermediateFiles = inLexique.boolOptionValueFromKeys ("oa_cli_options", "createIntermediateFiles", true) ;
+  const bool useCANmaxLengthOnly = inLexique.boolOptionValueFromKeys ("oa_cli_options", "useCANmaxLegth", true) ;
   bool forceBalgorithm = true ;
-  const C_String sourceFile = inLexique.getSourceFile () ;
+  const C_String sourceFile = inLexique.sourceFileName () ;
   
 
-  const C_String htmlFileName = sourceFile.getPath () + "/" + sourceFile.getFileNameWithoutSuffix () + ".html" ;
-  const C_String activitiesHTMLFileName = sourceFile.getPath () + "/" + sourceFile.getFileNameWithoutSuffix () + "_activities.html" ;
-  const C_String raw_outputHTMLFileName = sourceFile.getPath () + "/" + sourceFile.getFileNameWithoutSuffix () + "_raw_output.html" ;
+  const C_String htmlFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + ".html" ;
+  const C_String activitiesHTMLFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + "_activities.html" ;
+  const C_String raw_outputHTMLFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + "_raw_output.html" ;
 
-  buildCSSfile (sourceFile.getPath ()) ;
+  buildCSSfile (sourceFile.stringByDeletingLastPathComponent ()) ;
   C_HTML_FileWrite htmlFile ( htmlFileName,
-                              sourceFile.getFileNameWithSuffix () + " results",
+                              sourceFile.lastPathComponent () + " results",
                               "style.css"
                               COMMA_SAFARI_CREATOR
                               COMMA_HERE) ;
@@ -280,7 +280,7 @@ performComputations (C_Lexique & inLexique,
   char MessageType = '\0' ;
   bool DependentHasOffset = false ;
 	sint32  index ;
-	GGS_M_processor::element_type * processor = inProcessorMap.getFirstItem () ;
+	GGS_M_processor::element_type * processor = inProcessorMap.firstObject () ;
 //--- Print processors map
   htmlFile.writeTitleComment ("Processors map", "title") ;
   htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
@@ -295,29 +295,29 @@ performComputations (C_Lexique & inLexique,
 	  htmlFile.outputRawData ("</td><td>") ;
 	  htmlFile << processor->mInfo.mStep.getValue () ;
 	  htmlFile.outputRawData ("</td></tr>") ;
-	  processor = processor->getNextItem () ;
+	  processor = processor->nextObject () ;
 	  index ++ ;
 	}
 	htmlFile.outputRawData ("</table>") ;
 	htmlFile.outputRawData ("<br>");
 //--- Build processors map  
   index = 0 ;
-  processor = inProcessorMap.getFirstItem () ;
+  processor = inProcessorMap.firstObject () ;
   while (processor != NULL) {
     macroValidPointer (processor) ;
     cResource resource ;
-    strcpy (resource.mResourceName, processor->mKey.getStringPtr ());
+    strcpy (resource.mResourceName, processor->mKey.cString ());
   	resource.mResourceType= 2; // Processor = 2
    	resource.mStep = (sint32) processor->mInfo.mStep.getValue () ;
     
     Resource.addObject (resource) ;
-    processor = processor->getNextItem () ;
+    processor = processor->nextObject () ;
     index ++ ;
   }
   sint32 NumberOfProcessors = index ;
 	
   const char * kNetworkTypes [] = {"VAN","CAN"} ;
-	GGS_M_network::element_type * network = inNetworkMap.getFirstItem () ;
+	GGS_M_network::element_type * network = inNetworkMap.firstObject () ;
 //--- Print network map
   htmlFile.writeTitleComment ("Networks map", "title") ;
   htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
@@ -334,7 +334,7 @@ performComputations (C_Lexique & inLexique,
     htmlFile.outputRawData ("</td><td>") ;
     htmlFile << network->mInfo.mScalingFactor.getValue () ;
     htmlFile.outputRawData ("</td></tr>") ;
-    network = network->getNextItem () ;
+    network = network->nextObject () ;
     index ++ ;
   }
   htmlFile.outputRawData ("</table>") ;
@@ -342,28 +342,28 @@ performComputations (C_Lexique & inLexique,
 //--- Build networks map  
   sint32 min_NetworkStep = SINT32_MAX ;
   index = 0 ;
-  network = inNetworkMap.getFirstItem ();
+  network = inNetworkMap.firstObject ();
   while (network != NULL) {
     macroValidPointer (network) ;
     cResource resource ;
-    strcpy(resource.mResourceName,network->mKey.getStringPtr ());
+    strcpy(resource.mResourceName,network->mKey.cString ());
   	resource.mResourceType= network->mInfo.mCANnetwork.getValue ();
     resource.mStep = (sint32) network->mInfo.mScalingFactor.getValue () ;		
  		min_NetworkStep = min (min_NetworkStep, resource.mStep);
  	 	
  	 	Resource.addObject (resource) ;
-    network = network->getNextItem () ;
+    network = network->nextObject () ;
     index ++ ;
   }
   
 //--- Build tasks map  
-  GGS_M_tasks::element_type * task = inTasksMap.getFirstItem () ;
+  GGS_M_tasks::element_type * task = inTasksMap.firstObject () ;
   index = 0 ;
-  task = inTasksMap.getFirstItem () ;
+  task = inTasksMap.firstObject () ;
   while (task != NULL) {
     macroValidPointer (task) ;
     cElement element ;
-    strcpy(element.mElementName,task->mKey.getStringPtr ());   
+    strcpy(element.mElementName,task->mKey.cString ());   
     element.mElementType = 'T';    
     element.mId_inList =index;
   	element.mResourceId = (sint32) task->mInfo.mProcessor.getValue ();
@@ -411,21 +411,21 @@ performComputations (C_Lexique & inLexique,
       DependentHasOffset = DependentHasOffset || true ;
     }
     Element.addObject (element) ;
-		task = task->getNextItem () ;
+		task = task->nextObject () ;
     index ++ ;
   }
   sint32 NumberOfTasks = index;
 	
   const char * kMessageClasses [] = {"standard", "extended", "  VAN   "} ;
-  GGS_M_messages::element_type * message = inMessagesMap.getFirstItem () ;
+  GGS_M_messages::element_type * message = inMessagesMap.firstObject () ;
 
 //--- Build messages map
   index = 0 ;
-  message = inMessagesMap.getFirstItem () ;
+  message = inMessagesMap.firstObject () ;
   while (message != NULL) {
     macroValidPointer (message) ;
     cElement element ;
-    strcpy(element.mElementName,message->mKey.getStringPtr ());
+    strcpy(element.mElementName,message->mKey.cString ());
   	element.mElementType = 'M';
     element.mId_inList = index;
   	element.mResourceId = NumberOfProcessors + 
@@ -503,7 +503,7 @@ performComputations (C_Lexique & inLexique,
       DependentHasOffset = DependentHasOffset || true ;
     }
     Element.addObject (element) ;
-	  message = message->getNextItem () ;
+	  message = message->nextObject () ;
     index ++ ;
   }
   sint32 NumberOfMessages = index;  
@@ -516,13 +516,13 @@ performComputations (C_Lexique & inLexique,
   htmlFile.outputRawData ("Offset<th>Min<th>Max<th>Period<th>") ;
   htmlFile.outputRawData ("Deadline<th>Dependence<th>Every</tr>") ;
   index = 1 ;
-  task = inTasksMap.getFirstItem () ;
+  task = inTasksMap.firstObject () ;
   while (task != NULL) {
     macroValidPointer (task) ;
     htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
     htmlFile << index ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << task->mKey.getStringPtr () ;
+    htmlFile << task->mKey.cString () ;
     htmlFile.outputRawData ("</td><td>") ;
     htmlFile << task->mInfo.mProcessor.getValue ()+1 ;
     htmlFile.outputRawData ("</td><td>") ;
@@ -570,7 +570,7 @@ performComputations (C_Lexique & inLexique,
      htmlFile << task->mInfo.mTaskKind ()->getTaskEveryParameter () ;
       
     htmlFile.outputRawData ("</td></tr>") ;
-    task = task->getNextItem () ;
+    task = task->nextObject () ;
     index ++ ;
   }
   htmlFile.outputRawData ("</table>") ;
@@ -583,13 +583,13 @@ performComputations (C_Lexique & inLexique,
   htmlFile.outputRawData ("<th> min--max ") ;
   htmlFile.outputRawData ("<th>Offset<th>Period<th>Deadline<th>Dependence</tr>") ;
   index = 1 ;
-  message = inMessagesMap.getFirstItem () ;
+  message = inMessagesMap.firstObject () ;
   while (message != NULL) {
     macroValidPointer (message) ;
     htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
     htmlFile << index ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << message->mKey.getStringPtr () ;
+    htmlFile << message->mKey.cString () ;
     htmlFile.outputRawData ("</td><td>") ;
     htmlFile << message->mInfo.mNetworkIndex.getValue () +1;
     htmlFile.outputRawData ("</td><td>") ;
@@ -640,7 +640,7 @@ performComputations (C_Lexique & inLexique,
     }
     
     htmlFile.outputRawData ("</td></tr>") ;
-    message = message->getNextItem () ;
+    message = message->nextObject () ;
     index ++ ;
   }
   htmlFile.outputRawData ("</table>") ;
@@ -679,10 +679,10 @@ performComputations (C_Lexique & inLexique,
   	ExtractWorstBestRT (exElement, Resource, MTElement, 
                         responseTimeArray, CreateIntermediateFiles, 
                         raw_outputHTMLFileName, htmlFile);
-    printf ("Results are stored in %s file.\n", htmlFileName.getStringPtr ());
+    printf ("Results are stored in %s file.\n", htmlFileName.cString ());
     
  	}else{
-    printf ("System map is stored in %s file.\n", htmlFileName.getStringPtr ());
+    printf ("System map is stored in %s file.\n", htmlFileName.cString ());
  	}
  	fflush (stdout);
 }

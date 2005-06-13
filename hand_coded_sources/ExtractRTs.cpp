@@ -31,7 +31,7 @@ ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
   }
   
   if(CreateIntermediateFiles){
-    printf ("Raw output results are stored in %s file.\n", raw_outputHTMLFileName.getStringPtr ()) ;
+    printf ("Raw output results are stored in %s file.\n", raw_outputHTMLFileName.cString ()) ;
 			C_HTML_FileWrite raw_file (raw_outputHTMLFileName,
                               	  "Activities Outputs",
                               	  "style.css"
