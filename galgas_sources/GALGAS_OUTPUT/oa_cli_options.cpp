@@ -121,7 +121,7 @@ const char * oa_cli_options::getBoolOptionDescription (const sint32 inIndex) con
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-bool oa_cli_options::getBoolOptionValueFromKeys (const char * inModuleName,
+bool oa_cli_options::boolOptionValueFromKeys (const char * inModuleName,
                               const char * inOptionName,
                               bool * outFound) const {
   const char * kKeyArray [4] = {"createIntermediateFiles",
@@ -230,7 +230,7 @@ const char * oa_cli_options::getUintOptionDescription (const sint32 inIndex) con
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-uint32 oa_cli_options::getUintOptionValueFromKeys (const char * inModuleName,
+uint32 oa_cli_options::uintOptionValueFromKeys (const char * inModuleName,
                               const char * inOptionName,
                               bool * outFound) const {
   const char * kKeyArray [1] = {""} ;
@@ -324,7 +324,7 @@ getStringOptionDescription (const sint32 /* inIndex */) const {
 //---------------------------------------------------------------------------*
 
 C_String oa_cli_options::
-getStringOptionValueFromKeys (const char * /* inModuleName */,
+stringOptionValueFromKeys (const char * /* inModuleName */,
                               const char * /* inOptionName */,
                               bool * outFound) const {
   if (* outFound) {

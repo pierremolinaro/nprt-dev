@@ -68,7 +68,7 @@ sint32 GGS_M_processor::element_type::compareKeys (void * inKey) const {
 
 //---------------------------------------------------------------------------*
 
-C_String GGS_M_processor::element_type::getStringForKey (void) const {
+C_String GGS_M_processor::element_type::stringForKey (void) const {
   C_String result ;
   result << mKey ;
   return result ;
@@ -235,7 +235,7 @@ sint32 GGS_M_network::element_type::compareKeys (void * inKey) const {
 
 //---------------------------------------------------------------------------*
 
-C_String GGS_M_network::element_type::getStringForKey (void) const {
+C_String GGS_M_network::element_type::stringForKey (void) const {
   C_String result ;
   result << mKey ;
   return result ;
@@ -585,7 +585,7 @@ sint32 GGS_M_messages::element_type::compareKeys (void * inKey) const {
 
 //---------------------------------------------------------------------------*
 
-C_String GGS_M_messages::element_type::getStringForKey (void) const {
+C_String GGS_M_messages::element_type::stringForKey (void) const {
   C_String result ;
   result << mKey ;
   return result ;
@@ -1029,7 +1029,7 @@ sint32 GGS_M_tasks::element_type::compareKeys (void * inKey) const {
 
 //---------------------------------------------------------------------------*
 
-C_String GGS_M_tasks::element_type::getStringForKey (void) const {
+C_String GGS_M_tasks::element_type::stringForKey (void) const {
   C_String result ;
   result << mKey ;
   return result ;

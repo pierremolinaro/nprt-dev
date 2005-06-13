@@ -489,7 +489,7 @@ CreateActivitiesFile (const TC_UniqueArray <cActivity> & exElement,
 							      	const C_String & activitiesHTMLFileName){
 
   const sint32 NumberOfElements = exElement.count () ;
-  printf ("Extended activities list is stored in %s file.\n", activitiesHTMLFileName.getStringPtr ()) ;
+  printf ("Extended activities list is stored in %s file.\n", activitiesHTMLFileName.cString ()) ;
   C_HTML_FileWrite act_htmlFile (activitiesHTMLFileName,
                               "Extended List Activities",
                               "style.css"
