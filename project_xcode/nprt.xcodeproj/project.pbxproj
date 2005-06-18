@@ -23,14 +23,10 @@
 		CF2A8843058CCF43003EF2F4 /* GGS_bool.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C105877B62000D2F8C /* GGS_bool.h */; };
 		CF2A8844058CCF44003EF2F4 /* GGS_char.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53883057A558F00854C83 /* GGS_char.cpp */; };
 		CF2A8845058CCF45003EF2F4 /* GGS_char.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C205877B62000D2F8C /* GGS_char.h */; };
-		CF2A8846058CCF46003EF2F4 /* GGS_dfloat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53885057A558F00854C83 /* GGS_dfloat.cpp */; };
-		CF2A8847058CCF49003EF2F4 /* GGS_dfloat.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C305877B62000D2F8C /* GGS_dfloat.h */; };
 		CF2A8848058CCF4A003EF2F4 /* GGS_lbool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53889057A558F00854C83 /* GGS_lbool.cpp */; };
 		CF2A8849058CCF4B003EF2F4 /* GGS_lbool.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C405877B62000D2F8C /* GGS_lbool.h */; };
 		CF2A884A058CCF4B003EF2F4 /* GGS_lchar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF5388B057A558F00854C83 /* GGS_lchar.cpp */; };
 		CF2A884B058CCF4C003EF2F4 /* GGS_lchar.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C505877B62000D2F8C /* GGS_lchar.h */; };
-		CF2A884C058CCF4D003EF2F4 /* GGS_ldfloat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF5388D057A558F00854C83 /* GGS_ldfloat.cpp */; };
-		CF2A884D058CCF4E003EF2F4 /* GGS_ldfloat.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C605877B62000D2F8C /* GGS_ldfloat.h */; };
 		CF2A884E058CCF4F003EF2F4 /* GGS_location.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF5388F057A558F00854C83 /* GGS_location.cpp */; };
 		CF2A884F058CCF50003EF2F4 /* GGS_location.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C705877B62000D2F8C /* GGS_location.h */; };
 		CF2A8850058CCF51003EF2F4 /* GGS_lstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53891057A558F00854C83 /* GGS_lstring.cpp */; };
@@ -121,14 +117,10 @@
 		CF7A148F058D010B007126C1 /* GGS_bool.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C105877B62000D2F8C /* GGS_bool.h */; };
 		CF7A1490058D010C007126C1 /* GGS_char.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53883057A558F00854C83 /* GGS_char.cpp */; };
 		CF7A1491058D010D007126C1 /* GGS_char.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C205877B62000D2F8C /* GGS_char.h */; };
-		CF7A1492058D010E007126C1 /* GGS_dfloat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53885057A558F00854C83 /* GGS_dfloat.cpp */; };
-		CF7A1493058D010F007126C1 /* GGS_dfloat.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C305877B62000D2F8C /* GGS_dfloat.h */; };
 		CF7A1494058D0110007126C1 /* GGS_lbool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53889057A558F00854C83 /* GGS_lbool.cpp */; };
 		CF7A1495058D0110007126C1 /* GGS_lbool.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C405877B62000D2F8C /* GGS_lbool.h */; };
 		CF7A1496058D0111007126C1 /* GGS_lchar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF5388B057A558F00854C83 /* GGS_lchar.cpp */; };
 		CF7A1497058D0112007126C1 /* GGS_lchar.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C505877B62000D2F8C /* GGS_lchar.h */; };
-		CF7A1498058D0113007126C1 /* GGS_ldfloat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF5388D057A558F00854C83 /* GGS_ldfloat.cpp */; };
-		CF7A1499058D0114007126C1 /* GGS_ldfloat.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C605877B62000D2F8C /* GGS_ldfloat.h */; };
 		CF7A149A058D0115007126C1 /* GGS_location.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF5388F057A558F00854C83 /* GGS_location.cpp */; };
 		CF7A149B058D0116007126C1 /* GGS_location.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0C705877B62000D2F8C /* GGS_location.h */; };
 		CF7A149C058D011D007126C1 /* GGS_lstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53891057A558F00854C83 /* GGS_lstring.cpp */; };
@@ -366,10 +358,8 @@
 		CF3FF0C005877B62000D2F8C /* galgas_header.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = galgas_header.h; sourceTree = "<group>"; };
 		CF3FF0C105877B62000D2F8C /* GGS_bool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GGS_bool.h; sourceTree = "<group>"; };
 		CF3FF0C205877B62000D2F8C /* GGS_char.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GGS_char.h; sourceTree = "<group>"; };
-		CF3FF0C305877B62000D2F8C /* GGS_dfloat.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GGS_dfloat.h; sourceTree = "<group>"; };
 		CF3FF0C405877B62000D2F8C /* GGS_lbool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GGS_lbool.h; sourceTree = "<group>"; };
 		CF3FF0C505877B62000D2F8C /* GGS_lchar.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GGS_lchar.h; sourceTree = "<group>"; };
-		CF3FF0C605877B62000D2F8C /* GGS_ldfloat.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GGS_ldfloat.h; sourceTree = "<group>"; };
 		CF3FF0C705877B62000D2F8C /* GGS_location.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GGS_location.h; sourceTree = "<group>"; };
 		CF3FF0C805877B62000D2F8C /* GGS_lstring.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GGS_lstring.h; sourceTree = "<group>"; };
 		CF3FF0C905877B62000D2F8C /* GGS_luint.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GGS_luint.h; sourceTree = "<group>"; };
@@ -488,10 +478,8 @@
 		CFF5387B057A558F00854C83 /* C_galgas_uint_array.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_galgas_uint_array.cpp; sourceTree = "<group>"; };
 		CFF53881057A558F00854C83 /* GGS_bool.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = GGS_bool.cpp; sourceTree = "<group>"; };
 		CFF53883057A558F00854C83 /* GGS_char.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = GGS_char.cpp; sourceTree = "<group>"; };
-		CFF53885057A558F00854C83 /* GGS_dfloat.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = GGS_dfloat.cpp; sourceTree = "<group>"; };
 		CFF53889057A558F00854C83 /* GGS_lbool.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = GGS_lbool.cpp; sourceTree = "<group>"; };
 		CFF5388B057A558F00854C83 /* GGS_lchar.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = GGS_lchar.cpp; sourceTree = "<group>"; };
-		CFF5388D057A558F00854C83 /* GGS_ldfloat.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = GGS_ldfloat.cpp; sourceTree = "<group>"; };
 		CFF5388F057A558F00854C83 /* GGS_location.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = GGS_location.cpp; sourceTree = "<group>"; };
 		CFF53891057A558F00854C83 /* GGS_lstring.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = GGS_lstring.cpp; sourceTree = "<group>"; };
 		CFF53893057A558F00854C83 /* GGS_luint.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = GGS_luint.cpp; sourceTree = "<group>"; };
@@ -776,10 +764,8 @@
 				CFF5387B057A558F00854C83 /* C_galgas_uint_array.cpp */,
 				CFF53881057A558F00854C83 /* GGS_bool.cpp */,
 				CFF53883057A558F00854C83 /* GGS_char.cpp */,
-				CFF53885057A558F00854C83 /* GGS_dfloat.cpp */,
 				CFF53889057A558F00854C83 /* GGS_lbool.cpp */,
 				CFF5388B057A558F00854C83 /* GGS_lchar.cpp */,
-				CFF5388D057A558F00854C83 /* GGS_ldfloat.cpp */,
 				CFF5388F057A558F00854C83 /* GGS_location.cpp */,
 				CFF53891057A558F00854C83 /* GGS_lstring.cpp */,
 				CFF53893057A558F00854C83 /* GGS_luint.cpp */,
@@ -797,10 +783,8 @@
 				CF3FF0C005877B62000D2F8C /* galgas_header.h */,
 				CF3FF0C105877B62000D2F8C /* GGS_bool.h */,
 				CF3FF0C205877B62000D2F8C /* GGS_char.h */,
-				CF3FF0C305877B62000D2F8C /* GGS_dfloat.h */,
 				CF3FF0C405877B62000D2F8C /* GGS_lbool.h */,
 				CF3FF0C505877B62000D2F8C /* GGS_lchar.h */,
-				CF3FF0C605877B62000D2F8C /* GGS_ldfloat.h */,
 				CF3FF0C705877B62000D2F8C /* GGS_location.h */,
 				CF3FF0C805877B62000D2F8C /* GGS_lstring.h */,
 				CF3FF0C905877B62000D2F8C /* GGS_luint.h */,
@@ -852,10 +836,8 @@
 				CF2A8841058CCF42003EF2F4 /* galgas_header.h in Headers */,
 				CF2A8843058CCF43003EF2F4 /* GGS_bool.h in Headers */,
 				CF2A8845058CCF45003EF2F4 /* GGS_char.h in Headers */,
-				CF2A8847058CCF49003EF2F4 /* GGS_dfloat.h in Headers */,
 				CF2A8849058CCF4B003EF2F4 /* GGS_lbool.h in Headers */,
 				CF2A884B058CCF4C003EF2F4 /* GGS_lchar.h in Headers */,
-				CF2A884D058CCF4E003EF2F4 /* GGS_ldfloat.h in Headers */,
 				CF2A884F058CCF50003EF2F4 /* GGS_location.h in Headers */,
 				CF2A8851058CCF52003EF2F4 /* GGS_lstring.h in Headers */,
 				CF2A8853058CCF54003EF2F4 /* GGS_luint.h in Headers */,
@@ -918,10 +900,8 @@
 				CF7A148D058D0109007126C1 /* galgas_header.h in Headers */,
 				CF7A148F058D010B007126C1 /* GGS_bool.h in Headers */,
 				CF7A1491058D010D007126C1 /* GGS_char.h in Headers */,
-				CF7A1493058D010F007126C1 /* GGS_dfloat.h in Headers */,
 				CF7A1495058D0110007126C1 /* GGS_lbool.h in Headers */,
 				CF7A1497058D0112007126C1 /* GGS_lchar.h in Headers */,
-				CF7A1499058D0114007126C1 /* GGS_ldfloat.h in Headers */,
 				CF7A149B058D0116007126C1 /* GGS_location.h in Headers */,
 				CF7A149D058D011E007126C1 /* GGS_lstring.h in Headers */,
 				CF7A149F058D0120007126C1 /* GGS_luint.h in Headers */,
@@ -1229,10 +1209,8 @@
 				CF2A882F058CCF33003EF2F4 /* C_galgas_uint_array.cpp in Sources */,
 				CF2A8842058CCF43003EF2F4 /* GGS_bool.cpp in Sources */,
 				CF2A8844058CCF44003EF2F4 /* GGS_char.cpp in Sources */,
-				CF2A8846058CCF46003EF2F4 /* GGS_dfloat.cpp in Sources */,
 				CF2A8848058CCF4A003EF2F4 /* GGS_lbool.cpp in Sources */,
 				CF2A884A058CCF4B003EF2F4 /* GGS_lchar.cpp in Sources */,
-				CF2A884C058CCF4D003EF2F4 /* GGS_ldfloat.cpp in Sources */,
 				CF2A884E058CCF4F003EF2F4 /* GGS_location.cpp in Sources */,
 				CF2A8850058CCF51003EF2F4 /* GGS_lstring.cpp in Sources */,
 				CF2A8852058CCF53003EF2F4 /* GGS_luint.cpp in Sources */,
@@ -1291,10 +1269,8 @@
 				CF7A1486058D00FD007126C1 /* AC_galgas_io.cpp in Sources */,
 				CF7A148E058D010A007126C1 /* GGS_bool.cpp in Sources */,
 				CF7A1490058D010C007126C1 /* GGS_char.cpp in Sources */,
-				CF7A1492058D010E007126C1 /* GGS_dfloat.cpp in Sources */,
 				CF7A1494058D0110007126C1 /* GGS_lbool.cpp in Sources */,
 				CF7A1496058D0111007126C1 /* GGS_lchar.cpp in Sources */,
-				CF7A1498058D0113007126C1 /* GGS_ldfloat.cpp in Sources */,
 				CF7A149A058D0115007126C1 /* GGS_location.cpp in Sources */,
 				CF7A149C058D011D007126C1 /* GGS_lstring.cpp in Sources */,
 				CF7A149E058D011F007126C1 /* GGS_luint.cpp in Sources */,

@@ -51,7 +51,7 @@ bool cPtr_C_canMessageFromMessage::messageDependsOnTask (void) const {
 //--------------------------------------------------------------------------*
 
 uint32 cPtr_C_canMessageFromMessage::getMessageDependanceValue (void) const {
-  return mMessageIndex.getValue () ;
+  return mMessageIndex.uintValue () ;
 }
 
 //--------------------------------------------------------------------------*
@@ -73,7 +73,7 @@ bool cPtr_C_canMessageFromTask::messageDependsOnTask (void) const {
 //--------------------------------------------------------------------------*
 
 uint32 cPtr_C_canMessageFromTask::getMessageDependanceValue (void) const {
-  return mTaskIndex.getValue () ;
+  return mTaskIndex.uintValue () ;
 }
 
 //--------------------------------------------------------------------------*
@@ -123,13 +123,13 @@ bool cPtr_C_taskDependsFromTask::taskDependsOnMessage (void) const {
 //--------------------------------------------------------------------------*
 
 uint32 cPtr_C_taskDependsFromTask::getTaskDependanceValue (void) const {
-  return mTask.getValue () ;
+  return mTask.uintValue () ;
 }
 
 //--------------------------------------------------------------------------*
 
 uint32 cPtr_C_taskDependsFromTask::getTaskEveryParameter (void) const {
-  return mEvery.getValue () ;
+  return mEvery.uintValue () ;
 }
 
 //--------------------------------------------------------------------------*
@@ -151,13 +151,13 @@ bool cPtr_C_taskDependsFromMessage::taskDependsOnMessage (void) const {
 //--------------------------------------------------------------------------*
 
 uint32 cPtr_C_taskDependsFromMessage::getTaskDependanceValue (void) const {
-  return mMessage.getValue () ;
+  return mMessage.uintValue () ;
 }
 
 //--------------------------------------------------------------------------*
 
 uint32 cPtr_C_taskDependsFromMessage::getTaskEveryParameter (void) const {
-  return mEvery.getValue () ;
+  return mEvery.uintValue () ;
 }
 
 //--------------------------------------------------------------------------*
@@ -293,7 +293,7 @@ performComputations (C_Lexique & inLexique,
 	  htmlFile.outputRawData ("</td><td>") ;
 	  htmlFile << processor->mKey ;
 	  htmlFile.outputRawData ("</td><td>") ;
-	  htmlFile << processor->mInfo.mStep.getValue () ;
+	  htmlFile << processor->mInfo.mStep.uintValue () ;
 	  htmlFile.outputRawData ("</td></tr>") ;
 	  processor = processor->nextObject () ;
 	  index ++ ;
@@ -308,7 +308,7 @@ performComputations (C_Lexique & inLexique,
     cResource resource ;
     strcpy (resource.mResourceName, processor->mKey.cString ());
   	resource.mResourceType= 2; // Processor = 2
-   	resource.mStep = (sint32) processor->mInfo.mStep.getValue () ;
+   	resource.mStep = (sint32) processor->mInfo.mStep.uintValue () ;
     
     Resource.addObject (resource) ;
     processor = processor->nextObject () ;
@@ -330,9 +330,9 @@ performComputations (C_Lexique & inLexique,
     htmlFile.outputRawData ("</td><td>") ;
     htmlFile << network->mKey ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << kNetworkTypes [network->mInfo.mCANnetwork.getValue ()] ;
+    htmlFile << kNetworkTypes [network->mInfo.mCANnetwork.boolValue ()] ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << network->mInfo.mScalingFactor.getValue () ;
+    htmlFile << network->mInfo.mScalingFactor.uintValue () ;
     htmlFile.outputRawData ("</td></tr>") ;
     network = network->nextObject () ;
     index ++ ;
@@ -347,8 +347,8 @@ performComputations (C_Lexique & inLexique,
     macroValidPointer (network) ;
     cResource resource ;
     strcpy(resource.mResourceName,network->mKey.cString ());
-  	resource.mResourceType= network->mInfo.mCANnetwork.getValue ();
-    resource.mStep = (sint32) network->mInfo.mScalingFactor.getValue () ;		
+  	resource.mResourceType= network->mInfo.mCANnetwork.boolValue ();
+    resource.mStep = (sint32) network->mInfo.mScalingFactor.uintValue () ;		
  		min_NetworkStep = min (min_NetworkStep, resource.mStep);
  	 	
  	 	Resource.addObject (resource) ;
@@ -366,18 +366,18 @@ performComputations (C_Lexique & inLexique,
     strcpy(element.mElementName,task->mKey.cString ());   
     element.mElementType = 'T';    
     element.mId_inList =index;
-  	element.mResourceId = (sint32) task->mInfo.mProcessor.getValue ();
-    element.mPriority = (sint32) task->mInfo.mPriority.getValue ();
+  	element.mResourceId = (sint32) task->mInfo.mProcessor.uintValue ();
+    element.mPriority = (sint32) task->mInfo.mPriority.uintValue ();
 // §    element.mEvery = 1 ;
     sint32 Sca = Resource (element.mResourceId COMMA_HERE).mStep ;
 //    printf (" Sca : %ld \n",Sca);
     element.mEvery = (sint32) task->mInfo.mTaskKind ()->getTaskEveryParameter () ;
-  	element.mOffset = Sca*(sint32) task->mInfo.mOffset.getValue ();  
-    element.mMaxDuration = Sca*(sint32) task->mInfo.mDurationMax.getValue (); 
+  	element.mOffset = Sca*(sint32) task->mInfo.mOffset.uintValue ();  
+    element.mMaxDuration = Sca*(sint32) task->mInfo.mDurationMax.uintValue (); 
     element.mMinDuration = useCANmaxLengthOnly
-                          ? element.mMaxDuration :(Sca*(sint32)  task->mInfo.mDurationMin.getValue ());
+                          ? element.mMaxDuration :(Sca*(sint32)  task->mInfo.mDurationMin.uintValue ());
         
-    element.mDeadline = (sint32) task->mInfo.mDeadline.getValue ();
+    element.mDeadline = (sint32) task->mInfo.mDeadline.uintValue ();
     if ( element.mDeadline !=  SINT32_MAX){ // UINT32_MAX -> SINT32_MAX by PM, 17/1/2005
     	 element.mDeadline = Sca*element.mDeadline;
     }  
@@ -386,12 +386,12 @@ performComputations (C_Lexique & inLexique,
     	sint32 elementIndex = (sint32) task->mInfo.mTaskKind ()->getTaskDependanceValue ();
     	element.mEveryMultiple = 
     		 (sint32) task->mInfo.mTaskKind ()->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
-   		element.mPeriod = Sca*(sint32) task->mInfo.mPeriod.getValue ();
+   		element.mPeriod = Sca*(sint32) task->mInfo.mPeriod.uintValue ();
     } else if (task->mInfo.mTaskKind ()->taskDependsOnMessage ()){
     
     }else{
     	element.mEveryMultiple = (sint32) task->mInfo.mTaskKind ()->getTaskEveryParameter () ;
-    	element.mPeriod = Sca*(sint32) task->mInfo.mPeriod.getValue ();
+    	element.mPeriod = Sca*(sint32) task->mInfo.mPeriod.uintValue ();
     }
  //................................................
   	if (task->mInfo.mTaskKind ()->taskDependsOnTask ()) {
@@ -429,17 +429,17 @@ performComputations (C_Lexique & inLexique,
   	element.mElementType = 'M';
     element.mId_inList = index;
   	element.mResourceId = NumberOfProcessors + 
-  		(sint32) message->mInfo.mNetworkIndex.getValue ();
-  	element.mPriority = (sint32) message->mInfo.mPriority.getValue ();
+  		(sint32) message->mInfo.mNetworkIndex.uintValue ();
+  	element.mPriority = (sint32) message->mInfo.mPriority.uintValue ();
   	element.mEvery = 1 ;
   	sint32 ScalingFactor = 
 					 Resource (element.mResourceId COMMA_HERE).mStep;
 	//  printf (" Sca : %ld \n",ScalingFactor);
-	  element.mOffset = ScalingFactor*(sint32) message->mInfo.mOffset.getValue (); 
+	  element.mOffset = ScalingFactor*(sint32) message->mInfo.mOffset.uintValue (); 
   	if ( Resource (element.mResourceId COMMA_HERE).mResourceType == 1 ){ //CAN = 1
-    	if (strstr(kMessageClasses [message->mInfo.mClass.getValue ()],"standard") != NULL){ 
+    	if (strstr(kMessageClasses [message->mInfo.mClass.uintValue ()],"standard") != NULL){ 
     		MessageType = 'S';
-    	}else if (strstr(kMessageClasses [message->mInfo.mClass.getValue ()],
+    	}else if (strstr(kMessageClasses [message->mInfo.mClass.uintValue ()],
       					"extended") != NULL){ 
       	MessageType = 'X' ;
       }else{ 
@@ -449,17 +449,17 @@ performComputations (C_Lexique & inLexique,
       
       element.mMaxDuration = ScalingFactor* maxCANMessageTime(MessageType,
       											 (uint32) element.mMinDuration,
-      											 message->mInfo.mBytesCount.getValue ());
+      											 message->mInfo.mBytesCount.uintValue ());
   
       element.mMinDuration = useCANmaxLengthOnly
         ? element.mMaxDuration
         : (ScalingFactor * minCANMessageTime(MessageType,
-                            message->mInfo.mPriority.getValue (),
-                            message->mInfo.mBytesCount.getValue ()));
+                            message->mInfo.mPriority.uintValue (),
+                            message->mInfo.mBytesCount.uintValue ()));
                             
   	}else if (Resource (element.mResourceId COMMA_HERE).mResourceType == 0 ){ //VAN = 0
     	
-    	element.mMinDuration= ScalingFactor *(64+10* (sint32) message->mInfo.mBytesCount.getValue ()) ;
+    	element.mMinDuration= ScalingFactor *(64+10* (sint32) message->mInfo.mBytesCount.uintValue ()) ;
 
     	element.mMaxDuration= ScalingFactor* element.mMinDuration;
   	}else{ 
@@ -467,7 +467,7 @@ performComputations (C_Lexique & inLexique,
       fflush (stdout);  
 		}
 		
-    element.mDeadline =  (sint32) message->mInfo.mDeadline.getValue ();
+    element.mDeadline =  (sint32) message->mInfo.mDeadline.uintValue ();
     if ( element.mDeadline !=  SINT32_MAX){ // UINT32_MAX -> SINT32_MAX by PM, 17/1/2005
     	 element.mDeadline = ScalingFactor *element.mDeadline;
     }  
@@ -483,7 +483,7 @@ performComputations (C_Lexique & inLexique,
      element.mPeriod = Element (elementIndex COMMA_HERE).mPeriod ;
    } else{
    	 element.mEveryMultiple = 1;
-   	  element.mPeriod = ScalingFactor * (sint32) message->mInfo.mPeriod.getValue ();
+   	  element.mPeriod = ScalingFactor * (sint32) message->mInfo.mPeriod.uintValue ();
    }
  //.................................................................................   
   	if (message->mInfo.mMessageKind ()->messageDependsOnTask ()) {
@@ -524,19 +524,19 @@ performComputations (C_Lexique & inLexique,
     htmlFile.outputRawData ("</td><td>") ;
     htmlFile << task->mKey.cString () ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << task->mInfo.mProcessor.getValue ()+1 ;
+    htmlFile << task->mInfo.mProcessor.uintValue ()+1 ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << task->mInfo.mPriority.getValue () ;
+    htmlFile << task->mInfo.mPriority.uintValue () ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << task->mInfo.mOffset.getValue ();
+    htmlFile << task->mInfo.mOffset.uintValue ();
     htmlFile.outputRawData ("</td><td>") ;
     if (useCANmaxLengthOnly){
-      htmlFile << task->mInfo.mDurationMax.getValue () ;
+      htmlFile << task->mInfo.mDurationMax.uintValue () ;
     }else {
-      htmlFile << task->mInfo.mDurationMin.getValue () ;
+      htmlFile << task->mInfo.mDurationMin.uintValue () ;
     }
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << task->mInfo.mDurationMax.getValue () ;
+    htmlFile << task->mInfo.mDurationMax.uintValue () ;
     htmlFile.outputRawData ("</td><td>") ;
 //....................................................................   
     if (task->mInfo.mTaskKind ()->taskDependsOnMessage ()) {
@@ -546,15 +546,15 @@ performComputations (C_Lexique & inLexique,
     	Element (index-1 COMMA_HERE).mPeriod = Element (elementIndex COMMA_HERE).mPeriod  ;
     }
  //...................................................................
-    sint32 resourceId = (sint32) task->mInfo.mProcessor.getValue ();
+    sint32 resourceId = (sint32) task->mInfo.mProcessor.uintValue ();
     sint32 Scal = Resource (resourceId COMMA_HERE).mStep ;
 
     htmlFile << Element (index-1 COMMA_HERE).mEveryMultiple * Element (index-1 COMMA_HERE).mPeriod /Scal ;
     htmlFile.outputRawData ("</td><td>") ;
-    if (task->mInfo.mDeadline.getValue () == UINT32_MAX){
+    if (task->mInfo.mDeadline.uintValue () == UINT32_MAX){
     	htmlFile.outputRawData ("Unknown</td><td>") ;
     }else{
-     	htmlFile << task->mInfo.mDeadline.getValue () ;
+     	htmlFile << task->mInfo.mDeadline.uintValue () ;
     	htmlFile.outputRawData ("</td><td>") ;
     }
     if (task->mInfo.mTaskKind ()->taskDependsOnTask ()) {
@@ -591,21 +591,21 @@ performComputations (C_Lexique & inLexique,
     htmlFile.outputRawData ("</td><td>") ;
     htmlFile << message->mKey.cString () ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << message->mInfo.mNetworkIndex.getValue () +1;
+    htmlFile << message->mInfo.mNetworkIndex.uintValue () +1;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << kMessageClasses [message->mInfo.mClass.getValue ()];
+    htmlFile << kMessageClasses [message->mInfo.mClass.uintValue ()];
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << message->mInfo.mPriority.getValue () ;
+    htmlFile << message->mInfo.mPriority.uintValue () ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << message->mInfo.mBytesCount.getValue () ;
+    htmlFile << message->mInfo.mBytesCount.uintValue () ;
     htmlFile.outputRawData ("</td><td>") ;
     
-    sint32 resourceId =  NumberOfProcessors + (sint32) message->mInfo.mNetworkIndex.getValue ();
+    sint32 resourceId =  NumberOfProcessors + (sint32) message->mInfo.mNetworkIndex.uintValue ();
     sint32 Scal = Resource (resourceId COMMA_HERE).mStep ;
     
-    if ( (strstr(kMessageClasses [message->mInfo.mClass.getValue ()],"standard") != NULL)
+    if ( (strstr(kMessageClasses [message->mInfo.mClass.uintValue ()],"standard") != NULL)
     		|| 
-    		(strstr(kMessageClasses [message->mInfo.mClass.getValue ()],"extended") != NULL)
+    		(strstr(kMessageClasses [message->mInfo.mClass.uintValue ()],"extended") != NULL)
     		){ 
       		if (useCANmaxLengthOnly){
       		  htmlFile << Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal ;
@@ -618,15 +618,15 @@ performComputations (C_Lexique & inLexique,
       htmlFile <<Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration /Scal ;
     }
     htmlFile.outputRawData ("</td><td>");    
-    htmlFile << message->mInfo.mOffset.getValue () ;
+    htmlFile << message->mInfo.mOffset.uintValue () ;
     htmlFile.outputRawData ("</td><td>") ;
     htmlFile << Element (index-1 + NumberOfTasks  COMMA_HERE).mEveryMultiple *  
                 Element (index-1 + NumberOfTasks  COMMA_HERE).mPeriod /Scal;
     htmlFile.outputRawData ("</td><td>") ; 
-    if (message->mInfo.mDeadline.getValue () == UINT32_MAX){
+    if (message->mInfo.mDeadline.uintValue () == UINT32_MAX){
     	htmlFile.outputRawData ("Unknown</td><td>") ;
     }else{
-     	htmlFile << message->mInfo.mDeadline.getValue () ;
+     	htmlFile << message->mInfo.mDeadline.uintValue () ;
     	htmlFile.outputRawData ("</td><td>") ;
     }
    	if (message->mInfo.mMessageKind ()->messageDependsOnTask ()) {
