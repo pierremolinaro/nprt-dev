@@ -78,8 +78,6 @@
 		CF53389405FCA67C004C9D86 /* oa_scanner.h in Headers */ = {isa = PBXBuildFile; fileRef = CF53387005FCA67C004C9D86 /* oa_scanner.h */; };
 		CF53389505FCA67C004C9D86 /* oa_semantics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF53387105FCA67C004C9D86 /* oa_semantics.cpp */; };
 		CF53389605FCA67C004C9D86 /* oa_semantics.h in Headers */ = {isa = PBXBuildFile; fileRef = CF53387205FCA67C004C9D86 /* oa_semantics.h */; };
-		CF5338C305FCA69F004C9D86 /* AC_canMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CF53389905FCA69F004C9D86 /* AC_canMessage.h */; };
-		CF5338C405FCA69F004C9D86 /* AC_task.h in Headers */ = {isa = PBXBuildFile; fileRef = CF53389A05FCA69F004C9D86 /* AC_task.h */; };
 		CF5338C505FCA69F004C9D86 /* activities_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF53389B05FCA69F004C9D86 /* activities_core.cpp */; };
 		CF5338C905FCA69F004C9D86 /* C_us.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF53389F05FCA69F004C9D86 /* C_us.cpp */; };
 		CF5338CA05FCA69F004C9D86 /* C_us.h in Headers */ = {isa = PBXBuildFile; fileRef = CF5338A005FCA69F004C9D86 /* C_us.h */; };
@@ -88,8 +86,6 @@
 		CF5338D305FCA69F004C9D86 /* ExtractRTs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF5338A905FCA69F004C9D86 /* ExtractRTs.cpp */; };
 		CF5338D605FCA69F004C9D86 /* VerifyConditions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF5338AC05FCA69F004C9D86 /* VerifyConditions.cpp */; };
 		CF5338D705FCA69F004C9D86 /* VerifyConditions.h in Headers */ = {isa = PBXBuildFile; fileRef = CF5338AD05FCA69F004C9D86 /* VerifyConditions.h */; };
-		CF53391B05FCAC98004C9D86 /* AC_canMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CF53389905FCA69F004C9D86 /* AC_canMessage.h */; };
-		CF53391C05FCAC99004C9D86 /* AC_task.h in Headers */ = {isa = PBXBuildFile; fileRef = CF53389A05FCA69F004C9D86 /* AC_task.h */; };
 		CF53391E05FCAC99004C9D86 /* activities_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF53389B05FCA69F004C9D86 /* activities_core.cpp */; };
 		CF53392605FCAC9B004C9D86 /* C_us.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF53389F05FCA69F004C9D86 /* C_us.cpp */; };
 		CF53392805FCAC9C004C9D86 /* C_us.h in Headers */ = {isa = PBXBuildFile; fileRef = CF5338A005FCA69F004C9D86 /* C_us.h */; };
@@ -256,6 +252,22 @@
 		CFAC5157062158B500AF7FE3 /* AC_galgas_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFAC5156062158B500AF7FE3 /* AC_galgas_map.cpp */; };
 		CFAC5158062158B500AF7FE3 /* AC_galgas_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFAC5156062158B500AF7FE3 /* AC_galgas_map.cpp */; };
 		CFC30F93058A225E003D0386 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFC30F92058A225E003D0386 /* Info.plist */; };
+		CFD21B880913D48C0011F11E /* include_AC_canMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B800913D48C0011F11E /* include_AC_canMessage.h */; };
+		CFD21B890913D48C0011F11E /* include_AC_task.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B810913D48C0011F11E /* include_AC_task.h */; };
+		CFD21B8A0913D48C0011F11E /* include_C_canIndependantMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B820913D48C0011F11E /* include_C_canIndependantMessage.h */; };
+		CFD21B8B0913D48C0011F11E /* include_C_canMessageFromMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B830913D48C0011F11E /* include_C_canMessageFromMessage.h */; };
+		CFD21B8C0913D48C0011F11E /* include_C_canMessageFromTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B840913D48C0011F11E /* include_C_canMessageFromTask.h */; };
+		CFD21B8D0913D48C0011F11E /* include_C_independantTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B850913D48C0011F11E /* include_C_independantTask.h */; };
+		CFD21B8E0913D48C0011F11E /* include_C_taskDependsFromMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B860913D48C0011F11E /* include_C_taskDependsFromMessage.h */; };
+		CFD21B8F0913D48C0011F11E /* include_C_taskDependsFromTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B870913D48C0011F11E /* include_C_taskDependsFromTask.h */; };
+		CFD21B900913D48C0011F11E /* include_AC_canMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B800913D48C0011F11E /* include_AC_canMessage.h */; };
+		CFD21B910913D48C0011F11E /* include_AC_task.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B810913D48C0011F11E /* include_AC_task.h */; };
+		CFD21B920913D48C0011F11E /* include_C_canIndependantMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B820913D48C0011F11E /* include_C_canIndependantMessage.h */; };
+		CFD21B930913D48C0011F11E /* include_C_canMessageFromMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B830913D48C0011F11E /* include_C_canMessageFromMessage.h */; };
+		CFD21B940913D48C0011F11E /* include_C_canMessageFromTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B840913D48C0011F11E /* include_C_canMessageFromTask.h */; };
+		CFD21B950913D48C0011F11E /* include_C_independantTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B850913D48C0011F11E /* include_C_independantTask.h */; };
+		CFD21B960913D48C0011F11E /* include_C_taskDependsFromMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B860913D48C0011F11E /* include_C_taskDependsFromMessage.h */; };
+		CFD21B970913D48C0011F11E /* include_C_taskDependsFromTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B870913D48C0011F11E /* include_C_taskDependsFromTask.h */; };
 		CFFA808D0625861300A94B4B /* independant_resources_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFFA808C0625861300A94B4B /* independant_resources_core.cpp */; };
 		CFFA808E0625861300A94B4B /* independant_resources_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFFA808C0625861300A94B4B /* independant_resources_core.cpp */; };
 /* End PBXBuildFile section */
@@ -381,8 +393,6 @@
 		CF53387005FCA67C004C9D86 /* oa_scanner.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = oa_scanner.h; sourceTree = "<group>"; };
 		CF53387105FCA67C004C9D86 /* oa_semantics.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = oa_semantics.cpp; sourceTree = "<group>"; };
 		CF53387205FCA67C004C9D86 /* oa_semantics.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = oa_semantics.h; sourceTree = "<group>"; };
-		CF53389905FCA69F004C9D86 /* AC_canMessage.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AC_canMessage.h; sourceTree = "<group>"; };
-		CF53389A05FCA69F004C9D86 /* AC_task.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AC_task.h; sourceTree = "<group>"; };
 		CF53389B05FCA69F004C9D86 /* activities_core.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = activities_core.cpp; sourceTree = "<group>"; };
 		CF53389F05FCA69F004C9D86 /* C_us.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = C_us.cpp; sourceTree = "<group>"; };
 		CF5338A005FCA69F004C9D86 /* C_us.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = C_us.h; sourceTree = "<group>"; };
@@ -468,6 +478,14 @@
 		CFA8C6A30622A9D9005F7F63 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		CFAC5156062158B500AF7FE3 /* AC_galgas_map.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = AC_galgas_map.cpp; sourceTree = "<group>"; };
 		CFC30F92058A225E003D0386 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CFD21B800913D48C0011F11E /* include_AC_canMessage.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = include_AC_canMessage.h; sourceTree = "<group>"; };
+		CFD21B810913D48C0011F11E /* include_AC_task.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = include_AC_task.h; sourceTree = "<group>"; };
+		CFD21B820913D48C0011F11E /* include_C_canIndependantMessage.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = include_C_canIndependantMessage.h; sourceTree = "<group>"; };
+		CFD21B830913D48C0011F11E /* include_C_canMessageFromMessage.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = include_C_canMessageFromMessage.h; sourceTree = "<group>"; };
+		CFD21B840913D48C0011F11E /* include_C_canMessageFromTask.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = include_C_canMessageFromTask.h; sourceTree = "<group>"; };
+		CFD21B850913D48C0011F11E /* include_C_independantTask.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = include_C_independantTask.h; sourceTree = "<group>"; };
+		CFD21B860913D48C0011F11E /* include_C_taskDependsFromMessage.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = include_C_taskDependsFromMessage.h; sourceTree = "<group>"; };
+		CFD21B870913D48C0011F11E /* include_C_taskDependsFromTask.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = include_C_taskDependsFromTask.h; sourceTree = "<group>"; };
 		CFF53872057A558F00854C83 /* AC_galgas_io.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = AC_galgas_io.cpp; sourceTree = "<group>"; };
 		CFF5387B057A558F00854C83 /* C_galgas_uint_array.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_galgas_uint_array.cpp; sourceTree = "<group>"; };
 		CFF53881057A558F00854C83 /* GGS_bool.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = GGS_bool.cpp; sourceTree = "<group>"; };
@@ -634,7 +652,7 @@
 			path = generic_maps;
 			sourceTree = "<group>";
 		};
-		CFF53732057A4E5000854C83 /* GALGAS_OUTPUT */ = {
+		CFD21B7E0913D4670011F11E /* Sources Files */ = {
 			isa = PBXGroup;
 			children = (
 				CF45190005FCAE61008D4817 /* cocoaOA.mm */,
@@ -651,6 +669,30 @@
 				CF53387105FCA67C004C9D86 /* oa_semantics.cpp */,
 				CF53387205FCA67C004C9D86 /* oa_semantics.h */,
 			);
+			name = "Sources Files";
+			sourceTree = "<group>";
+		};
+		CFD21B7F0913D4730011F11E /* Include Files */ = {
+			isa = PBXGroup;
+			children = (
+				CFD21B800913D48C0011F11E /* include_AC_canMessage.h */,
+				CFD21B810913D48C0011F11E /* include_AC_task.h */,
+				CFD21B820913D48C0011F11E /* include_C_canIndependantMessage.h */,
+				CFD21B830913D48C0011F11E /* include_C_canMessageFromMessage.h */,
+				CFD21B840913D48C0011F11E /* include_C_canMessageFromTask.h */,
+				CFD21B850913D48C0011F11E /* include_C_independantTask.h */,
+				CFD21B860913D48C0011F11E /* include_C_taskDependsFromMessage.h */,
+				CFD21B870913D48C0011F11E /* include_C_taskDependsFromTask.h */,
+			);
+			name = "Include Files";
+			sourceTree = "<group>";
+		};
+		CFF53732057A4E5000854C83 /* GALGAS_OUTPUT */ = {
+			isa = PBXGroup;
+			children = (
+				CFD21B7F0913D4730011F11E /* Include Files */,
+				CFD21B7E0913D4670011F11E /* Sources Files */,
+			);
 			name = GALGAS_OUTPUT;
 			path = ../galgas_sources/GALGAS_OUTPUT;
 			sourceTree = SOURCE_ROOT;
@@ -658,8 +700,6 @@
 		CFF53737057A4E9400854C83 /* Hand Coded Sources */ = {
 			isa = PBXGroup;
 			children = (
-				CF53389905FCA69F004C9D86 /* AC_canMessage.h */,
-				CF53389A05FCA69F004C9D86 /* AC_task.h */,
 				CF74CCDC0621659C00458840 /* calculs_activites.cpp */,
 				CFFA808C0625861300A94B4B /* independant_resources_core.cpp */,
 				CF53389B05FCA69F004C9D86 /* activities_core.cpp */,
@@ -841,8 +881,6 @@
 				CF53389205FCA67C004C9D86 /* oa_parser.h in Headers */,
 				CF53389405FCA67C004C9D86 /* oa_scanner.h in Headers */,
 				CF53389605FCA67C004C9D86 /* oa_semantics.h in Headers */,
-				CF5338C305FCA69F004C9D86 /* AC_canMessage.h in Headers */,
-				CF5338C405FCA69F004C9D86 /* AC_task.h in Headers */,
 				CF5338CA05FCA69F004C9D86 /* C_us.h in Headers */,
 				CF5338D205FCA69F004C9D86 /* ExtendedList.h in Headers */,
 				CF5338D705FCA69F004C9D86 /* VerifyConditions.h in Headers */,
@@ -876,6 +914,14 @@
 				CF825D18085383C80077AEAF /* M_SourceLocation.h in Headers */,
 				CF825D1A085383C80077AEAF /* MF_Assert.h in Headers */,
 				CF825D1C085383C80077AEAF /* MF_MemoryControl.h in Headers */,
+				CFD21B880913D48C0011F11E /* include_AC_canMessage.h in Headers */,
+				CFD21B890913D48C0011F11E /* include_AC_task.h in Headers */,
+				CFD21B8A0913D48C0011F11E /* include_C_canIndependantMessage.h in Headers */,
+				CFD21B8B0913D48C0011F11E /* include_C_canMessageFromMessage.h in Headers */,
+				CFD21B8C0913D48C0011F11E /* include_C_canMessageFromTask.h in Headers */,
+				CFD21B8D0913D48C0011F11E /* include_C_independantTask.h in Headers */,
+				CFD21B8E0913D48C0011F11E /* include_C_taskDependsFromMessage.h in Headers */,
+				CFD21B8F0913D48C0011F11E /* include_C_taskDependsFromTask.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,8 +949,6 @@
 				CF53388605FCA67C004C9D86 /* oa_parser.h in Headers */,
 				CF53388805FCA67C004C9D86 /* oa_scanner.h in Headers */,
 				CF53388A05FCA67C004C9D86 /* oa_semantics.h in Headers */,
-				CF53391B05FCAC98004C9D86 /* AC_canMessage.h in Headers */,
-				CF53391C05FCAC99004C9D86 /* AC_task.h in Headers */,
 				CF53392805FCAC9C004C9D86 /* C_us.h in Headers */,
 				CF53393605FCACA0004C9D86 /* ExtendedList.h in Headers */,
 				CF53393C05FCACA2004C9D86 /* VerifyConditions.h in Headers */,
@@ -938,6 +982,14 @@
 				CF825D0A085383C80077AEAF /* M_SourceLocation.h in Headers */,
 				CF825D0C085383C80077AEAF /* MF_Assert.h in Headers */,
 				CF825D0E085383C80077AEAF /* MF_MemoryControl.h in Headers */,
+				CFD21B900913D48C0011F11E /* include_AC_canMessage.h in Headers */,
+				CFD21B910913D48C0011F11E /* include_AC_task.h in Headers */,
+				CFD21B920913D48C0011F11E /* include_C_canIndependantMessage.h in Headers */,
+				CFD21B930913D48C0011F11E /* include_C_canMessageFromMessage.h in Headers */,
+				CFD21B940913D48C0011F11E /* include_C_canMessageFromTask.h in Headers */,
+				CFD21B950913D48C0011F11E /* include_C_independantTask.h in Headers */,
+				CFD21B960913D48C0011F11E /* include_C_taskDependsFromMessage.h in Headers */,
+				CFD21B970913D48C0011F11E /* include_C_taskDependsFromTask.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1603,16 +1655,12 @@
 		CF0DA75308563C5400F38E67 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.3;
-				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;
 			};
 			name = Deployment;
 		};
 		CF0DA75408563C5400F38E67 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.3;
-				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;
 			};
 			name = Default;
 		};
