@@ -52,7 +52,6 @@ SOURCES += GGS_lstring.cpp
 SOURCES += GGS_luint.cpp
 SOURCES += C_Lexique.cpp
 SOURCES += GGS_location.cpp
-SOURCES += F_LexicalActions.cpp
 SOURCES += C_GGS_Object.cpp
 SOURCES += MF_MemoryControl.cpp
 SOURCES += C_AEDD.cpp
