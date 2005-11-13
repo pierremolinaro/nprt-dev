@@ -371,7 +371,7 @@ performComputations (C_Lexique & inLexique,
 // §    element.mEvery = 1 ;
     sint32 Sca = Resource (element.mResourceId COMMA_HERE).mStep ;
 //    printf (" Sca : %ld \n",Sca);
-    element.mEvery = (sint32) task->mInfo.mTaskKind ()->getTaskEveryParameter () ;
+    element.mEvery = (sint32) task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () ;
   	element.mOffset = Sca*(sint32) task->mInfo.mOffset.uintValue ();  
     element.mMaxDuration = Sca*(sint32) task->mInfo.mDurationMax.uintValue (); 
     element.mMinDuration = useCANmaxLengthOnly
@@ -382,28 +382,28 @@ performComputations (C_Lexique & inLexique,
     	 element.mDeadline = Sca*element.mDeadline;
     }  
  //................................................   
-    if (task->mInfo.mTaskKind ()->taskDependsOnTask ()) {
-    	sint32 elementIndex = (sint32) task->mInfo.mTaskKind ()->getTaskDependanceValue ();
+    if (task->mInfo.mTaskKind (HERE)->taskDependsOnTask ()) {
+    	sint32 elementIndex = (sint32) task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ();
     	element.mEveryMultiple = 
-    		 (sint32) task->mInfo.mTaskKind ()->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
+    		 (sint32) task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
    		element.mPeriod = Sca*(sint32) task->mInfo.mPeriod.uintValue ();
-    } else if (task->mInfo.mTaskKind ()->taskDependsOnMessage ()){
+    } else if (task->mInfo.mTaskKind (HERE)->taskDependsOnMessage ()){
     
     }else{
-    	element.mEveryMultiple = (sint32) task->mInfo.mTaskKind ()->getTaskEveryParameter () ;
+    	element.mEveryMultiple = (sint32) task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () ;
     	element.mPeriod = Sca*(sint32) task->mInfo.mPeriod.uintValue ();
     }
  //................................................
-  	if (task->mInfo.mTaskKind ()->taskDependsOnTask ()) {
+  	if (task->mInfo.mTaskKind (HERE)->taskDependsOnTask ()) {
       element.mIsIndependant=false ;
     	element.mPredecessorType = 'T'; 
       element.mPredecessorId = 
-      sint32 (task->mInfo.mTaskKind ()->getTaskDependanceValue ());
-    }else if (task->mInfo.mTaskKind ()->taskDependsOnMessage ()) {
+      sint32 (task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ());
+    }else if (task->mInfo.mTaskKind (HERE)->taskDependsOnMessage ()) {
       element.mIsIndependant=false ;
     	element.mPredecessorType = 'M'; 
       element.mPredecessorId = 
-      sint32 (task->mInfo.mTaskKind ()->getTaskDependanceValue ()) ;
+      sint32 (task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ()) ;
     }else{ 
     	element.mIsIndependant=true ;
     }
@@ -473,12 +473,12 @@ performComputations (C_Lexique & inLexique,
     }  
  //...........................................................................
     sint32 elementIndex ;
-   if (message->mInfo.mMessageKind ()->messageDependsOnTask ()) {
-   	 elementIndex = (sint32) message->mInfo.mMessageKind ()->getMessageDependanceValue ();
+   if (message->mInfo.mMessageKind (HERE)->messageDependsOnTask ()) {
+   	 elementIndex = (sint32) message->mInfo.mMessageKind (HERE)->getMessageDependanceValue ();
      element.mEveryMultiple = Element (elementIndex COMMA_HERE).mEveryMultiple ;  
      element.mPeriod = Element (elementIndex COMMA_HERE).mPeriod ; 
-   }else if (message->mInfo.mMessageKind ()->messageDependsOnMessage ()) {
-     elementIndex = (sint32) message->mInfo.mMessageKind ()->getMessageDependanceValue () + NumberOfTasks ;
+   }else if (message->mInfo.mMessageKind (HERE)->messageDependsOnMessage ()) {
+     elementIndex = (sint32) message->mInfo.mMessageKind (HERE)->getMessageDependanceValue () + NumberOfTasks ;
      element.mEveryMultiple = Element (elementIndex COMMA_HERE).mEveryMultiple; 
      element.mPeriod = Element (elementIndex COMMA_HERE).mPeriod ;
    } else{
@@ -486,16 +486,16 @@ performComputations (C_Lexique & inLexique,
    	  element.mPeriod = ScalingFactor * (sint32) message->mInfo.mPeriod.uintValue ();
    }
  //.................................................................................   
-  	if (message->mInfo.mMessageKind ()->messageDependsOnTask ()) {
+  	if (message->mInfo.mMessageKind (HERE)->messageDependsOnTask ()) {
       element.mIsIndependant=false ;
     	element.mPredecessorType = 'T'; 
       element.mPredecessorId = 
-         (sint32) message->mInfo.mMessageKind ()->getMessageDependanceValue ();
-    }else if (message->mInfo.mMessageKind ()->messageDependsOnMessage ()) {
+         (sint32) message->mInfo.mMessageKind (HERE)->getMessageDependanceValue ();
+    }else if (message->mInfo.mMessageKind (HERE)->messageDependsOnMessage ()) {
     	element.mIsIndependant=false ;
     	element.mPredecessorType = 'M'; 
       element.mPredecessorId = \
-      	(sint32) message->mInfo.mMessageKind ()->getMessageDependanceValue () ;
+      	(sint32) message->mInfo.mMessageKind (HERE)->getMessageDependanceValue () ;
     }else{ 
     	element.mIsIndependant=true ;
     }
@@ -539,10 +539,10 @@ performComputations (C_Lexique & inLexique,
     htmlFile << task->mInfo.mDurationMax.uintValue () ;
     htmlFile.outputRawData ("</td><td>") ;
 //....................................................................   
-    if (task->mInfo.mTaskKind ()->taskDependsOnMessage ()) {
-    	sint32 elementIndex = (sint32) task->mInfo.mTaskKind ()->getTaskDependanceValue () + NumberOfTasks ;
+    if (task->mInfo.mTaskKind (HERE)->taskDependsOnMessage ()) {
+    	sint32 elementIndex = (sint32) task->mInfo.mTaskKind (HERE)->getTaskDependanceValue () + NumberOfTasks ;
     	Element (index-1 COMMA_HERE).mEveryMultiple = 
-    		 (sint32) task->mInfo.mTaskKind ()->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
+    		 (sint32) task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
     	Element (index-1 COMMA_HERE).mPeriod = Element (elementIndex COMMA_HERE).mPeriod  ;
     }
  //...................................................................
@@ -557,17 +557,17 @@ performComputations (C_Lexique & inLexique,
      	htmlFile << task->mInfo.mDeadline.uintValue () ;
     	htmlFile.outputRawData ("</td><td>") ;
     }
-    if (task->mInfo.mTaskKind ()->taskDependsOnTask ()) {
+    if (task->mInfo.mTaskKind (HERE)->taskDependsOnTask ()) {
       htmlFile.outputRawData ("task #") ;
-      htmlFile << task->mInfo.mTaskKind ()->getTaskDependanceValue ()+1 ;
-    }else if (task->mInfo.mTaskKind ()->taskDependsOnMessage ()) {
+      htmlFile << task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ()+1 ;
+    }else if (task->mInfo.mTaskKind (HERE)->taskDependsOnMessage ()) {
       htmlFile.outputRawData ("message #") ;
-      htmlFile << task->mInfo.mTaskKind ()->getTaskDependanceValue ()+1 ;
+      htmlFile << task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ()+1 ;
     }else{
     	htmlFile.outputRawData (" ---") ;
     }
      htmlFile.outputRawData ("</td><td>") ;
-     htmlFile << task->mInfo.mTaskKind ()->getTaskEveryParameter () ;
+     htmlFile << task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () ;
       
     htmlFile.outputRawData ("</td></tr>") ;
     task = task->nextObject () ;
@@ -629,12 +629,12 @@ performComputations (C_Lexique & inLexique,
      	htmlFile << message->mInfo.mDeadline.uintValue () ;
     	htmlFile.outputRawData ("</td><td>") ;
     }
-   	if (message->mInfo.mMessageKind ()->messageDependsOnTask ()) {
+   	if (message->mInfo.mMessageKind (HERE)->messageDependsOnTask ()) {
     	htmlFile.outputRawData ("task #") ;
-     	htmlFile << message->mInfo.mMessageKind ()->getMessageDependanceValue ()+1 ;
-    }else if (message->mInfo.mMessageKind ()->messageDependsOnMessage ()) {
+     	htmlFile << message->mInfo.mMessageKind (HERE)->getMessageDependanceValue ()+1 ;
+    }else if (message->mInfo.mMessageKind (HERE)->messageDependsOnMessage ()) {
     	htmlFile.outputRawData ("message # ") ;
- 	   	htmlFile << message->mInfo.mMessageKind ()->getMessageDependanceValue ()+1 ;
+ 	   	htmlFile << message->mInfo.mMessageKind (HERE)->getMessageDependanceValue ()+1 ;
     }else{
     	htmlFile.outputRawData (" ---") ;
     }
