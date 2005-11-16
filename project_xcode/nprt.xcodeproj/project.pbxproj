@@ -53,6 +53,11 @@
 		CF45190105FCAE61008D4817 /* cocoaOA.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF45190005FCAE61008D4817 /* cocoaOA.mm */; };
 		CF45190205FCAEC7008D4817 /* nprt in Resources */ = {isa = PBXBuildFile; fileRef = CF4518F605FCAE44008D4817 /* nprt */; };
 		CF45190505FCAF69008D4817 /* oa_cli_options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF53386705FCA67C004C9D86 /* oa_cli_options.cpp */; };
+		CF512DF0092B3292008F7E87 /* C_builtin_CLI_Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF512DEE092B3292008F7E87 /* C_builtin_CLI_Options.cpp */; };
+		CF512DF1092B3292008F7E87 /* C_builtin_CLI_Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF512DEE092B3292008F7E87 /* C_builtin_CLI_Options.cpp */; };
+		CF512DF2092B3292008F7E87 /* C_builtin_CLI_Options.h in Headers */ = {isa = PBXBuildFile; fileRef = CF512DEF092B3292008F7E87 /* C_builtin_CLI_Options.h */; };
+		CF512DF3092B3292008F7E87 /* C_builtin_CLI_Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF512DEE092B3292008F7E87 /* C_builtin_CLI_Options.cpp */; };
+		CF512DF4092B3292008F7E87 /* C_builtin_CLI_Options.h in Headers */ = {isa = PBXBuildFile; fileRef = CF512DEF092B3292008F7E87 /* C_builtin_CLI_Options.h */; };
 		CF53387B05FCA67C004C9D86 /* oa_scanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF53386F05FCA67C004C9D86 /* oa_scanner.cpp */; };
 		CF53387F05FCA67C004C9D86 /* oa_cli_options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF53386705FCA67C004C9D86 /* oa_cli_options.cpp */; };
 		CF53388005FCA67C004C9D86 /* oa_cli_options.h in Headers */ = {isa = PBXBuildFile; fileRef = CF53386805FCA67C004C9D86 /* oa_cli_options.h */; };
@@ -140,8 +145,6 @@
 		CF825C8F085383290077AEAF /* C_PrimeCache2.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825C8B085383290077AEAF /* C_PrimeCache2.h */; };
 		CF825C9A0853833E0077AEAF /* AC_CLI_Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825C900853833E0077AEAF /* AC_CLI_Options.cpp */; };
 		CF825C9B0853833E0077AEAF /* AC_CLI_Options.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825C910853833E0077AEAF /* AC_CLI_Options.h */; };
-		CF825C9C0853833E0077AEAF /* C_Builtin_CLI_Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825C920853833E0077AEAF /* C_Builtin_CLI_Options.cpp */; };
-		CF825C9D0853833E0077AEAF /* C_Builtin_CLI_Options.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825C930853833E0077AEAF /* C_Builtin_CLI_Options.h */; };
 		CF825C9E0853833E0077AEAF /* C_CLI_OptionGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825C940853833E0077AEAF /* C_CLI_OptionGroup.cpp */; };
 		CF825C9F0853833E0077AEAF /* C_CLI_OptionGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825C950853833E0077AEAF /* C_CLI_OptionGroup.h */; };
 		CF825CA00853833E0077AEAF /* F_Analyze_CLI_Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825C960853833E0077AEAF /* F_Analyze_CLI_Options.cpp */; };
@@ -150,8 +153,6 @@
 		CF825CA30853833E0077AEAF /* mainForLIBPM.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825C990853833E0077AEAF /* mainForLIBPM.h */; };
 		CF825CA40853833E0077AEAF /* AC_CLI_Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825C900853833E0077AEAF /* AC_CLI_Options.cpp */; };
 		CF825CA50853833E0077AEAF /* AC_CLI_Options.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825C910853833E0077AEAF /* AC_CLI_Options.h */; };
-		CF825CA60853833E0077AEAF /* C_Builtin_CLI_Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825C920853833E0077AEAF /* C_Builtin_CLI_Options.cpp */; };
-		CF825CA70853833E0077AEAF /* C_Builtin_CLI_Options.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825C930853833E0077AEAF /* C_Builtin_CLI_Options.h */; };
 		CF825CA80853833E0077AEAF /* C_CLI_OptionGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825C940853833E0077AEAF /* C_CLI_OptionGroup.cpp */; };
 		CF825CA90853833E0077AEAF /* C_CLI_OptionGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825C950853833E0077AEAF /* C_CLI_OptionGroup.h */; };
 		CF825CAA0853833E0077AEAF /* F_Analyze_CLI_Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825C960853833E0077AEAF /* F_Analyze_CLI_Options.cpp */; };
@@ -232,7 +233,6 @@
 		CF825D1E085384710077AEAF /* C_String.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825CF5085383C80077AEAF /* C_String.cpp */; };
 		CF825D1F0853847B0077AEAF /* C_Lexique.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825CBC085383620077AEAF /* C_Lexique.cpp */; };
 		CF825D21085384880077AEAF /* C_CLI_OptionGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825C940853833E0077AEAF /* C_CLI_OptionGroup.cpp */; };
-		CF825D220853849C0077AEAF /* C_Builtin_CLI_Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825C920853833E0077AEAF /* C_Builtin_CLI_Options.cpp */; };
 		CF825D23085384A20077AEAF /* C_DateTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825CE7085383B10077AEAF /* C_DateTime.cpp */; };
 		CF825D24085384A60077AEAF /* C_TextFileWrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825CB00853834D0077AEAF /* C_TextFileWrite.cpp */; };
 		CF825D25085384AD0077AEAF /* C_ConsoleOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825CD7085383A20077AEAF /* C_ConsoleOut.cpp */; };
@@ -376,6 +376,8 @@
 		CF4518F805FCAE44008D4817 /* cocoaNPRT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cocoaNPRT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF4518FA05FCAE44008D4817 /* nprtDebug */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nprtDebug; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF45190005FCAE61008D4817 /* cocoaOA.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = cocoaOA.mm; sourceTree = "<group>"; };
+		CF512DEE092B3292008F7E87 /* C_builtin_CLI_Options.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_builtin_CLI_Options.cpp; sourceTree = "<group>"; };
+		CF512DEF092B3292008F7E87 /* C_builtin_CLI_Options.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_builtin_CLI_Options.h; sourceTree = "<group>"; };
 		CF53386705FCA67C004C9D86 /* oa_cli_options.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = oa_cli_options.cpp; sourceTree = "<group>"; };
 		CF53386805FCA67C004C9D86 /* oa_cli_options.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = oa_cli_options.h; sourceTree = "<group>"; };
 		CF53386905FCA67C004C9D86 /* oa_grammar.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = oa_grammar.cpp; sourceTree = "<group>"; };
@@ -419,8 +421,6 @@
 		CF825C8B085383290077AEAF /* C_PrimeCache2.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_PrimeCache2.h; sourceTree = "<group>"; };
 		CF825C900853833E0077AEAF /* AC_CLI_Options.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = AC_CLI_Options.cpp; sourceTree = "<group>"; };
 		CF825C910853833E0077AEAF /* AC_CLI_Options.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AC_CLI_Options.h; sourceTree = "<group>"; };
-		CF825C920853833E0077AEAF /* C_Builtin_CLI_Options.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_Builtin_CLI_Options.cpp; sourceTree = "<group>"; };
-		CF825C930853833E0077AEAF /* C_Builtin_CLI_Options.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_Builtin_CLI_Options.h; sourceTree = "<group>"; };
 		CF825C940853833E0077AEAF /* C_CLI_OptionGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_CLI_OptionGroup.cpp; sourceTree = "<group>"; };
 		CF825C950853833E0077AEAF /* C_CLI_OptionGroup.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_CLI_OptionGroup.h; sourceTree = "<group>"; };
 		CF825C960853833E0077AEAF /* F_Analyze_CLI_Options.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = F_Analyze_CLI_Options.cpp; sourceTree = "<group>"; };
@@ -589,10 +589,10 @@
 		CF31E0ED0598DF5400814123 /* command_line_interface */ = {
 			isa = PBXGroup;
 			children = (
+				CF512DEE092B3292008F7E87 /* C_builtin_CLI_Options.cpp */,
+				CF512DEF092B3292008F7E87 /* C_builtin_CLI_Options.h */,
 				CF825C900853833E0077AEAF /* AC_CLI_Options.cpp */,
 				CF825C910853833E0077AEAF /* AC_CLI_Options.h */,
-				CF825C920853833E0077AEAF /* C_Builtin_CLI_Options.cpp */,
-				CF825C930853833E0077AEAF /* C_Builtin_CLI_Options.h */,
 				CF825C940853833E0077AEAF /* C_CLI_OptionGroup.cpp */,
 				CF825C950853833E0077AEAF /* C_CLI_OptionGroup.h */,
 				CF825C960853833E0077AEAF /* F_Analyze_CLI_Options.cpp */,
@@ -880,7 +880,6 @@
 				CF4106200622B1AC006338F8 /* CANMessageBounds.h in Headers */,
 				CF825C8F085383290077AEAF /* C_PrimeCache2.h in Headers */,
 				CF825CA50853833E0077AEAF /* AC_CLI_Options.h in Headers */,
-				CF825CA70853833E0077AEAF /* C_Builtin_CLI_Options.h in Headers */,
 				CF825CA90853833E0077AEAF /* C_CLI_OptionGroup.h in Headers */,
 				CF825CAB0853833E0077AEAF /* F_Analyze_CLI_Options.h in Headers */,
 				CF825CAD0853833E0077AEAF /* mainForLIBPM.h in Headers */,
@@ -912,6 +911,7 @@
 				CFD21B8D0913D48C0011F11E /* include_C_independantTask.h in Headers */,
 				CFD21B8E0913D48C0011F11E /* include_C_taskDependsFromMessage.h in Headers */,
 				CFD21B8F0913D48C0011F11E /* include_C_taskDependsFromTask.h in Headers */,
+				CF512DF2092B3292008F7E87 /* C_builtin_CLI_Options.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -947,7 +947,6 @@
 				CF41060E0622B1AC006338F8 /* CANMessageBounds.h in Headers */,
 				CF825C8D085383290077AEAF /* C_PrimeCache2.h in Headers */,
 				CF825C9B0853833E0077AEAF /* AC_CLI_Options.h in Headers */,
-				CF825C9D0853833E0077AEAF /* C_Builtin_CLI_Options.h in Headers */,
 				CF825C9F0853833E0077AEAF /* C_CLI_OptionGroup.h in Headers */,
 				CF825CA10853833E0077AEAF /* F_Analyze_CLI_Options.h in Headers */,
 				CF825CA30853833E0077AEAF /* mainForLIBPM.h in Headers */,
@@ -979,6 +978,7 @@
 				CFD21B950913D48C0011F11E /* include_C_independantTask.h in Headers */,
 				CFD21B960913D48C0011F11E /* include_C_taskDependsFromMessage.h in Headers */,
 				CFD21B970913D48C0011F11E /* include_C_taskDependsFromTask.h in Headers */,
+				CF512DF4092B3292008F7E87 /* C_builtin_CLI_Options.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1221,11 +1221,11 @@
 				CF825D1E085384710077AEAF /* C_String.cpp in Sources */,
 				CF825D1F0853847B0077AEAF /* C_Lexique.cpp in Sources */,
 				CF825D21085384880077AEAF /* C_CLI_OptionGroup.cpp in Sources */,
-				CF825D220853849C0077AEAF /* C_Builtin_CLI_Options.cpp in Sources */,
 				CF825D23085384A20077AEAF /* C_DateTime.cpp in Sources */,
 				CF825D24085384A60077AEAF /* C_TextFileWrite.cpp in Sources */,
 				CF825D25085384AD0077AEAF /* C_ConsoleOut.cpp in Sources */,
 				CF825D26085384BA0077AEAF /* C_Exception.cpp in Sources */,
+				CF512DF0092B3292008F7E87 /* C_builtin_CLI_Options.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1264,7 +1264,6 @@
 				CFFA808E0625861300A94B4B /* independant_resources_core.cpp in Sources */,
 				CF825C8E085383290077AEAF /* C_PrimeCache2.cpp in Sources */,
 				CF825CA40853833E0077AEAF /* AC_CLI_Options.cpp in Sources */,
-				CF825CA60853833E0077AEAF /* C_Builtin_CLI_Options.cpp in Sources */,
 				CF825CA80853833E0077AEAF /* C_CLI_OptionGroup.cpp in Sources */,
 				CF825CAA0853833E0077AEAF /* F_Analyze_CLI_Options.cpp in Sources */,
 				CF825CAC0853833E0077AEAF /* F_main.cpp in Sources */,
@@ -1283,6 +1282,7 @@
 				CF825D15085383C80077AEAF /* F_GetPrime.cpp in Sources */,
 				CF825D19085383C80077AEAF /* MF_Assert.cpp in Sources */,
 				CF825D1B085383C80077AEAF /* MF_MemoryControl.cpp in Sources */,
+				CF512DF1092B3292008F7E87 /* C_builtin_CLI_Options.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1321,7 +1321,6 @@
 				CFFA808D0625861300A94B4B /* independant_resources_core.cpp in Sources */,
 				CF825C8C085383290077AEAF /* C_PrimeCache2.cpp in Sources */,
 				CF825C9A0853833E0077AEAF /* AC_CLI_Options.cpp in Sources */,
-				CF825C9C0853833E0077AEAF /* C_Builtin_CLI_Options.cpp in Sources */,
 				CF825C9E0853833E0077AEAF /* C_CLI_OptionGroup.cpp in Sources */,
 				CF825CA00853833E0077AEAF /* F_Analyze_CLI_Options.cpp in Sources */,
 				CF825CA20853833E0077AEAF /* F_main.cpp in Sources */,
@@ -1340,6 +1339,7 @@
 				CF825D07085383C80077AEAF /* F_GetPrime.cpp in Sources */,
 				CF825D0B085383C80077AEAF /* MF_Assert.cpp in Sources */,
 				CF825D0D085383C80077AEAF /* MF_MemoryControl.cpp in Sources */,
+				CF512DF3092B3292008F7E87 /* C_builtin_CLI_Options.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
