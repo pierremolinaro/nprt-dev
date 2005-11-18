@@ -87,21 +87,21 @@ sint32
 BuildExtendedList (TC_UniqueArray < cReadyAtThisInstant> & ReadyAtThisInstant,
                    TC_UniqueArray <cElement> & Element,
                    const TC_UniqueArray <cResource> & Resource,
-                  TC_UniqueArray <cActivity> & exElement,
-                  TC_UniqueArray <cMTElement> & outMTElement,
-                  const sint32 Nu_oftasks, const sint32 Nu_ofMessages,
-                  bool CreateIntermediateFiles,
-                  bool & ioUseBalgorithm,
-                  const C_String & activitiesHTMLFileName);
+                   TC_UniqueArray <cActivity> & exElement,
+                   TC_UniqueArray <cMTElement> & outMTElement,
+                   const sint32 Nu_oftasks, const sint32 Nu_ofMessages,
+                   bool CreateIntermediateFiles,
+                   bool & ioUseBalgorithm,
+                   const C_String & activitiesHTMLFileName);
                    
 
 void
 ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
-          					const TC_UniqueArray <cResource> & Resource,
-          					TC_UniqueArray <cMTElement> & MTElement,
+                    const TC_UniqueArray <cResource> & Resource,
+                    TC_UniqueArray <cMTElement> & MTElement,
                     const TC_UniqueArray <cResponseTime> & inResponseTimeArray,
                     bool CreateIntermediateFiles, 
-   									const C_String & raw_outputHTMLFileName,
+                    const C_String & raw_outputHTMLFileName,
                     C_HTML_FileWrite & in_htmlFile);
 
 
