@@ -4,7 +4,7 @@
 //                                                                           *
 //  Copyright (C) 2002-2004 Pierre Molinaro (started august 8th, 2002).      *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
-//  IRCCyN, Institut de Recherche en Communications et CybernŽtique de Nantes*
+//  IRCCyN, Institut de Recherche en Communications et Cybernetique de Nantes*
 //  ECN, Ecole Centrale de Nantes (France)                                   *
 //                                                                           *
 //  This program is free software; you can redistribute it and/or modify it  *
@@ -398,7 +398,7 @@ rotationGauche (cResourceSchedule * & a) {
   a->mPtrToSup = b->mPtrToInf ;
   b->mPtrToInf = a;
 
-// recalculer l'Žquilibrage 
+// recalculer l'equilibrage 
   if (b->mBalance >= 0) {
     a->mBalance++ ;
   }else{
@@ -421,7 +421,7 @@ rotationDroite (cResourceSchedule * & a) {
   a->mPtrToInf = b->mPtrToSup ;
   b->mPtrToSup = a ;
  
-// recalculer l'Žquilibrage 
+// recalculer l'equilibrage 
   if (b->mBalance > 0) {
     a->mBalance -= b->mBalance + 1 ;
   }else{
