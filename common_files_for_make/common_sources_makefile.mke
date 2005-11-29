@@ -70,6 +70,8 @@ SOURCES += C_HTML_FileWrite.cpp
 #--- Hand-coded files ---------------------
 SOURCES += activities_core.cpp
 SOURCES += C_activitiesToSchedule.cpp
+SOURCES += C_VDL_hashmap.cpp
+SOURCES += C_us_hashmap.cpp
 SOURCES += calculs_activites.cpp
 SOURCES += CANMmessageBounds.cpp
 SOURCES += C_us.cpp
