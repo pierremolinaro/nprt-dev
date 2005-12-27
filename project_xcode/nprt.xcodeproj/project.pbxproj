@@ -271,6 +271,10 @@
 		CFD21B950913D48C0011F11E /* include_C_independantTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B850913D48C0011F11E /* include_C_independantTask.h */; };
 		CFD21B960913D48C0011F11E /* include_C_taskDependsFromMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B860913D48C0011F11E /* include_C_taskDependsFromMessage.h */; };
 		CFD21B970913D48C0011F11E /* include_C_taskDependsFromTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B870913D48C0011F11E /* include_C_taskDependsFromTask.h */; };
+		CFDC50F60961B32F006A0AFD /* GGS_stringset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFDC50F40961B32F006A0AFD /* GGS_stringset.cpp */; };
+		CFDC50F70961B32F006A0AFD /* GGS_stringset.h in Headers */ = {isa = PBXBuildFile; fileRef = CFDC50F50961B32F006A0AFD /* GGS_stringset.h */; };
+		CFDC50F80961B32F006A0AFD /* GGS_stringset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFDC50F40961B32F006A0AFD /* GGS_stringset.cpp */; };
+		CFDC50F90961B32F006A0AFD /* GGS_stringset.h in Headers */ = {isa = PBXBuildFile; fileRef = CFDC50F50961B32F006A0AFD /* GGS_stringset.h */; };
 		CFFA808D0625861300A94B4B /* independant_resources_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFFA808C0625861300A94B4B /* independant_resources_core.cpp */; };
 		CFFA808E0625861300A94B4B /* independant_resources_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFFA808C0625861300A94B4B /* independant_resources_core.cpp */; };
 /* End PBXBuildFile section */
@@ -464,6 +468,8 @@
 		CFD21B850913D48C0011F11E /* include_C_independantTask.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = include_C_independantTask.h; sourceTree = "<group>"; };
 		CFD21B860913D48C0011F11E /* include_C_taskDependsFromMessage.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = include_C_taskDependsFromMessage.h; sourceTree = "<group>"; };
 		CFD21B870913D48C0011F11E /* include_C_taskDependsFromTask.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = include_C_taskDependsFromTask.h; sourceTree = "<group>"; };
+		CFDC50F40961B32F006A0AFD /* GGS_stringset.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = GGS_stringset.cpp; sourceTree = "<group>"; };
+		CFDC50F50961B32F006A0AFD /* GGS_stringset.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = GGS_stringset.h; sourceTree = "<group>"; };
 		CFF53872057A558F00854C83 /* AC_galgas_io.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = AC_galgas_io.cpp; sourceTree = "<group>"; };
 		CFF5387B057A558F00854C83 /* C_galgas_uint_array.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_galgas_uint_array.cpp; sourceTree = "<group>"; };
 		CFF53881057A558F00854C83 /* GGS_bool.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = GGS_bool.cpp; sourceTree = "<group>"; };
@@ -768,6 +774,8 @@
 		CFF53871057A555E00854C83 /* galgas */ = {
 			isa = PBXGroup;
 			children = (
+				CFDC50F40961B32F006A0AFD /* GGS_stringset.cpp */,
+				CFDC50F50961B32F006A0AFD /* GGS_stringset.h */,
 				CF825CBA085383620077AEAF /* C_GGS_Object.cpp */,
 				CF825CBB085383620077AEAF /* C_GGS_Object.h */,
 				CF825CBC085383620077AEAF /* C_Lexique.cpp */,
@@ -903,6 +911,7 @@
 				CF512DF2092B3292008F7E87 /* C_builtin_CLI_Options.h in Headers */,
 				CFC5D7EE093CAD3300112F5B /* C_us_hashmap.h in Headers */,
 				CFC5D821093CAF2D00112F5B /* C_VDL_hashmap.h in Headers */,
+				CFDC50F70961B32F006A0AFD /* GGS_stringset.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,6 +981,7 @@
 				CF512DF4092B3292008F7E87 /* C_builtin_CLI_Options.h in Headers */,
 				CFC5D7F0093CAD3300112F5B /* C_us_hashmap.h in Headers */,
 				CFC5D823093CAF2D00112F5B /* C_VDL_hashmap.h in Headers */,
+				CFDC50F90961B32F006A0AFD /* GGS_stringset.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1275,6 +1285,7 @@
 				CF512DF1092B3292008F7E87 /* C_builtin_CLI_Options.cpp in Sources */,
 				CFC5D7ED093CAD3300112F5B /* C_us_hashmap.cpp in Sources */,
 				CFC5D820093CAF2D00112F5B /* C_VDL_hashmap.cpp in Sources */,
+				CFDC50F60961B32F006A0AFD /* GGS_stringset.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1334,6 +1345,7 @@
 				CF512DF3092B3292008F7E87 /* C_builtin_CLI_Options.cpp in Sources */,
 				CFC5D7EF093CAD3300112F5B /* C_us_hashmap.cpp in Sources */,
 				CFC5D822093CAF2D00112F5B /* C_VDL_hashmap.cpp in Sources */,
+				CFDC50F80961B32F006A0AFD /* GGS_stringset.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

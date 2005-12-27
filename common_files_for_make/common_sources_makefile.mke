@@ -50,6 +50,7 @@ SOURCES += GGS_lbool.cpp
 SOURCES += GGS_lchar.cpp
 SOURCES += GGS_lstring.cpp
 SOURCES += GGS_luint.cpp
+SOURCES += GGS_stringset.cpp
 SOURCES += C_Lexique.cpp
 SOURCES += GGS_location.cpp
 SOURCES += C_GGS_Object.cpp
