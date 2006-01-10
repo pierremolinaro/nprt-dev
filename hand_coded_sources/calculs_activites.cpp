@@ -250,11 +250,11 @@ static void buildCSSfile (const C_String & inDirectory) {
 //--------------------------------------------------------------------------*
 
 void
-performComputations (C_Lexique & inLexique,
-                     GGS_M_processor & inProcessorMap,
-                     GGS_M_network & inNetworkMap,
-                     GGS_M_messages & inMessagesMap,
-                     GGS_M_tasks & inTasksMap) {  
+routine_performComputations (C_Lexique & inLexique,
+                             GGS_M_processor & inProcessorMap,
+                             GGS_M_network & inNetworkMap,
+                             GGS_M_messages & inMessagesMap,
+                             GGS_M_tasks & inTasksMap) {  
   TC_UniqueArray <cResource> Resource ;
   TC_UniqueArray <cElement> Element ;
 
