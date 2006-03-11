@@ -312,7 +312,7 @@ void GGS_M_network::methode_insertKey (C_Lexique & lexique_var_,
 
 cPtr_AC_canMessage::
 cPtr_AC_canMessage (LOCATION_ARGS)
-:C_GGS_Object (THERE) {
+:GGS_class (THERE) {
 }
 
 //---------------------------------------------------------------------------*
@@ -678,7 +678,7 @@ void GGS_M_messages::methode_insertKey (C_Lexique & lexique_var_,
 
 cPtr_AC_task::
 cPtr_AC_task (LOCATION_ARGS)
-:C_GGS_Object (THERE) {
+:GGS_class (THERE) {
 }
 
 //---------------------------------------------------------------------------*
