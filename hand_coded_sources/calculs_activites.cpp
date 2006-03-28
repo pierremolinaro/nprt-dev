@@ -254,7 +254,8 @@ routine_performComputations (C_Lexique & inLexique,
                              GGS_M_processor & inProcessorMap,
                              GGS_M_network & inNetworkMap,
                              GGS_M_messages & inMessagesMap,
-                             GGS_M_tasks & inTasksMap) {  
+                             GGS_M_tasks & inTasksMap
+                             COMMA_UNUSED_LOCATION_ARGS) {  
   TC_UniqueArray <cResource> Resource ;
   TC_UniqueArray <cElement> Element ;
 

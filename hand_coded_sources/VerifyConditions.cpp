@@ -36,7 +36,7 @@ NecessaryConditions_OK (C_Lexique & inLexique,
     	             << ResourceLoad
     	             << " (greater than 1.0) !\n" ;
 
-      inLexique.onTheFlySemanticError (errorMessage) ;
+      inLexique.onTheFlySemanticError (errorMessage COMMA_HERE) ;
     }else{ 
      	NecessaryConditionOK = NecessaryConditionOK && true;
     }   
