@@ -17,7 +17,7 @@
 
 //---------------------------------------------------------------------------*
 
-#ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+#ifndef DO_NOT_GENERATE_CHECKINGS
   static const char gGGSsourceFile [] = "oa_parser.ggs" ;
   #define SOURCE_FILE_AT_LINE(line) , gGGSsourceFile, line
 #else
@@ -449,7 +449,7 @@ GGS_AC_canMessage (cPtr_AC_canMessage * inSource) {
 
 //---------------------------------------------------------------------------*
 
-#ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+#ifndef DO_NOT_GENERATE_CHECKINGS
   cPtr_AC_canMessage * GGS_AC_canMessage
 ::operator () (LOCATION_ARGS) const {
     macroValidPointerThere (mPointer) ;
@@ -500,7 +500,7 @@ void cPtr_C_canIndependantMessage::appendForDescription (C_String & ioString) co
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+#ifndef DO_NOT_GENERATE_CHECKINGS
   cPtr_C_canIndependantMessage * GGS_C_canIndependantMessage::
     constructor_new (LOCATION_ARGS) {
     cPtr_C_canIndependantMessage * ptr_ = (cPtr_C_canIndependantMessage *) NULL ;
@@ -533,7 +533,7 @@ mMessageIndex.reader_description () ;
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+#ifndef DO_NOT_GENERATE_CHECKINGS
   cPtr_C_canMessageFromMessage * GGS_C_canMessageFromMessage::
     constructor_new (const GGS_luint & argument_0 COMMA_LOCATION_ARGS) {
     cPtr_C_canMessageFromMessage * ptr_ = (cPtr_C_canMessageFromMessage *) NULL ;
@@ -566,7 +566,7 @@ mTaskIndex.reader_description () ;
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+#ifndef DO_NOT_GENERATE_CHECKINGS
   cPtr_C_canMessageFromTask * GGS_C_canMessageFromTask::
     constructor_new (const GGS_luint & argument_0 COMMA_LOCATION_ARGS) {
     cPtr_C_canMessageFromTask * ptr_ = (cPtr_C_canMessageFromTask *) NULL ;
@@ -893,7 +893,7 @@ GGS_AC_task (cPtr_AC_task * inSource) {
 
 //---------------------------------------------------------------------------*
 
-#ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+#ifndef DO_NOT_GENERATE_CHECKINGS
   cPtr_AC_task * GGS_AC_task
 ::operator () (LOCATION_ARGS) const {
     macroValidPointerThere (mPointer) ;
@@ -944,7 +944,7 @@ void cPtr_C_independantTask::appendForDescription (C_String & ioString) const {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+#ifndef DO_NOT_GENERATE_CHECKINGS
   cPtr_C_independantTask * GGS_C_independantTask::
     constructor_new (LOCATION_ARGS) {
     cPtr_C_independantTask * ptr_ = (cPtr_C_independantTask *) NULL ;
@@ -980,7 +980,7 @@ mEvery.reader_description () ;
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+#ifndef DO_NOT_GENERATE_CHECKINGS
   cPtr_C_taskDependsFromTask * GGS_C_taskDependsFromTask::
     constructor_new (const GGS_luint & argument_0,
                                 const GGS_luint & argument_1 COMMA_LOCATION_ARGS) {
@@ -1018,7 +1018,7 @@ mEvery.reader_description () ;
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+#ifndef DO_NOT_GENERATE_CHECKINGS
   cPtr_C_taskDependsFromMessage * GGS_C_taskDependsFromMessage::
     constructor_new (const GGS_luint & argument_0,
                                 const GGS_luint & argument_1 COMMA_LOCATION_ARGS) {

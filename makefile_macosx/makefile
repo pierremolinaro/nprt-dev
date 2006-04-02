@@ -19,7 +19,7 @@ LINKER_OPTIONS :=
 
 #---------------------------------------------------------------*
 
-RELEASE_OPTIONS := -DDO_NOT_GENERATE_MEMORY_CHECK_CODE
+RELEASE_OPTIONS := -DDO_NOT_GENERATE_CHECKINGS
 
 #---------------------------------------------------------------*
 
