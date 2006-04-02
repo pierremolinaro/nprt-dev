@@ -189,7 +189,7 @@ class GGS_AC_canMessage {
   }
   public : void drop_operation (void) ;
   public : GGS_string reader_description (void) const ;
-  #ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+  #ifndef DO_NOT_GENERATE_CHECKINGS
     public : cPtr_AC_canMessage * operator () (LOCATION_ARGS) const ;
   #else
     public : inline cPtr_AC_canMessage * operator () (LOCATION_ARGS) const { return mPointer ; }
@@ -309,7 +309,7 @@ class GGS_AC_task {
   }
   public : void drop_operation (void) ;
   public : GGS_string reader_description (void) const ;
-  #ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+  #ifndef DO_NOT_GENERATE_CHECKINGS
     public : cPtr_AC_task * operator () (LOCATION_ARGS) const ;
   #else
     public : inline cPtr_AC_task * operator () (LOCATION_ARGS) const { return mPointer ; }
@@ -486,7 +486,7 @@ class elementOf_GGS_M_network : public AC_galgas_map_element {
 //---------------------------------------------------------------------------*
 
 class GGS_C_canIndependantMessage {
-  #ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+  #ifndef DO_NOT_GENERATE_CHECKINGS
     public : static cPtr_C_canIndependantMessage * constructor_new (LOCATION_ARGS) ;
   #else
     public : inline static cPtr_C_canIndependantMessage * constructor_new (LOCATION_ARGS) {
@@ -511,7 +511,7 @@ class GGS_C_canIndependantMessage {
 //---------------------------------------------------------------------------*
 
 class GGS_C_canMessageFromMessage {
-  #ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+  #ifndef DO_NOT_GENERATE_CHECKINGS
     public : static cPtr_C_canMessageFromMessage * constructor_new (const GGS_luint & argument_0 COMMA_LOCATION_ARGS) ;
   #else
     public : inline static cPtr_C_canMessageFromMessage * constructor_new (const GGS_luint & argument_0 COMMA_LOCATION_ARGS) {
@@ -536,7 +536,7 @@ class GGS_C_canMessageFromMessage {
 //---------------------------------------------------------------------------*
 
 class GGS_C_canMessageFromTask {
-  #ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+  #ifndef DO_NOT_GENERATE_CHECKINGS
     public : static cPtr_C_canMessageFromTask * constructor_new (const GGS_luint & argument_0 COMMA_LOCATION_ARGS) ;
   #else
     public : inline static cPtr_C_canMessageFromTask * constructor_new (const GGS_luint & argument_0 COMMA_LOCATION_ARGS) {
@@ -600,7 +600,7 @@ class elementOf_GGS_M_messages : public AC_galgas_map_element {
 //---------------------------------------------------------------------------*
 
 class GGS_C_independantTask {
-  #ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+  #ifndef DO_NOT_GENERATE_CHECKINGS
     public : static cPtr_C_independantTask * constructor_new (LOCATION_ARGS) ;
   #else
     public : inline static cPtr_C_independantTask * constructor_new (LOCATION_ARGS) {
@@ -625,7 +625,7 @@ class GGS_C_independantTask {
 //---------------------------------------------------------------------------*
 
 class GGS_C_taskDependsFromTask {
-  #ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+  #ifndef DO_NOT_GENERATE_CHECKINGS
     public : static cPtr_C_taskDependsFromTask * constructor_new (const GGS_luint & argument_0,
                                 const GGS_luint & argument_1 COMMA_LOCATION_ARGS) ;
   #else
@@ -653,7 +653,7 @@ class GGS_C_taskDependsFromTask {
 //---------------------------------------------------------------------------*
 
 class GGS_C_taskDependsFromMessage {
-  #ifndef DO_NOT_GENERATE_MEMORY_CHECK_CODE
+  #ifndef DO_NOT_GENERATE_CHECKINGS
     public : static cPtr_C_taskDependsFromMessage * constructor_new (const GGS_luint & argument_0,
                                 const GGS_luint & argument_1 COMMA_LOCATION_ARGS) ;
   #else
