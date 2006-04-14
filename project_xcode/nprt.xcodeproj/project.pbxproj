@@ -37,6 +37,7 @@
 		CF2A8857058CCF57003EF2F4 /* GGS_uint.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0CB05877B62000D2F8C /* GGS_uint.h */; };
 		CF3115F60622ABE200882F85 /* nprt_application.icns in Resources */ = {isa = PBXBuildFile; fileRef = CF3115F40622ABE200882F85 /* nprt_application.icns */; };
 		CF3115F70622ABE200882F85 /* nprt_document.icns in Resources */ = {isa = PBXBuildFile; fileRef = CF3115F50622ABE200882F85 /* nprt_document.icns */; };
+		CF337A1809EFAEBB00EC41F6 /* C_SourceTextForCoca.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF337A1609EFAEBB00EC41F6 /* C_SourceTextForCoca.mm */; };
 		CF3B8A80058CD05C00D682D2 /* AC_galgas_io.h in Headers */ = {isa = PBXBuildFile; fileRef = CF3FF0B705877B62000D2F8C /* AC_galgas_io.h */; };
 		CF3B8A81058CD05D00D682D2 /* AC_galgas_io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53872057A558F00854C83 /* AC_galgas_io.cpp */; };
 		CF3B8A9C058CD21900D682D2 /* libstdc++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3B8A9B058CD21900D682D2 /* libstdc++.a */; };
@@ -341,6 +342,8 @@
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		CF3115F40622ABE200882F85 /* nprt_application.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = nprt_application.icns; sourceTree = "<group>"; };
 		CF3115F50622ABE200882F85 /* nprt_document.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = nprt_document.icns; sourceTree = "<group>"; };
+		CF337A1609EFAEBB00EC41F6 /* C_SourceTextForCoca.mm */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.objcpp; path = C_SourceTextForCoca.mm; sourceTree = "<group>"; };
+		CF337A1709EFAEBB00EC41F6 /* C_SourceTextForCocoa.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_SourceTextForCocoa.h; sourceTree = "<group>"; };
 		CF3B8A9B058CD21900D682D2 /* libstdc++.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libstdc++.a"; path = "/usr/lib/gcc/darwin/3.3/libstdc++.a"; sourceTree = "<absolute>"; };
 		CF3FF0B705877B62000D2F8C /* AC_galgas_io.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AC_galgas_io.h; sourceTree = "<group>"; };
 		CF3FF0BD05877B62000D2F8C /* C_galgas_uint_array.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = C_galgas_uint_array.h; sourceTree = "<group>"; };
@@ -608,6 +611,8 @@
 		CFAD482E0591BCF700BF8381 /* cocoa_galgas */ = {
 			isa = PBXGroup;
 			children = (
+				CF337A1609EFAEBB00EC41F6 /* C_SourceTextForCoca.mm */,
+				CF337A1709EFAEBB00EC41F6 /* C_SourceTextForCocoa.h */,
 				CF825C84085383120077AEAF /* MainMenu.nib */,
 				CF825C86085383120077AEAF /* OC_GGS_Document.nib */,
 				CF825C64085383070077AEAF /* F_CocoaWrapperForGalgas.h */,
@@ -1230,6 +1235,7 @@
 				CF512DF0092B3292008F7E87 /* C_builtin_CLI_Options.cpp in Sources */,
 				CFF8618809C0DA4800F90D05 /* C_GGS_Object.cpp in Sources */,
 				CFE20B5009C8BDA500E10499 /* GGS_string.cpp in Sources */,
+				CF337A1809EFAEBB00EC41F6 /* C_SourceTextForCoca.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
