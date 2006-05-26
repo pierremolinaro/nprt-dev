@@ -39,6 +39,7 @@ SOURCES += C_builtin_CLI_Options.cpp
 SOURCES += C_CLI_OptionGroup.cpp
 SOURCES += F_Analyze_CLI_Options.cpp
 SOURCES += AC_CLI_Options.cpp
+SOURCES += C_galgas_CLI_Options.cpp
 SOURCES += AC_galgas_io.cpp
 SOURCES += AC_galgas_map.cpp
 SOURCES += C_galgas_terminal_io.cpp
