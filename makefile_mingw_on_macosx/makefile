@@ -11,12 +11,8 @@ EXECUTABLE_DEBUG := nprt_debug.exe
 
 #---------------------------------------------------------------*
 
-RELEASE_OPTIONS := -DDO_NOT_GENERATE_CHECKINGS
-
-#---------------------------------------------------------------*
-
-#--- Linker libraries
-LINKER_OPTIONS := -lcomdlg32
+#--- Linker Options for this platform
+PLATFORM_LINKER_OPTIONS := -lcomdlg32
 
 #---------------------------------------------------------------*
 

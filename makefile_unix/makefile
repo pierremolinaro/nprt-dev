@@ -10,15 +10,10 @@ EXECUTABLE_DEBUG := nprt_debug
 
 #--- Install directory (for "install" goal)
 INSTALL_DIR := /usr/bin
-
 #---------------------------------------------------------------*
 
-#--- Linker libraries
-LINKER_OPTIONS :=
-
-#---------------------------------------------------------------*
-
-RELEASE_OPTIONS := -DDO_NOT_GENERATE_CHECKINGS
+#--- Linker Options for this platform
+PLATFORM_LINKER_OPTIONS :=
 
 #---------------------------------------------------------------*
 
