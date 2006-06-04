@@ -555,8 +555,8 @@ BuildExtendedList (TC_UniqueArray <cReadyAtThisInstant> & oReadyAtThisInstant,
 	const sint32 Num_of_Activties = 
 	      DeployElements (ArrangedElement, exElement, outMTElement, HyperPeriod);
  	
- 	printf ("%ld activities\n", Num_of_Activties) ;
-  fflush (stdout);
+ 	co << Num_of_Activties << " activities\n" ;
+  co.flush ();
  	if (CreateIntermediateFiles){
 	 	CreateActivitiesFile (exElement, activitiesHTMLFileName);
   } 

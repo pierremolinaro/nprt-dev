@@ -10,6 +10,15 @@ EXECUTABLE := markg.exe
 EXECUTABLE_DEBUG := markg_debug.exe
 
 #---------------------------------------------------------------*
+#                                                               *
+#     Object files directory                                    *
+#                                                               *
+#---------------------------------------------------------------*
+
+OBJECTS_DIR := objects
+DEBUG_OBJECTS_DIR := debug_objects
+
+#---------------------------------------------------------------*
 
 #--- Linker Options for this platform
 PLATFORM_LINKER_OPTIONS := -lcomdlg32

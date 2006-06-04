@@ -444,8 +444,9 @@ routine_performComputations (C_Lexique & inLexique,
       					"extended") != NULL){ 
       	MessageType = 'X' ;
       }else{ 
-      	printf ("ERROR : message #%ld is neither standard (S)\
-      		nor extended (X) message!\n", index) ;
+      	co << "ERROR : message #"
+      	   << index
+      	   << " is neither standard (S) nor extended (X) message!\n" ;
       }
       
       element.mMaxDuration = ScalingFactor* maxCANMessageTime(MessageType,

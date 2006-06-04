@@ -185,14 +185,10 @@
 		CF825CDC085383A20077AEAF /* AC_OutputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825CD6085383A20077AEAF /* AC_OutputStream.h */; };
 		CF825CDD085383A20077AEAF /* C_ConsoleOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825CD7085383A20077AEAF /* C_ConsoleOut.cpp */; };
 		CF825CDE085383A20077AEAF /* C_ConsoleOut.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825CD8085383A20077AEAF /* C_ConsoleOut.h */; };
-		CF825CDF085383A20077AEAF /* C_IndirectOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825CD9085383A20077AEAF /* C_IndirectOut.cpp */; };
-		CF825CE0085383A20077AEAF /* C_IndirectOut.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825CDA085383A20077AEAF /* C_IndirectOut.h */; };
 		CF825CE1085383A20077AEAF /* AC_OutputStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825CD5085383A20077AEAF /* AC_OutputStream.cpp */; };
 		CF825CE2085383A20077AEAF /* AC_OutputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825CD6085383A20077AEAF /* AC_OutputStream.h */; };
 		CF825CE3085383A20077AEAF /* C_ConsoleOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825CD7085383A20077AEAF /* C_ConsoleOut.cpp */; };
 		CF825CE4085383A20077AEAF /* C_ConsoleOut.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825CD8085383A20077AEAF /* C_ConsoleOut.h */; };
-		CF825CE5085383A20077AEAF /* C_IndirectOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825CD9085383A20077AEAF /* C_IndirectOut.cpp */; };
-		CF825CE6085383A20077AEAF /* C_IndirectOut.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825CDA085383A20077AEAF /* C_IndirectOut.h */; };
 		CF825CEB085383B10077AEAF /* C_DateTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825CE7085383B10077AEAF /* C_DateTime.cpp */; };
 		CF825CEC085383B10077AEAF /* C_DateTime.h in Headers */ = {isa = PBXBuildFile; fileRef = CF825CE8085383B10077AEAF /* C_DateTime.h */; };
 		CF825CED085383B10077AEAF /* C_Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF825CE9085383B10077AEAF /* C_Timer.cpp */; };
@@ -241,6 +237,10 @@
 		CF9D5F5C05F3833400E53A6F /* GGS_location.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF5388F057A558F00854C83 /* GGS_location.cpp */; };
 		CF9D5F6405F3833F00E53A6F /* GGS_lstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53891057A558F00854C83 /* GGS_lstring.cpp */; };
 		CF9D5F6C05F3835200E53A6F /* GGS_luint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53893057A558F00854C83 /* GGS_luint.cpp */; };
+		CFA5D1210A32EA30009B4370 /* C_ErrorOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFA5D11F0A32EA30009B4370 /* C_ErrorOut.cpp */; };
+		CFA5D1220A32EA30009B4370 /* C_ErrorOut.h in Headers */ = {isa = PBXBuildFile; fileRef = CFA5D1200A32EA30009B4370 /* C_ErrorOut.h */; };
+		CFA5D1230A32EA30009B4370 /* C_ErrorOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFA5D11F0A32EA30009B4370 /* C_ErrorOut.cpp */; };
+		CFA5D1240A32EA30009B4370 /* C_ErrorOut.h in Headers */ = {isa = PBXBuildFile; fileRef = CFA5D1200A32EA30009B4370 /* C_ErrorOut.h */; };
 		CFA7ADBD058DB57E009AC1FE /* AC_galgas_io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53872057A558F00854C83 /* AC_galgas_io.cpp */; };
 		CFA7ADD7058DB5DF009AC1FE /* C_galgas_null_io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF86361A0586289600B23462 /* C_galgas_null_io.cpp */; };
 		CFA8C6A40622A9D9005F7F63 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = CFA8C6A30622A9D9005F7F63 /* main.mm */; };
@@ -412,8 +412,6 @@
 		CF825CD6085383A20077AEAF /* AC_OutputStream.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AC_OutputStream.h; sourceTree = "<group>"; };
 		CF825CD7085383A20077AEAF /* C_ConsoleOut.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_ConsoleOut.cpp; sourceTree = "<group>"; };
 		CF825CD8085383A20077AEAF /* C_ConsoleOut.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_ConsoleOut.h; sourceTree = "<group>"; };
-		CF825CD9085383A20077AEAF /* C_IndirectOut.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_IndirectOut.cpp; sourceTree = "<group>"; };
-		CF825CDA085383A20077AEAF /* C_IndirectOut.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_IndirectOut.h; sourceTree = "<group>"; };
 		CF825CE7085383B10077AEAF /* C_DateTime.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_DateTime.cpp; sourceTree = "<group>"; };
 		CF825CE8085383B10077AEAF /* C_DateTime.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_DateTime.h; sourceTree = "<group>"; };
 		CF825CE9085383B10077AEAF /* C_Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_Timer.cpp; sourceTree = "<group>"; };
@@ -438,6 +436,8 @@
 		CF86365105862B0600B23462 /* C_galgas_terminal_io.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = C_galgas_terminal_io.h; sourceTree = "<group>"; };
 		CF9041F0057F687D007362F4 /* C_galgas_cocoa_io.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = C_galgas_cocoa_io.h; sourceTree = "<group>"; };
 		CF904220057F6B8D007362F4 /* C_galgas_cocoa_io.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = C_galgas_cocoa_io.cpp; sourceTree = "<group>"; };
+		CFA5D11F0A32EA30009B4370 /* C_ErrorOut.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_ErrorOut.cpp; sourceTree = "<group>"; };
+		CFA5D1200A32EA30009B4370 /* C_ErrorOut.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_ErrorOut.h; sourceTree = "<group>"; };
 		CFA8C6A30622A9D9005F7F63 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		CFAC5156062158B500AF7FE3 /* AC_galgas_map.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = AC_galgas_map.cpp; sourceTree = "<group>"; };
 		CFC30F92058A225E003D0386 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -749,12 +749,12 @@
 		CFF53851057A54FB00854C83 /* streams */ = {
 			isa = PBXGroup;
 			children = (
+				CFA5D11F0A32EA30009B4370 /* C_ErrorOut.cpp */,
+				CFA5D1200A32EA30009B4370 /* C_ErrorOut.h */,
 				CF825CD5085383A20077AEAF /* AC_OutputStream.cpp */,
 				CF825CD6085383A20077AEAF /* AC_OutputStream.h */,
 				CF825CD7085383A20077AEAF /* C_ConsoleOut.cpp */,
 				CF825CD8085383A20077AEAF /* C_ConsoleOut.h */,
-				CF825CD9085383A20077AEAF /* C_IndirectOut.cpp */,
-				CF825CDA085383A20077AEAF /* C_IndirectOut.h */,
 			);
 			path = streams;
 			sourceTree = "<group>";
@@ -876,7 +876,6 @@
 				CF825CD4085383940077AEAF /* TC_Block_AVL_TreeForCollision.h in Headers */,
 				CF825CE2085383A20077AEAF /* AC_OutputStream.h in Headers */,
 				CF825CE4085383A20077AEAF /* C_ConsoleOut.h in Headers */,
-				CF825CE6085383A20077AEAF /* C_IndirectOut.h in Headers */,
 				CF825CF0085383B10077AEAF /* C_DateTime.h in Headers */,
 				CF825CF2085383B10077AEAF /* C_Timer.h in Headers */,
 				CF825D10085383C80077AEAF /* C_Exception.h in Headers */,
@@ -902,6 +901,7 @@
 				CFF8618509C0DA4800F90D05 /* C_GGS_Object.h in Headers */,
 				CF6557B30A25EB3400979050 /* AC_galgas_map.h in Headers */,
 				CF6557B50A25EB3400979050 /* C_galgas_CLI_Options.h in Headers */,
+				CFA5D1220A32EA30009B4370 /* C_ErrorOut.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -947,7 +947,6 @@
 				CF825CD3085383940077AEAF /* TC_Block_AVL_TreeForCollision.h in Headers */,
 				CF825CDC085383A20077AEAF /* AC_OutputStream.h in Headers */,
 				CF825CDE085383A20077AEAF /* C_ConsoleOut.h in Headers */,
-				CF825CE0085383A20077AEAF /* C_IndirectOut.h in Headers */,
 				CF825CEC085383B10077AEAF /* C_DateTime.h in Headers */,
 				CF825CEE085383B10077AEAF /* C_Timer.h in Headers */,
 				CF825D02085383C80077AEAF /* C_Exception.h in Headers */,
@@ -973,6 +972,7 @@
 				CFF8618709C0DA4800F90D05 /* C_GGS_Object.h in Headers */,
 				CF6557B60A25EB3400979050 /* AC_galgas_map.h in Headers */,
 				CF6557B80A25EB3400979050 /* C_galgas_CLI_Options.h in Headers */,
+				CFA5D1240A32EA30009B4370 /* C_ErrorOut.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1162,7 +1162,6 @@
 				CF825CC8085383620077AEAF /* C_Lexique.cpp in Sources */,
 				CF825CE1085383A20077AEAF /* AC_OutputStream.cpp in Sources */,
 				CF825CE3085383A20077AEAF /* C_ConsoleOut.cpp in Sources */,
-				CF825CE5085383A20077AEAF /* C_IndirectOut.cpp in Sources */,
 				CF825CEF085383B10077AEAF /* C_DateTime.cpp in Sources */,
 				CF825CF1085383B10077AEAF /* C_Timer.cpp in Sources */,
 				CF825D0F085383C80077AEAF /* C_Exception.cpp in Sources */,
@@ -1177,6 +1176,7 @@
 				CFDC50F60961B32F006A0AFD /* GGS_stringset.cpp in Sources */,
 				CFF8618409C0DA4800F90D05 /* C_GGS_Object.cpp in Sources */,
 				CF6557B40A25EB3400979050 /* C_galgas_CLI_Options.cpp in Sources */,
+				CFA5D1210A32EA30009B4370 /* C_ErrorOut.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1222,7 +1222,6 @@
 				CF825CC2085383620077AEAF /* C_Lexique.cpp in Sources */,
 				CF825CDB085383A20077AEAF /* AC_OutputStream.cpp in Sources */,
 				CF825CDD085383A20077AEAF /* C_ConsoleOut.cpp in Sources */,
-				CF825CDF085383A20077AEAF /* C_IndirectOut.cpp in Sources */,
 				CF825CEB085383B10077AEAF /* C_DateTime.cpp in Sources */,
 				CF825CED085383B10077AEAF /* C_Timer.cpp in Sources */,
 				CF825D01085383C80077AEAF /* C_Exception.cpp in Sources */,
@@ -1237,6 +1236,7 @@
 				CFDC50F80961B32F006A0AFD /* GGS_stringset.cpp in Sources */,
 				CFF8618609C0DA4800F90D05 /* C_GGS_Object.cpp in Sources */,
 				CF6557B70A25EB3400979050 /* C_galgas_CLI_Options.cpp in Sources */,
+				CFA5D1230A32EA30009B4370 /* C_ErrorOut.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

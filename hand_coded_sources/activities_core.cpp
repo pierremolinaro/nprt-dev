@@ -1588,10 +1588,12 @@ scheduleActivities (const sint32 NoInterButUseB,
 	  }
     const sint32 currentInstant = scheduleMap.getCurrentInstant () ;
     if ( (currentInstant != 0) && ((currentInstant % devisor) == 0)) {
-      printf ("currentInstant %ld, %ld resource nodes, ", currentInstant, nodeCount) ;
-      Timer.printTimer (stdout) ;
-      printf ("\n") ;
-      fflush (stdout) ;
+      co << "currentInstant " 
+         << currentInstant
+         << ", " << nodeCount << " resource nodes, "
+         << Timer
+         << "\n" ;
+      co.flush () ;
     }
     scheduleMap.advanceToNextInstant () ;
   }
@@ -1605,9 +1607,9 @@ scheduleActivities (const sint32 NoInterButUseB,
     scheduleMap.computeBestAndWorstResponseTime (outResponseTimeArray, activitiesCount) ;
   #endif
     
-  printf ("%ld resource nodes used, %ld allocated.\n", gUsedResourceNodesCount, gAllocatedResourceNodesCount) ;
+  co << gUsedResourceNodesCount << " resource nodes used, " << gAllocatedResourceNodesCount << " allocated.\n" ;
  // #ifndef FORGET_ACTIVITY_NODES
-    printf ("%ld activity nodes allocated.\n", gAllocatedActivityNodesCount) ;
+    co << gAllocatedActivityNodesCount << " activity nodes allocated.\n" ;
  // #endif
 }
 

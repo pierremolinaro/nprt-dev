@@ -310,32 +310,6 @@ find_or_add (const sint32 inIndex,
 //                                                                           *
 //---------------------------------------------------------------------------*
 
- void C_us::
- printVector (FILE * inFile,
-              const char * inPrefix,
-              const sint32 inFirst,
-              const sint32 inStep) const {
-   if (inFile != NULL) {
-     bool firstPrint = true ;
-     C_us_nodeInfo * p = mRootPointer ;
-      while (p != NULL) {
-       if (((p->mIndex - inFirst) % inStep) == 0) {
-         if (firstPrint) {
-           firstPrint = false ;
-         }else{
-           ::fprintf (inFile, " ") ;
-         }
-         ::fprintf (inFile, "%s%ld",
-                    inPrefix,
-                    (sint32) ((p->mIndex - inFirst) / inStep)) ;
-       }
-       p = p->mPtrToNext ;
-     }
-   }
- }
-
-//---------------------------------------------------------------------------*
-
  void C_us::printVector (AC_OutputStream & inStream,
                            const char * inPrefix,
                            const sint32 inFirst,
@@ -352,30 +326,6 @@ find_or_add (const sint32 inIndex,
        inStream << inPrefix << ((p->mIndex - inFirst) / inStep) ;
      }
      p = p->mPtrToNext ;
-   }
- }
-
-//---------------------------------------------------------------------------*
-
- void C_us::printVector (FILE * inFile,
-                           const TC_UniqueArray <C_String> & inNames,
-                           const sint32 inFirst,
-                           const sint32 inStep) const {
-   if (inFile != NULL) {
-     bool firstPrint = true ;
-     C_us_nodeInfo * p = mRootPointer ;
-      while (p != NULL) {
-       if (((p->mIndex - inFirst) % inStep) == 0) {
-         if (firstPrint) {
-           firstPrint = false ;
-         }else{
-           ::fprintf (inFile, " ") ;
-         }
-         ::fprintf (inFile, "%s",
-                    inNames ((p->mIndex - inFirst) / inStep COMMA_HERE).cString ()) ;
-       }
-       p = p->mPtrToNext ;
-     }
    }
  }
 
