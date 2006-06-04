@@ -208,8 +208,11 @@ addEntry (const sint32 inActivityIndex,
 //                                      hashCode, (sint32) mRootPointer) ;
 //    }
   }else{
-    printf ("**** ERROR !!! Activity index %ld already exists in schedule activity list at schedule instant %ld ****\n",
-            inActivityIndex, inActivityScheduleInstant) ;
+    co << "**** ERROR !!! Activity index "
+       << inActivityIndex
+       << " already exists in schedule activity list at schedule instant "
+       << inActivityScheduleInstant
+       << " ****\n" ;
   }
 }
 
@@ -580,19 +583,18 @@ AnyNotReadyToScheduleAt (const sint32 inCurrentInstant) const {
 //---------------------------------------------------------------------------*
 
  void C_activitiesToSchedule::
- printList (FILE * inFile,
+ printList (AC_OutputStream & inStream,
             const TC_UniqueArray <C_String> & inNames) const {
-   if (inFile != NULL) {
-     cVDLnodeInfo * p = mRootPointer ;
-     while (p != NULL) {
-       const sint32 index = p->mActivityIndex ;
-       if (index < inNames.count ()) {
-        ::fprintf (inFile, "%s ", inNames (index COMMA_HERE).cString ()) ;
-       }
-       ::fprintf (inFile, "#%ld at %ld, priority %ld\n",
-                  index, p->mScheduleInstant, p->mActivityPriority) ;
-       p = p->mPtrToNext ;
+   cVDLnodeInfo * p = mRootPointer ;
+   while (p != NULL) {
+     const sint32 index = p->mActivityIndex ;
+     if (index < inNames.count ()) {
+      inStream << inNames (index COMMA_HERE) << " " ;
      }
+     inStream << "#" << index << " at "
+              << p->mScheduleInstant << ", priority "
+              << p->mActivityPriority << "\n" ;
+     p = p->mPtrToNext ;
    }
  }
 

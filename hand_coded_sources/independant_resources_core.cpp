@@ -300,11 +300,14 @@ internalDumpStructure (cIndependantResourcesActivitySchedule * inPtr) {
     while (q != NULL) {
       if (! q->mMarked) {
         q->mMarked = true ;
-        printf ("at 0x%08lX : activity %ld, duration : %ld, eoe : %ld, previous : 0x%08lX, other : 0x%08lX\n",
-                (sint32) q, q->mActivityIndex, q->mActivityDuration, q->mActivityEndOfExecution,
-                (sint32) q->mPtrToPreviousActivity,
-                (sint32) q->mPtrToOtherSchedule) ;
-        fflush (stdout);
+        co << "at 0x" << kHEX_ONCE << q
+           << ": activity " << q->mActivityIndex
+           << ", duration: " << q->mActivityDuration
+           << ", eoe:" << q->mActivityEndOfExecution
+           << ", previous:" << ((ptrAsUint) q->mPtrToPreviousActivity)
+           << ", other: " << ((ptrAsUint) q->mPtrToOtherSchedule)
+           << "\n" ;
+        co.flush ();
         internalDumpStructure (q->mPtrToOtherSchedule) ;
       }
       q = q->mPtrToPreviousActivity ;
@@ -320,11 +323,12 @@ dumpSchedule (cIndependantResourceSchedule  * inPtr) {
   unMark () ;
   cIndependantResourceSchedule  * p = inPtr ;
   while (p != NULL) {
-    printf ("at 0x%08lX : resource %ld, activities : 0x%08lX (last 0x%08lX)\n",
-            (sint32) p, p->mResourceIndex,
-            (sint32) p->mPtrToFirstActivity,
-            (sint32) p->mPtrToLastActivity) ;
-    fflush (stdout);
+    co << "at 0x" << kHEX_ONCE << p
+       << ": resource:" << p->mResourceIndex
+       << ", activities: 0x" << p->mPtrToFirstActivity
+       << " (last 0x" << p->mPtrToLastActivity
+       << "\n" ;
+    co.flush ();
     internalDumpStructure (p->mPtrToFirstActivity) ;
     p = p->mPtrToOtherResource ;
   }
@@ -334,8 +338,8 @@ dumpSchedule (cIndependantResourceSchedule  * inPtr) {
 
 void cIndependantResourcesScheduleMap::
 dumpStructure (void) {
-  printf ("********** DUMP **********\n") ;
-  printf ("Latest instant : %ld\n", mLatestInstant) ;
+  co << "********** DUMP **********\n"
+        "Latest instant: " << mLatestInstant << "\n" ;
   dumpSchedule (mResourceScheduleArray (mLatestInstant COMMA_HERE)) ;
 }
 
@@ -352,7 +356,7 @@ independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inAct
   cIndependantResourcesScheduleMap scheduleMap ;
 //--- Enter independant activities
   const sint32 activitiesCount = inActivities.count () ;
-  printf ("%ld activities\n", activitiesCount) ;
+  co << activitiesCount << " activities\n" ;
   fflush (stdout);
   for (sint32 i=0 ; i<activitiesCount ; i++) {
     if (inActivities (i COMMA_HERE).mPredecessorId < 0) {
@@ -444,8 +448,9 @@ independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inAct
   outResponseTimeArray.addObjects (activitiesCount, cResponseTime ()) ;
   scheduleMap.computeBestAndWorstResponseTime (outResponseTimeArray) ;
   
-  printf ("%ld resource nodes used, %ld allocated.\n", gUsedResourceNodesCount, gAllocatedResourceNodesCount) ;
-  printf ("%ld activity nodes allocated.\n", gAllocatedActivityNodesCount) ;
+  co << gUsedResourceNodesCount << " resource nodes used, "
+     << gAllocatedResourceNodesCount << " allocated.\n"
+     << gAllocatedActivityNodesCount << " activity nodes allocated.\n" ;
 }
 
 /*------------------------------------------------------------------------*/

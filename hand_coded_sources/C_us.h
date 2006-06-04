@@ -98,16 +98,6 @@ class C_us {
   public : static void explore_vdl (C_us & ioVDL, sint32 & outIndex) ;
 
 //--- print a vector
-  public : void printVector (FILE * inFile,
-                             const char * inPrefix,
-                             const sint32 inFirst,
-                             const sint32 inStep) const ;
-
-  public : void printVector (FILE * inFile,
-                             const TC_UniqueArray <C_String> & inNames,
-                             const sint32 inFirst,
-                             const sint32 inStep) const ;
-
   public : void printVector (AC_OutputStream & inStream,
                              const TC_UniqueArray <C_String> & inNames,
                              const sint32 inFirst,
