@@ -59,7 +59,7 @@ ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
 		    raw_file << exElement (i COMMA_HERE).mOffset ;
 		    raw_file.outputRawData ("</td><td>") ;
 		    
-		    if (inResponseTimeArray ( i COMMA_HERE).mBestResponseTime > SINT32_MAX) {
+		    if (inResponseTimeArray (i COMMA_HERE).mBestResponseTime == SINT32_MAX) {
 	      		raw_file.outputRawData ("Error</td><td>") ;
 	      }else{
 	      		raw_file << inResponseTimeArray ( i COMMA_HERE).mBestResponseTime ;
@@ -144,7 +144,7 @@ ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
 		    in_htmlFile << Resource ( index COMMA_HERE).mResourceName ;
 	  		in_htmlFile.outputRawData ("</td><td>") ;
 		    
-		    if (MTElement ( i COMMA_HERE).mBestResponseTime > SINT32_MAX) {
+		    if (MTElement ( i COMMA_HERE).mBestResponseTime == SINT32_MAX) {
       		in_htmlFile.outputRawData ("Error</td><td>") ;
       	}else{
       		in_htmlFile << MTElement ( i COMMA_HERE).mBestResponseTime ;

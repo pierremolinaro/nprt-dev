@@ -165,7 +165,7 @@ class C_us_hashmap {
       delete mPtrToSup ;
       delete mPtrToInf ;
     }
-    public : sint32 compare (const MyBlockavltree_element_for_collision & inElement) const {
+    public : ptrAsSint compare (const MyBlockavltree_element_for_collision & inElement) const {
       return mInfo.compare (inElement.mInfo) ;
     }
     public : void * operator new (const size_t inByteSize) ;
