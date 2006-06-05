@@ -338,7 +338,7 @@
 		CF3FF0CB05877B62000D2F8C /* GGS_uint.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GGS_uint.h; sourceTree = "<group>"; };
 		CF4105F60622B1AC006338F8 /* activities_core.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = activities_core.h; sourceTree = "<group>"; };
 		CF4105F70622B1AC006338F8 /* C_activitiesToSchedule.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_activitiesToSchedule.cpp; sourceTree = "<group>"; };
-		CF4105F80622B1AC006338F8 /* C_activitiesToSchedule.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_activitiesToSchedule.h; sourceTree = "<group>"; };
+		CF4105F80622B1AC006338F8 /* C_activitiesToSchedule.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = C_activitiesToSchedule.h; sourceTree = "<group>"; };
 		CF4105FC0622B1AC006338F8 /* CANMessageBounds.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = CANMessageBounds.h; sourceTree = "<group>"; };
 		CF4105FD0622B1AC006338F8 /* CANMmessageBounds.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = CANMmessageBounds.cpp; sourceTree = "<group>"; };
 		CF4518F605FCAE44008D4817 /* nprt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nprt; sourceTree = BUILT_PRODUCTS_DIR; };

@@ -623,11 +623,12 @@ void C_activitiesToSchedule::operator = (const C_activitiesToSchedule & inOperan
 
 sint32 C_activitiesToSchedule::smNodeCompare = 0 ;
 
-sint32 C_activitiesToSchedule::cVDLnodeInfo::compare (const cVDLnodeInfo & inInfo) const {
+ptrAsSint C_activitiesToSchedule::cVDLnodeInfo::
+compare (const cVDLnodeInfo & inInfo) const {
   smNodeCompare ++ ;
-  sint32 result = mActivityIndex - inInfo.mActivityIndex ;
+  ptrAsSint result = mActivityIndex - inInfo.mActivityIndex ;
   if (result == 0) {
-    result = ((sint32) mPtrToNext) - ((sint32) inInfo.mPtrToNext) ;
+    result = ((ptrAsSint) mPtrToNext) - ((ptrAsSint) inInfo.mPtrToNext) ;
     if (result == 0) {
       result = mScheduleInstant - inInfo.mScheduleInstant ;
       if (result == 0) {
