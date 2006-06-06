@@ -39,7 +39,7 @@ ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
                                   COMMA_HERE) ;
     fflush (stdout);
      	 
-		raw_file.writeCTitleComment ("raw Activities results map", "title") ;
+		raw_file.writeCppTitleComment ("raw Activities results map", "title") ;
 		raw_file.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
 		raw_file.outputRawData ("#</td><td>Activity</td><td>Resource</td><td>Occurrence</td><td>");
   	raw_file.outputRawData ("Offset</td><td>BRT</td><td>WRT</td></tr>") ;
@@ -127,7 +127,7 @@ ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
     DC=DC + sint32 (MTElement(index COMMA_HERE).mWidth) ;
   }
 
-	in_htmlFile.writeCTitleComment ("Final results map", "title") ;
+	in_htmlFile.writeCppTitleComment ("Final results map", "title") ;
 	in_htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
 	in_htmlFile.outputRawData ("#</td><td>Element</td><td>Resource</td><td>BRT</td><td>");
   in_htmlFile.outputRawData ("WRT</td><td>Period</td><td>Deadline</td><td>&nbsp;</td></tr>") ;

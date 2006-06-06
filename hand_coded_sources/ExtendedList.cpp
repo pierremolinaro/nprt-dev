@@ -496,7 +496,7 @@ CreateActivitiesFile (const TC_UniqueArray <cActivity> & exElement,
                               COMMA_SAFARI_CREATOR
                               COMMA_HERE) ;
 		
-	act_htmlFile.writeCTitleComment ("raw Activities map", "title") ;
+	act_htmlFile.writeCppTitleComment ("raw Activities map", "title") ;
 	act_htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
 	act_htmlFile.outputRawData ("#</td><td>Activity</td><td>Resource</td><td>Priority</td><td>");
   act_htmlFile.outputRawData ("Occurrence</td><td>Offset</td><td>minDur.</td><td>");
