@@ -40,7 +40,7 @@
 	<key>CFBundleSignature</key>
 	<string>NPRX</string>
 	<key>CFBundleVersion</key>
-	<string>20, libpm v58</string>
+	<string>NPRT_BETA_VERSION</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
