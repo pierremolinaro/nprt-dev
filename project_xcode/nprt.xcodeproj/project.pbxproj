@@ -342,7 +342,7 @@
 		CF4105FC0622B1AC006338F8 /* CANMessageBounds.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = CANMessageBounds.h; sourceTree = "<group>"; };
 		CF4105FD0622B1AC006338F8 /* CANMmessageBounds.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = CANMmessageBounds.cpp; sourceTree = "<group>"; };
 		CF4518F605FCAE44008D4817 /* nprt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nprt; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF4518F805FCAE44008D4817 /* cocoaNPRT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cocoaNPRT.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF4518F805FCAE44008D4817 /* cocoaNPRT.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = cocoaNPRT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF4518FA05FCAE44008D4817 /* nprtDebug */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nprtDebug; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF45190005FCAE61008D4817 /* cocoaOA.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = cocoaOA.mm; sourceTree = "<group>"; };
 		CF512DEE092B3292008F7E87 /* C_builtin_CLI_Options.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_builtin_CLI_Options.cpp; sourceTree = "<group>"; };
@@ -1334,36 +1334,6 @@
 			};
 			name = Deployment;
 		};
-		CF0DA74B08563C5300F38E67 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEPLOYMENT_LOCATION = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_ENABLE_TRIGRAPHS = NO;
-				GCC_OPTIMIZATION_LEVEL = 1;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../libpm/galgas/PP_GalgasPrefix.pch;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = (
-					../galgas_generated_sources,
-					../hand_coded_sources,
-					../../libpm,
-				);
-				INSTALL_PATH = "$(HOME)/bin";
-				LIBRARY_SEARCH_PATHS = /usr/lib/gcc/darwin/3.3;
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = nprt;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				ZERO_LINK = NO;
-			};
-			name = Default;
-		};
 		CF0DA74D08563C5400F38E67 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1399,29 +1369,6 @@
 				WARNING_CFLAGS = "-Wmost";
 			};
 			name = Deployment;
-		};
-		CF0DA74E08563C5400F38E67 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "";
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = (
-					../galgas_generated_sources,
-					../hand_coded_sources,
-					../../libpm,
-				);
-				INSTALL_PATH = /usr/local/bin;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = nprtDebug;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = "-Wmost";
-			};
-			name = Default;
 		};
 		CF0DA75008563C5400F38E67 /* Deployment */ = {
 			isa = XCBuildConfiguration;
@@ -1464,9 +1411,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "-Wall";
 				OTHER_LDFLAGS = "";
-				PREBINDING = YES;
 				PRODUCT_NAME = cocoaNPRT;
-				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -1475,71 +1420,18 @@
 				WRAPPER_EXTENSION = app;
 			};
 			name = Deployment;
-		};
-		CF0DA75108563C5400F38E67 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEPLOYMENT_LOCATION = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_ENABLE_TRIGRAPHS = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 1;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../libpm/cocoa_galgas/PP_CocoaGalgasPrefix.pch;
-				GCC_SHORT_ENUMS = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
-				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
-				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = NO;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
-				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = NO;
-				GCC_WARN_MISSING_PARENTHESES = NO;
-				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
-				GCC_WARN_PEDANTIC = NO;
-				GCC_WARN_SHADOW = NO;
-				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = YES;
-				GCC_WARN_UNUSED_FUNCTION = NO;
-				GCC_WARN_UNUSED_LABEL = NO;
-				GCC_WARN_UNUSED_PARAMETER = NO;
-				GCC_WARN_UNUSED_VALUE = NO;
-				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = (
-					../galgas_generated_sources,
-					../hand_coded_sources,
-					../../libpm,
-				);
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = "-Wall";
-				OTHER_LDFLAGS = "";
-				PREBINDING = YES;
-				PRODUCT_NAME = cocoaNPRT;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = app;
-			};
-			name = Default;
 		};
 		CF0DA75308563C5400F38E67 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Deployment;
-		};
-		CF0DA75408563C5400F38E67 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Default;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1548,37 +1440,33 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CF0DA74A08563C5300F38E67 /* Deployment */,
-				CF0DA74B08563C5300F38E67 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Deployment;
 		};
 		CF0DA74C08563C5400F38E67 /* Build configuration list for PBXNativeTarget "NPRT Tool Debug" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CF0DA74D08563C5400F38E67 /* Deployment */,
-				CF0DA74E08563C5400F38E67 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Deployment;
 		};
 		CF0DA74F08563C5400F38E67 /* Build configuration list for PBXNativeTarget "NPRT Cocoa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CF0DA75008563C5400F38E67 /* Deployment */,
-				CF0DA75108563C5400F38E67 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Deployment;
 		};
 		CF0DA75208563C5400F38E67 /* Build configuration list for PBXProject "nprt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CF0DA75308563C5400F38E67 /* Deployment */,
-				CF0DA75408563C5400F38E67 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Deployment;
 		};
 /* End XCConfigurationList section */
 	};
