@@ -342,7 +342,7 @@
 		CF4105FC0622B1AC006338F8 /* CANMessageBounds.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = CANMessageBounds.h; sourceTree = "<group>"; };
 		CF4105FD0622B1AC006338F8 /* CANMmessageBounds.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = CANMmessageBounds.cpp; sourceTree = "<group>"; };
 		CF4518F605FCAE44008D4817 /* nprt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nprt; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF4518F805FCAE44008D4817 /* cocoaNPRT.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = cocoaNPRT.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF4518F805FCAE44008D4817 /* cocoaNPRT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cocoaNPRT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF4518FA05FCAE44008D4817 /* nprtDebug */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nprtDebug; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF45190005FCAE61008D4817 /* cocoaOA.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = cocoaOA.mm; sourceTree = "<group>"; };
 		CF512DEE092B3292008F7E87 /* C_builtin_CLI_Options.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_builtin_CLI_Options.cpp; sourceTree = "<group>"; };
