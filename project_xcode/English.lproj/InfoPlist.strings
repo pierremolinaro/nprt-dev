@@ -1,6 +1,1 @@
-/* Localized versions of Info.plist keys */
-
-CFBundleName = "cocoaNPRT";
-CFBundleShortVersionString = "NPRT_BETA_VERSION";
-CFBundleGetInfoString = "CocoaNPRT version NPRT_BETA_VERSION, Copyright 2006 Imad Alzeer and Pierre Molinaro.";
-NSHumanReadableCopyright = "Copyright 2006 Imad Alzeer and Pierre Molinaro.";
+/* Localized versions of Info.plist keys */CFBundleName = "cocoaNPRT";CFBundleShortVersionString = "NPRT_BETA_VERSION";CFBundleGetInfoString = "CocoaNPRT version NPRT_BETA_VERSION, Copyright 2006 Imad Alzeer and Pierre Molinaro.";NSHumanReadableCopyright = "Copyright 2006 Imad Alzeer and Pierre Molinaro.";
