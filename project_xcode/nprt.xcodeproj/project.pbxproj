@@ -246,6 +246,7 @@
 		CFA8C6A40622A9D9005F7F63 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = CFA8C6A30622A9D9005F7F63 /* main.mm */; };
 		CFAC5157062158B500AF7FE3 /* AC_galgas_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFAC5156062158B500AF7FE3 /* AC_galgas_map.cpp */; };
 		CFAC5158062158B500AF7FE3 /* AC_galgas_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFAC5156062158B500AF7FE3 /* AC_galgas_map.cpp */; };
+		CFBC76B90AC695BF00443ACA /* OC_GGS_BuildResultTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = CFBC76B80AC695BF00443ACA /* OC_GGS_BuildResultTextView.mm */; };
 		CFC30F93058A225E003D0386 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFC30F92058A225E003D0386 /* Info.plist */; };
 		CFC5D7ED093CAD3300112F5B /* C_us_hashmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFC5D7EB093CAD3200112F5B /* C_us_hashmap.cpp */; };
 		CFC5D7EE093CAD3300112F5B /* C_us_hashmap.h in Headers */ = {isa = PBXBuildFile; fileRef = CFC5D7EC093CAD3200112F5B /* C_us_hashmap.h */; };
@@ -440,6 +441,8 @@
 		CFA5D1200A32EA30009B4370 /* C_ErrorOut.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_ErrorOut.h; sourceTree = "<group>"; };
 		CFA8C6A30622A9D9005F7F63 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		CFAC5156062158B500AF7FE3 /* AC_galgas_map.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = AC_galgas_map.cpp; sourceTree = "<group>"; };
+		CFBC76B70AC695BF00443ACA /* OC_GGS_BuildResultTextView.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = OC_GGS_BuildResultTextView.h; sourceTree = "<group>"; };
+		CFBC76B80AC695BF00443ACA /* OC_GGS_BuildResultTextView.mm */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.objcpp; path = OC_GGS_BuildResultTextView.mm; sourceTree = "<group>"; };
 		CFC30F92058A225E003D0386 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CFC5D7EB093CAD3200112F5B /* C_us_hashmap.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_us_hashmap.cpp; sourceTree = "<group>"; };
 		CFC5D7EC093CAD3200112F5B /* C_us_hashmap.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_us_hashmap.h; sourceTree = "<group>"; };
@@ -592,8 +595,7 @@
 		CFAD482E0591BCF700BF8381 /* cocoa_galgas */ = {
 			isa = PBXGroup;
 			children = (
-				CF337A1609EFAEBB00EC41F6 /* C_SourceTextForCoca.mm */,
-				CF337A1709EFAEBB00EC41F6 /* C_SourceTextForCocoa.h */,
+				CF825C73085383070077AEAF /* PP_CocoaGalgasPrefix.pch */,
 				CF825C84085383120077AEAF /* MainMenu.nib */,
 				CF825C86085383120077AEAF /* OC_GGS_Document.nib */,
 				CF825C64085383070077AEAF /* F_CocoaWrapperForGalgas.h */,
@@ -601,6 +603,8 @@
 				CF825C66085383070077AEAF /* I_SaveAs.tiff */,
 				CF825C67085383070077AEAF /* I_Stop.tiff */,
 				CF825C68085383070077AEAF /* I_Window.png */,
+				CF337A1609EFAEBB00EC41F6 /* C_SourceTextForCoca.mm */,
+				CF337A1709EFAEBB00EC41F6 /* C_SourceTextForCocoa.h */,
 				CF825C69085383070077AEAF /* OC_GGS_BuildWindowController.h */,
 				CF825C6A085383070077AEAF /* OC_GGS_BuildWindowController.mm */,
 				CF825C6B085383070077AEAF /* OC_GGS_Document.h */,
@@ -611,7 +615,8 @@
 				CF825C70085383070077AEAF /* OC_GGS_RulerView.mm */,
 				CF825C71085383070077AEAF /* OC_GGS_TextView.h */,
 				CF825C72085383070077AEAF /* OC_GGS_TextView.mm */,
-				CF825C73085383070077AEAF /* PP_CocoaGalgasPrefix.pch */,
+				CFBC76B70AC695BF00443ACA /* OC_GGS_BuildResultTextView.h */,
+				CFBC76B80AC695BF00443ACA /* OC_GGS_BuildResultTextView.mm */,
 			);
 			path = cocoa_galgas;
 			sourceTree = "<group>";
@@ -1117,6 +1122,7 @@
 				CFE20B5009C8BDA500E10499 /* GGS_string.cpp in Sources */,
 				CF337A1809EFAEBB00EC41F6 /* C_SourceTextForCoca.mm in Sources */,
 				CF6557B20A25EB3400979050 /* C_galgas_CLI_Options.cpp in Sources */,
+				CFBC76B90AC695BF00443ACA /* OC_GGS_BuildResultTextView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
