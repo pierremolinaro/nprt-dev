@@ -300,7 +300,7 @@ internalDumpStructure (cIndependantResourcesActivitySchedule * inPtr) {
     while (q != NULL) {
       if (! q->mMarked) {
         q->mMarked = true ;
-        co << "at 0x" << kHEX_ONCE << q
+        co << "at " << uintInHex ((ptrAsUint) q)
            << ": activity " << q->mActivityIndex
            << ", duration: " << q->mActivityDuration
            << ", eoe:" << q->mActivityEndOfExecution
@@ -323,7 +323,7 @@ dumpSchedule (cIndependantResourceSchedule  * inPtr) {
   unMark () ;
   cIndependantResourceSchedule  * p = inPtr ;
   while (p != NULL) {
-    co << "at 0x" << kHEX_ONCE << p
+    co << "at " << uintInHex ((ptrAsUint) p)
        << ": resource:" << p->mResourceIndex
        << ", activities: 0x" << p->mPtrToFirstActivity
        << " (last 0x" << p->mPtrToLastActivity
