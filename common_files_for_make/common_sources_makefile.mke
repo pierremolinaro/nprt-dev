@@ -33,7 +33,6 @@ include $(LIB_PM_PATH)/included_makefiles/default_build_options.mke
 #--- Files from libpm --------------------
 include $(LIB_PM_PATH)/galgas/galgas_sources_for_makefile.mke
 SOURCES += C_HTML_FileWrite.cpp
-SOURCES += F_GetPrime.cpp
 
 #--- Hand-coded files ---------------------
 SOURCES += activities_core.cpp

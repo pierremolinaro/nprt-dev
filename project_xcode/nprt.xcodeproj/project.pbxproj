@@ -52,6 +52,14 @@
 		CF45190105FCAE61008D4817 /* cocoaOA.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF45190005FCAE61008D4817 /* cocoaOA.mm */; };
 		CF45190205FCAEC7008D4817 /* nprt in Resources */ = {isa = PBXBuildFile; fileRef = CF4518F605FCAE44008D4817 /* nprt */; };
 		CF45190505FCAF69008D4817 /* oa_cli_options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF53386705FCA67C004C9D86 /* oa_cli_options.cpp */; };
+		CF4896050B666CF4005A9E78 /* GGS_uint64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4896010B666CF4005A9E78 /* GGS_uint64.cpp */; };
+		CF4896060B666CF4005A9E78 /* GGS_uint64.h in Headers */ = {isa = PBXBuildFile; fileRef = CF4896020B666CF4005A9E78 /* GGS_uint64.h */; };
+		CF4896070B666CF4005A9E78 /* predefined_types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4896030B666CF4005A9E78 /* predefined_types.cpp */; };
+		CF4896080B666CF4005A9E78 /* predefined_types.h in Headers */ = {isa = PBXBuildFile; fileRef = CF4896040B666CF4005A9E78 /* predefined_types.h */; };
+		CF4896090B666CF4005A9E78 /* GGS_uint64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4896010B666CF4005A9E78 /* GGS_uint64.cpp */; };
+		CF48960A0B666CF4005A9E78 /* GGS_uint64.h in Headers */ = {isa = PBXBuildFile; fileRef = CF4896020B666CF4005A9E78 /* GGS_uint64.h */; };
+		CF48960B0B666CF4005A9E78 /* predefined_types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4896030B666CF4005A9E78 /* predefined_types.cpp */; };
+		CF48960C0B666CF4005A9E78 /* predefined_types.h in Headers */ = {isa = PBXBuildFile; fileRef = CF4896040B666CF4005A9E78 /* predefined_types.h */; };
 		CF512DF0092B3292008F7E87 /* C_builtin_CLI_Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF512DEE092B3292008F7E87 /* C_builtin_CLI_Options.cpp */; };
 		CF512DF1092B3292008F7E87 /* C_builtin_CLI_Options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF512DEE092B3292008F7E87 /* C_builtin_CLI_Options.cpp */; };
 		CF512DF2092B3292008F7E87 /* C_builtin_CLI_Options.h in Headers */ = {isa = PBXBuildFile; fileRef = CF512DEF092B3292008F7E87 /* C_builtin_CLI_Options.h */; };
@@ -351,6 +359,10 @@
 		CF4518F805FCAE44008D4817 /* cocoaNPRT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cocoaNPRT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF4518FA05FCAE44008D4817 /* nprtDebug */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nprtDebug; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF45190005FCAE61008D4817 /* cocoaOA.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = cocoaOA.mm; sourceTree = "<group>"; };
+		CF4896010B666CF4005A9E78 /* GGS_uint64.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = GGS_uint64.cpp; sourceTree = "<group>"; };
+		CF4896020B666CF4005A9E78 /* GGS_uint64.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = GGS_uint64.h; sourceTree = "<group>"; };
+		CF4896030B666CF4005A9E78 /* predefined_types.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = predefined_types.cpp; sourceTree = "<group>"; };
+		CF4896040B666CF4005A9E78 /* predefined_types.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = predefined_types.h; sourceTree = "<group>"; };
 		CF512DEE092B3292008F7E87 /* C_builtin_CLI_Options.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_builtin_CLI_Options.cpp; sourceTree = "<group>"; };
 		CF512DEF092B3292008F7E87 /* C_builtin_CLI_Options.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_builtin_CLI_Options.h; sourceTree = "<group>"; };
 		CF53386705FCA67C004C9D86 /* oa_cli_options.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = oa_cli_options.cpp; sourceTree = "<group>"; };
@@ -776,6 +788,10 @@
 		CFF53871057A555E00854C83 /* galgas */ = {
 			isa = PBXGroup;
 			children = (
+				CF4896010B666CF4005A9E78 /* GGS_uint64.cpp */,
+				CF4896020B666CF4005A9E78 /* GGS_uint64.h */,
+				CF4896030B666CF4005A9E78 /* predefined_types.cpp */,
+				CF4896040B666CF4005A9E78 /* predefined_types.h */,
 				CF7B06E90AEE466300E94B20 /* AC_galgas_list.cpp */,
 				CF7B06EA0AEE466300E94B20 /* AC_galgas_list.h */,
 				CF6557AF0A25EB3400979050 /* AC_galgas_map.h */,
@@ -919,6 +935,8 @@
 				CF6557B50A25EB3400979050 /* C_galgas_CLI_Options.h in Headers */,
 				CFA5D1220A32EA30009B4370 /* C_ErrorOut.h in Headers */,
 				CF7B06EC0AEE466300E94B20 /* AC_galgas_list.h in Headers */,
+				CF4896060B666CF4005A9E78 /* GGS_uint64.h in Headers */,
+				CF4896080B666CF4005A9E78 /* predefined_types.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -991,6 +1009,8 @@
 				CF6557B80A25EB3400979050 /* C_galgas_CLI_Options.h in Headers */,
 				CFA5D1240A32EA30009B4370 /* C_ErrorOut.h in Headers */,
 				CF7B06EE0AEE466300E94B20 /* AC_galgas_list.h in Headers */,
+				CF48960A0B666CF4005A9E78 /* GGS_uint64.h in Headers */,
+				CF48960C0B666CF4005A9E78 /* predefined_types.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1198,6 +1218,8 @@
 				CF6557B40A25EB3400979050 /* C_galgas_CLI_Options.cpp in Sources */,
 				CFA5D1210A32EA30009B4370 /* C_ErrorOut.cpp in Sources */,
 				CF7B06EB0AEE466300E94B20 /* AC_galgas_list.cpp in Sources */,
+				CF4896050B666CF4005A9E78 /* GGS_uint64.cpp in Sources */,
+				CF4896070B666CF4005A9E78 /* predefined_types.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1259,6 +1281,8 @@
 				CF6557B70A25EB3400979050 /* C_galgas_CLI_Options.cpp in Sources */,
 				CFA5D1230A32EA30009B4370 /* C_ErrorOut.cpp in Sources */,
 				CF7B06ED0AEE466300E94B20 /* AC_galgas_list.cpp in Sources */,
+				CF4896090B666CF4005A9E78 /* GGS_uint64.cpp in Sources */,
+				CF48960B0B666CF4005A9E78 /* predefined_types.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
