@@ -259,8 +259,8 @@ routine_performComputations (C_Lexique & inLexique,
   TC_UniqueArray <cResource> Resource ;
   TC_UniqueArray <cElement> Element ;
 
-  const bool CreateIntermediateFiles = inLexique.boolOptionValueFromKeys ("oa_cli_options", "createIntermediateFiles", true) ;
-  const bool useCANmaxLengthOnly = inLexique.boolOptionValueFromKeys ("oa_cli_options", "useCANmaxLegth", true) ;
+  const bool CreateIntermediateFiles = inLexique.boolOptionValueFromKeys ("oa_cli_options", "createIntermediateFiles" COMMA_HERE) ;
+  const bool useCANmaxLengthOnly = inLexique.boolOptionValueFromKeys ("oa_cli_options", "useCANmaxLegth" COMMA_HERE) ;
   bool forceBalgorithm = true ;
   const C_String sourceFile = inLexique.sourceFileName () ;
   
