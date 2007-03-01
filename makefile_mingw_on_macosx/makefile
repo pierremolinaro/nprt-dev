@@ -25,7 +25,7 @@ PLATFORM_LINKER_OPTIONS := -lcomdlg32
 
 #---------------------------------------------------------------*
 
-include ../common_files_for_make/common_sources_makefile.mke
+include ../common_files_for_make/makefile.mke
 
 #---------------------------------------------------------------*
 #                                                               *
