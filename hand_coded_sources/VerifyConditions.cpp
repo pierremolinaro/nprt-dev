@@ -1,8 +1,10 @@
-#include<stdlib.h> 
+#include <stdlib.h> 
 #include "oa_main.h"
 #include "ExtendedList.h"
 #include "VerifyConditions.h"
 #include "C_us.h"
+
+#include "galgas/C_Lexique.h"
 
 bool
 NecessaryConditions_OK (C_Lexique & inLexique,
