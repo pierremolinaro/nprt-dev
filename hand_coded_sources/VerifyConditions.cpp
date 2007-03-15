@@ -7,7 +7,7 @@
 #include "galgas/C_Lexique.h"
 
 bool
-NecessaryConditions_OK (C_Lexique & inLexique,
+NecessaryConditions_OK (C_Compiler & inLexique,
                         const TC_UniqueArray <cElement> & Element,
             						const TC_UniqueArray <cResource> & Resource){
                         

@@ -250,7 +250,7 @@ static void buildCSSfile (const C_String & inDirectory) {
 //--------------------------------------------------------------------------*
 
 void
-routine_performComputations (C_Lexique & inLexique,
+routine_performComputations (C_Compiler & inLexique,
                              GGS_M_processor & inProcessorMap,
                              GGS_M_network & inNetworkMap,
                              GGS_M_messages & inMessagesMap,
