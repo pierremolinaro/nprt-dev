@@ -2,10 +2,10 @@
 #define VERIFYCONDITIONS_H
 
 #include "generic_arraies/TC_UniqueArray.h"
-class C_Lexique ;
+class C_Compiler ;
 
 bool 
-NecessaryConditions_OK (C_Lexique & inLexique,
+NecessaryConditions_OK (C_Compiler & inLexique,
                         const TC_UniqueArray <cElement> & Element,
                         const TC_UniqueArray <cResource> & Resource);
 
