@@ -32,6 +32,7 @@
 		CF3115F60622ABE200882F85 /* nprt_application.icns in Resources */ = {isa = PBXBuildFile; fileRef = CF3115F40622ABE200882F85 /* nprt_application.icns */; };
 		CF3115F70622ABE200882F85 /* nprt_document.icns in Resources */ = {isa = PBXBuildFile; fileRef = CF3115F50622ABE200882F85 /* nprt_document.icns */; };
 		CF337A1809EFAEBB00EC41F6 /* C_SourceTextForCoca.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF337A1609EFAEBB00EC41F6 /* C_SourceTextForCoca.mm */; };
+		CF35C2E20BB179C8008D4278 /* GGS_bool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53881057A558F00854C83 /* GGS_bool.cpp */; };
 		CF3B8A9C058CD21900D682D2 /* libstdc++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3B8A9B058CD21900D682D2 /* libstdc++.a */; };
 		CF4106080622B1AC006338F8 /* activities_core.h in Headers */ = {isa = PBXBuildFile; fileRef = CF4105F60622B1AC006338F8 /* activities_core.h */; };
 		CF4106090622B1AC006338F8 /* C_activitiesToSchedule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4105F70622B1AC006338F8 /* C_activitiesToSchedule.cpp */; };
@@ -1193,6 +1194,7 @@
 				CFEA39E20B6E98930059CEDF /* C_ErrorOut.cpp in Sources */,
 				CFD64EF00BA16BDA00DAE493 /* NSSplitViewExtensions.m in Sources */,
 				CFD64EF10BA16BDA00DAE493 /* OC_GGS_DelegateForSyntaxColoring.mm in Sources */,
+				CF35C2E20BB179C8008D4278 /* GGS_bool.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
