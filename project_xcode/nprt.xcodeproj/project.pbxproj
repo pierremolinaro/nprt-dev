@@ -279,6 +279,9 @@
 		CFDC50F70961B32F006A0AFD /* GGS_stringset.h in Headers */ = {isa = PBXBuildFile; fileRef = CFDC50F50961B32F006A0AFD /* GGS_stringset.h */; };
 		CFDC50F80961B32F006A0AFD /* GGS_stringset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFDC50F40961B32F006A0AFD /* GGS_stringset.cpp */; };
 		CFDC50F90961B32F006A0AFD /* GGS_stringset.h in Headers */ = {isa = PBXBuildFile; fileRef = CFDC50F50961B32F006A0AFD /* GGS_stringset.h */; };
+		CFE29A590BB808B400BB18EB /* AC_galgas_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF7B06E90AEE466300E94B20 /* AC_galgas_list.cpp */; };
+		CFE29A5A0BB808B800BB18EB /* predefined_types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4896030B666CF4005A9E78 /* predefined_types.cpp */; };
+		CFE29A5B0BB808BC00BB18EB /* GGS_uint64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4896010B666CF4005A9E78 /* GGS_uint64.cpp */; };
 		CFEA39760B6E939D0059CEDF /* C_galgas_io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFEA39740B6E939C0059CEDF /* C_galgas_io.cpp */; };
 		CFEA39770B6E939D0059CEDF /* C_galgas_io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFEA39740B6E939C0059CEDF /* C_galgas_io.cpp */; };
 		CFEA39780B6E939D0059CEDF /* C_galgas_io.h in Headers */ = {isa = PBXBuildFile; fileRef = CFEA39750B6E939C0059CEDF /* C_galgas_io.h */; };
@@ -1195,6 +1198,9 @@
 				CFD64EF00BA16BDA00DAE493 /* NSSplitViewExtensions.m in Sources */,
 				CFD64EF10BA16BDA00DAE493 /* OC_GGS_DelegateForSyntaxColoring.mm in Sources */,
 				CF35C2E20BB179C8008D4278 /* GGS_bool.cpp in Sources */,
+				CFE29A590BB808B400BB18EB /* AC_galgas_list.cpp in Sources */,
+				CFE29A5A0BB808B800BB18EB /* predefined_types.cpp in Sources */,
+				CFE29A5B0BB808BC00BB18EB /* GGS_uint64.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
