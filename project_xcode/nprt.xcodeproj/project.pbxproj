@@ -273,6 +273,7 @@
 		CFD21B950913D48C0011F11E /* include_C_independantTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B850913D48C0011F11E /* include_C_independantTask.h */; };
 		CFD21B960913D48C0011F11E /* include_C_taskDependsFromMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B860913D48C0011F11E /* include_C_taskDependsFromMessage.h */; };
 		CFD21B970913D48C0011F11E /* include_C_taskDependsFromTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD21B870913D48C0011F11E /* include_C_taskDependsFromTask.h */; };
+		CFD63F9C0CD881E8002B6753 /* GGS_uint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53897057A558F00854C83 /* GGS_uint.cpp */; };
 		CFD64EF00BA16BDA00DAE493 /* NSSplitViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD64EED0BA16BDA00DAE493 /* NSSplitViewExtensions.m */; };
 		CFD64EF10BA16BDA00DAE493 /* OC_GGS_DelegateForSyntaxColoring.mm in Sources */ = {isa = PBXBuildFile; fileRef = CFD64EEF0BA16BDA00DAE493 /* OC_GGS_DelegateForSyntaxColoring.mm */; };
 		CFDC50F60961B32F006A0AFD /* GGS_stringset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFDC50F40961B32F006A0AFD /* GGS_stringset.cpp */; };
@@ -1167,9 +1168,11 @@
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = CF0DA75208563C5400F38E67 /* Build configuration list for PBXProject "nprt" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* essai_cocoa */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* NPRT Cocoa */,
 				8DD76F620486A84900D96B5E /* NPRT Tool */,
@@ -1251,6 +1254,7 @@
 				CFE29A590BB808B400BB18EB /* AC_galgas_list.cpp in Sources */,
 				CFE29A5A0BB808B800BB18EB /* predefined_types.cpp in Sources */,
 				CFE29A5B0BB808BC00BB18EB /* GGS_uint64.cpp in Sources */,
+				CFD63F9C0CD881E8002B6753 /* GGS_uint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
