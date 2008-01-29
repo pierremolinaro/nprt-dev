@@ -87,7 +87,7 @@ CalculateExtendedListLength (const TC_UniqueArray <cElement> & Element,
 /*-----------------------------------------------------------------------------*/
 static void
 ExtractResourceMinDuration (TC_UniqueArray <cElement> & Element,
-																const TC_UniqueArray <cResource> & Resource){
+                            const TC_UniqueArray <cResource> & Resource){
 
 sint32 NumOfResources = Resource.count();
 sint32 NumOfElements = Element.count();
@@ -492,7 +492,8 @@ CreateActivitiesFile (const TC_UniqueArray <cActivity> & exElement,
   printf ("Extended activities list is stored in %s file.\n", activitiesHTMLFileName.cString ()) ;
   C_HTML_FileWrite act_htmlFile (activitiesHTMLFileName,
                               "Extended List Activities",
-                              "style.css"
+                              "style.css",
+                              ""
                               COMMA_SAFARI_CREATOR
                               COMMA_HERE) ;
 		
@@ -548,7 +549,7 @@ BuildExtendedList (TC_UniqueArray <cReadyAtThisInstant> & oReadyAtThisInstant,
   TC_UniqueArray <cElement> ArrangedElement;
   sint32 NoInterDependenceButUseB = 0;
   ArrangingAccodingPrecedenceRelations (Element, ArrangedElement,
-  																			Nu_ofTasks,Nu_ofMessages);
+                                        Nu_ofTasks,Nu_ofMessages);
   
   FindSuccessors (ArrangedElement);
  // const sint32 ActivitiesNumber = CalculateExtendedListLength(Element, HyperPeriod) ; // Commented out PM 17/1/2005
