@@ -272,7 +272,8 @@ routine_performComputations (C_Compiler & inLexique,
   buildCSSfile (sourceFile.stringByDeletingLastPathComponent ()) ;
   C_HTML_FileWrite htmlFile ( htmlFileName,
                               sourceFile.lastPathComponent () + " results",
-                              "style.css"
+                              "style.css",
+                              ""
                               COMMA_SAFARI_CREATOR
                               COMMA_HERE) ;
   if(useCANmaxLengthOnly){

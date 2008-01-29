@@ -34,8 +34,9 @@ ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
     printf ("Raw output results are stored in %s file.\n", raw_outputHTMLFileName.cString ()) ;
 			C_HTML_FileWrite raw_file (raw_outputHTMLFileName,
                               	  "Activities Outputs",
-                              	  "style.css"
-                              		COMMA_SAFARI_CREATOR
+                              	  "style.css",
+                                  ""
+                                  COMMA_SAFARI_CREATOR
                                   COMMA_HERE) ;
     fflush (stdout);
      	 
