@@ -282,7 +282,7 @@ routine_performComputations (C_Compiler & inLexique,
   char MessageType = '\0' ;
   bool DependentHasOffset = false ;
 	sint32  index ;
-	GGS_M_processor::element_type * processor = inProcessorMap.firstObject () ;
+	GGS_M_processor::cElement * processor = inProcessorMap.firstObject () ;
 //--- Print processors map
   htmlFile.writeCppTitleComment ("Processors map", "title") ;
   htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
@@ -319,7 +319,7 @@ routine_performComputations (C_Compiler & inLexique,
   sint32 NumberOfProcessors = index ;
 	
   const char * kNetworkTypes [] = {"VAN","CAN"} ;
-	GGS_M_network::element_type * network = inNetworkMap.firstObject () ;
+	GGS_M_network::cElement * network = inNetworkMap.firstObject () ;
 //--- Print network map
   htmlFile.writeCppTitleComment ("Networks map", "title") ;
   htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
@@ -359,7 +359,7 @@ routine_performComputations (C_Compiler & inLexique,
   }
   
 //--- Build tasks map  
-  GGS_M_tasks::element_type * task = inTasksMap.firstObject () ;
+  GGS_M_tasks::cElement * task = inTasksMap.firstObject () ;
   index = 0 ;
   task = inTasksMap.firstObject () ;
   while (task != NULL) {
@@ -419,7 +419,7 @@ routine_performComputations (C_Compiler & inLexique,
   sint32 NumberOfTasks = index;
 	
   const char * kMessageClasses [] = {"standard", "extended", "  VAN   "} ;
-  GGS_M_messages::element_type * message = inMessagesMap.firstObject () ;
+  GGS_M_messages::cElement * message = inMessagesMap.firstObject () ;
 
 //--- Build messages map
   index = 0 ;
