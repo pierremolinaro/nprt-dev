@@ -1,7 +1,7 @@
 #ifndef VERIFYCONDITIONS_H
 #define VERIFYCONDITIONS_H
 
-#include "generic_arraies/TC_UniqueArray.h"
+#include "collections/TC_UniqueArray.h"
 class C_Compiler ;
 
 bool 
