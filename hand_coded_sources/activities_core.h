@@ -21,7 +21,7 @@
 #ifndef ACTIVITIES_CORE_DEFINED
 #define ACTIVITIES_CORE_DEFINED
 
-#include "generic_arraies/TC_UniqueArray.h"
+#include "collections/TC_UniqueArray.h"
 #include "ExtendedList.h"
 
 //---------------------------------------------------------------------------*

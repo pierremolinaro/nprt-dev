@@ -18,7 +18,7 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#include "generic_arraies/TC_UniqueArray.h"
+#include "collections/TC_UniqueArray.h"
 #include "streams/C_ConsoleOut.h"
 #include "command_line_interface/F_Analyze_CLI_Options.h"
 #include "command_line_interface/mainForLIBPM.h"

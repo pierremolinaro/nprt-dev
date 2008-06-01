@@ -1,4 +1,4 @@
-#include "generic_arraies/TC_UniqueArray.h"
+#include "collections/TC_UniqueArray.h"
 #include "files/C_HTML_FileWrite.h"
 #include <stdio.h>
 #include <math.h>
