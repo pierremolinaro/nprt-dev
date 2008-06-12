@@ -1,11 +1,11 @@
-#---------------------------------------------------------------------------*#                                                                           *#   P R O G R A M                                                           *#                                                                           *#---------------------------------------------------------------------------*program oa_main "version 1.1.9"  :  import grammar oa_grammar in "oa_grammar.ggs" ;#--- max error and warning count  routine {
+#---------------------------------------------------------------------------*#                                                                           *#   P R O G R A M                                                           *#                                                                           *#---------------------------------------------------------------------------*program oa_main "version 1.1.9"  :  import grammar oa_grammar in "oa_grammar.ggs" ;#--- max error and warning count  before {
   }
 
   when . "nprt" message "an '.nprt' source file" ??@lstring inSourceFile {
     grammar oa_grammar in inSourceFile;
   }
 
-  routine {
+  after {
   }
 
 end program ;#--------------------------------------------------------------------------------*
