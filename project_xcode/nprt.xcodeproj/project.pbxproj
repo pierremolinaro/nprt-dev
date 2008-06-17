@@ -266,7 +266,6 @@
 		CFB9E6200DF28F8C00885084 /* TC_UniqueFixedSizeArray.h in Headers */ = {isa = PBXBuildFile; fileRef = CFB9E6080DF28F8C00885084 /* TC_UniqueFixedSizeArray.h */; };
 		CFB9E6210DF28F8C00885084 /* TF_AVL_Tree.h in Headers */ = {isa = PBXBuildFile; fileRef = CFB9E6090DF28F8C00885084 /* TF_AVL_Tree.h */; };
 		CFBC76B90AC695BF00443ACA /* OC_GGS_BuildResultTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = CFBC76B80AC695BF00443ACA /* OC_GGS_BuildResultTextView.mm */; };
-		CFC30F93058A225E003D0386 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFC30F92058A225E003D0386 /* Info.plist */; };
 		CFC5D7ED093CAD3300112F5B /* C_us_hashmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFC5D7EB093CAD3200112F5B /* C_us_hashmap.cpp */; };
 		CFC5D7EE093CAD3300112F5B /* C_us_hashmap.h in Headers */ = {isa = PBXBuildFile; fileRef = CFC5D7EC093CAD3200112F5B /* C_us_hashmap.h */; };
 		CFC5D7EF093CAD3300112F5B /* C_us_hashmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFC5D7EB093CAD3200112F5B /* C_us_hashmap.cpp */; };
@@ -302,8 +301,6 @@
 		CFDF67FA0BD21EDC009F9171 /* AC_galgas_class.h in Headers */ = {isa = PBXBuildFile; fileRef = CFDF67F00BD21EDC009F9171 /* AC_galgas_class.h */; };
 		CFDF67FB0BD21EDC009F9171 /* AC_galgas_domain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFDF67F10BD21EDC009F9171 /* AC_galgas_domain.cpp */; };
 		CFDF67FC0BD21EDC009F9171 /* AC_galgas_domain.h in Headers */ = {isa = PBXBuildFile; fileRef = CFDF67F20BD21EDC009F9171 /* AC_galgas_domain.h */; };
-		CFDF67FD0BD21EDC009F9171 /* AC_galgas_entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFDF67F30BD21EDC009F9171 /* AC_galgas_entity.cpp */; };
-		CFDF67FE0BD21EDC009F9171 /* AC_galgas_entity.h in Headers */ = {isa = PBXBuildFile; fileRef = CFDF67F40BD21EDC009F9171 /* AC_galgas_entity.h */; };
 		CFDF67FF0BD21EDC009F9171 /* AC_galgas_mapindex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFDF67F50BD21EDC009F9171 /* AC_galgas_mapindex.cpp */; };
 		CFDF68000BD21EDC009F9171 /* AC_galgas_mapindex.h in Headers */ = {isa = PBXBuildFile; fileRef = CFDF67F60BD21EDC009F9171 /* AC_galgas_mapindex.h */; };
 		CFDF68010BD21EDC009F9171 /* AC_galgas_sortedlist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFDF67F70BD21EDC009F9171 /* AC_galgas_sortedlist.cpp */; };
@@ -312,8 +309,6 @@
 		CFDF68040BD21EDC009F9171 /* AC_galgas_class.h in Headers */ = {isa = PBXBuildFile; fileRef = CFDF67F00BD21EDC009F9171 /* AC_galgas_class.h */; };
 		CFDF68050BD21EDC009F9171 /* AC_galgas_domain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFDF67F10BD21EDC009F9171 /* AC_galgas_domain.cpp */; };
 		CFDF68060BD21EDC009F9171 /* AC_galgas_domain.h in Headers */ = {isa = PBXBuildFile; fileRef = CFDF67F20BD21EDC009F9171 /* AC_galgas_domain.h */; };
-		CFDF68070BD21EDC009F9171 /* AC_galgas_entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFDF67F30BD21EDC009F9171 /* AC_galgas_entity.cpp */; };
-		CFDF68080BD21EDC009F9171 /* AC_galgas_entity.h in Headers */ = {isa = PBXBuildFile; fileRef = CFDF67F40BD21EDC009F9171 /* AC_galgas_entity.h */; };
 		CFDF68090BD21EDC009F9171 /* AC_galgas_mapindex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFDF67F50BD21EDC009F9171 /* AC_galgas_mapindex.cpp */; };
 		CFDF680A0BD21EDC009F9171 /* AC_galgas_mapindex.h in Headers */ = {isa = PBXBuildFile; fileRef = CFDF67F60BD21EDC009F9171 /* AC_galgas_mapindex.h */; };
 		CFDF680B0BD21EDC009F9171 /* AC_galgas_sortedlist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFDF67F70BD21EDC009F9171 /* AC_galgas_sortedlist.cpp */; };
@@ -541,8 +536,6 @@
 		CFDF67F00BD21EDC009F9171 /* AC_galgas_class.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AC_galgas_class.h; sourceTree = "<group>"; };
 		CFDF67F10BD21EDC009F9171 /* AC_galgas_domain.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = AC_galgas_domain.cpp; sourceTree = "<group>"; };
 		CFDF67F20BD21EDC009F9171 /* AC_galgas_domain.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AC_galgas_domain.h; sourceTree = "<group>"; };
-		CFDF67F30BD21EDC009F9171 /* AC_galgas_entity.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = AC_galgas_entity.cpp; sourceTree = "<group>"; };
-		CFDF67F40BD21EDC009F9171 /* AC_galgas_entity.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AC_galgas_entity.h; sourceTree = "<group>"; };
 		CFDF67F50BD21EDC009F9171 /* AC_galgas_mapindex.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = AC_galgas_mapindex.cpp; sourceTree = "<group>"; };
 		CFDF67F60BD21EDC009F9171 /* AC_galgas_mapindex.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = AC_galgas_mapindex.h; sourceTree = "<group>"; };
 		CFDF67F70BD21EDC009F9171 /* AC_galgas_sortedlist.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = AC_galgas_sortedlist.cpp; sourceTree = "<group>"; };
@@ -887,8 +880,6 @@
 				CFDF67F00BD21EDC009F9171 /* AC_galgas_class.h */,
 				CFDF67F10BD21EDC009F9171 /* AC_galgas_domain.cpp */,
 				CFDF67F20BD21EDC009F9171 /* AC_galgas_domain.h */,
-				CFDF67F30BD21EDC009F9171 /* AC_galgas_entity.cpp */,
-				CFDF67F40BD21EDC009F9171 /* AC_galgas_entity.h */,
 				CFDF67F50BD21EDC009F9171 /* AC_galgas_mapindex.cpp */,
 				CFDF67F60BD21EDC009F9171 /* AC_galgas_mapindex.h */,
 				CFDF67F70BD21EDC009F9171 /* AC_galgas_sortedlist.cpp */,
@@ -1041,7 +1032,6 @@
 				CFEA39D30B6E96CB0059CEDF /* C_PrimeCache3.h in Headers */,
 				CFDF67FA0BD21EDC009F9171 /* AC_galgas_class.h in Headers */,
 				CFDF67FC0BD21EDC009F9171 /* AC_galgas_domain.h in Headers */,
-				CFDF67FE0BD21EDC009F9171 /* AC_galgas_entity.h in Headers */,
 				CFDF68000BD21EDC009F9171 /* AC_galgas_mapindex.h in Headers */,
 				CFDF68020BD21EDC009F9171 /* AC_galgas_sortedlist.h in Headers */,
 				CFB9E60A0DF28F8C00885084 /* TC_AVL_TreeForCollision.h in Headers */,
@@ -1131,7 +1121,6 @@
 				CFEA39D50B6E96CB0059CEDF /* C_PrimeCache3.h in Headers */,
 				CFDF68040BD21EDC009F9171 /* AC_galgas_class.h in Headers */,
 				CFDF68060BD21EDC009F9171 /* AC_galgas_domain.h in Headers */,
-				CFDF68080BD21EDC009F9171 /* AC_galgas_entity.h in Headers */,
 				CFDF680A0BD21EDC009F9171 /* AC_galgas_mapindex.h in Headers */,
 				CFDF680C0BD21EDC009F9171 /* AC_galgas_sortedlist.h in Headers */,
 				CFB9E6160DF28F8C00885084 /* TC_AVL_TreeForCollision.h in Headers */,
@@ -1234,7 +1223,6 @@
 			files = (
 				8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */,
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
-				CFC30F93058A225E003D0386 /* Info.plist in Resources */,
 				CF45190205FCAEC7008D4817 /* nprt in Resources */,
 				CF3115F60622ABE200882F85 /* nprt_application.icns in Resources */,
 				CF3115F70622ABE200882F85 /* nprt_document.icns in Resources */,
@@ -1368,7 +1356,6 @@
 				CFEA39D20B6E96CB0059CEDF /* C_PrimeCache3.cpp in Sources */,
 				CFDF67F90BD21EDC009F9171 /* AC_galgas_class.cpp in Sources */,
 				CFDF67FB0BD21EDC009F9171 /* AC_galgas_domain.cpp in Sources */,
-				CFDF67FD0BD21EDC009F9171 /* AC_galgas_entity.cpp in Sources */,
 				CFDF67FF0BD21EDC009F9171 /* AC_galgas_mapindex.cpp in Sources */,
 				CFDF68010BD21EDC009F9171 /* AC_galgas_sortedlist.cpp in Sources */,
 			);
@@ -1438,7 +1425,6 @@
 				CFEA39D40B6E96CB0059CEDF /* C_PrimeCache3.cpp in Sources */,
 				CFDF68030BD21EDC009F9171 /* AC_galgas_class.cpp in Sources */,
 				CFDF68050BD21EDC009F9171 /* AC_galgas_domain.cpp in Sources */,
-				CFDF68070BD21EDC009F9171 /* AC_galgas_entity.cpp in Sources */,
 				CFDF68090BD21EDC009F9171 /* AC_galgas_mapindex.cpp in Sources */,
 				CFDF680B0BD21EDC009F9171 /* AC_galgas_sortedlist.cpp in Sources */,
 			);
