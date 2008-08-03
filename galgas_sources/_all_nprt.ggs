@@ -1,7 +1,10 @@
-compile "oa_scanner.ggs" ;
-compile "oa_semantics.ggs" ;
-compile "oa_cli_options.ggs" ;
-compile "oa_parser.ggs" ;
-compile "oa_grammar.ggs" ;
+project
+  compile "oa_scanner.ggs" ;
+  compile "oa_semantics.ggs" ;
+  compile "oa_cli_options.ggs" ;
+  compile "oa_parser.ggs" ;
+  compile "oa_grammar.ggs" ;
+  compile "oa_main.ggs" ;
+end project ;
+
 compile "cocoaOA.ggs" ;
-compile "oa_main.ggs" ;
