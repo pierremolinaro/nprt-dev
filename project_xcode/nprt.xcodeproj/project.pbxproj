@@ -234,7 +234,6 @@
 		CFA5D1230A32EA30009B4370 /* C_ErrorOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFA5D11F0A32EA30009B4370 /* C_ErrorOut.cpp */; };
 		CFA5D1240A32EA30009B4370 /* C_ErrorOut.h in Headers */ = {isa = PBXBuildFile; fileRef = CFA5D1200A32EA30009B4370 /* C_ErrorOut.h */; };
 		CFA8C6A40622A9D9005F7F63 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = CFA8C6A30622A9D9005F7F63 /* main.mm */; };
-		CFABC3AC0B2D9F59000157E0 /* F_main-fake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFABC3AB0B2D9F59000157E0 /* F_main-fake.cpp */; };
 		CFABC3AD0B2D9F63000157E0 /* GGS_location.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF5388F057A558F00854C83 /* GGS_location.cpp */; };
 		CFABC3AE0B2D9F64000157E0 /* GGS_lstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53891057A558F00854C83 /* GGS_lstring.cpp */; };
 		CFABC3AF0B2D9F66000157E0 /* GGS_string.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFF53895057A558F00854C83 /* GGS_string.cpp */; };
@@ -545,7 +544,6 @@
 		CFA5D11F0A32EA30009B4370 /* C_ErrorOut.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = C_ErrorOut.cpp; sourceTree = "<group>"; };
 		CFA5D1200A32EA30009B4370 /* C_ErrorOut.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = C_ErrorOut.h; sourceTree = "<group>"; };
 		CFA8C6A30622A9D9005F7F63 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
-		CFABC3AB0B2D9F59000157E0 /* F_main-fake.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = "F_main-fake.cpp"; sourceTree = "<group>"; };
 		CFAC5156062158B500AF7FE3 /* AC_galgas_map.cpp */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.cpp.cpp; path = AC_galgas_map.cpp; sourceTree = "<group>"; };
 		CFB9E5FE0DF28F8C00885084 /* TC_AVL_TreeForCollision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_AVL_TreeForCollision.h; sourceTree = "<group>"; };
 		CFB9E5FF0DF28F8C00885084 /* TC_Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_Array.h; sourceTree = "<group>"; };
@@ -732,7 +730,6 @@
 		CF31E0ED0598DF5400814123 /* command_line_interface */ = {
 			isa = PBXGroup;
 			children = (
-				CFABC3AB0B2D9F59000157E0 /* F_main-fake.cpp */,
 				CF512DEE092B3292008F7E87 /* C_builtin_CLI_Options.cpp */,
 				CF512DEF092B3292008F7E87 /* C_builtin_CLI_Options.h */,
 				CF825C900853833E0077AEAF /* AC_CLI_Options.cpp */,
@@ -1395,7 +1392,6 @@
 				CF337A1809EFAEBB00EC41F6 /* C_SourceTextForCoca.mm in Sources */,
 				CF6557B20A25EB3400979050 /* C_galgas_CLI_Options.cpp in Sources */,
 				CFBC76B90AC695BF00443ACA /* OC_GGS_BuildResultTextView.mm in Sources */,
-				CFABC3AC0B2D9F59000157E0 /* F_main-fake.cpp in Sources */,
 				CFABC3AD0B2D9F63000157E0 /* GGS_location.cpp in Sources */,
 				CFABC3AE0B2D9F64000157E0 /* GGS_lstring.cpp in Sources */,
 				CFABC3AF0B2D9F66000157E0 /* GGS_string.cpp in Sources */,
