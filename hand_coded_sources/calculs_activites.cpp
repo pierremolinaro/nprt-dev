@@ -284,7 +284,7 @@ routine_performComputations (C_Compiler & inLexique,
 	sint32  index ;
 	GGS_M_processor::cElement * processor = inProcessorMap.firstObject () ;
 //--- Print processors map
-  htmlFile.writeCppTitleComment ("Processors map", "title") ;
+  htmlFile.appendCppTitleComment ("Processors map", "title") ;
   htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
 	htmlFile.outputRawData ("#<th>Name<th>ScaFactor</tr>") ;
 	index = 1 ;
@@ -321,7 +321,7 @@ routine_performComputations (C_Compiler & inLexique,
   const char * kNetworkTypes [] = {"VAN","CAN"} ;
 	GGS_M_network::cElement * network = inNetworkMap.firstObject () ;
 //--- Print network map
-  htmlFile.writeCppTitleComment ("Networks map", "title") ;
+  htmlFile.appendCppTitleComment ("Networks map", "title") ;
   htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
   htmlFile.outputRawData ("#<th>Name<th>Type<th>ScaFactor</tr>") ;
   index = 1 ;
@@ -513,7 +513,7 @@ routine_performComputations (C_Compiler & inLexique,
 //*----------------------------------------------------------------------/  
 	//--- Print task map
   
-	htmlFile.writeCppTitleComment ("Tasks map", "title") ;
+	htmlFile.appendCppTitleComment ("Tasks map", "title") ;
   htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>") ;
   htmlFile.outputRawData ("#<th>Name<th>Processor<th>Priority<th>");
   htmlFile.outputRawData ("Offset<th>Min<th>Max<th>Period<th>") ;
@@ -580,7 +580,7 @@ routine_performComputations (C_Compiler & inLexique,
   htmlFile.outputRawData ("<br>");
 
 //--- Print messages map
-  htmlFile.writeCppTitleComment ("Messages map", "title") ;
+  htmlFile.appendCppTitleComment ("Messages map", "title") ;
   htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>") ;
   htmlFile.outputRawData ("#<th>Name<th>Network<th>Type<th>Priority<th>Byte");
   htmlFile.outputRawData ("<th> min--max ") ;
