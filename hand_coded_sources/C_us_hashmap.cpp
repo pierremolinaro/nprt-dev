@@ -114,8 +114,8 @@ void C_us_hashmap::C_TreeForCollision::allocBlock (void) {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-C_us_hashmap::C_TreeForCollision::C_TreeForCollision (void) {
-  mRoot = NULL ;
+C_us_hashmap::C_TreeForCollision::C_TreeForCollision (void) :
+mRoot (NULL) {
 }
 
 //---------------------------------------------------------------------------*
@@ -480,9 +480,10 @@ getMarkedNodesCount (void) const {
 //---------------------------------------------------------------------------*
 
 C_us_hashmap
-::C_us_hashmap (void) {
-  mMapArray = & mMinimumMapArray ;
-  mEntryCurrentCount = 1 ;
+::C_us_hashmap (void) :
+mEntryCurrentCount (1),
+mMinimumMapArray (),
+mMapArray (& mMinimumMapArray) {
 }
 
 //---------------------------------------------------------------------------*

@@ -156,10 +156,11 @@ class C_VDL_hashmap {
     public : MyBlockavltree_element_for_collision * mPtrToSup ;
     public : MyBlockavltree_element_for_collision * mPtrToInf ;
     public : sint32 mBalance ;
-    public : MyBlockavltree_element_for_collision (const C_activitiesToSchedule::cVDLnodeInfo & inInfo) : mInfo (inInfo) {
-      mPtrToSup = (MyBlockavltree_element_for_collision *) NULL ;
-      mPtrToInf = (MyBlockavltree_element_for_collision *) NULL ;
-      mBalance = 0 ;
+    public : MyBlockavltree_element_for_collision (const C_activitiesToSchedule::cVDLnodeInfo & inInfo) :
+      mInfo (inInfo),
+      mPtrToSup (NULL),
+      mPtrToInf (NULL),
+      mBalance (0) {
     }
     public : ~MyBlockavltree_element_for_collision (void) {
       delete mPtrToSup ;
@@ -177,18 +178,19 @@ class C_VDL_hashmap {
 //------------------- MyBlockavltree_element_for_collision embedded class
   private : class cAllocInfo {
     public : char * * mAllocatedBlockList ;
+    public : MyBlockavltree_element_for_collision * mFreeList ;
     public : sint32 mAllocatedBlockListSize ;
     public : sint32 mAllocatedBlockCount ;
-    public : MyBlockavltree_element_for_collision * mFreeList ;
     public : sint32 mAllocatedObjectCount ;
     public : sint32 mCreatedObjectCount ;
-    public : cAllocInfo (void) {
-      mAllocatedBlockList = (char * *)  NULL ;
-      mFreeList = (MyBlockavltree_element_for_collision *) NULL ;
-      mAllocatedObjectCount = 0 ;
-      mAllocatedBlockCount = 0 ;
-      mAllocatedBlockListSize = 0 ;
-      mCreatedObjectCount = 0 ;
+
+    public : cAllocInfo (void) :
+    mAllocatedBlockList (NULL),
+    mFreeList (NULL),
+    mAllocatedBlockListSize (0),
+    mAllocatedBlockCount (0),
+    mAllocatedObjectCount (0),
+    mCreatedObjectCount (0) {
     }
   } ;
 

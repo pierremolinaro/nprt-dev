@@ -43,7 +43,7 @@ class C_us {
 
 //--- Control copy
   public : C_us (const C_us & inSource) ;
-  public : void operator = (const C_us & inSource) ;
+  public : C_us & operator = (const C_us & inSource) ;
 
 //--- Pointers for handling a double-linked list of all existing variables
   protected : C_us * mPtrToNextExisting ;

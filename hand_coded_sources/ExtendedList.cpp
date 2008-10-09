@@ -10,9 +10,9 @@
 
 /*-----------------------------------------------------------------------------*/
 
-cResponseTime::cResponseTime (void) {
-  mBestResponseTime = SINT32_MAX ;
-  mWorstResponseTime = 0 ;
+cResponseTime::cResponseTime (void) :
+mBestResponseTime (SINT32_MAX),
+mWorstResponseTime (0) {
 } ;
 
 /*-----------------------------------------------------------------------------*/
@@ -379,7 +379,7 @@ TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;
 	sint32 Num_ofIndepStaringInstant=0;
 	for ( sint32 index = 0; index < ArrangedElement.count(); index ++) {
    	if ( ArrangedElement (index COMMA_HERE).mPredecessorId < 0){
-   	   Num_ofIndepStaringInstant += inHyperPeriod/ArrangedElement (index COMMA_HERE).mPeriod  ;
+   	   Num_ofIndepStaringInstant += (sint32) inHyperPeriod/ArrangedElement (index COMMA_HERE).mPeriod  ;
    	}
   }
   //--- Initilize 
@@ -427,7 +427,7 @@ TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;
    	   	 NextOccurrence += ArrangedElement (index COMMA_HERE).mPeriod;
    	   }
    	} else {
-   		IdInList +=  inHyperPeriod/ArrangedElement (index COMMA_HERE).mPeriod ;
+   		IdInList += (sint32) inHyperPeriod/ArrangedElement (index COMMA_HERE).mPeriod ;
    	}
   }
   

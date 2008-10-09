@@ -64,6 +64,11 @@ class cIndependantResourceSchedule  {
   public : cIndependantResourceSchedule  * mPtrToOtherResource ;
   public : cIndependantResourcesActivitySchedule * mPtrToFirstActivity ;
   public : cIndependantResourcesActivitySchedule * mPtrToLastActivity ;
+  
+  public : cIndependantResourceSchedule (void) ;
+  
+  private : cIndependantResourceSchedule (const cIndependantResourceSchedule &) ;
+  private : cIndependantResourceSchedule & operator = (const cIndependantResourceSchedule &) ;
 } ;
 
 //---------------------------------------------------------------------------*
@@ -103,7 +108,17 @@ class cIndependantResourcesScheduleMap {
 
 //---------------------------------------------------------------------------*
 
-static cIndependantResourceSchedule  * gResourceFreeList = NULL ;
+cIndependantResourceSchedule::cIndependantResourceSchedule (void) :
+mResourceIndex (0),
+mActivitiesToScheduleList (),
+mPtrToOtherResource (NULL),
+mPtrToFirstActivity (NULL),
+mPtrToLastActivity (NULL) {
+}
+
+//---------------------------------------------------------------------------*
+
+static cIndependantResourceSchedule * gResourceFreeList = NULL ;
 static sint32 gAllocatedResourceNodesCount = 0 ;
 static sint32 gUsedResourceNodesCount = 0 ;
 static sint32 gAllocatedActivityNodesCount = 0 ;
@@ -132,9 +147,10 @@ static inline void disposeResourceNode (cIndependantResourceSchedule  * inPtr) {
 
 //---------------------------------------------------------------------------*
 
-cIndependantResourcesScheduleMap::cIndependantResourcesScheduleMap (void) {
-  mCurrentInstant = 0 ;
-  mLatestInstant = 0 ;
+cIndependantResourcesScheduleMap::cIndependantResourcesScheduleMap (void) :
+mResourceScheduleArray (),
+mCurrentInstant (0),
+mLatestInstant (0) {
 }
 
 //---------------------------------------------------------------------------*
