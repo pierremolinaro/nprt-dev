@@ -243,14 +243,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CFD252190E9DEC770050A24C /* PBXContainerItemProxy */ = {
+		CF6F52330E9E797900D2E25A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6BBF9AC94A7E459509A20ED0 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 74C28E489B44E954EC0B9BCA /* Nprt Tool Debug */;
 			remoteInfo = "Nprt Tool Debug";
 		};
-		CFD2521A0E9DEC770050A24C /* PBXContainerItemProxy */ = {
+		CF6F52340E9E797900D2E25A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6BBF9AC94A7E459509A20ED0 /* Project object */;
 			proxyType = 1;
@@ -1235,12 +1235,12 @@
 		8F1455B3FA09A282E0D496F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 74C28E489B44E954EC0B9BCA /* Nprt Tool Debug */;
-			targetProxy = CFD252190E9DEC770050A24C /* PBXContainerItemProxy */;
+			targetProxy = CF6F52330E9E797900D2E25A /* PBXContainerItemProxy */;
 		};
 		AC1C7093BD25041881277658 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F65B6DF5B5E3F94D95B11DAF /* Nprt Tool */;
-			targetProxy = CFD2521A0E9DEC770050A24C /* PBXContainerItemProxy */;
+			targetProxy = CF6F52340E9E797900D2E25A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
