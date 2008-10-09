@@ -161,6 +161,7 @@ void cActivityList::mergeList (cActivityList & inOtherList) {
 //    c R e s o u r c e S c h e d u l e                                      *
 //                                                                           *
 //---------------------------------------------------------------------------*
+
 class cResource2 {
   public : C_activitiesToSchedule mActivitiesToScheduleList ;
   public : sint32 mCurrentActivity ;
@@ -168,6 +169,8 @@ class cResource2 {
   public : bool mHasNoNewActivities ;
   public : sint32 mLHBound ;
   public : sint32 mStep ;
+
+  public : cResource2 (void) ;
 
   public : inline bool operator == (const cResource2 & inOperand) const {
     return (mActivitiesToScheduleList == inOperand.mActivitiesToScheduleList)
@@ -206,6 +209,10 @@ class cResourceSchedule {
  
   public : cResourceSchedule (const sint32 inResourceCount) ;
 
+//--- No copy
+  private : cResourceSchedule (const cResourceSchedule &) ;
+  private : cResourceSchedule & operator = (const cResourceSchedule &) ;
+  
   public : inline void hash (const sint32 inResourceCount) {
     uint32 hashValue = mArray (0 COMMA_HERE).hash () ;
     for (sint32 i=1 ; i<inResourceCount ; i++) {
@@ -219,13 +226,25 @@ class cResourceSchedule {
 
 //---------------------------------------------------------------------------*
 
+cResource2::cResource2 (void) :
+mActivitiesToScheduleList (),
+mCurrentActivity (0),
+mExecutionCounter (0),
+mHasNoNewActivities (false),
+mLHBound (0),
+mStep (0) {
+}
+
+//---------------------------------------------------------------------------*
+
 cResourceSchedule::
 cResourceSchedule (const sint32 inResourceCount) :
 mArray (inResourceCount COMMA_HERE),
 mPtrToOtherResource (NULL),
 mPtrToInf (NULL),
 mPtrToSup (NULL),
-mBalance (0) {
+mBalance (0),
+mHash (0) {
   mArray.addObjects (inResourceCount, cResource2 ()) ;
 }
 
@@ -307,11 +326,12 @@ static inline void disposeResourceNode (cResourceSchedule * inPtr) {
 cScheduleMap::
 cScheduleMap (const sint32 /*inResourceCount */,
               const sint32 inLastIndependantActivityScheduleInstant,
-              const TC_UniqueArray <cActivity> & /*inActivities*/) {
+              const TC_UniqueArray <cActivity> & /*inActivities*/) :
   
-   mCurrentInstant =0;
-   mResourceNodesList = NULL ;
-   mLastIndependantActivityScheduleInstant = inLastIndependantActivityScheduleInstant ;
+mResourceNodesAVLtree (),
+mResourceNodesList (NULL),
+mCurrentInstant (0),
+mLastIndependantActivityScheduleInstant (inLastIndependantActivityScheduleInstant) {
    //--- Enter independant activities
 //  printf ("%ld activities\n", inActivities.count ()) ;
 //  fflush (stdout);

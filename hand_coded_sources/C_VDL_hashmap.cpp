@@ -114,8 +114,8 @@ void C_VDL_hashmap::C_TreeForCollision::allocBlock (void) {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-C_VDL_hashmap::C_TreeForCollision::C_TreeForCollision (void) {
-  mRoot = NULL ;
+C_VDL_hashmap::C_TreeForCollision::C_TreeForCollision (void) :
+mRoot (NULL) {
 }
 
 //---------------------------------------------------------------------------*
@@ -479,10 +479,10 @@ getMarkedNodesCount (void) const {
 
 //---------------------------------------------------------------------------*
 
-C_VDL_hashmap
-::C_VDL_hashmap (void) {
-  mMapArray = & mMinimumMapArray ;
-  mEntryCurrentCount = 1 ;
+C_VDL_hashmap::C_VDL_hashmap (void) :
+mEntryCurrentCount (1),
+mMinimumMapArray (),
+mMapArray (& mMinimumMapArray) {
 }
 
 //---------------------------------------------------------------------------*

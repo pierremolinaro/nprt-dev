@@ -47,7 +47,7 @@ class C_activitiesToSchedule {
 
 //--- Control copy
   public : C_activitiesToSchedule (const C_activitiesToSchedule & inSource) ;
-  public : void operator = (const C_activitiesToSchedule & inSource) ;
+  public : C_activitiesToSchedule & operator = (const C_activitiesToSchedule & inSource) ;
 
 //--------------------- PUBLIC USEFUL METHODS --------------------
 

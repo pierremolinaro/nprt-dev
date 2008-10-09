@@ -89,9 +89,10 @@ void C_us::reallocAdditionCache (const sint32 inNewCacheSize) {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-C_us::C_us (void) {
-  mRootPointer = NULL ;
-//--- Link
+C_us::C_us (void) :
+mPtrToNextExisting (this),
+mPtrToPreviousExisting (this),
+mRootPointer (NULL) {
   initLinks () ;
 }
 
@@ -195,15 +196,18 @@ internalSuppressEntry (const sint32 inLevel,
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-C_us::C_us (const C_us & inOperand) {
-  mRootPointer = inOperand.mRootPointer ;
+C_us::C_us (const C_us & inOperand) :
+mPtrToNextExisting (this),
+mPtrToPreviousExisting (this),
+mRootPointer (inOperand.mRootPointer) {
   initLinks () ;
 }
 
 //---------------------------------------------------------------------------*
 
-void C_us::operator = (const C_us & inOperand) {
+C_us & C_us::operator = (const C_us & inOperand) {
   mRootPointer = inOperand.mRootPointer ;
+  return *this ;
 }
 
 //---------------------------------------------------------------------------*
@@ -387,7 +391,7 @@ void C_us::printVDLsummary (AC_OutputStream & inOutputStream) {
                  << " VDL used nodes (size " << getNodeSize () << " bytes) ;\n"
                     "  " << C_us_hashmap::getCreatedObjectCount ()
                  << " VDL created nodes (total size "
-                 << ((C_us_hashmap::getCreatedObjectCount () * getNodeSize ()) / 1024ULL)
+                 << ((uint32) ((C_us_hashmap::getCreatedObjectCount () * getNodeSize ()) / 1024UL))
                  << " kbytes) ;\n"
                     "  " << getNodeComparesCount () << " comparisons ;\n"
                     "  " << getTrivialAddCount ()

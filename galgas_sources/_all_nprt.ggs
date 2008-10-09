@@ -1,10 +1,22 @@
 project
-  compile "oa_scanner.ggs" ;
-  compile "oa_semantics.ggs" ;
-  compile "oa_cli_options.ggs" ;
-  compile "oa_parser.ggs" ;
-  compile "oa_grammar.ggs" ;
-  compile "oa_main.ggs" ;
+  lexique "oa_scanner.ggs" : makefile, xcode ;
+  semantics "oa_semantics.ggs" : makefile, xcode ;
+  option "oa_cli_options.ggs" : makefile, xcode ;
+  syntax "oa_parser.ggs" : makefile, xcode ;
+  grammar "oa_grammar.ggs" : makefile, xcode ;
+  gui "cocoaOA.ggs" : xcode ;
+  program "oa_main.ggs" : makefile, xcode ;
+
+  extern "activities_core.cpp" : makefile, xcode ;
+  extern "C_activitiesToSchedule.cpp" : makefile, xcode ;
+  extern "C_us_hashmap.cpp" : makefile, xcode ;
+  extern "C_us.cpp" : makefile, xcode ;
+  extern "C_VDL_hashmap.cpp" : makefile, xcode ;
+  extern "calculs_activites.cpp" : makefile, xcode ;
+  extern "CANMmessageBounds.cpp" : makefile, xcode ;
+  extern "ExtendedList.cpp" : makefile, xcode ;
+  extern "ExtractRTs.cpp" : makefile, xcode ;
+  extern "independant_resources_core.cpp" : makefile, xcode ;
+  extern "VerifyConditions.cpp" : makefile, xcode ;
 end project ;
 
-compile "cocoaOA.ggs" ;

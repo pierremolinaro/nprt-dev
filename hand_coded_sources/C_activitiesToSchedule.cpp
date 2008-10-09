@@ -62,8 +62,10 @@ sint32 C_activitiesToSchedule::smNodeCount = 0 ;
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-C_activitiesToSchedule::C_activitiesToSchedule (void) {
-  mRootPointer = (cVDLnodeInfo *) NULL ;
+C_activitiesToSchedule::C_activitiesToSchedule (void) :
+mPtrToNextExisting (this),
+mPtrToPreviousExisting (this),
+mRootPointer (NULL) {
 //--- Link
   initLinks () ;
 }
@@ -507,6 +509,7 @@ getMinimumBusyPeriod (const sint32 currentActivityIndex,
 }
 
 //--------------------------------------------------------------------------*/
+
 sint32 C_activitiesToSchedule::
 getFirstToSchedule (const sint32 inCurrentInstant) const {
   sint32 activityIndex = -1 ; // Means none
@@ -604,15 +607,18 @@ AnyNotReadyToScheduleAt (const sint32 inCurrentInstant) const {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-C_activitiesToSchedule::C_activitiesToSchedule (const C_activitiesToSchedule & inOperand) {
-  mRootPointer = inOperand.mRootPointer ;
+C_activitiesToSchedule::C_activitiesToSchedule (const C_activitiesToSchedule & inOperand) :
+mPtrToNextExisting (this),
+mPtrToPreviousExisting (this),
+mRootPointer (inOperand.mRootPointer) {
   initLinks () ;
 }
 
 //---------------------------------------------------------------------------*
 
-void C_activitiesToSchedule::operator = (const C_activitiesToSchedule & inOperand) {
+C_activitiesToSchedule & C_activitiesToSchedule::operator = (const C_activitiesToSchedule & inOperand) {
   mRootPointer = inOperand.mRootPointer ;
+  return *this ;
 }
 
 //---------------------------------------------------------------------------*
