@@ -247,14 +247,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 6BBF9AC94A7E459509A20ED0 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 74C28E489B44E954EC0B9BCA /* Nprt Tool Debug */;
+			remoteGlobalIDString = 74C28E489B44E954EC0B9BCA;
 			remoteInfo = "Nprt Tool Debug";
 		};
 		CF6F52340E9E797900D2E25A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6BBF9AC94A7E459509A20ED0 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F65B6DF5B5E3F94D95B11DAF /* Nprt Tool */;
+			remoteGlobalIDString = F65B6DF5B5E3F94D95B11DAF;
 			remoteInfo = "Nprt Tool";
 		};
 /* End PBXContainerItemProxy section */
