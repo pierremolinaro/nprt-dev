@@ -1,0 +1,19 @@
+# Intermediate file for Xcode Project
+oa_scanner
+oa_semantics
+oa_cli_options
+oa_parser
+oa_grammar
+cocoaOA
+oa_main
+activities_core
+C_activitiesToSchedule
+C_us_hashmap
+C_us
+C_VDL_hashmap
+calculs_activites
+CANMmessageBounds
+ExtendedList
+ExtractRTs
+independant_resources_core
+VerifyConditions
