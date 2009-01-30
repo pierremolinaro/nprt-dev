@@ -1,0 +1,5 @@
+0::
+oa_scanner.ggs
+oa_semantics.ggs::
+GALGAS_OUTPUT/oa_parser.h
+GALGAS_OUTPUT/oa_parser.cpp

@@ -1,0 +1,7 @@
+0::
+oa_scanner.ggs
+oa_cli_options.ggs
+oa_parser.ggs
+oa_semantics.ggs::
+GALGAS_OUTPUT/oa_grammar.cpp
+GALGAS_OUTPUT/oa_grammar.h
