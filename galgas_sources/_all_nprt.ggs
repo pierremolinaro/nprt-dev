@@ -1,22 +1,22 @@
 project
-  lexique "oa_scanner.ggs" : makefile, xcode ;
-  semantics "oa_semantics.ggs" : makefile, xcode ;
-  option "oa_cli_options.ggs" : makefile, xcode ;
-  syntax "oa_parser.ggs" : makefile, xcode ;
-  grammar "oa_grammar.ggs" : makefile, xcode ;
-  gui "cocoaOA.ggs" : xcode ;
-  program "oa_main.ggs" : makefile, xcode ;
+  lexique "oa_scanner.ggs" : makefile, xcode_tool, xcode_app ;
+  semantics "oa_semantics.ggs" : makefile, xcode_tool ;
+  option "oa_cli_options.ggs" : makefile, xcode_tool, xcode_app ;
+  syntax "oa_parser.ggs" : makefile, xcode_tool ;
+  grammar "oa_grammar.ggs" : makefile, xcode_tool ;
+  gui "cocoaOA.ggs" : xcode_tool, xcode_app ;
+  program "oa_main.ggs" : makefile, xcode_tool ;
 
-  extern "activities_core.cpp" : makefile, xcode ;
-  extern "C_activitiesToSchedule.cpp" : makefile, xcode ;
-  extern "C_us_hashmap.cpp" : makefile, xcode ;
-  extern "C_us.cpp" : makefile, xcode ;
-  extern "C_VDL_hashmap.cpp" : makefile, xcode ;
-  extern "calculs_activites.cpp" : makefile, xcode ;
-  extern "CANMmessageBounds.cpp" : makefile, xcode ;
-  extern "ExtendedList.cpp" : makefile, xcode ;
-  extern "ExtractRTs.cpp" : makefile, xcode ;
-  extern "independant_resources_core.cpp" : makefile, xcode ;
-  extern "VerifyConditions.cpp" : makefile, xcode ;
+  extern "activities_core.cpp" : makefile, xcode_tool ;
+  extern "C_activitiesToSchedule.cpp" : makefile, xcode_tool ;
+  extern "C_us_hashmap.cpp" : makefile, xcode_tool ;
+  extern "C_us.cpp" : makefile, xcode_tool ;
+  extern "C_VDL_hashmap.cpp" : makefile, xcode_tool ;
+  extern "calculs_activites.cpp" : makefile, xcode_tool ;
+  extern "CANMmessageBounds.cpp" : makefile, xcode_tool ;
+  extern "ExtendedList.cpp" : makefile, xcode_tool ;
+  extern "ExtractRTs.cpp" : makefile, xcode_tool ;
+  extern "independant_resources_core.cpp" : makefile, xcode_tool ;
+  extern "VerifyConditions.cpp" : makefile, xcode_tool ;
 end project ;
 

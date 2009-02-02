@@ -35,4 +35,4 @@ GALGAS_OUTPUT/oa_main.h
 GALGAS_OUTPUT/oa_main.cpp
 DEPENDENCIES/oa_main.ggs.dep
 GALGAS_OUTPUT/file_list.mke
-GALGAS_OUTPUT/file_list_for_xcode_project.txt
+DEPENDENCIES/file_list_for_xcode_project.txt

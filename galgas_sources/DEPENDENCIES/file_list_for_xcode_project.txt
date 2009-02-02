@@ -17,3 +17,7 @@ ExtendedList
 ExtractRTs
 independant_resources_core
 VerifyConditions
+::
+oa_scanner
+oa_cli_options
+cocoaOA
