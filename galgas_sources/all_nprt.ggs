@@ -7,10 +7,9 @@ project all_nprt :
   gui "cocoaOA.ggs" : xcode_tool, xcode_app ;
   program "oa_main.ggs" : makefile, xcode_tool ;
 
+  extern "C_us.cpp" : makefile, xcode_tool ;
   extern "activities_core.cpp" : makefile, xcode_tool ;
   extern "C_activitiesToSchedule.cpp" : makefile, xcode_tool ;
-  extern "C_us_hashmap.cpp" : makefile, xcode_tool ;
-  extern "C_us.cpp" : makefile, xcode_tool ;
   extern "C_VDL_hashmap.cpp" : makefile, xcode_tool ;
   extern "calculs_activites.cpp" : makefile, xcode_tool ;
   extern "CANMmessageBounds.cpp" : makefile, xcode_tool ;
@@ -18,5 +17,6 @@ project all_nprt :
   extern "ExtractRTs.cpp" : makefile, xcode_tool ;
   extern "independant_resources_core.cpp" : makefile, xcode_tool ;
   extern "VerifyConditions.cpp" : makefile, xcode_tool ;
+  extern "C_us_hashmap.cpp" : makefile, xcode_tool ;
 end project ;
 
