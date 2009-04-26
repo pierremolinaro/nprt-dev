@@ -7,16 +7,16 @@ project all_nprt :
   gui "cocoaOA.ggs" : xcode_tool, xcode_app ;
   program "oa_main.ggs" : makefile, xcode_tool ;
 
-  extern "C_us.cpp" : makefile, xcode_tool ;
-  extern "activities_core.cpp" : makefile, xcode_tool ;
-  extern "C_activitiesToSchedule.cpp" : makefile, xcode_tool ;
-  extern "C_VDL_hashmap.cpp" : makefile, xcode_tool ;
-  extern "calculs_activites.cpp" : makefile, xcode_tool ;
-  extern "CANMmessageBounds.cpp" : makefile, xcode_tool ;
-  extern "ExtendedList.cpp" : makefile, xcode_tool ;
-  extern "ExtractRTs.cpp" : makefile, xcode_tool ;
-  extern "independant_resources_core.cpp" : makefile, xcode_tool ;
-  extern "VerifyConditions.cpp" : makefile, xcode_tool ;
-  extern "C_us_hashmap.cpp" : makefile, xcode_tool ;
+  extern "../hand_coded_sources/C_us.cpp" : makefile, xcode_tool ;
+  extern "../hand_coded_sources/activities_core.cpp" : makefile, xcode_tool ;
+  extern "../hand_coded_sources/C_activitiesToSchedule.cpp" : makefile, xcode_tool ;
+  extern "../hand_coded_sources/C_VDL_hashmap.cpp" : makefile, xcode_tool ;
+  extern "../hand_coded_sources/calculs_activites.cpp" : makefile, xcode_tool ;
+  extern "../hand_coded_sources/CANMmessageBounds.cpp" : makefile, xcode_tool ;
+  extern "../hand_coded_sources/ExtendedList.cpp" : makefile, xcode_tool ;
+  extern "../hand_coded_sources/ExtractRTs.cpp" : makefile, xcode_tool ;
+  extern "../hand_coded_sources/independant_resources_core.cpp" : makefile, xcode_tool ;
+  extern "../hand_coded_sources/VerifyConditions.cpp" : makefile, xcode_tool ;
+  extern "../hand_coded_sources/C_us_hashmap.cpp" : makefile, xcode_tool ;
 end project ;
 
