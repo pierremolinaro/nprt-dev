@@ -24,7 +24,7 @@
 //---------------------------------------------------------------------------*
 
 #include "collections/TC_UniqueArray.h"
-#include "utilities/C_String.h"
+#include "strings/C_String.h"
 #include "ExtendedList.h"
 
 //---------------------------------------------------------------------------*
