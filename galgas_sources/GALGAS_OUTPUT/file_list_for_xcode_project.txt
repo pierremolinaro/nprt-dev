@@ -874,7 +874,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		894217686BA124D7356686C9 = {
+		1C8CEF6730F9FD03C8125CAB = {
 			isa = PBXGroup;
 			children = (
 				D9CAA6E02C990B0A82652DCA /* Hand Coded Sources */,
@@ -945,10 +945,10 @@
 /* Begin PBXProject section */
 		6BBF9AC94A7E459509A20ED0 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 1C8CEF6730F9FD03C8125CAB /* Build configuration list for PBXProject "nprt" */;
+			buildConfigurationList = 894217686BA124D7356686C9 /* Build configuration list for PBXProject "nprt" */;
 			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
-			mainGroup = 894217686BA124D7356686C9;
+			mainGroup = 1C8CEF6730F9FD03C8125CAB;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -1386,7 +1386,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
 		};
-		1C8CEF6730F9FD03C8125CAB /* Build configuration list for PBXProject "nprt" */ = {
+		894217686BA124D7356686C9 /* Build configuration list for PBXProject "nprt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFDF976CFDC032E3BDE78DE5 /* Default */,
