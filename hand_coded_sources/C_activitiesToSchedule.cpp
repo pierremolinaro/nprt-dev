@@ -211,9 +211,9 @@ addEntry (const sint32 inActivityIndex,
 //    }
   }else{
     co << "**** ERROR !!! Activity index "
-       << inActivityIndex
+       << cStringWithSigned (inActivityIndex)
        << " already exists in schedule activity list at schedule instant "
-       << inActivityScheduleInstant
+       << cStringWithSigned (inActivityScheduleInstant)
        << " ****\n" ;
   }
 }
@@ -594,9 +594,9 @@ AnyNotReadyToScheduleAt (const sint32 inCurrentInstant) const {
      if (index < inNames.count ()) {
       inStream << inNames (index COMMA_HERE) << " " ;
      }
-     inStream << "#" << index << " at "
-              << p->mScheduleInstant << ", priority "
-              << p->mActivityPriority << "\n" ;
+     inStream << "#" << cStringWithSigned (index) << " at "
+              << cStringWithSigned (p->mScheduleInstant) << ", priority "
+              << cStringWithSigned (p->mActivityPriority) << "\n" ;
      p = p->mPtrToNext ;
    }
  }

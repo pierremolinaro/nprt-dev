@@ -291,11 +291,11 @@ routine_performComputations (C_Compiler & inLexique,
 	while (processor != NULL) {
 	  macroValidPointer (processor) ;
 	  htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
-	  htmlFile << index ;
+	  htmlFile << cStringWithSigned (index) ;
 	  htmlFile.outputRawData ("</td><td>") ;
 	  htmlFile << processor->mKey ;
 	  htmlFile.outputRawData ("</td><td>") ;
-	  htmlFile << processor->mInfo.mStep.uintValue () ;
+	  htmlFile << cStringWithUnsigned (processor->mInfo.mStep.uintValue ()) ;
 	  htmlFile.outputRawData ("</td></tr>") ;
 	  processor = processor->nextObject () ;
 	  index ++ ;
@@ -308,7 +308,7 @@ routine_performComputations (C_Compiler & inLexique,
   while (processor != NULL) {
     macroValidPointer (processor) ;
     cResource resource ;
-    strcpy (resource.mResourceName, processor->mKey.cString ());
+    strcpy (resource.mResourceName, processor->mKey.cString (HERE));
   	resource.mResourceType= 2; // Processor = 2
    	resource.mStep = (sint32) processor->mInfo.mStep.uintValue () ;
     
@@ -328,13 +328,13 @@ routine_performComputations (C_Compiler & inLexique,
   while (network != NULL) {
     macroValidPointer (network) ;
     htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
-    htmlFile << index ;
+    htmlFile << cStringWithSigned (index) ;
     htmlFile.outputRawData ("</td><td>") ;
     htmlFile << network->mKey ;
     htmlFile.outputRawData ("</td><td>") ;
     htmlFile << kNetworkTypes [network->mInfo.mCANnetwork.boolValue ()] ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << network->mInfo.mScalingFactor.uintValue () ;
+    htmlFile << cStringWithUnsigned (network->mInfo.mScalingFactor.uintValue ()) ;
     htmlFile.outputRawData ("</td></tr>") ;
     network = network->nextObject () ;
     index ++ ;
@@ -348,7 +348,7 @@ routine_performComputations (C_Compiler & inLexique,
   while (network != NULL) {
     macroValidPointer (network) ;
     cResource resource ;
-    strcpy(resource.mResourceName,network->mKey.cString ());
+    strcpy(resource.mResourceName,network->mKey.cString (HERE));
   	resource.mResourceType= network->mInfo.mCANnetwork.boolValue ();
     resource.mStep = (sint32) network->mInfo.mScalingFactor.uintValue () ;		
  		min_NetworkStep = min (min_NetworkStep, resource.mStep);
@@ -365,7 +365,7 @@ routine_performComputations (C_Compiler & inLexique,
   while (task != NULL) {
     macroValidPointer (task) ;
     cElement element ;
-    strcpy(element.mElementName,task->mKey.cString ());   
+    strcpy(element.mElementName,task->mKey.cString (HERE));   
     element.mElementType = 'T';    
     element.mId_inList =index;
   	element.mResourceId = (sint32) task->mInfo.mProcessor.uintValue ();
@@ -427,7 +427,7 @@ routine_performComputations (C_Compiler & inLexique,
   while (message != NULL) {
     macroValidPointer (message) ;
     cElement element ;
-    strcpy(element.mElementName,message->mKey.cString ());
+    strcpy(element.mElementName,message->mKey.cString (HERE));
   	element.mElementType = 'M';
     element.mId_inList = index;
   	element.mResourceId = NumberOfProcessors + 
@@ -446,7 +446,7 @@ routine_performComputations (C_Compiler & inLexique,
       	MessageType = 'X' ;
       }else{ 
       	co << "ERROR : message #"
-      	   << index
+      	   << cStringWithSigned (index)
       	   << " is neither standard (S) nor extended (X) message!\n" ;
       }
       
@@ -523,23 +523,23 @@ routine_performComputations (C_Compiler & inLexique,
   while (task != NULL) {
     macroValidPointer (task) ;
     htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
-    htmlFile << index ;
+    htmlFile << cStringWithSigned (index) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << task->mKey.cString () ;
+    htmlFile << task->mKey.cString (HERE) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << task->mInfo.mProcessor.uintValue ()+1 ;
+    htmlFile << cStringWithUnsigned (task->mInfo.mProcessor.uintValue ()+1) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << task->mInfo.mPriority.uintValue () ;
+    htmlFile << cStringWithUnsigned (task->mInfo.mPriority.uintValue ()) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << task->mInfo.mOffset.uintValue ();
+    htmlFile << cStringWithUnsigned (task->mInfo.mOffset.uintValue ());
     htmlFile.outputRawData ("</td><td>") ;
     if (useCANmaxLengthOnly){
-      htmlFile << task->mInfo.mDurationMax.uintValue () ;
+      htmlFile << cStringWithUnsigned (task->mInfo.mDurationMax.uintValue ()) ;
     }else {
-      htmlFile << task->mInfo.mDurationMin.uintValue () ;
+      htmlFile << cStringWithUnsigned (task->mInfo.mDurationMin.uintValue ()) ;
     }
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << task->mInfo.mDurationMax.uintValue () ;
+    htmlFile << cStringWithUnsigned (task->mInfo.mDurationMax.uintValue ()) ;
     htmlFile.outputRawData ("</td><td>") ;
 //....................................................................   
     if (task->mInfo.mTaskKind (HERE)->taskDependsOnMessage ()) {
@@ -552,25 +552,25 @@ routine_performComputations (C_Compiler & inLexique,
     sint32 resourceId = (sint32) task->mInfo.mProcessor.uintValue ();
     sint32 Scal = Resource (resourceId COMMA_HERE).mStep ;
 
-    htmlFile << Element (index-1 COMMA_HERE).mEveryMultiple * Element (index-1 COMMA_HERE).mPeriod /Scal ;
+    htmlFile << cStringWithSigned (Element (index-1 COMMA_HERE).mEveryMultiple * Element (index-1 COMMA_HERE).mPeriod /Scal) ;
     htmlFile.outputRawData ("</td><td>") ;
     if (task->mInfo.mDeadline.uintValue () == UINT32_MAX){
     	htmlFile.outputRawData ("Unknown</td><td>") ;
     }else{
-     	htmlFile << task->mInfo.mDeadline.uintValue () ;
+     	htmlFile << cStringWithUnsigned (task->mInfo.mDeadline.uintValue ()) ;
     	htmlFile.outputRawData ("</td><td>") ;
     }
     if (task->mInfo.mTaskKind (HERE)->taskDependsOnTask ()) {
       htmlFile.outputRawData ("task #") ;
-      htmlFile << task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ()+1 ;
+      htmlFile << cStringWithUnsigned (task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ()+1) ;
     }else if (task->mInfo.mTaskKind (HERE)->taskDependsOnMessage ()) {
       htmlFile.outputRawData ("message #") ;
-      htmlFile << task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ()+1 ;
+      htmlFile << cStringWithUnsigned (task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ()+1) ;
     }else{
     	htmlFile.outputRawData (" ---") ;
     }
      htmlFile.outputRawData ("</td><td>") ;
-     htmlFile << task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () ;
+     htmlFile << cStringWithUnsigned (task->mInfo.mTaskKind (HERE)->getTaskEveryParameter ()) ;
       
     htmlFile.outputRawData ("</td></tr>") ;
     task = task->nextObject () ;
@@ -590,17 +590,17 @@ routine_performComputations (C_Compiler & inLexique,
   while (message != NULL) {
     macroValidPointer (message) ;
     htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
-    htmlFile << index ;
+    htmlFile << cStringWithSigned (index) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << message->mKey.cString () ;
+    htmlFile << message->mKey.cString (HERE) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << message->mInfo.mNetworkIndex.uintValue () +1;
+    htmlFile << cStringWithUnsigned (message->mInfo.mNetworkIndex.uintValue () +1) ;
     htmlFile.outputRawData ("</td><td>") ;
     htmlFile << kMessageClasses [message->mInfo.mClass.uintValue ()];
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << message->mInfo.mPriority.uintValue () ;
+    htmlFile << cStringWithUnsigned (message->mInfo.mPriority.uintValue ()) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << message->mInfo.mBytesCount.uintValue () ;
+    htmlFile << cStringWithUnsigned (message->mInfo.mBytesCount.uintValue ()) ;
     htmlFile.outputRawData ("</td><td>") ;
     
     sint32 resourceId =  NumberOfProcessors + (sint32) message->mInfo.mNetworkIndex.uintValue ();
@@ -611,33 +611,33 @@ routine_performComputations (C_Compiler & inLexique,
     		(strstr(kMessageClasses [message->mInfo.mClass.uintValue ()],"extended") != NULL)
     		){ 
       		if (useCANmaxLengthOnly){
-      		  htmlFile << Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal ;
+      		  htmlFile << cStringWithSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal) ;
       		}else{
-      			htmlFile << Element((index-1+NumberOfTasks) COMMA_HERE).mMinDuration / Scal;
+      			htmlFile << cStringWithSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMinDuration / Scal);
       			htmlFile.outputRawData ("--");
-      			htmlFile << Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal ;
+      			htmlFile << cStringWithSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal) ;
       		}
     }else{
-      htmlFile <<Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration /Scal ;
+      htmlFile << cStringWithSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration /Scal) ;
     }
     htmlFile.outputRawData ("</td><td>");    
-    htmlFile << message->mInfo.mOffset.uintValue () ;
+    htmlFile << cStringWithUnsigned (message->mInfo.mOffset.uintValue ()) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << Element (index-1 + NumberOfTasks  COMMA_HERE).mEveryMultiple *  
-                Element (index-1 + NumberOfTasks  COMMA_HERE).mPeriod /Scal;
+    htmlFile << cStringWithSigned (Element (index-1 + NumberOfTasks  COMMA_HERE).mEveryMultiple *  
+                                   Element (index-1 + NumberOfTasks  COMMA_HERE).mPeriod /Scal);
     htmlFile.outputRawData ("</td><td>") ; 
     if (message->mInfo.mDeadline.uintValue () == UINT32_MAX){
     	htmlFile.outputRawData ("Unknown</td><td>") ;
     }else{
-     	htmlFile << message->mInfo.mDeadline.uintValue () ;
+     	htmlFile << cStringWithUnsigned (message->mInfo.mDeadline.uintValue ()) ;
     	htmlFile.outputRawData ("</td><td>") ;
     }
    	if (message->mInfo.mMessageKind (HERE)->messageDependsOnTask ()) {
     	htmlFile.outputRawData ("task #") ;
-     	htmlFile << message->mInfo.mMessageKind (HERE)->getMessageDependanceValue ()+1 ;
+     	htmlFile << cStringWithUnsigned (message->mInfo.mMessageKind (HERE)->getMessageDependanceValue ()+1) ;
     }else if (message->mInfo.mMessageKind (HERE)->messageDependsOnMessage ()) {
     	htmlFile.outputRawData ("message # ") ;
- 	   	htmlFile << message->mInfo.mMessageKind (HERE)->getMessageDependanceValue ()+1 ;
+ 	   	htmlFile << cStringWithUnsigned (message->mInfo.mMessageKind (HERE)->getMessageDependanceValue ()+1) ;
     }else{
     	htmlFile.outputRawData (" ---") ;
     }
@@ -682,10 +682,10 @@ routine_performComputations (C_Compiler & inLexique,
   	ExtractWorstBestRT (exElement, Resource, MTElement, 
                         responseTimeArray, CreateIntermediateFiles, 
                         raw_outputHTMLFileName, htmlFile);
-    printf ("Results are stored in %s file.\n", htmlFileName.cString ());
+    printf ("Results are stored in %s file.\n", htmlFileName.cString (HERE));
     
  	}else{
-    printf ("System map is stored in %s file.\n", htmlFileName.cString ());
+    printf ("System map is stored in %s file.\n", htmlFileName.cString (HERE));
  	}
  	fflush (stdout);
 }

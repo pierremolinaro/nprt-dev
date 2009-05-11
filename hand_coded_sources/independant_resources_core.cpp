@@ -316,12 +316,12 @@ internalDumpStructure (cIndependantResourcesActivitySchedule * inPtr) {
     while (q != NULL) {
       if (! q->mMarked) {
         q->mMarked = true ;
-        co << "at " << uintInHex ((ptrAsUint) q)
-           << ": activity " << q->mActivityIndex
-           << ", duration: " << q->mActivityDuration
-           << ", eoe:" << q->mActivityEndOfExecution
-           << ", previous:" << ((ptrAsUint) q->mPtrToPreviousActivity)
-           << ", other: " << ((ptrAsUint) q->mPtrToOtherSchedule)
+        co << "at " << cStringWithPointer (q)
+           << ": activity " << cStringWithSigned (q->mActivityIndex)
+           << ", duration: " << cStringWithSigned (q->mActivityDuration)
+           << ", eoe:" << cStringWithSigned (q->mActivityEndOfExecution)
+           << ", previous:" << cStringWithPointer (q->mPtrToPreviousActivity)
+           << ", other: " << cStringWithPointer (q->mPtrToOtherSchedule)
            << "\n" ;
         co.flush ();
         internalDumpStructure (q->mPtrToOtherSchedule) ;
@@ -339,10 +339,10 @@ dumpSchedule (cIndependantResourceSchedule  * inPtr) {
   unMark () ;
   cIndependantResourceSchedule  * p = inPtr ;
   while (p != NULL) {
-    co << "at " << uintInHex ((ptrAsUint) p)
-       << ": resource:" << p->mResourceIndex
-       << ", activities: 0x" << p->mPtrToFirstActivity
-       << " (last 0x" << p->mPtrToLastActivity
+    co << "at " << cStringWithPointer (p)
+       << ": resource:" << cStringWithSigned (p->mResourceIndex)
+       << ", activities: 0x" << cStringWithPointer (p->mPtrToFirstActivity)
+       << " (last 0x" << cStringWithPointer (p->mPtrToLastActivity)
        << "\n" ;
     co.flush ();
     internalDumpStructure (p->mPtrToFirstActivity) ;
@@ -355,7 +355,7 @@ dumpSchedule (cIndependantResourceSchedule  * inPtr) {
 void cIndependantResourcesScheduleMap::
 dumpStructure (void) {
   co << "********** DUMP **********\n"
-        "Latest instant: " << mLatestInstant << "\n" ;
+        "Latest instant: " << cStringWithSigned (mLatestInstant) << "\n" ;
   dumpSchedule (mResourceScheduleArray (mLatestInstant COMMA_HERE)) ;
 }
 
@@ -372,7 +372,7 @@ independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inAct
   cIndependantResourcesScheduleMap scheduleMap ;
 //--- Enter independant activities
   const sint32 activitiesCount = inActivities.count () ;
-  co << activitiesCount << " activities\n" ;
+  co << cStringWithSigned (activitiesCount) << " activities\n" ;
   fflush (stdout);
   for (sint32 i=0 ; i<activitiesCount ; i++) {
     if (inActivities (i COMMA_HERE).mPredecessorId < 0) {
@@ -464,9 +464,9 @@ independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inAct
   outResponseTimeArray.addObjects (activitiesCount, cResponseTime ()) ;
   scheduleMap.computeBestAndWorstResponseTime (outResponseTimeArray) ;
   
-  co << gUsedResourceNodesCount << " resource nodes used, "
-     << gAllocatedResourceNodesCount << " allocated.\n"
-     << gAllocatedActivityNodesCount << " activity nodes allocated.\n" ;
+  co << cStringWithSigned (gUsedResourceNodesCount) << " resource nodes used, "
+     << cStringWithSigned (gAllocatedResourceNodesCount) << " allocated.\n"
+     << cStringWithSigned (gAllocatedActivityNodesCount) << " activity nodes allocated.\n" ;
 }
 
 /*------------------------------------------------------------------------*/

@@ -489,7 +489,7 @@ CreateActivitiesFile (const TC_UniqueArray <cActivity> & exElement,
 							      	const C_String & activitiesHTMLFileName){
 
   const sint32 NumberOfElements = exElement.count () ;
-  printf ("Extended activities list is stored in %s file.\n", activitiesHTMLFileName.cString ()) ;
+  printf ("Extended activities list is stored in %s file.\n", activitiesHTMLFileName.cString (HERE)) ;
   C_HTML_FileWrite act_htmlFile (activitiesHTMLFileName,
                               "Extended List Activities",
                               "style.css",
@@ -506,23 +506,23 @@ CreateActivitiesFile (const TC_UniqueArray <cActivity> & exElement,
  	for (sint32 index = 0; index < NumberOfElements ;index++) {
  	  if ( (exElement (index COMMA_HERE).mOccurrence % exElement (index COMMA_HERE).mEvery) == 0 ){
 			act_htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
-		  act_htmlFile << index;
+		  act_htmlFile << cStringWithSigned (index) ;
 		  act_htmlFile.outputRawData ("</td><td>") ;
 		  act_htmlFile << exElement (index COMMA_HERE).mElementName;  
 	    act_htmlFile.outputRawData ("</td><td>") ;
-		  act_htmlFile << exElement (index COMMA_HERE).mResourceId;
+		  act_htmlFile << cStringWithSigned (exElement (index COMMA_HERE).mResourceId) ;
 	    act_htmlFile.outputRawData ("</td><td>") ;
-		  act_htmlFile << exElement (index COMMA_HERE).mPriority;
+		  act_htmlFile << cStringWithSigned (exElement (index COMMA_HERE).mPriority) ;
 	    act_htmlFile.outputRawData ("</td><td>") ;
-		  act_htmlFile << exElement (index COMMA_HERE).mOccurrence/exElement (index COMMA_HERE).mEvery;
+		  act_htmlFile << cStringWithSigned (exElement (index COMMA_HERE).mOccurrence/exElement (index COMMA_HERE).mEvery);
 	    act_htmlFile.outputRawData ("</td><td>") ;
-		  act_htmlFile << exElement (index COMMA_HERE).mOffset;  
+		  act_htmlFile << cStringWithSigned (exElement (index COMMA_HERE).mOffset);  
 	    act_htmlFile.outputRawData ("</td><td>") ;
-		  act_htmlFile << exElement (index COMMA_HERE).mMinDuration; 
+		  act_htmlFile << cStringWithSigned (exElement (index COMMA_HERE).mMinDuration); 
 	    act_htmlFile.outputRawData ("</td><td>") ;
-		  act_htmlFile << exElement (index COMMA_HERE).mMaxDuration;
+		  act_htmlFile << cStringWithSigned (exElement (index COMMA_HERE).mMaxDuration);
 	    act_htmlFile.outputRawData ("</td><td>") ;
-		  act_htmlFile << exElement (index COMMA_HERE).mPredecessorId;
+		  act_htmlFile << cStringWithSigned (exElement (index COMMA_HERE).mPredecessorId);
 	    act_htmlFile.outputRawData ("</td><td>") ;
 		}
 	}
@@ -556,7 +556,7 @@ BuildExtendedList (TC_UniqueArray <cReadyAtThisInstant> & oReadyAtThisInstant,
 	const sint32 Num_of_Activties = 
 	      DeployElements (ArrangedElement, exElement, outMTElement, HyperPeriod);
  	
- 	co << Num_of_Activties << " activities\n" ;
+ 	co << cStringWithSigned (Num_of_Activties) << " activities\n" ;
   co.flush ();
  	if (CreateIntermediateFiles){
 	 	CreateActivitiesFile (exElement, activitiesHTMLFileName);
