@@ -31,7 +31,7 @@ ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
   }
   
   if(CreateIntermediateFiles){
-    printf ("Raw output results are stored in %s file.\n", raw_outputHTMLFileName.cString ()) ;
+    printf ("Raw output results are stored in %s file.\n", raw_outputHTMLFileName.cString (HERE)) ;
 			C_HTML_FileWrite raw_file (raw_outputHTMLFileName,
                               	  "Activities Outputs",
                               	  "style.css",
@@ -49,28 +49,28 @@ ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
 		for (sint32 i=0 ; i<inResponseTimeArray.count () ; i++) {
 		  if ( (exElement (i COMMA_HERE).mOccurrence % exElement (i COMMA_HERE).mEvery) == 0 ){
 				raw_file.outputRawData ("<tr class=\"result_line\"><td>") ;
-		    raw_file << i ;
+		    raw_file << cStringWithSigned (i) ;
 		    raw_file.outputRawData ("</td><td>") ;
 		    raw_file << exElement (i COMMA_HERE).mElementName ;
 		    raw_file.outputRawData ("</td><td>") ;
 		    raw_file << Resource (exElement (i COMMA_HERE).mResourceId COMMA_HERE).mResourceName ;
 	  		raw_file.outputRawData ("</td><td>") ;
-		    raw_file << exElement (i COMMA_HERE).mOccurrence/exElement (i COMMA_HERE).mEvery;
+		    raw_file << cStringWithSigned (exElement (i COMMA_HERE).mOccurrence/exElement (i COMMA_HERE).mEvery);
 		    raw_file.outputRawData ("</td><td>") ;
-		    raw_file << exElement (i COMMA_HERE).mOffset ;
+		    raw_file << cStringWithSigned (exElement (i COMMA_HERE).mOffset) ;
 		    raw_file.outputRawData ("</td><td>") ;
 		    
 		    if (inResponseTimeArray (i COMMA_HERE).mBestResponseTime == SINT32_MAX) {
 	      		raw_file.outputRawData ("Error</td><td>") ;
 	      }else{
-	      		raw_file << inResponseTimeArray ( i COMMA_HERE).mBestResponseTime ;
+	      		raw_file << cStringWithSigned (inResponseTimeArray ( i COMMA_HERE).mBestResponseTime) ;
 		  			raw_file.outputRawData ("</td><td>") ;
 	      }
 			    
 			  if (inResponseTimeArray ( i COMMA_HERE).mWorstResponseTime == 0){
 	      			raw_file.outputRawData ("Error</td></tr>") ;
 	      }else{
-	      	raw_file << inResponseTimeArray ( i COMMA_HERE).mWorstResponseTime ;
+	      	raw_file << cStringWithSigned (inResponseTimeArray ( i COMMA_HERE).mWorstResponseTime) ;
 		  		raw_file.outputRawData ("</td></tr>") ;
 	      } 
 	    }
@@ -138,7 +138,7 @@ ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
   	for(sint32 i = 0; i<Num_ofElements; i++){
   		if(index == MTElement ( i COMMA_HERE).mResourceId){
 				in_htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
-		    in_htmlFile << ElementIndex ;
+		    in_htmlFile << cStringWithSigned (ElementIndex) ;
 		    in_htmlFile.outputRawData ("</td><td>") ;
 		    in_htmlFile << MTElement ( i COMMA_HERE).mElementName ;
 		    in_htmlFile.outputRawData ("</td><td>") ;
@@ -148,24 +148,24 @@ ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
 		    if (MTElement ( i COMMA_HERE).mBestResponseTime == SINT32_MAX) {
       		in_htmlFile.outputRawData ("Error</td><td>") ;
       	}else{
-      		in_htmlFile << MTElement ( i COMMA_HERE).mBestResponseTime ;
+      		in_htmlFile << cStringWithSigned (MTElement ( i COMMA_HERE).mBestResponseTime) ;
 	  			in_htmlFile.outputRawData ("</td><td>") ;
       	}
 		    
 		    if (MTElement ( i COMMA_HERE).mWorstResponseTime == 0){
       			in_htmlFile.outputRawData ("Error</td><td>") ;
       	}else{
-      		in_htmlFile << MTElement ( i COMMA_HERE).mWorstResponseTime ;
+      		in_htmlFile << cStringWithSigned (MTElement ( i COMMA_HERE).mWorstResponseTime) ;
 	  			in_htmlFile.outputRawData ("</td><td>") ;
       	} 
 		    
-		    in_htmlFile << MTElement ( i COMMA_HERE).mPeriod * MTElement ( i COMMA_HERE).mEvery ;
+		    in_htmlFile << cStringWithSigned (MTElement ( i COMMA_HERE).mPeriod * MTElement ( i COMMA_HERE).mEvery) ;
 		    in_htmlFile.outputRawData ("</td><td>") ;
 		    
 		    if (MTElement ( i COMMA_HERE).mDeadline ==  SINT32_MAX){// UINT32_MAX -> SINT32_MAX by PM 17/1/2005
   				in_htmlFile.outputRawData ("Unkown</td><td>&nbsp;</td></tr>") ;
   			}else{
-        	in_htmlFile << MTElement ( i COMMA_HERE).mDeadline ;
+        	in_htmlFile << cStringWithSigned (MTElement ( i COMMA_HERE).mDeadline) ;
 	  			in_htmlFile.outputRawData ("</td>") ;
         	
       		if (MTElement (i COMMA_HERE).mWorstResponseTime > 

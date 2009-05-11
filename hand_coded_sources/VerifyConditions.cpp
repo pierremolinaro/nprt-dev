@@ -35,7 +35,7 @@ NecessaryConditions_OK (C_Compiler & inLexique,
     	             << " ("
     	             << Resource (index COMMA_HERE).mResourceName
     	             << ") is: "
-    	             << ResourceLoad
+    	             << cStringWithDouble (ResourceLoad)
     	             << " (greater than 1.0) !\n" ;
 
       inLexique.onTheFlySemanticError (errorMessage COMMA_HERE) ;

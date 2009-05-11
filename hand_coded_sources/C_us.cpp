@@ -328,7 +328,7 @@ find_or_add (const sint32 inIndex,
        }else{
          inStream << " " ;
        }
-       inStream << inPrefix << ((p->mIndex - inFirst) / inStep) ;
+       inStream << inPrefix << cStringWithSigned ((p->mIndex - inFirst) / inStep) ;
      }
      p = p->mPtrToNext ;
    }
@@ -387,25 +387,25 @@ void C_us::collectUnusedNodes (void) {
 void C_us::printVDLsummary (AC_OutputStream & inOutputStream) {
   const uint64 n = getTrivialAddCount () + getCacheSuccessCount () + getCacheFailureCount () ;
   inOutputStream << "Summary of VDL operations :\n"
-                    "  " << getVDLnodeCount ()
-                 << " VDL used nodes (size " << getNodeSize () << " bytes) ;\n"
-                    "  " << C_us_hashmap::getCreatedObjectCount ()
+                    "  " << cStringWithSigned (getVDLnodeCount ())
+                 << " VDL used nodes (size " << cStringWithUnsigned (getNodeSize ()) << " bytes) ;\n"
+                    "  " << cStringWithSigned (C_us_hashmap::getCreatedObjectCount ())
                  << " VDL created nodes (total size "
-                 << ((uint32) ((C_us_hashmap::getCreatedObjectCount () * getNodeSize ()) / 1024UL))
+                 << cStringWithUnsigned ((uint32) ((C_us_hashmap::getCreatedObjectCount () * getNodeSize ()) / 1024UL))
                  << " kbytes) ;\n"
-                    "  " << getNodeComparesCount () << " comparisons ;\n"
-                    "  " << getTrivialAddCount ()
-                 << " trivial additions (" << ((100ULL * getTrivialAddCount ()) / n)
+                    "  " << cStringWithSigned (getNodeComparesCount ()) << " comparisons ;\n"
+                    "  " << cStringWithUnsigned64 (getTrivialAddCount ())
+                 << " trivial additions (" << cStringWithUnsigned64 ((100ULL * getTrivialAddCount ()) / n)
                  << "%) ;\n"
-                    "  " << getCacheSuccessCount ()
-                 << " cache successes (" << ((100ULL * getCacheSuccessCount ()) / n) << "%) ;\n"
-                    "  " << getCacheFailureCount () << " cache failures ("
-                 << ((100ULL * getCacheFailureCount ()) / n) << "%), including "
-                 << getCacheOverrideCount () << " cache overrides ("
-                 << ((100ULL * getCacheOverrideCount ()) / n) << "%) ;\n"
-                    "  " << getUnusedCacheEntriesCount () << " unused cache entries ("
-                 << ((100ULL * getUnusedCacheEntriesCount ()) / getCacheEntriesCount ())
-                 << "%, total entries = " << getCacheEntriesCount () << ").\n" ;
+                    "  " << cStringWithUnsigned64 (getCacheSuccessCount ())
+                 << " cache successes (" << cStringWithUnsigned64 ((100ULL * getCacheSuccessCount ()) / n) << "%) ;\n"
+                    "  " << cStringWithUnsigned64 (getCacheFailureCount ()) << " cache failures ("
+                 << cStringWithUnsigned64 ((100ULL * getCacheFailureCount ()) / n) << "%), including "
+                 << cStringWithUnsigned64 (getCacheOverrideCount ()) << " cache overrides ("
+                 << cStringWithUnsigned64 ((100ULL * getCacheOverrideCount ()) / n) << "%) ;\n"
+                    "  " << cStringWithUnsigned64 (getUnusedCacheEntriesCount ()) << " unused cache entries ("
+                 << cStringWithUnsigned64 ((100ULL * getUnusedCacheEntriesCount ()) / getCacheEntriesCount ())
+                 << "%, total entries = " << cStringWithUnsigned64 (getCacheEntriesCount ()) << ").\n" ;
 }
 
 //---------------------------------------------------------------------------*
