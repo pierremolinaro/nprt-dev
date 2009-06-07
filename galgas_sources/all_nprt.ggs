@@ -1,7 +1,7 @@
 project all_nprt :
   lexique "oa_scanner.ggs" : makefile, xcode_tool, xcode_app ;
   semantics "oa_semantics.ggs" : makefile, xcode_tool ;
-  option "oa_cli_options.ggs" : makefile, xcode_tool, xcode_app ;
+  option "oa_cli_options.gOption" : makefile, xcode_tool, xcode_app ;
   syntax "oa_parser.ggs" : makefile, xcode_tool ;
   grammar "oa_grammar.ggs" : makefile, xcode_tool ;
   gui "cocoaOA.ggs" : xcode_tool, xcode_app ;
