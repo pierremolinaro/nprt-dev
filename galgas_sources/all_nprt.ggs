@@ -1,5 +1,5 @@
 project all_nprt :
-  lexique "oa_scanner.ggs" : makefile, xcode_tool, xcode_app ;
+  lexique "oa_scanner.gLexique" : makefile, xcode_tool, xcode_app ;
   semantics "oa_semantics.ggs" : makefile, xcode_tool ;
   option "oa_cli_options.gOption" : makefile, xcode_tool, xcode_app ;
   syntax "oa_parser.ggs" : makefile, xcode_tool ;
