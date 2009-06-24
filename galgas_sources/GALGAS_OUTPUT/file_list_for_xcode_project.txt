@@ -88,7 +88,7 @@
 		DA20EF399B63A72D0E4AB575 /* MF_Assert.cpp */ = {isa = PBXBuildFile; fileRef = 649FFA2B3FF8C02EBFD5659F ; settings = {ATTRIBUTES = (); }; };
 		E5BC5280214E0486B273A5F9 /* MF_MemoryControl.cpp */ = {isa = PBXBuildFile; fileRef = CED301B442654DD8C23B3FC9 ; settings = {ATTRIBUTES = (); }; };
 		139AA4D9AA55B8D237EC5D4A /* C_String.cpp */ = {isa = PBXBuildFile; fileRef = 26A953A8CD9526FCA6FE9BA5 ; settings = {ATTRIBUTES = (); }; };
-		68F23406C6CECF84A7EBB0FE /* unicode_character.cpp */ = {isa = PBXBuildFile; fileRef = 010D3C3B8269FAF0BA7491D4 ; settings = {ATTRIBUTES = (); }; };
+		68F23406C6CECF84A7EBB0FE /* unicode_character_cpp.cpp */ = {isa = PBXBuildFile; fileRef = 010D3C3B8269FAF0BA7491D4 ; settings = {ATTRIBUTES = (); }; };
 		4CCE62F762A2AAA148D556BD /* unicode_string_routines.cpp */ = {isa = PBXBuildFile; fileRef = 267E36708F955D7AB048990D ; settings = {ATTRIBUTES = (); }; };
 		25D76A6704B08093C652FD79 /* ../hand_coded_sources/CANMmessageBounds.cpp */ = {isa = PBXBuildFile; fileRef = 95D565EF66E7DFF9F98764DA ; settings = {ATTRIBUTES = (); }; };
 		3289AF4DD08DE5D1DE54F68F /* ../hand_coded_sources/C_VDL_hashmap.cpp */ = {isa = PBXBuildFile; fileRef = A0B923820DCC509A6F75849B ; settings = {ATTRIBUTES = (); }; };
@@ -171,7 +171,7 @@
 		62A78B84F3D5D92F4FAA000B /* MF_Assert.cpp */ = {isa = PBXBuildFile; fileRef = 649FFA2B3FF8C02EBFD5659F ; settings = {ATTRIBUTES = (); }; };
 		814305CA9AD266F53BC82511 /* MF_MemoryControl.cpp */ = {isa = PBXBuildFile; fileRef = CED301B442654DD8C23B3FC9 ; settings = {ATTRIBUTES = (); }; };
 		7DC79D135BA18E051673D906 /* C_String.cpp */ = {isa = PBXBuildFile; fileRef = 26A953A8CD9526FCA6FE9BA5 ; settings = {ATTRIBUTES = (); }; };
-		8B48137A16A1ACD04ED91125 /* unicode_character.cpp */ = {isa = PBXBuildFile; fileRef = 010D3C3B8269FAF0BA7491D4 ; settings = {ATTRIBUTES = (); }; };
+		8B48137A16A1ACD04ED91125 /* unicode_character_cpp.cpp */ = {isa = PBXBuildFile; fileRef = 010D3C3B8269FAF0BA7491D4 ; settings = {ATTRIBUTES = (); }; };
 		B30D6F8C31474BD0764E6AC0 /* unicode_string_routines.cpp */ = {isa = PBXBuildFile; fileRef = 267E36708F955D7AB048990D ; settings = {ATTRIBUTES = (); }; };
 		B9B3EEE609D05B90C14222FB /* main.m */ = {isa = PBXBuildFile; fileRef = 65E6E1EDC05F3D8AB658C551 ; settings = {ATTRIBUTES = (); }; };
 		73A3CEF72E03AA9D980C7ECA /* NSSplitViewExtensions.m */ = {isa = PBXBuildFile; fileRef = 778DFAECDC212708F721B788 ; settings = {ATTRIBUTES = (); }; };
@@ -218,7 +218,7 @@
 		AAD094E0B5CB1B01D712F708 /* C_ConsoleOut.cpp */ = {isa = PBXBuildFile; fileRef = 6F634854F3EF915E2E980C31 ; settings = {ATTRIBUTES = (); }; };
 		0041A42470269D56260243A1 /* C_DateTime.cpp */ = {isa = PBXBuildFile; fileRef = 40BE98EFAAE0091FA301E613 ; settings = {ATTRIBUTES = (); }; };
 		BED5BEAE847A7FF6E220B5CF /* C_String.cpp */ = {isa = PBXBuildFile; fileRef = 26A953A8CD9526FCA6FE9BA5 ; settings = {ATTRIBUTES = (); }; };
-		C60D1DB1D2E5E7A07DA55B26 /* unicode_character.cpp */ = {isa = PBXBuildFile; fileRef = 010D3C3B8269FAF0BA7491D4 ; settings = {ATTRIBUTES = (); }; };
+		C60D1DB1D2E5E7A07DA55B26 /* unicode_character_cpp.cpp */ = {isa = PBXBuildFile; fileRef = 010D3C3B8269FAF0BA7491D4 ; settings = {ATTRIBUTES = (); }; };
 		C1921C25C5121F9DA7815CDE /* unicode_string_routines.cpp */ = {isa = PBXBuildFile; fileRef = 267E36708F955D7AB048990D ; settings = {ATTRIBUTES = (); }; };
 		7FB6D44DD73C7041E0AA0F19 /* C_Exception.cpp */ = {isa = PBXBuildFile; fileRef = F98EA8FE223C713B77189A77 ; settings = {ATTRIBUTES = (); }; };
 		C2C5517597CE0A4D89620F55 /* md5.cpp */ = {isa = PBXBuildFile; fileRef = CE68DAD4D52D063967F0A705 ; settings = {ATTRIBUTES = (); }; };
@@ -455,8 +455,8 @@
 		54F96369AB93E4F3BB068C22 /* predefined_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = predefined_types.h; path = predefined_types.h; sourceTree = "<group>"; };
 		8EBCB58C6CE932B957B6F332 /* scanner_actions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scanner_actions.cpp; path = scanner_actions.cpp; sourceTree = "<group>"; };
 		66EC4FA56EB1E1F8CBE183B9 /* scanner_actions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scanner_actions.h; path = scanner_actions.h; sourceTree = "<group>"; };
-		010D3C3B8269FAF0BA7491D4 /* unicode_character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = unicode_character.cpp; path = unicode_character.cpp; sourceTree = "<group>"; };
-		DAB8595A7DBDA4CBCBEE168F /* unicode_character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unicode_character.h; path = unicode_character.h; sourceTree = "<group>"; };
+		010D3C3B8269FAF0BA7491D4 /* unicode_character_cpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = unicode_character_cpp.cpp; path = unicode_character_cpp.cpp; sourceTree = "<group>"; };
+		DAB8595A7DBDA4CBCBEE168F /* unicode_character_cpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unicode_character_cpp.h; path = unicode_character_cpp.h; sourceTree = "<group>"; };
 		267E36708F955D7AB048990D /* unicode_string_routines.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = unicode_string_routines.cpp; path = unicode_string_routines.cpp; sourceTree = "<group>"; };
 		B3E952A85B8551BA726A1227 /* unicode_string_routines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unicode_string_routines.h; path = unicode_string_routines.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -781,8 +781,8 @@
 			children = (
 				26A953A8CD9526FCA6FE9BA5 /* C_String.cpp */,
 				E05EBD93369CE542E8F2322D /* C_String.h */,
-				010D3C3B8269FAF0BA7491D4 /* unicode_character.cpp */,
-				DAB8595A7DBDA4CBCBEE168F /* unicode_character.h */,
+				010D3C3B8269FAF0BA7491D4 /* unicode_character_cpp.cpp */,
+				DAB8595A7DBDA4CBCBEE168F /* unicode_character_cpp.h */,
 				267E36708F955D7AB048990D /* unicode_string_routines.cpp */,
 				B3E952A85B8551BA726A1227 /* unicode_string_routines.h */,
 				89947D410D897474079C1477 /* cUnicodeData.h */,
