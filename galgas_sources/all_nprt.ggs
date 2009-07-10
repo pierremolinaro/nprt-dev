@@ -4,7 +4,7 @@ project all_nprt :
   option "oa_cli_options.gOption" : makefile, xcode_tool, xcode_app ;
   syntax "oa_parser.ggs" : makefile, xcode_tool ;
   grammar "oa_grammar.ggs" : makefile, xcode_tool ;
-  gui "cocoaOA.ggs" : xcode_tool, xcode_app ;
+  gui "cocoaOA.gGui" : xcode_tool, xcode_app ;
   program "oa_main.ggs" : makefile, xcode_tool ;
 
   extern "../hand_coded_sources/C_us.cpp" : makefile, xcode_tool ;

@@ -9,6 +9,7 @@
 #include "ExtendedList.h"
 #include "VerifyConditions.h"
 #include "activities_core.h"
+#include "oa_cli_options.h"
 
 //--------------------------------------------------------------------------*
 //                                                                          *
@@ -259,8 +260,8 @@ routine_performComputations (C_Compiler & inLexique,
   TC_UniqueArray <cResource> Resource ;
   TC_UniqueArray <cElement> Element ;
 
-  const bool CreateIntermediateFiles = inLexique.boolOptionValueFromKeys ("oa_cli_options", "createIntermediateFiles" COMMA_HERE) ;
-  const bool useCANmaxLengthOnly = inLexique.boolOptionValueFromKeys ("oa_cli_options", "useCANmaxLegth" COMMA_HERE) ;
+  const bool CreateIntermediateFiles = gOption_oa_5F_cli_5F_options_createIntermediateFiles.mValue ;
+  const bool useCANmaxLengthOnly = gOption_oa_5F_cli_5F_options_useCANmaxLegth.mValue ;
   bool forceBalgorithm = true ;
   const C_String sourceFile = inLexique.sourceFileName () ;
   

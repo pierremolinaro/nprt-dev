@@ -1,2 +1,12 @@
-#---------------------------------------------------------------------------*#                                                                           *#   C L I    O P T I O N S                                                  *#                                                                           *#---------------------------------------------------------------------------*option oa_cli_options :  @bool createIntermediateFiles : 'C', "create-intermediate-files" -> "Create the intermediate files" ;  @bool forceBalgorithm : 'B', "force-B-algorithm" -> "For independant resources, force B algorithm" ;  @bool useCANmaxLegth : 'M', "use-can-max-length" -> "Use only CAN messages max length" ;end option ;
-#---------------------------------------------------------------------------*
+#---------------------------------------------------------------------------*
+#                                                                           *
+#   C L I    O P T I O N S                                                  *
+#                                                                           *
+#---------------------------------------------------------------------------*
+
+option oa_cli_options :
+  @bool createIntermediateFiles : 'C', "create-intermediate-files" -> "Create the intermediate files" ;
+  @bool useCANmaxLegth : 'M', "use-can-max-length" -> "Use only CAN messages max length" ;
+end option ;
+
+#---------------------------------------------------------------------------*
