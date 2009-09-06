@@ -32,7 +32,7 @@
 
 //---------------------------------------------------------------------------*
 
-const ptrAsSint MARK_VDL_NODE = PTR_AS_SINT_MIN ;
+const sinteger MARK_VDL_NODE = SINTEGER_MIN ;
 
 //---------------------------------------------------------------------------*
 
@@ -53,10 +53,10 @@ class C_us {
 //--- Internal nodes
   public : class C_us_nodeInfo {
     public : C_us_nodeInfo * mPtrToNext ;
-    public : ptrAsSint mID ;
+    public : sinteger mID ;
     public : sint32 mIndex ;
     
-    public : ptrAsSint compare (const C_us_nodeInfo & inOperand) const ;
+    public : sinteger compare (const C_us_nodeInfo & inOperand) const ;
     
     public : inline bool isMarked (void) const {
       return (mID & MARK_VDL_NODE) != 0 ;
@@ -111,9 +111,9 @@ class C_us {
 //--- Print VDL summary
   public : static void printVDLsummary (AC_OutputStream & inOutputStream) ;
 
-//--- Get value ID (as ptrAsSint integer)
-  public : inline ptrAsSint getLongID (void) const {
-    return (mRootPointer != NULL) ? ((ptrAsSint) mRootPointer->mID) : 0 ;
+//--- Get value ID (as sinteger integer)
+  public : inline sinteger getLongID (void) const {
+    return (mRootPointer != NULL) ? ((sinteger) mRootPointer->mID) : 0 ;
   }
 
 //--- Push a new value on stack

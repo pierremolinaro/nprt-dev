@@ -100,12 +100,12 @@ class C_activitiesToSchedule {
 //--- Internal nodes
   public : class cVDLnodeInfo {
     public : cVDLnodeInfo * mPtrToNext ;
-    public : ptrAsSint mID ;
+    public : sinteger mID ;
     public : sint32 mActivityIndex ;
     public : sint32 mActivityPriority ;
     public : sint32 mScheduleInstant ;
     
-    public : ptrAsSint compare (const cVDLnodeInfo & inOperand) const ;
+    public : sinteger compare (const cVDLnodeInfo & inOperand) const ;
     
     public : inline bool isMarked (void) const {
       return (mID & MARK_VDL_NODE) != 0 ;
@@ -137,11 +137,11 @@ class C_activitiesToSchedule {
   protected : cVDLnodeInfo * mRootPointer ;
 
 //--- Get pointer value
-  public : inline ptrAsSint getPtr (void) const { return (ptrAsSint) mRootPointer ; }
+  public : inline sinteger getPtr (void) const { return (sinteger) mRootPointer ; }
 
-//--- Get value ID (as ptrAsSint integer)
-  public : inline ptrAsSint getLongID (void) const {
-    return (mRootPointer != NULL) ? ((ptrAsSint) mRootPointer->mID) : 0 ;
+//--- Get value ID (as sinteger integer)
+  public : inline sinteger getLongID (void) const {
+    return (mRootPointer != NULL) ? ((sinteger) mRootPointer->mID) : 0 ;
   }
 
 //--- Collect unused elements

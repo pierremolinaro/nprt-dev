@@ -94,8 +94,8 @@ void C_us_hashmap::C_TreeForCollision::allocBlock (void) {
   sint32 blockSize = BLOCK_SIZE ;
   const sint32 ALIGNMENT = 32 ;
 //--- Align pointer
-  if ((((ptrAsSint) ptr) % ALIGNMENT) != 0) {
-    ptr = (char *) (((((ptrAsSint) ptr) / ALIGNMENT) + 1) * ALIGNMENT) ;
+  if ((((sinteger) ptr) % ALIGNMENT) != 0) {
+    ptr = (char *) (((((sinteger) ptr) / ALIGNMENT) + 1) * ALIGNMENT) ;
     blockSize -= ALIGNMENT ;
   }
   const sint32 nbNewObjects = blockSize / ((sint32) sizeof (MyBlockavltree_element_for_collision)) ;
