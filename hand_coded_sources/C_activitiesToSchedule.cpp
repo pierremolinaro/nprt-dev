@@ -629,12 +629,12 @@ C_activitiesToSchedule & C_activitiesToSchedule::operator = (const C_activitiesT
 
 sint32 C_activitiesToSchedule::smNodeCompare = 0 ;
 
-ptrAsSint C_activitiesToSchedule::cVDLnodeInfo::
+sinteger C_activitiesToSchedule::cVDLnodeInfo::
 compare (const cVDLnodeInfo & inInfo) const {
   smNodeCompare ++ ;
-  ptrAsSint result = mActivityIndex - inInfo.mActivityIndex ;
+  sinteger result = mActivityIndex - inInfo.mActivityIndex ;
   if (result == 0) {
-    result = ((ptrAsSint) mPtrToNext) - ((ptrAsSint) inInfo.mPtrToNext) ;
+    result = ((sinteger) mPtrToNext) - ((sinteger) inInfo.mPtrToNext) ;
     if (result == 0) {
       result = mScheduleInstant - inInfo.mScheduleInstant ;
       if (result == 0) {

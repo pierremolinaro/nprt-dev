@@ -166,7 +166,7 @@ class C_VDL_hashmap {
       delete mPtrToSup ;
       delete mPtrToInf ;
     }
-    public : ptrAsSint compare (const MyBlockavltree_element_for_collision & inElement) const {
+    public : sinteger compare (const MyBlockavltree_element_for_collision & inElement) const {
       return mInfo.compare (inElement.mInfo) ;
     }
     public : void * operator new (const size_t inByteSize) ;

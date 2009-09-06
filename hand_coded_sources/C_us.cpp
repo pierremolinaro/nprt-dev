@@ -267,10 +267,10 @@ uint64 C_us::getUnusedCacheEntriesCount (void) {
 
 sint32 C_us::smNodeCompare = 0 ;
 
-ptrAsSint C_us::C_us_nodeInfo::
+sinteger C_us::C_us_nodeInfo::
 compare (const C_us_nodeInfo & inInfo) const {
   smNodeCompare ++ ;
-  ptrAsSint result = ((ptrAsSint) mPtrToNext) - ((ptrAsSint) inInfo.mPtrToNext) ;
+  sinteger result = ((sinteger) mPtrToNext) - ((sinteger) inInfo.mPtrToNext) ;
   if (result == 0) {
     result = mIndex - inInfo.mIndex ;
   }
