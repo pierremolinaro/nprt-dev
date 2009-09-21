@@ -43,9 +43,9 @@
 //---------------------------------------------------------------------------*
 
 class cIndependantResourcesActivitySchedule {
-  public : sint32 mActivityIndex ;
-  public : sint32 mActivityDuration ;
-  public : sint32 mActivityEndOfExecution ;
+  public : PMSInt32 mActivityIndex ;
+  public : PMSInt32 mActivityDuration ;
+  public : PMSInt32 mActivityEndOfExecution ;
   public : cIndependantResourcesActivitySchedule * mPtrToOtherSchedule ;
   public : cIndependantResourcesActivitySchedule * mPtrToPreviousActivity ;
   public : cIndependantResourcesActivitySchedule * mPtrToNextNode ;
@@ -59,7 +59,7 @@ class cIndependantResourcesActivitySchedule {
 //---------------------------------------------------------------------------*
 
 class cIndependantResourceSchedule  {
-  public : sint32 mResourceIndex ;
+  public : PMSInt32 mResourceIndex ;
   public : C_activitiesToSchedule mActivitiesToScheduleList ;
   public : cIndependantResourceSchedule  * mPtrToOtherResource ;
   public : cIndependantResourcesActivitySchedule * mPtrToFirstActivity ;
@@ -79,30 +79,30 @@ class cIndependantResourceSchedule  {
 
 class cIndependantResourcesScheduleMap {
   private : TC_UniqueArray <cIndependantResourceSchedule  *> mResourceScheduleArray ;
-  private : sint32 mCurrentInstant ;
-  private : sint32 mLatestInstant ;
+  private : PMSInt32 mCurrentInstant ;
+  private : PMSInt32 mLatestInstant ;
 
 //--- Constructor
   public : cIndependantResourcesScheduleMap (void) ;
 
 //--- Enter an activity to schedule
- public : void enterActivity (const sint32 inActivityIndex,
-                              const sint32 inActivityPriority,
-                              const sint32 inActivityReadyAt,
-                              const sint32 inRessourceIndex) ;
+ public : void enterActivity (const PMSInt32 inActivityIndex,
+                              const PMSInt32 inActivityPriority,
+                              const PMSInt32 inActivityReadyAt,
+                              const PMSInt32 inRessourceIndex) ;
   
 //--- More work ?
   public : bool moreWorkToDo (void) const ;
-  public : inline sint32 getCurrentInstant (void) const { return mCurrentInstant ; }
-  public : inline sint32 getFarestInstant (void) const { return mLatestInstant ; }
+  public : inline PMSInt32 getCurrentInstant (void) const { return mCurrentInstant ; }
+  public : inline PMSInt32 getFarestInstant (void) const { return mLatestInstant ; }
   public : cIndependantResourceSchedule  * retrieveResourceList (void) ;
   public : void insertAtNextInstant (cIndependantResourceSchedule  * inResource) ;
   public : void advanceToNextInstant (void) ;
   public : void dumpStructure (void) ;
   public : void insertAtInstant (cIndependantResourceSchedule  * inResource,
-                                 const sint32 inInstant) ;
+                                 const PMSInt32 inInstant) ;
   public : void computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & ioResponseTimeArray) ;
-  protected : void reallocIfNeeded (const sint32 inInstant) ;
+  protected : void reallocIfNeeded (const PMSInt32 inInstant) ;
 
 } ;
 
@@ -119,9 +119,9 @@ mPtrToLastActivity (NULL) {
 //---------------------------------------------------------------------------*
 
 static cIndependantResourceSchedule * gResourceFreeList = NULL ;
-static sint32 gAllocatedResourceNodesCount = 0 ;
-static sint32 gUsedResourceNodesCount = 0 ;
-static sint32 gAllocatedActivityNodesCount = 0 ;
+static PMSInt32 gAllocatedResourceNodesCount = 0 ;
+static PMSInt32 gUsedResourceNodesCount = 0 ;
+static PMSInt32 gAllocatedActivityNodesCount = 0 ;
 
 //---------------------------------------------------------------------------*
 
@@ -158,11 +158,11 @@ mLatestInstant (0) {
 #define EXTRA 1000
 
 void cIndependantResourcesScheduleMap::
-reallocIfNeeded (const sint32 inInstant) {
+reallocIfNeeded (const PMSInt32 inInstant) {
 //--- Realloc schedule map ?
   if (inInstant >= mResourceScheduleArray.count ()) {
-    const sint32 actualCount = mResourceScheduleArray.count () ;
-    const sint32 newCount = inInstant + EXTRA + 1 ;
+    const PMSInt32 actualCount = mResourceScheduleArray.count () ;
+    const PMSInt32 newCount = inInstant + EXTRA + 1 ;
     mResourceScheduleArray.addObjects (newCount - actualCount, NULL) ;
   }
 }
@@ -170,10 +170,10 @@ reallocIfNeeded (const sint32 inInstant) {
 //---------------------------------------------------------------------------*
 
 void cIndependantResourcesScheduleMap::
-enterActivity (const sint32 inActivityIndex,
-               const sint32 inActivityPriority,
-               const sint32 inActivityReadyAt,
-               const sint32 inRessourceIndex) {
+enterActivity (const PMSInt32 inActivityIndex,
+               const PMSInt32 inActivityPriority,
+               const PMSInt32 inActivityReadyAt,
+               const PMSInt32 inRessourceIndex) {
 //--- Realloc schedule map ?
   reallocIfNeeded (inActivityReadyAt) ;
 //--- Is instant is far than farest ?
@@ -237,7 +237,7 @@ void cIndependantResourcesScheduleMap::insertAtNextInstant (cIndependantResource
 
 void cIndependantResourcesScheduleMap::
 insertAtInstant (cIndependantResourceSchedule  * inResource,
-                 const sint32 inInstant) {
+                 const PMSInt32 inInstant) {
 //  printf ("Insert at %ld\n", inInstant) ;
 //--- Realloc schedule map ?
   reallocIfNeeded (inInstant) ;
@@ -294,8 +294,8 @@ void cIndependantResourcesScheduleMap::
 computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & ioResponseTimeArray) {
   cIndependantResourcesActivitySchedule * p = gPtrNodeList ;
   while (p != NULL) {
-    const sint32 activityIndex = p->mActivityIndex ;
-    const sint32 eoe = p->mActivityEndOfExecution ;
+    const PMSInt32 activityIndex = p->mActivityIndex ;
+    const PMSInt32 eoe = p->mActivityEndOfExecution ;
     if (ioResponseTimeArray (activityIndex COMMA_HERE).mBestResponseTime > eoe) {
       ioResponseTimeArray (activityIndex COMMA_HERE).mBestResponseTime = eoe ;
     }
@@ -371,10 +371,10 @@ independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inAct
 //--- Schedule map
   cIndependantResourcesScheduleMap scheduleMap ;
 //--- Enter independant activities
-  const sint32 activitiesCount = inActivities.count () ;
+  const PMSInt32 activitiesCount = inActivities.count () ;
   co << cStringWithSigned (activitiesCount) << " activities\n" ;
   fflush (stdout);
-  for (sint32 i=0 ; i<activitiesCount ; i++) {
+  for (PMSInt32 i=0 ; i<activitiesCount ; i++) {
     if (inActivities (i COMMA_HERE).mPredecessorId < 0) {
       scheduleMap.enterActivity (i,
                                  inActivities (i COMMA_HERE).mPriority,
@@ -394,11 +394,11 @@ independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inAct
       }else if (p->mActivitiesToScheduleList.AnyReadyToScheduleAt (scheduleMap.getCurrentInstant ())) {
       //  printf ("Iteration %ld, latest : %ld\n", iteration, scheduleMap.getFarestInstant ()) ;
         C_activitiesToSchedule list = p->mActivitiesToScheduleList ;
-        const sint32 activityIndex = list.getFirstToScheduleAndSuppress (scheduleMap.getCurrentInstant ()) ;
-        const sint32 successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId ;
-        const sint32 minDuration = inActivities (activityIndex COMMA_HERE).mMinDuration ;
-        const sint32 maxDuration = inActivities (activityIndex COMMA_HERE).mMaxDuration ;
-        for (sint32 i=minDuration ; i<=maxDuration ; i++) {
+        const PMSInt32 activityIndex = list.getFirstToScheduleAndSuppress (scheduleMap.getCurrentInstant ()) ;
+        const PMSInt32 successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId ;
+        const PMSInt32 minDuration = inActivities (activityIndex COMMA_HERE).mMinDuration ;
+        const PMSInt32 maxDuration = inActivities (activityIndex COMMA_HERE).mMaxDuration ;
+        for (PMSInt32 i=minDuration ; i<=maxDuration ; i++) {
           gAllocatedActivityNodesCount ++ ;
           cIndependantResourcesActivitySchedule * pActivity = new cIndependantResourcesActivitySchedule ;
           pActivity->mMarked = false ;
@@ -425,7 +425,7 @@ independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inAct
                                                    inActivities (successorIndex COMMA_HERE).mOffset);
             }
           	
-          	sint32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId;
+          	PMSInt32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId;
           	
           	while (OtherHeirId >= 0){
           		

@@ -50,9 +50,9 @@
 
 #ifndef FORGET_ACTIVITY_NODES
   class cActivitySchedule {
-    public : sint32 mActivityIndex ;
-    public : sint32 mActivityDuration ;
-    public : sint32 mActivityEndOfExecution ;
+    public : PMSInt32 mActivityIndex ;
+    public : PMSInt32 mActivityDuration ;
+    public : PMSInt32 mActivityEndOfExecution ;
     public : cActivitySchedule * mPtrToOtherSchedule ;
     public : cActivitySchedule * mPtrToSameSchedule ;
     public : cActivitySchedule * mPtrToNextNode ;
@@ -73,9 +73,9 @@
   
     public : cActivityList (void) ;
   
-    public : void push (const sint32 inActivity,
-                        const sint32 inEndOfExecution,
-                        const sint32 inExecutionCounter) ;
+    public : void push (const PMSInt32 inActivity,
+                        const PMSInt32 inEndOfExecution,
+                        const PMSInt32 inExecutionCounter) ;
 
     public : void mergeList (cActivityList & inOtherList) ;
 
@@ -101,20 +101,20 @@
 
 #ifndef FORGET_ACTIVITY_NODES
   static cActivitySchedule * gPtrNodeList = NULL ;
-//  static sint32 gAllocatedActivityNodesCount = 0 ;
+//  static PMSInt32 gAllocatedActivityNodesCount = 0 ;
 #endif
 
-static sint32 gAllocatedActivityNodesCount = 0 ;
+static PMSInt32 gAllocatedActivityNodesCount = 0 ;
 static bool NoInterdependenceButUseB ;
 static bool DependentActivitiesHasOffset;
-static sint32 ResourceMinDuration[1000];
+static PMSInt32 ResourceMinDuration[1000];
 
 //---------------------------------------------------------------------------*
 
 #ifndef FORGET_ACTIVITY_NODES
-void cActivityList::push (const sint32 inActivity,
-                          const sint32 inEndOfExecution,
-                          const sint32 inExecutionCounter) {
+void cActivityList::push (const PMSInt32 inActivity,
+                          const PMSInt32 inEndOfExecution,
+                          const PMSInt32 inExecutionCounter) {
 //  gAllocatedActivityNodesCount ++ ;
   cActivitySchedule * p = new cActivitySchedule ;
   p->mPtrToOtherSchedule = NULL ;
@@ -164,11 +164,11 @@ void cActivityList::mergeList (cActivityList & inOtherList) {
 
 class cResource2 {
   public : C_activitiesToSchedule mActivitiesToScheduleList ;
-  public : sint32 mCurrentActivity ;
-  public : sint32 mExecutionCounter ;
+  public : PMSInt32 mCurrentActivity ;
+  public : PMSInt32 mExecutionCounter ;
   public : bool mHasNoNewActivities ;
-  public : sint32 mLHBound ;
-  public : sint32 mStep ;
+  public : PMSInt32 mLHBound ;
+  public : PMSInt32 mStep ;
 
   public : cResource2 (void) ;
 
@@ -178,8 +178,8 @@ class cResource2 {
       && (mExecutionCounter == inOperand.mExecutionCounter) ;  
   }
 
-  public : inline sint32 compare (const cResource2 & inOperand) const {
-    sint32 result = mActivitiesToScheduleList.getPtr () - inOperand.mActivitiesToScheduleList.getPtr () ;
+  public : inline PMSInt32 compare (const cResource2 & inOperand) const {
+    PMSInt32 result = mActivitiesToScheduleList.getPtr () - inOperand.mActivitiesToScheduleList.getPtr () ;
     if (result == 0) {
       result = mCurrentActivity - inOperand.mCurrentActivity ;
       if (result == 0) {
@@ -189,8 +189,8 @@ class cResource2 {
     return result ;  
   }
 
-  public : inline uint32 hash (void) const {
-    return (uint32) mActivitiesToScheduleList.getPtr () ;  
+  public : inline PMUInt32 hash (void) const {
+    return (PMUInt32) mActivitiesToScheduleList.getPtr () ;  
   }
 } ;
 
@@ -204,18 +204,18 @@ class cResourceSchedule {
   #endif
   public : cResourceSchedule * mPtrToInf ;
   public : cResourceSchedule * mPtrToSup ;
-  public : sint32 mBalance ;
-  public : uint32 mHash ;
+  public : PMSInt32 mBalance ;
+  public : PMUInt32 mHash ;
  
-  public : cResourceSchedule (const sint32 inResourceCount) ;
+  public : cResourceSchedule (const PMSInt32 inResourceCount) ;
 
 //--- No copy
   private : cResourceSchedule (const cResourceSchedule &) ;
   private : cResourceSchedule & operator = (const cResourceSchedule &) ;
   
-  public : inline void hash (const sint32 inResourceCount) {
-    uint32 hashValue = mArray (0 COMMA_HERE).hash () ;
-    for (sint32 i=1 ; i<inResourceCount ; i++) {
+  public : inline void hash (const PMSInt32 inResourceCount) {
+    PMUInt32 hashValue = mArray (0 COMMA_HERE).hash () ;
+    for (PMSInt32 i=1 ; i<inResourceCount ; i++) {
       hashValue <<= 3 ;
       hashValue ^= mArray (i COMMA_HERE).hash () ;
     }
@@ -238,7 +238,7 @@ mStep (0) {
 //---------------------------------------------------------------------------*
 
 cResourceSchedule::
-cResourceSchedule (const sint32 inResourceCount) :
+cResourceSchedule (const PMSInt32 inResourceCount) :
 mArray (inResourceCount COMMA_HERE),
 mPtrToOtherResource (NULL),
 mPtrToInf (NULL),
@@ -257,30 +257,30 @@ mHash (0) {
 class cScheduleMap {
   #ifdef HASH_MAP
     private : TC_UniqueArray <cResourceSchedule *> mResourceNodesAVLtree ;
-    public : sint32 mArraySize ;
+    public : PMSInt32 mArraySize ;
   #else
     private : cResourceSchedule * mResourceNodesAVLtree ;
   #endif
   private : cResourceSchedule * mResourceNodesList ;
-  private : sint32 mCurrentInstant ;
-  private : sint32 mLastIndependantActivityScheduleInstant ;
+  private : PMSInt32 mCurrentInstant ;
+  private : PMSInt32 mLastIndependantActivityScheduleInstant ;
 
 //--- Constructor
-  public : cScheduleMap (const sint32 inResourceCount,
-                         const sint32 inLastIndependantActivityScheduleInstant,
+  public : cScheduleMap (const PMSInt32 inResourceCount,
+                         const PMSInt32 inLastIndependantActivityScheduleInstant,
                          const TC_UniqueArray <cActivity> & inActivities) ;
   public : void AddToScheduleMap (cResourceSchedule * inPtr,
-                                  const sint32 index,
+                                  const PMSInt32 index,
                                   const TC_UniqueArray <cActivity> & inActivities);
 
 //--- More work ?
   public : bool moreWorkToDo (void) const ;
 
-  public : inline sint32 getCurrentInstant (void) const { return mCurrentInstant ; }
+  public : inline PMSInt32 getCurrentInstant (void) const { return mCurrentInstant ; }
 
   public : cResourceSchedule * retrieveResourceList (void) ;
 
-  public : void insert (const sint32 inResourceCount,
+  public : void insert (const PMSInt32 inResourceCount,
                         cResourceSchedule * inResource) ;
 
   public : void advanceToNextInstant (void) ;
@@ -288,19 +288,19 @@ class cScheduleMap {
   #ifndef FORGET_ACTIVITY_NODES
     public : void dumpStructure (void) ;
     public : void computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & ioResponseTimeArray,
-                                                   const sint32 inActivitiesCount) ;
+                                                   const PMSInt32 inActivitiesCount) ;
   #endif
 } ;
 
 //---------------------------------------------------------------------------*
 
 static cResourceSchedule * gResourceFreeList = NULL ;
-static sint32 gAllocatedResourceNodesCount = 0 ;
-static sint32 gUsedResourceNodesCount = 0 ;
+static PMSInt32 gAllocatedResourceNodesCount = 0 ;
+static PMSInt32 gUsedResourceNodesCount = 0 ;
 
 //---------------------------------------------------------------------------*
 
-static inline cResourceSchedule * allocResourceNode (const sint32 inResourceCount) {
+static inline cResourceSchedule * allocResourceNode (const PMSInt32 inResourceCount) {
   gUsedResourceNodesCount ++ ;
   cResourceSchedule * p = gResourceFreeList ;
   if (p == NULL) {
@@ -324,8 +324,8 @@ static inline void disposeResourceNode (cResourceSchedule * inPtr) {
 //---------------------------------------------------------------------------*
 
 cScheduleMap::
-cScheduleMap (const sint32 /*inResourceCount */,
-              const sint32 inLastIndependantActivityScheduleInstant,
+cScheduleMap (const PMSInt32 /*inResourceCount */,
+              const PMSInt32 inLastIndependantActivityScheduleInstant,
               const TC_UniqueArray <cActivity> & /*inActivities*/) :
   
 mResourceNodesAVLtree (),
@@ -339,7 +339,7 @@ mLastIndependantActivityScheduleInstant (inLastIndependantActivityScheduleInstan
   #ifdef HASH_MAP
     mArraySize = getPrimeGreaterThan (1000000) ;
     mResourceNodesAVLtree.reallocArray (mArraySize COMMA_HERE) ;
-    for (sint32 r=0 ; r<mArraySize ; r++) {
+    for (PMSInt32 r=0 ; r<mArraySize ; r++) {
       mResourceNodesAVLtree (r COMMA_HERE) = NULL ;
     }
   #else
@@ -349,7 +349,7 @@ mLastIndependantActivityScheduleInstant (inLastIndependantActivityScheduleInstan
 //--- Init resource node
   #ifdef HASH_MAP
     mResourceNodesList->hash (inResourceCount) ;
-    mResourceNodesAVLtree ((sint32) (mResourceNodesList->mHash % mArraySize) COMMA_HERE) = mResourceNodesList ;
+    mResourceNodesAVLtree ((PMSInt32) (mResourceNodesList->mHash % mArraySize) COMMA_HERE) = mResourceNodesList ;
   #else
     mResourceNodesAVLtree = mResourceNodesList ;
   #endif
@@ -358,13 +358,13 @@ mLastIndependantActivityScheduleInstant (inLastIndependantActivityScheduleInstan
 //--------------------------------------------------------------------------*
 void cScheduleMap::
 AddToScheduleMap (cResourceSchedule * inPtr,
-                  const sint32 inIndex,
+                  const PMSInt32 inIndex,
 							    const TC_UniqueArray <cActivity> & inActivities) {
-  sint32 index = inIndex;
+  PMSInt32 index = inIndex;
    do{
-		  const sint32 readyAt = inActivities (index COMMA_HERE).mOffset ;
-      const sint32 resourceIndex = inActivities (index COMMA_HERE).mResourceId ;
-		  const sint32 priority = inActivities (index COMMA_HERE).mPriority ;
+		  const PMSInt32 readyAt = inActivities (index COMMA_HERE).mOffset ;
+      const PMSInt32 resourceIndex = inActivities (index COMMA_HERE).mResourceId ;
+		  const PMSInt32 priority = inActivities (index COMMA_HERE).mPriority ;
 		  //--- Insert activity into activity list
 		  
   	 inPtr->mArray (resourceIndex COMMA_HERE).mActivitiesToScheduleList.addEntry (index, 
@@ -386,7 +386,7 @@ cResourceSchedule * cScheduleMap::retrieveResourceList (void) {
   cResourceSchedule * p = mResourceNodesList ;
   #ifdef HASH_MAP
     while (p != NULL) {
-      mResourceNodesAVLtree ((sint32) (p->mHash % mArraySize) COMMA_HERE) = NULL ;
+      mResourceNodesAVLtree ((PMSInt32) (p->mHash % mArraySize) COMMA_HERE) = NULL ;
       p = p->mPtrToOtherResource ;
     }
     p = mResourceNodesList ;
@@ -461,7 +461,7 @@ static void
 recursiveInsertResourceNode (cResourceSchedule * inResource,
                              cResourceSchedule * & ioRoot,
                              cResourceSchedule * & ioResourceNodesList,
-                             const sint32 inResourceCount,
+                             const PMSInt32 inResourceCount,
                              bool & ioExtension) {
   if (ioRoot == NULL) {
     ioRoot = inResource ;
@@ -472,8 +472,8 @@ recursiveInsertResourceNode (cResourceSchedule * inResource,
     ioResourceNodesList = ioRoot ;
     ioExtension = true ;
   }else{
-    sint32 comparaison = 0 ;
-    for (sint32 i=0 ; (i<inResourceCount) && (comparaison == 0) ; i++) {
+    PMSInt32 comparaison = 0 ;
+    for (PMSInt32 i=0 ; (i<inResourceCount) && (comparaison == 0) ; i++) {
       comparaison = ioRoot->mArray (i COMMA_HERE).compare (inResource->mArray (i COMMA_HERE)) ;
     }
     if (comparaison > 0) {
@@ -527,7 +527,7 @@ recursiveInsertResourceNode (cResourceSchedule * inResource,
 //---------------------------------------------------------------------------*
 
 void cScheduleMap::
-insert (const sint32 inResourceCount,
+insert (const PMSInt32 inResourceCount,
         cResourceSchedule * inResource) {
 //--- Insert
   #ifdef HASH_MAP
@@ -536,7 +536,7 @@ insert (const sint32 inResourceCount,
   bool extension ; // Unused
   recursiveInsertResourceNode (inResource,
                                #ifdef HASH_MAP
-                                 mResourceNodesAVLtree ((sint32) (inResource->mHash % mArraySize) COMMA_HERE),
+                                 mResourceNodesAVLtree ((PMSInt32) (inResource->mHash % mArraySize) COMMA_HERE),
                                #else
                                  mResourceNodesAVLtree,
                                #endif
@@ -568,8 +568,8 @@ insert (const sint32 inResourceCount,
     while (p != NULL) {
       if (! p->mMarked) {
         p->mMarked = true ;
-        const sint32 activityIndex = p->mActivityIndex ;
-        const sint32 eoe = p->mActivityEndOfExecution ;
+        const PMSInt32 activityIndex = p->mActivityIndex ;
+        const PMSInt32 eoe = p->mActivityEndOfExecution ;
         if (ioResponseTimeArray (activityIndex COMMA_HERE).mBestResponseTime > eoe) {
           ioResponseTimeArray (activityIndex COMMA_HERE).mBestResponseTime = eoe ;
         }
@@ -598,17 +598,17 @@ insert (const sint32 inResourceCount,
 #ifndef FORGET_ACTIVITY_NODES
 void cScheduleMap::
 computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & outResponseTimeArray,
-                                 const sint32 inActivitiesCount) {
+                                 const PMSInt32 inActivitiesCount) {
   TC_UniqueArray <cResponseTime> otherMethodResponseTimeArray (inActivitiesCount COMMA_HERE) ;
-  for (sint32 i=0 ; i<inActivitiesCount ; i++) {
-    otherMethodResponseTimeArray (i COMMA_HERE).mBestResponseTime = SINT32_MAX ;
+  for (PMSInt32 i=0 ; i<inActivitiesCount ; i++) {
+    otherMethodResponseTimeArray (i COMMA_HERE).mBestResponseTime = PMSINT32_MAX ;
     otherMethodResponseTimeArray (i COMMA_HERE).mWorstResponseTime = 0 ;
   }
 //--- First method
   cActivitySchedule * p = gPtrNodeList ;
   while (p != NULL) {
-    const sint32 activityIndex = p->mActivityIndex ;
-    const sint32 eoe = p->mActivityEndOfExecution ;
+    const PMSInt32 activityIndex = p->mActivityIndex ;
+    const PMSInt32 eoe = p->mActivityEndOfExecution ;
     if (outResponseTimeArray (activityIndex COMMA_HERE).mBestResponseTime > eoe) {
       outResponseTimeArray (activityIndex COMMA_HERE).mBestResponseTime = eoe ;
     }
@@ -620,7 +620,7 @@ computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & outResponseTim
 //--- Second method
   cActivityList::computeBestAndWorstResponseTime (otherMethodResponseTimeArray) ;
 //--- Compare results
-  for (sint32 i=0 ; i<inActivitiesCount ; i++) {
+  for (PMSInt32 i=0 ; i<inActivitiesCount ; i++) {
     const bool ok = (outResponseTimeArray (i COMMA_HERE).mBestResponseTime == otherMethodResponseTimeArray (i COMMA_HERE).mBestResponseTime)
       && (outResponseTimeArray (i COMMA_HERE).mWorstResponseTime == otherMethodResponseTimeArray (i COMMA_HERE).mWorstResponseTime) ;
     if (! ok) {
@@ -647,8 +647,8 @@ internalDumpStructure (cActivitySchedule * inPtr) {
     if (! p->mMarked) {
       p->mMarked = true ;
       printf ("at 0x%08lX : activity %ld, duration : %ld, eoe : %ld, previous : 0x%08lX, other : 0x%08lX\n",
-              (sint32) p, p->mActivityIndex, p->mActivityDuration, p->mActivityEndOfExecution,
-              (sint32) p->mPtrToSameSchedule, (sint32) p->mPtrToOtherSchedule) ;
+              (PMSInt32) p, p->mActivityIndex, p->mActivityDuration, p->mActivityEndOfExecution,
+              (PMSInt32) p->mPtrToSameSchedule, (PMSInt32) p->mPtrToOtherSchedule) ;
       internalDumpStructure (p->mPtrToOtherSchedule) ;
     }
     p = p->mPtrToSameSchedule ;
@@ -689,8 +689,8 @@ static void dumpStructure (void) {
   cActivitySchedule * p = gPtrNodeList ;
   while (p != NULL) {
     printf ("at 0x%08lX : activity %ld, duration : %ld, eoe : %ld, previous : 0x%08lX, next :0x%08lX, other : 0x%08lX\n",
-            (sint32) p, p->mActivityIndex, p->mActivityDuration, p->mActivityEndOfExecution,
-            (sint32) p->mPtrToSameSchedule, (sint32) p->mPtrToNextNode, (sint32) p->mPtrToOtherSchedule) ;
+            (PMSInt32) p, p->mActivityIndex, p->mActivityDuration, p->mActivityEndOfExecution,
+            (PMSInt32) p->mPtrToSameSchedule, (PMSInt32) p->mPtrToNextNode, (PMSInt32) p->mPtrToOtherSchedule) ;
             fflush (stdout);
     p = p->mPtrToNextNode ;
   }
@@ -703,49 +703,49 @@ static void dumpStructure (void) {
 //---------------------------------------------------------------------------*
 static bool
 WillRecieveHigherActivation(const cResourceSchedule * inPtr,
-			                       const sint32 inResourceCount,
-			                       const sint32 inSuccessorIndex,
-			                       const sint32 inCurrentInstant,
+			                       const PMSInt32 inResourceCount,
+			                       const PMSInt32 inSuccessorIndex,
+			                       const PMSInt32 inCurrentInstant,
 			                       const TC_UniqueArray <cActivity> & inActivities ) {
   
   bool WillReceive= false ;
    
-  const sint32 SuccessorResourceIndex =  inActivities (inSuccessorIndex COMMA_HERE).mResourceId ;
-  const sint32 SuccessorPriority = inActivities (inSuccessorIndex COMMA_HERE).mPriority ;
-  const sint32 SuccessorOffset = inActivities (inSuccessorIndex COMMA_HERE).mOffset ;
+  const PMSInt32 SuccessorResourceIndex =  inActivities (inSuccessorIndex COMMA_HERE).mResourceId ;
+  const PMSInt32 SuccessorPriority = inActivities (inSuccessorIndex COMMA_HERE).mPriority ;
+  const PMSInt32 SuccessorOffset = inActivities (inSuccessorIndex COMMA_HERE).mOffset ;
    
  //--- Test of any successor that has higher priority than the possible CA will be lunched!
   const bool AnyReadyAt= 
     	  inPtr->mArray (SuccessorResourceIndex COMMA_HERE).mActivitiesToScheduleList.AnyReadyToScheduleAt (inCurrentInstant) ;
      //--- If yes, if the ready one is not higher priority--> Add successor
   if (AnyReadyAt){           
-    const sint32 HighestReadyAt=
+    const PMSInt32 HighestReadyAt=
         inPtr->mArray (SuccessorResourceIndex COMMA_HERE).mActivitiesToScheduleList.getFirstToSchedule (inCurrentInstant) ;
 	  if ( inActivities (HighestReadyAt COMMA_HERE).mPriority < SuccessorPriority){
 	 		WillReceive = true ;
     }
   }
-  for(sint32 index =0; (index<inResourceCount) && ! WillReceive; index++){
-    const sint32 currentActivity = inPtr->mArray (index COMMA_HERE).mCurrentActivity ;
+  for(PMSInt32 index =0; (index<inResourceCount) && ! WillReceive; index++){
+    const PMSInt32 currentActivity = inPtr->mArray (index COMMA_HERE).mCurrentActivity ;
     if (currentActivity >= 0){
       if ( inPtr->mArray (index COMMA_HERE).mExecutionCounter >=  
          (inActivities (currentActivity COMMA_HERE).mMaxDuration-SuccessorOffset)){
-        const sint32 successorIndex = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
+        const PMSInt32 successorIndex = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
         if (successorIndex >= 0) {
 	        if ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0){
-	          const sint32 successorResource = inActivities (successorIndex COMMA_HERE).mResourceId ;
-		        const sint32 successorPriority = inActivities (successorIndex COMMA_HERE).mPriority;
+	          const PMSInt32 successorResource = inActivities (successorIndex COMMA_HERE).mResourceId ;
+		        const PMSInt32 successorPriority = inActivities (successorIndex COMMA_HERE).mPriority;
 		        if ( (SuccessorResourceIndex == successorResource )
 		           && 
 		           (successorPriority < SuccessorPriority) ){
 		               WillReceive = true;
 		        }
 		      }
-	        sint32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
+	        PMSInt32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
 	        while ( (OtherHeirId >= 0) && !WillReceive ) {
             if ((inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0){
-		          sint32 const heirPriority = inActivities (OtherHeirId COMMA_HERE).mPriority;
-			        sint32 HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
+		          PMSInt32 const heirPriority = inActivities (OtherHeirId COMMA_HERE).mPriority;
+			        PMSInt32 HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
 			        if ( (SuccessorResourceIndex == HeirResource)
 			           &&
 		    	      (heirPriority < SuccessorPriority) ){
@@ -761,28 +761,28 @@ WillRecieveHigherActivation(const cResourceSchedule * inPtr,
 	return  WillReceive;
 }   
 //---------------------------------------------------------------------------*
-static sint32 
+static PMSInt32 
 LeastBusyDuration (const cResourceSchedule * inPtr,
-                   const sint32 leastBusyDuration,
-                   const sint32 inCurrentInstant,
-                   const sint32 inAdditionIndex,
-                   const sint32 inActivityIndex,
-                   const sint32 inResourceCount,
+                   const PMSInt32 leastBusyDuration,
+                   const PMSInt32 inCurrentInstant,
+                   const PMSInt32 inAdditionIndex,
+                   const PMSInt32 inActivityIndex,
+                   const PMSInt32 inResourceCount,
                    const TC_UniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
                    const TC_UniqueArray <cActivity> & inActivities){
  
-  sint32 leastBusy =leastBusyDuration;
-  sint32 additionIndex = inAdditionIndex ;
-  const sint32 inActivityPriority = inActivities (inActivityIndex COMMA_HERE).mPriority; 
+  PMSInt32 leastBusy =leastBusyDuration;
+  PMSInt32 additionIndex = inAdditionIndex ;
+  const PMSInt32 inActivityPriority = inActivities (inActivityIndex COMMA_HERE).mPriority; 
   //--- Include all independent Partitions in the busy period 
   while ( ( additionIndex < inReadyAtThisInstant.count())
          && 
         ((leastBusy + inCurrentInstant) >= inReadyAtThisInstant (additionIndex COMMA_HERE).mThisInstant) ){ 
-    sint32 nextActivityIndex = inReadyAtThisInstant (additionIndex COMMA_HERE). mActivityIndex;
+    PMSInt32 nextActivityIndex = inReadyAtThisInstant (additionIndex COMMA_HERE). mActivityIndex;
     do{
-       sint32 inActivityResource = inActivities (inActivityIndex COMMA_HERE).mResourceId ;
-       sint32 nextActivityResource = inActivities (nextActivityIndex COMMA_HERE).mResourceId ;
-       sint32 priority = inActivities (nextActivityIndex COMMA_HERE).mPriority ;
+       PMSInt32 inActivityResource = inActivities (inActivityIndex COMMA_HERE).mResourceId ;
+       PMSInt32 nextActivityResource = inActivities (nextActivityIndex COMMA_HERE).mResourceId ;
+       PMSInt32 priority = inActivities (nextActivityIndex COMMA_HERE).mPriority ;
        if ( (inActivityResource == nextActivityResource)
           &&(priority < inActivityPriority) ){
   	      	leastBusy += inActivities (nextActivityIndex COMMA_HERE).mMinDuration ;
@@ -792,17 +792,17 @@ LeastBusyDuration (const cResourceSchedule * inPtr,
 	  additionIndex ++;
   }
  //--- Add partitions from possible successors activated from other resources
-  for(sint32 index =0; index<inResourceCount; index++){
-    const sint32 currentActivity = inPtr->mArray (index COMMA_HERE).mCurrentActivity ;
+  for(PMSInt32 index =0; index<inResourceCount; index++){
+    const PMSInt32 currentActivity = inPtr->mArray (index COMMA_HERE).mCurrentActivity ;
     if (currentActivity >= 0){
  //--- If the CA on other resource certainely will be terminated after the busy period
       if ( inPtr->mArray (index COMMA_HERE).mExecutionCounter >=  (inActivities (currentActivity COMMA_HERE).mMaxDuration-leastBusy)){
-        const sint32 successorIndex = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
+        const PMSInt32 successorIndex = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
         if ( successorIndex >= 0) {
           if ((inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0){
             //--- If the CA on the other resource has successor 
-	          const sint32 successorResource = inActivities (successorIndex COMMA_HERE).mResourceId ;
-	          sint32 successorPriority = inActivities (successorIndex COMMA_HERE).mPriority;
+	          const PMSInt32 successorResource = inActivities (successorIndex COMMA_HERE).mResourceId ;
+	          PMSInt32 successorPriority = inActivities (successorIndex COMMA_HERE).mPriority;
 	          if ( inActivities (inActivityIndex COMMA_HERE).mResourceId == successorResource ){
               //--- and it is successor on the same resource
 	            if (successorPriority < inActivityPriority ){
@@ -812,12 +812,12 @@ LeastBusyDuration (const cResourceSchedule * inPtr,
 	          }
 	        }
  //--- Test of the current activity on the other resource has other successors, on the resource where the activity has to be added
-	        sint32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
+	        PMSInt32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
 	        while (OtherHeirId >= 0 ){ 
 	          if ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0){
-		          sint32 HeirPriority = inActivities (OtherHeirId COMMA_HERE).mPriority;
-			        sint32 HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
-			        sint32 inActivityResource = inActivities (inActivityIndex COMMA_HERE).mResourceId ;
+		          PMSInt32 HeirPriority = inActivities (OtherHeirId COMMA_HERE).mPriority;
+			        PMSInt32 HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
+			        PMSInt32 inActivityResource = inActivities (inActivityIndex COMMA_HERE).mResourceId ;
 			        if ( (inActivityResource == HeirResource) 
 			           &&
 		    	      (HeirPriority < inActivityPriority) ){
@@ -836,23 +836,23 @@ LeastBusyDuration (const cResourceSchedule * inPtr,
 //---------------------------------------------------------------------------*
 static bool
 HasToAddSuccessors (const cResourceSchedule * inPtr,
-                    const sint32 inResourceCount,
-                    const sint32 inAdditionIndex,
+                    const PMSInt32 inResourceCount,
+                    const PMSInt32 inAdditionIndex,
                     const TC_UniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
-			              const sint32 inActivityIndex,
-			              const sint32 inCurrentInstant,
+			              const PMSInt32 inActivityIndex,
+			              const PMSInt32 inCurrentInstant,
                     const TC_UniqueArray <cActivity> & inActivities ) {
   
   bool HasToAdd= false ; 
-  sint32 LeastBusyPeriod = 0 ;  
-  const sint32 SuccessorIndex = inActivities (inActivityIndex COMMA_HERE).mSuccessorId ;
+  PMSInt32 LeastBusyPeriod = 0 ;  
+  const PMSInt32 SuccessorIndex = inActivities (inActivityIndex COMMA_HERE).mSuccessorId ;
   //--- Is any successor ?
   if (SuccessorIndex >= 0){ 
     if( (inActivities (SuccessorIndex COMMA_HERE).mOccurrence % inActivities (SuccessorIndex COMMA_HERE).mEvery) == 0 ){ 
-      const sint32 SuccessorResource = inActivities (SuccessorIndex COMMA_HERE).mResourceId ;
-	    sint32 SuccessorOffset =  inActivities (SuccessorIndex COMMA_HERE).mOffset ;
-	    sint32 SuccessorPriority = inActivities (SuccessorIndex COMMA_HERE).mPriority ;
-      const sint32 currentActivityOnSuccessurResource = inPtr->mArray (SuccessorResource COMMA_HERE).mCurrentActivity ;
+      const PMSInt32 SuccessorResource = inActivities (SuccessorIndex COMMA_HERE).mResourceId ;
+	    PMSInt32 SuccessorOffset =  inActivities (SuccessorIndex COMMA_HERE).mOffset ;
+	    PMSInt32 SuccessorPriority = inActivities (SuccessorIndex COMMA_HERE).mPriority ;
+      const PMSInt32 currentActivityOnSuccessurResource = inPtr->mArray (SuccessorResource COMMA_HERE).mCurrentActivity ;
       //--- Get the busy duration on the successor resource
       LeastBusyPeriod = 
         inPtr->mArray (SuccessorResource COMMA_HERE).mActivitiesToScheduleList.getMinimumBusyPeriod4Activity (SuccessorIndex,
@@ -882,7 +882,7 @@ HasToAddSuccessors (const cResourceSchedule * inPtr,
     	    inPtr->mArray (SuccessorResource COMMA_HERE).mActivitiesToScheduleList.AnyReadyToScheduleAt (inCurrentInstant) ;
        //--- If yes, if the ready one is not higher priority--> Add successor
         if (AnyReadyAt){           
-          const sint32 HighestReadyAt=
+          const PMSInt32 HighestReadyAt=
             inPtr->mArray (SuccessorResource COMMA_HERE).mActivitiesToScheduleList.getFirstToSchedule (inCurrentInstant) ;
 	        if ( (SuccessorPriority < inActivities (HighestReadyAt COMMA_HERE).mPriority )
 	            ||
@@ -897,15 +897,15 @@ HasToAddSuccessors (const cResourceSchedule * inPtr,
     }
 //--- do the same for other heirs
 
-		sint32 OtherHeirId = inActivities (SuccessorIndex COMMA_HERE).mOtherHeirId ;
+		PMSInt32 OtherHeirId = inActivities (SuccessorIndex COMMA_HERE).mOtherHeirId ;
 	  while ( (OtherHeirId >= 0) && !HasToAdd){ 
 	    if( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ) {
-			  sint32 HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
-			  sint32 HeirOffset = inActivities (OtherHeirId COMMA_HERE).mOffset ;
-			  sint32 HeirPriority = inActivities (OtherHeirId COMMA_HERE).mPriority ;
-				sint32 currentActivityOnHeirResource = inPtr->mArray (HeirResource COMMA_HERE).mCurrentActivity ;
+			  PMSInt32 HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
+			  PMSInt32 HeirOffset = inActivities (OtherHeirId COMMA_HERE).mOffset ;
+			  PMSInt32 HeirPriority = inActivities (OtherHeirId COMMA_HERE).mPriority ;
+				PMSInt32 currentActivityOnHeirResource = inPtr->mArray (HeirResource COMMA_HERE).mCurrentActivity ;
 			
-			  sint32 
+			  PMSInt32 
 	        leastBusyPeriod = inPtr->mArray (HeirResource COMMA_HERE).mActivitiesToScheduleList.getMinimumBusyPeriod4Activity (OtherHeirId,
 	                          inActivities);
 	      leastBusyPeriod = LeastBusyDuration (inPtr, leastBusyPeriod, inCurrentInstant,
@@ -928,7 +928,7 @@ HasToAddSuccessors (const cResourceSchedule * inPtr,
 	    	    inPtr->mArray (HeirResource COMMA_HERE).mActivitiesToScheduleList.AnyReadyToScheduleAt (inCurrentInstant) ;
 
 	        if (AnyReadyAt){
-	          const sint32 HighestReadyAt=
+	          const PMSInt32 HighestReadyAt=
 	            inPtr->mArray (HeirResource COMMA_HERE).mActivitiesToScheduleList.getFirstToSchedule (inCurrentInstant) ;
 
 		        if ( (HeirPriority < inActivities (HighestReadyAt COMMA_HERE).mPriority )
@@ -950,25 +950,25 @@ HasToAddSuccessors (const cResourceSchedule * inPtr,
 /*--------------------------------------------------------------------------------------*/
 static void
 addSuccessors (cResourceSchedule * inPtr,
-			         const sint32 inActivityIndex,
+			         const PMSInt32 inActivityIndex,
                const TC_UniqueArray <cActivity> & inActivities,
-               const sint32 inCurrentInstant) {
+               const PMSInt32 inCurrentInstant) {
              
-  const sint32 successorIndex = inActivities (inActivityIndex COMMA_HERE).mSuccessorId ;
+  const PMSInt32 successorIndex = inActivities (inActivityIndex COMMA_HERE).mSuccessorId ;
            
   if (successorIndex >= 0) {
     if ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ){ 
-			const sint32 successorResource = inActivities (successorIndex COMMA_HERE).mResourceId ;
-			const sint32 successorOffset =  inActivities (successorIndex COMMA_HERE).mOffset ;
+			const PMSInt32 successorResource = inActivities (successorIndex COMMA_HERE).mResourceId ;
+			const PMSInt32 successorOffset =  inActivities (successorIndex COMMA_HERE).mOffset ;
 			inPtr->mArray (successorResource COMMA_HERE).mActivitiesToScheduleList.addEntry (successorIndex, 
 										inActivities (successorIndex COMMA_HERE).mPriority,
 						  			inCurrentInstant + successorOffset) ;
 	  }
-	  sint32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
+	  PMSInt32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
     while (OtherHeirId >= 0) {
       if ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ){ 
-		    const sint32 HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
-		    const sint32 heirOffset = inActivities (OtherHeirId COMMA_HERE).mOffset ;
+		    const PMSInt32 HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
+		    const PMSInt32 heirOffset = inActivities (OtherHeirId COMMA_HERE).mOffset ;
 						 
 		    inPtr->mArray (HeirResource COMMA_HERE).mActivitiesToScheduleList.addEntry (OtherHeirId, 
 			 	  					  inActivities (OtherHeirId COMMA_HERE).mPriority,
@@ -983,36 +983,36 @@ addSuccessors (cResourceSchedule * inPtr,
 static bool 
 IsOffsetTimeGTNextMinDur (const cResourceSchedule * inPtr, 
                           const TC_UniqueArray <cActivity> & inActivities,
-                          const sint32 inResourceIndex,
-                          const sint32 inCurrentInstant){
+                          const PMSInt32 inResourceIndex,
+                          const PMSInt32 inCurrentInstant){
                           
-	const sint32 currentActivity = inPtr->mArray (inResourceIndex COMMA_HERE).mCurrentActivity ;
-	sint32 MaximumSuccessorOffset = 0 ;
-  sint32 HigestSuccessorPriority = SINT32_MAX ;
+	const PMSInt32 currentActivity = inPtr->mArray (inResourceIndex COMMA_HERE).mCurrentActivity ;
+	PMSInt32 MaximumSuccessorOffset = 0 ;
+  PMSInt32 HigestSuccessorPriority = PMSINT32_MAX ;
   bool WillReceiveNew = false;
-  sint32 successorIndex = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
+  PMSInt32 successorIndex = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
   if (successorIndex >= 0){
     if ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ){   
-		  sint32 successorResource = inActivities (successorIndex COMMA_HERE).mResourceId ;
+		  PMSInt32 successorResource = inActivities (successorIndex COMMA_HERE).mResourceId ;
 		  if (successorResource == inResourceIndex){
-		  sint32 successorOffset =  inActivities (successorIndex COMMA_HERE).mOffset ;
+		  PMSInt32 successorOffset =  inActivities (successorIndex COMMA_HERE).mOffset ;
 		  	MaximumSuccessorOffset = MAX( MaximumSuccessorOffset, successorOffset);
 		  	HigestSuccessorPriority = min (HigestSuccessorPriority, inActivities (successorIndex COMMA_HERE).mPriority);
 			}
 	  }
-	  sint32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
+	  PMSInt32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
 	  while (OtherHeirId >= 0) {
 	    if ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ){   
-		  	sint32 HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
+		  	PMSInt32 HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
 		  	if (HeirResource == inResourceIndex){
-		  		sint32 heirOffset = inActivities (OtherHeirId COMMA_HERE).mOffset ;
+		  		PMSInt32 heirOffset = inActivities (OtherHeirId COMMA_HERE).mOffset ;
 		 			MaximumSuccessorOffset = MAX( MaximumSuccessorOffset, heirOffset);
 		     	HigestSuccessorPriority = min (HigestSuccessorPriority, inActivities (OtherHeirId COMMA_HERE).mPriority);
 		    }
 		  }
 			OtherHeirId = inActivities (OtherHeirId COMMA_HERE).mOtherHeirId;
 		}
-	  sint32 HPA = 
+	  PMSInt32 HPA = 
 	    inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.getFirstToSchedule (inCurrentInstant) ;
 	  if ( ( (HPA == -1) && (MaximumSuccessorOffset != 0))
 	      || 
@@ -1029,24 +1029,24 @@ static bool
 NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr, 
                                const TC_UniqueArray <cActivity> & inActivities,
                                const TC_UniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
-                               const sint32 inAdditionIndex,
-                               const sint32 inResourceIndex,
-                               const sint32 inResourceCount,
-                               const sint32 inCurrentInstant){
+                               const PMSInt32 inAdditionIndex,
+                               const PMSInt32 inResourceIndex,
+                               const PMSInt32 inResourceCount,
+                               const PMSInt32 inCurrentInstant){
    
   bool WillReceiveNew= false ; 
-  sint32 additionIndex = inAdditionIndex ; 
+  PMSInt32 additionIndex = inAdditionIndex ; 
   bool AnyInsertedButNotReady = false;
   bool DirectSuccessor = false ;
   //--- If there is ready activity
-  const sint32 currentActivity = inPtr->mArray (inResourceIndex COMMA_HERE).mCurrentActivity ;
+  const PMSInt32 currentActivity = inPtr->mArray (inResourceIndex COMMA_HERE).mCurrentActivity ;
   const bool 
     AnyReadyAt= inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.AnyReadyToScheduleAt (inCurrentInstant) ;
   if (DependentActivitiesHasOffset){
     AnyInsertedButNotReady = inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.AnyNotReadyToScheduleAt (inCurrentInstant) ;
   }
   if (!AnyReadyAt){
-    sint32 lSuccessorId = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
+    PMSInt32 lSuccessorId = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
   	if (lSuccessorId >= 0){
   		if ((inActivities (lSuccessorId COMMA_HERE).mOffset == 0)
   		   &&
@@ -1057,29 +1057,29 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
   }
   //--- If all inserted activities are ready:   
   if ((AnyReadyAt || DirectSuccessor) && !AnyInsertedButNotReady){
-     sint32 HPAReadyAtInstant = 
+     PMSInt32 HPAReadyAtInstant = 
       inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.getFirstScheduledInstant (inCurrentInstant);
     if (inCurrentInstant==HPAReadyAtInstant){
     	WillReceiveNew = true;
     }else{
-      sint32 MinimumHPBusyPeriod = 0;
-      sint32 MinimumBusyPeriod = 0;
-     //  sint32 PreviousPriority = SINT32_MAX; // Unused var ; commented out 1/1/2005
-	    sint32 MaximumBusyPeriod = inActivities (currentActivity COMMA_HERE).mMaxDuration -
+      PMSInt32 MinimumHPBusyPeriod = 0;
+      PMSInt32 MinimumBusyPeriod = 0;
+     //  PMSInt32 PreviousPriority = PMSINT32_MAX; // Unused var ; commented out 1/1/2005
+	    PMSInt32 MaximumBusyPeriod = inActivities (currentActivity COMMA_HERE).mMaxDuration -
 	                               inPtr->mArray (inResourceIndex COMMA_HERE).mExecutionCounter;
 	    MaximumBusyPeriod += 
 	    	inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.getMaximumBusyPeriod (currentActivity, inActivities);    	
-	 		sint32 LowerPriorityActivity = inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.getLowerPriority (currentActivity, inActivities);
+	 		PMSInt32 LowerPriorityActivity = inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.getLowerPriority (currentActivity, inActivities);
 			
 		  while (!WillReceiveNew 
 		         &&
 		         (additionIndex < inReadyAtThisInstant.count())
 	           && 
 	           ((MaximumBusyPeriod +inCurrentInstant) > inReadyAtThisInstant (additionIndex COMMA_HERE).mThisInstant) ){ 
-	        sint32 nextActivityIndex = inReadyAtThisInstant (additionIndex COMMA_HERE). mActivityIndex;
+	        PMSInt32 nextActivityIndex = inReadyAtThisInstant (additionIndex COMMA_HERE). mActivityIndex;
 	        do{
-	          sint32 nextActivityResource = inActivities (nextActivityIndex COMMA_HERE).mResourceId ;
-	          sint32 activityPriority = inActivities (nextActivityIndex COMMA_HERE).mPriority;
+	          PMSInt32 nextActivityResource = inActivities (nextActivityIndex COMMA_HERE).mResourceId ;
+	          PMSInt32 activityPriority = inActivities (nextActivityIndex COMMA_HERE).mPriority;
 	          if ( inResourceIndex == nextActivityResource){
 	          	MinimumHPBusyPeriod = inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.getMinimumBusyPeriod4Activity (nextActivityIndex, inActivities);
 	 						SuccessorsMinBusyDuration4Activity (MinimumHPBusyPeriod, currentActivity, 
@@ -1116,19 +1116,19 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
 	  	  		  
 		  if (!WillReceiveNew){
 		  	if( !NoInterdependenceButUseB){
-			  	for (sint32 index = 0 ; (index < inResourceCount) && ! WillReceiveNew ; index++){
+			  	for (PMSInt32 index = 0 ; (index < inResourceCount) && ! WillReceiveNew ; index++){
 			  	  if (index != inResourceIndex){
-			      	const sint32 resCurrentActivity = inPtr->mArray (index COMMA_HERE).mCurrentActivity ;
+			      	const PMSInt32 resCurrentActivity = inPtr->mArray (index COMMA_HERE).mCurrentActivity ;
 			  			if (resCurrentActivity >= 0){
-			  		  	sint32 CertainFutureBusyDuration = 
+			  		  	PMSInt32 CertainFutureBusyDuration = 
 			  		    	inActivities (resCurrentActivity COMMA_HERE).mMinDuration-inPtr->mArray (index COMMA_HERE).mExecutionCounter;
 			  				
 			  				CertainFutureBusyDuration =MAX(0, CertainFutureBusyDuration);
 			  				if (CertainFutureBusyDuration < MaximumBusyPeriod ){
-			  				 	sint32 successorId = inActivities (resCurrentActivity COMMA_HERE).mSuccessorId;
+			  				 	PMSInt32 successorId = inActivities (resCurrentActivity COMMA_HERE).mSuccessorId;
 			  					if (successorId >= 0){
 			  					  if ( (inActivities (successorId COMMA_HERE).mOccurrence % inActivities (successorId COMMA_HERE).mEvery) == 0 ){   
-			  						  sint32 successorResource = inActivities (successorId COMMA_HERE).mResourceId;
+			  						  PMSInt32 successorResource = inActivities (successorId COMMA_HERE).mResourceId;
 			  						  if (successorResource == inResourceIndex){
 			  							  WillReceiveNew = true;
 			  						  }else if( (inActivities (successorId COMMA_HERE).mMinDuration + CertainFutureBusyDuration) < MaximumBusyPeriod  ){
@@ -1138,9 +1138,9 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
 			  				      WillReceiveNew = true;
 			  					  }
 			  						
-			  						sint32 OtherHeirId = inActivities (successorId COMMA_HERE).mOtherHeirId ;
+			  						PMSInt32 OtherHeirId = inActivities (successorId COMMA_HERE).mOtherHeirId ;
     								while (OtherHeirId >= 0) {
-	    							  sint32 HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
+	    							  PMSInt32 HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
 	                    if ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ){   
 			  			          if (HeirResource == inResourceIndex){
 			  							    WillReceiveNew = true;
@@ -1162,8 +1162,8 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
 			  		}else{ 
 			  		  /*if(index == inResourceIndex) { //If the resource will chgange context on others
 			  		  //--- 
-			  		  for (sint32 i = 0 ; (i < inResourceCount) && ! WillReceiveNew ; i++){
-			  		    sint32 CertainFutureDuration = 0 ;
+			  		  for (PMSInt32 i = 0 ; (i < inResourceCount) && ! WillReceiveNew ; i++){
+			  		    PMSInt32 CertainFutureDuration = 0 ;
 			  		    if (i != inResourceIndex){
 			      	    resCurrentActivity = inPtr->mArray (i COMMA_HERE).mCurrentActivity ;
 			  		      if (currentActivity >= 0){
@@ -1192,20 +1192,20 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
 //---------------------------------------------------------------------------*
 static void
 recursiveOP (cResourceSchedule * inPtr,
-             const sint32 inResourceIndex,
-             const sint32 inAdditionIndex,
+             const PMSInt32 inResourceIndex,
+             const PMSInt32 inAdditionIndex,
              const TC_UniqueArray <cActivity> & inActivities,
-             const sint32 inCurrentInstant,
+             const PMSInt32 inCurrentInstant,
              const TC_UniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
              cScheduleMap & ioScheduleMap,
              #ifdef FORGET_ACTIVITY_NODES
                TC_UniqueArray <cResponseTime> & ioResponseTimeArray,
              #endif
-             const sint32 inResourceCount) {
+             const PMSInt32 inResourceCount) {
            
   if (inResourceIndex == inResourceCount) {
     bool terminated = true ;
-    for (sint32 i=0 ; i<inResourceCount ; i++) {
+    for (PMSInt32 i=0 ; i<inResourceCount ; i++) {
       if (inPtr->mArray (i COMMA_HERE).mCurrentActivity < 0) {
         inPtr->mArray (i COMMA_HERE).mCurrentActivity = inPtr->mArray (i COMMA_HERE).mActivitiesToScheduleList.getFirstToScheduleAndSuppress (inCurrentInstant) ;
         if (inPtr->mArray (i COMMA_HERE).mCurrentActivity < 0){
@@ -1230,7 +1230,7 @@ recursiveOP (cResourceSchedule * inPtr,
       ioScheduleMap.insert (inResourceCount, inPtr) ;
    }
   }else{
-    const sint32 currentActivity = inPtr->mArray (inResourceIndex COMMA_HERE).mCurrentActivity ;
+    const PMSInt32 currentActivity = inPtr->mArray (inResourceIndex COMMA_HERE).mCurrentActivity ;
     if (currentActivity < 0) {
      	recursiveOP (inPtr,
                    inResourceIndex + 1,
@@ -1314,7 +1314,7 @@ recursiveOP (cResourceSchedule * inPtr,
       bool NewActivationDuringBusyPeriod =false ;
       bool ThereIsReady = false ;
       //--- Test if the busy period (BP) is already tested & there is new activation during it
-      sint32 SuccessorId = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
+      PMSInt32 SuccessorId = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
       if (! inPtr->mArray (inResourceIndex COMMA_HERE).mHasNoNewActivities){
          NewActivationDuringBusyPeriod = 
             NewReadyInfluenceOnScheduling (inPtr, inActivities,
@@ -1369,7 +1369,7 @@ recursiveOP (cResourceSchedule * inPtr,
                                        inCurrentInstant, inActivities);    
                                        
       	bool NotZeroOffsetOnSameResource =false;
-      	sint32 SuccessorResource = inActivities (SuccessorId COMMA_HERE).mResourceId ;
+      	PMSInt32 SuccessorResource = inActivities (SuccessorId COMMA_HERE).mResourceId ;
       	if ( DependentActivitiesHasOffset
       	    &&
       	    (SuccessorResource == inResourceIndex)
@@ -1446,7 +1446,7 @@ recursiveOP (cResourceSchedule * inPtr,
 		      } 
 		  	  cResourceSchedule *  resourceSchedule = allocResourceNode (inResourceCount) ;
 		  	  
-	    		for (sint32 i=0 ; i<inResourceCount ; i++) {
+	    		for (PMSInt32 i=0 ; i<inResourceCount ; i++) {
 		  		  resourceSchedule->mArray (i COMMA_HERE) = inPtr->mArray (i COMMA_HERE);
 		  	  }
 		  	  #ifndef FORGET_ACTIVITY_NODES
@@ -1510,15 +1510,15 @@ recursiveOP (cResourceSchedule * inPtr,
 //---------------------------------------------------------------------------*
 
 void
-scheduleActivities (const sint32 NoInterButUseB,
+scheduleActivities (const PMSInt32 NoInterButUseB,
                     const bool DependentHasOffset,
                     const TC_UniqueArray <cReadyAtThisInstant> & ReadyAtThisInstant, 
                     const TC_UniqueArray <cActivity> & inActivities,
                     const TC_UniqueArray <cResource> & inResource,
                     TC_UniqueArray <cResponseTime> & outResponseTimeArray) {
  
-  const sint32 inResourceCount = inResource.count ();
-  const sint32 activitiesCount = inActivities.count () ;
+  const PMSInt32 inResourceCount = inResource.count ();
+  const PMSInt32 activitiesCount = inActivities.count () ;
   outResponseTimeArray.makeRoom (activitiesCount) ;
   outResponseTimeArray.addObjects (activitiesCount, cResponseTime ()) ;
   
@@ -1528,15 +1528,15 @@ scheduleActivities (const sint32 NoInterButUseB,
   }else{
   	NoInterdependenceButUseB = false;
   }
-  for (sint32 i = 0; i< inResourceCount ;i++){
+  for (PMSInt32 i = 0; i< inResourceCount ;i++){
   	ResourceMinDuration[i]= inResource(i COMMA_HERE).mMinDuration;
   }
   
-  const sint32 NumberOfIndependentInsertion =  ReadyAtThisInstant.count();
-  const sint32 lastActivityScheduleInstant = 
+  const PMSInt32 NumberOfIndependentInsertion =  ReadyAtThisInstant.count();
+  const PMSInt32 lastActivityScheduleInstant = 
   						 ReadyAtThisInstant ((NumberOfIndependentInsertion-1) COMMA_HERE).mThisInstant ;
   cScheduleMap scheduleMap (inResourceCount, lastActivityScheduleInstant, inActivities) ;
-  sint32 AdditionIndex=0;
+  PMSInt32 AdditionIndex=0;
 //--- Perform activities scheduling
   C_Timer Timer ;
   while (scheduleMap.moreWorkToDo ()) {
@@ -1548,7 +1548,7 @@ scheduleActivities (const sint32 NoInterButUseB,
        (ReadyAtThisInstant (AdditionIndex COMMA_HERE).mThisInstant == scheduleMap.getCurrentInstant ())) {
       if (list == NULL) {
 		    list = allocResourceNode (inResourceCount) ;
-        for (sint32 i=0 ; i<inResourceCount ; i++) {
+        for (PMSInt32 i=0 ; i<inResourceCount ; i++) {
           list->mArray (i COMMA_HERE).mActivitiesToScheduleList.setToEmptyList () ;
           list->mArray (i COMMA_HERE).mExecutionCounter = 0 ;
           list->mArray (i COMMA_HERE).mCurrentActivity = -1 ;
@@ -1558,7 +1558,7 @@ scheduleActivities (const sint32 NoInterButUseB,
         }
       }
      
-      const sint32 AddedActivityIndex = ReadyAtThisInstant (AdditionIndex COMMA_HERE).mActivityIndex ;
+      const PMSInt32 AddedActivityIndex = ReadyAtThisInstant (AdditionIndex COMMA_HERE).mActivityIndex ;
       cResourceSchedule * p = list ;
       while (p != NULL) {
 	      scheduleMap.AddToScheduleMap (p, AddedActivityIndex, inActivities);
@@ -1567,7 +1567,7 @@ scheduleActivities (const sint32 NoInterButUseB,
       AdditionIndex ++;
     }
     
-     sint32 nodeCount = 0 ;
+     PMSInt32 nodeCount = 0 ;
     { cResourceSchedule * p = list ;
       while (p != NULL) {
         nodeCount ++ ;
@@ -1594,7 +1594,7 @@ scheduleActivities (const sint32 NoInterButUseB,
       }
     }
     
-	  sint32 devisor=100000;
+	  PMSInt32 devisor=100000;
 	  if(nodeCount >500000){
 	  	devisor = 1 ;
 	  }else if (nodeCount >100000){
@@ -1606,7 +1606,7 @@ scheduleActivities (const sint32 NoInterButUseB,
 	  }else if (nodeCount >1000){
 	  devisor = 500;
 	  }
-    const sint32 currentInstant = scheduleMap.getCurrentInstant () ;
+    const PMSInt32 currentInstant = scheduleMap.getCurrentInstant () ;
     if ( (currentInstant != 0) && ((currentInstant % devisor) == 0)) {
       co << "currentInstant " 
          << cStringWithSigned (currentInstant)

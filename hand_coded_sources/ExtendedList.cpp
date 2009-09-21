@@ -11,14 +11,14 @@
 /*-----------------------------------------------------------------------------*/
 
 cResponseTime::cResponseTime (void) :
-mBestResponseTime (SINT32_MAX),
+mBestResponseTime (PMSINT32_MAX),
 mWorstResponseTime (0) {
 } ;
 
 /*-----------------------------------------------------------------------------*/
 
-static uint64 GCD(uint64 a, uint64 b) {
-  uint64 r;
+static PMUInt64 GCD(PMUInt64 a, PMUInt64 b) {
+  PMUInt64 r;
   do{
     r = a%b;
     a = b;
@@ -28,16 +28,16 @@ static uint64 GCD(uint64 a, uint64 b) {
 }
 
 /*---------------------------------------------------------------------------*/ 
-static uint64
+static PMUInt64
 CalculateHyperPeriod (const TC_UniqueArray <cElement> & Element) {
   
-  sint32 minimumOffset = SINT32_MAX ;
-  uint64 LCM = 0 ;
-  sint32 maximumOffset= 0 ;
+  PMSInt32 minimumOffset = PMSINT32_MAX ;
+  PMUInt64 LCM = 0 ;
+  PMSInt32 maximumOffset= 0 ;
 
 // Calculate the LCM for independent elements only since dependent ones inherit periods  
-  const sint32 Nu_ofElements = Element.count () ;
-  for (sint32 index = 0 ; index < Nu_ofElements; index++) {
+  const PMSInt32 Nu_ofElements = Element.count () ;
+  for (PMSInt32 index = 0 ; index < Nu_ofElements; index++) {
     if (Element (index COMMA_HERE).mIsIndependant
         || 
         (Element (index COMMA_HERE).mEvery != 1) ) {
@@ -57,7 +57,7 @@ CalculateHyperPeriod (const TC_UniqueArray <cElement> & Element) {
   can not be blocked if their precedence constraned are satisfied --> Hyper period = LCM
   otherwise, Hyper period = 2*LCM + maximum offset */  
   
-  uint64 HyperPeriod = 0 ;
+  PMUInt64 HyperPeriod = 0 ;
   if (minimumOffset == maximumOffset) {
     HyperPeriod  = LCM + maximumOffset ;
   }else{
@@ -71,14 +71,14 @@ CalculateHyperPeriod (const TC_UniqueArray <cElement> & Element) {
 /*----------------------------------------------------------------------*/
 
 // Unused function : commented out by PM 17/1/2005
-/* static sint32 
+/* static PMSInt32 
 CalculateExtendedListLength (const TC_UniqueArray <cElement> & Element,
-                             const uint64 inHyperPeriod) {
+                             const PMUInt64 inHyperPeriod) {
   
-  sint32 ExtendedListLength=0;
-  const sint32 N_Elements = Element.count () ;
-  for(sint32 index =0; index < N_Elements; index ++){
-    ExtendedListLength += sint32 ( inHyperPeriod / Element (index COMMA_HERE).mPeriod) ;
+  PMSInt32 ExtendedListLength=0;
+  const PMSInt32 N_Elements = Element.count () ;
+  for(PMSInt32 index =0; index < N_Elements; index ++){
+    ExtendedListLength += PMSInt32 ( inHyperPeriod / Element (index COMMA_HERE).mPeriod) ;
   }
   return ExtendedListLength;
 }
@@ -89,12 +89,12 @@ static void
 ExtractResourceMinDuration (TC_UniqueArray <cElement> & Element,
                             const TC_UniqueArray <cResource> & Resource){
 
-sint32 NumOfResources = Resource.count();
-sint32 NumOfElements = Element.count();
-sint32 minDuration=SINT32_MAX;
+PMSInt32 NumOfResources = Resource.count();
+PMSInt32 NumOfElements = Element.count();
+PMSInt32 minDuration=PMSINT32_MAX;
 
-	for (sint32 index = 0; index < NumOfResources ;index++){
-    for (sint32 i = 0; i < NumOfElements ;i++){
+	for (PMSInt32 index = 0; index < NumOfResources ;index++){
+    for (PMSInt32 i = 0; i < NumOfElements ;i++){
       if( index == Element (i COMMA_HERE).mResourceId){
        	minDuration = min( minDuration, Element (i COMMA_HERE).mMinDuration);
        	Element (i COMMA_HERE).mEvery = Element (i COMMA_HERE).mEveryMultiple;
@@ -107,7 +107,7 @@ sint32 minDuration=SINT32_MAX;
 static void 
 InsertInOrderedList(const TC_UniqueArray <cElement> & Element,
 	                  TC_UniqueArray <cElement> & ArrangedElement,
-                    const sint32 ElementCounter) {  
+                    const PMSInt32 ElementCounter) {  
   cElement element;
    
   strcpy (element.mElementName, Element(ElementCounter COMMA_HERE).mElementName);   
@@ -127,7 +127,7 @@ InsertInOrderedList(const TC_UniqueArray <cElement> & Element,
   if( Element (ElementCounter COMMA_HERE).mIsIndependant) {
     element.mPredecessorId = -1;
   }else{
-    sint32 i = 0;
+    PMSInt32 i = 0;
     bool PredecessorIsFound = false;
     while(! PredecessorIsFound){
       if((ArrangedElement(i COMMA_HERE).mElementType == element.mPredecessorType)  
@@ -153,11 +153,11 @@ static void
 ArrangingAccodingPrecedenceRelations(
                    const TC_UniqueArray <cElement> & Element,
                    TC_UniqueArray <cElement> & ArrangedElement,
-                   const sint32 Nu_ofTasks,
-                   const sint32 Nu_ofMessages) {
+                   const PMSInt32 Nu_ofTasks,
+                   const PMSInt32 Nu_ofMessages) {
                              
-  sint32 TaskCounter = 0 ;
-  sint32 MessageCounter = Nu_ofTasks ;  
+  PMSInt32 TaskCounter = 0 ;
+  PMSInt32 MessageCounter = Nu_ofTasks ;  
   do{
 //If a task is independent or its  predecessor is arranged, insert it!
     while ( (TaskCounter <Nu_ofTasks) 
@@ -202,9 +202,9 @@ ArrangingAccodingPrecedenceRelations(
 /*----------------------------------------------------------------------------*/
 static bool 
 VerifyInterDependence (TC_UniqueArray <cElement> & Element){
- 	const sint32 Nu_ofElements = Element.count () ;
+ 	const PMSInt32 Nu_ofElements = Element.count () ;
  	bool interDependence=false;
-  for (sint32 i = 0; (i < Nu_ofElements)  && !interDependence ;i++){
+  for (PMSInt32 i = 0; (i < Nu_ofElements)  && !interDependence ;i++){
   	if( (Element (i COMMA_HERE).mPredecessorId >=0 )
          &&
          ( (Element (i COMMA_HERE).mResourceId != 
@@ -221,16 +221,16 @@ VerifyInterDependence (TC_UniqueArray <cElement> & Element){
 static void 
 FindSuccessors (TC_UniqueArray <cElement> & Element){
   
-  const sint32 Nu_ofElements = Element.count () ;
+  const PMSInt32 Nu_ofElements = Element.count () ;
   Element (Nu_ofElements-1 COMMA_HERE).mSuccessorId = -1;
   Element (Nu_ofElements-1 COMMA_HERE).mOtherHeirId= -1;
   
-  for( sint32 index = 0; index < Nu_ofElements-1 ;index++){
+  for( PMSInt32 index = 0; index < Nu_ofElements-1 ;index++){
     Element (index COMMA_HERE).mSuccessorId = -1;
  
-    sint32 temp_index = 0 ;
+    PMSInt32 temp_index = 0 ;
     
-    for( sint32 i = index+1; i < Nu_ofElements ;i++){
+    for( PMSInt32 i = index+1; i < Nu_ofElements ;i++){
       if(Element (i COMMA_HERE).mPredecessorId == index) {
     	  if (Element (index COMMA_HERE).mSuccessorId < 0 ) {
     	  	Element (index COMMA_HERE).mSuccessorId = i; 
@@ -247,64 +247,64 @@ FindSuccessors (TC_UniqueArray <cElement> & Element){
 }
 
 /*---------------------------------------------------------------------------*/
-static sint32
+static PMSInt32
 DeployElements (TC_UniqueArray <cElement> & ArrangedElement,
                 TC_UniqueArray <cActivity> & exElement,
                 TC_UniqueArray <cMTElement> & outMTElement,
-                const uint64 inHyperPeriod){
+                const PMUInt64 inHyperPeriod){
 
 //Arrange elements according to their precedence relations
 
-  sint32 interIndex ;
-  sint32 ExtendedIndicator =0;
-  sint32 SuccessorGap;
-  sint32 OtherHeirGap;
+  PMSInt32 interIndex ;
+  PMSInt32 ExtendedIndicator =0;
+  PMSInt32 SuccessorGap;
+  PMSInt32 OtherHeirGap;
         
-  const sint32 Nu_ofElements = ArrangedElement.count () ;
-  sint32 Num_of_Activties = 0 ;
-  for ( sint32 index = 0; index < Nu_ofElements; index ++) {
+  const PMSInt32 Nu_ofElements = ArrangedElement.count () ;
+  PMSInt32 Num_of_Activties = 0 ;
+  for ( PMSInt32 index = 0; index < Nu_ofElements; index ++) {
     cMTElement element;
     
     element.mPeriod = ArrangedElement (index COMMA_HERE).mPeriod;
   //Keep the number of occurence during the hyper period
     ArrangedElement (index COMMA_HERE).mInExtendedList = ExtendedIndicator;            
     element.mWidth = 
-          (sint32) (inHyperPeriod /ArrangedElement(index COMMA_HERE).mPeriod) ; 
+          (PMSInt32) (inHyperPeriod /ArrangedElement(index COMMA_HERE).mPeriod) ; 
   /*    
         printf("Element Id = %d & its 1st occurence is : %d and has awidth = %d.\n",
             index +1,ExtendedIndicator+1,element.mWidth); */ 
       
     if (ArrangedElement (index COMMA_HERE).mSuccessorId != -1) {
       SuccessorGap = 0;
-      for(sint32 i= index; i< ArrangedElement (index COMMA_HERE).mSuccessorId;i++) {
-        SuccessorGap += (sint32) (inHyperPeriod /ArrangedElement(i COMMA_HERE).mPeriod);    
+      for(PMSInt32 i= index; i< ArrangedElement (index COMMA_HERE).mSuccessorId;i++) {
+        SuccessorGap += (PMSInt32) (inHyperPeriod /ArrangedElement(i COMMA_HERE).mPeriod);    
       }
       ArrangedElement (index COMMA_HERE).mSuccessorId =ExtendedIndicator + SuccessorGap ;
     } 
     
     if (ArrangedElement (index COMMA_HERE).mOtherHeirId != -1) {
       OtherHeirGap = 0;
-      for(sint32 i= index; i<ArrangedElement (index COMMA_HERE).mOtherHeirId;i++) {
-        OtherHeirGap += (sint32) (inHyperPeriod /ArrangedElement(i COMMA_HERE).mPeriod);    
+      for(PMSInt32 i= index; i<ArrangedElement (index COMMA_HERE).mOtherHeirId;i++) {
+        OtherHeirGap += (PMSInt32) (inHyperPeriod /ArrangedElement(i COMMA_HERE).mPeriod);    
       }
       ArrangedElement (index COMMA_HERE).mOtherHeirId =ExtendedIndicator + OtherHeirGap ;
     } 
       
-    ExtendedIndicator += (sint32) element.mWidth;    
+    ExtendedIndicator += (PMSInt32) element.mWidth;    
     if (ArrangedElement (index COMMA_HERE).mPredecessorId == -1) {
       element.mOffset = ArrangedElement (index COMMA_HERE).mOffset;
      }else {
-       sint32 predecessorId = ArrangedElement (index COMMA_HERE).mPredecessorId ;
+       PMSInt32 predecessorId = ArrangedElement (index COMMA_HERE).mPredecessorId ;
        element.mOffset = outMTElement (predecessorId COMMA_HERE).mOffset;
      }
     
     outMTElement.addObject (element);
     
     
-    sint32 Repetition =0;
+    PMSInt32 Repetition =0;
         
-    for(sint32 clicktime = 0; 
-    	((uint32) clicktime) <= (inHyperPeriod - ArrangedElement (index COMMA_HERE).mPeriod) ; clicktime++) {
+    for(PMSInt32 clicktime = 0; 
+    	((PMUInt32) clicktime) <= (inHyperPeriod - ArrangedElement (index COMMA_HERE).mPeriod) ; clicktime++) {
     
       if ( clicktime% ArrangedElement (index COMMA_HERE).mPeriod == 0) {
           
@@ -325,8 +325,8 @@ DeployElements (TC_UniqueArray <cElement> & ArrangedElement,
         MTelement.mMinDuration = ArrangedElement (index COMMA_HERE).mMinDuration ;
         MTelement.mMaxDuration = ArrangedElement (index COMMA_HERE).mMaxDuration ;
         
-        if (ArrangedElement (index COMMA_HERE).mDeadline == SINT32_MAX) {
-		     	MTelement.mDeadline = SINT32_MAX;
+        if (ArrangedElement (index COMMA_HERE).mDeadline == PMSINT32_MAX) {
+		     	MTelement.mDeadline = PMSINT32_MAX;
 		    }else{
 		     	MTelement.mDeadline = clicktime +	ArrangedElement (index COMMA_HERE).mDeadline ;
 		    }
@@ -336,7 +336,7 @@ DeployElements (TC_UniqueArray <cElement> & ArrangedElement,
         if (ArrangedElement (index COMMA_HERE).mPredecessorId == -1) {
           MTelement.mPredecessorId = -1 ; 
         }else{ 
-          interIndex = sint32 (ArrangedElement(index COMMA_HERE).mPredecessorId);
+          interIndex = PMSInt32 (ArrangedElement(index COMMA_HERE).mPredecessorId);
                  
           MTelement.mPredecessorId = Repetition + 
                ArrangedElement (interIndex COMMA_HERE).mInExtendedList ; 
@@ -371,19 +371,19 @@ static void
 DisposeReadyAtRelations(const TC_UniqueArray <cElement> & ArrangedElement,
                         TC_UniqueArray <cActivity> & Activity,
                         TC_UniqueArray <cReadyAtThisInstant> & ReadyAtThisInstant,
-                        const uint64 inHyperPeriod){
+                        const PMUInt64 inHyperPeriod){
 
 TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;	
 
 	//--- calculate max size
-	sint32 Num_ofIndepStaringInstant=0;
-	for ( sint32 index = 0; index < ArrangedElement.count(); index ++) {
+	PMSInt32 Num_ofIndepStaringInstant=0;
+	for ( PMSInt32 index = 0; index < ArrangedElement.count(); index ++) {
    	if ( ArrangedElement (index COMMA_HERE).mPredecessorId < 0){
-   	   Num_ofIndepStaringInstant += (sint32) inHyperPeriod/ArrangedElement (index COMMA_HERE).mPeriod  ;
+   	   Num_ofIndepStaringInstant += (PMSInt32) inHyperPeriod/ArrangedElement (index COMMA_HERE).mPeriod  ;
    	}
   }
   //--- Initilize 
-  for (sint32 i = 0; i <Num_ofIndepStaringInstant; i ++) {
+  for (PMSInt32 i = 0; i <Num_ofIndepStaringInstant; i ++) {
 	  cReadyAtThisInstant readyAtThisInstant;
       readyAtThisInstant.mThisInstant=-1;
       readyAtThisInstant.mActivityIndex=-1; 
@@ -392,14 +392,14 @@ TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;
 	}
   
     
-	sint32 IdInList = 0;
+	PMSInt32 IdInList = 0;
   
-  for ( sint32 index = 0; index < ArrangedElement.count(); index ++) {
+  for ( PMSInt32 index = 0; index < ArrangedElement.count(); index ++) {
    	if ( ArrangedElement (index COMMA_HERE).mPredecessorId < 0){
-   	   sint32 NextOccurrence = ArrangedElement (index COMMA_HERE).mOffset ;
-   	   while (NextOccurrence <= (ArrangedElement (index COMMA_HERE).mOffset+ ((sint32)inHyperPeriod) - ArrangedElement (index COMMA_HERE).mPeriod)) {
+   	   PMSInt32 NextOccurrence = ArrangedElement (index COMMA_HERE).mOffset ;
+   	   while (NextOccurrence <= (ArrangedElement (index COMMA_HERE).mOffset+ ((PMSInt32)inHyperPeriod) - ArrangedElement (index COMMA_HERE).mPeriod)) {
    	     bool theSameInstantIsFound = false;
-   	     sint32 interindex=0;
+   	     PMSInt32 interindex=0;
    	     while( (interindex < Num_ofIndepStaringInstant) 
    	     			 &&
    	     			 (!theSameInstantIsFound)
@@ -407,7 +407,7 @@ TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;
    	           (oReadyAtThisInstant (interindex COMMA_HERE).mThisInstant >= 0)){
    	           
    	           if (NextOccurrence == oReadyAtThisInstant (interindex COMMA_HERE).mThisInstant){
-   	           	 sint32 ActivityIndex = oReadyAtThisInstant (interindex COMMA_HERE).mActivityIndex;
+   	           	 PMSInt32 ActivityIndex = oReadyAtThisInstant (interindex COMMA_HERE).mActivityIndex;
    	           	 while (  Activity (ActivityIndex COMMA_HERE).mOtherReadyAtThisInst != -1){
    	           	   ActivityIndex = Activity (ActivityIndex COMMA_HERE).mOtherReadyAtThisInst ;
    	           	 }
@@ -427,17 +427,17 @@ TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;
    	   	 NextOccurrence += ArrangedElement (index COMMA_HERE).mPeriod;
    	   }
    	} else {
-   		IdInList += (sint32) inHyperPeriod/ArrangedElement (index COMMA_HERE).mPeriod ;
+   		IdInList += (PMSInt32) inHyperPeriod/ArrangedElement (index COMMA_HERE).mPeriod ;
    	}
   }
   
 //  printf(" Num_ofIndepStaringInstant : %ld.\n", Num_ofIndepStaringInstant);
-  sint32 sizeofStarting = 0;
-  sint32 interindex=0;
+  PMSInt32 sizeofStarting = 0;
+  PMSInt32 interindex=0;
   while ( (interindex < Num_ofIndepStaringInstant)
            &&
            (oReadyAtThisInstant (interindex COMMA_HERE).mThisInstant != -1) ){
-  //  sint32 ActivityIndex = oReadyAtThisInstant (interindex COMMA_HERE).mActivityIndex; // Commented out PM 17/1/2005
+  //  PMSInt32 ActivityIndex = oReadyAtThisInstant (interindex COMMA_HERE).mActivityIndex; // Commented out PM 17/1/2005
     /*printf("Activitites ready at : %ld are:\n",Activity (ActivityIndex COMMA_HERE).mOffset);
     printf("Activity : %ld & ",ActivityIndex);
     fflush(stdout); */
@@ -451,11 +451,11 @@ TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;
     interindex ++;
   }
 
-  sint32 lIndex = 0 ;
+  PMSInt32 lIndex = 0 ;
  
-   for ( sint32 index = 0; index < interindex ; index ++) {
-  	sint32 minStarting = SINT32_MAX;
-  	for (sint32 i = 0; i < sizeofStarting ; i ++) {
+   for ( PMSInt32 index = 0; index < interindex ; index ++) {
+  	PMSInt32 minStarting = PMSINT32_MAX;
+  	for (PMSInt32 i = 0; i < sizeofStarting ; i ++) {
     	if ( !oReadyAtThisInstant (i COMMA_HERE).mMarked){
     		if ( (minStarting=min(minStarting,oReadyAtThisInstant (i COMMA_HERE).mThisInstant))==
     			oReadyAtThisInstant (i COMMA_HERE).mThisInstant ){
@@ -472,9 +472,9 @@ TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;
    // 	printf ("index : %ld Instant %ld\n",index,oReadyAtThisInstant (lIndex COMMA_HERE).mThisInstant);
     ReadyAtThisInstant.addObject(readyAtThisInstant); 
   }
-/*  for ( sint32 i = 0; i < sizeofStarting ; i ++) {
+/*  for ( PMSInt32 i = 0; i < sizeofStarting ; i ++) {
   	printf("------Activitites at : %ld are:\n",ReadyAtThisInstant (i COMMA_HERE).mThisInstant);
-  	sint32 Activ =ReadyAtThisInstant (i COMMA_HERE).mActivityIndex;
+  	PMSInt32 Activ =ReadyAtThisInstant (i COMMA_HERE).mActivityIndex;
     printf("Activity : %ld & ",Activ);
    	while ( (Activ = Activity (Activ COMMA_HERE).mOtherReadyAtThisInst) !=-1){
       printf("Activity : %ld & ",Activ);
@@ -488,7 +488,7 @@ static void
 CreateActivitiesFile (const TC_UniqueArray <cActivity> & exElement,
 							      	const C_String & activitiesHTMLFileName){
 
-  const sint32 NumberOfElements = exElement.count () ;
+  const PMSInt32 NumberOfElements = exElement.count () ;
   printf ("Extended activities list is stored in %s file.\n", activitiesHTMLFileName.cString (HERE)) ;
   C_HTML_FileWrite act_htmlFile (activitiesHTMLFileName,
                               "Extended List Activities",
@@ -503,7 +503,7 @@ CreateActivitiesFile (const TC_UniqueArray <cActivity> & exElement,
   act_htmlFile.outputRawData ("Occurrence</td><td>Offset</td><td>minDur.</td><td>");
   act_htmlFile.outputRawData ("MaxDur.</td><td>Predecessor</td></tr>") ;
 		
- 	for (sint32 index = 0; index < NumberOfElements ;index++) {
+ 	for (PMSInt32 index = 0; index < NumberOfElements ;index++) {
  	  if ( (exElement (index COMMA_HERE).mOccurrence % exElement (index COMMA_HERE).mEvery) == 0 ){
 			act_htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
 		  act_htmlFile << cStringWithSigned (index) ;
@@ -531,29 +531,29 @@ CreateActivitiesFile (const TC_UniqueArray <cActivity> & exElement,
 }
 	
 /*----------------------------------------------------------------------------*/
-sint32
+PMSInt32
 BuildExtendedList (TC_UniqueArray <cReadyAtThisInstant> & oReadyAtThisInstant,
                    TC_UniqueArray <cElement> & Element,
                    const TC_UniqueArray <cResource> & Resource,
                    TC_UniqueArray <cActivity> & exElement,
                    TC_UniqueArray <cMTElement> & outMTElement,
-                   const sint32 Nu_ofTasks, sint32 Nu_ofMessages,
+                   const PMSInt32 Nu_ofTasks, PMSInt32 Nu_ofMessages,
                    bool CreateIntermediateFiles,
                    bool & ioUseBalgorithm,
                    const C_String & activitiesHTMLFileName) {
 
       
   ExtractResourceMinDuration(Element, Resource);
-  const uint64 HyperPeriod = CalculateHyperPeriod (Element) ;
-  const sint32 Number_ofResources = Resource.count();
+  const PMUInt64 HyperPeriod = CalculateHyperPeriod (Element) ;
+  const PMSInt32 Number_ofResources = Resource.count();
   TC_UniqueArray <cElement> ArrangedElement;
-  sint32 NoInterDependenceButUseB = 0;
+  PMSInt32 NoInterDependenceButUseB = 0;
   ArrangingAccodingPrecedenceRelations (Element, ArrangedElement,
                                         Nu_ofTasks,Nu_ofMessages);
   
   FindSuccessors (ArrangedElement);
- // const sint32 ActivitiesNumber = CalculateExtendedListLength(Element, HyperPeriod) ; // Commented out PM 17/1/2005
-	const sint32 Num_of_Activties = 
+ // const PMSInt32 ActivitiesNumber = CalculateExtendedListLength(Element, HyperPeriod) ; // Commented out PM 17/1/2005
+	const PMSInt32 Num_of_Activties = 
 	      DeployElements (ArrangedElement, exElement, outMTElement, HyperPeriod);
  	
  	co << cStringWithSigned (Num_of_Activties) << " activities\n" ;

@@ -28,7 +28,7 @@
 
 //---------------------------------------------------------------------------*
 
-uint64 C_us::smTrivialAdd ;
+PMUInt64 C_us::smTrivialAdd ;
 
 //---------------------------------------------------------------------------*
 //                                                                           *
@@ -53,7 +53,7 @@ static C_us_hashmap gMap ;
 
 //---------------------------------------------------------------------------*
 
-void C_us::reallocUniqueTable (const sint32 inTableUniqueNewSize) {
+void C_us::reallocUniqueTable (const PMSInt32 inTableUniqueNewSize) {
   gMap.reallocMap (inTableUniqueNewSize) ;
 }
 
@@ -71,7 +71,7 @@ static C_us gVDLlistRoot ;
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-sint32 C_us::smNodeCount = 0 ;
+PMSInt32 C_us::smNodeCount = 0 ;
 
 //---------------------------------------------------------------------------*
 //                                                                           *
@@ -79,7 +79,7 @@ sint32 C_us::smNodeCount = 0 ;
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-void C_us::reallocAdditionCache (const sint32 inNewCacheSize) {
+void C_us::reallocAdditionCache (const PMSInt32 inNewCacheSize) {
   gCache.reallocCache (inNewCacheSize) ;
 }
 
@@ -159,7 +159,7 @@ bool C_us::operator == (const C_us & inOperand) const {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-void C_us::pushValue (const sint32 inIndex) {
+void C_us::pushValue (const PMSInt32 inIndex) {
   mRootPointer = find_or_add (inIndex, mRootPointer) ;
 }
 
@@ -169,14 +169,14 @@ void C_us::pushValue (const sint32 inIndex) {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-void C_us::suppressEntryAtLevel (const sint32 inLevel) {
+void C_us::suppressEntryAtLevel (const PMSInt32 inLevel) {
   mRootPointer = internalSuppressEntry (inLevel, mRootPointer) ;
 }
 
 //---------------------------------------------------------------------------*
 
 C_us::C_us_nodeInfo * C_us::
-internalSuppressEntry (const sint32 inLevel,
+internalSuppressEntry (const PMSInt32 inLevel,
                        C_us_nodeInfo * const inPointer) {
   C_us_nodeInfo * result = NULL ;
   if (inPointer != NULL) {
@@ -216,31 +216,31 @@ C_us & C_us::operator = (const C_us & inOperand) {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-uint64 C_us::getCacheEntriesCount (void) {
+PMUInt64 C_us::getCacheEntriesCount (void) {
   return gCache.getCacheEntriesCount () ;
 }
 
 //---------------------------------------------------------------------------*
 
-uint64 C_us::getCacheSuccessCount (void) {
+PMUInt64 C_us::getCacheSuccessCount (void) {
   return gCache.getCacheEntriesCount () ;
 }
 
 //---------------------------------------------------------------------------*
 
-uint64 C_us::getCacheFailureCount (void) {
+PMUInt64 C_us::getCacheFailureCount (void) {
   return gCache.getCacheMissCount () ;
 }
 
 //---------------------------------------------------------------------------*
 
-uint64 C_us::getCacheOverrideCount (void) {
+PMUInt64 C_us::getCacheOverrideCount (void) {
   return gCache.getCacheOverrideCount () ;
 }
 
 //---------------------------------------------------------------------------*
 
-uint64 C_us::getUnusedCacheEntriesCount (void) {
+PMUInt64 C_us::getUnusedCacheEntriesCount (void) {
   return gCache.getUnusedCacheEntriesCount () ;
 }
 
@@ -250,7 +250,7 @@ uint64 C_us::getUnusedCacheEntriesCount (void) {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
- void C_us::explore_vdl (C_us & ioVDL, sint32 & outIndex) {
+ void C_us::explore_vdl (C_us & ioVDL, PMSInt32 & outIndex) {
   if (ioVDL.mRootPointer == NULL) {
     outIndex  = -1 ;
   }else{
@@ -265,12 +265,12 @@ uint64 C_us::getUnusedCacheEntriesCount (void) {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-sint32 C_us::smNodeCompare = 0 ;
+PMSInt32 C_us::smNodeCompare = 0 ;
 
-sinteger C_us::C_us_nodeInfo::
+PMSInt C_us::C_us_nodeInfo::
 compare (const C_us_nodeInfo & inInfo) const {
   smNodeCompare ++ ;
-  sinteger result = ((sinteger) mPtrToNext) - ((sinteger) inInfo.mPtrToNext) ;
+  PMSInt result = ((PMSInt) mPtrToNext) - ((PMSInt) inInfo.mPtrToNext) ;
   if (result == 0) {
     result = mIndex - inInfo.mIndex ;
   }
@@ -283,7 +283,7 @@ compare (const C_us_nodeInfo & inInfo) const {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-uint32 C_us::getNodeSize (void) {
+PMUInt32 C_us::getNodeSize (void) {
   return C_us_hashmap::getNodeSize () ;
 }
 
@@ -294,7 +294,7 @@ uint32 C_us::getNodeSize (void) {
 //---------------------------------------------------------------------------*
 
 C_us::C_us_nodeInfo * C_us::
-find_or_add (const sint32 inIndex,
+find_or_add (const PMSInt32 inIndex,
              C_us::C_us_nodeInfo * const inPointerToNext) {
 //--- Do search or insert
   C_us_nodeInfo info ;
@@ -317,8 +317,8 @@ find_or_add (const sint32 inIndex,
 
  void C_us::printVector (AC_OutputStream & inStream,
                            const char * inPrefix,
-                           const sint32 inFirst,
-                           const sint32 inStep) const {
+                           const PMSInt32 inFirst,
+                           const PMSInt32 inStep) const {
    bool firstPrint = true ;
    C_us_nodeInfo * p = mRootPointer ;
     while (p != NULL) {
@@ -338,8 +338,8 @@ find_or_add (const sint32 inIndex,
 
  void C_us::printVector (AC_OutputStream & inStream,
                          const TC_UniqueArray <C_String> & inNames,
-                         const sint32 inFirst,
-                         const sint32 inStep) const {
+                         const PMSInt32 inFirst,
+                         const PMSInt32 inStep) const {
    bool firstPrint = true ;
    C_us_nodeInfo * p = mRootPointer ;
     while (p != NULL) {
@@ -385,13 +385,13 @@ void C_us::collectUnusedNodes (void) {
 //---------------------------------------------------------------------------*
 
 void C_us::printVDLsummary (AC_OutputStream & inOutputStream) {
-  const uint64 n = getTrivialAddCount () + getCacheSuccessCount () + getCacheFailureCount () ;
+  const PMUInt64 n = getTrivialAddCount () + getCacheSuccessCount () + getCacheFailureCount () ;
   inOutputStream << "Summary of VDL operations :\n"
                     "  " << cStringWithSigned (getVDLnodeCount ())
                  << " VDL used nodes (size " << cStringWithUnsigned (getNodeSize ()) << " bytes) ;\n"
                     "  " << cStringWithSigned (C_us_hashmap::getCreatedObjectCount ())
                  << " VDL created nodes (total size "
-                 << cStringWithUnsigned ((uint32) ((C_us_hashmap::getCreatedObjectCount () * getNodeSize ()) / 1024UL))
+                 << cStringWithUnsigned ((PMUInt32) ((C_us_hashmap::getCreatedObjectCount () * getNodeSize ()) / 1024UL))
                  << " kbytes) ;\n"
                     "  " << cStringWithSigned (getNodeComparesCount ()) << " comparisons ;\n"
                     "  " << cStringWithUnsigned64 (getTrivialAddCount ())
