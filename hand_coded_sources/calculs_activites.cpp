@@ -29,7 +29,7 @@ bool cPtr_C_canIndependantMessage::messageDependsOnTask (void) const {
 
 //--------------------------------------------------------------------------*
 
-uint32 cPtr_C_canIndependantMessage::getMessageDependanceValue (void) const {
+PMUInt32 cPtr_C_canIndependantMessage::getMessageDependanceValue (void) const {
   return 0 ;
 }
 
@@ -51,7 +51,7 @@ bool cPtr_C_canMessageFromMessage::messageDependsOnTask (void) const {
 
 //--------------------------------------------------------------------------*
 
-uint32 cPtr_C_canMessageFromMessage::getMessageDependanceValue (void) const {
+PMUInt32 cPtr_C_canMessageFromMessage::getMessageDependanceValue (void) const {
   return mMessageIndex.uintValue () ;
 }
 
@@ -73,7 +73,7 @@ bool cPtr_C_canMessageFromTask::messageDependsOnTask (void) const {
 
 //--------------------------------------------------------------------------*
 
-uint32 cPtr_C_canMessageFromTask::getMessageDependanceValue (void) const {
+PMUInt32 cPtr_C_canMessageFromTask::getMessageDependanceValue (void) const {
   return mTaskIndex.uintValue () ;
 }
 
@@ -95,13 +95,13 @@ bool cPtr_C_independantTask::taskDependsOnMessage (void) const {
 
 //--------------------------------------------------------------------------*
 
-uint32 cPtr_C_independantTask::getTaskDependanceValue (void) const {
+PMUInt32 cPtr_C_independantTask::getTaskDependanceValue (void) const {
   return 0 ;
 }
 
 //--------------------------------------------------------------------------*
 
-uint32 cPtr_C_independantTask::getTaskEveryParameter (void) const {
+PMUInt32 cPtr_C_independantTask::getTaskEveryParameter (void) const {
   return 1 ;
 }
 
@@ -123,13 +123,13 @@ bool cPtr_C_taskDependsFromTask::taskDependsOnMessage (void) const {
 
 //--------------------------------------------------------------------------*
 
-uint32 cPtr_C_taskDependsFromTask::getTaskDependanceValue (void) const {
+PMUInt32 cPtr_C_taskDependsFromTask::getTaskDependanceValue (void) const {
   return mTask.uintValue () ;
 }
 
 //--------------------------------------------------------------------------*
 
-uint32 cPtr_C_taskDependsFromTask::getTaskEveryParameter (void) const {
+PMUInt32 cPtr_C_taskDependsFromTask::getTaskEveryParameter (void) const {
   return mEvery.uintValue () ;
 }
 
@@ -151,13 +151,13 @@ bool cPtr_C_taskDependsFromMessage::taskDependsOnMessage (void) const {
 
 //--------------------------------------------------------------------------*
 
-uint32 cPtr_C_taskDependsFromMessage::getTaskDependanceValue (void) const {
+PMUInt32 cPtr_C_taskDependsFromMessage::getTaskDependanceValue (void) const {
   return mMessage.uintValue () ;
 }
 
 //--------------------------------------------------------------------------*
 
-uint32 cPtr_C_taskDependsFromMessage::getTaskEveryParameter (void) const {
+PMUInt32 cPtr_C_taskDependsFromMessage::getTaskEveryParameter (void) const {
   return mEvery.uintValue () ;
 }
 
@@ -282,7 +282,7 @@ routine_performComputations (C_Compiler & inLexique,
   }
   char MessageType = '\0' ;
   bool DependentHasOffset = false ;
-	sint32  index ;
+	PMSInt32  index ;
 	GGS_M_processor::cElement * processor = inProcessorMap.firstObject () ;
 //--- Print processors map
   htmlFile.appendCppTitleComment ("Processors map", "title") ;
@@ -311,13 +311,13 @@ routine_performComputations (C_Compiler & inLexique,
     cResource resource ;
     strcpy (resource.mResourceName, processor->mKey.cString (HERE));
   	resource.mResourceType= 2; // Processor = 2
-   	resource.mStep = (sint32) processor->mInfo.mStep.uintValue () ;
+   	resource.mStep = (PMSInt32) processor->mInfo.mStep.uintValue () ;
     
     Resource.addObject (resource) ;
     processor = processor->nextObject () ;
     index ++ ;
   }
-  sint32 NumberOfProcessors = index ;
+  PMSInt32 NumberOfProcessors = index ;
 	
   const char * kNetworkTypes [] = {"VAN","CAN"} ;
 	GGS_M_network::cElement * network = inNetworkMap.firstObject () ;
@@ -343,7 +343,7 @@ routine_performComputations (C_Compiler & inLexique,
   htmlFile.outputRawData ("</table>") ;
   htmlFile.outputRawData ("<br>");
 //--- Build networks map  
-  sint32 min_NetworkStep = SINT32_MAX ;
+  PMSInt32 min_NetworkStep = PMSINT32_MAX ;
   index = 0 ;
   network = inNetworkMap.firstObject ();
   while (network != NULL) {
@@ -351,7 +351,7 @@ routine_performComputations (C_Compiler & inLexique,
     cResource resource ;
     strcpy(resource.mResourceName,network->mKey.cString (HERE));
   	resource.mResourceType= network->mInfo.mCANnetwork.boolValue ();
-    resource.mStep = (sint32) network->mInfo.mScalingFactor.uintValue () ;		
+    resource.mStep = (PMSInt32) network->mInfo.mScalingFactor.uintValue () ;		
  		min_NetworkStep = min (min_NetworkStep, resource.mStep);
  	 	
  	 	Resource.addObject (resource) ;
@@ -369,44 +369,44 @@ routine_performComputations (C_Compiler & inLexique,
     strcpy(element.mElementName,task->mKey.cString (HERE));   
     element.mElementType = 'T';    
     element.mId_inList =index;
-  	element.mResourceId = (sint32) task->mInfo.mProcessor.uintValue ();
-    element.mPriority = (sint32) task->mInfo.mPriority.uintValue ();
+  	element.mResourceId = (PMSInt32) task->mInfo.mProcessor.uintValue ();
+    element.mPriority = (PMSInt32) task->mInfo.mPriority.uintValue ();
 // §    element.mEvery = 1 ;
-    sint32 Sca = Resource (element.mResourceId COMMA_HERE).mStep ;
+    PMSInt32 Sca = Resource (element.mResourceId COMMA_HERE).mStep ;
 //    printf (" Sca : %ld \n",Sca);
-    element.mEvery = (sint32) task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () ;
-  	element.mOffset = Sca*(sint32) task->mInfo.mOffset.uintValue ();  
-    element.mMaxDuration = Sca*(sint32) task->mInfo.mDurationMax.uintValue (); 
+    element.mEvery = (PMSInt32) task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () ;
+  	element.mOffset = Sca*(PMSInt32) task->mInfo.mOffset.uintValue ();  
+    element.mMaxDuration = Sca*(PMSInt32) task->mInfo.mDurationMax.uintValue (); 
     element.mMinDuration = useCANmaxLengthOnly
-                          ? element.mMaxDuration :(Sca*(sint32)  task->mInfo.mDurationMin.uintValue ());
+                          ? element.mMaxDuration :(Sca*(PMSInt32)  task->mInfo.mDurationMin.uintValue ());
         
-    element.mDeadline = (sint32) task->mInfo.mDeadline.uintValue ();
-    if ( element.mDeadline !=  SINT32_MAX){ // UINT32_MAX -> SINT32_MAX by PM, 17/1/2005
+    element.mDeadline = (PMSInt32) task->mInfo.mDeadline.uintValue ();
+    if ( element.mDeadline !=  PMSINT32_MAX){ // PMUINT32_MAX -> PMSINT32_MAX by PM, 17/1/2005
     	 element.mDeadline = Sca*element.mDeadline;
     }  
  //................................................   
     if (task->mInfo.mTaskKind (HERE)->taskDependsOnTask ()) {
-    	sint32 elementIndex = (sint32) task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ();
+    	PMSInt32 elementIndex = (PMSInt32) task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ();
     	element.mEveryMultiple = 
-    		 (sint32) task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
-   		element.mPeriod = Sca*(sint32) task->mInfo.mPeriod.uintValue ();
+    		 (PMSInt32) task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
+   		element.mPeriod = Sca*(PMSInt32) task->mInfo.mPeriod.uintValue ();
     } else if (task->mInfo.mTaskKind (HERE)->taskDependsOnMessage ()){
     
     }else{
-    	element.mEveryMultiple = (sint32) task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () ;
-    	element.mPeriod = Sca*(sint32) task->mInfo.mPeriod.uintValue ();
+    	element.mEveryMultiple = (PMSInt32) task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () ;
+    	element.mPeriod = Sca*(PMSInt32) task->mInfo.mPeriod.uintValue ();
     }
  //................................................
   	if (task->mInfo.mTaskKind (HERE)->taskDependsOnTask ()) {
       element.mIsIndependant=false ;
     	element.mPredecessorType = 'T'; 
       element.mPredecessorId = 
-      sint32 (task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ());
+      PMSInt32 (task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ());
     }else if (task->mInfo.mTaskKind (HERE)->taskDependsOnMessage ()) {
       element.mIsIndependant=false ;
     	element.mPredecessorType = 'M'; 
       element.mPredecessorId = 
-      sint32 (task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ()) ;
+      PMSInt32 (task->mInfo.mTaskKind (HERE)->getTaskDependanceValue ()) ;
     }else{ 
     	element.mIsIndependant=true ;
     }
@@ -417,7 +417,7 @@ routine_performComputations (C_Compiler & inLexique,
 		task = task->nextObject () ;
     index ++ ;
   }
-  sint32 NumberOfTasks = index;
+  PMSInt32 NumberOfTasks = index;
 	
   const char * kMessageClasses [] = {"standard", "extended", "  VAN   "} ;
   GGS_M_messages::cElement * message = inMessagesMap.firstObject () ;
@@ -432,13 +432,13 @@ routine_performComputations (C_Compiler & inLexique,
   	element.mElementType = 'M';
     element.mId_inList = index;
   	element.mResourceId = NumberOfProcessors + 
-  		(sint32) message->mInfo.mNetworkIndex.uintValue ();
-  	element.mPriority = (sint32) message->mInfo.mPriority.uintValue ();
+  		(PMSInt32) message->mInfo.mNetworkIndex.uintValue ();
+  	element.mPriority = (PMSInt32) message->mInfo.mPriority.uintValue ();
   	element.mEvery = 1 ;
-  	sint32 ScalingFactor = 
+  	PMSInt32 ScalingFactor = 
 					 Resource (element.mResourceId COMMA_HERE).mStep;
 	//  printf (" Sca : %ld \n",ScalingFactor);
-	  element.mOffset = ScalingFactor*(sint32) message->mInfo.mOffset.uintValue (); 
+	  element.mOffset = ScalingFactor*(PMSInt32) message->mInfo.mOffset.uintValue (); 
   	if ( Resource (element.mResourceId COMMA_HERE).mResourceType == 1 ){ //CAN = 1
     	if (strstr(kMessageClasses [message->mInfo.mClass.uintValue ()],"standard") != NULL){ 
     		MessageType = 'S';
@@ -452,7 +452,7 @@ routine_performComputations (C_Compiler & inLexique,
       }
       
       element.mMaxDuration = ScalingFactor* maxCANMessageTime(MessageType,
-      											 (uint32) element.mMinDuration,
+      											 (PMUInt32) element.mMinDuration,
       											 message->mInfo.mBytesCount.uintValue ());
   
       element.mMinDuration = useCANmaxLengthOnly
@@ -463,7 +463,7 @@ routine_performComputations (C_Compiler & inLexique,
                             
   	}else if (Resource (element.mResourceId COMMA_HERE).mResourceType == 0 ){ //VAN = 0
     	
-    	element.mMinDuration= ScalingFactor *(64+10* (sint32) message->mInfo.mBytesCount.uintValue ()) ;
+    	element.mMinDuration= ScalingFactor *(64+10* (PMSInt32) message->mInfo.mBytesCount.uintValue ()) ;
 
     	element.mMaxDuration= ScalingFactor* element.mMinDuration;
   	}else{ 
@@ -471,35 +471,35 @@ routine_performComputations (C_Compiler & inLexique,
       fflush (stdout);  
 		}
 		
-    element.mDeadline =  (sint32) message->mInfo.mDeadline.uintValue ();
-    if ( element.mDeadline !=  SINT32_MAX){ // UINT32_MAX -> SINT32_MAX by PM, 17/1/2005
+    element.mDeadline =  (PMSInt32) message->mInfo.mDeadline.uintValue ();
+    if ( element.mDeadline !=  PMSINT32_MAX){ // PMUINT32_MAX -> PMSINT32_MAX by PM, 17/1/2005
     	 element.mDeadline = ScalingFactor *element.mDeadline;
     }  
  //...........................................................................
-    sint32 elementIndex ;
+    PMSInt32 elementIndex ;
    if (message->mInfo.mMessageKind (HERE)->messageDependsOnTask ()) {
-   	 elementIndex = (sint32) message->mInfo.mMessageKind (HERE)->getMessageDependanceValue ();
+   	 elementIndex = (PMSInt32) message->mInfo.mMessageKind (HERE)->getMessageDependanceValue ();
      element.mEveryMultiple = Element (elementIndex COMMA_HERE).mEveryMultiple ;  
      element.mPeriod = Element (elementIndex COMMA_HERE).mPeriod ; 
    }else if (message->mInfo.mMessageKind (HERE)->messageDependsOnMessage ()) {
-     elementIndex = (sint32) message->mInfo.mMessageKind (HERE)->getMessageDependanceValue () + NumberOfTasks ;
+     elementIndex = (PMSInt32) message->mInfo.mMessageKind (HERE)->getMessageDependanceValue () + NumberOfTasks ;
      element.mEveryMultiple = Element (elementIndex COMMA_HERE).mEveryMultiple; 
      element.mPeriod = Element (elementIndex COMMA_HERE).mPeriod ;
    } else{
    	 element.mEveryMultiple = 1;
-   	  element.mPeriod = ScalingFactor * (sint32) message->mInfo.mPeriod.uintValue ();
+   	  element.mPeriod = ScalingFactor * (PMSInt32) message->mInfo.mPeriod.uintValue ();
    }
  //.................................................................................   
   	if (message->mInfo.mMessageKind (HERE)->messageDependsOnTask ()) {
       element.mIsIndependant=false ;
     	element.mPredecessorType = 'T'; 
       element.mPredecessorId = 
-         (sint32) message->mInfo.mMessageKind (HERE)->getMessageDependanceValue ();
+         (PMSInt32) message->mInfo.mMessageKind (HERE)->getMessageDependanceValue ();
     }else if (message->mInfo.mMessageKind (HERE)->messageDependsOnMessage ()) {
     	element.mIsIndependant=false ;
     	element.mPredecessorType = 'M'; 
       element.mPredecessorId = \
-      	(sint32) message->mInfo.mMessageKind (HERE)->getMessageDependanceValue () ;
+      	(PMSInt32) message->mInfo.mMessageKind (HERE)->getMessageDependanceValue () ;
     }else{ 
     	element.mIsIndependant=true ;
     }
@@ -510,7 +510,7 @@ routine_performComputations (C_Compiler & inLexique,
 	  message = message->nextObject () ;
     index ++ ;
   }
-  sint32 NumberOfMessages = index;  
+  PMSInt32 NumberOfMessages = index;  
 //*----------------------------------------------------------------------/  
 	//--- Print task map
   
@@ -544,18 +544,18 @@ routine_performComputations (C_Compiler & inLexique,
     htmlFile.outputRawData ("</td><td>") ;
 //....................................................................   
     if (task->mInfo.mTaskKind (HERE)->taskDependsOnMessage ()) {
-    	sint32 elementIndex = (sint32) task->mInfo.mTaskKind (HERE)->getTaskDependanceValue () + NumberOfTasks ;
+    	PMSInt32 elementIndex = (PMSInt32) task->mInfo.mTaskKind (HERE)->getTaskDependanceValue () + NumberOfTasks ;
     	Element (index-1 COMMA_HERE).mEveryMultiple = 
-    		 (sint32) task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
+    		 (PMSInt32) task->mInfo.mTaskKind (HERE)->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
     	Element (index-1 COMMA_HERE).mPeriod = Element (elementIndex COMMA_HERE).mPeriod  ;
     }
  //...................................................................
-    sint32 resourceId = (sint32) task->mInfo.mProcessor.uintValue ();
-    sint32 Scal = Resource (resourceId COMMA_HERE).mStep ;
+    PMSInt32 resourceId = (PMSInt32) task->mInfo.mProcessor.uintValue ();
+    PMSInt32 Scal = Resource (resourceId COMMA_HERE).mStep ;
 
     htmlFile << cStringWithSigned (Element (index-1 COMMA_HERE).mEveryMultiple * Element (index-1 COMMA_HERE).mPeriod /Scal) ;
     htmlFile.outputRawData ("</td><td>") ;
-    if (task->mInfo.mDeadline.uintValue () == UINT32_MAX){
+    if (task->mInfo.mDeadline.uintValue () == PMUINT32_MAX){
     	htmlFile.outputRawData ("Unknown</td><td>") ;
     }else{
      	htmlFile << cStringWithUnsigned (task->mInfo.mDeadline.uintValue ()) ;
@@ -604,8 +604,8 @@ routine_performComputations (C_Compiler & inLexique,
     htmlFile << cStringWithUnsigned (message->mInfo.mBytesCount.uintValue ()) ;
     htmlFile.outputRawData ("</td><td>") ;
     
-    sint32 resourceId =  NumberOfProcessors + (sint32) message->mInfo.mNetworkIndex.uintValue ();
-    sint32 Scal = Resource (resourceId COMMA_HERE).mStep ;
+    PMSInt32 resourceId =  NumberOfProcessors + (PMSInt32) message->mInfo.mNetworkIndex.uintValue ();
+    PMSInt32 Scal = Resource (resourceId COMMA_HERE).mStep ;
     
     if ( (strstr(kMessageClasses [message->mInfo.mClass.uintValue ()],"standard") != NULL)
     		|| 
@@ -627,7 +627,7 @@ routine_performComputations (C_Compiler & inLexique,
     htmlFile << cStringWithSigned (Element (index-1 + NumberOfTasks  COMMA_HERE).mEveryMultiple *  
                                    Element (index-1 + NumberOfTasks  COMMA_HERE).mPeriod /Scal);
     htmlFile.outputRawData ("</td><td>") ; 
-    if (message->mInfo.mDeadline.uintValue () == UINT32_MAX){
+    if (message->mInfo.mDeadline.uintValue () == PMUINT32_MAX){
     	htmlFile.outputRawData ("Unknown</td><td>") ;
     }else{
      	htmlFile << cStringWithUnsigned (message->mInfo.mDeadline.uintValue ()) ;
@@ -661,7 +661,7 @@ routine_performComputations (C_Compiler & inLexique,
   	TC_UniqueArray <cMTElement> MTElement ;
   	TC_UniqueArray <cReadyAtThisInstant>  ReadyAtThisInstant;
    
-   sint32 NoInterButUseB = 
+   PMSInt32 NoInterButUseB = 
          BuildExtendedList (ReadyAtThisInstant, Element, 
              Resource, exElement, 
              MTElement,NumberOfTasks,

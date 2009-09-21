@@ -36,7 +36,7 @@ static C_VDL_hashmap gMap ;
 
 //---------------------------------------------------------------------------*
 
-void C_activitiesToSchedule::reallocUniqueTable (const sint32 inTableUniqueNewSize) {
+void C_activitiesToSchedule::reallocUniqueTable (const PMSInt32 inTableUniqueNewSize) {
   gMap.reallocMap (inTableUniqueNewSize) ;
 }
 
@@ -54,7 +54,7 @@ static C_activitiesToSchedule gVDLlistRoot ;
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-sint32 C_activitiesToSchedule::smNodeCount = 0 ;
+PMSInt32 C_activitiesToSchedule::smNodeCount = 0 ;
 
 //---------------------------------------------------------------------------*
 //                                                                           *
@@ -142,9 +142,9 @@ operator != (const C_activitiesToSchedule & inOperand) const {
 //---------------------------------------------------------------------------*
 
 C_activitiesToSchedule::cVDLnodeInfo * C_activitiesToSchedule::
-internalAddEntry (const sint32 inActivityIndex,
-                  const sint32 inActivityPriority,
-                  const sint32 inActivityScheduleInstant,
+internalAddEntry (const PMSInt32 inActivityIndex,
+                  const PMSInt32 inActivityPriority,
+                  const PMSInt32 inActivityScheduleInstant,
                   cVDLnodeInfo * const inPointerToNext) {
   cVDLnodeInfo * p ;
   if (inPointerToNext == NULL) {
@@ -182,9 +182,9 @@ internalAddEntry (const sint32 inActivityIndex,
 //---------------------------------------------------------------------------*
 
 void C_activitiesToSchedule::
-addEntry (const sint32 inActivityIndex,
-          const sint32 inActivityPriority,
-          const sint32 inActivityScheduleInstant) {
+addEntry (const PMSInt32 inActivityIndex,
+          const PMSInt32 inActivityPriority,
+          const PMSInt32 inActivityScheduleInstant) {
 //--- Check that entry index is unique
   bool unique = true ;
   cVDLnodeInfo * p = mRootPointer ;
@@ -195,8 +195,8 @@ addEntry (const sint32 inActivityIndex,
 //--- Perform entry
   if (unique) {
 //    bool cacheSuccess ;
-//    sint32 hashCode ;
-//    sint32 result ;
+//    PMSInt32 hashCode ;
+//    PMSInt32 result ;
 //    gAddEntryCache.getCacheEntry (inActivityIndex, inActivityPriority, inActivityScheduleInstant, 
 //                                  cacheSuccess, hashCode, result) ;
 //    if (cacheSuccess) {
@@ -207,7 +207,7 @@ addEntry (const sint32 inActivityIndex,
                                        inActivityScheduleInstant,
                                        mRootPointer) ;
 //      gAddEntryCache.writeCacheEntry (inActivityIndex, inActivityPriority, inActivityScheduleInstant,
-//                                      hashCode, (sint32) mRootPointer) ;
+//                                      hashCode, (PMSInt32) mRootPointer) ;
 //    }
   }else{
     co << "**** ERROR !!! Activity index "
@@ -226,7 +226,7 @@ addEntry (const sint32 inActivityIndex,
 
 void C_activitiesToSchedule::
 internalGetFirstToScheduleAndSuppress (cVDLnodeInfo * & ioPtr,
-                            const sint32 inActivityIndex) {
+                            const PMSInt32 inActivityIndex) {
   cVDLnodeInfo * result = ioPtr->mPtrToNext ;
   if (ioPtr->mActivityIndex != inActivityIndex) {
     internalGetFirstToScheduleAndSuppress (result, inActivityIndex) ;
@@ -239,12 +239,12 @@ internalGetFirstToScheduleAndSuppress (cVDLnodeInfo * & ioPtr,
 }
 //---------------------------------------------------------------------------*
 
-sint32 C_activitiesToSchedule::
-getFirstToScheduleAndSuppress (const sint32 inCurrentInstant) {
-  sint32 activityIndex = -1 ; // Means none
+PMSInt32 C_activitiesToSchedule::
+getFirstToScheduleAndSuppress (const PMSInt32 inCurrentInstant) {
+  PMSInt32 activityIndex = -1 ; // Means none
   if ((mRootPointer != NULL) && (mRootPointer->mScheduleInstant <= inCurrentInstant)) {
   //--- Find min priority activity
-    sint32 priority = mRootPointer->mActivityPriority ;
+    PMSInt32 priority = mRootPointer->mActivityPriority ;
     activityIndex = mRootPointer->mActivityIndex ;
     cVDLnodeInfo * p = mRootPointer->mPtrToNext ;
     while ((p != NULL) && (p->mScheduleInstant <= inCurrentInstant)) {
@@ -260,11 +260,11 @@ getFirstToScheduleAndSuppress (const sint32 inCurrentInstant) {
 }
 //---------------------------------------------------------------------------*
 //static 
-void LowerPriorityOnResource (sint32 & lowerPriority, const sint32 activityIndex, 
-                              const sint32 ResourceIndex,
+void LowerPriorityOnResource (PMSInt32 & lowerPriority, const PMSInt32 activityIndex, 
+                              const PMSInt32 ResourceIndex,
                               const TC_UniqueArray <cActivity> & inActivities){                             
   if (activityIndex >= 0){
-	  sint32 successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
+	  PMSInt32 successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
 	  if (successorIndex >= 0){
 	    if ( (ResourceIndex == inActivities (successorIndex COMMA_HERE).mResourceId)
 	       &&
@@ -272,7 +272,7 @@ void LowerPriorityOnResource (sint32 & lowerPriority, const sint32 activityIndex
 	      lowerPriority = MAX(lowerPriority, inActivities (successorIndex COMMA_HERE).mPriority);
 	   	  LowerPriorityOnResource (lowerPriority, successorIndex, ResourceIndex, inActivities);
    	  }	
-	  	sint32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
+	  	PMSInt32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
 		  while ( OtherHeirId >= 0 ) {
 		    if ( (ResourceIndex == inActivities (OtherHeirId COMMA_HERE).mResourceId)
 		       &&
@@ -286,12 +286,12 @@ void LowerPriorityOnResource (sint32 & lowerPriority, const sint32 activityIndex
   }                                  
 }
 //---------------------------------------------------------------------------*
-sint32 C_activitiesToSchedule::
-getLowerPriority (const sint32 currentActivityIndex, 
+PMSInt32 C_activitiesToSchedule::
+getLowerPriority (const PMSInt32 currentActivityIndex, 
                   const TC_UniqueArray <cActivity> & inActivities) {
-  sint32 lowerPriority = 0 ; 
-  sint32 activityIndex = currentActivityIndex ;// Means none
-  sint32 ResourceIndex = inActivities (activityIndex COMMA_HERE).mResourceId;
+  PMSInt32 lowerPriority = 0 ; 
+  PMSInt32 activityIndex = currentActivityIndex ;// Means none
+  PMSInt32 ResourceIndex = inActivities (activityIndex COMMA_HERE).mResourceId;
   LowerPriorityOnResource (lowerPriority, currentActivityIndex, ResourceIndex, inActivities);
   if (mRootPointer != NULL) {
   //--- Find min priority activity
@@ -310,12 +310,12 @@ getLowerPriority (const sint32 currentActivityIndex,
 }
 //---------------------------------------------------------------------------*
 //static 
-void SuccessorsMaxBusyDuration (sint32 & ioBusyDuration, const sint32 activityIndex, 
-                                const sint32 ResourceIndex,
+void SuccessorsMaxBusyDuration (PMSInt32 & ioBusyDuration, const PMSInt32 activityIndex, 
+                                const PMSInt32 ResourceIndex,
                                 const TC_UniqueArray <cActivity> & inActivities){
                               
   if (activityIndex >= 0){
-	  sint32 successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
+	  PMSInt32 successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
 	  if (successorIndex >= 0){
 	    if ( (ResourceIndex == inActivities (successorIndex COMMA_HERE).mResourceId)
 	        &&
@@ -325,7 +325,7 @@ void SuccessorsMaxBusyDuration (sint32 & ioBusyDuration, const sint32 activityIn
 	  		                  inActivities (successorIndex COMMA_HERE).mMaxDuration ;
 	  	  SuccessorsMaxBusyDuration(ioBusyDuration, successorIndex, ResourceIndex, inActivities);
 	  	}	
-	  	sint32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
+	  	PMSInt32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
 		  while ( OtherHeirId >= 0 ) {
 		    if ( (ResourceIndex == inActivities (OtherHeirId COMMA_HERE).mResourceId)
 		       &&
@@ -341,15 +341,15 @@ void SuccessorsMaxBusyDuration (sint32 & ioBusyDuration, const sint32 activityIn
   }                                  
 }
 //---------------------------------------------------------------------------*
-sint32 C_activitiesToSchedule::
-getMaximumBusyPeriod (const sint32 currentActivityIndex, 
+PMSInt32 C_activitiesToSchedule::
+getMaximumBusyPeriod (const PMSInt32 currentActivityIndex, 
                       const TC_UniqueArray <cActivity> & inActivities) {
  
-  sint32 BusyDuration=0;
-  const sint32 ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
+  PMSInt32 BusyDuration=0;
+  const PMSInt32 ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
   SuccessorsMaxBusyDuration (BusyDuration, currentActivityIndex, ResourceIndex, inActivities);
   if (mRootPointer != NULL){
-    sint32 activityIndex = mRootPointer->mActivityIndex;
+    PMSInt32 activityIndex = mRootPointer->mActivityIndex;
     BusyDuration +=inActivities (activityIndex COMMA_HERE).mMaxDuration; 
   	SuccessorsMaxBusyDuration (BusyDuration, activityIndex, ResourceIndex, inActivities);
    	cVDLnodeInfo * p = mRootPointer->mPtrToNext ;
@@ -364,19 +364,19 @@ getMaximumBusyPeriod (const sint32 currentActivityIndex,
 }
 //---------------------------------------------------------------------------*
 //static 
-void SuccessorsMinBusyDuration4Activity (sint32 & ioBusyDuration, const sint32 activityIndex, 
-                                const sint32 ResourceIndex,
-                                const sint32 priorityOfCurrentActivity,
+void SuccessorsMinBusyDuration4Activity (PMSInt32 & ioBusyDuration, const PMSInt32 activityIndex, 
+                                const PMSInt32 ResourceIndex,
+                                const PMSInt32 priorityOfCurrentActivity,
                                 const TC_UniqueArray <cActivity> & inActivities){
                               
   if (activityIndex >= 0){
-	  sint32 successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
+	  PMSInt32 successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
 	  if (successorIndex >= 0){
 	    if ( (ResourceIndex == inActivities (successorIndex COMMA_HERE).mResourceId)
 	        &&
           ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ) ){   
 	   
-	      sint32 successorPriority = inActivities (successorIndex COMMA_HERE).mPriority;
+	      PMSInt32 successorPriority = inActivities (successorIndex COMMA_HERE).mPriority;
 	  		if ( (inActivities (successorIndex COMMA_HERE).mOffset == 0)
 	  		    &&
 	  		    (successorPriority <= priorityOfCurrentActivity) ){
@@ -384,13 +384,13 @@ void SuccessorsMinBusyDuration4Activity (sint32 & ioBusyDuration, const sint32 a
 	  	    SuccessorsMinBusyDuration4Activity(ioBusyDuration, successorIndex, ResourceIndex, priorityOfCurrentActivity, inActivities);
 	  	  }
 	  	}	
-	  	sint32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
+	  	PMSInt32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
 		  while ( OtherHeirId >= 0 ) {
 		    if ( (ResourceIndex == inActivities (OtherHeirId COMMA_HERE).mResourceId)
 		     &&
          ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ) ){   
 	   
-	        sint32 HeirPriority = inActivities (OtherHeirId COMMA_HERE).mPriority;
+	        PMSInt32 HeirPriority = inActivities (OtherHeirId COMMA_HERE).mPriority;
 		      if ( (inActivities (OtherHeirId COMMA_HERE).mOffset == 0)
 		          &&
 		          (HeirPriority <= priorityOfCurrentActivity)){
@@ -404,16 +404,16 @@ void SuccessorsMinBusyDuration4Activity (sint32 & ioBusyDuration, const sint32 a
   }                                  
 }
 //---------------------------------------------------------------------------*
-sint32 C_activitiesToSchedule::
-getMinimumBusyPeriod4Activity (const sint32 currentActivityIndex, 
+PMSInt32 C_activitiesToSchedule::
+getMinimumBusyPeriod4Activity (const PMSInt32 currentActivityIndex, 
                       const TC_UniqueArray <cActivity> & inActivities) {
  
-  sint32 BusyDuration=0;
-  const sint32 ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
-  const sint32 priorityOfCurrentActivity = inActivities (currentActivityIndex COMMA_HERE).mPriority;
+  PMSInt32 BusyDuration=0;
+  const PMSInt32 ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
+  const PMSInt32 priorityOfCurrentActivity = inActivities (currentActivityIndex COMMA_HERE).mPriority;
   SuccessorsMinBusyDuration4Activity (BusyDuration, currentActivityIndex, ResourceIndex, priorityOfCurrentActivity, inActivities);
   if (mRootPointer != NULL){
-    sint32 activityIndex = mRootPointer->mActivityIndex;
+    PMSInt32 activityIndex = mRootPointer->mActivityIndex;
     if (priorityOfCurrentActivity >= inActivities (activityIndex COMMA_HERE).mPriority){ 
     	BusyDuration +=inActivities (activityIndex COMMA_HERE).mMinDuration; 
   		SuccessorsMinBusyDuration4Activity (BusyDuration, activityIndex, ResourceIndex, priorityOfCurrentActivity, inActivities);
@@ -431,20 +431,20 @@ getMinimumBusyPeriod4Activity (const sint32 currentActivityIndex,
   return BusyDuration;   
 }
 //--------------------------------------------------------------------------------
-/*sint32 C_activitiesToSchedule::
-getLeastBusyPeriod (const sint32 inCurrentActivity,
+/*PMSInt32 C_activitiesToSchedule::
+getLeastBusyPeriod (const PMSInt32 inCurrentActivity,
                     const TC_UniqueArray <cActivity> & inActivities) {
-  sint32 LeastActiviyPeriod = 0 ; // Means none
-  const sint32 priorityOfCurrentActivity = inActivities (inCurrentActivity COMMA_HERE).mPriority;
+  PMSInt32 LeastActiviyPeriod = 0 ; // Means none
+  const PMSInt32 priorityOfCurrentActivity = inActivities (inCurrentActivity COMMA_HERE).mPriority;
   if (mRootPointer != NULL){
   	if(priorityOfCurrentActivity >= mRootPointer->mActivityPriority){
-  		sint32 activityIndex = mRootPointer->mActivityIndex;
+  		PMSInt32 activityIndex = mRootPointer->mActivityIndex;
   		LeastActiviyPeriod = inActivities (activityIndex COMMA_HERE).mMinDuration;
   	}
   	cVDLnodeInfo * p = mRootPointer->mPtrToNext ;
   	while (p != NULL){
   		if (priorityOfCurrentActivity >= p->mActivityPriority){
-  		 	sint32 activityIndex = p->mActivityIndex;
+  		 	PMSInt32 activityIndex = p->mActivityIndex;
   		 	LeastActiviyPeriod += inActivities (activityIndex COMMA_HERE).mMinDuration;
   		}
   		 p = p->mPtrToNext ;
@@ -455,12 +455,12 @@ getLeastBusyPeriod (const sint32 inCurrentActivity,
 
 //---------------------------------------------------------------------------*
 //static 
-void SuccessorsMinBusyDuration (sint32 & ioBusyDuration, const sint32 activityIndex, 
-                                const sint32 ResourceIndex,
+void SuccessorsMinBusyDuration (PMSInt32 & ioBusyDuration, const PMSInt32 activityIndex, 
+                                const PMSInt32 ResourceIndex,
                                 const TC_UniqueArray <cActivity> & inActivities){
                               
   if (activityIndex >= 0){
-	  sint32 successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
+	  PMSInt32 successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
 	  if (successorIndex >= 0){
 	    if ( (ResourceIndex == inActivities (successorIndex COMMA_HERE).mResourceId)
 	        &&
@@ -470,7 +470,7 @@ void SuccessorsMinBusyDuration (sint32 & ioBusyDuration, const sint32 activityIn
 	  		                  inActivities (successorIndex COMMA_HERE).mMinDuration ;
 	  	  SuccessorsMinBusyDuration(ioBusyDuration, successorIndex, ResourceIndex, inActivities);
 	  	}	
-	  	sint32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
+	  	PMSInt32 OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
 		  while ( OtherHeirId >= 0 ) {
 		    if ( (ResourceIndex == inActivities (OtherHeirId COMMA_HERE).mResourceId)
 		        &&
@@ -486,15 +486,15 @@ void SuccessorsMinBusyDuration (sint32 & ioBusyDuration, const sint32 activityIn
   }                                  
 }
 //---------------------------------------------------------------------------*
-sint32 C_activitiesToSchedule::
-getMinimumBusyPeriod (const sint32 currentActivityIndex, 
+PMSInt32 C_activitiesToSchedule::
+getMinimumBusyPeriod (const PMSInt32 currentActivityIndex, 
                       const TC_UniqueArray <cActivity> & inActivities) {
  
-  sint32 BusyDuration=0;
-  const sint32 ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
+  PMSInt32 BusyDuration=0;
+  const PMSInt32 ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
   SuccessorsMinBusyDuration (BusyDuration, currentActivityIndex, ResourceIndex, inActivities);
   if (mRootPointer != NULL){
-    sint32 activityIndex = mRootPointer->mActivityIndex;
+    PMSInt32 activityIndex = mRootPointer->mActivityIndex;
     BusyDuration +=inActivities (activityIndex COMMA_HERE).mMinDuration; 
   	SuccessorsMinBusyDuration (BusyDuration, activityIndex, ResourceIndex, inActivities);
    	cVDLnodeInfo * p = mRootPointer->mPtrToNext ;
@@ -510,12 +510,12 @@ getMinimumBusyPeriod (const sint32 currentActivityIndex,
 
 //--------------------------------------------------------------------------*/
 
-sint32 C_activitiesToSchedule::
-getFirstToSchedule (const sint32 inCurrentInstant) const {
-  sint32 activityIndex = -1 ; // Means none
+PMSInt32 C_activitiesToSchedule::
+getFirstToSchedule (const PMSInt32 inCurrentInstant) const {
+  PMSInt32 activityIndex = -1 ; // Means none
   if ((mRootPointer != NULL) && (mRootPointer->mScheduleInstant <= inCurrentInstant)) {
   //--- Find min priority activity
-    sint32 priority = mRootPointer->mActivityPriority ;
+    PMSInt32 priority = mRootPointer->mActivityPriority ;
     activityIndex = mRootPointer->mActivityIndex ;
     cVDLnodeInfo * p = mRootPointer->mPtrToNext ;
     while ((p != NULL) && (p->mScheduleInstant <= inCurrentInstant)) {
@@ -529,13 +529,13 @@ getFirstToSchedule (const sint32 inCurrentInstant) const {
   return activityIndex ;
 }
 //----------------------------------------------------------------------------*/
-sint32 C_activitiesToSchedule::
-getFirstScheduledInstant (const sint32 inCurrentInstant) const {
-  sint32 scheduledInstant=-1 ; // 
+PMSInt32 C_activitiesToSchedule::
+getFirstScheduledInstant (const PMSInt32 inCurrentInstant) const {
+  PMSInt32 scheduledInstant=-1 ; // 
   if ((mRootPointer != NULL) && (mRootPointer->mScheduleInstant <= inCurrentInstant)) {
   //--- Find min priority activity
     scheduledInstant=mRootPointer->mScheduleInstant;
-    sint32 priority = mRootPointer->mActivityPriority ;
+    PMSInt32 priority = mRootPointer->mActivityPriority ;
     cVDLnodeInfo * p = mRootPointer->mPtrToNext ;
     while ((p != NULL) && (p->mScheduleInstant <= inCurrentInstant)) {
       if (priority > p->mActivityPriority) {
@@ -550,18 +550,18 @@ getFirstScheduledInstant (const sint32 inCurrentInstant) const {
 //--------------------------------------------------------------------------*/
 
 bool C_activitiesToSchedule::
- AnyReadyToScheduleAt (const sint32 inCurrentInstant) const {
+ AnyReadyToScheduleAt (const PMSInt32 inCurrentInstant) const {
   return (mRootPointer != NULL) && (mRootPointer->mScheduleInstant <= inCurrentInstant) ;
 }
 //---------------------------------------------------------------------------*
 
-sint32 C_activitiesToSchedule::
+PMSInt32 C_activitiesToSchedule::
 getNextScheduleTime (void) const {
-  return (mRootPointer != NULL) ? mRootPointer->mScheduleInstant : SINT32_MAX ;
+  return (mRootPointer != NULL) ? mRootPointer->mScheduleInstant : PMSINT32_MAX ;
 }
 //---------------------------------------------------------------------------*/
 bool C_activitiesToSchedule::
-AnyNotReadyToScheduleAt (const sint32 inCurrentInstant) const {
+AnyNotReadyToScheduleAt (const PMSInt32 inCurrentInstant) const {
   bool NotReadyAt = false; // Means none
   if (mRootPointer != NULL) {
   //--- Find min priority activity
@@ -590,7 +590,7 @@ AnyNotReadyToScheduleAt (const sint32 inCurrentInstant) const {
             const TC_UniqueArray <C_String> & inNames) const {
    cVDLnodeInfo * p = mRootPointer ;
    while (p != NULL) {
-     const sint32 index = p->mActivityIndex ;
+     const PMSInt32 index = p->mActivityIndex ;
      if (index < inNames.count ()) {
       inStream << inNames (index COMMA_HERE) << " " ;
      }
@@ -627,14 +627,14 @@ C_activitiesToSchedule & C_activitiesToSchedule::operator = (const C_activitiesT
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-sint32 C_activitiesToSchedule::smNodeCompare = 0 ;
+PMSInt32 C_activitiesToSchedule::smNodeCompare = 0 ;
 
-sinteger C_activitiesToSchedule::cVDLnodeInfo::
+PMSInt C_activitiesToSchedule::cVDLnodeInfo::
 compare (const cVDLnodeInfo & inInfo) const {
   smNodeCompare ++ ;
-  sinteger result = mActivityIndex - inInfo.mActivityIndex ;
+  PMSInt result = mActivityIndex - inInfo.mActivityIndex ;
   if (result == 0) {
-    result = ((sinteger) mPtrToNext) - ((sinteger) inInfo.mPtrToNext) ;
+    result = ((PMSInt) mPtrToNext) - ((PMSInt) inInfo.mPtrToNext) ;
     if (result == 0) {
       result = mScheduleInstant - inInfo.mScheduleInstant ;
       if (result == 0) {
@@ -651,7 +651,7 @@ compare (const cVDLnodeInfo & inInfo) const {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-uint32 C_activitiesToSchedule::getNodeSize (void) {
+PMUInt32 C_activitiesToSchedule::getNodeSize (void) {
   return C_VDL_hashmap::getNodeSize () ;
 }
 
@@ -662,9 +662,9 @@ uint32 C_activitiesToSchedule::getNodeSize (void) {
 //---------------------------------------------------------------------------*
 
 C_activitiesToSchedule::cVDLnodeInfo * C_activitiesToSchedule::
-find_or_add (const sint32 inIndex,
-             const sint32 inActivityPriority,
-             const sint32 inScheduleInstant,
+find_or_add (const PMSInt32 inIndex,
+             const PMSInt32 inActivityPriority,
+             const PMSInt32 inScheduleInstant,
              C_activitiesToSchedule::cVDLnodeInfo * const inPointerToNext) {
 //--- Do search or insert
   cVDLnodeInfo info ;

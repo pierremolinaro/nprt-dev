@@ -7,9 +7,9 @@ extern "C" {
 
 #include "utilities/M_machine.h"
 
-sint32 minCANMessageTime(const char c, const uint32 priority, const uint32 Num_Bytes) ;
+PMSInt32 minCANMessageTime(const char c, const PMUInt32 priority, const PMUInt32 Num_Bytes) ;
 
-sint32 maxCANMessageTime(const char c, const uint32 minTrTime, const uint32 Num_Bytes) ;
+PMSInt32 maxCANMessageTime(const char c, const PMUInt32 minTrTime, const PMUInt32 Num_Bytes) ;
 
 
 #endif

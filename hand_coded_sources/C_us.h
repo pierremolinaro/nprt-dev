@@ -32,7 +32,7 @@
 
 //---------------------------------------------------------------------------*
 
-const sinteger MARK_VDL_NODE = SINTEGER_MIN ;
+const PMSInt MARK_VDL_NODE = PMSINT_MIN ;
 
 //---------------------------------------------------------------------------*
 
@@ -53,10 +53,10 @@ class C_us {
 //--- Internal nodes
   public : class C_us_nodeInfo {
     public : C_us_nodeInfo * mPtrToNext ;
-    public : sinteger mID ;
-    public : sint32 mIndex ;
+    public : PMSInt mID ;
+    public : PMSInt32 mIndex ;
     
-    public : sinteger compare (const C_us_nodeInfo & inOperand) const ;
+    public : PMSInt compare (const C_us_nodeInfo & inOperand) const ;
     
     public : inline bool isMarked (void) const {
       return (mID & MARK_VDL_NODE) != 0 ;
@@ -70,17 +70,17 @@ class C_us {
       mID &= ~ MARK_VDL_NODE ;
     }
     
-    public : inline uint32 getHashCodeForMap (void) const {
-      return (uint32) ((mIndex << 11)
+    public : inline PMUInt32 getHashCodeForMap (void) const {
+      return (PMUInt32) ((mIndex << 11)
                     ^ ((mPtrToNext == NULL) ? -1 : mPtrToNext->mID)) ;
     }
   } ;
 
 //--- Realloc unique table
-  public : static void reallocUniqueTable (const sint32 inTableUniqueNewSize) ;
+  public : static void reallocUniqueTable (const PMSInt32 inTableUniqueNewSize) ;
 
 //--- Realloc addition cache
-  public : static void reallocAdditionCache (const sint32 inNewCacheSize) ;
+  public : static void reallocAdditionCache (const PMSInt32 inNewCacheSize) ;
 
 //--- Decision list
   protected : C_us_nodeInfo * mRootPointer ;
@@ -95,55 +95,55 @@ class C_us {
   public : bool operator == (const C_us & inOperand) const ;
 
 //--- Explore a VDL
-  public : static void explore_vdl (C_us & ioVDL, sint32 & outIndex) ;
+  public : static void explore_vdl (C_us & ioVDL, PMSInt32 & outIndex) ;
 
 //--- print a vector
   public : void printVector (AC_OutputStream & inStream,
                              const TC_UniqueArray <C_String> & inNames,
-                             const sint32 inFirst,
-                             const sint32 inStep) const ;
+                             const PMSInt32 inFirst,
+                             const PMSInt32 inStep) const ;
 
   public : void printVector (AC_OutputStream & inStream,
                              const char * inPrefix,
-                             const sint32 inFirst,
-                             const sint32 inStep) const ;
+                             const PMSInt32 inFirst,
+                             const PMSInt32 inStep) const ;
 
 //--- Print VDL summary
   public : static void printVDLsummary (AC_OutputStream & inOutputStream) ;
 
-//--- Get value ID (as sinteger integer)
-  public : inline sinteger getLongID (void) const {
-    return (mRootPointer != NULL) ? ((sinteger) mRootPointer->mID) : 0 ;
+//--- Get value ID (as PMSInt integer)
+  public : inline PMSInt getLongID (void) const {
+    return (mRootPointer != NULL) ? ((PMSInt) mRootPointer->mID) : 0 ;
   }
 
 //--- Push a new value on stack
-  public : void pushValue (const sint32 inIndex) ;
+  public : void pushValue (const PMSInt32 inIndex) ;
 
 //--- Suppress an entry
-  public : void suppressEntryAtLevel (const sint32 inLevel) ;
+  public : void suppressEntryAtLevel (const PMSInt32 inLevel) ;
 
 //--- Collect unused elements
   public : static void collectUnusedNodes (void) ;
 
 //--- Internal methods
-  protected : static C_us_nodeInfo * find_or_add (const sint32 inIndex,
+  protected : static C_us_nodeInfo * find_or_add (const PMSInt32 inIndex,
                                                  C_us_nodeInfo * const inPointerToNext) ;
 
-  protected : static C_us_nodeInfo * internalSuppressEntry (const sint32 inLevel,
+  protected : static C_us_nodeInfo * internalSuppressEntry (const PMSInt32 inLevel,
                                                            C_us_nodeInfo * const inPointer) ;
 
-  protected : static sint32 smNodeCompare ;
-  public : static uint32 getNodeSize (void) ;
-  public : static sint32 getNodeComparesCount (void) { return smNodeCompare ; }
-  protected : static sint32 smNodeCount ;
-  public : static sint32 getVDLnodeCount (void) { return smNodeCount ; }
-  protected : static uint64 smTrivialAdd ;
-  public : static uint64 getTrivialAddCount (void) { return smTrivialAdd ; }
-  public : static uint64 getCacheSuccessCount (void) ;
-  public : static uint64 getCacheFailureCount (void) ;
-  public : static uint64 getCacheOverrideCount (void) ;
-  public : static uint64 getUnusedCacheEntriesCount (void) ;
-  public : static uint64 getCacheEntriesCount (void) ;
+  protected : static PMSInt32 smNodeCompare ;
+  public : static PMUInt32 getNodeSize (void) ;
+  public : static PMSInt32 getNodeComparesCount (void) { return smNodeCompare ; }
+  protected : static PMSInt32 smNodeCount ;
+  public : static PMSInt32 getVDLnodeCount (void) { return smNodeCount ; }
+  protected : static PMUInt64 smTrivialAdd ;
+  public : static PMUInt64 getTrivialAddCount (void) { return smTrivialAdd ; }
+  public : static PMUInt64 getCacheSuccessCount (void) ;
+  public : static PMUInt64 getCacheFailureCount (void) ;
+  public : static PMUInt64 getCacheOverrideCount (void) ;
+  public : static PMUInt64 getUnusedCacheEntriesCount (void) ;
+  public : static PMUInt64 getCacheEntriesCount (void) ;
   
   friend class C_us_nodeInfo ;
 } ;
