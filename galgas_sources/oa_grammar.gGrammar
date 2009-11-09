@@ -5,6 +5,7 @@
 #---------------------------------------------------------------------------*
 
 grammar oa_grammar "LL1" :
+  with "oa_parser.ggs" ;
   import lexique oa_scanner in "oa_scanner.gLexique" ;
   import option oa_cli_options in "oa_cli_options.gOption" ;
   import syntax oa_parser in "oa_parser.ggs" ;
