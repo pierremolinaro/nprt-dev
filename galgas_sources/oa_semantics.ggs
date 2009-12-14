@@ -7,16 +7,18 @@
 semantics oa_semantics :
 
   map @M_processor {
+    @uint mIndex ;
     @luint mStep ;
     insert insertKey error message "the processor '%K' has been already declared in %L" ;
-    search searchKey, searchKeyGetIndex error message "the processor '%K' is not declared" ;
+    search searchKey error message "the processor '%K' is not declared" ;
   }
 
   map @M_network {
+    @uint mIndex ;
     @bool mCANnetwork ;
     @luint mScalingFactor ;
     insert insertKey error message "the processor '%K' has been already declared in %L" ;
-    search searchKey, searchKeyGetIndex error message "the processor '%K' is not declared" ;
+    search searchKey error message "the processor '%K' is not declared" ;
   }
 
   abstract class @AC_canMessage feature generatedInSeparateFile {
@@ -26,16 +28,17 @@ semantics oa_semantics :
   }
   
   class @C_canMessageFromMessage extends @AC_canMessage {
-    @luint mMessageIndex ;
+    @uint mMessageIndex ;
   }
   
   class @C_canMessageFromTask extends @AC_canMessage  {
-    @luint mTaskIndex ;
+    @uint mTaskIndex ;
   }
     
   map @M_messages {
+    @uint mIndex ;
     @luint mClass ; # 0 : standard can, 1 : extented can, 2 : van
-    @luint mNetworkIndex ;
+    @uint mNetworkIndex ;
     @luint mBytesCount ;
     @luint mPriority ;
     @luint mOffset ;
@@ -43,7 +46,7 @@ semantics oa_semantics :
     @luint mPeriod ;
     @AC_canMessage mMessageKind ;
     insert insertKey error message "the CAN message '%K' has been already declared in %L" ;
-    search searchKey, searchKeyGetIndex error message "the CAN message '%K' is not declared" ;
+    search searchKey error message "the CAN message '%K' is not declared" ;
   }
   
   abstract class @AC_task feature generatedInSeparateFile {
@@ -53,26 +56,27 @@ semantics oa_semantics :
   }
   
   class @C_taskDependsFromTask extends @AC_task {
-    @luint mTask ;
+    @uint mTask ;
     @luint mEvery ;
  }
   
   class @C_taskDependsFromMessage extends @AC_task {
-    @luint mMessage ;
+    @uint mMessage ;
     @luint mEvery ;
   }
   
   map @M_tasks {
+    @uint mIndex ;
     @luint mPriority ;
     @luint mOffset ;
     @luint mDeadline ;
     @luint mDurationMin ;
     @luint mDurationMax ;
-    @luint mProcessor ;
+    @uint mProcessor ;
     @luint mPeriod ;
     @AC_task mTaskKind ;
     insert insertKey error message "the task '%K' has been already declared in %L" ;
-    search searchKey, searchKeyGetIndex error message "the task '%K' is not declared" ;
+    search searchKey error message "the task '%K' is not declared" ;
   }
 
 extern routine performComputations

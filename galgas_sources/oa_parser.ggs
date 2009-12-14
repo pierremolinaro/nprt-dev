@@ -33,7 +33,7 @@ rule <axiome>
         error step : "the step value must be > 0" ;
       end if ;
     end select ;
-    [!?outProcessorMap insertKey !processorName !step] ;
+    [!?outProcessorMap insertKey !processorName ![outProcessorMap count] !step] ;
     $;$ ;
   while
     @bool network ;
@@ -57,7 +57,7 @@ rule <axiome>
         error factor : "the factor value must be > 0" ;
       end if ;
     end select ;
-    [!?outNetworkMap insertKey !networkName !network !factor] ;
+    [!?outNetworkMap insertKey !networkName ![outNetworkMap count] !network !factor] ;
     $;$ ;
   while
     $task$ ;
@@ -90,7 +90,7 @@ rule <axiome>
       taskDeadline := [@luint new !4294967295 !here] ;
     end select ;
     @AC_task taskKind ;
-    @luint taskProcessorIndex ;
+    @uint taskProcessorIndex ;
     @luint taskPeriod ;
     select
       $period$ ;
@@ -98,7 +98,7 @@ rule <axiome>
       $processor$ ;
       @lstring taskProcessorName ;
       $identifier$ ? taskProcessorName ;
-      [outProcessorMap searchKeyGetIndex !taskProcessorName ?taskProcessorIndex ?*] ;
+      [outProcessorMap searchKey !taskProcessorName ?taskProcessorIndex ?*] ;
       taskKind := [@C_independantTask new] ;
     or
       $on$ ;
@@ -116,15 +116,15 @@ rule <axiome>
           $every$ ;
           $literal_integer$ ? every ;
         end select ;
-        @luint masterTaskIndex ;
-        [outTaskMap searchKeyGetIndex !masterTaskName ?masterTaskIndex ?* ?* ?* ?* ?* ?taskProcessorIndex ?taskPeriod ?*] ;
+        @uint masterTaskIndex ;
+        [outTaskMap searchKey !masterTaskName ?masterTaskIndex ?* ?* ?* ?* ?* ?taskProcessorIndex ?taskPeriod ?*] ;
         taskKind := [@C_taskDependsFromTask new !masterTaskIndex !every] ;
       or
         $message$ ;
         @lstring masterMessageName ;
         $identifier$ ? masterMessageName ;
-        @luint masterMessageIndex ;
-        [outMessagesMap searchKeyGetIndex !masterMessageName ?masterMessageIndex ?* ?* ?* ?* ?* ?* ?taskPeriod ?*] ;
+        @uint masterMessageIndex ;
+        [outMessagesMap searchKey !masterMessageName ?masterMessageIndex ?* ?* ?* ?* ?* ?* ?taskPeriod ?*] ;
         $processor$ ;
         @lstring taskProcessorName ;
         $identifier$ ? taskProcessorName ;
@@ -135,11 +135,12 @@ rule <axiome>
           $every$ ;
           $literal_integer$ ? every ;
         end select ;
-        [outProcessorMap searchKeyGetIndex !taskProcessorName ?taskProcessorIndex ?*] ;
+        [outProcessorMap searchKey !taskProcessorName ?taskProcessorIndex ?*] ;
         taskKind := [@C_taskDependsFromMessage new !masterMessageIndex !every] ;
       end select ;
     end select ;
-    [!?outTaskMap insertKey !taskName !taskPriority
+    [!?outTaskMap insertKey !taskName ![outTaskMap count]
+                                      !taskPriority
                                         !taskOffset
                                         !taskDeadline
                                         !taskDurationMin
@@ -167,9 +168,9 @@ rule <axiome>
     $network$ ;
     @lstring networkName ;
     $identifier$ ? networkName ;
-    @luint networkIndex ;
+    @uint networkIndex ;
     @bool CANnetwork ;
-    [outNetworkMap searchKeyGetIndex !networkName ?networkIndex ?CANnetwork ?*] ;
+    [outNetworkMap searchKey !networkName ?networkIndex ?CANnetwork ?*] ;
     if CANnetwork & ([messageClass uint] == 2) then
       error messageClass : "a CAN message must be either standard either extended" ;
     elsif (not CANnetwork) & ([messageClass uint] != 2) then
@@ -218,19 +219,19 @@ rule <axiome>
         $message$ ;
         @lstring name ;
         $identifier$ ? name ;
-        @luint messageIndex ;
-        [outMessagesMap searchKeyGetIndex !name ?messageIndex ?* ?* ?* ?* ?* ?* ?period ?*] ;
+        @uint messageIndex ;
+        [outMessagesMap searchKey !name ?messageIndex ?* ?* ?* ?* ?* ?* ?period ?*] ;
         messageKind := [@C_canMessageFromMessage new !messageIndex] ;
       or
         $task$ ;
         @lstring taskName ;
         $identifier$ ? taskName ;
-        @luint taskIndex ;
-        [outTaskMap searchKeyGetIndex !taskName ?taskIndex ?* ?* ?* ?* ?* ?* ?period ?*] ;
+        @uint taskIndex ;
+        [outTaskMap searchKey !taskName ?taskIndex ?* ?* ?* ?* ?* ?* ?period ?*] ;
         messageKind := [@C_canMessageFromTask new !taskIndex] ;
       end select ;
     end select ;
-    [!?outMessagesMap insertKey !messageName
+    [!?outMessagesMap insertKey !messageName ![outMessagesMap count]
          !messageClass !networkIndex !bytesCount !priority !offset !deadline !period !messageKind] ;
     $;$ ;        
   end repeat ;
