@@ -4,7 +4,7 @@
 #include "VerifyConditions.h"
 #include "C_us.h"
 
-#include "galgas/C_Lexique.h"
+#include "galgas-utilities/C_Lexique.h"
 
 bool
 NecessaryConditions_OK (C_Compiler & inLexique,
