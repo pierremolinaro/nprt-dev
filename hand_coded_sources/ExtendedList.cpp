@@ -1,5 +1,6 @@
 #include "collections/TC_UniqueArray.h"
 #include "files/C_HTML_FileWrite.h"
+#include "galgas-utilities/C_Compiler.h"
 #include <stdio.h>
 #include <math.h>
 #include <limits.h>
@@ -485,17 +486,24 @@ TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;
 
 /*-------------------------------------------------------------------------*/
 static void
-CreateActivitiesFile (const TC_UniqueArray <cActivity> & exElement,
+CreateActivitiesFile (C_Compiler & inLexique,
+                      const TC_UniqueArray <cActivity> & exElement,
 							      	const C_String & activitiesHTMLFileName){
 
   const PMSInt32 NumberOfElements = exElement.count () ;
   printf ("Extended activities list is stored in %s file.\n", activitiesHTMLFileName.cString (HERE)) ;
+  bool ok = false ;
   C_HTML_FileWrite act_htmlFile (activitiesHTMLFileName,
                               "Extended List Activities",
                               "style.css",
                               ""
-                              COMMA_SAFARI_CREATOR
-                              COMMA_HERE) ;
+                              COMMA_SAFARI_CREATOR,
+                              ok) ;
+  if (! ok) {
+    C_String message ;
+    message << "Cannot open '" << activitiesHTMLFileName << "' file in write mode." ;
+    inLexique.onTheFlySemanticError (message COMMA_HERE) ;
+  }
 		
 	act_htmlFile.appendCppTitleComment ("raw Activities map", "title") ;
 	act_htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
@@ -531,8 +539,10 @@ CreateActivitiesFile (const TC_UniqueArray <cActivity> & exElement,
 }
 	
 /*----------------------------------------------------------------------------*/
+
 PMSInt32
-BuildExtendedList (TC_UniqueArray <cReadyAtThisInstant> & oReadyAtThisInstant,
+BuildExtendedList (C_Compiler & inLexique,
+                   TC_UniqueArray <cReadyAtThisInstant> & oReadyAtThisInstant,
                    TC_UniqueArray <cElement> & Element,
                    const TC_UniqueArray <cResource> & Resource,
                    TC_UniqueArray <cActivity> & exElement,
@@ -559,7 +569,7 @@ BuildExtendedList (TC_UniqueArray <cReadyAtThisInstant> & oReadyAtThisInstant,
  	co << cStringWithSigned (Num_of_Activties) << " activities\n" ;
   co.flush ();
  	if (CreateIntermediateFiles){
-	 	CreateActivitiesFile (exElement, activitiesHTMLFileName);
+	 	CreateActivitiesFile (inLexique, exElement, activitiesHTMLFileName);
   } 
   															
   if (! VerifyInterDependence (ArrangedElement)) {

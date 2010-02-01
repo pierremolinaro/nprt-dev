@@ -168,11 +168,18 @@ PMUInt32 cPtr_C_taskDependsFromMessage::getTaskEveryParameter (void) const {
 //--------------------------------------------------------------------------*
 
 
-static void buildCSSfile (const C_String & inDirectory) {
+static void buildCSSfile (C_Compiler & inLexique,
+                          const C_String & inDirectory) {
 //--- Style file name
   const C_String styleFileName = inDirectory + "/style.css" ;
 //--- Build file
-  C_TextFileWrite f (styleFileName COMMA_SAFARI_CREATOR COMMA_HERE) ;
+  bool ok = false ;
+  C_TextFileWrite f (styleFileName COMMA_SAFARI_CREATOR, ok) ;
+  if (! ok) {
+    C_String message ;
+    message << "Cannot open '" << styleFileName << "' file in write mode." ;
+    inLexique.onTheFlySemanticError (message COMMA_HERE) ;
+  }
   f << "body {\n"
        "  font-family: Helvetica, sans-serif ;\n"
        "	font-size: small ;\n"
@@ -270,13 +277,19 @@ routine_performComputations (C_Compiler & inLexique,
   const C_String activitiesHTMLFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + "_activities.html" ;
   const C_String raw_outputHTMLFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + "_raw_output.html" ;
 
-  buildCSSfile (sourceFile.stringByDeletingLastPathComponent ()) ;
-  C_HTML_FileWrite htmlFile ( htmlFileName,
-                              sourceFile.lastPathComponent () + " results",
-                              "style.css",
-                              ""
-                              COMMA_SAFARI_CREATOR
-                              COMMA_HERE) ;
+  buildCSSfile (inLexique, sourceFile.stringByDeletingLastPathComponent ()) ;
+  bool ok = false ;
+  C_HTML_FileWrite htmlFile (htmlFileName,
+                             sourceFile.lastPathComponent () + " results",
+                             "style.css",
+                             ""
+                             COMMA_SAFARI_CREATOR,
+                             ok) ;
+  if (! ok) {
+    C_String message ;
+    message << "Cannot open '" << htmlFileName << "' file in write mode." ;
+    inLexique.onTheFlySemanticError (message COMMA_HERE) ;
+  }
   if(useCANmaxLengthOnly){
   	printf("Elements have their upper duration bounds.\n"); 
   }
@@ -662,7 +675,8 @@ routine_performComputations (C_Compiler & inLexique,
   	TC_UniqueArray <cReadyAtThisInstant>  ReadyAtThisInstant;
    
    PMSInt32 NoInterButUseB = 
-         BuildExtendedList (ReadyAtThisInstant, Element, 
+         BuildExtendedList (inLexique,
+                            ReadyAtThisInstant, Element, 
              Resource, exElement, 
              MTElement,NumberOfTasks,
              NumberOfMessages,CreateIntermediateFiles,
@@ -680,7 +694,8 @@ routine_performComputations (C_Compiler & inLexique,
       independantResourcesScheduleActivities (exElement, responseTimeArray) ;
     }
 		//Extract absolute bornes (min & max)
-  	ExtractWorstBestRT (exElement, Resource, MTElement, 
+  	ExtractWorstBestRT (inLexique,
+                        exElement, Resource, MTElement, 
                         responseTimeArray, CreateIntermediateFiles, 
                         raw_outputHTMLFileName, htmlFile);
     printf ("Results are stored in %s file.\n", htmlFileName.cString (HERE));
