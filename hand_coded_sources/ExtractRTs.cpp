@@ -4,6 +4,7 @@
 #include <math.h>
 #include "collections/TC_UniqueArray.h"
 #include "files/C_HTML_FileWrite.h"
+#include "galgas-utilities/C_Compiler.h"
 
 #include "ExtendedList.h"
 
@@ -13,7 +14,8 @@
 //Extract absolut min=best & max =worst response times from the o/p extended list
 
 void
-ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
+ExtractWorstBestRT (C_Compiler & inLexique,
+                    const TC_UniqueArray <cActivity> & exElement,
           const TC_UniqueArray <cResource> & Resource,
           TC_UniqueArray <cMTElement> & MTElement,
           const TC_UniqueArray <cResponseTime> & inResponseTimeArray,
@@ -32,12 +34,18 @@ ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
   
   if(CreateIntermediateFiles){
     printf ("Raw output results are stored in %s file.\n", raw_outputHTMLFileName.cString (HERE)) ;
-			C_HTML_FileWrite raw_file (raw_outputHTMLFileName,
-                              	  "Activities Outputs",
-                              	  "style.css",
-                                  ""
-                                  COMMA_SAFARI_CREATOR
-                                  COMMA_HERE) ;
+    bool ok = false ;
+    C_HTML_FileWrite raw_file (raw_outputHTMLFileName,
+                               "Activities Outputs",
+                               "style.css",
+                               ""
+                               COMMA_SAFARI_CREATOR,
+                               ok) ;
+    if (! ok) {
+      C_String message ;
+      message << "Cannot open '" << raw_outputHTMLFileName << "' file in write mode." ;
+      inLexique.onTheFlySemanticError (message COMMA_HERE) ;
+    }
     fflush (stdout);
      	 
 		raw_file.appendCppTitleComment ("raw Activities results map", "title") ;

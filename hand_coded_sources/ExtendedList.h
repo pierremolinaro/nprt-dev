@@ -81,10 +81,12 @@ class cMTElement {
   public : PMSInt32 mDeadline ;
 } ;
 
+class C_Compiler ;
 
 
 PMSInt32
-BuildExtendedList (TC_UniqueArray < cReadyAtThisInstant> & ReadyAtThisInstant,
+BuildExtendedList (C_Compiler & inLexique,
+                   TC_UniqueArray < cReadyAtThisInstant> & ReadyAtThisInstant,
                    TC_UniqueArray <cElement> & Element,
                    const TC_UniqueArray <cResource> & Resource,
                    TC_UniqueArray <cActivity> & exElement,
@@ -96,7 +98,8 @@ BuildExtendedList (TC_UniqueArray < cReadyAtThisInstant> & ReadyAtThisInstant,
                    
 
 void
-ExtractWorstBestRT (const TC_UniqueArray <cActivity> & exElement,
+ExtractWorstBestRT (C_Compiler & inLexique,
+                    const TC_UniqueArray <cActivity> & exElement,
                     const TC_UniqueArray <cResource> & Resource,
                     TC_UniqueArray <cMTElement> & MTElement,
                     const TC_UniqueArray <cResponseTime> & inResponseTimeArray,
