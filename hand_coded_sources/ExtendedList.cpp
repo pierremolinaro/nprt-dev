@@ -1,6 +1,6 @@
 #include "collections/TC_UniqueArray.h"
 #include "files/C_HTML_FileWrite.h"
-#include "galgas-utilities/C_Compiler.h"
+#include "galgas/C_CompilerEx.h"
 #include <stdio.h>
 #include <math.h>
 #include <limits.h>
@@ -486,7 +486,7 @@ TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;
 
 /*-------------------------------------------------------------------------*/
 static void
-CreateActivitiesFile (C_Compiler & inLexique,
+CreateActivitiesFile (C_CompilerEx & inLexique,
                       const TC_UniqueArray <cActivity> & exElement,
 							      	const C_String & activitiesHTMLFileName){
 
@@ -541,7 +541,7 @@ CreateActivitiesFile (C_Compiler & inLexique,
 /*----------------------------------------------------------------------------*/
 
 PMSInt32
-BuildExtendedList (C_Compiler & inLexique,
+BuildExtendedList (C_CompilerEx & inLexique,
                    TC_UniqueArray <cReadyAtThisInstant> & oReadyAtThisInstant,
                    TC_UniqueArray <cElement> & Element,
                    const TC_UniqueArray <cResource> & Resource,

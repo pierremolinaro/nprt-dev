@@ -1,22 +1,32 @@
-project all_nprt :
-  lexique "oa_scanner.gLexique" : makefile, xcode_tool, xcode_app ;
-  semantics "oa_semantics.gSemantics" : makefile, xcode_tool ;
-  option "oa_cli_options.gOption" : makefile, xcode_tool, xcode_app ;
-  syntax "oa_parser.gSyntax" : makefile, xcode_tool ;
-  grammar "oa_grammar.gGrammar" : makefile, xcode_tool ;
-  gui "cocoaOA.gGui" : xcode_tool, xcode_app ;
-  program "oa_main.gProgram" : makefile, xcode_tool ;
+project all_nprt -> "nprt" :
+#--- Targets
+  feature "makefile-macosx" ;
+  feature "makefile-unix" ;
+  feature "makefile-i386-linux-on-macosx" ;
+  feature "makefile-mingw-on-macosx" ;
+  feature "makefile-msys-on-win32" ;
+  feature "xcode-project" ;
+  feature "xcode-arch:i386" ;
 
-  extern "../hand_coded_sources/C_us.cpp" : makefile, xcode_tool ;
-  extern "../hand_coded_sources/activities_core.cpp" : makefile, xcode_tool ;
-  extern "../hand_coded_sources/C_activitiesToSchedule.cpp" : makefile, xcode_tool ;
-  extern "../hand_coded_sources/C_VDL_hashmap.cpp" : makefile, xcode_tool ;
-  extern "../hand_coded_sources/calculs_activites.cpp" : makefile, xcode_tool ;
-  extern "../hand_coded_sources/CANMmessageBounds.cpp" : makefile, xcode_tool ;
-  extern "../hand_coded_sources/ExtendedList.cpp" : makefile, xcode_tool ;
-  extern "../hand_coded_sources/ExtractRTs.cpp" : makefile, xcode_tool ;
-  extern "../hand_coded_sources/independant_resources_core.cpp" : makefile, xcode_tool ;
-  extern "../hand_coded_sources/VerifyConditions.cpp" : makefile, xcode_tool ;
-  extern "../hand_coded_sources/C_us_hashmap.cpp" : makefile, xcode_tool ;
+
+  lexique "oa_scanner.gLexique" ;
+  semantics "oa_semantics.gSemantics" ;
+  option "oa_cli_options.gOption" ;
+  syntax "oa_parser.gSyntax" ;
+  grammar "oa_grammar.gGrammar" ;
+  gui "cocoaOA.gGui" ;
+  program "oa_main.gProgram" ;
+
+  extern "C_us.cpp" ;
+  extern "activities_core.cpp" ;
+  extern "C_activitiesToSchedule.cpp" ;
+  extern "C_VDL_hashmap.cpp" ;
+  extern "calculs_activites.cpp" ;
+  extern "CANMmessageBounds.cpp" ;
+  extern "ExtendedList.cpp" ;
+  extern "ExtractRTs.cpp" ;
+  extern "independant_resources_core.cpp" ;
+  extern "VerifyConditions.cpp" ;
+  extern "C_us_hashmap.cpp" ;
 end project ;
 
