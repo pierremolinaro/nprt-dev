@@ -168,7 +168,7 @@ PMUInt32 cPtr_C_taskDependsFromMessage::getTaskEveryParameter (void) const {
 //--------------------------------------------------------------------------*
 
 
-static void buildCSSfile (C_Compiler & inLexique,
+static void buildCSSfile (C_CompilerEx & inLexique,
                           const C_String & inDirectory) {
 //--- Style file name
   const C_String styleFileName = inDirectory + "/style.css" ;
@@ -258,7 +258,7 @@ static void buildCSSfile (C_Compiler & inLexique,
 //--------------------------------------------------------------------------*
 
 void
-routine_performComputations (C_Compiler & inLexique,
+routine_performComputations (C_CompilerEx & inLexique,
                              GGS_M_processor & inProcessorMap,
                              GGS_M_network & inNetworkMap,
                              GGS_M_messages & inMessagesMap,

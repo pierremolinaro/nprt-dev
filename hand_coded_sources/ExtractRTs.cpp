@@ -4,7 +4,7 @@
 #include <math.h>
 #include "collections/TC_UniqueArray.h"
 #include "files/C_HTML_FileWrite.h"
-#include "galgas-utilities/C_Compiler.h"
+#include "galgas/C_CompilerEx.h"
 
 #include "ExtendedList.h"
 
@@ -14,7 +14,7 @@
 //Extract absolut min=best & max =worst response times from the o/p extended list
 
 void
-ExtractWorstBestRT (C_Compiler & inLexique,
+ExtractWorstBestRT (C_CompilerEx & inLexique,
                     const TC_UniqueArray <cActivity> & exElement,
           const TC_UniqueArray <cResource> & Resource,
           TC_UniqueArray <cMTElement> & MTElement,
