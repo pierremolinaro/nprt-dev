@@ -8,8 +8,8 @@
 
 #include "oa_semantics.h"
 #include "CANMessageBounds.h"
-#include "ExtendedList.h"
-#include "VerifyConditions.h"
+#include "ExtendedList-v2.h"
+#include "VerifyConditions-v2.h"
 #include "activities_core.h"
 #include "oa_cli_options.h"
 
