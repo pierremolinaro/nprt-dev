@@ -8,6 +8,7 @@ syntax oa_parser :
 with "oa_scanner.gLexique" ;
 import lexique oa_scanner in "oa_scanner.gLexique" ;
 import semantics oa_semantics in "oa_semantics.gSemantics" ;
+import "oa_semantics.gSemantics" ;
 
 nonterminal <axiome> ;
 

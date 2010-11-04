@@ -21,12 +21,12 @@ project all_nprt -> "nprt" :
   extern "activities_core.cpp" ;
   extern "C_activitiesToSchedule.cpp" ;
   extern "C_VDL_hashmap.cpp" ;
-  extern "calculs_activites.cpp" ;
+  extern "calculs_activites-v2.cpp" ;
   extern "CANMmessageBounds.cpp" ;
-  extern "ExtendedList.cpp" ;
-  extern "ExtractRTs.cpp" ;
+  extern "ExtendedList-v2.cpp" ;
+  extern "ExtractRTs-v2.cpp" ;
   extern "independant_resources_core.cpp" ;
-  extern "VerifyConditions.cpp" ;
+  extern "VerifyConditions-v2.cpp" ;
   extern "C_us_hashmap.cpp" ;
 end project ;
 
