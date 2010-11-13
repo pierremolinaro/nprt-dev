@@ -308,9 +308,9 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
 	  htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
 	  htmlFile << cStringWithSigned (index) ;
 	  htmlFile.outputRawData ("</td><td>") ;
-	  htmlFile << processor.current_lkey () ;
+	  htmlFile << processor.current_lkey (HERE) ;
 	  htmlFile.outputRawData ("</td><td>") ;
-	  htmlFile << cStringWithUnsigned (processor.current_mStep ().mAttribute_uint.uintValue ()) ;
+	  htmlFile << cStringWithUnsigned (processor.current_mStep (HERE).mAttribute_uint.uintValue ()) ;
 	  htmlFile.outputRawData ("</td></tr>") ;
 	  processor.gotoNextObject () ;
 	  index ++ ;
@@ -322,9 +322,9 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
   processor.rewind () ;
   while (processor.hasCurrentObject ()) {
     cResource resource ;
-    strcpy (resource.mResourceName, processor.current_lkey ().mAttribute_string.stringValue ().cString (HERE));
+    strcpy (resource.mResourceName, processor.current_lkey (HERE).mAttribute_string.stringValue ().cString (HERE));
   	resource.mResourceType= 2; // Processor = 2
-   	resource.mStep = (PMSInt32) processor.current_mStep ().mAttribute_uint.uintValue () ;
+   	resource.mStep = (PMSInt32) processor.current_mStep (HERE).mAttribute_uint.uintValue () ;
     
     Resource.addObject (resource) ;
     processor.gotoNextObject () ;
@@ -343,11 +343,11 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
     htmlFile << cStringWithSigned (index) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << network.current_lkey () ;
+    htmlFile << network.current_lkey (HERE) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << kNetworkTypes [network.current_mCANnetwork ().boolValue ()] ;
+    htmlFile << kNetworkTypes [network.current_mCANnetwork (HERE).boolValue ()] ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (network.current_mScalingFactor ().mAttribute_uint.uintValue ()) ;
+    htmlFile << cStringWithUnsigned (network.current_mScalingFactor (HERE).mAttribute_uint.uintValue ()) ;
     htmlFile.outputRawData ("</td></tr>") ;
     network.gotoNextObject () ;
     index ++ ;
@@ -360,9 +360,9 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
   network.rewind ();
   while (network.hasCurrentObject ()) {
     cResource resource ;
-    strcpy(resource.mResourceName,network.current_lkey ().mAttribute_string.stringValue ().cString (HERE));
-  	resource.mResourceType= network.current_mCANnetwork ().boolValue ();
-    resource.mStep = (PMSInt32) network.current_mScalingFactor ().mAttribute_uint.uintValue () ;		
+    strcpy(resource.mResourceName,network.current_lkey (HERE).mAttribute_string.stringValue ().cString (HERE));
+  	resource.mResourceType= network.current_mCANnetwork (HERE).boolValue ();
+    resource.mStep = (PMSInt32) network.current_mScalingFactor (HERE).mAttribute_uint.uintValue () ;		
  		min_NetworkStep = min (min_NetworkStep, resource.mStep);
  	 	
  	 	Resource.addObject (resource) ;
@@ -375,47 +375,47 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
   index = 0 ;
   while (task.hasCurrentObject ()) {
     cElement element ;
-    strcpy(element.mElementName,task.current_lkey ().mAttribute_string.stringValue ().cString (HERE));   
+    strcpy(element.mElementName,task.current_lkey (HERE).mAttribute_string.stringValue ().cString (HERE));   
     element.mElementType = 'T';    
     element.mId_inList =index;
-  	element.mResourceId = (PMSInt32) task.current_mProcessor ().uintValue ();
-    element.mPriority = (PMSInt32) task.current_mPriority ().mAttribute_uint.uintValue ();
+  	element.mResourceId = (PMSInt32) task.current_mProcessor (HERE).uintValue ();
+    element.mPriority = (PMSInt32) task.current_mPriority (HERE).mAttribute_uint.uintValue ();
 // §    element.mEvery = 1 ;
     PMSInt32 Sca = Resource (element.mResourceId COMMA_HERE).mStep ;
 //    printf (" Sca : %ld \n",Sca);
-    element.mEvery = (PMSInt32) task.current_mTaskKind ().ptr ()->getTaskEveryParameter () ;
-  	element.mOffset = Sca*(PMSInt32) task.current_mOffset ().mAttribute_uint.uintValue ();  
-    element.mMaxDuration = Sca*(PMSInt32) task.current_mDurationMax ().mAttribute_uint.uintValue (); 
+    element.mEvery = (PMSInt32) task.current_mTaskKind (HERE).ptr ()->getTaskEveryParameter () ;
+  	element.mOffset = Sca*(PMSInt32) task.current_mOffset (HERE).mAttribute_uint.uintValue ();  
+    element.mMaxDuration = Sca*(PMSInt32) task.current_mDurationMax (HERE).mAttribute_uint.uintValue (); 
     element.mMinDuration = useCANmaxLengthOnly
-                          ? element.mMaxDuration :(Sca*(PMSInt32)  task.current_mDurationMin ().mAttribute_uint.uintValue ());
+                          ? element.mMaxDuration :(Sca*(PMSInt32)  task.current_mDurationMin (HERE).mAttribute_uint.uintValue ());
         
-    element.mDeadline = (PMSInt32) task.current_mDeadline ().mAttribute_uint.uintValue ();
+    element.mDeadline = (PMSInt32) task.current_mDeadline (HERE).mAttribute_uint.uintValue ();
     if ( element.mDeadline !=  PMSINT32_MAX){ // PMUINT32_MAX -> PMSINT32_MAX by PM, 17/1/2005
     	 element.mDeadline = Sca*element.mDeadline;
     }  
  //................................................   
-    if (task.current_mTaskKind ().ptr ()->taskDependsOnTask ()) {
-    	PMSInt32 elementIndex = (PMSInt32) task.current_mTaskKind ().ptr ()->getTaskDependanceValue ();
+    if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnTask ()) {
+    	PMSInt32 elementIndex = (PMSInt32) task.current_mTaskKind (HERE).ptr ()->getTaskDependanceValue ();
     	element.mEveryMultiple = 
-    		 (PMSInt32) task.current_mTaskKind ().ptr ()->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
-   		element.mPeriod = Sca*(PMSInt32) task.current_mPeriod ().mAttribute_uint.uintValue ();
-    } else if (task.current_mTaskKind ().ptr ()->taskDependsOnMessage ()){
+    		 (PMSInt32) task.current_mTaskKind (HERE).ptr ()->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
+   		element.mPeriod = Sca*(PMSInt32) task.current_mPeriod (HERE).mAttribute_uint.uintValue ();
+    } else if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnMessage ()){
     
     }else{
-    	element.mEveryMultiple = (PMSInt32) task.current_mTaskKind ().ptr ()->getTaskEveryParameter () ;
-    	element.mPeriod = Sca*(PMSInt32) task.current_mPeriod ().mAttribute_uint.uintValue ();
+    	element.mEveryMultiple = (PMSInt32) task.current_mTaskKind (HERE).ptr ()->getTaskEveryParameter () ;
+    	element.mPeriod = Sca*(PMSInt32) task.current_mPeriod (HERE).mAttribute_uint.uintValue ();
     }
  //................................................
-  	if (task.current_mTaskKind ().ptr ()->taskDependsOnTask ()) {
+  	if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnTask ()) {
       element.mIsIndependant=false ;
     	element.mPredecessorType = 'T'; 
       element.mPredecessorId = 
-      PMSInt32 (task.current_mTaskKind ().ptr ()->getTaskDependanceValue ());
-    }else if (task.current_mTaskKind ().ptr ()->taskDependsOnMessage ()) {
+      PMSInt32 (task.current_mTaskKind (HERE).ptr ()->getTaskDependanceValue ());
+    }else if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnMessage ()) {
       element.mIsIndependant=false ;
     	element.mPredecessorType = 'M'; 
       element.mPredecessorId = 
-      PMSInt32 (task.current_mTaskKind ().ptr ()->getTaskDependanceValue ()) ;
+      PMSInt32 (task.current_mTaskKind (HERE).ptr ()->getTaskDependanceValue ()) ;
     }else{ 
     	element.mIsIndependant=true ;
     }
@@ -436,21 +436,21 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
   message.rewind () ;
   while (message.hasCurrentObject ()) {
     cElement element ;
-    strcpy(element.mElementName,message.current_lkey ().mAttribute_string.stringValue ().cString (HERE));
+    strcpy(element.mElementName,message.current_lkey (HERE).mAttribute_string.stringValue ().cString (HERE));
   	element.mElementType = 'M';
     element.mId_inList = index;
   	element.mResourceId = NumberOfProcessors + 
-  		(PMSInt32) message.current_mNetworkIndex ().uintValue ();
-  	element.mPriority = (PMSInt32) message.current_mPriority ().mAttribute_uint.uintValue ();
+  		(PMSInt32) message.current_mNetworkIndex (HERE).uintValue ();
+  	element.mPriority = (PMSInt32) message.current_mPriority (HERE).mAttribute_uint.uintValue ();
   	element.mEvery = 1 ;
   	PMSInt32 ScalingFactor = 
 					 Resource (element.mResourceId COMMA_HERE).mStep;
 	//  printf (" Sca : %ld \n",ScalingFactor);
-	  element.mOffset = ScalingFactor*(PMSInt32) message.current_mOffset ().mAttribute_uint.uintValue (); 
+	  element.mOffset = ScalingFactor*(PMSInt32) message.current_mOffset (HERE).mAttribute_uint.uintValue (); 
   	if ( Resource (element.mResourceId COMMA_HERE).mResourceType == 1 ){ //CAN = 1
-    	if (strstr(kMessageClasses [message.current_mClass ().mAttribute_uint.uintValue ()],"standard") != NULL){ 
+    	if (strstr(kMessageClasses [message.current_mClass (HERE).mAttribute_uint.uintValue ()],"standard") != NULL){ 
     		MessageType = 'S';
-    	}else if (strstr(kMessageClasses [message.current_mClass ().mAttribute_uint.uintValue ()],
+    	}else if (strstr(kMessageClasses [message.current_mClass (HERE).mAttribute_uint.uintValue ()],
       					"extended") != NULL){ 
       	MessageType = 'X' ;
       }else{ 
@@ -461,17 +461,17 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
       
       element.mMaxDuration = ScalingFactor* maxCANMessageTime(MessageType,
       											 (PMUInt32) element.mMinDuration,
-      											 message.current_mBytesCount ().mAttribute_uint.uintValue ());
+      											 message.current_mBytesCount (HERE).mAttribute_uint.uintValue ());
   
       element.mMinDuration = useCANmaxLengthOnly
         ? element.mMaxDuration
         : (ScalingFactor * minCANMessageTime(MessageType,
-                            message.current_mPriority ().mAttribute_uint.uintValue (),
-                            message.current_mBytesCount ().mAttribute_uint.uintValue ()));
+                            message.current_mPriority (HERE).mAttribute_uint.uintValue (),
+                            message.current_mBytesCount (HERE).mAttribute_uint.uintValue ()));
                             
   	}else if (Resource (element.mResourceId COMMA_HERE).mResourceType == 0 ){ //VAN = 0
     	
-    	element.mMinDuration= ScalingFactor *(64+10* (PMSInt32) message.current_mBytesCount ().mAttribute_uint.uintValue ()) ;
+    	element.mMinDuration= ScalingFactor *(64+10* (PMSInt32) message.current_mBytesCount (HERE).mAttribute_uint.uintValue ()) ;
 
     	element.mMaxDuration= ScalingFactor* element.mMinDuration;
   	}else{ 
@@ -479,35 +479,34 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
       fflush (stdout);  
 		}
 		
-    element.mDeadline =  (PMSInt32) message.current_mDeadline ().mAttribute_uint.uintValue ();
+    element.mDeadline =  (PMSInt32) message.current_mDeadline (HERE).mAttribute_uint.uintValue ();
     if ( element.mDeadline !=  PMSINT32_MAX){ // PMUINT32_MAX -> PMSINT32_MAX by PM, 17/1/2005
     	 element.mDeadline = ScalingFactor *element.mDeadline;
     }  
  //...........................................................................
     PMSInt32 elementIndex ;
-   if (message.current_mMessageKind ().ptr ()->messageDependsOnTask ()) {
-   	 elementIndex = (PMSInt32) message.current_mMessageKind ().ptr ()->getMessageDependanceValue ();
+   if (message.current_mMessageKind (HERE).ptr ()->messageDependsOnTask ()) {
+   	 elementIndex = (PMSInt32) message.current_mMessageKind (HERE).ptr ()->getMessageDependanceValue ();
      element.mEveryMultiple = Element (elementIndex COMMA_HERE).mEveryMultiple ;  
      element.mPeriod = Element (elementIndex COMMA_HERE).mPeriod ; 
-   }else if (message.current_mMessageKind ().ptr ()->messageDependsOnMessage ()) {
-     elementIndex = (PMSInt32) message.current_mMessageKind ().ptr ()->getMessageDependanceValue () + NumberOfTasks ;
+   }else if (message.current_mMessageKind (HERE).ptr ()->messageDependsOnMessage ()) {
+     elementIndex = (PMSInt32) message.current_mMessageKind (HERE).ptr ()->getMessageDependanceValue () + NumberOfTasks ;
      element.mEveryMultiple = Element (elementIndex COMMA_HERE).mEveryMultiple; 
      element.mPeriod = Element (elementIndex COMMA_HERE).mPeriod ;
    } else{
    	 element.mEveryMultiple = 1;
-   	  element.mPeriod = ScalingFactor * (PMSInt32) message.current_mPeriod ().mAttribute_uint.uintValue ();
+   	  element.mPeriod = ScalingFactor * (PMSInt32) message.current_mPeriod (HERE).mAttribute_uint.uintValue ();
    }
  //.................................................................................   
-  	if (message.current_mMessageKind ().ptr ()->messageDependsOnTask ()) {
+  	if (message.current_mMessageKind (HERE).ptr ()->messageDependsOnTask ()) {
       element.mIsIndependant=false ;
     	element.mPredecessorType = 'T'; 
       element.mPredecessorId = 
-         (PMSInt32) message.current_mMessageKind ().ptr ()->getMessageDependanceValue ();
-    }else if (message.current_mMessageKind ().ptr ()->messageDependsOnMessage ()) {
+         (PMSInt32) message.current_mMessageKind (HERE).ptr ()->getMessageDependanceValue ();
+    }else if (message.current_mMessageKind (HERE).ptr ()->messageDependsOnMessage ()) {
     	element.mIsIndependant=false ;
     	element.mPredecessorType = 'M'; 
-      element.mPredecessorId = \
-      	(PMSInt32) message.current_mMessageKind ().ptr ()->getMessageDependanceValue () ;
+      element.mPredecessorId = (PMSInt32) message.current_mMessageKind (HERE).ptr ()->getMessageDependanceValue () ;
     }else{ 
     	element.mIsIndependant=true ;
     }
@@ -533,52 +532,52 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
     htmlFile << cStringWithSigned (index) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << task.current_lkey ().mAttribute_string.stringValue ().cString (HERE) ;
+    htmlFile << task.current_lkey (HERE).mAttribute_string.stringValue ().cString (HERE) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (task.current_mProcessor ().uintValue ()+1) ;
+    htmlFile << cStringWithUnsigned (task.current_mProcessor (HERE).uintValue ()+1) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (task.current_mPriority ().mAttribute_uint.uintValue ()) ;
+    htmlFile << cStringWithUnsigned (task.current_mPriority (HERE).mAttribute_uint.uintValue ()) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (task.current_mOffset ().mAttribute_uint.uintValue ());
+    htmlFile << cStringWithUnsigned (task.current_mOffset (HERE).mAttribute_uint.uintValue ());
     htmlFile.outputRawData ("</td><td>") ;
     if (useCANmaxLengthOnly){
-      htmlFile << cStringWithUnsigned (task.current_mDurationMax ().mAttribute_uint.uintValue ()) ;
+      htmlFile << cStringWithUnsigned (task.current_mDurationMax (HERE).mAttribute_uint.uintValue ()) ;
     }else {
-      htmlFile << cStringWithUnsigned (task.current_mDurationMin ().mAttribute_uint.uintValue ()) ;
+      htmlFile << cStringWithUnsigned (task.current_mDurationMin (HERE).mAttribute_uint.uintValue ()) ;
     }
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (task.current_mDurationMax ().mAttribute_uint.uintValue ()) ;
+    htmlFile << cStringWithUnsigned (task.current_mDurationMax (HERE).mAttribute_uint.uintValue ()) ;
     htmlFile.outputRawData ("</td><td>") ;
 //....................................................................   
-    if (task.current_mTaskKind ().ptr ()->taskDependsOnMessage ()) {
-    	PMSInt32 elementIndex = (PMSInt32) task.current_mTaskKind ().ptr ()->getTaskDependanceValue () + NumberOfTasks ;
+    if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnMessage ()) {
+    	PMSInt32 elementIndex = (PMSInt32) task.current_mTaskKind (HERE).ptr ()->getTaskDependanceValue () + NumberOfTasks ;
     	Element (index-1 COMMA_HERE).mEveryMultiple = 
-    		 (PMSInt32) task.current_mTaskKind ().ptr ()->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
+    		 (PMSInt32) task.current_mTaskKind (HERE).ptr ()->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
     	Element (index-1 COMMA_HERE).mPeriod = Element (elementIndex COMMA_HERE).mPeriod  ;
     }
  //...................................................................
-    PMSInt32 resourceId = (PMSInt32) task.current_mProcessor ().uintValue ();
+    PMSInt32 resourceId = (PMSInt32) task.current_mProcessor (HERE).uintValue ();
     PMSInt32 Scal = Resource (resourceId COMMA_HERE).mStep ;
 
     htmlFile << cStringWithSigned (Element (index-1 COMMA_HERE).mEveryMultiple * Element (index-1 COMMA_HERE).mPeriod /Scal) ;
     htmlFile.outputRawData ("</td><td>") ;
-    if (task.current_mDeadline ().mAttribute_uint.uintValue () == PMUINT32_MAX){
+    if (task.current_mDeadline (HERE).mAttribute_uint.uintValue () == PMUINT32_MAX){
     	htmlFile.outputRawData ("Unknown</td><td>") ;
     }else{
-     	htmlFile << cStringWithUnsigned (task.current_mDeadline ().mAttribute_uint.uintValue ()) ;
+     	htmlFile << cStringWithUnsigned (task.current_mDeadline (HERE).mAttribute_uint.uintValue ()) ;
     	htmlFile.outputRawData ("</td><td>") ;
     }
-    if (task.current_mTaskKind ().ptr ()->taskDependsOnTask ()) {
+    if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnTask ()) {
       htmlFile.outputRawData ("task #") ;
-      htmlFile << cStringWithUnsigned (task.current_mTaskKind ().ptr ()->getTaskDependanceValue ()+1) ;
-    }else if (task.current_mTaskKind ().ptr ()->taskDependsOnMessage ()) {
+      htmlFile << cStringWithUnsigned (task.current_mTaskKind (HERE).ptr ()->getTaskDependanceValue ()+1) ;
+    }else if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnMessage ()) {
       htmlFile.outputRawData ("message #") ;
-      htmlFile << cStringWithUnsigned (task.current_mTaskKind ().ptr ()->getTaskDependanceValue ()+1) ;
+      htmlFile << cStringWithUnsigned (task.current_mTaskKind (HERE).ptr ()->getTaskDependanceValue ()+1) ;
     }else{
     	htmlFile.outputRawData (" ---") ;
     }
      htmlFile.outputRawData ("</td><td>") ;
-     htmlFile << cStringWithUnsigned (task.current_mTaskKind ().ptr ()->getTaskEveryParameter ()) ;
+     htmlFile << cStringWithUnsigned (task.current_mTaskKind (HERE).ptr ()->getTaskEveryParameter ()) ;
       
     htmlFile.outputRawData ("</td></tr>") ;
     task.gotoNextObject () ;
@@ -599,23 +598,23 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
     htmlFile << cStringWithSigned (index) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << message.current_lkey ().mAttribute_string.stringValue ().cString (HERE) ;
+    htmlFile << message.current_lkey (HERE).mAttribute_string.stringValue ().cString (HERE) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (message.current_mNetworkIndex ().uintValue () +1) ;
+    htmlFile << cStringWithUnsigned (message.current_mNetworkIndex (HERE).uintValue () +1) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << kMessageClasses [message.current_mClass ().mAttribute_uint.uintValue ()];
+    htmlFile << kMessageClasses [message.current_mClass (HERE).mAttribute_uint.uintValue ()];
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (message.current_mPriority ().mAttribute_uint.uintValue ()) ;
+    htmlFile << cStringWithUnsigned (message.current_mPriority (HERE).mAttribute_uint.uintValue ()) ;
     htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (message.current_mBytesCount ().mAttribute_uint.uintValue ()) ;
+    htmlFile << cStringWithUnsigned (message.current_mBytesCount (HERE).mAttribute_uint.uintValue ()) ;
     htmlFile.outputRawData ("</td><td>") ;
     
-    PMSInt32 resourceId =  NumberOfProcessors + (PMSInt32) message.current_mNetworkIndex ().uintValue ();
+    PMSInt32 resourceId =  NumberOfProcessors + (PMSInt32) message.current_mNetworkIndex (HERE).uintValue ();
     PMSInt32 Scal = Resource (resourceId COMMA_HERE).mStep ;
     
-    if ( (strstr(kMessageClasses [message.current_mClass ().mAttribute_uint.uintValue ()],"standard") != NULL)
+    if ( (strstr(kMessageClasses [message.current_mClass (HERE).mAttribute_uint.uintValue ()],"standard") != NULL)
     		|| 
-    		(strstr(kMessageClasses [message.current_mClass ().mAttribute_uint.uintValue ()],"extended") != NULL)
+    		(strstr(kMessageClasses [message.current_mClass (HERE).mAttribute_uint.uintValue ()],"extended") != NULL)
     		){ 
       		if (useCANmaxLengthOnly){
       		  htmlFile << cStringWithSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal) ;
@@ -628,23 +627,23 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
       htmlFile << cStringWithSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration /Scal) ;
     }
     htmlFile.outputRawData ("</td><td>");    
-    htmlFile << cStringWithUnsigned (message.current_mOffset ().mAttribute_uint.uintValue ()) ;
+    htmlFile << cStringWithUnsigned (message.current_mOffset (HERE).mAttribute_uint.uintValue ()) ;
     htmlFile.outputRawData ("</td><td>") ;
     htmlFile << cStringWithSigned (Element (index-1 + NumberOfTasks  COMMA_HERE).mEveryMultiple *  
                                    Element (index-1 + NumberOfTasks  COMMA_HERE).mPeriod /Scal);
     htmlFile.outputRawData ("</td><td>") ; 
-    if (message.current_mDeadline ().mAttribute_uint.uintValue () == PMUINT32_MAX){
+    if (message.current_mDeadline (HERE).mAttribute_uint.uintValue () == PMUINT32_MAX){
     	htmlFile.outputRawData ("Unknown</td><td>") ;
     }else{
-     	htmlFile << cStringWithUnsigned (message.current_mDeadline ().mAttribute_uint.uintValue ()) ;
+     	htmlFile << cStringWithUnsigned (message.current_mDeadline (HERE).mAttribute_uint.uintValue ()) ;
     	htmlFile.outputRawData ("</td><td>") ;
     }
-   	if (message.current_mMessageKind ().ptr ()->messageDependsOnTask ()) {
+   	if (message.current_mMessageKind (HERE).ptr ()->messageDependsOnTask ()) {
     	htmlFile.outputRawData ("task #") ;
-     	htmlFile << cStringWithUnsigned (message.current_mMessageKind ().ptr ()->getMessageDependanceValue ()+1) ;
-    }else if (message.current_mMessageKind ().ptr ()->messageDependsOnMessage ()) {
+     	htmlFile << cStringWithUnsigned (message.current_mMessageKind (HERE).ptr ()->getMessageDependanceValue ()+1) ;
+    }else if (message.current_mMessageKind (HERE).ptr ()->messageDependsOnMessage ()) {
     	htmlFile.outputRawData ("message # ") ;
- 	   	htmlFile << cStringWithUnsigned (message.current_mMessageKind ().ptr ()->getMessageDependanceValue ()+1) ;
+ 	   	htmlFile << cStringWithUnsigned (message.current_mMessageKind (HERE).ptr ()->getMessageDependanceValue ()+1) ;
     }else{
     	htmlFile.outputRawData (" ---") ;
     }
