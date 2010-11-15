@@ -5,7 +5,6 @@
 #---------------------------------------------------------------------------*
 
 program oa_main "version 1.1.9"  :
-  import grammar oa_grammar in "oa_grammar.gGrammar" ;
   import "oa_grammar.gGrammar" ;
 #--- max error and warning count
   before {
