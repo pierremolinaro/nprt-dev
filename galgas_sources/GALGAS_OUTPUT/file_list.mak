@@ -1,8 +1,8 @@
 #---------------------------------------------------------------*
 
-#--- Lib PM directory
+#--- LIBPM directory
 ifndef LIBPM_PATH
-  $(info *** the LIBPM_PATH environment variable is not defined)
+  $(error *** the LIBPM_PATH environment variable is not defined)
 endif
 
 #---------------------------------------------------------------*
@@ -13,7 +13,7 @@ endif
 
 SOURCES_DIR := ../galgas_sources/GALGAS_OUTPUT
 SOURCES_DIR += ../galgas_sources/GALGAS_OUTPUT/include-files
-SOURCES_DIR += ../hand_coded_sources/
+SOURCES_DIR += ../hand_coded_sources
 
 
 #---------------------------------------------------------------*
