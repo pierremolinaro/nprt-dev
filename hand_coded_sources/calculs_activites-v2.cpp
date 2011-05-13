@@ -303,7 +303,7 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
   htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
 	htmlFile.outputRawData ("#<th>Name<th>ScaFactor</tr>") ;
 	index = 1 ;
-	cEnumerator_M_5F_processor processor (inProcessorMap, true) ;
+	cEnumerator_M_5F_processor processor (inProcessorMap, kEnumeration_up) ;
 	while (processor.hasCurrentObject ()) {
 	  htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
 	  htmlFile << cStringWithSigned (index) ;
@@ -333,7 +333,7 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
   PMSInt32 NumberOfProcessors = index ;
 	
   const char * kNetworkTypes [] = {"VAN","CAN"} ;
-	cEnumerator_M_5F_network network (inNetworkMap, true) ;
+	cEnumerator_M_5F_network network (inNetworkMap, kEnumeration_up) ;
 //--- Print network map
   htmlFile.appendCppTitleComment ("Networks map", "title") ;
   htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
@@ -371,7 +371,7 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
   }
   
 //--- Build tasks map  
-  cEnumerator_M_5F_tasks task (inTasksMap, true) ;
+  cEnumerator_M_5F_tasks task (inTasksMap, kEnumeration_up) ;
   index = 0 ;
   while (task.hasCurrentObject ()) {
     cElement element ;
@@ -429,7 +429,7 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
   PMSInt32 NumberOfTasks = index;
 	
   const char * kMessageClasses [] = {"standard", "extended", "  VAN   "} ;
-  cEnumerator_M_5F_messages message (inMessagesMap, true) ;
+  cEnumerator_M_5F_messages message (inMessagesMap, kEnumeration_up) ;
 
 //--- Build messages map
   index = 0 ;
