@@ -394,18 +394,18 @@ void C_us::printVDLsummary (AC_OutputStream & inOutputStream) {
                  << cStringWithUnsigned ((PMUInt32) ((C_us_hashmap::getCreatedObjectCount () * getNodeSize ()) / 1024UL))
                  << " kbytes) ;\n"
                     "  " << cStringWithSigned (getNodeComparesCount ()) << " comparisons ;\n"
-                    "  " << cStringWithUnsigned64 (getTrivialAddCount ())
-                 << " trivial additions (" << cStringWithUnsigned64 ((100ULL * getTrivialAddCount ()) / n)
+                    "  " << cStringWithUnsigned (getTrivialAddCount ())
+                 << " trivial additions (" << cStringWithUnsigned ((100ULL * getTrivialAddCount ()) / n)
                  << "%) ;\n"
-                    "  " << cStringWithUnsigned64 (getCacheSuccessCount ())
-                 << " cache successes (" << cStringWithUnsigned64 ((100ULL * getCacheSuccessCount ()) / n) << "%) ;\n"
-                    "  " << cStringWithUnsigned64 (getCacheFailureCount ()) << " cache failures ("
-                 << cStringWithUnsigned64 ((100ULL * getCacheFailureCount ()) / n) << "%), including "
-                 << cStringWithUnsigned64 (getCacheOverrideCount ()) << " cache overrides ("
-                 << cStringWithUnsigned64 ((100ULL * getCacheOverrideCount ()) / n) << "%) ;\n"
-                    "  " << cStringWithUnsigned64 (getUnusedCacheEntriesCount ()) << " unused cache entries ("
-                 << cStringWithUnsigned64 ((100ULL * getUnusedCacheEntriesCount ()) / getCacheEntriesCount ())
-                 << "%, total entries = " << cStringWithUnsigned64 (getCacheEntriesCount ()) << ").\n" ;
+                    "  " << cStringWithUnsigned (getCacheSuccessCount ())
+                 << " cache successes (" << cStringWithUnsigned ((100ULL * getCacheSuccessCount ()) / n) << "%) ;\n"
+                    "  " << cStringWithUnsigned (getCacheFailureCount ()) << " cache failures ("
+                 << cStringWithUnsigned ((100ULL * getCacheFailureCount ()) / n) << "%), including "
+                 << cStringWithUnsigned (getCacheOverrideCount ()) << " cache overrides ("
+                 << cStringWithUnsigned ((100ULL * getCacheOverrideCount ()) / n) << "%) ;\n"
+                    "  " << cStringWithUnsigned (getUnusedCacheEntriesCount ()) << " unused cache entries ("
+                 << cStringWithUnsigned ((100ULL * getUnusedCacheEntriesCount ()) / getCacheEntriesCount ())
+                 << "%, total entries = " << cStringWithUnsigned (getCacheEntriesCount ()) << ").\n" ;
 }
 
 //---------------------------------------------------------------------------*

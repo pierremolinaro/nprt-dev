@@ -1,9 +1,7 @@
 #---------------------------------------------------------------*
 
 #--- LIBPM directory
-ifndef LIBPM_PATH
-  $(error *** the LIBPM_PATH environment variable is not defined)
-endif
+LIBPM_DIRECTORY_PATH := ../galgas_sources/GALGAS_OUTPUT/libpm
 
 #---------------------------------------------------------------*
 #                                                               *
@@ -109,6 +107,7 @@ SOURCES += basic-allocation.cpp
 #    G A L G A S    2                                           *
 #---------------------------------------------------------------*
 
+SOURCES += typeComparisonResult.cpp
 SOURCES += C_Compiler.cpp
 SOURCES += C_Lexique.cpp
 SOURCES += C_LocationInSource.cpp
