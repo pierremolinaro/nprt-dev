@@ -4,7 +4,7 @@
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 1997, ..., 2010 Pierre Molinaro.                           *
+//  Copyright (C) 1997, ..., 2011 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
 //                                                                           *
@@ -30,6 +30,7 @@
 #include "utilities/C_SharedObject.h"
 #include "strings/unicode_string_routines.h"
 #include "strings/unicode_character_cpp.h"
+#include "collections/TC_UniqueArray2.h"
 
 //---------------------------------------------------------------------------*
 
@@ -705,7 +706,7 @@ bool C_String::containsString (const C_String & inSearchedString) const {
 void C_String::
 componentsSeparatedByString (const C_String & inSeparatorString,
                              TC_UniqueArray <C_String> & outResult) const {
-  outResult.clear () ;
+  outResult.removeAllObjects () ;
   const utf32 * sourcePtr = utf32String (HERE) ;
   if (sourcePtr == NULL) {
     outResult.addObject (C_String ()) ;
@@ -1662,7 +1663,7 @@ bool C_String::makeDirectoryIfDoesNotExist (void) const {
 bool C_String::
 binaryDataWithContentOfFile (TC_UniqueArray <unsigned char> & outBinaryData) const {
 //--- Clear result
-  outBinaryData.clear () ;
+  outBinaryData.removeAllObjects () ;
 //--- Open file for binary reading
   const C_String nativePath = nativePathWithUnixPath () ;
   FILE * inputFile = ::fopen (nativePath.cString (HERE), "rb") ;
@@ -1725,6 +1726,52 @@ bool C_String::writeToFile (const C_String & inFilePath
   }
   return success ;
 }
+
+//---------------------------------------------------------------------------*
+
+#ifdef TARGET_API_MAC_CARBON
+  static C_String unixPath2macOSpath (const C_String & inPath) {
+    C_String macOSpath ;
+    const PMSInt32 length = inPath.length () ;
+    if (length > 0) {
+    //--- Replace '/' by ':'
+      for (PMSInt32 i=0 ; i<length ; i++) {
+        const utf32 c = inPath (i COMMA_HERE) ;
+        macOSpath.appendUnicodeCharacter ((UNICODE_VALUE (c) == '/') ? TO_UNICODE (':') : c COMMA_HERE) ;
+      }
+    //--- if first character is ':', following char must be 'Volumes:' : suppress them
+      if ((UNICODE_VALUE (macOSpath (0 COMMA_HERE)) == ':') && (macOSpath.length () > 9)) {
+        macOSpath.suppress (0, 9 COMMA_HERE) ;
+      }
+    }
+    return macOSpath ;
+  }
+#endif
+
+//---------------------------------------------------------------------------*
+
+#ifdef COMPILE_FOR_WIN32
+  static C_String unixPath2winPath (const C_String & inWinFileName) {
+    C_String winFileName ;
+      const PMSInt32 fileLength = inWinFileName.length () ;
+      PMSInt32 firstChar = 0 ;
+      if ((fileLength > 3)
+       && (UNICODE_VALUE (inWinFileName (0 COMMA_HERE)) == '/')
+       && isalpha ((int) UNICODE_VALUE (inWinFileName (1 COMMA_HERE)))
+       && (UNICODE_VALUE (inWinFileName (2 COMMA_HERE)) == '/')) {
+        winFileName.appendUnicodeCharacter (inWinFileName (1 COMMA_HERE) COMMA_HERE) ;
+        winFileName << ":\\" ;
+        firstChar = 3 ;
+      }
+      for (PMSInt32 i=firstChar ; i<fileLength ; i++) {
+        const utf32 c = (UNICODE_VALUE (inWinFileName (i COMMA_HERE)) == '/')
+          ? TO_UNICODE ('\\')
+          : inWinFileName (i COMMA_HERE) ;
+        winFileName.appendUnicodeCharacter (c COMMA_HERE) ;
+      }
+    return winFileName ;
+  }
+#endif
 
 //---------------------------------------------------------------------------*
   
@@ -2733,5 +2780,77 @@ C_String C_String::stringWithSymbolicLinkContents (bool & outOk) const {
     return r >= 0 ;
   }
 #endif
+
+//---------------------------------------------------------------------------*
+
+static inline PMUInt32 minimum (const PMUInt32 inA, const PMUInt32 inB) { return inA < inB ? inA : inB ; }
+
+//---------------------------------------------------------------------------*
+
+PMUInt32 C_String::LevenshteinDistanceFromString (const C_String & inOperand) const {
+
+//char s[1..m], char t[1..n])
+//{
+  const PMSInt32 myLength = length () ;
+  const PMSInt32 operandLength = inOperand.length () ;
+  // for all i and j, d[i,j] will hold the Levenshtein distance between
+  // the first i characters of s and the first j characters of t;
+  // note that d has (m+1)x(n+1) values
+  TC_UniqueArray2 <PMUInt32> distance (myLength + 1, operandLength + 1) ;
+
+  for (PMSInt32 i=0 ; i<=myLength ; i++) {
+    distance (i, 0 COMMA_HERE) = (PMUInt32) i ;
+  }
+ 
+  for (PMSInt32 j=0 ; j<=operandLength ; j++) {
+    distance (0, j COMMA_HERE) = (PMUInt32) j ;
+  }
+ 
+  for (PMSInt32 j=1 ; j<=operandLength ; j++) {
+    for (PMSInt32 i=1 ; i<=myLength ; i++) {
+      if (UNICODE_VALUE (this->operator () (i-1 COMMA_HERE)) == UNICODE_VALUE (inOperand (j-1 COMMA_HERE))) {
+        distance (i, j COMMA_HERE) = distance (i-1, j-1 COMMA_HERE) ;       // no operation required
+      }else{
+        distance (i, j COMMA_HERE) = minimum (minimum (
+          distance (i-1, j COMMA_HERE) + 1,  // a deletion
+          distance (i, j-1 COMMA_HERE) + 1),  // an insertion
+          distance (i-1, j-1 COMMA_HERE) + 1 // a substitution
+        ) ;
+      }
+    }
+  }
+  return distance (myLength, operandLength COMMA_HERE) ;
+}
+
+/* int LevenshteinDistance(char s[1..m], char t[1..n])
+{
+  // for all i and j, d[i,j] will hold the Levenshtein distance between
+  // the first i characters of s and the first j characters of t;
+  // note that d has (m+1)x(n+1) values
+  declare int d[0..m, 0..n]
+
+  for i from 0 to m
+    d[i, 0] := i // the distance of any first string to an empty second string
+  for j from 0 to n
+    d[0, j] := j // the distance of any second string to an empty first string
+
+  for j from 1 to n
+  {
+    for i from 1 to m
+    {
+      if s[i] = t[j] then  
+        d[i, j] := d[i-1, j-1]       // no operation required
+      else
+        d[i, j] := minimum
+                   (
+                     d[i-1, j] + 1,  // a deletion
+                     d[i, j-1] + 1,  // an insertion
+                     d[i-1, j-1] + 1 // a substitution
+                   )
+    }
+  }
+
+  return d[m,n]
+} */
 
 //---------------------------------------------------------------------------*

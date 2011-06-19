@@ -309,7 +309,7 @@ static inline cResourceSchedule * allocResourceNode (const PMSInt32 inResourceCo
    }else{
     gResourceFreeList = p->mPtrToOtherResource ;
     p->mPtrToOtherResource = NULL ;
-    p->mArray.clear () ;
+    p->mArray.removeAllObjects () ;
     p->mArray.addObjects (inResourceCount, cResource2 ()) ;
   }
   return p ;
