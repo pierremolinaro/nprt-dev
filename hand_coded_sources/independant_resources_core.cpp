@@ -459,7 +459,7 @@ independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inAct
 //--- Dump data structure
 //  scheduleMap.dumpStructure () ;
 //--- Build response time array
-  outResponseTimeArray.clear () ;
+  outResponseTimeArray.removeAllObjects () ;
   outResponseTimeArray.makeRoom (activitiesCount) ;
   outResponseTimeArray.addObjects (activitiesCount, cResponseTime ()) ;
   scheduleMap.computeBestAndWorstResponseTime (outResponseTimeArray) ;
