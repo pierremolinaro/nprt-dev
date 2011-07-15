@@ -2338,6 +2338,20 @@ static void addHorizontalScrollBarToTextView (NSScrollView * inScrollView) {
 
 //---------------------------------------------------------------------------*
 
+- (NSString *) sourceString {
+  OC_GGS_TextView * textView = [self sourceTextViewInDocumentWindow] ;
+  return [textView string] ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) setSourceString: (NSString *) inString {
+  OC_GGS_TextView * textView = [self sourceTextViewInDocumentWindow] ;
+  [textView setString:inString] ;
+}
+
+//---------------------------------------------------------------------------*
+
 - (void) indexingMenuAction: (id) inSender {
   NSString * descriptor = [inSender representedObject] ;
   // NSLog (@"descriptor '%@'", descriptor) ;
