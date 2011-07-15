@@ -91,6 +91,10 @@
   @private OC_GGS_Document * mCurrentlyEditedDocumentInBuildWindow ;
 }
 
+- (void) setSelectionRange: (NSRange) inRange ;
+- (NSString *) sourceString ;
+- (void) setSourceString: (NSString *) inString ;
+
 - (IBAction) actionBuild: (id) sender ;
 - (IBAction) stopBuild: (id) sender ;
 
