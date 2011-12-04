@@ -178,8 +178,8 @@ class cResource2 {
       && (mExecutionCounter == inOperand.mExecutionCounter) ;  
   }
 
-  public : inline PMSInt32 compare (const cResource2 & inOperand) const {
-    PMSInt32 result = mActivitiesToScheduleList.getPtr () - inOperand.mActivitiesToScheduleList.getPtr () ;
+  public : inline PMSInt compare (const cResource2 & inOperand) const {
+    PMSInt result = mActivitiesToScheduleList.getPtr () - inOperand.mActivitiesToScheduleList.getPtr () ;
     if (result == 0) {
       result = mCurrentActivity - inOperand.mCurrentActivity ;
       if (result == 0) {
@@ -472,7 +472,7 @@ recursiveInsertResourceNode (cResourceSchedule * inResource,
     ioResourceNodesList = ioRoot ;
     ioExtension = true ;
   }else{
-    PMSInt32 comparaison = 0 ;
+    PMSInt comparaison = 0 ;
     for (PMSInt32 i=0 ; (i<inResourceCount) && (comparaison == 0) ; i++) {
       comparaison = ioRoot->mArray (i COMMA_HERE).compare (inResource->mArray (i COMMA_HERE)) ;
     }

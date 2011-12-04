@@ -3,7 +3,7 @@
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 2003, ..., 2009 Pierre Molinaro.                           *
+//  Copyright (C) 2003, ..., 2011 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
 //                                                                           *
@@ -26,8 +26,16 @@
 
 //---------------------------------------------------------------------------*
 
+@class OC_GGS_Document ;
+
+//---------------------------------------------------------------------------*
+
 @interface OC_GGS_RulerViewForTextView : NSRulerView {
+  @private NSArray * mIssues ; // Array of PMIssueInRuler
+  @private OC_GGS_Document * __weak mDocument ;
 }
+
+- (OC_GGS_RulerViewForTextView *) initWithDocument: (OC_GGS_Document *) inDocument ;
 
 @end
 

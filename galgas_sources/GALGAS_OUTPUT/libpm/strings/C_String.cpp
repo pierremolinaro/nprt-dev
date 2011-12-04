@@ -1370,6 +1370,31 @@ void C_String::setFromCstring (const char * inCstring) {
   setLengthToZero () ;
   *this << inCstring ;
 }
+
+//---------------------------------------------------------------------------*
+//                                                                           *
+//   X M L    E S C A P E D    S T R I N G                                   *
+//                                                                           *
+//---------------------------------------------------------------------------*
+
+//--- Returns a string where ", ', <, > and & have been replaced by &quot;, &apos;, &lt;, &gt; and &amp;
+C_String C_String::XMLEscapedString (void) const {
+  C_String result ;
+  for (PMSInt32 i=0 ; i<length () ; i++) {
+    const utf32 c = this->operator () (i COMMA_HERE) ;
+    switch (UNICODE_VALUE (c)) {
+    case '"'  : result << "&quot;" ; break ;
+    case '\'' : result << "&apos;" ; break ;
+    case '<'  : result << "&lt;"   ; break ;
+    case '>'  : result << "&gt;"   ; break ;
+    case '&'  : result << "&amp;"  ; break ;
+    case '\n' : result << "&#10;" ; break ;
+    default   : result.appendUnicodeCharacter (c COMMA_HERE) ; break;
+    }
+  } 
+  return result ;
+}
+
 //---------------------------------------------------------------------------*
 
 #ifdef PRAGMA_MARK_ALLOWED
@@ -2372,7 +2397,7 @@ static bool parseUTF16LE (const PMUInt8 * inCString,
                           const PMSInt32 inLength,
                           C_String & outString) {
   bool ok = (inLength % 2) == 0 ;
-  PMUInt32 utf16prefix =0 ;
+  // PMUInt32 utf16prefix =0 ;
   bool foundUTF16prefix = false ;
   const PMUInt8 * sourcePointer = inCString ;
   for (PMSInt32 i=0 ; (i<inLength) && ok ; i+=2) {
@@ -2383,13 +2408,13 @@ static bool parseUTF16LE (const PMUInt8 * inCString,
     if ((n & 0xDC00) == 0xD800) {
       ok = ! foundUTF16prefix ;
       foundUTF16prefix = true ;
-      utf16prefix = n & 0x3FF ;
-      utf16prefix += 64 ;
+      // utf16prefix = n & 0x3FF ;
+      // utf16prefix += 64 ;
     }else if ((n & 0xDC00) == 0xDC00) {
       ok = foundUTF16prefix ;
       foundUTF16prefix = false ;
-      n &= 0x3FF ;
-      n |= utf16prefix << 6 ;
+      // n &= 0x3FF ;
+      // n |= utf16prefix << 6 ;
     }else{
       ok = isUnicodeCharacterAssigned (TO_UNICODE (n)) && ! foundUTF16prefix ;
       outString.appendUnicodeCharacter (TO_UNICODE (n) COMMA_HERE) ;
@@ -2408,7 +2433,7 @@ static bool parseUTF16BE (const PMUInt8 * inCString,
                           const PMSInt32 inLength,
                           C_String & outString) {
   bool ok = (inLength % 2) == 0 ;
-  PMUInt32 utf16prefix =0 ;
+  // PMUInt32 utf16prefix =0 ;
   bool foundUTF16prefix = false ;
   const PMUInt8 * sourcePointer = inCString ;
   for (PMSInt32 i=0 ; (i<inLength) && ok ; i+=2) {
@@ -2420,13 +2445,13 @@ static bool parseUTF16BE (const PMUInt8 * inCString,
     if ((n & 0xDC00) == 0xD800) {
       ok = ! foundUTF16prefix ;
       foundUTF16prefix = true ;
-      utf16prefix = n & 0x3FF ;
-      utf16prefix += 64 ;
+      // utf16prefix = n & 0x3FF ;
+      // utf16prefix += 64 ;
     }else if ((n & 0xDC00) == 0xDC00) {
       ok = foundUTF16prefix ;
       foundUTF16prefix = false ;
-      n &= 0x3FF ;
-      n |= utf16prefix << 6 ;
+      // n &= 0x3FF ;
+      // n |= utf16prefix << 6 ;
     }else{
       ok = isUnicodeCharacterAssigned (TO_UNICODE (n)) && ! foundUTF16prefix ;
       outString.appendUnicodeCharacter (TO_UNICODE (n) COMMA_HERE) ;

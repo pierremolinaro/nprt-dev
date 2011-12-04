@@ -199,7 +199,7 @@ avltree_search (MyBlockavltree_element_for_collision * ioRootPointer,
   if (ioRootPointer == NULL) {
     result = (C_us::C_us_nodeInfo *) NULL ;
   }else{
-    const PMSInt32 comp = ioRootPointer->mInfo.compare (inInfo) ;
+    const PMSInt comp = ioRootPointer->mInfo.compare (inInfo) ;
     if (comp > 0) {
       result = avltree_search (ioRootPointer->mPtrToSup, inInfo) ;
     }else if (comp < 0) {
@@ -230,7 +230,7 @@ recursiveSearchOrInsert (MyBlockavltree_element_for_collision * & ioRootPointer,
     outInsertionPerformed = true ;
   }else{
     outInsertionPerformed = false ;
-    const PMSInt32 comp = ioRootPointer->mInfo.compare (inInfo) ;
+    const PMSInt comp = ioRootPointer->mInfo.compare (inInfo) ;
     if (comp > 0) {
       result = recursiveSearchOrInsert (ioRootPointer->mPtrToSup, inInfo, outExtension, outInsertionPerformed) ;
       if (outExtension) {
@@ -320,7 +320,7 @@ recursiveInsertElement (MyBlockavltree_element_for_collision * & ioRootPointer,
     outExtension = true ;
     outInsertionPerformed = true ;
   }else{
-    const PMSInt32 comp = ioRootPointer->compare (* inElementPointer) ;
+    const PMSInt comp = ioRootPointer->compare (* inElementPointer) ;
     if (comp > 0) {
       recursiveInsertElement (ioRootPointer->mPtrToSup, inElementPointer, outExtension, outInsertionPerformed) ;
       if (outExtension) {
