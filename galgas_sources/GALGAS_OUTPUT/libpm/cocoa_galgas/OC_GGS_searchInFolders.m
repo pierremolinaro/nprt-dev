@@ -8,6 +8,7 @@
 
 #import "OC_GGS_searchInFolders.h"
 #import "OC_GGS_Document.h"
+#import "PMCocoaCallsDebug.h"
 
 //---------------------------------------------------------------------------*
 
@@ -184,7 +185,7 @@
       error:NULL
     ] ;
   }else{
-    fileContents = [document sourceString] ;
+    fileContents = [document sourceStringForGlobalSearch] ;
   }
   NSRange searchRange = {0, [fileContents length]} ;
   while (searchRange.length > 0) {
@@ -322,7 +323,7 @@
       OC_GGS_Document * document = [dc documentForURL:[NSURL fileURLWithPath:filePath]] ;
       [[document windowForSheet] makeKeyAndOrderFront:nil] ;
       if (nil == document) {
-        document = [dc
+        /* document = */ [dc
           openDocumentWithContentsOfURL:[NSURL fileURLWithPath:filePath]
           display:YES
           error:nil
@@ -331,8 +332,9 @@
       // NSLog (@"document %@", document) ;
       NSString * rangeString = [selectedObject valueForKey:@"rangeString"] ;
       if (nil != rangeString) {
-        const NSRange searchRange = NSRangeFromString (rangeString) ;
-        [document setSelectionRange:searchRange] ;
+      //  const NSRange searchRange = NSRangeFromString (rangeString) ;
+     //   [document setSelectionRange:searchRange] ;
+       NSBeep () ; NSLog (@"%s", __PRETTY_FUNCTION__) ;
       }
     }else{
       [ws openFile:filePath] ;
@@ -416,7 +418,7 @@
       error:NULL
     ] ;
   }else{
-    fileContents = [document sourceString] ;
+    fileContents = [document sourceStringForGlobalSearch] ;
   }
 //--- Perform find and replace
   BOOL contentsShouldChange = NO ;
@@ -447,7 +449,7 @@
         error:nil
       ] ;
     }else{
-      [document setSourceString:newContents] ;
+      [document replaceSourceStringWithString:newContents] ;
     }
   }
 }

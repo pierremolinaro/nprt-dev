@@ -38,7 +38,6 @@
 #define GGS_uint_build_option                @"GGS_uint_build_option"
 #define GGS_string_build_option              @"GGS_string_build_option"
 #define GGS_preference_window_frame          @"GGS_preference_window_frame"
-#define GGS_prefix_by_time_tool      @"GGS_prefix_by_time_tool"
 #define GGS_default_encoding_for_new_file @"GGS_default_encoding_for_new_file"
 #define GGS_default_encoding_for_existing_file @"GGS_default_encoding_for_existing_file"
 #define GGS_operation_on_opening_file_with_undecidable_encoding @"GGS_operation_on_opening_file_with_undecidable_encoding"
@@ -60,11 +59,7 @@ extern OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
 
 //---------------------------------------------------------------------------*
 
-@interface OC_GGS_PreferencesController : NSObject
-#ifdef MAC_OS_X_VERSION_10_6
- <NSWindowDelegate>
-#endif
-{
+@interface OC_GGS_PreferencesController : NSObject <NSWindowDelegate> {
 //--- Text Macros Menu
   @private IBOutlet NSMenu * mTextMacroMenu ;
 
@@ -75,13 +70,16 @@ extern OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
   @private IBOutlet NSPopUpButton * mToolPopUpButton ;
   @private NSMutableArray * mToolNameArray ;
 
+//--- "Live Compilation" checkbox
+  @private IBOutlet NSButton * mLiveCompilationCheckBox ;
+
 //--- "Show ruler" checkbox
   @private IBOutlet NSButton * mShowRuleCheckBox ;
   @private IBOutlet NSButton * mConvert_CRLF_And_CR_To_LF_AtStartUpButton ;
   @private IBOutlet NSButton * mConvert_HTAB_To_SPACE_AtStartUpButton ;
   @private IBOutlet NSButton * mShowInvisibleCharactersCheckBox ;
 
-//--- "Show ruler" checkbox
+//---
   @private IBOutlet NSTextField * mShiftLeftInsertedSpaceTextField ;
 
 //--- Preference Window
@@ -113,7 +111,6 @@ extern OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
 //--- "Run" Window
   @private IBOutlet NSWindow * mRunWindow ;
 
-//  @private IBOutlet NSScrollView * mRunScrollView ;
   @private IBOutlet NSTextView * mRunTextView ;
 
 //--- 'Run' Button
@@ -121,9 +118,6 @@ extern OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
 
 //--- Task for 'Run' command
   @private NSTask * mTask ;
-
-//--- "time" option
-  @private bool mTimeOptionOn ;
 
 //--- Command line option
   @private NSMutableArray * mBoolOptionArray ;
@@ -148,9 +142,7 @@ extern OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
 
 - (void) windowDidMove: (NSNotification *) aNotification ;
 
-- (float) ruleThickness ;
-
-- (void) cocoaDocumentWillClose: (OC_GGS_Document *) inDocument ;
+- (double) ruleThickness ;
 
 - (NSTabView *) preferencesTabView ;
 

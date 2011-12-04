@@ -27,142 +27,83 @@
 
 @class OC_GGS_TextView ;
 @class OC_GGS_DelegateForSyntaxColoring ;
-@class NSSplitViewExtensions ;
 @class OC_Lexique ;
 @class OC_GGS_RulerViewForCompileMessageView ;
 @class OC_GGS_ErrorOrWarningDescriptor ;
+@class OC_GGS_TextSyntaxColoring ;
+@class PMTabBarView ;
+@class OC_GGS_SourceScrollView ;
+@class OC_GGS_BuildTask ;
 
 //---------------------------------------------------------------------------*
 
-@interface OC_GGS_Document : NSDocument
-#ifdef MAC_OS_X_VERSION_10_6
- <NSTextViewDelegate, NSToolbarDelegate, NSWindowDelegate>
- #endif
-{
-@private OC_GGS_DelegateForSyntaxColoring * mDelegateForSyntaxColoring ;
-@private OC_Lexique * mTokenizer ;
+@interface OC_GGS_Document : NSDocument <NSTextViewDelegate, NSSplitViewDelegate, NSWindowDelegate> {
 
-@private IBOutlet OC_GGS_TextView * mUpperTextView ;
-@private IBOutlet OC_GGS_TextView * mLowerTextView ;
+  @private IBOutlet NSSplitView * mIssueSplitView ;
 
-@private IBOutlet NSScrollView * mScrollViewForUpperTextView ;
-@private IBOutlet NSScrollView * mScrollViewForLowerTextView ;
-
-@private IBOutlet NSSplitViewExtensions * mSplitView ;
-
-@private IBOutlet NSWindowController * mBuildWindowController ;
-
-@private IBOutlet NSTextField * mErrorCountMessage ;
-
-@private IBOutlet NSTextField * mWarningCountMessage ;
-
-@private IBOutlet NSButton * mCurrentLineButton ;
-
-@private IBOutlet NSWindow * mBuildWindow ;
-//@private IBOutlet NSTextField * mGotoLineTextField ;
-
-@private IBOutlet NSTextView * mCompileMessagesTextView ;
-@private IBOutlet NSScrollView * mCompileMessagesScrollView ;
-@private OC_GGS_RulerViewForCompileMessageView * mRulerForCompileMessageTextView ; 
-@private BOOL mScrollToTheEndOfTextDuringBuild ;
-@private NSMutableArray * mWarningArray ; // Array of OC_GGS_ErrorOrWarningDescriptor
-@private NSMutableArray * mErrorArray ; // Array of OC_GGS_ErrorOrWarningDescriptor
-@private NSColor * mBackgroundColorForWarningsAndErrors ;
-
-@private NSTask * mTask ;
-
-@private NSTextStorage * mDefaultTextStorage ;
-
-@private NSMutableData * mBufferedInputData ;
-@private NSMutableString * mBufferedInputFromCompilerString ;
-@private NSUInteger mBufferedInputFromCompilerIndex ;
-@private unichar mBufferedInputFromCompilerCurrentStyle ;
-
-//@private NSStringEncoding mCocoaSourceStringEncoding ;
-
-@private NSUInteger mCurrentWarning ;
-@private NSUInteger mCurrentError ;
+  @private IBOutlet NSView * mSourceHostView ;
 
   @private IBOutlet NSPopUpButton * mEntryListPopUpButton ;
+  
+  @private IBOutlet NSButton * mCurrentLineButton ;
+
+  @private IBOutlet NSTableView * mIssueTableView ;
+  @private IBOutlet NSTableColumn * mIssueTableViewColumn ;
 
   @private IBOutlet NSPanel * mUpdateFromFileSystemPanel ;
 
   @private IBOutlet NSTextField * mSourceEncodingTextField ;
   @private NSStringEncoding mFileEncoding ;
-  
-  @private IBOutlet OC_GGS_TextView * mSourceTextViewInBuildWindow ;
-  @private IBOutlet NSScrollView * mSourceScrollViewInBuildWindow ;
-  @private OC_GGS_Document * mCurrentlyEditedDocumentInBuildWindow ;
+
+  @private OC_GGS_BuildTask * mBuildTask ;
+//---  
+  @private OC_GGS_TextSyntaxColoring * mSourceTextWithSyntaxColoring ;
+  @private NSArrayController * mSourceDisplayArrayController ;
+
+//---
+  @private IBOutlet PMTabBarView * mTabBarView ;
+
+//--- "Goto Line" sheet
+  @private IBOutlet NSWindow * mGotoWindow ;
+  @private IBOutlet NSTextField * mGotoLineTextField ;
+
+//--- Detailled issue message
+  @private IBOutlet NSTextView * mDetailedIssueTextView ;
+  @private IBOutlet NSSplitView * mDetailedIssueSplitView ;
+
+//--- Build, stop button
+  @private IBOutlet NSButton * mStartBuildButton ;
+  @private IBOutlet NSProgressIndicator * mBuildProgressIndicator ;
+  @private IBOutlet NSButton * mStopBuildButton ;
+  @private IBOutlet NSTextField * mErrorCountTextField ;
+  @private IBOutlet NSTextField * mWarningCountTextField ;
 }
 
-- (void) setSelectionRange: (NSRange) inRange ;
-- (NSString *) sourceString ;
-- (void) setSourceString: (NSString *) inString ;
+- (IBAction) collapseDetailledMessageAction: (id) inSender ;
+- (IBAction) collapseIssuesAction: (id) inSender ;
+
+- (IBAction) actionGotoLine: (id) inSender ;
+
+- (IBAction) duplicateSelectedSourceViewAction: (id) inSender ;
+
+- (IBAction) actionComment: (id) sender ;
+- (IBAction) actionUncomment: (id) sender ;
+- (IBAction) actionShiftLeft: (id) sender  ;
+- (IBAction) actionShiftRight: (id) sender ;
 
 - (IBAction) actionBuild: (id) sender ;
 - (IBAction) stopBuild: (id) sender ;
 
-- (NSArray *) warningDescriptorArray ;
-- (NSArray *) errorDescriptorArray ;
+- (NSString *) sourceStringForGlobalSearch ;
+- (void) replaceSourceStringWithString: (NSString *) inString ;
 
+- (void) triggerDocumentEditedStatusUpdate ;
 
-- (void) changeTextRulerVisible: (BOOL) inVisible forRuleThickness: (CGFloat) inThickness ;
+- (OC_GGS_TextSyntaxColoring *) textSyntaxColoring ;
 
-- (BOOL) canTerminateApplication ;
-- (void) selectLine: (NSInteger) inLine forTextView: (NSTextView *) inTextView ;
-- (void) willCloseGalgasDocument: (OC_GGS_Document *) inDocument ;
+- (void) displayIssueDetailedMessage: (NSString *) inDetailledMessage ;
 
-- (void) selectEntryPopUpForSelectionStart: (NSInteger) inSelectionStart ;
-- (OC_GGS_DelegateForSyntaxColoring *) delegateForSyntaxColoring ;
-- (OC_Lexique *) tokenizer ;
-- (OC_GGS_TextView *) sourceTextViewInDocumentWindow ;
-- (OC_GGS_Document *) currentlyEditedDocumentInBuildWindow ;
+- (void) triggerLiveCompilation ;
 
-//--- Navigation throught warnings
-- (void) showWarningAtIndex: (NSUInteger) inIndex
-         display: (BOOL) inDisplaySourceWindow ;
-
-- (NSUInteger) currentWarning ;
-
-- (IBAction) gotoFirstWarning: (id) inSender ;
-- (IBAction) gotoPreviousWarning: (id) inSender ;
-- (IBAction) gotoCurrentWarning: (id) inSender ;
-- (IBAction) gotoNextWarning: (id) inSender ;
-- (IBAction) gotoLastWarning: (id) inSender ;
-
-- (BOOL) canGotoFirstWarning ;
-- (BOOL) canGotoPreviousWarning ;
-- (BOOL) canGotoCurrentWarning ;
-- (BOOL) canGotoNextWarning ;
-- (BOOL) canGotoLastWarning ;
-
-- (void) addWarningDescriptor: (OC_GGS_ErrorOrWarningDescriptor *) inWarningDescriptor ;
-
-//--- Navigation throught errors
-- (void) showErrorAtIndex: (NSUInteger) inIndex
-         display: (BOOL) inDisplaySourceWindow ;
-
-- (NSUInteger) currentError ;
-
-- (IBAction) gotoFirstError: (id) inSender ;
-- (IBAction) gotoPreviousError: (id) inSender ;
-- (IBAction) gotoCurrentError: (id) inSender ;
-- (IBAction) gotoNextError: (id) inSender ;
-- (IBAction) gotoLastError: (id) inSender ;
-
-- (BOOL) canGotoFirstError ;
-- (BOOL) canGotoPreviousError ;
-- (BOOL) canGotoCurrentError ;
-- (BOOL) canGotoNextError ;
-- (BOOL) canGotoLastError ;
-
-- (void) addErrorDescriptor: (OC_GGS_ErrorOrWarningDescriptor *) inWarningDescriptor ;
-
-- (void) editedFilePath:(NSString *) inDocPath
-         editedRange: (NSRange) inEditedRange
-         changeInLength: (NSInteger) inChangeInLength ;
-
-- (NSMenu *) indexMenuForToken: (NSString *) inToken
-             atomicSelection: (BOOL) inHasAtomicSelection
-             range: (NSRange) allTokenCharactersRange ;
+- (BOOL) buildTaskIsRunning ;
 @end

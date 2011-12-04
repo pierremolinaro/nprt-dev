@@ -48,13 +48,6 @@
 
 //---------------------------------------------------------------------------*
 
-- (void) dealloc {
-  [mSourceString release] ;
-  [super dealloc] ;
-}
-
-//---------------------------------------------------------------------------*
-
 - (NSString *) indexingDirectory {
   return @"" ;
 }
@@ -285,7 +278,6 @@
         ] ;
         [item setTag:[[inTokenArray objectAtIndex:i HERE] range].location] ;
         [menu addItem:item] ;
-        [item release] ;
       }
     }
   }
@@ -310,10 +302,10 @@
     appendFormat:@"For the '%@' key, there is no '%@' style in the '%@' application bundle resource file",
     inKey, inStyle, [inPath lastPathComponent]
   ] ;
-  static NSPoint origin = {20.0F, 20.0F} ;
-  const NSRect r = {origin, {300.0F, 200.0F}} ;
-  origin.x += 20.0F ;
-  origin.y += 20.0F ;
+  static NSPoint origin = {20.0, 20.0} ;
+  const NSRect r = {origin, {300.0, 200.0}} ;
+  origin.x += 20.0 ;
+  origin.y += 20.0 ;
   NSWindow * window = [[NSWindow alloc] initWithContentRect:r
     styleMask:NSTitledWindowMask | NSClosableWindowMask
     backing:NSBackingStoreBuffered
@@ -322,11 +314,11 @@
   ] ;
   [window setTitle:@"Custom Style Error"] ;
   NSView * contentView = [window contentView] ;
-  const NSRect tfRect = NSInsetRect ([contentView bounds], 10.0F, 10.0F) ;
+  const NSRect tfRect = NSInsetRect ([contentView bounds], 10.0, 10.0) ;
   NSTextField * tf = [[NSTextField alloc] initWithFrame:tfRect] ;
   [tf setEditable:NO] ;
   [tf setSelectable:YES] ;
-  [tf setFont:[NSFont boldSystemFontOfSize:0.0F]] ;
+  [tf setFont:[NSFont boldSystemFontOfSize:0.0]] ;
   [tf setTextColor:[NSColor redColor]] ;
   [tf setStringValue:message] ;
   [contentView addSubview:tf] ;
@@ -351,7 +343,6 @@
     ] ;
     if (nil == pathForCustomDictionary) {
       mCustomSyntaxColoringDictionary = [NSDictionary dictionary] ;
-      [mCustomSyntaxColoringDictionary retain] ;
     }else{
     //--- Compute style index dictionary
       NSMutableDictionary * styleIndexDictionary = [NSMutableDictionary new] ;
@@ -397,7 +388,7 @@
 
 - (void) tokenizeForSourceString: (NSString *) inSourceString
          tokenArray: (NSMutableArray *) ioStyledRangeArray // Array of OC_Token
-         editedRange: (const NSRange *) inEditedRange
+         editedRange: (const NSRange) inEditedRange
          changeInLength: (const NSInteger) inChangeInLength
          firstIndexToRedraw: (NSInteger *) outLowerIndexToRedrawInStyleArray // In ioStyledRangeArray
          lastIndexToRedraw: (NSInteger *) outUpperIndexToRedrawInStyleArray // In ioStyledRangeArray
@@ -407,8 +398,6 @@
     NSLog (@"tokenizeForSourceString:tokenArray:...") ;
   #endif
 //--- Set source string
-  [inSourceString retain] ;
-  [mSourceString release] ;
   mSourceString = inSourceString ;
 //--- Finding lower index in ioStyledRangeArray to redraw
   #ifdef DEBUG_MESSAGES
@@ -420,7 +409,7 @@
   while ((*outLowerIndexToRedrawInStyleArray < initialArrayLength) && search) {
     OC_Token * token = [ioStyledRangeArray objectAtIndex:* outLowerIndexToRedrawInStyleArray HERE] ;
     const NSRange range = [token range] ;
-    search = (range.location + range.length) < inEditedRange->location ;
+    search = (range.location + range.length) < inEditedRange.location ;
     *outLowerIndexToRedrawInStyleArray += search ;
   }
 //--- Determine if we are within template string, or outside
@@ -448,7 +437,7 @@
     NSLog (@"  Suppress affected Tokens") ;
   #endif
   search = YES ;
-  const NSUInteger affectedRangeEndLocation = inEditedRange->location + inEditedRange->length - inChangeInLength ;
+  const NSUInteger affectedRangeEndLocation = inEditedRange.location + inEditedRange.length - inChangeInLength ;
   while ((*outLowerIndexToRedrawInStyleArray < (SInt32) [ioStyledRangeArray count]) && search) {
     OC_Token * token = [ioStyledRangeArray objectAtIndex:* outLowerIndexToRedrawInStyleArray HERE] ;
     search = [token range].location < affectedRangeEndLocation ;
@@ -493,7 +482,6 @@
         NSLog (@"  error -> insertAtIndex:%u, range %u, %u", * outUpperIndexToRedrawInStyleArray, [token range].location, [token range].length) ;
       #endif
       [ioStyledRangeArray insertObject:token atIndex:* outUpperIndexToRedrawInStyleArray] ;
-      [token release] ;
       (*outUpperIndexToRedrawInStyleArray) ++ ;
     }else if ((mTokenCode > 0) && ((* outUpperIndexToRedrawInStyleArray) >= (SInt32) [ioStyledRangeArray count])) { // Regular token
       const NSRange range = {mTokenStartLocation, mCurrentLocation - mTokenStartLocation} ;
@@ -507,7 +495,6 @@
         NSLog (@"  token -> insertObject:atIndex:%u", * outUpperIndexToRedrawInStyleArray) ;
       #endif
       [ioStyledRangeArray insertObject:token atIndex:* outUpperIndexToRedrawInStyleArray] ;
-      [token release] ;
       (*outUpperIndexToRedrawInStyleArray) ++ ;
     }else if (mTokenCode > 0) { // Regular token
       const NSRange range = {mTokenStartLocation, mCurrentLocation - mTokenStartLocation} ;
@@ -526,7 +513,6 @@
           NSLog (@"  token -> insertObject:atIndex:%u", * outUpperIndexToRedrawInStyleArray) ;
         #endif
         [ioStyledRangeArray insertObject:token atIndex:* outUpperIndexToRedrawInStyleArray] ;
-        [token release] ;
         (*outUpperIndexToRedrawInStyleArray) ++ ;
       }
     }

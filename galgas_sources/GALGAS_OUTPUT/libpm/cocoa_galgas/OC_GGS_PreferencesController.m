@@ -3,7 +3,7 @@
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 2003, ..., 2010 Pierre Molinaro.                           *
+//  Copyright (C) 2003, ..., 2011 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
 //                                                                           *
@@ -29,7 +29,8 @@
 #import "enterDefaultCommandLineOptions.h"
 #import "OC_Lexique.h"
 #import "PMCocoaCallsDebug.h"
-#include "F_CocoaWrapperForGalgas.h"
+#import "F_CocoaWrapperForGalgas.h"
+#import "OC_GGS_BuildTask.h"
 
 //---------------------------------------------------------------------------*
 
@@ -124,11 +125,10 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
   NSMutableArray * arguments = [NSMutableArray new] ;
 //--- Add tool path
   [arguments addObject:[self compilerToolPath]] ;
-//--- Add --cocoa option
- [arguments addObject: @"--cocoa"] ;
+//--- Add --xml option
+ [arguments addObject: @"--xml"] ;
 //--- Add boolean options
-  unsigned i ;
-  for (i=0 ; i<[mBoolOptionArray count] ; i++) {
+  for (NSUInteger i=0 ; i<[mBoolOptionArray count] ; i++) {
     OC_GGS_CommandLineOption * option = [mBoolOptionArray objectAtIndex:i HERE] ;
     const bool optionValue = [defaults integerForKey: [NSString stringWithFormat:@"%@_%@", GGS_bool_build_option, [option identifier]]] != 0 ;
     if (optionValue) {
@@ -144,7 +144,7 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     }
   }
 //--- Add integer options
-  for (i=0 ; i<[mUIntOptionArray count] ; i++) {
+  for (NSUInteger i=0 ; i<[mUIntOptionArray count] ; i++) {
     OC_GGS_CommandLineOption * option = [mUIntOptionArray objectAtIndex:i HERE] ;
     const NSUInteger optionValue = [defaults integerForKey: [NSString stringWithFormat:@"%@_%@", GGS_uint_build_option, [option identifier]]];
     if (optionValue != 0) {
@@ -160,7 +160,7 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     }
   }
 //--- Add string options
-  for (i=0 ; i<[mStringOptionArray count] ; i++) {
+  for (NSUInteger i=0 ; i<[mStringOptionArray count] ; i++) {
     OC_GGS_CommandLineOption * option = [mStringOptionArray objectAtIndex:i HERE] ;
     NSString * optionValue = [defaults objectForKey: [NSString stringWithFormat:@"%@_%@", GGS_string_build_option, [option identifier]]];
     if ([optionValue length] > 0) {
@@ -175,17 +175,11 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
       }
     }
   }
-//--- Add 'time' option
-  if (mTimeOptionOn) {
-    [arguments insertObject:@"/usr/bin/time" atIndex:0] ;
-  }
 //--- Assign command line option array attribute
-  [arguments retain] ;
-  [mCommandLineItemArray release] ;
   mCommandLineItemArray = arguments ;
 //---- Build string for displaying
   NSMutableString * s = [NSMutableString new] ;
-  for (i=0 ; i<[arguments count] ; i++) {
+  for (NSUInteger i=0 ; i<[arguments count] ; i++) {
     [s appendString:[arguments objectAtIndex:i HERE]] ;
     [s appendString:@" "] ;  
   }
@@ -212,8 +206,8 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
          withSettingTitle: (NSString *) inTitle {
   NSUserDefaultsController * udc = [NSUserDefaultsController sharedUserDefaultsController] ;
 //--- Add background color well
-  ioRect->origin.x = 10.0f ;
-  ioRect->size.width = 40.0f ;
+  ioRect->origin.x = 10.0 ;
+  ioRect->size.width = 40.0 ;
   NSColorWell * colorWell = [[NSColorWell alloc] initWithFrame:*ioRect] ;
   [colorWell setAutoresizingMask: NSViewMaxXMargin | NSViewMinYMargin] ;
   [colorWell
@@ -223,11 +217,10 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     options:[NSDictionary dictionaryWithObject:NSUnarchiveFromDataTransformerName forKey:NSValueTransformerNameBindingOption]
   ] ;
   [ioView addSubview:colorWell] ;
-  [colorWell release] ;
   *ioEnclosingRect = NSUnionRect (*ioEnclosingRect, *ioRect) ;
 //--- Add "Font" button
-  ioRect->origin.x += 50.0f ;
-  ioRect->size.width = 200.0f ;
+  ioRect->origin.x += 50.0 ;
+  ioRect->size.width = 200.0 ;
   NSButton * cb = [[PMFontButton alloc] initWithFrame:*ioRect] ;
   [cb setButtonType: NSMomentaryLightButton] ;
   [cb setBezelStyle: NSSmallSquareBezelStyle] ;
@@ -239,11 +232,10 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     options:NULL
   ] ;
   [ioView addSubview:cb] ;
-  [cb release] ;
   *ioEnclosingRect = NSUnionRect (*ioEnclosingRect, *ioRect) ;
 //--- Add foreground color well
-  ioRect->origin.x += 210.0f ;
-  ioRect->size.width = 40.0f ;
+  ioRect->origin.x += 210.0 ;
+  ioRect->size.width = 40.0 ;
   colorWell = [[NSColorWell alloc] initWithFrame:*ioRect] ;
   [colorWell setAutoresizingMask: NSViewMaxXMargin | NSViewMinYMargin] ;
   [colorWell
@@ -253,7 +245,6 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     options:[NSDictionary dictionaryWithObject:NSUnarchiveFromDataTransformerName forKey:NSValueTransformerNameBindingOption]
   ] ;
   [ioView addSubview:colorWell] ;
-  [colorWell release] ;
   *ioEnclosingRect = NSUnionRect (*ioEnclosingRect, *ioRect) ;
 //--- Add text
   NSTextField * f = [[NSTextField alloc] init] ;
@@ -268,18 +259,18 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     [f font], NSFontAttributeName,
     nil
   ] ;
-  ioRect->origin.x += 50.0f ;
-  ioRect->size.width = [inTitle sizeWithAttributes:d].width + 30.0f ;
+  ioRect->origin.x += 50.0 ;
+  ioRect->size.width = [inTitle sizeWithAttributes:d].width + 30.0 ;
   [f setFrame: *ioRect] ;
   [ioView addSubview: f] ;
   *ioEnclosingRect = NSUnionRect (*ioEnclosingRect, *ioRect) ;
-  ioRect->origin.y -= 25.0f ;
+  ioRect->origin.y -= 25.0 ;
 }
 
 //---------------------------------------------------------------------------*
 
 - (void) setTextColorsAndFontForTokenizer: (OC_Lexique *) inTokenizer
-         atIndex: (unsigned) inIndex {
+         atIndex: (NSUInteger) inIndex {
   #define kDefaultColorCount 7
   NSColor * defaultColorArray [kDefaultColorCount] = {
     [NSColor blackColor],
@@ -292,12 +283,12 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
   } ;
   NSUInteger defaultColorIndex = 0 ;
   NSUserDefaults * ud = [NSUserDefaults standardUserDefaults] ;
-  NSRect enclosingRect = {{0.0f, 0.0f}, {10.0f, 25.0f}} ;
+  NSRect enclosingRect = {{0.0, 0.0}, {10.0, 25.0}} ;
   NSView * view = [[NSView alloc] initWithFrame:enclosingRect] ;
   [view setAutoresizesSubviews:YES] ;
   NSRect r ;
   r.origin.y = enclosingRect.origin.y ;
-  r.size.height = 20.0f ;
+  r.size.height = 20.0 ;
   NSMutableArray * allFontPreferenceNames = [NSMutableArray new] ;
   if ([inTokenizer isTemplateLexique]) {
   //--- By default, background color is white
@@ -315,14 +306,15 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
         setObject:[NSArchiver archivedDataWithRootObject:defaultColorArray [defaultColorIndex]]
         forKey:name
       ] ;
-      defaultColorIndex = (defaultColorIndex + 1) % kDefaultColorCount ;
+      // defaultColorIndex = (defaultColorIndex + 1) % kDefaultColorCount ;
+      defaultColorIndex = 1 ;
     }
   //--- By default, font is courier 13
     name = [NSString stringWithFormat:@"%@_%@", GGS_template_font, [inTokenizer styleIdentifierForStyleIndex:0]] ;
     [allFontPreferenceNames addObject:name] ;
     if ([ud objectForKey:name] == nil) {
       [[NSUserDefaults standardUserDefaults]
-        setObject:[NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Courier" size:13.0f]]
+        setObject:[NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Courier" size:13.0]]
         forKey:name
       ] ;
     }
@@ -376,7 +368,7 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     [allFontPreferenceNames addObject:name] ;
     if ([ud objectForKey:name] == nil) {
       [[NSUserDefaults standardUserDefaults]
-        setObject:[NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Courier" size:13.0f]]
+        setObject:[NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Courier" size:13.0]]
         forKey:name
       ] ;
     }
@@ -391,15 +383,14 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
       withSettingTitle:[inTokenizer styleNameForStyleIndex:i]
     ] ;
   }
-  enclosingRect.size.height += 10.0f ;
-  enclosingRect.origin.y -= 10.0f ;
+  enclosingRect.size.height += 10.0 ;
+  enclosingRect.origin.y -= 10.0 ;
   [view setFrame:enclosingRect] ;
 //--- Set view to scroll view
   NSString * title = [inTokenizer tabItemTitle] ;
   NSTabViewItem * tvi = [[NSTabViewItem alloc] initWithIdentifier:title] ;
   [tvi setLabel:title] ;
   [mLexicalColoringTabView insertTabViewItem:tvi atIndex:inIndex] ;
-  [tvi release] ;
 //--- Duplicate 'SetFont' Button
 //  NSLog (@"ALL NAMES IN PREFERENCES: '%@'", allFontPreferenceNames) ;
   NSButton * setFontButton = [[NSButton alloc] initWithFrame:[mSetFontButton frame]] ;
@@ -517,57 +508,6 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
 
 //---------------------------------------------------------------------------*
 
-#pragma mark time Option
-
-//---------------------------------------------------------------------------*
-//                                                                           *
-//   "    T I M E    "    O P T I O N                                        *
-//                                                                           *
-//---------------------------------------------------------------------------*
-
-- (void) timeOptionDidChange: (id) inSender {
-//  NSLog (@"%d", [inSender state]) ;
-  mTimeOptionOn = [inSender state] != 0 ;
-  [self willChangeValueForKey:@"commandLineString"] ;
-  [self  didChangeValueForKey:@"commandLineString"] ;
-}
-
-//---------------------------------------------------------------------------*
-
-- (void) build_time_optionInView: (NSView *) inView enclosingRect: (NSRect *) ioRect {
-//--- Create checkbox
-  NSRect r  ;
-  r.origin.x = 10.0f ;
-  r.origin.y = ioRect->origin.y - 25.0f ;
-  r.size.height = 20.0f ;
-  NSButton * cb = [[NSButton alloc] init] ;
-  NSString * title = @"Prefix by 'time' tool" ;
-  NSDictionary * d = [NSDictionary dictionaryWithObjectsAndKeys:
-    [cb font], NSFontAttributeName,
-    nil
-  ] ;
-  r.size.width = [title sizeWithAttributes:d].width + 30.0f ;
-  [cb setTitle:title] ;
-  [cb setButtonType: NSSwitchButton] ;
-  [cb setAutoresizingMask: NSViewMaxXMargin | NSViewMinYMargin] ;
-  [cb setFrame: r] ;
-  [cb setTarget: self] ;
-  [cb setAction: @selector (timeOptionDidChange:)] ;
-  [inView addSubview:cb] ;
-//--- Bind to user defaults controller
-  NSUserDefaultsController * udc = [NSUserDefaultsController sharedUserDefaultsController] ;
-  [cb
-    bind:@"value"
-    toObject:udc
-    withKeyPath:[NSString stringWithFormat:@"values.%@", GGS_prefix_by_time_tool]
-    options:nil
-  ] ;
-  [self timeOptionDidChange:cb] ;
-  *ioRect = NSUnionRect (*ioRect, r) ;
-}
-
-//---------------------------------------------------------------------------*
-
 #pragma mark Build Text Macros Menu
 
 //---------------------------------------------------------------------------*
@@ -601,7 +541,6 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     if (submenu == nil) {
       submenu = [[NSMenu alloc] initWithTitle:@""] ;
       [item setSubmenu:submenu] ;
-      [submenu release] ;
     }
   //---
     NSMutableArray * components = [[NSMutableArray alloc] init] ;
@@ -613,8 +552,6 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
       titleComponents:components
       intoMenu:submenu
     ] ;
-  //---
-    [components release] ;
   }
 }
 
@@ -667,11 +604,10 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
          enclosingRect: (NSRect *) ioRect {
   NSUserDefaultsController * udc = [NSUserDefaultsController sharedUserDefaultsController] ;
   NSRect r  ;
-  r.origin.x = 10.0f ;
+  r.origin.x = 10.0 ;
   r.origin.y = ioRect->origin.y ;
-  r.size.height = 20.0f ;
-  UInt32 i ;
-  for (i=0 ; i<[mBoolOptionArray count] ; i++) {
+  r.size.height = 20.0 ;
+  for (NSUInteger i=0 ; i<[mBoolOptionArray count] ; i++) {
     OC_GGS_CommandLineOption * option = [mBoolOptionArray objectAtIndex:i HERE] ;
     NSButton * cb = [[NSButton alloc] init] ;
     NSString * title = [option title] ;
@@ -679,8 +615,8 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
       [cb font], NSFontAttributeName,
       nil
     ] ;
-    r.size.width = [title sizeWithAttributes:d].width + 30.0f ;
-    r.origin.y -= 25.0f ;
+    r.size.width = [title sizeWithAttributes:d].width + 30.0 ;
+    r.origin.y -= 25.0 ;
     [cb setFrame:r] ;
     [cb setTitle: title] ;
     [cb setButtonType: NSSwitchButton] ;
@@ -710,9 +646,9 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     forKey:NSContinuouslyUpdatesValueBindingOption
   ] ;
   NSRect r;
-  r.origin.x = 10.0f ;
+  r.origin.x = 10.0 ;
   r.origin.y = ioRect->origin.y ;
-  r.size.height = 20.0f ;
+  r.size.height = 20.0 ;
   UInt32 i ;
   for (i=0 ; i<[mUIntOptionArray count] ; i++) {
     OC_GGS_CommandLineOption * option = [mUIntOptionArray objectAtIndex:i HERE] ;
@@ -725,11 +661,10 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     [format setMinimum:[NSDecimalNumber zero]] ;
     [format setAllowsFloats:NO] ;
     [[tx cell] setFormatter:format] ;
-    [format release] ;
 
-    r.origin.x = 10.0f ;
-    r.size.width = 80.0f ;
-    r.origin.y -= 25.0f ;
+    r.origin.x = 10.0 ;
+    r.size.width = 80.0 ;
+    r.origin.y -= 25.0 ;
     [tx setFrame: r] ;
     [tx setTag: i] ;
     [tx
@@ -749,8 +684,8 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
       [tx font], NSFontAttributeName,
       nil
     ] ;
-    r.size.width = [title sizeWithAttributes:d].width + 30.0f ;
-    r.origin.x = 100.0f ;
+    r.size.width = [title sizeWithAttributes:d].width + 30.0 ;
+    r.origin.x = 100.0 ;
     [tx setFrame: r] ;
     [tx setEditable: NO] ;
     [tx setBordered: NO] ;
@@ -775,10 +710,10 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     forKey:NSContinuouslyUpdatesValueBindingOption
   ] ;
   NSRect r;
-  r.origin.x = 10.0f ;
+  r.origin.x = 10.0 ;
   r.origin.y = ioRect->origin.y ;
-  r.size.width = 240.0f ;
-  r.size.height = 20.0f ;
+  r.size.width = 240.0 ;
+  r.size.height = 20.0 ;
   NSRect viewFrame = [inView frame] ;
   UInt32 i ;
   for (i=0 ; i<[mStringOptionArray count] ; i++) {
@@ -786,9 +721,9 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
   //--- Input text field
     NSTextField * tx = [[NSTextField alloc] init] ;
     [tx setAutoresizingMask: NSViewMaxXMargin | NSViewMinYMargin] ;
-    r.origin.y -= 25.0f ;
-    r.origin.x = 10.0f ;
-    r.size.width = 280.0f ;
+    r.origin.y -= 25.0 ;
+    r.origin.x = 10.0 ;
+    r.size.width = 280.0 ;
     [tx setFrame: r] ;
     [tx
       bind:@"value"
@@ -807,8 +742,8 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
       [tx font], NSFontAttributeName,
       nil
     ] ;
-    r.size.width = [title sizeWithAttributes:d].width + 30.0f ;
-    r.origin.x = 300.0f ;
+    r.size.width = [title sizeWithAttributes:d].width + 30.0 ;
+    r.origin.x = 300.0 ;
     [tx setFrame: r] ;
     [tx setEditable: NO] ;
     [tx setBordered: NO] ;
@@ -866,36 +801,13 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
 
 - (void) awakeFromNib {
   // NSLog (@"%s", __PRETTY_FUNCTION__) ;
-  NSUserDefaultsController * udc = [NSUserDefaultsController sharedUserDefaultsController] ;
 //--- Add observer to user defaults changes
   NSUserDefaults * ud = [NSUserDefaults standardUserDefaults] ;
   NSNotificationCenter  * nc = [NSNotificationCenter defaultCenter] ;
   [nc addObserver:self selector:@selector(preferencesDidChange:) name:NSUserDefaultsDidChangeNotification object:ud] ;
-//--- Copy old style preferences
-  NSString * prefString = [ud objectForKey:@"useTimeOption"] ;
-  if (prefString != nil) {
-    [ud setObject:prefString forKey:GGS_prefix_by_time_tool] ;
-  }
-  prefString = [ud objectForKey:@"defaultEncodingForNewFile"] ;
-  if (prefString != nil) {
-    [ud setObject:prefString forKey:GGS_default_encoding_for_new_file] ;
-  }
-  prefString = [ud objectForKey:@"defaultEncodingForExistingFile"] ;
-  if (prefString != nil) {
-    [ud setObject:prefString forKey:GGS_default_encoding_for_existing_file] ;
-  }
-  prefString = [ud objectForKey:@"operationOnOpeningFileWithUndecidableEncoding"] ;
-  if (prefString != nil) {
-    [ud setObject:prefString forKey:GGS_operation_on_opening_file_with_undecidable_encoding] ;
-  }
-  prefString = [ud objectForKey:@"tool_selection_preference"] ;
-  if (prefString != nil) {
-    [ud setObject:prefString forKey:GGS_tool_selection_preference] ;
-  }
 //--- Load tool nibs ?
   NSArray * nibArray = nibsAndClasses () ;
-  unsigned i ;
-  for (i=0 ; i<[nibArray count] ; i++) {
+  for (NSUInteger i=0 ; i<[nibArray count] ; i++) {
     NSArray * entry = [nibArray objectAtIndex:i HERE] ;
     NSString * nibName = [entry objectAtIndex:0 HERE] ;
     Class mainClass = [entry objectAtIndex:1 HERE] ;
@@ -931,12 +843,12 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
   }
 //--- Get default font, used when there is no preference setting
   if ([defaults stringForKey:GGS_build_text_font] == nil) {
-    NSFont * defaultFont = [NSFont fontWithName:@"Courier-Bold" size:13.0f] ;
+    NSFont * defaultFont = [NSFont fontWithName:@"Courier-Bold" size:13.0] ;
     [defaults setObject:[NSArchiver archivedDataWithRootObject:defaultFont] forKey:GGS_build_text_font] ;
   }
   [mCurrentBuildWindowFontAndSizeSettingsButton
     bind:@"fontValue"
-    toObject:udc
+    toObject:[NSUserDefaultsController sharedUserDefaultsController]
     withKeyPath:[NSString stringWithFormat:@"values.%@", GGS_build_text_font]
     options:NULL
   ] ;
@@ -956,32 +868,25 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     [defaults setBool:YES forKey:keyForVerboseOption] ;
   }
 //---------- OPTIONS TAB ----------
-  NSRect enclosingRect = {{0.0F, 0.0F}, {5.0F, 5.0F}} ;
+  NSRect enclosingRect = {{0.0, 0.0}, {5.0, 5.0}} ;
   NSView * view = [[NSView alloc] initWithFrame:enclosingRect] ;
   [view setAutoresizesSubviews:YES] ;
   [self populateToolPopupButtonInView:view] ;
-//--- Add "time" option
-  [self build_time_optionInView:view enclosingRect:&enclosingRect] ;
 //--- Build boolean command line options
   [self buildBooleanCommandLineOptionsInView:view enclosingRect:&enclosingRect] ;
 //--- Build unsigned integer command line options
   [self buildUnsignedIntegerCommandLineOptionsInView:view enclosingRect:&enclosingRect] ;
 //--- Build string command line options
   [self buildStringCommandLineOptionsInView:view enclosingRect:&enclosingRect] ;
-  enclosingRect.size.height += 10.0f ;
-  enclosingRect.origin.y -= 10.0f ;
+  enclosingRect.size.height += 10.0 ;
+  enclosingRect.origin.y -= 10.0 ;
   [view setFrame:enclosingRect] ;
 //--- Set view to scroll view
   [mCommandLineOptionScrollView setDocumentView:view] ;
-  [view release] ;
-//--- Set initial tab view selection
-  /* NSInteger tabViewIndex = [defaults integerForKey:GGS_selected_tab] ;
-  if (tabViewIndex >= [mPreferencesTabView numberOfTabViewItems]) {
-    tabViewIndex = [mPreferencesTabView numberOfTabViewItems] - 1 ;
-  } */
+//---
   [mPreferencesTabView
     bind:@"selectedIndex"
-    toObject:udc
+    toObject:[NSUserDefaultsController sharedUserDefaultsController]
     withKeyPath:@"values.GGS_selected_tab"
     options:nil
   ] ;
@@ -997,7 +902,7 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
   }
   [mConvert_CRLF_And_CR_To_LF_AtStartUpButton
     bind:@"value"
-    toObject:udc
+    toObject:[NSUserDefaultsController sharedUserDefaultsController]
     withKeyPath:@"values.PMConvert_CRLF_And_CR_To_LF_AtStartUp"
     options:NULL
   ] ;
@@ -1007,14 +912,14 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
   }
   [mConvert_HTAB_To_SPACE_AtStartUpButton
     bind:@"value"
-    toObject:udc
+    toObject:[NSUserDefaultsController sharedUserDefaultsController]
     withKeyPath:@"values.PMConvert_HTAB_To_SPACE_AtStartUp"
     options:NULL
   ] ;
 //--- Show Invisible Characters Checkbox
  [mShowInvisibleCharactersCheckBox
     bind:@"value"
-    toObject:udc
+    toObject:[NSUserDefaultsController sharedUserDefaultsController]
     withKeyPath:@"values.PMShowInvisibleCharacters"
     options:NULL
   ] ;
@@ -1024,6 +929,13 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
   [self willChangeValueForKey:@"commandLineString"] ;
   [self  didChangeValueForKey:@"commandLineString"] ;
   [mCommandLineOptionTextView setEditable:NO] ;
+//---
+  [mLiveCompilationCheckBox
+    bind:@"value"
+    toObject:[NSUserDefaultsController sharedUserDefaultsController]
+    withKeyPath:@"values.PMLiveCompilation"
+    options:NULL
+  ] ;
 //---  
   [self updateSourceTextPreferenceCount] ;
 }
@@ -1052,14 +964,14 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-- (float) ruleThickness {
-  return 50.0f ;
+- (double) ruleThickness {
+  return 50.0 ;
 }
 
 //---------------------------------------------------------------------------*
 
 - (IBAction) setTextRulerVisible: (id) inSender {
-  const BOOL rulerIsVisible = [inSender state] ;
+/*  const BOOL rulerIsVisible = [inSender state] ;
   const float ruleThickness = [self ruleThickness] ;
 //--- Update opened documents
   NSArray * docArray = [[NSApplication sharedApplication] orderedDocuments] ;
@@ -1070,7 +982,7 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     [doc changeTextRulerVisible:rulerIsVisible forRuleThickness:ruleThickness] ;
   }
 //--- Update default setting
-  [[NSUserDefaults standardUserDefaults] setBool:rulerIsVisible forKey:GGS_show_ruler] ;
+  [[NSUserDefaults standardUserDefaults] setBool:rulerIsVisible forKey:GGS_show_ruler] ;*/
 }
 
 //---------------------------------------------------------------------------*
@@ -1270,7 +1182,6 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
   if (status != 0) {
     [self appendMessage: [NSString stringWithFormat: @"Build task failure, code %d\n", status]] ;
   }
-  [mTask release] ;
   mTask = nil ;
 //--- Enable Run button
   [mRunButton setEnabled:YES] ;
@@ -1388,13 +1299,11 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
 //---------------------------------------------------------------------------*
 
 - (NSApplicationTerminateReply) applicationShouldTerminate:(NSApplication *)sender {
-//--- Ask opened documents
   BOOL canTerminateApplication = YES ;
-  NSArray * docArray = [[NSApplication sharedApplication] orderedDocuments] ;
-  unsigned d ;
-  for (d=0 ; (d<[docArray count]) && canTerminateApplication ; d++) {
-    OC_GGS_Document * doc = [docArray objectAtIndex: d HERE] ;
-    canTerminateApplication = [doc canTerminateApplication] ;
+  for (OC_GGS_Document * doc in [[NSDocumentController sharedDocumentController] documents]) {
+    if (doc.buildTaskIsRunning) {
+      canTerminateApplication = NO ;
+    }
   }
   if (! canTerminateApplication) {
     const NSInteger response = NSRunAlertPanel (@"Application cannot terminate while some tasks are running.",
@@ -1403,17 +1312,6 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
     canTerminateApplication = response == NSAlertAlternateReturn ;
   }
   return canTerminateApplication ? NSTerminateNow : NSTerminateCancel ;
-}
-
-//---------------------------------------------------------------------------*
-
-- (void) cocoaDocumentWillClose: (OC_GGS_Document *) inDocument {
-  NSArray * docArray = [[NSApplication sharedApplication] orderedDocuments] ;
-  unsigned d ;
-  for (d=0 ; d<[docArray count] ; d++) {
-    OC_GGS_Document * doc = [docArray objectAtIndex:d HERE] ;
-    [doc willCloseGalgasDocument:inDocument] ;
-  }
 }
 
 //---------------------------------------------------------------------------*

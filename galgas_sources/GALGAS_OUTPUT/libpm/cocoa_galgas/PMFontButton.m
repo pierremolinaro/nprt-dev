@@ -105,7 +105,6 @@
   if ([inBindingName isEqualToString:@"fontValue"]) {
     [mBoundObjectFor_fontValue removeObserver:self forKeyPath:mKeyPathFor_fontValue] ;
     mBoundObjectFor_fontValue = nil ;
-    [mKeyPathFor_fontValue release] ;
     mKeyPathFor_fontValue = nil ;
   }else{
     [super unbind:inBindingName] ;
@@ -279,7 +278,7 @@
     f = [NSUnarchiver unarchiveObjectWithData:data] ;
   }
   if (f == nil) {
-    f = [NSFont systemFontOfSize:0.0F] ;
+    f = [NSFont systemFontOfSize:0.0] ;
   }
   [fontManager setSelectedFont:f isMultiple:NO] ;
   [fontManager setAction:@selector (changeFont:)] ;
