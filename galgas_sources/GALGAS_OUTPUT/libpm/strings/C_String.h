@@ -277,6 +277,9 @@ class C_String : public AC_OutputStream {
 //--- Return reversed string
   public : C_String reversedString (void) const ;
 
+//--- Return unsigned integer value
+  public : PMUInt32 unsignedIntegerValue (void) const ;
+
 //--- Get current column index (starting from 0)
   public : static C_String stringWithRepeatedCharacter (const utf32 inRepeatedCharacter, const PMUInt32 inCount) ;
 
@@ -376,6 +379,10 @@ class C_String : public AC_OutputStream {
   #ifndef DO_NOT_GENERATE_CHECKINGS
     private : void checkString (LOCATION_ARGS) const ;
   #endif
+
+  public : static bool parseUTF8 (const PMUInt8 * inCString,
+                                  const PMSInt32 inLength,
+                                  C_String & outString) ;
 
 //---------------- Private attributes -------------
   private : class cEmbeddedString * mEmbeddedString ;

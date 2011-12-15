@@ -321,6 +321,12 @@
 }
 
 //---------------------------------------------------------------------------*
+
+- (void) collapseContextualHelpAction: (id) inSender {
+  [mIssueSplitView setPosition:mIssueSplitView.bounds.size.width ofDividerAtIndex:1] ;
+}
+
+//---------------------------------------------------------------------------*
 //                                                                           *
 //        S H E E T    D I D    E N D    ( G O T O    L I N E )              *
 //                                                                           *
@@ -865,7 +871,7 @@
   mSourceTextWithSyntaxColoring = [[OC_GGS_TextSyntaxColoring alloc]
     initWithSourceString:source
     tokenizer:tokenizerForExtension (inAbsoluteURL.absoluteString.pathExtension)
-    sourceURL:self.fileURL
+    document:self
     issueArray:mBuildTask.issueArrayController.arrangedObjects
   ] ;
 //---
@@ -945,7 +951,7 @@
   OC_GGS_TextSyntaxColoring * result = nil ;
   NSString * currentSourceDir = mSourceTextWithSyntaxColoring.sourceURL.path.stringByDeletingLastPathComponent ;
   NSString * requestedAbsolutePath = inPath.isAbsolutePath
-    ? inPath
+    ? inPath.copy
     : [currentSourceDir stringByAppendingPathComponent:inPath]
   ;
 //--- Search in opened documents
@@ -973,10 +979,10 @@
 //---------------------------------------------------------------------------*
 
 - (OC_GGS_TextDisplayDescriptor *) findOrAddNewTabForFile: (NSString *) inDocumentPath {
-  NSArray * sourceDisplayDescriptorArray = mSourceDisplayArrayController.arrangedObjects ;
   OC_GGS_TextSyntaxColoring * newTextSyntaxColoring = [self findOrAddDocumentWithPath:inDocumentPath] ;
   OC_GGS_TextDisplayDescriptor * foundSourceText = nil ;
   if (nil != newTextSyntaxColoring) { // Find a text display descriptor
+    NSArray * sourceDisplayDescriptorArray = mSourceDisplayArrayController.arrangedObjects ;
     for (NSUInteger i=0 ; (i<sourceDisplayDescriptorArray.count) && (nil == foundSourceText) ; i++) {
       OC_GGS_TextDisplayDescriptor * std = [sourceDisplayDescriptorArray objectAtIndex:i HERE] ;
       if (std.textSyntaxColoring == newTextSyntaxColoring) {
@@ -990,7 +996,6 @@
       ] ;
       [mSourceDisplayArrayController addObject:foundSourceText] ;
     }
-
     [mSourceDisplayArrayController setSelectedObjects:[NSArray arrayWithObject:foundSourceText]] ;
   }
   return foundSourceText ;
@@ -1220,6 +1225,31 @@
 //---
   NSString * selectedString = [sourceString substringWithRange:selection] ;
   [self findOrAddNewTabForFile:selectedString] ;
+}
+
+//---------------------------------------------------------------------------*
+
+#pragma mark Contextual Help Message
+
+//---------------------------------------------------------------------------*
+
+- (void) setContextualHelpMessage: (NSString *) inMessage {
+  NSTextStorage * textStorage = mContextualHelpTextView.textStorage ;
+  [textStorage beginEditing] ;
+  [textStorage replaceCharactersInRange:NSMakeRange (0, [textStorage length]) withString:inMessage] ;
+  [mContextualHelpTextView setFont:[NSFont fontWithName:@"Courier" size:13.0]] ;
+  [textStorage endEditing] ;
+//---
+/*  [mIssueSplitView
+    setPosition:mIssueSplitView.bounds.size.width - 200.0
+    ofDividerAtIndex:1
+  ] ;*/
+}
+
+//---------------------------------------------------------------------------*
+
+- (BOOL) isContextualHelpTextViewCollapsed {
+  return [mIssueSplitView isSubviewCollapsed:mContextualHelpScrollView] ;
 }
 
 //---------------------------------------------------------------------------*

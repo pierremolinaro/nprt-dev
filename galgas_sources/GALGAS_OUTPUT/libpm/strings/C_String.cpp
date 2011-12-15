@@ -352,18 +352,32 @@ PMSInt32 C_String::length (void) const {
 
 //---------------------------------------------------------------------------*
 
-const char * C_String::cString (LOCATION_ARGS) const {
+const char * C_String::cString (UNUSED_LOCATION_ARGS) const {
   const char * result = "" ;
   if (NULL != mEmbeddedString) {
     macroValidSharedObject (mEmbeddedString, cEmbeddedString) ;
-    if (mEmbeddedString->mEncodedCString == NULL) {
-      macroMyNewPODArray (mEmbeddedString->mEncodedCString, char, mEmbeddedString->mLength + 1) ;
+    if (NULL == mEmbeddedString->mEncodedCString) {
+      PMUInt32 allocatedSize = mEmbeddedString->mLength + 1 ;
+      macroMyReallocPODArray (mEmbeddedString->mEncodedCString, char, allocatedSize) ;
+      PMUInt32 idx = 0 ;
       for (PMSInt32 i=0 ; i<mEmbeddedString->mLength ; i++) {
-        const utf32 c = mEmbeddedString->mString [i] ;
-        MF_AssertThere (UNICODE_VALUE (c) < 127, "TO_UNICODE CHARACTER c (%lu) >= 127", (PMSInt32) UNICODE_VALUE (c), 0) ;
-        mEmbeddedString->mEncodedCString [i] = (char) (UNICODE_VALUE (c) & 255) ;
+        char buffer [5] ;
+        const PMSInt32 n = UTF8StringFromUTF32Character (mEmbeddedString->mString [i], buffer) ;
+        for (PMSInt32 j=0 ; j<n ; j++) {
+          if (allocatedSize == idx) {
+            allocatedSize *= 2 ;
+            macroMyReallocPODArray (mEmbeddedString->mEncodedCString, char, allocatedSize) ;
+          }
+          mEmbeddedString->mEncodedCString [idx] = buffer [j] ;
+          idx ++ ;
+        }
       }
-      mEmbeddedString->mEncodedCString [mEmbeddedString->mLength] = '\0' ;
+    //---
+      if (allocatedSize == idx) {
+        allocatedSize *= 2 ;
+        macroMyReallocPODArray (mEmbeddedString->mEncodedCString, char, allocatedSize) ;
+      }
+      mEmbeddedString->mEncodedCString [idx] = '\0' ;
     }
     result = mEmbeddedString->mEncodedCString ;
   }
@@ -977,6 +991,22 @@ reversedString (void) const {
     s.appendUnicodeCharacter (ptr [i] COMMA_HERE) ;
   }
   return s ;
+}
+
+//---------------------------------------------------------------------------*
+
+PMUInt32 C_String::unsignedIntegerValue (void) const {
+  PMUInt32 result = 0 ;
+  bool ok = true ;
+  for (PMSInt32 i=0 ; (i < length ()) && ok ; i++) {
+    const PMUInt32 c = UNICODE_VALUE (this->operator () (i COMMA_HERE)) ;
+    ok = (c >= '0') && (c <= '9') ;
+    if (ok) {
+      result *= 10 ;
+      result += c - '0' ;
+    }
+  }  
+  return result ;  
 }
 
 //---------------------------------------------------------------------------*
@@ -2269,9 +2299,9 @@ static bool parseWithEncoding (const PMUInt8 * inCString,
 
 //---------------------------------------------------------------------------*
   
-static bool parseUTF8 (const PMUInt8 * inCString,
-                       const PMSInt32 inLength,
-                       C_String & outString) {
+bool C_String::parseUTF8 (const PMUInt8 * inCString,
+                          const PMSInt32 inLength,
+                          C_String & outString) {
   bool ok = true ;
   if (inLength > 0) {
     const PMUInt8 * sourcePointer = inCString ;
@@ -2488,7 +2518,7 @@ searchBOMandParse (const PMUInt8 * inCString,
     #endif
 //--- UTF-8 BOM ?
   }else if ((inLength >= 3) && (inCString [0] == 0xEF) && (inCString [1] == 0xBB) && (inCString [2] == 0x3F)) {
-    ok = parseUTF8 (inCString + 3, inLength - 3, outResultString) ;
+    ok = C_String::parseUTF8 (inCString + 3, inLength - 3, outResultString) ;
     outTextFileEncoding = kUTF_8_FileEncoding ;
     #ifdef PRINT_SNIFF_ENCODING
       printf ("found UTF-8 BOM **\n") ;
@@ -2519,7 +2549,7 @@ sniffUTFEncodingAndParse (const PMUInt8 * inCString,
                           PMTextFileEncoding & outTextFileEncoding,
                           C_String & outResultString) {
 //--- Try UTF-8
-  bool ok = parseUTF8 (inCString, inLength, outResultString) ;
+  bool ok = C_String::parseUTF8 (inCString, inLength, outResultString) ;
   if (ok) {
     outTextFileEncoding = kUTF_8_FileEncoding ;
     #ifdef PRINT_SNIFF_ENCODING
@@ -2630,7 +2660,7 @@ searchForEncodingTagAndParse (const PMUInt8 * inCString,
 //--- Search for Tag
   bool tagFound = false ;
   if (strstr (firstLine, "UTF-8") != NULL) {
-    ok = parseUTF8 (inCString, inLength, outResultString) ;
+    ok = C_String::parseUTF8 (inCString, inLength, outResultString) ;
     outTextFileEncoding = kUTF_8_FileEncoding ;
     tagFound = true ;
     #ifdef PRINT_SNIFF_ENCODING

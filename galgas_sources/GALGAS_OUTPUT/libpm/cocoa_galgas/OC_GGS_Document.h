@@ -34,6 +34,7 @@
 @class PMTabBarView ;
 @class OC_GGS_SourceScrollView ;
 @class OC_GGS_BuildTask ;
+@class OC_GGS_TextDisplayDescriptor ;
 
 //---------------------------------------------------------------------------*
 
@@ -77,10 +78,17 @@
   @private IBOutlet NSButton * mStopBuildButton ;
   @private IBOutlet NSTextField * mErrorCountTextField ;
   @private IBOutlet NSTextField * mWarningCountTextField ;
+
+//--- Contextual help message
+  @private IBOutlet NSTextView * mContextualHelpTextView ;
+  @private IBOutlet NSScrollView * mContextualHelpScrollView ;
 }
+
+- (OC_GGS_TextDisplayDescriptor *) findOrAddNewTabForFile: (NSString *) inDocumentPath ;
 
 - (IBAction) collapseDetailledMessageAction: (id) inSender ;
 - (IBAction) collapseIssuesAction: (id) inSender ;
+- (IBAction) collapseContextualHelpAction: (id) inSender ;
 
 - (IBAction) actionGotoLine: (id) inSender ;
 
@@ -106,4 +114,8 @@
 - (void) triggerLiveCompilation ;
 
 - (BOOL) buildTaskIsRunning ;
+
+- (void) setContextualHelpMessage: (NSString *) inMessage ;
+- (BOOL) isContextualHelpTextViewCollapsed ;
+
 @end

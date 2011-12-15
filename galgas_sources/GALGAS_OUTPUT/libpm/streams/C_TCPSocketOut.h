@@ -1,12 +1,13 @@
 //---------------------------------------------------------------------------*
 //                                                                           *
-//  OC_GGS_DelegateForSyntaxColoring.h (started march 7th, 2007)             *
+//  'C_TCPSocketOut' : a class for sending data as TCP socket client         *
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 2007, ..., 2011 Pierre Molinaro.                           *
+//  Copyright (C) 2011, ..., 2011 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
+//                                                                           *
 //  IRCCyN, Institut de Recherche en Communications et Cybernetique de Nantes*
 //  ECN, Ecole Centrale de Nantes (France)                                   *
 //                                                                           *
@@ -22,45 +23,37 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#import <Cocoa/Cocoa.h>
+#ifndef CLASS_TCP_SOCKET_OUTPUT_DEFINED
+#define CLASS_TCP_SOCKET_OUTPUT_DEFINED
 
 //---------------------------------------------------------------------------*
 
-@class OC_GGS_Document ;
-@class OC_GGS_TextView ;
+#include "streams/AC_OutputStream.h"
 
 //---------------------------------------------------------------------------*
 
-@interface OC_GGS_DelegateForSyntaxColoring : NSObject
-#ifdef MAC_OS_X_VERSION_10_6
- <NSTextViewDelegate>
+class C_TCPSocketOut : public AC_OutputStream {
+//--- Constructor
+  public : C_TCPSocketOut (void) ; // No connection
+
+//--- Destructor
+  public : virtual ~ C_TCPSocketOut (void) ;
+
+//--- Connect (call it once)
+  public : bool connect (const PMUInt16 inServerPort,
+                         const C_String & inHostName) ;
+
+//--- General stream methods
+  protected : virtual void performActualCharArrayOutput (const char * inCharArray,
+                                                         const PMSInt32 inArrayCount) ;
+
+  protected : virtual void performActualUnicodeArrayOutput (const utf32 * inCharArray,
+                                                            const PMSInt32 inArrayCount) ;
+
+//---
+  private : int mSocket ;
+} ;
+
+//---------------------------------------------------------------------------*
+
 #endif
-{
-  @private NSMutableArray * mFontAttributesDictionaryArray ; // Array of OC_Token
-  @private NSMutableArray * mStyledRangeArray ;
-  @private NSTextStorage * mTextStorage ;
-  @private OC_GGS_Document * mDocument ;
-  @private NSMutableDictionary * mTemplateTextAttributeDictionary ;
-  @private NSUndoManager * mUndoManager ;
-  
-  @private CGFloat mMaxAscender ; // Only mMaxAscender is observable
-  @private CGFloat mMaxLeadingMinusDescender ; // leading - descender (because descender is < 0)
-}
-
-- (id) initWithDocument: (OC_GGS_Document *) inDocument
-       withSourceString: (NSString *) inSource ;
-
-- (void) breakUndoCoalescing ;
-
-- (NSString *) sourceString ;
-
-- (void) setSourceString: (NSString *) inSource ;
-
-- (NSTextStorage *) textStorage ;
-
-- (NSArray *) tokenArray ; // Array of OC_Token
-
-- (BOOL) selectionByWordSelectsAllCharactersForTokenIndex: (NSUInteger) inTokenIndex ;
-@end
-
-//---------------------------------------------------------------------------*

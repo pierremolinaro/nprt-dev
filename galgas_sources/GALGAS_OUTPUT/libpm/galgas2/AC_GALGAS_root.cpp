@@ -1,10 +1,10 @@
 //---------------------------------------------------------------------------*
 //                                                                           *
-//  AC_GALGAS_root : root type for all GALGAS types (on debug mode only)       *
+//  AC_GALGAS_root : root type for all GALGAS types                          *
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 2010, ..., 2010 Pierre Molinaro.                           *
+//  Copyright (C) 2010, ..., 2011 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
 //                                                                           *
@@ -24,6 +24,7 @@
 //---------------------------------------------------------------------------*
 
 #include "galgas2/predefined-types.h"
+#include "galgas2/C_galgas_io.h"
 
 //---------------------------------------------------------------------------*
 
@@ -31,11 +32,12 @@
 
 //---------------------------------------------------------------------------*
 
-void AC_GALGAS_root::log (const char * inMessage) const {
-  printf ("LOGGING %s: ", inMessage) ;
+void AC_GALGAS_root::log (const char * inMessage COMMA_LOCATION_ARGS) const {
   C_String s ;
+  s << "LOGGING " << inMessage << ": " ;
   description (s, 0) ;
-  printf ("%s\n", s.cString (HERE)) ;
+  s << "\n" ;
+  ggs_printMessage (s COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------*
