@@ -5,8 +5,11 @@
 //  Created by Pierre Molinaro on 24/11/11.
 //  Copyright (c) 2011 IRCCyN. All rights reserved.
 //
+//---------------------------------------------------------------------------*
 
 #import <Foundation/Foundation.h>
+
+//---------------------------------------------------------------------------*
 
 @class OC_GGS_TextSyntaxColoring ;
 @class OC_GGS_Document ;
@@ -14,7 +17,9 @@
 @class PMIssueDescriptor ;
 @class OC_GGS_RulerViewForTextView ;
 
-@interface OC_GGS_TextDisplayDescriptor : NSObject <NSTextViewDelegate> {
+//---------------------------------------------------------------------------*
+
+@interface OC_GGS_TextDisplayDescriptor : NSObject <NSTextViewDelegate, NSPortDelegate> {
 
   @private OC_GGS_TextSyntaxColoring * mTextSyntaxColoring ;
   @private OC_GGS_TextView * mTextView ;
@@ -23,7 +28,11 @@
   @private NSUInteger mTextSelectionStart ;
   @private OC_GGS_Document * mDocument ;
   @private NSArray * mIssueArray ;
-
+  @private NSMutableData * mBufferedInputData ;
+  @private NSTask * mTask ;
+  @private NSSocketPort * mReceiveSocket ;
+  @private NSFileHandle * mReceiveSocketHandle ;
+  @private NSFileHandle * mRemoteSocketHandle ;
 }
 
 - (OC_GGS_TextDisplayDescriptor *) initWithDelegateForSyntaxColoring: (OC_GGS_TextSyntaxColoring *) inDelegate
@@ -38,6 +47,8 @@
 - (NSTextView *) textView ;
 
 - (NSScrollView *) scrollView ;
+
+- (OC_GGS_Document *) document ;
 
 - (NSMenu *) menuForEntryPopUpButton ;
 
@@ -55,4 +66,8 @@
 - (void) setIssueArray: (NSArray *) inIssueArray ; 
 
 - (BOOL) makeVisibleIssue: (PMIssueDescriptor *) inIssue ;
+
+- (void) setSelectionRangeAndMakeItVisible: (NSRange) inRange ;
 @end
+
+//---------------------------------------------------------------------------*

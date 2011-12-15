@@ -173,25 +173,15 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-- (void) terminateTask {
+- (void) notifyTaskCompleted {
   #ifdef DEBUG_MESSAGES
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
   #endif
-  if (mTask != nil) {
-    NSTask * task = mTask ;
-    [self willChangeValueForKey:@"buildTaskIsRunning"] ;
-    [self willChangeValueForKey:@"buildTaskIsNotRunning"] ;
-    mTask = nil ;
-    [self didChangeValueForKey:@"buildTaskIsNotRunning"] ;
-    [self didChangeValueForKey:@"buildTaskIsRunning"] ;
-    [task terminate] ;
-    [task waitUntilExit] ;
-    const int status = [task terminationStatus];
-    if (status != 0) {
-//      [self appendMessage: [NSString stringWithFormat: @"Build task has exited with status %d\n", status]] ;
-    }
-
-  }
+  [self willChangeValueForKey:@"buildTaskIsRunning"] ;
+  [self willChangeValueForKey:@"buildTaskIsNotRunning"] ;
+  mTask = nil ;
+  [self didChangeValueForKey:@"buildTaskIsNotRunning"] ;
+  [self didChangeValueForKey:@"buildTaskIsRunning"] ;
 }
 
 //---------------------------------------------------------------------------*
@@ -206,18 +196,10 @@
     [inNotification.object readInBackgroundAndNotify] ;
   }else{
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter] ;
-    [center removeObserver:self name:NSFileHandleReadCompletionNotification object: [[mTask standardOutput] fileHandleForReading]] ;
-    [center removeObserver:self name:NSTaskDidTerminateNotification object:mTask] ;
-    [self terminateTask] ;
-    if (! mAbortRequested) {
-      [self XMLIssueAnalysis] ;
-      [NSApp requestUserAttention:NSInformationalRequest] ;
-    }
-    mAbortRequested = NO ;
-    if (nil != mDocumentToBuild) {
-      [self buildDocument:mDocumentToBuild] ;
-      mDocumentToBuild = nil ;
-    }
+    [center removeObserver:self name:NSFileHandleReadCompletionNotification object:[mTask.standardOutput fileHandleForReading]] ;
+    [self notifyTaskCompleted] ;
+    [self XMLIssueAnalysis] ;
+    [NSApp requestUserAttention:NSInformationalRequest] ;
   }
 }
 
@@ -225,8 +207,10 @@
 
 - (void) stopBuild {
   if (nil != mTask) {
-    mAbortRequested = YES ;
-    [self terminateTask] ;
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter] ;
+    [center removeObserver:self name:NSFileHandleReadCompletionNotification object:[mTask.standardOutput fileHandleForReading]] ;
+    [mTask terminate] ;
+    [self notifyTaskCompleted] ;
   }
 }
 
@@ -236,12 +220,8 @@
   #ifdef DEBUG_MESSAGES
     NSLog (@"%s:%@", __PRETTY_FUNCTION__, inDocument) ;
   #endif
-  if (nil == mTask) {
-    [self buildDocument:inDocument] ;
-  }else{
-    mDocumentToBuild = inDocument ;
-    [self stopBuild] ;
-  }
+  [self stopBuild] ;
+  [self buildDocument:inDocument] ;
 }
 
 //---------------------------------------------------------------------------*
