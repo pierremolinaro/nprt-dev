@@ -1,4 +1,4 @@
-//
+  //
 //  OC_GGS_TextDisplayDescriptor.m
 //  galgas-developer
 //
@@ -16,6 +16,11 @@
 #import "OC_GGS_RulerViewForTextView.h"
 #import "OC_GGS_PreferencesController.h"
 #import "OC_GGS_Scroller.h"
+
+//---------------------------------------------------------------------------*
+
+#include <netdb.h>
+#include <netinet/in.h>
 
 //---------------------------------------------------------------------------*
 
@@ -54,6 +59,9 @@ static inline NSInteger imax (const NSInteger a, const NSInteger b) { return a >
     mTextView.usesFindPanel = YES ;
     mTextView.grammarCheckingEnabled = NO ;
     mTextView.allowsUndo = YES ;
+    mTextView.automaticQuoteSubstitutionEnabled = NO ;
+    mTextView.smartInsertDeleteEnabled = NO ;
+    mTextView.automaticTextReplacementEnabled = NO ;
   //---
     if ([mTextView respondsToSelector:@selector (setUsesFindBar:)]) {
       [mTextView setValue:[NSNumber numberWithBool:YES] forKey:@"usesFindBar"] ;
@@ -362,12 +370,10 @@ static inline NSInteger imax (const NSInteger a, const NSInteger b) { return a >
 
 #pragma mark Contextual Help
 
-#include <netdb.h>
-#include <netinet/in.h>
 //---------------------------------------------------------------------------*
 
-- (void) performContextualHelpAtLocation: (NSUInteger) inLocation {
-  [mDocument setContextualHelpMessage:@"Searching…"] ;
+- (void) performContextualHelpAtRange: (NSRange) inRange {
+  [mDocument setContextualHelpMessage:@"Looking for Help…"] ;
 //---
   if (nil != mTask) {
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter] ;
@@ -381,6 +387,7 @@ static inline NSInteger imax (const NSInteger a, const NSInteger b) { return a >
     mReceiveSocketHandle = nil ;
     mRemoteSocketHandle = nil ;
     [mTask terminate] ;
+    [mTask waitUntilExit] ;
     mTask = nil ;
   }
 //---
@@ -402,7 +409,7 @@ static inline NSInteger imax (const NSInteger a, const NSInteger b) { return a >
     NSArray * commandLineArray = [gCocoaGalgasPreferencesController commandLineItemArray] ;
     [arguments addObjectsFromArray:[commandLineArray subarrayWithRange:NSMakeRange (1, commandLineArray.count-1)]] ;
     [arguments addObject:mTextSyntaxColoring.sourceURL.path] ;
-    [arguments addObject:[NSString stringWithFormat:@"--mode=context-help:%hu:%lu", actualPort, inLocation]] ;
+    [arguments addObject:[NSString stringWithFormat:@"--mode=context-help:%hu:%lu:%lu", actualPort, inRange.location, inRange.length]] ;
     [mTask setArguments:arguments] ;
     // NSLog (@"'%@' %@", [mTask launchPath], arguments) ;
   //--- Set standard output notification
@@ -448,35 +455,30 @@ static inline NSInteger imax (const NSInteger a, const NSInteger b) { return a >
 //---------------------------------------------------------------------------*
 
 - (void) getDataFromConnection: (NSNotification *) inNotification {
-  NSData * data = [inNotification.userInfo objectForKey:NSFileHandleNotificationDataItem];
-  #ifdef DEBUG_MESSAGES
-    NSLog (@"%s (%lu bytes)", __PRETTY_FUNCTION__, (unsigned long) data.length) ;
-  #endif
-  if (data.length > 0) {
-    [mBufferedInputData appendData:data] ;
-    [inNotification.object readInBackgroundAndNotify] ;
-  }else{
-    NSNotificationCenter * center = [NSNotificationCenter defaultCenter] ;
-    [center removeObserver:self name:NSFileHandleConnectionAcceptedNotification object:mReceiveSocketHandle] ;
-    [center removeObserver:self name:NSFileHandleReadCompletionNotification object:mRemoteSocketHandle] ;
-    mReceiveSocket = nil ;
-    mReceiveSocketHandle = nil ;
-    mRemoteSocketHandle = nil ;
-    [mTask terminate] ;
-    [mTask waitUntilExit] ;
-    mTask = nil ;
-  //---
-    NSString * message = [[NSString alloc] initWithData:mBufferedInputData encoding:NSUTF8StringEncoding] ;
-    mBufferedInputData = nil ;
-    [mDocument setContextualHelpMessage:message] ;
+  if (inNotification.object == mRemoteSocketHandle) {
+    NSData * data = [inNotification.userInfo objectForKey:NSFileHandleNotificationDataItem];
+    #ifdef DEBUG_MESSAGES
+      NSLog (@"%s (%lu bytes)", __PRETTY_FUNCTION__, (unsigned long) data.length) ;
+    #endif
+    if (data.length > 0) {
+      [mBufferedInputData appendData:data] ;
+      [inNotification.object readInBackgroundAndNotify] ;
+    }else{
+      NSNotificationCenter * center = [NSNotificationCenter defaultCenter] ;
+      [center removeObserver:self name:NSFileHandleConnectionAcceptedNotification object:mReceiveSocketHandle] ;
+      [center removeObserver:self name:NSFileHandleReadCompletionNotification object:mRemoteSocketHandle] ;
+      mReceiveSocket = nil ;
+      mReceiveSocketHandle = nil ;
+      mRemoteSocketHandle = nil ;
+      [mTask terminate] ;
+      [mTask waitUntilExit] ;
+      mTask = nil ;
+    //---
+      NSString * message = [[NSString alloc] initWithData:mBufferedInputData encoding:NSUTF8StringEncoding] ;
+      mBufferedInputData = nil ;
+      [mDocument setContextualHelpMessage:message] ;
+    }
   }
-}
-
-//---------------------------------------------------------------------------*
-
-- (void) performContextualHelp: (NSMenuItem *) inSender {
-  const NSRange r = [[inSender representedObject] rangeValue] ;
-  [self performContextualHelpAtLocation:r.location] ;
 }
 
 //---------------------------------------------------------------------------*
@@ -497,7 +499,7 @@ static inline NSInteger imax (const NSInteger a, const NSInteger b) { return a >
   [self  didChangeValueForKey:@"textSelectionStart"] ;
   [mRulerView setNeedsDisplay:YES] ;
   if (! [mDocument isContextualHelpTextViewCollapsed]) {
-    [self performContextualHelpAtLocation:mTextSelectionStart] ;
+    [self performContextualHelpAtRange:mTextView.selectedRange] ;
   }
 }
 
