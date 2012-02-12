@@ -1,10 +1,10 @@
 //---------------------------------------------------------------------------*
 //                                                                           *
-//  Routine 'F_default_display_exception'.                                   *
+//  'C_TextFileWrite' : a class for stream writing text files                *
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 1997, ..., 2008 Pierre Molinaro.                           *
+//  Copyright (C) 1999, ..., 2011 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
 //                                                                           *
@@ -23,81 +23,59 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#include "utilities/F_DisplayException.h"
-#include "streams/C_ConsoleOut.h"
-#include "streams/C_ErrorOut.h"
+#include "files/C_BinaryFileWrite.h"
+#include "time/C_DateTime.h"
+#include "files/C_FileManager.h"
 
 //---------------------------------------------------------------------------*
 
-#ifdef COMPILE_FOR_WIN32
-  #include <windows.h>
-  #include <stdio.h>
-#endif
-
-#ifdef UNIX_TOOL
-  #include <stdio.h>
-#endif
+#include <string.h>
+#include <ctype.h>
 
 //---------------------------------------------------------------------------*
 
-#ifndef MACHINE_IS_DEFINED
-  #error "Undefined machine"
-#endif
+C_BinaryFileWrite::C_BinaryFileWrite (const C_String & inFileName) :
+AC_FileHandleForWriting (inFileName, "wb") {
+}
 
 //---------------------------------------------------------------------------*
-//                                                                           *
-//         'F_default_display_exception' for WIN 32                          *
-//                                                                           *
+//                                Close                                      *
 //---------------------------------------------------------------------------*
 
-#ifdef COMPILE_FOR_WIN32
-  void F_default_display_exception (const M_STD_NAMESPACE exception & inException) {
-    ::MessageBox ((HWND__ *) NULL,
-                  inException.what (),
-                  "C++ exception",
-                  MB_OK | MB_ICONERROR) ;
+bool C_BinaryFileWrite::close (void) {
+  bool ok = true ;
+  if (mFilePtr != NULL) {
+    ok = ::fclose (mFilePtr) == 0 ; // Flushes the file, then closes it
+    mFilePtr = NULL ;
   }
-#endif
+  return ok ;
+}
 
 //---------------------------------------------------------------------------*
-//                                                                           *
-//         'F_default_display_exception' for UNIX                            *
-//                                                                           *
-//---------------------------------------------------------------------------*
 
-#ifdef UNIX_TOOL
-  void F_default_display_exception (const M_STD_NAMESPACE exception & inException) {
-    co.flush () ;
-    ce << "\n*** Exception: " << inException.what () << " ***\n" ;
+void C_BinaryFileWrite::flush (void) {
+  if (NULL != mFilePtr) {
+    ::fflush (mFilePtr) ;
   }
-#endif
+}
 
 //---------------------------------------------------------------------------*
-//                                                                           *
-//     'F_default_display_unknown_exception' for WIN 32                      *
-//                                                                           *
+//                             Destructor                                    *
+// Cannot call the virtual 'close' method in destructor                      *
 //---------------------------------------------------------------------------*
 
-#ifdef COMPILE_FOR_WIN32
-  void F_default_display_unknown_exception (void) {
-    ::MessageBox ((HWND__ *) NULL,
-                  "An unknown C++ exception has been raised.",
-                  "Unknown exception",
-                  MB_OK | MB_ICONERROR) ;
+C_BinaryFileWrite::~C_BinaryFileWrite (void) {
+  if (NULL != mFilePtr) {
+    ::fflush (mFilePtr) ;
   }
-#endif
+}
 
 //---------------------------------------------------------------------------*
-//                                                                           *
-//     'F_default_display_unknown_exception' for UNIX                        *
-//                                                                           *
-//---------------------------------------------------------------------------*
 
-#ifdef UNIX_TOOL
-  void F_default_display_unknown_exception (void) {
-    ::fflush (stdout) ;
-    ::fprintf (stderr, "\n*** Unknown exception ***\n") ;
+void C_BinaryFileWrite::appendData (const C_Data & inData) {
+  if (NULL != mFilePtr) {
+    ::fwrite (inData.dataPointer (), 1, inData.length (), mFilePtr) ;
   }
-#endif
+}
 
 //---------------------------------------------------------------------------*

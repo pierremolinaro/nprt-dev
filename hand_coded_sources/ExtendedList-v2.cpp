@@ -492,14 +492,11 @@ CreateActivitiesFile (C_Compiler * inCompiler,
 
   const PMSInt32 NumberOfElements = exElement.count () ;
   printf ("Extended activities list is stored in %s file.\n", activitiesHTMLFileName.cString (HERE)) ;
-  bool ok = false ;
   C_HTML_FileWrite act_htmlFile (activitiesHTMLFileName,
                               "Extended List Activities",
                               "style.css",
-                              ""
-                              COMMA_SAFARI_CREATOR,
-                              ok) ;
-  if (! ok) {
+                              "") ;
+  if (! act_htmlFile.isOpened ()) {
     C_String message ;
     message << "Cannot open '" << activitiesHTMLFileName << "' file in write mode." ;
     inCompiler->onTheFlySemanticError (message COMMA_HERE) ;

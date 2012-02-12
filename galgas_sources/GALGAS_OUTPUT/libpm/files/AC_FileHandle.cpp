@@ -1,12 +1,13 @@
 //---------------------------------------------------------------------------*
 //                                                                           *
-//  Timer class.                                                             *
+//  'AC_FileHandle' : an abstract class for handling files handles           *
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 1999, ..., 2010 Pierre Molinaro.                           *
+//  Copyright (C) 2012, ..., 2012 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
+//                                                                           *
 //  IRCCyN, Institut de Recherche en Communications et Cybernetique de Nantes*
 //  ECN, Ecole Centrale de Nantes (France)                                   *
 //                                                                           *
@@ -22,62 +23,24 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#ifndef CLASS_TIMER_DEFINED
-#define CLASS_TIMER_DEFINED
+#include "files/AC_FileHandle.h"
 
 //---------------------------------------------------------------------------*
 
-#include <stdio.h>
+AC_FileHandle::AC_FileHandle (const C_String & inFilePath,
+                              const char * inMode) :
+mFilePtr ((inFilePath.length () == 0) ? NULL : ::fopen (C_FileManager::nativePathWithUnixPath (inFilePath).cString (HERE), inMode)),
+mFilePath (inFilePath) {
+}
+
 
 //---------------------------------------------------------------------------*
 
-#include "utilities/M_machine.h"
+AC_FileHandle::~AC_FileHandle (void) {
+  if (NULL != mFilePtr) {
+    fclose (mFilePtr) ;
+  }
+}
+
 
 //---------------------------------------------------------------------------*
-
-#ifdef COMPILE_FOR_WIN32
-  #include <time.h>
-#else // Unix
-  #include <sys/time.h>
-  #define LIBPM_USES_TIMEVAL_STRUCT
-#endif
-
-//---------------------------------------------------------------------------*
-
-class AC_OutputStream ;
-class C_String ;
-
-//---------------------------------------------------------------------------*
-
-class C_Timer {
-  #ifdef LIBPM_USES_TIMEVAL_STRUCT
-    private : timeval mStart ;
-    private : timeval mEnd ;
-  #else
-    private : clock_t mStart ;
-    private : clock_t mEnd ;
-  #endif
-  
-  private : bool mRunning ;
-  
-  public : C_Timer (void) ;
-
-  public : void stopTimer (void) ;
-
-  public : void startTimer (void) ;
-
-  public : C_String timeString (void) const ;
-
-  friend AC_OutputStream & operator << (AC_OutputStream & inStream,
-                                        const C_Timer & inTimer) ;
-
-} ;
-
-//---------------------------------------------------------------------------*
-
-AC_OutputStream & operator << (AC_OutputStream & inStream,
-                               const C_Timer & inTimer) ;
-
-//---------------------------------------------------------------------------*
-
-#endif

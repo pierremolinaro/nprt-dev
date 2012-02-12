@@ -1,12 +1,13 @@
 //---------------------------------------------------------------------------*
 //                                                                           *
-//  Timer class.                                                             *
+//  'C_BinaryFileWrite' : a class for stream writing binary files            *
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 1999, ..., 2010 Pierre Molinaro.                           *
+//  Copyright (C) 2012, ..., 2012 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
+//                                                                           *
 //  IRCCyN, Institut de Recherche en Communications et Cybernetique de Nantes*
 //  ECN, Ecole Centrale de Nantes (France)                                   *
 //                                                                           *
@@ -22,8 +23,13 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#ifndef CLASS_TIMER_DEFINED
-#define CLASS_TIMER_DEFINED
+#ifndef WRITE_BINARY_FILE_CLASS_DEFINED
+#define WRITE_BINARY_FILE_CLASS_DEFINED
+
+//---------------------------------------------------------------------------*
+
+#include "strings/C_String.h"
+#include "files/AC_FileHandleForWriting.h"
 
 //---------------------------------------------------------------------------*
 
@@ -31,52 +37,30 @@
 
 //---------------------------------------------------------------------------*
 
-#include "utilities/M_machine.h"
+class C_BinaryFileWrite : public AC_FileHandleForWriting {
+//--- Constructor : if inFileName is the empty string, no file is opened.
+//    Otherwise, it tries to open the file for writing;
+//    outSuccessfullyOpened is returned true is inFileName is empty or if file is successfully opened
+//    outSuccessfullyOpened is returned false is inFileName is not empty and file cannot be successfully opened
+//    The destructor will close the file (is successfully opened)
+  public : C_BinaryFileWrite (const C_String & inFilePath) ;
 
-//---------------------------------------------------------------------------*
+//--- Destructor closes the file
+  public : virtual ~ C_BinaryFileWrite (void) ;
 
-#ifdef COMPILE_FOR_WIN32
-  #include <time.h>
-#else // Unix
-  #include <sys/time.h>
-  #define LIBPM_USES_TIMEVAL_STRUCT
-#endif
-
-//---------------------------------------------------------------------------*
-
-class AC_OutputStream ;
-class C_String ;
-
-//---------------------------------------------------------------------------*
-
-class C_Timer {
-  #ifdef LIBPM_USES_TIMEVAL_STRUCT
-    private : timeval mStart ;
-    private : timeval mEnd ;
-  #else
-    private : clock_t mStart ;
-    private : clock_t mEnd ;
-  #endif
+//--- No copy
+  private : C_BinaryFileWrite (C_BinaryFileWrite &) ;
+  private : C_BinaryFileWrite & operator = (C_BinaryFileWrite &) ;
   
-  private : bool mRunning ;
-  
-  public : C_Timer (void) ;
+//--- 
+  public : void appendData (const C_Data & inData) ;
 
-  public : void stopTimer (void) ;
+//--- Flush print
+  public : virtual void flush (void) ;
 
-  public : void startTimer (void) ;
-
-  public : C_String timeString (void) const ;
-
-  friend AC_OutputStream & operator << (AC_OutputStream & inStream,
-                                        const C_Timer & inTimer) ;
-
+//--- Close file (does nothing is file is not open)
+  public : virtual bool close (void) ;
 } ;
-
-//---------------------------------------------------------------------------*
-
-AC_OutputStream & operator << (AC_OutputStream & inStream,
-                               const C_Timer & inTimer) ;
 
 //---------------------------------------------------------------------------*
 

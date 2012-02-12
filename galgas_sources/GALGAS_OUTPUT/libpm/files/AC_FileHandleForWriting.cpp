@@ -1,12 +1,13 @@
 //---------------------------------------------------------------------------*
 //                                                                           *
-//  Timer class.                                                             *
+//  'AC_FileHandleForWriting' : an abstract class for handling file write    *
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 1999, ..., 2010 Pierre Molinaro.                           *
+//  Copyright (C) 2012, ..., 2012 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
+//                                                                           *
 //  IRCCyN, Institut de Recherche en Communications et Cybernetique de Nantes*
 //  ECN, Ecole Centrale de Nantes (France)                                   *
 //                                                                           *
@@ -22,62 +23,50 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#ifndef CLASS_TIMER_DEFINED
-#define CLASS_TIMER_DEFINED
+#include "files/AC_FileHandleForWriting.h"
 
 //---------------------------------------------------------------------------*
 
-#include <stdio.h>
+#include <signal.h>
 
 //---------------------------------------------------------------------------*
 
-#include "utilities/M_machine.h"
-
-//---------------------------------------------------------------------------*
-
-#ifdef COMPILE_FOR_WIN32
-  #include <time.h>
-#else // Unix
-  #include <sys/time.h>
-  #define LIBPM_USES_TIMEVAL_STRUCT
+#ifndef COMPILE_FOR_WIN32
+  static PMUInt32 g_SIGTERM_balance_count = 0 ;
 #endif
 
 //---------------------------------------------------------------------------*
 
-class AC_OutputStream ;
-class C_String ;
-
-//---------------------------------------------------------------------------*
-
-class C_Timer {
-  #ifdef LIBPM_USES_TIMEVAL_STRUCT
-    private : timeval mStart ;
-    private : timeval mEnd ;
-  #else
-    private : clock_t mStart ;
-    private : clock_t mEnd ;
+AC_FileHandleForWriting::AC_FileHandleForWriting (const C_String & inFilePath,
+                                                  const char * inMode) :
+AC_FileHandle (inFilePath, inMode) {
+  #ifndef COMPILE_FOR_WIN32
+    if (0 == g_SIGTERM_balance_count) {
+      sigset_t s ;
+      sigemptyset (& s) ;
+      sigaddset (& s, SIGTERM) ;
+      sigprocmask (SIG_BLOCK, & s, NULL) ;
+    }
+    g_SIGTERM_balance_count ++ ;
   #endif
-  
-  private : bool mRunning ;
-  
-  public : C_Timer (void) ;
-
-  public : void stopTimer (void) ;
-
-  public : void startTimer (void) ;
-
-  public : C_String timeString (void) const ;
-
-  friend AC_OutputStream & operator << (AC_OutputStream & inStream,
-                                        const C_Timer & inTimer) ;
-
-} ;
+}
 
 //---------------------------------------------------------------------------*
 
-AC_OutputStream & operator << (AC_OutputStream & inStream,
-                               const C_Timer & inTimer) ;
+AC_FileHandleForWriting::~ AC_FileHandleForWriting (void) {
+  if (NULL != mFilePtr) {
+    fclose (mFilePtr) ;
+  }
+//---
+  #ifndef COMPILE_FOR_WIN32
+    g_SIGTERM_balance_count -- ;
+    if (0 == g_SIGTERM_balance_count) {
+      sigset_t s ;
+      sigemptyset (& s) ;
+      sigaddset (& s, SIGTERM) ;
+      sigprocmask (SIG_UNBLOCK, & s, NULL) ;
+    }
+  #endif
+}
 
 //---------------------------------------------------------------------------*
-
-#endif

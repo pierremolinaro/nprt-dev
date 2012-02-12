@@ -1,11 +1,10 @@
 //---------------------------------------------------------------------------*
 //                                                                           *
-//  'C_HTML_FileWrite' : a class for stream writing html text files          *
-//    (with facility for outputing C++ code)                                 *
+//  C_Data : a class for handling arbitrary data array                       *
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 2003, ..., 2010 Pierre Molinaro.                           *
+//  Copyright (C) 2012, ..., 2012 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
 //                                                                           *
@@ -24,52 +23,69 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#ifndef CLASS_WRITE_HTML_FILE_DEFINED
-#define CLASS_WRITE_HTML_FILE_DEFINED
+#ifndef DATA_CLASS_DEFINED
+#define DATA_CLASS_DEFINED
 
 //---------------------------------------------------------------------------*
 
-#include "files/C_TextFileWrite.h"
+#include "collections/TC_Array.h"
 
 //---------------------------------------------------------------------------*
 
-class C_String ;
+class C_Data {
+//--- Data
+  private : TC_Array <PMUInt8> mBinaryData ;
 
-//---------------------------------------------------------------------------*
-
-class C_HTML_FileWrite : public C_TextFileWrite {
-//--- Constructor : if inFileName is the empty string, no file is opened.
-//    Otherwise, it tries to open the file for writing;
-//    The destructor will close the file (is successfully opened)
-  public : C_HTML_FileWrite (const C_String & inFileName,
-                             const C_String & inWindowTitle,
-                             const C_String & inCSSFileName,
-                             const C_String & inCSSContents) ;
+//--- Constructors
+  public : C_Data (void) ;
 
 //--- Destructor
-  public : virtual ~C_HTML_FileWrite (void) ;
+  public : virtual ~C_Data (void) ;
+  
+//--- Length
+  public : inline PMSInt32 length (void) const { return mBinaryData.count () ; }
+  
+  public : void setLengthToZero (void) ;
 
-//--- No copy
-  private : C_HTML_FileWrite & operator = (C_HTML_FileWrite &) ;
-  private : C_HTML_FileWrite (C_HTML_FileWrite &) ;
+  public : const PMUInt8 * dataPointer (void) const { return mBinaryData.arrayPointer () ; }
 
-//--- Output data, without HTML formatting
-  public : void outputRawData (const char * in_Cstring) ;
+//--- Free
+  public : void free (void) ;
 
-//--- General stream methods
-  protected : virtual void
-  performActualCharArrayOutput (const char * inCharArray,
-                                const PMSInt32 inArrayCount) ;
+//--- Append data
+  public : void appendData (const C_Data & inData) ;
+  
+//---
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    public : PMUInt8 & operator () (const PMSInt32 inIndex
+                                    COMMA_LOCATION_ARGS) ;
+    public : PMUInt8 & operator () (const PMSInt32 inIndex
+                                    COMMA_LOCATION_ARGS) const ;
+  #endif
 
-//--- Method for writing a HTML table
-  public : void appendCppTitleComment (const C_String & inCommentString,
-                                       const C_String & inTableStyleClass) ;
+//--- Array access (without index checking)
+  #ifdef DO_NOT_GENERATE_CHECKINGS
+    public : inline PMUInt8 & operator () (const PMSInt32 inIndex) {
+      return mBinaryData (inIndex) ;
+    }
+    public : inline PMUInt8 & operator () (const PMSInt32 inIndex) const {
+      return mBinaryData (inIndex) ;
+    }
+  #endif
 
-//--- Close file (does nothing is file is not open)
-  public : virtual bool close (void) ;
+//--- Data from pointer
+  public : void setDataFromPointer (PMUInt8 * & ioDataPtr,
+                                    const PMSInt32 inDataLength) ;
 
-//--- Private attributes
-  private : typedef C_TextFileWrite inherited ;
+  public : void appendDataFromPointer (const PMUInt8 * inDataPtr,
+                                       const PMSInt32 inDataLength) ;
+
+  public : void appendByte (const PMUInt8 inByte) ;
+
+  public : PMSInt32 compareWithData (const C_Data & inData) const ;
+  
+  public : bool operator == (const C_Data & inData) const ;
+  public : bool operator != (const C_Data & inData) const ;
 } ;
 
 //---------------------------------------------------------------------------*
