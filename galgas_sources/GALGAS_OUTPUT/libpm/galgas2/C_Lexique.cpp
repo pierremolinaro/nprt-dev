@@ -31,6 +31,7 @@
 #include "strings/unicode_string_routines.h"
 #include "galgas2/C_galgas_CLI_Options.h"
 #include "galgas2/cIndexingDictionary.h"
+#include "files/C_FileManager.h"
 
 //---------------------------------------------------------------------------*
 
@@ -118,7 +119,7 @@ mIndexForSecondPassParsing (0) {
     logFileRead (inSourceFileName) ;
     bool ok = false ;
     PMTextFileEncoding textFileEncoding ;
-    const C_String sourceString = C_String::stringWithContentOfFile (inSourceFileName, textFileEncoding, ok) ;
+    const C_String sourceString = C_FileManager::stringWithContentOfFile (inSourceFileName, textFileEncoding, ok) ;
     if (ok) {
       C_SourceTextInString * sourceTextPtr = NULL ;    
       macroMyNew (sourceTextPtr, C_SourceTextInString (sourceString,
@@ -982,7 +983,7 @@ bool C_Lexique::performTopDownParsing (const PMSInt16 inProductions [],
             uniqueTerminalIndex ++ ;
           }
           errorStackCount = stack.count () ;
-          errorStack.removeAllObjects () ;
+          errorStack.setCountToZero () ;
           errorProgramCounter = programCounter ;
         }else{ // Error !
           #ifdef TRACE_LL1_PARSING
@@ -1224,7 +1225,7 @@ bool C_Lexique::performBottomUpParsing (const PMSInt16 inActionTable [],
         #ifdef CHECK_NEW_BOTTOM_UP_PARSING_ERROR_HANDLING
           oldErrorStack = stack ;
         #endif
-        poppedErrors.removeAllObjects () ;
+        poppedErrors.setCountToZero () ;
         errorSignalingUselessEntryOnTopOfStack = 0 ;
         executionList.addDefaultObjectUsingSwap () ;
       //---
@@ -1475,7 +1476,7 @@ void C_Lexique::enableIndexing (void) {
 void C_Lexique::generateIndexFile (void) {
   if (NULL != mIndexingDictionary) {
     const C_String sourceFilePath = sourceText ()->sourceFilePath () ;
-    C_String indexFilePath = indexingDirectory ().absolutePathFromPath (sourceFilePath.stringByDeletingLastPathComponent ()) ;
+    C_String indexFilePath = C_FileManager::absolutePathFromPath (indexingDirectory (), sourceFilePath.stringByDeletingLastPathComponent ()) ;
     indexFilePath << "/" << sourceFilePath.lastPathComponent () << ".plist" ;
     mIndexingDictionary->generateIndexFile (indexFilePath) ;
   }

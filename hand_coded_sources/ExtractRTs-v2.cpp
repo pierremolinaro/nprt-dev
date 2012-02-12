@@ -34,14 +34,11 @@ ExtractWorstBestRT (C_Compiler * inCompiler,
   
   if(CreateIntermediateFiles){
     printf ("Raw output results are stored in %s file.\n", raw_outputHTMLFileName.cString (HERE)) ;
-    bool ok = false ;
     C_HTML_FileWrite raw_file (raw_outputHTMLFileName,
                                "Activities Outputs",
                                "style.css",
-                               ""
-                               COMMA_SAFARI_CREATOR,
-                               ok) ;
-    if (! ok) {
+                               "") ;
+    if (! raw_file.isOpened ()) {
       C_String message ;
       message << "Cannot open '" << raw_outputHTMLFileName << "' file in write mode." ;
       inCompiler->onTheFlySemanticError (message COMMA_HERE) ;

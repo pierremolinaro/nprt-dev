@@ -26,105 +26,18 @@
 #include "files/C_TextFileWrite.h"
 #include "time/C_DateTime.h"
 #include "strings/unicode_character_cpp.h"
+#include "files/C_FileManager.h"
 
 //---------------------------------------------------------------------------*
 
 #include <string.h>
 #include <ctype.h>
-#include <signal.h>
-
-#ifdef TARGET_API_MAC_CARBON
-  #include <unix.h>
-#endif
 
 //---------------------------------------------------------------------------*
 
-#ifdef TARGET_API_MAC_CARBON
-  static C_String unixPath2macOSpath (const C_String & inPath) {
-    C_String macOSpath ;
-    const PMSInt32 length = inPath.length () ;
-    if (length > 0) {
-    //--- Replace '/' by ':'
-      for (PMSInt32 i=0 ; i<length ; i++) {
-        const utf32 c = inPath (i COMMA_HERE) ;
-        macOSpath.appendUnicodeCharacter ((UNICODE_VALUE (c) == '/') ? TO_UNICODE (':') : c COMMA_HERE) ;
-      }
-    //--- if first character is ':', following char must be 'Volumes:' : suppress them
-      if ((UNICODE_VALUE (macOSpath (0 COMMA_HERE)) == ':') && (macOSpath.length () > 9)) {
-        macOSpath.suppress (0, 9 COMMA_HERE) ;
-      }
-    }
-    return macOSpath ;
-  }
-#endif
-
-//---------------------------------------------------------------------------*
-
-#ifdef COMPILE_FOR_WIN32
-  static C_String unixPath2winPath (const C_String & inWinFileName) {
-    C_String winFileName ;
-      const PMSInt32 fileLength = inWinFileName.length () ;
-      PMSInt32 firstChar = 0 ;
-      if ((fileLength > 3)
-       && (UNICODE_VALUE (inWinFileName (0 COMMA_HERE)) == '/')
-       && isalpha ((int) UNICODE_VALUE (inWinFileName (1 COMMA_HERE)))
-       && (UNICODE_VALUE (inWinFileName (2 COMMA_HERE)) == '/')) {
-        winFileName.appendUnicodeCharacter (inWinFileName (1 COMMA_HERE) COMMA_HERE) ;
-        winFileName << ":\\" ;
-        firstChar = 3 ;
-      }
-      for (PMSInt32 i=firstChar ; i<fileLength ; i++) {
-        const utf32 c = (UNICODE_VALUE (inWinFileName (i COMMA_HERE)) == '/')
-          ? TO_UNICODE ('\\')
-          : inWinFileName (i COMMA_HERE) ;
-        winFileName.appendUnicodeCharacter (c COMMA_HERE) ;
-      }
-    return winFileName ;
-  }
-#endif
-
-//---------------------------------------------------------------------------*
-
-#ifndef COMPILE_FOR_WIN32
-  static PMUInt32 g_SIGTERM_balance_count = 0 ;
-#endif
-
-//---------------------------------------------------------------------------*
-
-C_TextFileWrite::C_TextFileWrite (const C_String & inFileName
-                                  COMMA_MAC_OS_CREATOR_FORMAL_ARGUMENT,
-                                  bool & outOk) :
-mFileName (inFileName),
-mFilePtr((FILE *) NULL),
+C_TextFileWrite::C_TextFileWrite (const C_String & inFileName) :
+AC_FileHandleForWriting (inFileName, "wt"),
 mBufferLength (0) {
-  outOk = true ;
-//--- If 'inFileName' is the empty string, do not create the file
-//    so that 'mFilePtr' remains equal to NULL
-  if (inFileName.length () > 0) {
-  //--- Open file in "wt" mode
-  //--- Mac OS : fix creator and type
-    #ifdef TARGET_API_MAC_CARBON
-      _fcreator = MAC_OS_CREATOR_FORMAL_ARGUMENT_NAME ;
-      _ftype = 'TEXT' ;
-      mFilePtr = ::fopen (unixPath2macOSpath (inFileName).cString (HERE), "wt") ;
-    #elif defined (COMPILE_FOR_WIN32)
-      mFilePtr = ::fopen (unixPath2winPath (inFileName).cString (HERE), "wt") ;
-    #else
-      mFilePtr = ::fopen (inFileName.cString (HERE), "wt") ;
-    #endif
-  //--- Open Ok ?
-    outOk = mFilePtr != NULL ;
-  //
-    #ifndef COMPILE_FOR_WIN32
-      if (0 == g_SIGTERM_balance_count) {
-        sigset_t s ;
-        sigemptyset (& s) ;
-        sigaddset (& s, SIGTERM) ;
-        sigprocmask (SIG_BLOCK, & s, NULL) ;
-      }
-      g_SIGTERM_balance_count ++ ;
-    #endif
-  }
 }
 
 //---------------------------------------------------------------------------*
@@ -139,7 +52,7 @@ bool C_TextFileWrite::close (void) {
       mBufferLength = 0 ;
     }
     ok = ::fclose (mFilePtr) == 0 ; // Flushes the file, then closes it
-    mFilePtr = (FILE *) NULL ;
+    mFilePtr = NULL ;
   }
   return ok ;
 }
@@ -150,24 +63,10 @@ bool C_TextFileWrite::close (void) {
 //---------------------------------------------------------------------------*
 
 C_TextFileWrite::~C_TextFileWrite (void) {
-  if (mFilePtr != NULL) {
-    if (mBufferLength > 0) {
-      ::fprintf (mFilePtr, "%.*s", (int) mBufferLength, mBuffer) ;
-      mBufferLength = 0 ;
-    }
-    ::fclose (mFilePtr) ; // Flushes the file, then closes it
-    mFilePtr = (FILE *) NULL ;
+  if ((mFilePtr != NULL) && (mBufferLength > 0)) {
+    ::fprintf (mFilePtr, "%.*s", (int) mBufferLength, mBuffer) ;
+    mBufferLength = 0 ;
   }
-//---
-  #ifndef COMPILE_FOR_WIN32
-    g_SIGTERM_balance_count -- ;
-    if (0 == g_SIGTERM_balance_count) {
-      sigset_t s ;
-      sigemptyset (& s) ;
-      sigaddset (& s, SIGTERM) ;
-      sigprocmask (SIG_UNBLOCK, & s, NULL) ;
-    }
-  #endif
 }
 
 //---------------------------------------------------------------------------*

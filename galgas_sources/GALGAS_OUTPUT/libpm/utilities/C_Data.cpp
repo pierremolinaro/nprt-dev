@@ -1,10 +1,10 @@
 //---------------------------------------------------------------------------*
 //                                                                           *
-//  Routine 'F_default_display_exception'.                                   *
+//  C_Data : a class for handling arbitrary data array                       *
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 1997, ..., 2008 Pierre Molinaro.                           *
+//  Copyright (C) 2012, ..., 2012 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
 //                                                                           *
@@ -23,81 +23,106 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#include "utilities/F_DisplayException.h"
-#include "streams/C_ConsoleOut.h"
-#include "streams/C_ErrorOut.h"
+#include "utilities/C_Data.h"
 
 //---------------------------------------------------------------------------*
 
-#ifdef COMPILE_FOR_WIN32
-  #include <windows.h>
-  #include <stdio.h>
-#endif
-
-#ifdef UNIX_TOOL
-  #include <stdio.h>
-#endif
+C_Data::C_Data (void) :
+mBinaryData () {
+}
 
 //---------------------------------------------------------------------------*
 
-#ifndef MACHINE_IS_DEFINED
-  #error "Undefined machine"
-#endif
+void C_Data::setDataFromPointer (PMUInt8 * & ioDataPtr,
+                                 const PMSInt32 inDataLength) {
+  mBinaryData.setDataFromPointer (ioDataPtr, inDataLength) ;
+}
 
 //---------------------------------------------------------------------------*
-//                                                                           *
-//         'F_default_display_exception' for WIN 32                          *
-//                                                                           *
+
+void C_Data::appendDataFromPointer (const PMUInt8 * inDataPtr,
+                                    const PMSInt32 inDataLength) {
+  mBinaryData.appendDataFromPointer (inDataPtr, inDataLength) ;
+}
+
 //---------------------------------------------------------------------------*
 
-#ifdef COMPILE_FOR_WIN32
-  void F_default_display_exception (const M_STD_NAMESPACE exception & inException) {
-    ::MessageBox ((HWND__ *) NULL,
-                  inException.what (),
-                  "C++ exception",
-                  MB_OK | MB_ICONERROR) ;
+C_Data::~C_Data (void) {
+}
+
+//---------------------------------------------------------------------------*
+
+void C_Data::appendData (const C_Data & inData) {
+  for (PMSInt32 i=0 ; i<inData.mBinaryData.count () ; i++) {
+    mBinaryData.addObject (inData.mBinaryData (i COMMA_HERE)) ;
+  }
+}
+
+//---------------------------------------------------------------------------*
+
+void C_Data::appendByte (const PMUInt8 inByte) {
+  mBinaryData.addObject (inByte) ;
+}
+
+//---------------------------------------------------------------------------*
+
+void C_Data::setLengthToZero (void) {
+  mBinaryData.setCountToZero () ;
+}
+
+//---------------------------------------------------------------------------*
+
+void C_Data::free (void) {
+  mBinaryData.free () ;
+}
+
+//---------------------------------------------------------------------------*
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  PMUInt8 & C_Data::operator () (const PMSInt32 inIndex
+                                 COMMA_LOCATION_ARGS) {
+    return mBinaryData (inIndex COMMA_THERE) ;
   }
 #endif
 
 //---------------------------------------------------------------------------*
-//                                                                           *
-//         'F_default_display_exception' for UNIX                            *
-//                                                                           *
-//---------------------------------------------------------------------------*
 
-#ifdef UNIX_TOOL
-  void F_default_display_exception (const M_STD_NAMESPACE exception & inException) {
-    co.flush () ;
-    ce << "\n*** Exception: " << inException.what () << " ***\n" ;
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  PMUInt8 & C_Data::operator () (const PMSInt32 inIndex
+                                 COMMA_LOCATION_ARGS) const {
+    return mBinaryData (inIndex COMMA_THERE) ;
   }
 #endif
 
 //---------------------------------------------------------------------------*
-//                                                                           *
-//     'F_default_display_unknown_exception' for WIN 32                      *
-//                                                                           *
-//---------------------------------------------------------------------------*
 
-#ifdef COMPILE_FOR_WIN32
-  void F_default_display_unknown_exception (void) {
-    ::MessageBox ((HWND__ *) NULL,
-                  "An unknown C++ exception has been raised.",
-                  "Unknown exception",
-                  MB_OK | MB_ICONERROR) ;
-  }
-#endif
+PMSInt32 C_Data::compareWithData (const C_Data & inData) const {
+  PMSInt32 result = length () - inData.length () ;
+  for (PMSInt32 i=0 ; (i<length ()) && (result == 0) ; i++) {
+    result = ((PMSInt32) this->operator () (i COMMA_HERE)) - ((PMSInt32) inData (i COMMA_HERE)) ;  
+  }  
+  return result ;
+}
 
 //---------------------------------------------------------------------------*
-//                                                                           *
-//     'F_default_display_unknown_exception' for UNIX                        *
-//                                                                           *
+
+bool C_Data::operator == (const C_Data & inData) const {
+  bool equal = length () == inData.length () ;
+  for (PMSInt32 i=0 ; (i<length ()) && equal ; i++) {
+    equal = this->operator () (i COMMA_HERE) == inData (i COMMA_HERE) ;  
+  }  
+  return equal ;
+
+}
+
 //---------------------------------------------------------------------------*
 
-#ifdef UNIX_TOOL
-  void F_default_display_unknown_exception (void) {
-    ::fflush (stdout) ;
-    ::fprintf (stderr, "\n*** Unknown exception ***\n") ;
-  }
-#endif
+bool C_Data::operator != (const C_Data & inData) const {
+  bool equal = length () == inData.length () ;
+  for (PMSInt32 i=0 ; (i<length ()) && equal ; i++) {
+    equal = this->operator () (i COMMA_HERE) == inData (i COMMA_HERE) ;  
+  }  
+  return ! equal ;
+}
 
 //---------------------------------------------------------------------------*

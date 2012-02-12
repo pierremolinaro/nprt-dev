@@ -72,8 +72,12 @@ SOURCES += C_BDD_Set3.cpp
 SOURCES += C_BDD_Descriptor.cpp
 
 #--- Files
+SOURCES += C_FileManager.cpp
+SOURCES += AC_FileHandleForWriting.cpp
+SOURCES += AC_FileHandle.cpp
 SOURCES += C_TextFileWrite.cpp
 SOURCES += C_HTML_FileWrite.cpp
+SOURCES += C_BinaryFileWrite.cpp
 
 #--- Streams
 SOURCES += AC_OutputStream.cpp
@@ -96,6 +100,7 @@ SOURCES += C_DateTime.cpp
 SOURCES += F_main.cpp
 SOURCES += C_PrologueEpilogue.cpp
 SOURCES += C_SharedObject.cpp
+SOURCES += C_Data.cpp
 SOURCES += F_DisplayException.cpp
 SOURCES += MF_Assert.cpp
 SOURCES += F_GetPrime.cpp

@@ -175,9 +175,8 @@ static void buildCSSfile (C_Compiler * inCompiler,
 //--- Style file name
   const C_String styleFileName = inDirectory + "/style.css" ;
 //--- Build file
-  bool ok = false ;
-  C_TextFileWrite f (styleFileName COMMA_SAFARI_CREATOR, ok) ;
-  if (! ok) {
+  C_TextFileWrite f (styleFileName) ;
+  if (! f.isOpened ()) {
     C_String message ;
     message << "Cannot open '" << styleFileName << "' file in write mode." ;
     inCompiler->onTheFlySemanticError (message COMMA_HERE) ;
@@ -280,14 +279,12 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
   const C_String raw_outputHTMLFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + "_raw_output.html" ;
 
   buildCSSfile (inCompiler, sourceFile.stringByDeletingLastPathComponent ()) ;
-  bool ok = false ;
+
   C_HTML_FileWrite htmlFile (htmlFileName,
                              sourceFile.lastPathComponent () + " results",
                              "style.css",
-                             ""
-                             COMMA_SAFARI_CREATOR,
-                             ok) ;
-  if (! ok) {
+                             "") ;
+  if (! htmlFile.isOpened ()) {
     C_String message ;
     message << "Cannot open '" << htmlFileName << "' file in write mode." ;
     inCompiler->onTheFlySemanticError (message COMMA_HERE) ;

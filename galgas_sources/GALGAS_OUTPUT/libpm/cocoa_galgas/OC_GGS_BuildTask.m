@@ -16,7 +16,12 @@
 
 //---------------------------------------------------------------------------*
 
-//#define DEBUG_MESSAGES
+#include <netdb.h>
+#include <netinet/in.h>
+
+//---------------------------------------------------------------------------*
+
+#define DEBUG_MESSAGES
 
 //---------------------------------------------------------------------------*
 
@@ -88,15 +93,14 @@
 
 //---------------------------------------------------------------------------*
 
-- (void) XMLIssueAnalysis {
-  if (mBufferedInputData.length > 0) {
+- (void) XMLIssueAnalysis: (NSData *) inXMLdata {
+  if (inXMLdata.length > 0) {
     NSError * error = nil ;
     NSXMLDocument * xmlDoc = [[NSXMLDocument alloc]
-      initWithData:mBufferedInputData
+      initWithData:inXMLdata
       options:0
       error:& error
     ] ;
-    mBufferedInputData = nil ;
     NSArray * issues = nil ;
     if (nil == error) {
       issues = xmlDoc.rootElement.children ;
@@ -148,6 +152,7 @@
         [issueArray addObject:issue] ;
       }
     }
+    //NSLog (@"issueArray %lu", issueArray.count) ;
     [mIssueArrayController setContent:issueArray] ;
   //--- Send issues to concerned text source coloring objects
     for (OC_GGS_Document * doc in [[NSDocumentController sharedDocumentController] documents]) {
@@ -173,49 +178,108 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-- (void) notifyTaskCompleted {
-  #ifdef DEBUG_MESSAGES
-    NSLog (@"%s", __PRETTY_FUNCTION__) ;
-  #endif
-  [self willChangeValueForKey:@"buildTaskIsRunning"] ;
-  [self willChangeValueForKey:@"buildTaskIsNotRunning"] ;
-  mTask = nil ;
-  [self didChangeValueForKey:@"buildTaskIsNotRunning"] ;
-  [self didChangeValueForKey:@"buildTaskIsRunning"] ;
+- (void) sendTaskOutputString: (NSString *) inString {
+  NSDictionary * d = [NSDictionary dictionaryWithObjectsAndKeys:
+    [NSFont fontWithName:@"Courier" size:13.0], NSFontAttributeName,
+    nil
+  ] ;
+    NSAttributedString * attributedString = [[NSAttributedString alloc]
+      initWithString:inString
+      attributes:d
+    ] ;
+    for (OC_GGS_Document * doc in [[NSDocumentController sharedDocumentController] documents]) {
+      [doc setRawOutputString:attributedString] ;
+    }
 }
 
 //---------------------------------------------------------------------------*
 
-- (void) getDataFromTaskOutput: (NSNotification *) inNotification {
-  if (inNotification.object == [mTask.standardOutput fileHandleForReading]) {
-    NSData * data = [inNotification.userInfo objectForKey:NSFileHandleNotificationDataItem];
+- (void) abortBuild {
+  if (nil != mTask) {
     #ifdef DEBUG_MESSAGES
-      NSLog (@"%s (%lu bytes)", __PRETTY_FUNCTION__, (unsigned long) data.length) ;
+      NSLog (@"%s", __PRETTY_FUNCTION__) ;
     #endif
-    if (data.length > 0) {
-      [mBufferedInputData appendData:data] ;
-      [inNotification.object readInBackgroundAndNotify] ;
-    // }else if (nil != mBufferedInputData) {
-    }else{
-      NSNotificationCenter * center = [NSNotificationCenter defaultCenter] ;
-      [center removeObserver:self name:NSFileHandleReadCompletionNotification object:[mTask.standardOutput fileHandleForReading]] ;
-      [self notifyTaskCompleted] ;
-      [self XMLIssueAnalysis] ;
-      [NSApp requestUserAttention:NSInformationalRequest] ;
-    }
+  //---
+    [[NSNotificationCenter defaultCenter]
+      removeObserver:self
+      name:NSTaskDidTerminateNotification
+      object:mTask
+    ] ;
+    [[NSNotificationCenter defaultCenter]
+      removeObserver:self
+      name:NSFileHandleConnectionAcceptedNotification
+      object:mConnectionSocketHandle
+    ] ;
+  //---
+    [mConnectionSocket invalidate] ; mConnectionSocket = nil ;
+    [mConnectionSocketHandle closeFile] ; mConnectionSocketHandle = nil ;
+    [mRemoteSocketHandle closeFile] ; mRemoteSocketHandle = nil ;
+  //---
+    [mTask terminate] ;
+  //---    
+    [self willChangeValueForKey:@"buildTaskIsRunning"] ;
+    [self willChangeValueForKey:@"buildTaskIsNotRunning"] ;
+    mTask = nil ;
+    [self didChangeValueForKey:@"buildTaskIsNotRunning"] ;
+    [self didChangeValueForKey:@"buildTaskIsRunning"] ;
+  //---
+    [self sendTaskOutputString:@"Build has been aborted"] ;
+  //---
+    mTerminateOnConnection = NO ;
   }
 }
 
 //---------------------------------------------------------------------------*
 
-- (void) stopBuild {
-  if (nil != mTask) {
-    mBufferedInputData = nil ;
-    NSNotificationCenter * center = [NSNotificationCenter defaultCenter] ;
-    [center removeObserver:self name:NSFileHandleReadCompletionNotification object:[mTask.standardOutput fileHandleForReading]] ;
-    [mTask terminate] ;
-    [mTask waitUntilExit] ;
-    [self notifyTaskCompleted] ;
+- (void) buildTaskDidTerminate {
+  #ifdef DEBUG_MESSAGES
+    NSLog (@"%s", __PRETTY_FUNCTION__) ;
+  #endif
+//--- Standard and error output
+  NSMutableData * outputData = [NSMutableData new] ;
+  BOOL loop = YES ;
+  while (loop) {
+    NSData * data = [[mTask.standardOutput fileHandleForReading] availableData] ;
+    [outputData appendData:data] ;
+    loop = data.length > 0 ;
+  }
+ // NSLog (@"outputData %lu", outputData.length) ;
+  NSString * message = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding] ;
+  [self sendTaskOutputString:message] ;
+//--- Socket Data
+  NSMutableData * socketData = [NSMutableData new] ;
+  loop = YES ;
+  while (loop) {
+    NSData * data = [mRemoteSocketHandle availableData] ;
+    [socketData appendData:data] ;
+    loop = data.length > 0 ;
+  }
+  // NSLog (@"socketData %lu", socketData.length) ;
+  [self XMLIssueAnalysis:socketData] ;
+//---
+  [mConnectionSocket invalidate] ; mConnectionSocket = nil ;
+  [mConnectionSocketHandle closeFile] ; mConnectionSocketHandle = nil ;
+  [mRemoteSocketHandle closeFile] ; mRemoteSocketHandle = nil ;
+//---    
+  [self willChangeValueForKey:@"buildTaskIsRunning"] ;
+  [self willChangeValueForKey:@"buildTaskIsNotRunning"] ;
+  mTask = nil ;
+  [self didChangeValueForKey:@"buildTaskIsNotRunning"] ;
+  [self didChangeValueForKey:@"buildTaskIsRunning"] ;
+//---
+  mTerminateOnConnection = NO ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) buildTaskDidTerminateNotification:(NSNotification *) inNotification {
+  #ifdef DEBUG_MESSAGES
+    NSLog (@"%s", __PRETTY_FUNCTION__) ;
+  #endif
+  if (nil != mRemoteSocketHandle) {
+    [self buildTaskDidTerminate] ;
+  }else{
+    mTerminateOnConnection = YES ;
   }
 }
 
@@ -225,11 +289,11 @@
   #ifdef DEBUG_MESSAGES
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
   #endif
-  [self stopBuild] ;
+  [self abortBuild] ;
 //---
+  [self sendTaskOutputString:@"Compiling…"] ;
   [[NSDocumentController sharedDocumentController] saveAllDocuments:self] ;
   [inDocument displayIssueDetailedMessage:nil] ;
-  mBufferedInputData = [NSMutableData new] ;
   [mIssueArrayController setContent:[NSArray array]] ;
   NSArray * commandLineArray = [gCocoaGalgasPreferencesController commandLineItemArray] ;
 //--- Command line tool does actually exist ? (First argument is not "?")
@@ -247,9 +311,19 @@
       contextInfo:NULL
     ] ;
   }else{
+  //--- Issue receiver socket
+    mConnectionSocket = [[NSSocketPort alloc] initWithTCPPort:0] ; // A port number will be attributed
+    struct sockaddr_in socketStruct ;
+    socklen_t length = sizeof (socketStruct) ;
+    getsockname (mConnectionSocket.socket, (struct sockaddr *) & socketStruct, & length) ;
+    const UInt16 actualPort = ntohs (socketStruct.sin_port) ;
+    // NSLog (@"actualPort %hu\n", actualPort) ;
+    // NSLog (@"mConnectionSocket %p %d", mConnectionSocket, mConnectionSocket.socket) ;
     NSMutableArray * arguments = [NSMutableArray new] ;
     [arguments addObjectsFromArray:[commandLineArray subarrayWithRange:NSMakeRange (1, [commandLineArray count]-1)]] ;
     [arguments addObject:inDocument.fileURL.path] ;
+    [arguments addObject:[NSString stringWithFormat:@"--mode=xml-issues-on-port:%hu", actualPort]] ;
+    [arguments addObject:@"--no-color"] ;
  //--- Create task
     [self willChangeValueForKey:@"buildTaskIsRunning"] ;
     [self willChangeValueForKey:@"buildTaskIsNotRunning"] ;
@@ -265,15 +339,46 @@
     NSPipe * taskOutput = [NSPipe pipe] ;
     [mTask setStandardOutput:taskOutput] ;
     [mTask setStandardError:taskOutput] ;
+  //--- http://www.cocoadev.com/index.pl?NSSocketPort
+    mConnectionSocketHandle = [[NSFileHandle alloc]
+      initWithFileDescriptor:mConnectionSocket.socket
+      closeOnDealloc:NO
+    ];
+    // NSLog (@"mConnectionSocketHandle %p", mConnectionSocketHandle) ;
     [[NSNotificationCenter defaultCenter]
       addObserver:self
-      selector:@selector (getDataFromTaskOutput:)
-      name:NSFileHandleReadCompletionNotification
-      object:[taskOutput fileHandleForReading]
+      selector:@selector (newSocketConnection:) 
+      name:NSFileHandleConnectionAcceptedNotification
+      object:mConnectionSocketHandle
     ] ;
-    [taskOutput.fileHandleForReading readInBackgroundAndNotify] ;
+    [mConnectionSocketHandle acceptConnectionInBackgroundAndNotify] ;
+  //--- Set Termination notification
+    [[NSNotificationCenter defaultCenter]
+      addObserver:self
+      selector: @selector (buildTaskDidTerminateNotification:)
+      name:NSTaskDidTerminateNotification
+      object:mTask
+    ] ;
+  //---
+    mTerminateOnConnection = NO ;
   //--- Start task
     [mTask launch] ;
+  }
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) newSocketConnection:(NSNotification *) inNotification {
+  #ifdef DEBUG_MESSAGES
+    NSLog (@"%s", __PRETTY_FUNCTION__) ;
+  #endif
+  if (inNotification.object == mConnectionSocketHandle) {
+    mRemoteSocketHandle = [inNotification.userInfo
+       objectForKey:NSFileHandleNotificationFileHandleItem
+    ] ;
+    if (mTerminateOnConnection) {
+      [self buildTaskDidTerminate] ;
+    }
   }
 }
 
