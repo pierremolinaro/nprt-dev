@@ -1,5 +1,5 @@
 //
-//  OC_GGS_BuildTask.m
+//  OC_GGS_ContextualHelpTask.m
 //  galgas-developer
 //
 //  Created by Pierre Molinaro on 30/11/11.
@@ -7,8 +7,8 @@
 //
 //---------------------------------------------------------------------------*
 
-#import "OC_GGS_BuildTask.h"
-#import "OC_GGS_BuildTaskProxy.h"
+#import "OC_GGS_ContextualHelpTask.h"
+#import "OC_GGS_TextDisplayDescriptor.h"
 #import "PMIssueDescriptor.h"
 #import "PMCocoaCallsDebug.h"
 #import "OC_GGS_TextDisplayDescriptor.h"
@@ -26,13 +26,14 @@
 
 //---------------------------------------------------------------------------*
 
-@implementation OC_GGS_BuildTask 
+@implementation OC_GGS_ContextualHelpTask 
 
 //---------------------------------------------------------------------------*
 
-- (OC_GGS_BuildTask *) initWithDocument: (OC_GGS_Document *) inDocument
-                       proxy : (OC_GGS_BuildTaskProxy *) inProxy
-                       index: (NSUInteger) inIndex {
+- (OC_GGS_ContextualHelpTask *) initWithDocument: (OC_GGS_Document *) inDocument
+                                range: (NSRange) inRange
+                                proxy : (OC_GGS_TextDisplayDescriptor *) inProxy
+                                index: (NSUInteger) inIndex {
   #ifdef DEBUG_MESSAGES
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
   #endif
@@ -69,8 +70,7 @@
       NSMutableArray * arguments = [NSMutableArray new] ;
       [arguments addObjectsFromArray:[commandLineArray subarrayWithRange:NSMakeRange (1, [commandLineArray count]-1)]] ;
       [arguments addObject:inDocument.fileURL.path] ;
-      [arguments addObject:[NSString stringWithFormat:@"--mode=xml-issues-on-port:%hu", actualPort]] ;
-      [arguments addObject:@"--no-color"] ;
+      [arguments addObject:[NSString stringWithFormat:@"--mode=context-help:%hu:%lu:%lu", actualPort, inRange.location, inRange.length]] ;
    //--- Create task
       mTask = [NSTask new] ;
       [mTask setLaunchPath:[commandLineArray objectAtIndex:0 HERE]] ;
@@ -122,15 +122,11 @@
 //---------------------------------------------------------------------------*
 
 - (void) taskDidTerminate: (NSNotification *) inNotification {
-  if (nil != mProxy) {
-    NSData * data = [mPipe.fileHandleForReading readDataToEndOfFile] ;
-    [mProxy noteStandardOutputData:data] ;
-    if (nil != mRemoteSocketHandle) {
-      data = [mRemoteSocketHandle readDataToEndOfFile] ;
-      [mProxy noteSocketData:data] ;
-    }
-    [mProxy noteBuildTaskTermination:self] ;
+  if ((nil != mProxy) && (nil != mRemoteSocketHandle)) {
+    NSData * data = [mRemoteSocketHandle readDataToEndOfFile] ;
+    [mProxy noteSocketData:data] ;
   }
+  [mProxy noteBuildTaskTermination:self] ;
   mTaskCompleted = YES ;
 }
 

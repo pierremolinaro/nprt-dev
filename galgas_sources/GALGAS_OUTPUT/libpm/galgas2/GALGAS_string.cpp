@@ -146,6 +146,16 @@ GALGAS_uint GALGAS_string::reader_length (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------*
 
+GALGAS_range GALGAS_string::reader_range (UNUSED_LOCATION_ARGS) const {
+  GALGAS_range result ;
+  if (isValid ()) {
+    result = GALGAS_range (GALGAS_uint (0), GALGAS_uint ((PMUInt32) mString.length ())) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------*
+
 GALGAS_string GALGAS_string::reader_md_35_ (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (isValid ()) {
@@ -964,7 +974,7 @@ void GALGAS_string::class_method_deleteFile (GALGAS_string inFilePath,
       inCompiler->onTheFlyRunTimeError ("cannot perform file delete: file name is an empty string" COMMA_THERE) ;
     }else{
       const C_String errorMessage = C_FileManager::deleteFile (inFilePath.mString) ;
-      if (errorMessage.length () > 0) {
+      if (errorMessage.length () == 0) {
         ggs_printFileOperationSuccess (C_String ("Deleted '") + inFilePath.mString + "'.\n" COMMA_THERE) ;
       }else{
         C_String message ;
@@ -1221,7 +1231,6 @@ void GALGAS_string::method_writeToExecutableFileWhenDifferentContents (GALGAS_st
                                                                        C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) const {
   if (inFilePath.isValid ()) {
-//    inCompiler->addDependancyOutputFilePath (inFilePath.mString) ;
     bool needToWrite = true ;
     const bool fileAlreadyExists = C_FileManager::fileExistsAtPath (inFilePath.mString) ;
     if (fileAlreadyExists) {

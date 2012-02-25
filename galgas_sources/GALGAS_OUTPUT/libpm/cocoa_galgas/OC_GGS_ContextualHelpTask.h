@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @class OC_GGS_Document ;
-@class OC_GGS_BuildTaskProxy ;
+@class OC_GGS_TextDisplayDescriptor ;
 
-@interface OC_GGS_BuildTask : NSObject {
-  @private OC_GGS_BuildTaskProxy * mProxy ;
+@interface OC_GGS_ContextualHelpTask : NSObject {
+  @private OC_GGS_TextDisplayDescriptor * mProxy ;
   @private NSUInteger mTaskIndex ;
 
   @private NSTask * mTask ;
@@ -25,7 +25,8 @@
 }
 
 - (id) initWithDocument: (OC_GGS_Document *) inDocument
-       proxy: (OC_GGS_BuildTaskProxy *) inProxy
+       range: (NSRange) inRange
+       proxy: (OC_GGS_TextDisplayDescriptor *) inProxy
        index: (NSUInteger) inIndex ;
 
 - (void) terminate ;
