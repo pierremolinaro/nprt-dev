@@ -1,13 +1,10 @@
 //---------------------------------------------------------------------------*
 //                                                                           *
-//  Generic Command Line Interface Options                                   *
-//   --help : Display help information                                       *
-//   --version : Display software current version                            *
-//   --no-color: Do not issue colored messages                               *
+//  'cEnumerator_range' : galgas range enumerator                            *
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 2003, ..., 2012 Pierre Molinaro.                           *
+//  Copyright (C) 2012, ..., 2012 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
 //                                                                           *
@@ -26,45 +23,58 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#ifndef GENERIC_CLI_OPTIONS_DEFINED
-#define GENERIC_CLI_OPTIONS_DEFINED
+#include "predefined-types.h"
 
 //---------------------------------------------------------------------------*
 
-#include "command_line_interface/C_BoolCommandLineOption.h"
+cEnumerator_range::cEnumerator_range (const GALGAS_range & inEnumeratedRange,
+                                      const typeEnumerationOrder inOrder) :
+mIsValid (inEnumeratedRange.isValid ()),
+mAscending (enumerationOrderValue (inOrder) == kENUMERATION_UP),
+mStart (inEnumeratedRange.mAttribute_start.uintValue ()),
+mLength (inEnumeratedRange.mAttribute_length.uintValue ()),
+mCurrent (0) {
+  if (mAscending) {
+    mCurrent = mStart ;
+  }else{
+    mCurrent = mStart + mLength ;
+  }
+}
+
 
 //---------------------------------------------------------------------------*
 
-extern C_BoolCommandLineOption gOption_generic_5F_cli_5F_options_display_5F_help ;
+cEnumerator_range::~cEnumerator_range (void) {
+}
 
 //---------------------------------------------------------------------------*
 
-extern C_BoolCommandLineOption gOption_generic_5F_cli_5F_options_display_5F_version ;
+bool cEnumerator_range::hasCurrentObject (void) const {
+  bool ok = false ;
+  if (mIsValid) {
+    if (mAscending) {
+      ok = mCurrent < (mStart + mLength) ;
+    }else{
+      ok = mCurrent > mStart ;
+    }
+  }
+  return ok ;
+}
 
 //---------------------------------------------------------------------------*
 
-#ifdef SIOUX_IS_IMPLEMENTED
-  extern C_BoolCommandLineOption gOption_generic_5F_cli_5F_options_options_asktosaveonclose ;
-#endif
+void cEnumerator_range::gotoNextObject (void) {
+  if (mAscending) {
+    mCurrent ++ ;
+  }else{
+    mCurrent -- ;
+  }
+}
 
 //---------------------------------------------------------------------------*
 
-#ifdef COMPILE_FOR_WIN32
-  extern C_BoolCommandLineOption gOption_generic_5F_cli_5F_options_nodialog ;
-#endif
+GALGAS_uint cEnumerator_range::current (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_uint (mIsValid, (PMUInt32) (mCurrent + mAscending - 1)) ;
+}
 
 //---------------------------------------------------------------------------*
-
-#ifdef __LP64__
-  extern C_BoolCommandLineOption gOption_generic_5F_cli_5F_options_enable_5F_allocation_5F_debugging ;
-#endif
-
-//---------------------------------------------------------------------------*
-
-#ifndef COMPILE_FOR_WIN32
-  extern C_BoolCommandLineOption gOption_generic_5F_cli_5F_options_no_5F_color ;
-#endif
-
-//---------------------------------------------------------------------------*
-
-#endif
