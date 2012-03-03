@@ -2,7 +2,7 @@
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 2003, ..., 2010 Pierre Molinaro.                           *
+//  Copyright (C) 2003, ..., 2012 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
 //                                                                           *
@@ -38,7 +38,11 @@
 
 //---------------------------------------------------------------------------*
 
-@interface OC_GGS_Document : NSDocument <NSTextViewDelegate, NSSplitViewDelegate, NSWindowDelegate> {
+@interface OC_GGS_Document : NSDocument
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_5
+  <NSTextViewDelegate, NSSplitViewDelegate, NSWindowDelegate>
+#endif
+{
 
   @private IBOutlet NSSplitView * mIssueSplitView ;
 
@@ -112,6 +116,8 @@
 - (void) triggerDocumentEditedStatusUpdate ;
 
 - (OC_GGS_TextSyntaxColoring *) textSyntaxColoring ;
+
+- (NSPopUpButton *) entryListPopUpButton ;
 
 - (void) displayIssueDetailedMessage: (NSString *) inDetailledMessage ;
 

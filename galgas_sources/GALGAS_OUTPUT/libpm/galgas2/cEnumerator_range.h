@@ -1,13 +1,10 @@
 //---------------------------------------------------------------------------*
 //                                                                           *
-//  Generic Command Line Interface Options                                   *
-//   --help : Display help information                                       *
-//   --version : Display software current version                            *
-//   --no-color: Do not issue colored messages                               *
+//  'cEnumerator_range' : galgas range enumerator                            *
 //                                                                           *
 //  This file is part of libpm library                                       *
 //                                                                           *
-//  Copyright (C) 2003, ..., 2012 Pierre Molinaro.                           *
+//  Copyright (C) 2012, ..., 2012 Pierre Molinaro.                           *
 //                                                                           *
 //  e-mail : molinaro@irccyn.ec-nantes.fr                                    *
 //                                                                           *
@@ -26,44 +23,47 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#ifndef GENERIC_CLI_OPTIONS_DEFINED
-#define GENERIC_CLI_OPTIONS_DEFINED
+#ifndef RANGE_ENUMERATOR_CLASS_DEFINED
+#define RANGE_ENUMERATOR_CLASS_DEFINED
 
 //---------------------------------------------------------------------------*
 
-#include "command_line_interface/C_BoolCommandLineOption.h"
+#include "galgas2/cGenericAbstractEnumerator.h"
 
 //---------------------------------------------------------------------------*
 
-extern C_BoolCommandLineOption gOption_generic_5F_cli_5F_options_display_5F_help ;
+class GALGAS_range ;
+class GALGAS_uint ;
 
 //---------------------------------------------------------------------------*
 
-extern C_BoolCommandLineOption gOption_generic_5F_cli_5F_options_display_5F_version ;
+class cEnumerator_range {
+//--- Constructor
+  public : cEnumerator_range (const GALGAS_range & inEnumeratedRange,
+                              const typeEnumerationOrder inOrder) ;
 
-//---------------------------------------------------------------------------*
+//--- Virtual destructor
+  public : virtual ~ cEnumerator_range (void) ;
 
-#ifdef SIOUX_IS_IMPLEMENTED
-  extern C_BoolCommandLineOption gOption_generic_5F_cli_5F_options_options_asktosaveonclose ;
-#endif
+//--- No copy
+  private : cEnumerator_range (const cEnumerator_range &) ;
+  private : cEnumerator_range & operator = (const cEnumerator_range &) ;
 
-//---------------------------------------------------------------------------*
+//--- 
+  public : bool hasCurrentObject (void) const ;
+  public : void gotoNextObject (void) ;
 
-#ifdef COMPILE_FOR_WIN32
-  extern C_BoolCommandLineOption gOption_generic_5F_cli_5F_options_nodialog ;
-#endif
+//--- Current element access
+  public : GALGAS_uint current (LOCATION_ARGS) const ;
 
-//---------------------------------------------------------------------------*
+//---- Attributes
+  private : const bool mIsValid ;
+  private : const bool mAscending ;
+  private : const PMSInt64 mStart ;
+  private : const PMSInt64 mLength ;
+  private : PMSInt64 mCurrent ;
+} ;
 
-#ifdef __LP64__
-  extern C_BoolCommandLineOption gOption_generic_5F_cli_5F_options_enable_5F_allocation_5F_debugging ;
-#endif
-
-//---------------------------------------------------------------------------*
-
-#ifndef COMPILE_FOR_WIN32
-  extern C_BoolCommandLineOption gOption_generic_5F_cli_5F_options_no_5F_color ;
-#endif
 
 //---------------------------------------------------------------------------*
 
