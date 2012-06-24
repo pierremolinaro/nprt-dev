@@ -13,7 +13,6 @@
 @class OC_GGS_Document ;
 
 @interface OC_GGS_TextSyntaxColoring : NSObject {
-  @private NSURL * mSourceURL ;
   @private NSTextStorage * mSourceTextStorage ;
   @private NSMutableSet * mTextDisplayDescriptorSet ; // Set of OC_GGS_TextDisplayDescriptor
   @private OC_Lexique * mTokenizer ;
@@ -24,6 +23,8 @@
   @private double mMaxAscender ; // Only mMaxAscender is observable
   @private double mMaxLeadingMinusDescender ; // leading - descender (because descender is < 0)
 
+  @private NSUInteger mSavePointUndoStackCount ;
+  
 //--- Undo manager
   @private NSUndoManager * mUndoManager ;
   
@@ -41,8 +42,9 @@
 - (NSTextStorage *) textStorage ;
 - (NSUndoManager *) undoManager ;
 - (OC_Lexique *) tokenizer ;
-- (NSURL *) sourceURL ;
-- (NSArray *) issueArray ;
+- (OC_GGS_Document *) document ;
+- (NSUInteger) textDisplayDescriptorCount ;
+- (NSRange) rangeForLine: (NSInteger) inLineNumber ;
 
 - (NSArray *) buildIndexingDictionaryArray ;
 
@@ -65,8 +67,6 @@
 - (NSRange) commentRange: (NSRange) initialSelectedRange ;
 
 - (void) documentHasBeenSaved ;
-
-- (void) setIssueArray: (NSArray *) inIssueArray ;
 
 - (NSMenu *) indexMenuForRange: (NSRange) inSelectedRange
              textDisplayDescriptor: (OC_GGS_TextDisplayDescriptor *) inTextDisplayDescriptor ;

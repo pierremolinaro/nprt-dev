@@ -12,21 +12,21 @@
 @class OC_GGS_BuildTask ;
 
 @interface OC_GGS_BuildTaskProxy : NSObject {
-  @private NSArrayController * mIssueArrayController ;
   @private OC_GGS_BuildTask * mBuildTask ;
   @private NSMutableSet * mPreviousBuildTasks ;
 
   @private NSUInteger mErrorCount ;
   @private NSUInteger mWarningCount ;
   @private NSUInteger mTaskIndex ;
+  @private OC_GGS_Document * mDocument ;
 }
+
+- (OC_GGS_BuildTaskProxy *) initWithDocument: (OC_GGS_Document *) inDocument ;
 
 - (BOOL) buildTaskIsRunning ;
 - (BOOL) buildTaskIsNotRunning ;
 
-- (NSArrayController *) issueArrayController ;
-
-- (void) buildDocument: (OC_GGS_Document *) inDocument ;
+- (void) build ;
 
 - (void) abortBuild ;
 
