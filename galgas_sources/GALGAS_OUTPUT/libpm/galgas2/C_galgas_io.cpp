@@ -567,8 +567,12 @@ void ggs_printError (const C_SourceTextInString * inSourceTextPtr,
     inSourceTextPtr->appendSourceContents (errorMessage) ;
   }
   if (cocoaOutput ()) {
+    co.setForeColor (kRedForeColor) ;
+    co.setTextAttribute (kBoldTextAttribute) ;
     co.appendUnicodeCharacter (COCOA_ERROR_ID COMMA_HERE) ;
     co << errorMessage ;
+    co.setTextAttribute (kAllAttributesOff) ;
+    co.appendUnicodeCharacter (COCOA_MESSAGE_ID COMMA_HERE) ;
     co.appendUnicodeCharacter (COCOA_MESSAGE_ID COMMA_HERE) ;
     co.flush () ;
   }else{
@@ -628,8 +632,12 @@ void ggs_printWarning (const C_SourceTextInString * inSourceTextPtr,
     inSourceTextPtr->appendSourceContents (warningMessage) ;
   }
   if (cocoaOutput ()) {
+    co.setForeColor (kYellowForeColor) ;
+    co.setTextAttribute (kBoldTextAttribute) ;
     co.appendUnicodeCharacter (COCOA_WARNING_ID COMMA_HERE) ;
     co << warningMessage ;
+    co.setTextAttribute (kAllAttributesOff) ;
+    co.appendUnicodeCharacter (COCOA_MESSAGE_ID COMMA_HERE) ;
     co.appendUnicodeCharacter (COCOA_MESSAGE_ID COMMA_HERE) ;
     co.flush () ;
   }else{
@@ -665,8 +673,12 @@ void ggs_printFileOperationSuccess (const C_String & inMessage
   }
 //---
   if (cocoaOutput ()) {
-    co.appendUnicodeCharacter (COCOA_REWRITE_SUCCESS_ID COMMA_HERE) ;
+    co.setForeColor (kBlueForeColor) ;
+    co.setTextAttribute (kBoldTextAttribute) ;
+//    co.appendUnicodeCharacter (COCOA_REWRITE_SUCCESS_ID COMMA_HERE) ;
     co << inMessage;
+    co.setTextAttribute (kAllAttributesOff) ;
+    co.appendUnicodeCharacter (COCOA_MESSAGE_ID COMMA_HERE) ;
     co.appendUnicodeCharacter (COCOA_MESSAGE_ID COMMA_HERE) ;
     co.flush () ;
   }else{
@@ -694,6 +706,8 @@ void ggs_printMessage (const C_String & inMessage
     }
   #endif
   co << message ;
+    co.appendUnicodeCharacter (COCOA_MESSAGE_ID COMMA_HERE) ;
+    co.appendUnicodeCharacter (COCOA_MESSAGE_ID COMMA_HERE) ;
   co.flush () ;
 }
 
