@@ -24,10 +24,10 @@
 
 #import "OC_GGS_RulerViewForTextView.h"
 #import "OC_GGS_TextView.h"
-#import "PMErrorOrWarningDescriptor.h"
-#import "PMCocoaCallsDebug.h"
+#import "PMIssueDescriptor.h"
 #import "PMIssueInRuler.h"
 #import "OC_GGS_Document.h"
+#import "PMDebug.h"
 
 //---------------------------------------------------------------------------*
 
@@ -39,14 +39,75 @@
 
 //---------------------------------------------------------------------------*
 
-- (OC_GGS_RulerViewForTextView *) initWithDocument: (OC_GGS_Document *) inDocument {
-  self = [self init] ;
+- (void) FINALIZE_OR_DEALLOC {
+  noteObjectDeallocation (self) ;
+  macroSuperFinalize ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (OC_GGS_RulerViewForTextView *) init {
+  self = [super init] ;
   if (self) {
-    mDocument = inDocument ;
+    noteObjectAllocation (self) ;
   }
   return self ;
 }
 
+//---------------------------------------------------------------------------*
+
+- (void) setIssueArray: (NSArray *) inIssueArray {
+  mIssueArray = inIssueArray.copy ;
+  [self setNeedsDisplay:YES] ;
+}
+/*
+  NSLog (@"inIssueArray %@", inIssueArray) ;
+//--- Note: ruler view and text view are both flipped
+  OC_GGS_TextView * textView = self.scrollView.documentView ;
+  NSLayoutManager * lm = textView.layoutManager ;
+  NSLog (@"lm %p", lm) ;
+//---
+  NSMutableArray * bulletArray = [NSMutableArray new] ;
+  NSString * sourceString = textView.string ;
+  const NSUInteger sourceStringLength = sourceString.length ;
+  NSUInteger idx = 0 ;
+  NSUInteger lineIndex = 0 ;
+  while (idx < sourceStringLength) {
+    lineIndex ++ ;
+    const NSRange lineRange = [sourceString lineRangeForRange:NSMakeRange (idx, 1)] ;
+  //--- Error or warning at this line ?
+    BOOL hasError = NO ;
+    BOOL hasWarning = NO ;
+    NSMutableString * allMessages = [NSMutableString stringWithCapacity:100] ;
+    for (PMErrorOrWarningDescriptor * issue in inIssueArray) {
+      if ([issue isInRange:lineRange]) {
+        [allMessages appendString:issue.message] ;
+        if (issue.isError) {
+          hasError = YES ;
+        }else{
+          hasWarning = YES ;
+        }
+      }
+    }
+    if (hasError || hasWarning) {
+      const NSRect r = [lm lineFragmentUsedRectForGlyphAtIndex:idx effectiveRange:NULL] ;
+      const NSPoint p = [self convertPoint:NSMakePoint (0.0, NSMidY (r) - 8.0) fromView:textView] ;
+      const NSRect rImage = {{0.0, p.y}, {16.0, 16.0}} ;
+      NSLog (@"ADD %p", lm) ;
+      PMIssueInRuler * issueInRuler = [[PMIssueInRuler alloc]
+        initWithRect:rImage
+        message:allMessages
+        isError:hasError
+      ] ;
+      [bulletArray addObject:issueInRuler] ;
+    }
+    idx = lineRange.location + lineRange.length ;
+  }
+//---
+  mBulletArray = bulletArray ;
+  [self setNeedsDisplay:YES] ;
+}
+*/
 //---------------------------------------------------------------------------*
 
 static NSUInteger imax (NSUInteger a, NSUInteger b) { return (a > b) ? a : b ; }
@@ -55,7 +116,6 @@ static NSUInteger imin (NSUInteger a, NSUInteger b) { return (a < b) ? a : b ; }
 //---------------------------------------------------------------------------*
 
 - (void) drawHashMarksAndLabelsInRect: (NSRect) inRect {
-  NSMutableArray * issues = [NSMutableArray new] ;
 //--- Draw background
   [[NSColor windowBackgroundColor] setFill] ;
   [NSBezierPath fillRect:inRect] ;
@@ -77,24 +137,21 @@ static NSUInteger imin (NSUInteger a, NSUInteger b) { return (a < b) ? a : b ; }
     [NSColor selectedControlColor], NSBackgroundColorAttributeName,
     nil
   ] ;
-//--- Images
-  NSImage * errorImage = [NSImage imageNamed:NSImageNameStatusUnavailable] ;
-  NSImage * warningImage = [NSImage imageNamed:NSImageNameStatusPartiallyAvailable] ;
 //--- Note: ruler view and text view are both flipped
   OC_GGS_TextView * textView = self.scrollView.documentView ;
-  NSArray * issueArray = textView.issueArray ; // Array of PMErrorOrWarningDescriptor
   NSLayoutManager * lm = textView.layoutManager ;
   const NSRange selectedRange = textView.selectedRange ;
   NSString * sourceString = textView.string ;
   const NSUInteger sourceStringLength = sourceString.length ;
   // NSLog (@"sourceStringLength %u", sourceStringLength) ;
   NSUInteger idx = 0 ;
-  NSInteger line = 0 ;
+  NSInteger lineIndex = 0 ;
   const double minYforDrawing = inRect.origin.y - (2.0 * ([font ascender] + [font descender])) ;
   const double maxYforDrawing = NSMaxY ([self visibleRect]) ;
   BOOL maxYreached = NO ;
+  mBulletArray = [NSMutableArray new] ;
   while ((idx < sourceStringLength) && ! maxYreached) {
-    line ++ ;
+    lineIndex ++ ;
   //--- Draw line numbers
     // NSLog (@"%u is valid glyph index: %@", idx, [lm isValidGlyphIndex:idx] ? @"yes" : @"no") ;
     const NSRect r = [lm lineFragmentUsedRectForGlyphAtIndex:idx effectiveRange:NULL] ;
@@ -108,7 +165,7 @@ static NSUInteger imin (NSUInteger a, NSUInteger b) { return (a < b) ? a : b ; }
         imin (selectedRange.location + selectedRange.length, lineRange.location + lineRange.length)
       ; 
     //--- Draw line number
-      NSString * str = [NSString stringWithFormat:@"%ld", line] ;
+      NSString * str = [NSString stringWithFormat:@"%ld", lineIndex] ;
       const NSSize strSize = [str sizeWithAttributes:intersect ? attributesForSelection : attributes] ;
       p.x = viewBounds.size.width - 2.0 - strSize.width ;
       p.y -= strSize.height ;
@@ -118,10 +175,9 @@ static NSUInteger imin (NSUInteger a, NSUInteger b) { return (a < b) ? a : b ; }
       BOOL hasError = NO ;
       BOOL hasWarning = NO ;
       NSMutableString * allMessages = [NSMutableString stringWithCapacity:100] ;
-      for (NSUInteger i=0 ; (i<issueArray.count) ; i++) {
-        PMErrorOrWarningDescriptor * issue = [issueArray objectAtIndex:i HERE] ;
-        if ([issue isInRange:lineRange]) {
-          [allMessages appendFormat:issue.message] ;
+      for (PMIssueDescriptor * issue in mIssueArray) {
+        if (NSLocationInRange (issue.locationInSourceString, lineRange) && (issue.locationInSourceStringStatus == kLocationInSourceStringSolved)) {
+          [allMessages appendString:issue.issueMessage] ;
           if (issue.isError) {
             hasError = YES ;
           }else{
@@ -131,42 +187,27 @@ static NSUInteger imin (NSUInteger a, NSUInteger b) { return (a < b) ? a : b ; }
       }
       if (hasError || hasWarning) {
         const NSRect rImage = {{0.0, p.y}, {16.0, 16.0}} ;
-        [hasError ? errorImage : warningImage
-          drawInRect:rImage
-          fromRect:NSZeroRect
-          operation:NSCompositeSourceOver
-          fraction:1.0
+        PMIssueInRuler * issueInRuler = [[PMIssueInRuler alloc]
+          initWithRect:rImage
+          message:allMessages
+          isError:hasError
         ] ;
-        [issues addObject:
-          [[PMIssueInRuler alloc]
-            initWithRect:rImage
-            message:allMessages
-          ]
-        ] ;
+        [mBulletArray addObject:issueInRuler] ;
       }
     }
-  //---
-    // NSLog (@"New line range: [%u, %u] for idx %u", lineRange.location, lineRange.length, idx) ;
     idx = lineRange.location + lineRange.length ;
   }
+//--- Images
+  NSImage * errorImage = [NSImage imageNamed:NSImageNameStatusUnavailable] ;
+  NSImage * warningImage = [NSImage imageNamed:NSImageNameStatusPartiallyAvailable] ;
 //---
-  mIssues = issues ;
-}
-
-//---------------------------------------------------------------------------*
-
-- (void) mouseDown: (NSEvent *) inEvent {
-  const NSPoint localPoint = [self convertPoint:[inEvent locationInWindow] fromView:nil] ;
-  PMIssueInRuler * foundIssue = nil ;
-  for (NSUInteger i=0 ; (i<mIssues.count) && (nil == foundIssue) ; i++) {
-    PMIssueInRuler * issue = [mIssues objectAtIndex:i] ;
-    if (NSPointInRect (localPoint, issue.rect)) {
-      foundIssue = issue ;
-    }
-  }
-//---
-  if (nil != foundIssue) {
-    [mDocument displayIssueDetailedMessage:foundIssue.message] ;
+  for (PMIssueInRuler * bullet in mBulletArray) {
+    [bullet.isError ? errorImage : warningImage
+      drawInRect:bullet.rect
+      fromRect:NSZeroRect
+      operation:NSCompositeSourceOver
+      fraction:1.0
+    ] ;
   }
 }
 
