@@ -113,7 +113,7 @@
 //--- Signed integer max
 #define PMSINT8_MAX       0x7F
 #define PMSINT16_MAX      0x7FFF
-#define PMSINT32_MAX      0x7FFFFFFFL
+#define PMSINT32_MAX      ((PMSInt32) 0x7FFFFFFFL)
 #define PMSINT64_MAX      0x7FFFFFFFFFFFFFFFLL
 
 //--- Signed integer min

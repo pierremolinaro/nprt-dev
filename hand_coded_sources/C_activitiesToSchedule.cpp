@@ -555,8 +555,7 @@ bool C_activitiesToSchedule::
 }
 //---------------------------------------------------------------------------*
 
-PMSInt32 C_activitiesToSchedule::
-getNextScheduleTime (void) const {
+PMSInt32 C_activitiesToSchedule::getNextScheduleTime (void) const {
   return (mRootPointer != NULL) ? mRootPointer->mScheduleInstant : PMSINT32_MAX ;
 }
 //---------------------------------------------------------------------------*/
