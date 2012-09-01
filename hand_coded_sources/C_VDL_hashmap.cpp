@@ -524,9 +524,8 @@ PMUInt32 C_VDL_hashmap::sweepUnmarkedObjects (void) {
 
 //---------------------------------------------------------------------------*
 
-PMUInt32 C_VDL_hashmap
-::getMapSizeInBytes (void) const {
-  return ((PMUInt32) mEntryCurrentCount) * sizeof (C_TreeForCollision) ;
+PMUInt32 C_VDL_hashmap::getMapSizeInBytes (void) const {
+  return (PMUInt32) (mEntryCurrentCount * sizeof (C_TreeForCollision)) ;
 }
 
 //---------------------------------------------------------------------------*

@@ -527,7 +527,7 @@ PMUInt32 C_us_hashmap::sweepUnmarkedObjects (void) {
 
 PMUInt32 C_us_hashmap
 ::getMapSizeInBytes (void) const {
-  return ((PMUInt32) mEntryCurrentCount) * sizeof (C_TreeForCollision) ;
+  return (PMUInt32) (mEntryCurrentCount * sizeof (C_TreeForCollision)) ;
 }
 
 //---------------------------------------------------------------------------*
