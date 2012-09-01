@@ -313,7 +313,7 @@
   mSourceDisplayArrayController = nil ;
   mDisplayDescriptorArray = nil ;
 //--- Last call
-  [OC_GGS_DocumentData cocoaDocumentWillClose] ;
+  [OC_GGS_DocumentData cocoaDocumentWillClose:mDocumentData] ;
 //---
   [super removeWindowController:inWindowController] ;
 }
@@ -358,7 +358,7 @@
   ] ;
 //---
   [inTextDisplayDescriptor detachTextDisplayDescriptor] ;
-  [OC_GGS_DocumentData cocoaDocumentWillClose] ;
+  [OC_GGS_DocumentData cocoaDocumentWillClose:nil] ;
 }
 
 //---------------------------------------------------------------------------*
@@ -782,8 +782,8 @@
   #ifdef DEBUG_MESSAGES
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
   #endif
+  mBuildTaskHasBeenAborted = YES ;
   [mBuildTask terminate] ;
-  mBuildTask = nil ;
 }
 
 //---------------------------------------------------------------------------*
@@ -798,6 +798,7 @@
   mWarningCount = 0 ;
   mErrorCountTextField.stringValue = @"0" ;
   mErrorCount = 0 ;
+  mBuildTaskHasBeenAborted = NO ;
   mIssueArray = [NSMutableArray new] ;
   [mRulerViewForBuildOutput setIssueArray:mIssueArray] ;
   OC_GGS_Scroller * scroller = (OC_GGS_Scroller *) mOutputScrollView.verticalScroller ;
@@ -823,7 +824,7 @@
 
 - (void) enterIssue: (NSString *) inIssueMessage
          isError: (BOOL) inIsError
-         locationInOutputData: (NSInteger) inLocationInOutputData {
+         locationInOutputData: (NSRange) inRangeInOutputData {
   #ifdef DEBUG_MESSAGES
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
   #endif
@@ -849,7 +850,7 @@
     line:issueLine
     column:issueColumn
     isError:inIsError
-    locationInOutputData:inLocationInOutputData
+    rangeInOutputData:inRangeInOutputData
     buildOutputRuler:mRulerViewForBuildOutput
   ] ;
   [mIssueArray addObject:issue] ;
@@ -930,19 +931,20 @@ static const utf32 COCOA_ERROR_ID   = TO_UNICODE (4) ;
     }
     NSString * s = [component substringFromIndex:idx] ;
     if (s.length > 0) {
+      const NSRange r = {mOutputTextView.textStorage.length + outputAttributedString.length, s.length - 1} ;
       if ([s characterAtIndex:0] == COCOA_WARNING_ID) {
         s = [s substringFromIndex:1] ;
         [self
           enterIssue:s
           isError:NO
-          locationInOutputData:mOutputTextView.textStorage.length + outputAttributedString.length
+          locationInOutputData:r
         ] ;
       }else if ([s characterAtIndex:0] == COCOA_ERROR_ID) {
         s = [s substringFromIndex:1] ;
         [self
           enterIssue:s
           isError:YES
-          locationInOutputData:mOutputTextView.textStorage.length + outputAttributedString.length
+          locationInOutputData:r
         ] ;
       }
       NSAttributedString * as = [[NSAttributedString alloc]
@@ -975,12 +977,34 @@ static const utf32 COCOA_ERROR_ID   = TO_UNICODE (4) ;
     nil
   ] ;
   NSAttributedString * attributedString = [[NSAttributedString alloc]
-    initWithString:(nil == mBuildTask) ? @"Aborted.\n" : @"Done.\n"
+    initWithString:mBuildTaskHasBeenAborted ? @"Aborted.\n" : @"Done.\n"
     attributes:defaultDictionary
   ] ;
   [mOutputTextView.textStorage appendAttributedString:attributedString] ;
 //---
+  [[NSRunLoop mainRunLoop]
+    performSelector:@selector (pmReleaseBuildTask)
+    target:self
+    argument:nil
+    order:0
+    modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]
+  ] ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) pmReleaseBuildTask {
   mBuildTask = nil ;
+//---
+  [NSApp requestUserAttention:NSInformationalRequest] ;
+//---
+  if ((! mHasSpoken) && (mErrorCount > 40)) {
+    mHasSpoken = YES ;
+    NSString * thePhrase = [NSString stringWithFormat:@"\"Oh! %@ makes %lu errors\"", NSFullUserName (), mErrorCount] ;
+    NSSpeechSynthesizer * speech = [[NSSpeechSynthesizer alloc] initWithVoice:nil] ;
+    [speech startSpeakingString:thePhrase] ;
+  }
+  
 }
 
 //---------------------------------------------------------------------------*

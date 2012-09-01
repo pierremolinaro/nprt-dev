@@ -26,7 +26,7 @@
 #include "predefined-types.h"
 #include "galgas2/C_galgas_CLI_Options.h"
 #include "galgas2/C_Compiler.h"
-#include "command_line_interface/mainForLIBPM.h"
+#include "command_line_interface/F_mainForLIBPM.h"
 #include "command_line_interface/F_Analyze_CLI_Options.h"
 #include "strings/unicode_character_cpp.h"
 #include "galgas2/C_galgas_io.h"
@@ -1158,7 +1158,7 @@ void GALGAS_string::method_writeToFile (GALGAS_string inFilePath,
   if (inFilePath.isValid ()) {
     if (C_Compiler::performGeneration ()) {
       const bool fileAlreadyExists = C_FileManager::fileExistsAtPath (inFilePath.mString) ;
-      const bool verboseOptionOn = gOption_galgas_5F_cli_5F_options_verbose_5F_output.mValue ;
+      const bool verboseOptionOn = gOption_galgas_5F_builtin_5F_options_verbose_5F_output.mValue ;
       const bool ok = C_FileManager::writeStringToFile (mString, inFilePath.mString) ;
       if (ok && verboseOptionOn && fileAlreadyExists) {
         ggs_printFileOperationSuccess (C_String ("Replaced '") + inFilePath.mString + "'.\n" COMMA_THERE) ;
@@ -1192,7 +1192,7 @@ void GALGAS_string::method_writeToFileWhenDifferentContents (GALGAS_string inFil
     outFileWritten = GALGAS_bool (needToWrite) ;
     if (needToWrite) {
       if (C_Compiler::performGeneration ()) {
-        const bool verboseOptionOn = gOption_galgas_5F_cli_5F_options_verbose_5F_output.mValue ;
+        const bool verboseOptionOn = gOption_galgas_5F_builtin_5F_options_verbose_5F_output.mValue ;
         bool ok = C_FileManager::makeDirectoryIfDoesNotExist (inFilePath.mString.stringByDeletingLastPathComponent ()) ;
         if (! ok) {
           C_String message ;
@@ -1228,7 +1228,7 @@ void GALGAS_string::method_writeToExecutableFile (GALGAS_string inFilePath,
  //   inCompiler->addDependancyOutputFilePath (inFilePath.mString) ;
     const bool fileAlreadyExists = C_FileManager::fileExistsAtPath (inFilePath.mString) ;
     if (C_Compiler::performGeneration ()) {
-      const bool verboseOptionOn = gOption_galgas_5F_cli_5F_options_verbose_5F_output.mValue ;
+      const bool verboseOptionOn = gOption_galgas_5F_builtin_5F_options_verbose_5F_output.mValue ;
       const bool ok = C_FileManager::writeStringToExecutableFile (mString, inFilePath.mString) ;
       if (ok && verboseOptionOn && fileAlreadyExists) {
         ggs_printFileOperationSuccess (C_String ("Replaced '") + inFilePath.mString + "'.\n" COMMA_THERE) ;
@@ -1262,7 +1262,7 @@ void GALGAS_string::method_writeToExecutableFileWhenDifferentContents (GALGAS_st
     outFileWritten = GALGAS_bool (needToWrite) ;
     if (needToWrite) {
       if (C_Compiler::performGeneration ()) {
-        const bool verboseOptionOn = gOption_galgas_5F_cli_5F_options_verbose_5F_output.mValue ;
+        const bool verboseOptionOn = gOption_galgas_5F_builtin_5F_options_verbose_5F_output.mValue ;
         bool ok = C_FileManager::makeDirectoryIfDoesNotExist (inFilePath.mString.stringByDeletingLastPathComponent ()) ;
         if (! ok) {
           C_String message ;
