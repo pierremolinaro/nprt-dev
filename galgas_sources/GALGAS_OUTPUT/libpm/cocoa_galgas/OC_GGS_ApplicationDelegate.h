@@ -50,16 +50,16 @@
 //---------------------------------------------------------------------------*
 
 @class OC_GGS_Document ;
-@class OC_GGS_PreferencesController ;
+@class OC_GGS_ApplicationDelegate ;
 @class PMFontButton ;
 
 //---------------------------------------------------------------------------*
 
-extern OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
+extern OC_GGS_ApplicationDelegate * gCocoaGalgasPreferencesController ;
 
 //---------------------------------------------------------------------------*
 
-@interface OC_GGS_PreferencesController : NSObject
+@interface OC_GGS_ApplicationDelegate : NSObject
 #if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_5
   <NSWindowDelegate>
 #endif

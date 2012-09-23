@@ -22,7 +22,7 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#import "OC_GGS_PreferencesController.h"
+#import "OC_GGS_ApplicationDelegate.h"
 #import "OC_GGS_Document.h"
 #import "PMFontButton.h"
 #import "OC_GGS_CommandLineOption.h"
@@ -33,11 +33,11 @@
 
 //---------------------------------------------------------------------------*
 
-OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
+OC_GGS_ApplicationDelegate * gCocoaGalgasPreferencesController ;
 
 //---------------------------------------------------------------------------*
 
-@implementation OC_GGS_PreferencesController
+@implementation OC_GGS_ApplicationDelegate
 
 //---------------------------------------------------------------------------*
 
@@ -45,7 +45,7 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
   self = [super init] ;
   if (self) {
     gCocoaGalgasPreferencesController = self ;
-    mToolNameArray = [[NSMutableArray alloc] init] ;
+    mToolNameArray = [NSMutableArray new] ;
   //--- Get command line option list
     mBoolOptionArray = [NSMutableArray new] ;
     mUIntOptionArray = [NSMutableArray new] ;
@@ -760,13 +760,13 @@ OC_GGS_PreferencesController * gCocoaGalgasPreferencesController ;
   NSString * resourcePath = [[NSBundle mainBundle] resourcePath] ;
   NSFileManager * fm = [NSFileManager new] ;
   NSDirectoryEnumerator * dirEnum = [fm enumeratorAtPath:resourcePath];
-  NSString * file = [dirEnum nextObject] ;
-  while (file != nil) {
-    if ([[file pathExtension] isEqualToString: @""]) {
-      [mToolPopUpButton addItemWithTitle:file] ;
-      [mToolNameArray addObject:file] ;
+  NSString * path = dirEnum.nextObject ;
+  while (path != nil) {
+    if ([path.pathExtension isEqualToString: @""] && (path.stringByDeletingLastPathComponent.length == 0)) {
+      [mToolPopUpButton addItemWithTitle:path] ;
+      [mToolNameArray addObject:path] ;
     }
-    file = [dirEnum nextObject] ;
+    path = dirEnum.nextObject ;
   }
 //--- Select popup item from user defaults
   NSInteger selected_item ;
