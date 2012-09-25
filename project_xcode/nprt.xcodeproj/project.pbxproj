@@ -1388,7 +1388,6 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = "LIBPM_MULTI_THREADING=0";
 				PRODUCT_NAME = "nprt_debug";
 			};
@@ -1448,6 +1447,7 @@
 					"../hand_coded_sources/**",
 				);
 				SDKROOT = macosx10.6 ;
+				COPY_PHASE_STRIP = NO ;
 			};
 			name = Default;
 		};
