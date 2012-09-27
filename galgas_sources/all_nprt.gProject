@@ -1,4 +1,4 @@
-project all_nprt -> "nprt" :
+project all_nprt (1:2:0) -> "nprt" :
 #--- Targets
   feature "makefile_macosx" ;
   feature "makefile_unix" ;
