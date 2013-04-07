@@ -60,12 +60,12 @@ CalculateHyperPeriod (const TC_UniqueArray <cElement> & Element) {
   
   PMUInt64 HyperPeriod = 0 ;
   if (minimumOffset == maximumOffset) {
-    HyperPeriod  = LCM + maximumOffset ;
+    HyperPeriod  = LCM + (PMUInt32) maximumOffset ;
   }else{
-    HyperPeriod = LCM + LCM + maximumOffset;
+    HyperPeriod = LCM + LCM + (PMUInt32) maximumOffset;
   }
-  printf ("HyperPeriod : %llu\n", HyperPeriod) ;
-  
+  co << "HyperPeriod : " << cStringWithUnsigned (HyperPeriod) << "\n" ;
+
   return HyperPeriod ;
 }
 

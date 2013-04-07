@@ -59,17 +59,13 @@ GALGAS_binaryset GALGAS_binaryset::constructor_fullBinarySet (UNUSED_LOCATION_AR
 //---------------------------------------------------------------------------*
 
 GALGAS_binaryset GALGAS_binaryset::constructor_binarySetWithBit (const GALGAS_uint & inBitIndex,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) {
+                                                                 C_Compiler * /* inCompiler */
+                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_binaryset result ;
   if (inBitIndex.isValid ()) {
     const PMUInt32 bitIndex = inBitIndex.uintValue () ;
-    if (bitIndex > 32766) {
-      inCompiler->onTheFlyRunTimeError ("bit index greater than 32766" COMMA_THERE) ;
-    }else{
-      const C_BDD bdd ((PMUInt16) (bitIndex & PMUINT16_MAX), true) ;
-      result = GALGAS_binaryset (bdd) ;
-    }
+    const C_BDD bdd (bitIndex, true) ;
+    result = GALGAS_binaryset (bdd) ;
   }
   return result ;
 }
@@ -102,10 +98,10 @@ GALGAS_binaryset GALGAS_binaryset::constructor_binarySetWithPredicateString (con
         for (PMSInt32 i=s.length () - 1 ; i>=0 ; i--) {
           const utf32 c = s (i COMMA_HERE) ;
           if (UNICODE_VALUE (c) == '0') {
-            v &= C_BDD ((PMUInt16) (bitIndex & PMUINT16_MAX), false) ;
+            v &= C_BDD (bitIndex, false) ;
             bitIndex ++ ;
           }else if (UNICODE_VALUE (c) == '1') {
-            v &= C_BDD ((PMUInt16) (bitIndex & PMUINT16_MAX), true) ;
+            v &= C_BDD (bitIndex, true) ;
             bitIndex ++ ;
           }else if (UNICODE_VALUE (c) == 'X') {
             bitIndex ++ ;
@@ -141,16 +137,15 @@ static GALGAS_binaryset binarySetWithComparison (C_Compiler * inCompiler,
   if ((inLeftFirstIndex.isValid ()) && (inBitCount.isValid ()) && (inRightFirstIndex.isValid ())) {
     const PMUInt64 maxLeft = ((PMUInt64) inLeftFirstIndex.uintValue ()) + inBitCount.uintValue () ;
     const PMUInt64 maxRight = ((PMUInt64) inRightFirstIndex.uintValue ()) + inBitCount.uintValue () ;
-    if (maxLeft > 32766) {
-      inCompiler->onTheFlyRunTimeError ("left operand upper bit is greater than 32766" COMMA_THERE) ;
-    }else if (maxRight > 32766) {
-      inCompiler->onTheFlyRunTimeError ("right operand upper bit is greater than 32766" COMMA_THERE) ;
+    if (maxLeft > PMUINT32_MAX) {
+      inCompiler->onTheFlyRunTimeError ("left operand upper bit is greater than 2**31-1" COMMA_THERE) ;
+    }else if (maxRight > PMUINT32_MAX) {
+      inCompiler->onTheFlyRunTimeError ("right operand upper bit is greater than 2**31-1" COMMA_THERE) ;
     }else {
-      result = GALGAS_binaryset (C_BDD::varCompareVar ((PMUInt16) (inLeftFirstIndex.uintValue () & PMUINT16_MAX),
-                                                                        (PMUInt16) (inBitCount.uintValue () & PMUINT16_MAX),
-                                                                        inComparison,
-                                                                        (PMUInt16) (inRightFirstIndex.uintValue () & PMUINT16_MAX))
-                                ) ;
+      result = GALGAS_binaryset (C_BDD::varCompareVar (inLeftFirstIndex.uintValue (),
+                                 inBitCount.uintValue (),
+                                 inComparison,
+                                 inRightFirstIndex.uintValue ())) ;
     }
   }
   return result ;
@@ -257,14 +252,13 @@ static GALGAS_binaryset binarySetWithComparisonWithConstant (C_Compiler * inComp
   GALGAS_binaryset result ;
   if ((inBitIndex.isValid ()) && (inBitCount.isValid ()) && (inConstant.isValid ())) {
     const PMUInt64 maxLeft = ((PMUInt64) inBitIndex.uintValue ()) + inBitCount.uintValue () ;
-    if (maxLeft > 32766) {
-      inCompiler->onTheFlyRunTimeError ("left operand upper bit is greater than 32766" COMMA_THERE) ;
+    if (maxLeft > PMUINT32_MAX) {
+      inCompiler->onTheFlyRunTimeError ("left operand upper bit is greater than 2**31-1" COMMA_THERE) ;
     }else {
-      result = GALGAS_binaryset (C_BDD::varCompareConst ((PMUInt16) (inBitIndex.uintValue () & PMUINT16_MAX),
-                                                                          (PMUInt16) (inBitCount.uintValue () & PMUINT16_MAX),
-                                                                          inComparison,
-                                                                          inConstant.uint64Value ())
-                                ) ;
+      result = GALGAS_binaryset (C_BDD::varCompareConst (inBitIndex.uintValue (),
+                                 inBitCount.uintValue (),
+                                 inComparison,
+                                 inConstant.uint64Value ())) ;
     }
   }
   return result ;
@@ -440,8 +434,8 @@ GALGAS_bool GALGAS_binaryset::reader_containsValue (const GALGAS_uint_36__34_ & 
   GALGAS_bool result ;
   if ((inValue.isValid ()) && (inFirstBit.isValid ()) && (inBitCount.isValid ())) {
      const PMUInt64 value = inValue.uint64Value () ;
-     const PMUInt16 firstBit = (PMUInt16) (inFirstBit.uintValue () & PMUINT16_MAX) ;
-     const PMUInt16 bitCount = (PMUInt16) (inBitCount.uintValue () & PMUINT16_MAX) ;
+     const PMUInt32 firstBit = inFirstBit.uintValue () ;
+     const PMUInt32 bitCount = inBitCount.uintValue () ;
      result = GALGAS_bool (mBDD.containsValue64 (value, firstBit, bitCount)) ;
   }
   return result ;
@@ -546,16 +540,14 @@ GALGAS_uint GALGAS_binaryset::reader_significantVariableCount (UNUSED_LOCATION_A
 //---------------------------------------------------------------------------*
 
 GALGAS_uint_36__34_ GALGAS_binaryset::reader_valueCount (const GALGAS_uint & inVariableCount,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const {
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
   GALGAS_uint_36__34_ result ;
   if (inVariableCount.isValid ()) {
     if (mBDD.significantVariableCount () > inVariableCount.uintValue ()) {
       inCompiler->onTheFlyRunTimeError ("needed variable count is greater than variable count argument" COMMA_THERE) ;
-    }else if (inVariableCount.uintValue () > (((PMSInt32) PMUINT16_MAX) + 1)) {
-      inCompiler->onTheFlyRunTimeError ("variable count argument is greater than 32767" COMMA_THERE) ;
     }else{
-      result = GALGAS_uint_36__34_ (mBDD.valueCount ((PMUInt16) (inVariableCount.uintValue () & PMUINT16_MAX))) ;
+      result = GALGAS_uint_36__34_ (mBDD.valueCount (inVariableCount.uintValue ())) ;
     }
   }
   return result ;
@@ -571,21 +563,16 @@ GALGAS_uint_36__34_ GALGAS_binaryset::reader_compressedValueCount (UNUSED_LOCATI
 
 //---------------------------------------------------------------------------*
 
-GALGAS_uint_36__34_list GALGAS_binaryset::reader_uint_36__34_ValueList (const GALGAS_uint & inVariableCount,
-                                                                        C_Compiler * inCompiler
+GALGAS_uint_36__34_list GALGAS_binaryset::reader_uint_36__34_ValueList (const GALGAS_uint & inVariableCount
                                                                         COMMA_LOCATION_ARGS) const {
   GALGAS_uint_36__34_list result ;
   if (inVariableCount.isValid ()) {
-    if (inVariableCount.uintValue () > (((PMSInt32) PMUINT16_MAX) + 1)) {
-      inCompiler->onTheFlyRunTimeError ("variable count argument is greater than 32767" COMMA_THERE) ;
-    }else{
-      TC_UniqueArray <PMUInt64> valuesArray ;
-      mBDD.buildValue64Array (valuesArray, (PMUInt16) (inVariableCount.uintValue () & PMUINT16_MAX)) ;
-      result = GALGAS_uint_36__34_list::constructor_emptyList (THERE) ;
-      for (PMSInt32 i=0 ; i<valuesArray.count () ; i++) {
-        const PMUInt64 v = valuesArray (i COMMA_HERE) ;
-        result.addAssign_operation (GALGAS_uint_36__34_ (v) COMMA_HERE) ;
-      }
+    TC_UniqueArray <PMUInt64> valuesArray ;
+    mBDD.buildValue64Array (valuesArray, inVariableCount.uintValue ()) ;
+    result = GALGAS_uint_36__34_list::constructor_emptyList (THERE) ;
+    for (PMSInt32 i=0 ; i<valuesArray.count () ; i++) {
+      const PMUInt64 v = valuesArray (i COMMA_HERE) ;
+      result.addAssign_operation (GALGAS_uint_36__34_ (v) COMMA_HERE) ;
     }
   }
   return result ;
@@ -599,17 +586,13 @@ GALGAS_stringlist GALGAS_binaryset::reader_stringValueListWithNameList (const GA
                                                                         COMMA_LOCATION_ARGS) const {
   GALGAS_stringlist result ;
   if ((inVariableCount.isValid ()) && (inStringList.isValid ())) {
-    if (inVariableCount.uintValue () > (((PMSInt32) PMUINT16_MAX) + 1)) {
-      inCompiler->onTheFlyRunTimeError ("variable count argument is greater than 32767" COMMA_THERE) ;
-    }else{
-      TC_UniqueArray <PMUInt64> valuesArray ;
-      mBDD.buildValue64Array (valuesArray, (PMUInt16) (inVariableCount.uintValue () & PMUINT16_MAX)) ;
-      result = GALGAS_stringlist::constructor_emptyList (THERE) ;
-      for (PMSInt32 i=0 ; i<valuesArray.count () ; i++) {
-        const PMUInt32 v = (PMUInt32) (valuesArray (i COMMA_HERE) & PMUINT32_MAX) ;
-        GALGAS_uint object = GALGAS_uint (v) ;
-        result.addAssign_operation (inStringList.reader_mValueAtIndex (object, inCompiler COMMA_HERE) COMMA_HERE) ;
-      }
+    TC_UniqueArray <PMUInt64> valuesArray ;
+    mBDD.buildValue64Array (valuesArray, inVariableCount.uintValue ()) ;
+    result = GALGAS_stringlist::constructor_emptyList (THERE) ;
+    for (PMSInt32 i=0 ; i<valuesArray.count () ; i++) {
+      const PMUInt32 v = (PMUInt32) (valuesArray (i COMMA_HERE) & PMUINT32_MAX) ;
+      GALGAS_uint object = GALGAS_uint (v) ;
+      result.addAssign_operation (inStringList.reader_mValueAtIndex (object, inCompiler COMMA_HERE) COMMA_HERE) ;
     }
   }
   return result ;
@@ -622,25 +605,21 @@ GALGAS_stringlist GALGAS_binaryset::reader_compressedStringValueList (const GALG
                                                                       COMMA_LOCATION_ARGS) const {
   GALGAS_stringlist result ;
   if (inVariableCount.isValid ()) {
-    if (inVariableCount.uintValue () > (((PMSInt32) PMUINT16_MAX) + 1)) {
-      inCompiler->onTheFlyRunTimeError ("variable count argument is greater than 32767" COMMA_THERE) ;
+    const PMUInt32 variableCount = inVariableCount.uintValue () ;
+    const PMUInt32 actualVariableCount = mBDD.significantVariableCount () ;
+    if (actualVariableCount > variableCount) {
+      C_String message ;
+      message << "variable count argument (" << cStringWithSigned (variableCount)
+              << ") is lower than actual variable count ("
+              << cStringWithSigned (actualVariableCount) << "); it should be greater or equal" ;
+      inCompiler->onTheFlyRunTimeError (message COMMA_THERE) ;
     }else{
-      const PMUInt16 variableCount = (PMUInt16) (inVariableCount.uintValue () & PMUINT16_MAX) ;
-      const PMUInt16 actualVariableCount = mBDD.significantVariableCount () ;
-      if (actualVariableCount > variableCount) {
-        C_String message ;
-        message << "variable count argument (" << cStringWithSigned (variableCount)
-                << ") is lower than actual variable count ("
-                << cStringWithSigned (actualVariableCount) << "); it should be greater or equal" ;
-        inCompiler->onTheFlyRunTimeError (message COMMA_THERE) ;
-      }else{
-        TC_UniqueArray <C_String> valuesArray ;
-        mBDD.buildCompressedBigEndianStringValueArray (valuesArray, variableCount COMMA_THERE) ;
-        result = GALGAS_stringlist::constructor_emptyList (THERE) ;
-        for (PMSInt32 i=0 ; i<valuesArray.count () ; i++) {
-          const C_String v = valuesArray (i COMMA_HERE) ;
-          result.addAssign_operation (GALGAS_string (v) COMMA_HERE) ;
-        }
+      TC_UniqueArray <C_String> valuesArray ;
+      mBDD.buildCompressedBigEndianStringValueArray (valuesArray, variableCount COMMA_THERE) ;
+      result = GALGAS_stringlist::constructor_emptyList (THERE) ;
+      for (PMSInt32 i=0 ; i<valuesArray.count () ; i++) {
+        const C_String v = valuesArray (i COMMA_HERE) ;
+        result.addAssign_operation (GALGAS_string (v) COMMA_HERE) ;
       }
     }
   }
@@ -649,21 +628,16 @@ GALGAS_stringlist GALGAS_binaryset::reader_compressedStringValueList (const GALG
 
 //---------------------------------------------------------------------------*
 
-GALGAS_stringlist GALGAS_binaryset::reader_stringValueList (const GALGAS_uint & inVariableCount,
-                                                            C_Compiler * inCompiler
+GALGAS_stringlist GALGAS_binaryset::reader_stringValueList (const GALGAS_uint & inVariableCount
                                                             COMMA_LOCATION_ARGS) const {
   GALGAS_stringlist result ;
   if (inVariableCount.isValid ()) {
-    if (inVariableCount.uintValue () > (((PMSInt32) PMUINT16_MAX) + 1)) {
-      inCompiler->onTheFlyRunTimeError ("variable count argument is greater than 32767" COMMA_THERE) ;
-    }else{
-      TC_UniqueArray <C_String> valuesArray ;
-      mBDD.buildBigEndianStringValueArray (valuesArray, (PMUInt16) (inVariableCount.uintValue () & PMUINT16_MAX)) ;
-      result = GALGAS_stringlist::constructor_emptyList (THERE) ;
-      for (PMSInt32 i=0 ; i<valuesArray.count () ; i++) {
-        const C_String v = valuesArray (i COMMA_HERE) ;
-        result.addAssign_operation (GALGAS_string (v) COMMA_HERE) ;
-      }
+    TC_UniqueArray <C_String> valuesArray ;
+    mBDD.buildBigEndianStringValueArray (valuesArray, inVariableCount.uintValue ()) ;
+    result = GALGAS_stringlist::constructor_emptyList (THERE) ;
+    for (PMSInt32 i=0 ; i<valuesArray.count () ; i++) {
+      const C_String v = valuesArray (i COMMA_HERE) ;
+      result.addAssign_operation (GALGAS_string (v) COMMA_HERE) ;
     }
   }
   return result ;
@@ -677,58 +651,44 @@ GALGAS_string GALGAS_binaryset::reader_predicateStringValue (LOCATION_ARGS) cons
 
 //---------------------------------------------------------------------------*
 
-GALGAS_binaryset GALGAS_binaryset::reader_forAllOnBitIndex (const GALGAS_uint & inVariableIndex,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const {
+GALGAS_binaryset GALGAS_binaryset::reader_forAllOnBitIndex (const GALGAS_uint & inVariableIndex
+                                                            COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
-  if (inVariableIndex.uintValue () > 32766) {
-    inCompiler->onTheFlyRunTimeError ("index argument is greater than 32766" COMMA_THERE) ;
-  }else{
-    result = GALGAS_binaryset (mBDD.forallOnBitNumber ((PMUInt16) (inVariableIndex.uintValue () & PMUINT16_MAX))) ;
+  if (isValid()) {
+    result = GALGAS_binaryset (mBDD.forallOnBitNumber (inVariableIndex.uintValue ())) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------*
 
-GALGAS_binaryset GALGAS_binaryset::reader_forAllOnBitIndexAndBeyond (const GALGAS_uint & inVariableIndex,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const {
+GALGAS_binaryset GALGAS_binaryset::reader_forAllOnBitIndexAndBeyond (const GALGAS_uint & inVariableIndex
+                                                                     COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
-  if (inVariableIndex.uintValue () > 32766) {
-    inCompiler->onTheFlyRunTimeError ("index argument is greater than 32766" COMMA_THERE) ;
-  }else{
-    result = GALGAS_binaryset (mBDD.forallOnBitsAfterNumber ((PMUInt16) (inVariableIndex.uintValue () & PMUINT16_MAX))) ;
+  if (isValid ()) {
+    result = GALGAS_binaryset (mBDD.forallOnBitsAfterNumber (inVariableIndex.uintValue ())) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------*
 
-GALGAS_binaryset GALGAS_binaryset::reader_existOnBitIndex (const GALGAS_uint & inVariableIndex,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS)const  {
+GALGAS_binaryset GALGAS_binaryset::reader_existOnBitIndex (const GALGAS_uint & inVariableIndex
+                                                           COMMA_UNUSED_LOCATION_ARGS)const  {
   GALGAS_binaryset result ;
-  if (inVariableIndex.uintValue () > 32766) {
-    inCompiler->onTheFlyRunTimeError ("index argument is greater than 32766" COMMA_THERE) ;
-  }else{
-    result = GALGAS_binaryset (mBDD.existsOnBitNumber ((PMUInt16) (inVariableIndex.uintValue () & PMUINT16_MAX))) ;
+  if (isValid ()) {
+    result = GALGAS_binaryset (mBDD.existsOnBitNumber (inVariableIndex.uintValue ())) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------*
 
-GALGAS_binaryset GALGAS_binaryset::reader_existOnBitIndexAndBeyond (const GALGAS_uint & inVariableIndex,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) const {
+GALGAS_binaryset GALGAS_binaryset::reader_existOnBitIndexAndBeyond (const GALGAS_uint & inVariableIndex
+                                                                    COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
   if (inVariableIndex.isValid ()) {
-    if (inVariableIndex.uintValue () > 32766) {
-      inCompiler->onTheFlyRunTimeError ("index argument is greater than 32766" COMMA_THERE) ;
-    }else{
-      result = GALGAS_binaryset (mBDD.existsOnBitsAfterNumber ((PMUInt16) (inVariableIndex.uintValue () & PMUINT16_MAX))) ;
-    }
+    result = GALGAS_binaryset (mBDD.existsOnBitsAfterNumber (inVariableIndex.uintValue ())) ;
   }
   return result ;
 }
@@ -740,8 +700,8 @@ GALGAS_binaryset GALGAS_binaryset::reader_swap_32__31_ (const GALGAS_uint & inBi
                                                           COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
   if ((inBitCount1.isValid ()) && (inBitCount2.isValid ())) {
-    const PMUInt16 bitSize1 = (PMUInt16) (inBitCount1.uintValue () & PMUINT16_MAX) ;
-    const PMUInt16 bitSize2 = (PMUInt16) (inBitCount2.uintValue () & PMUINT16_MAX) ;
+    const PMUInt32 bitSize1 = inBitCount1.uintValue () ;
+    const PMUInt32 bitSize2 = inBitCount2.uintValue () ;
     result = GALGAS_binaryset (mBDD.swap21 (bitSize1, bitSize2)) ;
   }
   return result ;
@@ -755,9 +715,9 @@ GALGAS_binaryset GALGAS_binaryset::reader_swap_31__33__32_ (const GALGAS_uint & 
                                                               COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
   if ((inBitCount1.isValid ()) && (inBitCount2.isValid ()) && (inBitCount3.isValid ())) {
-    const PMUInt16 bitSize1 = (PMUInt16) (inBitCount1.uintValue () & PMUINT16_MAX) ;
-    const PMUInt16 bitSize2 = (PMUInt16) (inBitCount2.uintValue () & PMUINT16_MAX) ;
-    const PMUInt16 bitSize3 = (PMUInt16) (inBitCount3.uintValue () & PMUINT16_MAX) ;
+    const PMUInt32 bitSize1 = inBitCount1.uintValue () ;
+    const PMUInt32 bitSize2 = inBitCount2.uintValue () ;
+    const PMUInt32 bitSize3 = inBitCount3.uintValue () ;
     result = GALGAS_binaryset (mBDD.swap132  (bitSize1, bitSize2, bitSize3)) ;
   }
   return result ;
@@ -771,9 +731,9 @@ GALGAS_binaryset GALGAS_binaryset::reader_swap_32__31__33_ (const GALGAS_uint & 
                                                               COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
   if ((inBitCount1.isValid ()) && (inBitCount2.isValid ()) && (inBitCount3.isValid ())) {
-    const PMUInt16 bitSize1 = (PMUInt16) (inBitCount1.uintValue () & PMUINT16_MAX) ;
-    const PMUInt16 bitSize2 = (PMUInt16) (inBitCount2.uintValue () & PMUINT16_MAX) ;
-    const PMUInt16 bitSize3 = (PMUInt16) (inBitCount3.uintValue () & PMUINT16_MAX) ;
+    const PMUInt32 bitSize1 = inBitCount1.uintValue () ;
+    const PMUInt32 bitSize2 = inBitCount2.uintValue () ;
+    const PMUInt32 bitSize3 = inBitCount3.uintValue () ;
     result = GALGAS_binaryset (mBDD.swap213 (bitSize1, bitSize2, bitSize3)) ;
   }
   return result ;
@@ -787,9 +747,9 @@ GALGAS_binaryset GALGAS_binaryset::reader_swap_32__33__31_ (const GALGAS_uint & 
                                                               COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
   if ((inBitCount1.isValid ()) && (inBitCount2.isValid ()) && (inBitCount3.isValid ())) {
-    const PMUInt16 bitSize1 = (PMUInt16) (inBitCount1.uintValue () & PMUINT16_MAX) ;
-    const PMUInt16 bitSize2 = (PMUInt16) (inBitCount2.uintValue () & PMUINT16_MAX) ;
-    const PMUInt16 bitSize3 = (PMUInt16) (inBitCount3.uintValue () & PMUINT16_MAX) ;
+    const PMUInt32 bitSize1 = inBitCount1.uintValue () ;
+    const PMUInt32 bitSize2 = inBitCount2.uintValue () ;
+    const PMUInt32 bitSize3 = inBitCount3.uintValue () ;
     result = GALGAS_binaryset (mBDD.swap231 (bitSize1, bitSize2, bitSize3)) ;
   }
   return result ;
@@ -803,9 +763,9 @@ GALGAS_binaryset GALGAS_binaryset::reader_swap_33__31__32_ (const GALGAS_uint & 
                                                               COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
   if ((inBitCount1.isValid ()) && (inBitCount2.isValid ()) && (inBitCount3.isValid ())) {
-    const PMUInt16 bitSize1 = (PMUInt16) (inBitCount1.uintValue () & PMUINT16_MAX) ;
-    const PMUInt16 bitSize2 = (PMUInt16) (inBitCount2.uintValue () & PMUINT16_MAX) ;
-    const PMUInt16 bitSize3 = (PMUInt16) (inBitCount3.uintValue () & PMUINT16_MAX) ;
+    const PMUInt32 bitSize1 = inBitCount1.uintValue () ;
+    const PMUInt32 bitSize2 = inBitCount2.uintValue () ;
+    const PMUInt32 bitSize3 = inBitCount3.uintValue () ;
     result = GALGAS_binaryset (mBDD.swap321 (bitSize1, bitSize2, bitSize3)) ;
   }
   return result ;
@@ -819,9 +779,9 @@ GALGAS_binaryset GALGAS_binaryset::reader_swap_33__32__31_ (const GALGAS_uint & 
                                                               COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
   if ((inBitCount1.isValid ()) && (inBitCount2.isValid ()) && (inBitCount3.isValid ())) {
-    const PMUInt16 bitSize1 = (PMUInt16) (inBitCount1.uintValue () & PMUINT16_MAX) ;
-    const PMUInt16 bitSize2 = (PMUInt16) (inBitCount2.uintValue () & PMUINT16_MAX) ;
-    const PMUInt16 bitSize3 = (PMUInt16) (inBitCount3.uintValue () & PMUINT16_MAX) ;
+    const PMUInt32 bitSize1 = inBitCount1.uintValue () ;
+    const PMUInt32 bitSize2 = inBitCount2.uintValue () ;
+    const PMUInt32 bitSize3 = inBitCount3.uintValue () ;
     result = GALGAS_binaryset (mBDD.swap321 (bitSize1, bitSize2, bitSize3)) ;
   }
   return result ;
@@ -830,10 +790,10 @@ GALGAS_binaryset GALGAS_binaryset::reader_swap_33__32__31_ (const GALGAS_uint & 
 //---------------------------------------------------------------------------*
 
 GALGAS_binaryset GALGAS_binaryset::reader_transitiveClosure (const GALGAS_uint & inBitCount
-                                                               COMMA_UNUSED_LOCATION_ARGS) const {
+                                                             COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
   if (inBitCount.isValid ()) {
-    const PMUInt16 bitCount = (PMUInt16) (inBitCount.uintValue () & PMUINT16_MAX) ;
+    const PMUInt32 bitCount = inBitCount.uintValue () ;
     result = GALGAS_binaryset (mBDD.transitiveClosure (bitCount, NULL)) ;
   }
   return result ;
@@ -850,8 +810,8 @@ GALGAS_binaryset GALGAS_binaryset::reader_accessibleStates (const GALGAS_binarys
   GALGAS_binaryset result ;
   if ((inInitialStateSet.isValid ()) && (inBitSize.isValid ())) {
     result = GALGAS_binaryset (mBDD.accessibleStates (inInitialStateSet.mBDD,
-                                                   (PMUInt16) (inBitSize.uintValue () & PMUINT16_MAX),
-                                                   NULL)) ;
+                               inBitSize.uintValue (),
+                               NULL)) ;
   }
   return result ;
 }
@@ -863,19 +823,19 @@ GALGAS_binaryset GALGAS_binaryset::reader_binarySetByTranslatingFromIndex (const
                                                                            COMMA_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
   if ((inFirstIndexToTranslate.isValid ()) && (inTranslation.isValid ())) {
-    const PMUInt16 varCount = mBDD.significantVariableCount () ;
-    const PMUInt16 translation = (PMUInt16) (inTranslation.uintValue () & PMUINT16_MAX) ;
+    const PMUInt32 varCount = mBDD.significantVariableCount () ;
+    const PMUInt32 translation = inTranslation.uintValue () ;
     if ((varCount == 0) || (translation == 0)) {
       result = *this ;
     }else{
-      const PMUInt16 firstIndex = (PMUInt16) (inFirstIndexToTranslate.uintValue () & PMUINT16_MAX) ;
-      PMUInt16 * substitionArray = NULL ;
-      macroMyNewArray (substitionArray, PMUInt16, varCount) ;
-      for (PMUInt16 i=0 ; i<varCount ; i++) {
+      const PMUInt32 firstIndex = inFirstIndexToTranslate.uintValue () ;
+      PMUInt32 * substitionArray = NULL ;
+      macroMyNewArray (substitionArray, PMUInt32, varCount) ;
+      for (PMUInt32 i=0 ; i<varCount ; i++) {
         substitionArray [i] = i ;
       }
-      for (PMUInt16 i=firstIndex ; i<varCount ; i++) {
-        substitionArray [i] = (PMUInt16) (substitionArray [i] + translation) ;
+      for (PMUInt32 i=firstIndex ; i<varCount ; i++) {
+        substitionArray [i] = (PMUInt32) (substitionArray [i] + translation) ;
       }
       result = GALGAS_binaryset (mBDD.substitution (substitionArray, varCount COMMA_THERE)) ;
       macroMyDeleteArray (substitionArray) ;
@@ -891,12 +851,12 @@ GALGAS_binaryset GALGAS_binaryset::reader_existsOnBitRange (const GALGAS_uint & 
                                                               COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
   if ((inFirstIndex.isValid ()) && (inCount.isValid ())) {
-    const PMUInt16 varCount = mBDD.significantVariableCount () ;
-    const PMUInt16 count = (PMUInt16) (inCount.uintValue () & PMUINT16_MAX) ;
+    const PMUInt32 varCount = mBDD.significantVariableCount () ;
+    const PMUInt32 count = inCount.uintValue () ;
     if ((varCount == 0) || (count == 0)) {
       result = *this ;
     }else{
-      const PMUInt16 firstIndex = (PMUInt16) (inFirstIndex.uintValue () & PMUINT16_MAX) ;
+      const PMUInt32 firstIndex = inFirstIndex.uintValue () ;
       result = GALGAS_binaryset (mBDD.existsOnBitRange (firstIndex, count)) ;
     }
   }
@@ -909,7 +869,7 @@ GALGAS_binaryset GALGAS_binaryset::left_shift_operation (const GALGAS_uint inLef
                                                          COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
   if (isValid () && (inLeftShiftCount.isValid ())) {
-    result = GALGAS_binaryset (mBDD.bddByLeftShifting ((PMUInt16) (inLeftShiftCount.uintValue () & PMUINT16_MAX))) ;
+    result = GALGAS_binaryset (mBDD.bddByLeftShifting (inLeftShiftCount.uintValue ())) ;
   }
   return result ;
 }
@@ -920,7 +880,7 @@ GALGAS_binaryset GALGAS_binaryset::right_shift_operation (const GALGAS_uint inRi
                                                           COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_binaryset result ;
   if (isValid () && (inRightShiftCount.isValid ())) {
-    result = GALGAS_binaryset (mBDD.bddByRightShifting ((PMUInt16) (inRightShiftCount.uintValue () & PMUINT16_MAX))) ;
+    result = GALGAS_binaryset (mBDD.bddByRightShifting (inRightShiftCount.uintValue ())) ;
   }
   return result ;
 }
