@@ -70,7 +70,7 @@ class C_VDL_hashmap {
   public : inline PMSInt32 getHashMapEntryCount (void) const { return mEntryCurrentCount ; }
 
 //--- Get node size (in bytes)
-  public : static PMUInt32 getNodeSize (void) { return sizeof (MyBlockavltree_element_for_collision) ; }
+  public : static PMUInt32 getNodeSize (void) { return (PMUInt32) sizeof (MyBlockavltree_element_for_collision) ; }
 
 //--- Get allocated size (in bytes)
   public : static PMUInt32 getAllocatedSizeInBytes (void) ;
