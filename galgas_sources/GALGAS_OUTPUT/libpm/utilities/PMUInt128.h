@@ -28,50 +28,54 @@
 
 //---------------------------------------------------------------------------*
 
-#include "collections/TC_Array.h"
 #include "strings/C_String.h"
 
 //---------------------------------------------------------------------------*
 
-class C_BigUInt {
+class PMUInt128 {
 //--- Constructors
-  public : C_BigUInt (void) ;
-  public : C_BigUInt (const PMUInt64 inValue) ;
+  public : PMUInt128 (void) ;
+  public : PMUInt128 (const PMUInt64 inValue) ;
 
 //--- Destructor
-  public : virtual ~ C_BigUInt (void) ;
+  public : virtual ~ PMUInt128 (void) ;
 
 //--- Is Zero
   public : bool isZero (void) const ;
 
 //--- Comparison
-  public : bool operator == (const C_BigUInt & inValue) const ;
-  public : bool operator != (const C_BigUInt & inValue) const ;
-  public : bool greaterThan (const PMUInt32 inOperand) const ;
+  public : bool operator == (const PMUInt128 & inValue) const ;
+  public : bool operator != (const PMUInt128 & inValue) const ;
+  public : bool operator > (const PMUInt32 inOperand) const ;
 
+//--- Incrementation, decrmentation
+  public : PMUInt128 & operator ++ (void) ;
+  public : PMUInt128 & operator -- (void) ;
+  
 //--- Addition
-  public : void operator += (const C_BigUInt & inValue) ;
-  public : C_BigUInt operator + (const C_BigUInt & inValue) const ;
+  public : void operator += (const PMUInt128 & inValue) ;
+  public : PMUInt128 operator + (const PMUInt128 & inValue) const ;
 
 //--- Multiplication
-  public : void multiplyBy (const PMUInt32 inMultiplicand) ;
+  public : void operator *= (const PMUInt32 inMultiplicand) ;
 
 //--- Division
   public : void divideBy (const PMUInt32 inDivisor,
                           PMUInt32 & outRemainder) ;
+  public : void operator /= (const PMUInt32 inMultiplicand) ;
 
 //--- Bit access
   public : bool valueAtBitIndex (const PMUInt32 inIndex) const ;
   public : void setValueAtBitIndex (const bool inValue, const PMUInt32 inIndex) ;
 
+//--- Example
+  public : static void example (void) ;
+  
 //--- Value as string
   public : C_String decimalString (void) const ;
-
-//--- Internal method
-  private : void normalize (void) ;
-
 //--- Attributes
-  private : TC_Array <PMUInt32> mValueArray ;
+  private : PMUInt64 mLow ;
+  private : PMUInt64 mHigh ;
 } ;
 
 //---------------------------------------------------------------------------*
