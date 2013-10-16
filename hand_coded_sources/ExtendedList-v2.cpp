@@ -43,9 +43,9 @@ CalculateHyperPeriod (const TC_UniqueArray <cElement> & Element) {
         || 
         (Element (index COMMA_HERE).mEvery != 1) ) {
       if (LCM == 0) {
-        LCM = Element (index COMMA_HERE).mPeriod ;
+        LCM = (PMUInt64) Element (index COMMA_HERE).mPeriod ;
       }else{
-        LCM = Element (index COMMA_HERE).mPeriod * Element (index COMMA_HERE).mEvery * LCM / GCD (Element (index COMMA_HERE).mPeriod * Element (index COMMA_HERE).mEvery, LCM) ;
+        LCM = ((PMUInt64) (Element (index COMMA_HERE).mPeriod * Element (index COMMA_HERE).mEvery)) * LCM / GCD ((PMUInt64) (Element (index COMMA_HERE).mPeriod * Element (index COMMA_HERE).mEvery), LCM) ;
       }
       if (Element (index COMMA_HERE).mIsIndependant){
         minimumOffset = min (minimumOffset, Element (index COMMA_HERE).mOffset);
@@ -269,8 +269,7 @@ DeployElements (TC_UniqueArray <cElement> & ArrangedElement,
     element.mPeriod = ArrangedElement (index COMMA_HERE).mPeriod;
   //Keep the number of occurence during the hyper period
     ArrangedElement (index COMMA_HERE).mInExtendedList = ExtendedIndicator;            
-    element.mWidth = 
-          (PMSInt32) (inHyperPeriod /ArrangedElement(index COMMA_HERE).mPeriod) ; 
+    element.mWidth = (PMSInt32) inHyperPeriod / ArrangedElement(index COMMA_HERE).mPeriod ;
   /*    
         printf("Element Id = %d & its 1st occurence is : %d and has awidth = %d.\n",
             index +1,ExtendedIndicator+1,element.mWidth); */ 
@@ -278,7 +277,7 @@ DeployElements (TC_UniqueArray <cElement> & ArrangedElement,
     if (ArrangedElement (index COMMA_HERE).mSuccessorId != -1) {
       SuccessorGap = 0;
       for(PMSInt32 i= index; i< ArrangedElement (index COMMA_HERE).mSuccessorId;i++) {
-        SuccessorGap += (PMSInt32) (inHyperPeriod /ArrangedElement(i COMMA_HERE).mPeriod);    
+        SuccessorGap += (PMSInt32) inHyperPeriod /ArrangedElement(i COMMA_HERE).mPeriod;
       }
       ArrangedElement (index COMMA_HERE).mSuccessorId =ExtendedIndicator + SuccessorGap ;
     } 
@@ -286,7 +285,7 @@ DeployElements (TC_UniqueArray <cElement> & ArrangedElement,
     if (ArrangedElement (index COMMA_HERE).mOtherHeirId != -1) {
       OtherHeirGap = 0;
       for(PMSInt32 i= index; i<ArrangedElement (index COMMA_HERE).mOtherHeirId;i++) {
-        OtherHeirGap += (PMSInt32) (inHyperPeriod /ArrangedElement(i COMMA_HERE).mPeriod);    
+        OtherHeirGap += (PMSInt32) inHyperPeriod /ArrangedElement(i COMMA_HERE).mPeriod;
       }
       ArrangedElement (index COMMA_HERE).mOtherHeirId =ExtendedIndicator + OtherHeirGap ;
     } 
@@ -304,8 +303,7 @@ DeployElements (TC_UniqueArray <cElement> & ArrangedElement,
     
     PMSInt32 Repetition =0;
         
-    for(PMSInt32 clicktime = 0; 
-    	((PMUInt32) clicktime) <= (inHyperPeriod - ArrangedElement (index COMMA_HERE).mPeriod) ; clicktime++) {
+    for (PMSInt32 clicktime = 0; (clicktime) <= ((PMSInt32) inHyperPeriod - ArrangedElement (index COMMA_HERE).mPeriod) ; clicktime++) {
     
       if ( clicktime% ArrangedElement (index COMMA_HERE).mPeriod == 0) {
           

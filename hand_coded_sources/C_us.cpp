@@ -217,13 +217,13 @@ C_us & C_us::operator = (const C_us & inOperand) {
 //---------------------------------------------------------------------------*
 
 PMUInt64 C_us::getCacheEntriesCount (void) {
-  return gCache.getCacheEntriesCount () ;
+  return (PMUInt64) gCache.getCacheEntriesCount () ;
 }
 
 //---------------------------------------------------------------------------*
 
 PMUInt64 C_us::getCacheSuccessCount (void) {
-  return gCache.getCacheEntriesCount () ;
+  return (PMUInt64) gCache.getCacheEntriesCount () ;
 }
 
 //---------------------------------------------------------------------------*
@@ -391,7 +391,7 @@ void C_us::printVDLsummary (AC_OutputStream & inOutputStream) {
                  << " VDL used nodes (size " << cStringWithUnsigned (getNodeSize ()) << " bytes) ;\n"
                     "  " << cStringWithSigned (C_us_hashmap::getCreatedObjectCount ())
                  << " VDL created nodes (total size "
-                 << cStringWithUnsigned ((PMUInt32) ((C_us_hashmap::getCreatedObjectCount () * getNodeSize ()) / 1024UL))
+                 << cStringWithUnsigned (((PMUInt32) C_us_hashmap::getCreatedObjectCount () * getNodeSize ()) / 1024UL)
                  << " kbytes) ;\n"
                     "  " << cStringWithSigned (getNodeComparesCount ()) << " comparisons ;\n"
                     "  " << cStringWithUnsigned (getTrivialAddCount ())
