@@ -525,14 +525,14 @@ PMUInt32 C_VDL_hashmap::sweepUnmarkedObjects (void) {
 //---------------------------------------------------------------------------*
 
 PMUInt32 C_VDL_hashmap::getMapSizeInBytes (void) const {
-  return (PMUInt32) (mEntryCurrentCount * sizeof (C_TreeForCollision)) ;
+  return (PMUInt32) mEntryCurrentCount * (PMUInt32) sizeof (C_TreeForCollision) ;
 }
 
 //---------------------------------------------------------------------------*
 
 void C_VDL_hashmap
 ::reallocMap (const PMSInt32 inNewSize) {
-  const PMSInt32 newSize = (inNewSize < 1) ? 1 : getPrimeGreaterThan (inNewSize) ;
+  const PMSInt32 newSize = (inNewSize < 1) ? 1 : (PMSInt32) getPrimeGreaterThan ((PMUInt32) inNewSize) ;
   if (newSize != mEntryCurrentCount) {
     C_TreeForCollision * newMapArray = (newSize > 1) ? new C_TreeForCollision [newSize] : (& mMinimumMapArray) ;
     for (PMSInt32 i=0 ; i<mEntryCurrentCount ; i++) {
