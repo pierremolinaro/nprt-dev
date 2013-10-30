@@ -288,7 +288,7 @@ void LowerPriorityOnResource (PMSInt32 & lowerPriority, const PMSInt32 activityI
 //---------------------------------------------------------------------------*
 PMSInt32 C_activitiesToSchedule::
 getLowerPriority (const PMSInt32 currentActivityIndex, 
-                  const TC_UniqueArray <cActivity> & inActivities) {
+                  const TC_UniqueArray <cActivity> & inActivities) const {
   PMSInt32 lowerPriority = 0 ; 
   PMSInt32 activityIndex = currentActivityIndex ;// Means none
   PMSInt32 ResourceIndex = inActivities (activityIndex COMMA_HERE).mResourceId;
@@ -343,7 +343,7 @@ void SuccessorsMaxBusyDuration (PMSInt32 & ioBusyDuration, const PMSInt32 activi
 //---------------------------------------------------------------------------*
 PMSInt32 C_activitiesToSchedule::
 getMaximumBusyPeriod (const PMSInt32 currentActivityIndex, 
-                      const TC_UniqueArray <cActivity> & inActivities) {
+                      const TC_UniqueArray <cActivity> & inActivities) const {
  
   PMSInt32 BusyDuration=0;
   const PMSInt32 ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
@@ -406,7 +406,7 @@ void SuccessorsMinBusyDuration4Activity (PMSInt32 & ioBusyDuration, const PMSInt
 //---------------------------------------------------------------------------*
 PMSInt32 C_activitiesToSchedule::
 getMinimumBusyPeriod4Activity (const PMSInt32 currentActivityIndex, 
-                      const TC_UniqueArray <cActivity> & inActivities) {
+                               const TC_UniqueArray <cActivity> & inActivities) const {
  
   PMSInt32 BusyDuration=0;
   const PMSInt32 ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
@@ -488,7 +488,7 @@ void SuccessorsMinBusyDuration (PMSInt32 & ioBusyDuration, const PMSInt32 activi
 //---------------------------------------------------------------------------*
 PMSInt32 C_activitiesToSchedule::
 getMinimumBusyPeriod (const PMSInt32 currentActivityIndex, 
-                      const TC_UniqueArray <cActivity> & inActivities) {
+                      const TC_UniqueArray <cActivity> & inActivities) const {
  
   PMSInt32 BusyDuration=0;
   const PMSInt32 ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
