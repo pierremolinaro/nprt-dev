@@ -65,16 +65,17 @@ class C_activitiesToSchedule {
 //--- Get first activity to schedule
   public : PMSInt32 getFirstToScheduleAndSuppress (const PMSInt32 inCurrentInstant) ;
   public : PMSInt32 getMinimumBusyPeriod4Activity  (const PMSInt32 inCurrentActivity,
-                                      const TC_UniqueArray <cActivity> & inActivities);
+                                                    const TC_UniqueArray <cActivity> & inActivities) const ;
  
   public : PMSInt32 getMaximumBusyPeriod (const PMSInt32 currentActivityIndex,
-                                        const TC_UniqueArray <cActivity> & inActivities); 
+                                          const TC_UniqueArray <cActivity> & inActivities) const ; 
  
   public : PMSInt32 getMinimumBusyPeriod (const PMSInt32 currentActivityIndex,
-                                        const TC_UniqueArray <cActivity> & inActivities); 
+                                          const TC_UniqueArray <cActivity> & inActivities) const ; 
  
   public : PMSInt32 getLowerPriority (const PMSInt32 currentActivityIndex, 
-                                    const TC_UniqueArray <cActivity> & inActivities) ;
+                                      const TC_UniqueArray <cActivity> & inActivities) const ;
+
   public : PMSInt32 getFirstToSchedule (const PMSInt32 inCurrentInstant) const ;
   public : PMSInt32 getFirstScheduledInstant (const PMSInt32 inCurrentInstant) const ;
   public : bool AnyReadyToScheduleAt (const PMSInt32 inCurrentInstant) const ;
