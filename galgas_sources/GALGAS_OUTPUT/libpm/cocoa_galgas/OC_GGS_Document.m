@@ -34,6 +34,7 @@
 #import "OC_GGS_RulerViewForBuildOutput.h"
 #import "OC_GGS_Scroller.h"
 #import "PMDebug.h"
+#import "PMSearchResultDescriptor.h"
 
 //---------------------------------------------------------------------------*
 
@@ -102,15 +103,6 @@
 
 //---------------------------------------------------------------------------*
 
-- (void) replaceSourceStringWithString: (NSString *) inString {
-  #ifdef DEBUG_MESSAGES
-    NSLog (@"%s", __PRETTY_FUNCTION__) ;
-  #endif
-  [mDocumentData replaceSourceStringWithString:inString] ;
-}
-
-//---------------------------------------------------------------------------*
-
 #pragma mark Nib relative Actions
 
 //---------------------------------------------------------------------------*
@@ -146,7 +138,47 @@
 //--- Add Split view binding
 // Note : use [self lastComponentOfFileName] instead of [window title], because window title may not set at this point
   key = [NSString stringWithFormat:@"values.issue-split-fraction:%@", self.lastComponentOfFileName] ;
-  [mIssueSplitView setAutosaveName:key] ;
+  [mFirstSplitView setAutosaveName:key] ;
+  key = [NSString stringWithFormat:@"values.build-split-fraction:%@", self.lastComponentOfFileName] ;
+  [mSecondSplitView setAutosaveName:key] ;
+//---
+  mFirstSplitView.delegate = self ;
+  mSecondSplitView.delegate = self ;
+//---
+  mOccurenceFoundCountTextField.stringValue = @"" ;
+//--- Global search result display
+  mFoundEntryTreeController = [NSTreeController new] ;
+  mFoundEntryTreeController.childrenKeyPath = @"children" ;
+  [mFoundEntryTreeController
+    bind:@"contentArray"
+    toObject:self
+    withKeyPath:@"mResultArray"
+    options:nil
+  ] ;
+  [mFoundEntryTreeController
+    addObserver:self 
+    forKeyPath:@"selectionIndexPath"
+    options:0
+    context:NULL
+  ] ;
+  [[mResultOutlineView tableColumnWithIdentifier:@"count"]
+    bind:@"value"
+    toObject:mFoundEntryTreeController
+    withKeyPath:@"arrangedObjects.countString"
+    options:nil
+  ] ;
+  [[mResultOutlineView tableColumnWithIdentifier:@"result"]
+    bind:@"value"
+    toObject:mFoundEntryTreeController
+    withKeyPath:@"arrangedObjects.foundItem"
+    options:nil
+  ] ;
+  [[mResultOutlineView tableColumnWithIdentifier:@"result"]
+    bind:@"fontBold"
+    toObject:mFoundEntryTreeController
+    withKeyPath:@"arrangedObjects.boldDisplay"
+    options:nil
+  ] ;
 //---
   [mSourceDisplayArrayController
     bind:@"contentArray"
@@ -166,6 +198,13 @@
     forKeyPath:@"selection.textSelectionStart"
     options:0
     context:NULL
+  ] ;
+//---
+  [mSourceFilePathTextField
+    bind:@"value"
+    toObject:mSourceDisplayArrayController
+    withKeyPath:@"selection.sourceURL.path"
+    options:nil    
   ] ;
 //---
   [[mDisplayDescriptorTableView tableColumnWithIdentifier:@"source"]
@@ -257,6 +296,54 @@
   #ifdef DEBUG_MESSAGES
     NSLog (@"%s: DONE", __PRETTY_FUNCTION__) ;
   #endif
+//---
+  [mCaseSensitiveSearchCheckbox
+    bind:@"value"
+    toObject:[NSUserDefaultsController sharedUserDefaultsController] 
+    withKeyPath:@"values.SENSITIVE-SEARCH" 
+    options:nil
+  ] ;
+  [mGlobalReplaceTextField
+    bind:@"value"
+    toObject:[NSUserDefaultsController sharedUserDefaultsController] 
+    withKeyPath:@"values.GLOBAL-REPLACE-FIELD" 
+    options:nil
+  ] ;
+  [mSearchMatrix
+    bind:@"selectedIndex"
+    toObject:[NSUserDefaultsController sharedUserDefaultsController] 
+    withKeyPath:@"values.SEARCH-MATRIX" 
+    options:nil
+  ] ;
+//--- Configuring recent search menu
+  NSMenu * cellMenu = [[NSMenu alloc]
+    initWithTitle:NSLocalizedString(@"Search Menu", @"Search Menu title")
+  ] ;
+  NSMenuItem * item = [[NSMenuItem alloc]
+    initWithTitle:NSLocalizedString(@"Clear", @"Clear menu title")
+    action:NULL
+    keyEquivalent:@""
+  ];
+  [item setTag:NSSearchFieldClearRecentsMenuItemTag];
+  [cellMenu insertItem:item atIndex:0];
+  item = [NSMenuItem separatorItem];
+  [item setTag:NSSearchFieldRecentsTitleMenuItemTag];
+  [cellMenu insertItem:item atIndex:1];
+  item = [[NSMenuItem alloc]
+    initWithTitle:NSLocalizedString(@"Recent Searches", @"Recent Searches menu title")
+    action:NULL keyEquivalent:@""
+  ];
+  [item setTag:NSSearchFieldRecentsTitleMenuItemTag];
+  [cellMenu insertItem:item atIndex:2];
+  item = [[NSMenuItem alloc]
+    initWithTitle:@"Recents"
+    action:NULL
+    keyEquivalent:@""
+  ];
+  [item setTag:NSSearchFieldRecentsMenuItemTag];
+  [cellMenu insertItem:item atIndex:3];
+  id searchCell = [mGlobalSearchTextField cell];
+  [searchCell setSearchMenuTemplate:cellMenu];
 }
 
 //---------------------------------------------------------------------------*
@@ -281,6 +368,10 @@
   for (NSView * subview in mSourceHostView.subviews.copy) {
     [subview removeFromSuperview] ;
   }
+//---
+  [mSourceFilePathTextField
+    unbind:@"value"
+  ] ;
 //---
   [mSourceDisplayArrayController
     unbind:@"contentArray"
@@ -318,10 +409,37 @@
     unbind:@"value"
   ] ;
 //---
+  [mFoundEntryTreeController
+    unbind:@"contentArray"
+  ] ;
+  [mFoundEntryTreeController
+    removeObserver:self 
+    forKeyPath:@"selectionIndexPath"
+  ] ;
+  [[mResultOutlineView tableColumnWithIdentifier:@"count"]
+    unbind:@"value"
+  ] ;
+  [[mResultOutlineView tableColumnWithIdentifier:@"result"]
+    unbind:@"value"
+  ] ;
+  [[mResultOutlineView tableColumnWithIdentifier:@"result"]
+    unbind:@"fontBold"
+  ] ;
+//---
   NSUserDefaults * ud = [NSUserDefaults standardUserDefaults] ;
   [ud
     removeObserver:self
     forKeyPath:GGS_build_text_font
+  ] ;
+//---
+  [mCaseSensitiveSearchCheckbox
+    unbind:@"value"
+  ] ;
+  [mGlobalReplaceTextField
+    unbind:@"value"
+  ] ;
+  [mSearchMatrix
+    unbind:@"selectedIndex"
   ] ;
 //---
   mSourceDisplayArrayController = nil ;
@@ -335,18 +453,6 @@
 //---------------------------------------------------------------------------*
 
 #pragma mark Actions
-
-//---------------------------------------------------------------------------*
-
-- (void) clickOnSourceTableView: (id) inSEnder {
-  if (mDisplayDescriptorTableView.clickedColumn == 1) {
-    const NSInteger row = mDisplayDescriptorTableView.clickedRow ;
-    if (row >= 0) {
-      OC_GGS_TextDisplayDescriptor * desc = [mSourceDisplayArrayController.arrangedObjects objectAtIndex: (NSUInteger) row] ;
-      [self removeSelectedTabAction:desc] ;
-    }
-  }
-}
 
 //---------------------------------------------------------------------------*
 
@@ -381,24 +487,6 @@
 
 //---------------------------------------------------------------------------*
 
-- (void) removeSelectedTabAction: (OC_GGS_TextDisplayDescriptor *) inTextDisplayDescriptor {
-  #ifdef DEBUG_MESSAGES
-    NSLog (@"%s", __PRETTY_FUNCTION__) ;
-  #endif
-//---
-  const BOOL lastSourceWillClose = [mSourceDisplayArrayController.arrangedObjects count] == 1 ;
-  [mSourceDisplayArrayController removeObject:inTextDisplayDescriptor] ;
-  [inTextDisplayDescriptor detachTextDisplayDescriptor] ;
-  [OC_GGS_DocumentData cocoaDocumentWillClose:nil] ;
-  if (lastSourceWillClose) {
-    [self.windowForSheet performClose:nil] ;
-  }else{
-    [self registerConfigurationInPreferences] ;
-  }
-}
-
-//---------------------------------------------------------------------------*
-
 - (void) changeSelectedSourceViewAction: (NSButton *) inSender {
   #ifdef DEBUG_MESSAGES
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
@@ -427,7 +515,7 @@
   #ifdef DEBUG_MESSAGES
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
   #endif
-  [mIssueSplitView setPosition:0.0 ofDividerAtIndex:0] ;
+  [mFirstSplitView setPosition:0.0 ofDividerAtIndex:0] ;
 }
 
 //---------------------------------------------------------------------------*
@@ -848,6 +936,10 @@
   OC_GGS_Scroller * scroller = (OC_GGS_Scroller *) mOutputScrollView.verticalScroller ;
   [scroller setIssueArray:mIssueArray] ;
 //---
+  if (nil == mOutputScrollView.superview) {
+    [self closeSearchAndReplaceView:nil] ;
+  }
+//---
   [OC_GGS_DocumentData broadcastIssueArray:nil] ;
   mBuildTask = [[OC_GGS_BuildTask alloc] initWithDocument:self] ;
   self.mBuildTaskIsRunning = YES ;
@@ -1057,7 +1149,7 @@ static const utf32 COCOA_ERROR_ID   = TO_UNICODE (4) ;
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
   #endif
   [mBufferedOutputData appendData:inData] ;
-//--- Split input data, be detecting 2 consecutives COCOA_MESSAGE_ID characters
+//--- Split input data, by detecting 2 consecutives COCOA_MESSAGE_ID characters
   BOOL ok = YES ;
   const uint16 sentinel = 0x0101 ;
   while (ok) {
@@ -1102,6 +1194,92 @@ static const utf32 COCOA_ERROR_ID   = TO_UNICODE (4) ;
 //---------------------------------------------------------------------------*
 
 #pragma mark Click on issue table view
+
+//---------------------------------------------------------------------------*
+
+- (void) clickOnSourceTableView: (id) inSender {
+  if (mDisplayDescriptorTableView.clickedColumn == 1) {
+    const NSInteger row = mDisplayDescriptorTableView.clickedRow ;
+    if (row >= 0) {
+      OC_GGS_TextDisplayDescriptor * desc = [mSourceDisplayArrayController.arrangedObjects objectAtIndex: (NSUInteger) row] ;
+      [self removeSelectedTabAction:desc] ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------*
+
+- (IBAction) openSourceInNewWindowAction: (id) inSender {
+  NSError * error = nil ;
+  OC_GGS_Document * newDocument = [[NSDocumentController sharedDocumentController]
+    openUntitledDocumentAndDisplay:YES
+    error:& error
+  ] ;
+  if (nil == error) {
+    OC_GGS_TextDisplayDescriptor * d = [mSourceDisplayArrayController.selectedObjects objectAtIndex:0] ;
+    [newDocument findOrAddNewTabForFile:d.sourceURL.path] ;
+  }else{
+    [self.windowForSheet presentError:error] ;
+  }
+}
+
+//---------------------------------------------------------------------------*
+
+- (IBAction) moveSourceInNewWindowAction: (id) inSender {
+  NSError * error = nil ;
+  OC_GGS_Document * newDocument = [[NSDocumentController sharedDocumentController]
+    openUntitledDocumentAndDisplay:YES
+    error:& error
+  ] ;
+  if (nil == error) {
+    OC_GGS_TextDisplayDescriptor * d = [mSourceDisplayArrayController.selectedObjects objectAtIndex:0] ;
+    [newDocument findOrAddNewTabForFile:d.sourceURL.path] ;
+    [self removeSelectedTabAction:d] ;
+  }else{
+    [self.windowForSheet presentError:error] ;
+  }
+}
+
+//---------------------------------------------------------------------------*
+
+- (IBAction) duplicateSourceAction: (id) inSender {
+  OC_GGS_TextDisplayDescriptor * d = [mSourceDisplayArrayController.selectedObjects objectAtIndex:0] ;
+  OC_GGS_TextDisplayDescriptor * tdd = [[OC_GGS_TextDisplayDescriptor alloc]
+    initWithDocumentData:d.documentData
+    displayDocument:self
+  ] ;
+  [mSourceDisplayArrayController addObject:tdd] ;
+  [self registerConfigurationInPreferences] ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (IBAction) revealInFinderAction: (id) inSender {
+  OC_GGS_TextDisplayDescriptor * d = [mSourceDisplayArrayController.selectedObjects objectAtIndex:0] ;
+  NSWorkspace * ws = [NSWorkspace sharedWorkspace] ;
+  const BOOL ok = [ws selectFile:d.sourceURL.path inFileViewerRootedAtPath:@""] ;
+  if (! ok) {
+    NSBeep () ;
+  }
+}
+
+//---------------------------------------------------------------------------*
+
+- (IBAction) closeAction: (id) inSender {
+  OC_GGS_TextDisplayDescriptor * d = [mSourceDisplayArrayController.selectedObjects objectAtIndex:0] ;
+  [self removeSelectedTabAction:d] ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (IBAction) closeOthersAction: (id) inSender {
+  OC_GGS_TextDisplayDescriptor * tdd = [mSourceDisplayArrayController.selectedObjects objectAtIndex:0] ;
+  for (OC_GGS_TextDisplayDescriptor * d in [mSourceDisplayArrayController.arrangedObjects copy]) {
+    if (tdd != d) {
+      [self removeSelectedTabAction:d] ;
+    }
+  }
+}
 
 //---------------------------------------------------------------------------*
 
@@ -1151,6 +1329,24 @@ static const utf32 COCOA_ERROR_ID   = TO_UNICODE (4) ;
 
 //---------------------------------------------------------------------------*
 
+- (void) removeSelectedTabAction: (OC_GGS_TextDisplayDescriptor *) inTextDisplayDescriptor {
+  #ifdef DEBUG_MESSAGES
+    NSLog (@"%s", __PRETTY_FUNCTION__) ;
+  #endif
+//---
+  const BOOL lastSourceWillBeRemoved = [mSourceDisplayArrayController.arrangedObjects count] == 1 ;
+  [mSourceDisplayArrayController removeObject:inTextDisplayDescriptor] ;
+  [inTextDisplayDescriptor detachTextDisplayDescriptor] ;
+  [OC_GGS_DocumentData cocoaDocumentWillClose:nil] ;
+  if (lastSourceWillBeRemoved) {
+    [self.windowForSheet performClose:nil] ;
+  }else{
+    [self registerConfigurationInPreferences] ;
+  }
+}
+
+//---------------------------------------------------------------------------*
+
 #pragma mark observeValueForKeyPath
 
 //---------------------------------------------------------------------------*
@@ -1172,7 +1368,9 @@ static const utf32 COCOA_ERROR_ID   = TO_UNICODE (4) ;
       mBuildTextFont = [NSFont fontWithName:@"Courier" size:13.0] ;
     }
     [mOutputTextView setFont:mBuildTextFont] ;
-  }else if ([inKeyPath isEqualToString:@"selectionIndex"]) {
+  }else if ((inObject == mFoundEntryTreeController) && [inKeyPath isEqualToString:@"selectionIndexPath"]) {
+    [self changeSelectionInSearchResultView] ;
+  }else if ((inObject == mSourceDisplayArrayController) && [inKeyPath isEqualToString:@"selectionIndex"]) {
     for (NSView * subview in mSourceHostView.subviews.copy) {
       [subview removeFromSuperview] ;
     }
@@ -1195,14 +1393,6 @@ static const utf32 COCOA_ERROR_ID   = TO_UNICODE (4) ;
       [object selectEntryPopUp] ;
     }
   }
-}
-
-//---------------------------------------------------------------------------*
-
-- (CGFloat) splitView:(NSSplitView *)splitView
-            constrainMinCoordinate:(CGFloat)proposedMin
-            ofSubviewAt:(NSInteger) inDividerIndex {
-  return 40.0 ;
 }
 
 //---------------------------------------------------------------------------*
@@ -1290,6 +1480,373 @@ static const utf32 COCOA_ERROR_ID   = TO_UNICODE (4) ;
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
   #endif
   [self findOrAddNewTabForFile:[self fileNameFromSelection]] ;
+}
+
+//---------------------------------------------------------------------------*
+
+#pragma mark Search and Replace
+
+//https://github.com/malcommac/NSSplitView-Animatable
+
+- (double) positionOfDividerAtIndex:(NSInteger)dividerIndex {
+  // It looks like NSSplitView relies on its subviews being ordered left->right or top->bottom so we can too.
+  // It also raises w/ array bounds exception if you use its API with dividerIndex > count of subviews.
+  while ((dividerIndex >= 0) && [mSecondSplitView isSubviewCollapsed:[mSecondSplitView.subviews objectAtIndex: (NSUInteger) dividerIndex]]) {
+    dividerIndex-- ;
+    if (dividerIndex < 0) {
+      return 0.0 ;
+    }
+  }
+  const NSRect priorViewFrame = [[mSecondSplitView.subviews objectAtIndex:(NSUInteger) dividerIndex] frame];
+  return mSecondSplitView.isVertical ? NSMaxX (priorViewFrame) : NSMaxY (priorViewFrame);
+}
+
+//---------------------------------------------------------------------------*
+// NSPlitView delegate method
+
+- (CGFloat) splitView:(NSSplitView *) inSplitView
+            constrainMinCoordinate: (CGFloat) inProposedMin
+            ofSubviewAt: (NSInteger) inDividerIndex {
+  CGFloat result = inProposedMin ;
+  const CGFloat minFirstSplitViewValue = 250.0 ;
+  const CGFloat minSecondSplitViewValue = 50.0 ;
+  if ((inDividerIndex == 0) && (inSplitView == mFirstSplitView) && (inProposedMin < minFirstSplitViewValue)) {
+    result = minFirstSplitViewValue ;
+  }else if ((inDividerIndex == 0) && (inSplitView == mSecondSplitView) && (inProposedMin < minSecondSplitViewValue)) {
+    result = minSecondSplitViewValue ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------*
+// NSPlitView delegate method
+
+- (CGFloat) splitView:(NSSplitView *) inSplitView
+            constrainMaxCoordinate: (CGFloat) inProposedMax
+            ofSubviewAt: (NSInteger) inDividerIndex {
+  CGFloat result = inProposedMax ;
+  const CGFloat minSecondSplitViewValue = 250.0 ;
+  CGFloat max = inSplitView.bounds.size.height - minSecondSplitViewValue ;
+  if ((inDividerIndex == 0) && (inSplitView == mSecondSplitView) && (inProposedMax > max)) {
+    result = max  ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------*
+
+// http://stackoverflow.com/questions/17441877/nssplitview-fixed-splitter-on-window-resize
+
+- (void) splitView:(NSSplitView *) inSplitView
+         resizeSubviewsWithOldSize: (NSSize) inOldSize {
+  const CGFloat dividerThickness = inSplitView.dividerThickness ;
+  const NSRect newFrame = inSplitView.frame ;
+  if (inSplitView == mFirstSplitView) {
+    const NSRect leftRect  = [[inSplitView.subviews objectAtIndex:0] frame] ;
+    const CGFloat minFirstSplitViewValue = 250.0 ;
+    NSRect newLeftRect = {{0.0, 0.0}, {floor (leftRect.size.width * newFrame.size.width / inOldSize.width), newFrame.size.height}} ;
+    if (newLeftRect.size.width < minFirstSplitViewValue) {
+      newLeftRect.size.width = minFirstSplitViewValue ;
+    }
+    const NSRect newRightRect = {
+      {newLeftRect.origin.x + newLeftRect.size.width + dividerThickness, 0.0},
+      {newFrame.size.width - newLeftRect.size.width - dividerThickness, newFrame.size.height}
+    } ;
+    [[inSplitView.subviews objectAtIndex:0] setFrame:newLeftRect];
+    [[inSplitView.subviews objectAtIndex:1] setFrame:newRightRect];
+  }else if (inSplitView == mSecondSplitView) {
+    const NSRect bottomRect  = [[inSplitView.subviews objectAtIndex:1] frame] ;
+  /*  const NSRect topRect  = [[inSplitView.subviews objectAtIndex:0] frame] ;
+    NSLog (@"0:%p, 1:%p, mOutputScrollView:%p, mSearchView:%p", [inSplitView.subviews objectAtIndex:0], [inSplitView.subviews objectAtIndex:1], mOutputScrollView, mSearchView) ;
+    NSLog (@"inSplitView.isFlipped %d", inSplitView.isFlipped) ;
+    NSLog (@"topRect {{%g, %g}, {%g, %g}}", topRect.origin.x, topRect.origin.y, topRect.size.width, topRect.size.height) ;
+    NSLog (@"bottomRect {{%g, %g}, {%g, %g}}", bottomRect.origin.x, bottomRect.origin.y, bottomRect.size.width, bottomRect.size.height) ;*/
+    NSRect newBottomRect = {
+      {0.0, 0.0 /* temporary */},
+      {newFrame.size.width, floor (bottomRect.size.height * newFrame.size.height / inOldSize.height)}
+    } ;
+    const CGFloat minSecondSplitViewValue = 250.0 ;
+    if (newBottomRect.size.height > (newFrame.size.height - dividerThickness)) {
+      newBottomRect.size.height = newFrame.size.height - dividerThickness ;
+    }else if (newBottomRect.size.height < minSecondSplitViewValue) {
+      newBottomRect.size.height = minSecondSplitViewValue ;
+    }
+    newBottomRect.origin.y = newFrame.size.height - newBottomRect.size.height ;
+    const NSRect newTopRect = {
+      {0.0, 0.0},
+      {newFrame.size.width, newFrame.size.height - newBottomRect.size.height - dividerThickness}
+    } ;
+    [[inSplitView.subviews objectAtIndex:0] setFrame:newTopRect];
+    [[inSplitView.subviews objectAtIndex:1] setFrame:newBottomRect];
+  }
+}
+
+//---------------------------------------------------------------------------*
+
+- (IBAction) showSearchAndReplaceView: (id) inSender {
+  const double position = [self positionOfDividerAtIndex:0] ;
+  [mOutputScrollView removeFromSuperview] ;
+  [mSecondSplitView addSubview:mSearchView] ;
+  [mSecondSplitView adjustSubviews] ;
+  [mSecondSplitView setPosition:position ofDividerAtIndex:0] ;
+  [mGlobalSearchTextField.window makeFirstResponder:mGlobalSearchTextField] ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (IBAction) closeSearchAndReplaceView: (id) inSender {
+  const double position = [self positionOfDividerAtIndex:0] ;
+  [mSearchView removeFromSuperview] ;
+  [mSecondSplitView addSubview:mOutputScrollView] ;
+  [mSecondSplitView adjustSubviews] ;
+  [mSecondSplitView setPosition:position ofDividerAtIndex:0] ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) updateOccurrenceFoundTextField {
+  NSString * s = @"No Occurrence found" ;
+  if (mResultCount == 1) {
+    s = @"1 Occurrence found" ;
+  }else if (mResultCount > 1) {
+    s = [NSString stringWithFormat:@"%lu Occurrences found", mResultCount] ;
+  }
+  mOccurenceFoundCountTextField.stringValue = s ;
+  [mOccurenceFoundCountTextField display] ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (IBAction) globalFindAction: (id) inSender {
+  [OC_GGS_DocumentData saveAllDocuments] ;
+  [self willChangeValueForKey:@"mResultArray"] ;
+  mResultArray = [NSMutableArray new] ;
+  [self didChangeValueForKey:@"mResultArray"] ;
+  mResultCount = 0 ;
+  [self updateOccurrenceFoundTextField] ;
+  switch (mSearchMatrix.selectedRow) {
+  case 0 :
+    [self findInOpenedFiles] ;
+    break ;
+  case 1 :
+    [self findInOpenedFileDirectories] ;
+    break ;
+  }
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) findInOpenedFileDirectories {
+  NSMutableSet * directoryPathSet = [NSMutableSet new] ;
+  for (OC_GGS_TextDisplayDescriptor * d in mSourceDisplayArrayController.arrangedObjects) {
+    NSString * filePath = d.sourceURL.path ;
+    [directoryPathSet addObject:filePath.stringByDeletingLastPathComponent] ;
+  }
+  for (NSString * directoryPath in directoryPathSet) {
+    [self
+      recursiveSearchInDirectory:directoryPath
+      recursive:YES
+      extensionList:self.allTypesOfCurrentApplication
+    ] ;
+  }
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) recursiveSearchInDirectory: (NSString *) inDirectoryFullPath
+         recursive: (BOOL) inRecursive
+         extensionList: (NSArray *) inExtensionList {
+  NSFileManager * fm = [NSFileManager new] ;
+  NSArray * contents = [fm contentsOfDirectoryAtPath:inDirectoryFullPath error:nil] ;
+  if (nil == contents) {
+  
+  }else{
+    for (NSString * subPath in contents) {
+      if ('.' != [subPath characterAtIndex:0]) {
+        NSString * fullPath = [NSString stringWithFormat:@"%@/%@", inDirectoryFullPath, subPath] ;
+        BOOL isDirectory ;
+        if ([fm fileExistsAtPath:fullPath isDirectory: & isDirectory]) {
+          if (isDirectory && inRecursive) {
+            [self recursiveSearchInDirectory:fullPath recursive:YES extensionList:inExtensionList] ;
+          }else if ((! isDirectory) && [inExtensionList containsObject:[fullPath pathExtension]]) {
+            [self findInFile:fullPath] ;
+          }
+        }
+      }
+    }
+  }
+}
+
+//---------------------------------------------------------------------------*
+
+- (NSArray *) allTypesOfCurrentApplication {
+  NSMutableArray * allTypes = [NSMutableArray new] ;
+  NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary] ;
+  NSArray * allDocumentTypes = [infoDictionary objectForKey:@"CFBundleDocumentTypes"] ;
+  for (NSDictionary * type in allDocumentTypes) {
+    NSArray * a = [type objectForKey:@"CFBundleTypeExtensions"] ;
+    [allTypes addObjectsFromArray:a] ;  
+  }
+  return allTypes ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (NSUInteger) searchOptions {
+  NSUInteger searchOptions = 0 ;
+  if (! mCaseSensitiveSearchCheckbox.state) {
+    searchOptions |= NSCaseInsensitiveSearch ;
+  }
+  return searchOptions ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) findInFile: (NSString *) inFilePath {
+  NSMutableArray * foundEntries = [NSMutableArray new] ;
+  NSString * sourceString = [NSString stringWithContentsOfFile:inFilePath encoding:NSUTF8StringEncoding error:nil] ;
+  NSRange searchRange = {0, sourceString.length} ;
+  while (searchRange.length > 0) {
+    const NSRange r = [sourceString rangeOfString:mGlobalSearchTextField.stringValue options:self.searchOptions range:searchRange] ;
+    if (r.length > 0) { // Found
+      [self
+        addFindResult:inFilePath
+        sourceString:sourceString
+        range:r
+        toArray:foundEntries
+      ] ;
+      searchRange.location = r.location + r.length ;
+      searchRange.length = sourceString.length - searchRange.location ;
+    }else{
+      searchRange.length = 0 ; // For exiting
+    }
+  }
+  [self enterResult:foundEntries forFilePath:inFilePath] ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) findInOpenedFiles {
+  NSMutableSet * visitedFilePathes = [NSMutableSet new] ;
+  for (OC_GGS_TextDisplayDescriptor * d in mSourceDisplayArrayController.arrangedObjects) {
+    NSString * filePath = d.sourceURL.path ;
+    if (! [visitedFilePathes containsObject:filePath]) {
+      [visitedFilePathes addObject:filePath] ;
+      NSMutableArray * foundEntries = [NSMutableArray new] ;
+      NSString * sourceString = d.documentData.sourceString ;
+      NSRange searchRange = {0, sourceString.length} ;
+      while (searchRange.length > 0) {
+        const NSRange r = [sourceString rangeOfString:mGlobalSearchTextField.stringValue options:self.searchOptions range:searchRange] ;
+        if (r.length > 0) { // Found
+          [self
+            addFindResult:filePath
+            sourceString:sourceString
+            range:r
+            toArray:foundEntries
+          ] ;
+          searchRange.location = r.location + r.length ;
+          searchRange.length = sourceString.length - searchRange.location ;
+        }else{
+          searchRange.length = 0 ; // For exiting
+        }
+      }
+      [self enterResult:foundEntries forFilePath:filePath] ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) addFindResult:(NSString *) inSourceFilePath
+         sourceString: (NSString *) inSourceString
+         range: (NSRange) inFoundRange
+         toArray: (NSMutableArray *) ioFoundEntries {
+  const NSRange lineRange = [inSourceString lineRangeForRange:inFoundRange] ;
+  PMSearchResultDescriptor * d = [[PMSearchResultDescriptor alloc]
+    initWithLine:[inSourceString substringWithRange:lineRange]
+    range:inFoundRange
+    sourceFilePath:inSourceFilePath
+  ] ;
+  [ioFoundEntries addObject:d] ;
+//---
+  mResultCount ++ ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) enterResult: (NSMutableArray *) inFoundEntries
+         forFilePath:(NSString *) inSourceFilePath {
+  if (inFoundEntries.count > 0) {
+    [self willChangeValueForKey:@"mResultArray"] ;
+    PMSearchResultDescriptor * d = [[PMSearchResultDescriptor alloc]
+      initWithEntries:inFoundEntries
+      sourceFilePath:inSourceFilePath
+    ] ;
+    [mResultArray addObject:d] ;
+    [self didChangeValueForKey:@"mResultArray"] ;
+    [mResultOutlineView display] ;
+    [self updateOccurrenceFoundTextField] ;
+  }
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) changeSelectionInSearchResultView {
+  NSArray * selectedObjects = mFoundEntryTreeController.selectedObjects ;
+  if (selectedObjects.count > 1) {
+    NSBeep () ;
+  }else if (selectedObjects.count == 1) {
+    PMSearchResultDescriptor * d = [selectedObjects objectAtIndex:0] ;
+    NSString * filePath = d.filePath ;
+    if (nil != filePath) {
+      OC_GGS_TextDisplayDescriptor * tdd = [self findOrAddNewTabForFile:filePath] ;
+      [tdd setSelectionRangeAndMakeItVisible:d.range] ;
+      [mResultOutlineView.window makeFirstResponder:mResultOutlineView] ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) updateSearchResultForFile: (NSString *) inFilePath
+         previousRange: (NSRange) inPreviousRange
+         changeInLength: (NSInteger) inChangeInLength {
+  for (PMSearchResultDescriptor * d in mResultArray) {
+    [d
+      updateSearchResultForFile:inFilePath
+      previousRange:inPreviousRange
+      changeInLength:inChangeInLength
+    ] ;
+  }
+} 
+
+//---------------------------------------------------------------------------*
+
+- (IBAction) globalReplaceAllAction: (id) inSender {
+  NSString * replaceString = mGlobalReplaceTextField.stringValue ;
+  for (PMSearchResultDescriptor * d in mResultArray) {
+    NSString * filePath = d.filePath ;
+    // NSLog (@"filePath %@", filePath) ;
+    NSArray * foundEntries = d.children ;
+    OC_GGS_DocumentData * documentData = [OC_GGS_DocumentData findDocumentDataForFilePath:filePath] ;
+    if (nil == documentData) {
+      NSMutableString * contents = [[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil] mutableCopy] ;
+      if (nil != contents) {
+        for (PMSearchResultDescriptor * entry in foundEntries.reverseObjectEnumerator) {
+          const NSRange r = entry.range ;
+          // NSLog (@"r [%lu, %lu]", r.location, r.length) ;
+          [contents replaceCharactersInRange:r withString:replaceString] ;
+        }
+      }
+      [contents writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil] ;
+    }else{
+      for (PMSearchResultDescriptor * entry in foundEntries.reverseObjectEnumerator) {
+        const NSRange r = entry.range ;
+        // NSLog (@"r [%lu, %lu]", r.location, r.length) ;
+        [documentData replaceCharactersInRange:r withString:replaceString] ;
+      }
+    }
+  }
 }
 
 //---------------------------------------------------------------------------*

@@ -16,6 +16,7 @@
 #import "OC_GGS_DocumentData.h"
 #import "PMDebug.h"
 #import "PMUndoManager.h"
+#import "OC_GGS_Document.h"
 
 //---------------------------------------------------------------------------*
 
@@ -336,6 +337,43 @@
 
 //---------------------------------------------------------------------------*
 
+- (void) replaceCharactersInRange: (NSRange) inRange
+         withString: (NSString *) inReplaceString {
+  #ifdef DEBUG_MESSAGES
+    NSLog (@"%s", __PRETTY_FUNCTION__) ;
+  #endif
+ // NSLog (@"inRange [%lu, %lu], inReplaceString '%@'", inRange.location, inRange.length, inReplaceString) ;
+  const NSRange replacementRange = {inRange.location, inReplaceString.length} ;
+  NSDictionary * d = [NSDictionary dictionaryWithObjectsAndKeys:
+    [mSourceTextStorage.string substringWithRange:inRange], @"str",
+    NSStringFromRange (replacementRange), @"range",
+    nil
+  ] ;
+  [mUndoManager
+    registerUndoWithTarget:self
+    selector:@selector (replaceUsingDictionary:)
+    object:d
+  ] ;
+  [mSourceTextStorage beginEditing] ;
+  [mSourceTextStorage replaceCharactersInRange:inRange withString:inReplaceString] ;
+  [mSourceTextStorage endEditing] ;
+}
+
+//---------------------------------------------------------------------------*
+
+- (void) replaceUsingDictionary: (NSDictionary *) inDictionary {
+  #ifdef DEBUG_MESSAGES
+    NSLog (@"%s", __PRETTY_FUNCTION__) ;
+  #endif
+//  NSLog (@"-------- replace --------") ;
+  [self
+    replaceCharactersInRange:NSRangeFromString([inDictionary objectForKey:@"range"])
+    withString:[inDictionary objectForKey:@"str"]
+  ] ;
+}
+
+//---------------------------------------------------------------------------*
+
 - (NSUndoManager *) undoManager {
   #ifdef DEBUG_MESSAGES
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
@@ -497,6 +535,14 @@
   for (OC_GGS_TextDisplayDescriptor * textDisplay in mTextDisplayDescriptorSet) {
     [textDisplay setTextDisplayIssueArray:mIssueArray] ; 
   }
+//---
+  for (OC_GGS_Document * doc in [[NSDocumentController sharedDocumentController] documents]) {
+    [doc
+      updateSearchResultForFile:self.documentData.fileURL.path
+      previousRange:previousRange
+      changeInLength:inChangeInLength
+    ] ; 
+  }
 }
 
 //---------------------------------------------------------------------------*
@@ -544,7 +590,7 @@
       eraseRangeEnd = (NSInteger) (textLength - 1) ;
     }
     if (eraseRangeStart < eraseRangeEnd) {
-      const NSRange eraseRange = {(NSUInteger) eraseRangeStart, (NSUInteger) (eraseRangeEnd - eraseRangeStart + 1)} ;
+      const NSRange eraseRange = {(NSUInteger) eraseRangeStart, (NSUInteger) (eraseRangeEnd - eraseRangeStart)} ;
       #ifdef DEBUG_MESSAGES
         NSLog (@"PERFORM REMOVE ATTRIBUTE range [%lu, %lu] text length %lu", eraseRange.location, eraseRange.length, textLength) ;
       #endif
