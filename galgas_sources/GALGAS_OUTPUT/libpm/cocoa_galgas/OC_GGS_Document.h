@@ -36,7 +36,8 @@
 //---------------------------------------------------------------------------*
 
 @interface OC_GGS_Document : NSDocument <NSTextViewDelegate, NSSplitViewDelegate, NSWindowDelegate> {
-  @private IBOutlet NSSplitView * mIssueSplitView ;
+  @private IBOutlet NSSplitView * mFirstSplitView ;
+  @private IBOutlet NSSplitView * mSecondSplitView ;
 
   @private IBOutlet NSView * mSourceHostView ;
   
@@ -54,6 +55,7 @@
   @private OC_GGS_DocumentData * mDocumentData ;
   @private NSArray * mDisplayDescriptorArray ;
   @private IBOutlet NSTableView * mDisplayDescriptorTableView ;
+  @private IBOutlet NSTextField * mSourceFilePathTextField ;
 
 //--- "Goto Line" sheet
   @private IBOutlet NSWindow * mGotoWindow ;
@@ -69,9 +71,36 @@
   @private IBOutlet NSTextField * mWarningCountTextField ;
   @private OC_GGS_RulerViewForBuildOutput * mRulerViewForBuildOutput ;
   @private NSMutableArray * mIssueArray ;
+
+//--- Search view
+  @private IBOutlet NSView * mSearchView ;
+  @private IBOutlet NSButton * mCaseSensitiveSearchCheckbox ;
+  @private IBOutlet NSSearchField * mGlobalSearchTextField ;
+  @private IBOutlet NSTextField * mGlobalReplaceTextField ;
+  @private IBOutlet NSTextField * mOccurenceFoundCountTextField ;
+  @private IBOutlet NSMatrix * mSearchMatrix ;
+  @private IBOutlet NSOutlineView * mResultOutlineView ;
+  @private NSMutableArray * mResultArray ;
+  @private NSUInteger mResultCount ;
+  @private NSTreeController * mFoundEntryTreeController ;
 }
 
 @property (assign PROPERTY_COMMA_ATOMIC) BOOL mBuildTaskIsRunning ;
+
+- (IBAction) openSourceInNewWindowAction: (id) inSender ;
+- (IBAction) moveSourceInNewWindowAction: (id) inSender ;
+- (IBAction) duplicateSourceAction: (id) inSender ;
+- (IBAction) revealInFinderAction: (id) inSender ;
+- (IBAction) closeAction: (id) inSender ;
+- (IBAction) closeOthersAction: (id) inSender ;
+
+- (IBAction) closeSearchAndReplaceView: (id) inSender ;
+- (IBAction) globalFindAction: (id) inSender ;
+- (IBAction) globalReplaceAllAction: (id) inSender ;
+
+- (void) updateSearchResultForFile: (NSString *) inFilePath
+         previousRange: (NSRange) inPreviousRange
+         changeInLength: (NSInteger) inChangeInLength ; 
 
 - (OC_GGS_TextDisplayDescriptor *) findOrAddNewTabForFile: (NSString *) inDocumentPath ;
 
@@ -88,7 +117,6 @@
 - (IBAction) stopBuild: (id) sender ;
 
 - (NSString *) sourceStringForGlobalSearch ;
-- (void) replaceSourceStringWithString: (NSString *) inString ;
 
 - (void) triggerDocumentEditedStatusUpdate ;
 
