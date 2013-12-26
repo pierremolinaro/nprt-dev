@@ -98,7 +98,9 @@ class C_Compiler : public C_SharedObject {
 //--- 'loop' intruction variant run-time error
   public : void loopRunTimeVariantError (LOCATION_ARGS) ;
 
-//--- Handle 'here' in GALGAS 2
+//--- Handle 'here' in GALGAS
+  protected : C_LocationInSource mStartLocationForHere ; // Set by lexique
+  protected : C_LocationInSource mEndLocationForHere ; // Set by lexique
   public : GALGAS_location here (void) const ;
 
 //--- Source file name
