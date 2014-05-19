@@ -1,20 +1,20 @@
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//  Declaration and implementation of the template class                     *
-//  'TC_AVL_TreeForCollision'                                                *
+//  Declaration and implementation of the template class                       *
+//  'TC_AVL_TreeForCollision'                                                  *
 //                                                                             *
-//  This class implements a generic ordered binary AVL tree for hash map     *
-//  table collision.                                                         *
+//  This class implements a generic ordered binary AVL tree for hash map       *
+//  table collision.                                                           *
 //                                                                             *
-//  COPY OF ITS INSTANCES IS FORBIDDEN BY REDEFINITION OF COPY CONSTRUCTOR   *
-//  AND ASSIGNMENT OPERATOR.                                                 *
+//  COPY OF ITS INSTANCES IS FORBIDDEN BY REDEFINITION OF COPY CONSTRUCTOR     *
+//  AND ASSIGNMENT OPERATOR.                                                   *
 //                                                                             *
 //  This file is part of libpm library                                         *
 //                                                                             *
-//  Copyright (C) 2001 Pierre Molinaro.                                      *
+//  Copyright (C) 2001 Pierre Molinaro.                                        *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                               *
 //  IRCCyN, Institut de Recherche en Communications et Cybernétique de Nantes  *
-//  ECN, Ecole Centrale de Nantes                                            *
+//  ECN, Ecole Centrale de Nantes                                              *
 //                                                                             *
 //  This library is free software; you can redistribute it and/or modify it    *
 //  under the terms of the GNU Lesser General Public License as published      *
@@ -41,7 +41,7 @@
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//       Class of avl trees                                                  *
+//       Class of avl trees                                                    *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
@@ -59,7 +59,7 @@ class TC_AVL_TreeForCollision {
   public : void unmarkAllObjects (void) ;
 
 //--- Sweep unmarked objects
-  public : PMUInt32 sweepUnmarkedObjects (void) ;
+  public : uint32_t sweepUnmarkedObjects (void) ;
 
 //--- No copy
   private : TC_AVL_TreeForCollision (const TC_AVL_TreeForCollision <INFO> &) ;
@@ -70,7 +70,7 @@ class TC_AVL_TreeForCollision {
     public : INFO mInfo ;
     public : TC_avltree_element * mPtrToSup ;
     public : TC_avltree_element * mPtrToInf ;
-    public : PMSInt8 mBalance ;
+    public : int8_t mBalance ;
     public : TC_avltree_element (const INFO & inInfo) {
       mInfo = inInfo ;
       mPtrToSup = (TC_avltree_element *) NULL ;
@@ -81,7 +81,7 @@ class TC_AVL_TreeForCollision {
       delete mPtrToSup ;
       delete mPtrToInf ;
     }
-    public : PMSInt32 compare (const TC_avltree_element & inElement) const {
+    public : int32_t compare (const TC_avltree_element & inElement) const {
       return mInfo.compare (inElement.mInfo) ;
     }
     private : TC_avltree_element (const TC_avltree_element & inSource) ;
@@ -90,7 +90,7 @@ class TC_AVL_TreeForCollision {
 
 //--- Class of allocation info
   protected : class cAllocInfo {
-    public : PMSInt32 mCreatedObjectsCount ;
+    public : int32_t mCreatedObjectsCount ;
     public : cAllocInfo (void) {
       mCreatedObjectsCount = 0 ;
     }
@@ -100,32 +100,32 @@ class TC_AVL_TreeForCollision {
   protected : static cAllocInfo smAllocInfo ;
 
 //--- Get created element count
-  public : static PMSInt32 getCreatedObjectsCount (void) { return smAllocInfo.mCreatedObjectsCount ; }
+  public : static int32_t getCreatedObjectsCount (void) { return smAllocInfo.mCreatedObjectsCount ; }
 
 //--- Get node size (in bytes)
-  public : static PMUInt32 getNodeSize (void) { return sizeof (TC_avltree_element) ; }
+  public : static uint32_t getNodeSize (void) { return sizeof (TC_avltree_element) ; }
 
 //--- Root
   protected : TC_avltree_element * mRoot ;
 
 //--- Tranfert object in a new map array
   public : void transfertElementsInNewMapArray (TC_AVL_TreeForCollision<INFO> * inNewMapArray,
-                                                const PMUInt32 inNewSize) ;
+                                                const uint32_t inNewSize) ;
 
 //--- Internal methods
-  protected : PMUInt32 internalRecursiveSweep (TC_avltree_element * inElement) ;
+  protected : uint32_t internalRecursiveSweep (TC_avltree_element * inElement) ;
   protected : void internalRecursiveUnmark (TC_avltree_element * inElement) ;
   protected : static void recursiveTransfertElementsInNewMapArray
                                              (TC_avltree_element * inElementPointer,
                                               TC_AVL_TreeForCollision<INFO> * inNewMapArray,
-                                              const PMUInt32 inNewSize) ;
+                                              const uint32_t inNewSize) ;
   protected : static void printNodes (TC_avltree_element * inRootPtr,
-                                      const PMSInt32 inIndentation)  ;
+                                      const int32_t inIndentation)  ;
 } ;
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//       Constructor for avl tree                                            *
+//       Constructor for avl tree                                              *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
@@ -136,7 +136,7 @@ TC_AVL_TreeForCollision<INFO>::TC_AVL_TreeForCollision (void) {
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//       Destructor for avl tree                                             *
+//       Destructor for avl tree                                               *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
@@ -147,15 +147,15 @@ TC_AVL_TreeForCollision<INFO>::~TC_AVL_TreeForCollision (void) {
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//       Search and insert if not found                                      *
+//       Search and insert if not found                                        *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
 template <class INFO>
 void TC_AVL_TreeForCollision<INFO>::printNodes (TC_avltree_element * inRootPtr,
-                                            const PMSInt32 inIndentation) {
+                                            const int32_t inIndentation) {
   if (inRootPtr != NULL) {
-    for (PMSInt32 i=0 ; i<inIndentation ; i++) {
+    for (int32_t i=0 ; i<inIndentation ; i++) {
       printf (" ") ;
     }
     printf ("0x%08lX --> b:%3hd, inf:0x%08lX, sup:0x%08lX",
@@ -177,20 +177,20 @@ INFO * TC_AVL_TreeForCollision<INFO>::search_or_insert (const INFO & inInfo,
   if (outInsertionPerformed) {
     smAllocInfo.mCreatedObjectsCount ++ ;
   }
-//  PMSInt32 maxLevels = 0 ;
+//  int32_t maxLevels = 0 ;
 //  const bool ok = verifyAVLtree <TC_avltree_element, INFO> (mRoot, LONG_MAX, maxLevels, stdout) ;
   return result ;
 }
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//       Sweep unmarked objects                                              *
+//       Sweep unmarked objects                                                *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
 template <class INFO>
-PMUInt32 TC_AVL_TreeForCollision<INFO>::internalRecursiveSweep (TC_avltree_element * inElement) {
-  PMUInt32 sweepedNodes = 0 ;
+uint32_t TC_AVL_TreeForCollision<INFO>::internalRecursiveSweep (TC_avltree_element * inElement) {
+  uint32_t sweepedNodes = 0 ;
   if (inElement != NULL) {
     sweepedNodes += internalRecursiveSweep (inElement->mPtrToInf) ;
     sweepedNodes += internalRecursiveSweep (inElement->mPtrToSup) ;
@@ -213,7 +213,7 @@ PMUInt32 TC_AVL_TreeForCollision<INFO>::internalRecursiveSweep (TC_avltree_eleme
 //-----------------------------------------------------------------------------*
 
 template <class INFO>
-PMUInt32 TC_AVL_TreeForCollision<INFO>::sweepUnmarkedObjects (void) {
+uint32_t TC_AVL_TreeForCollision<INFO>::sweepUnmarkedObjects (void) {
   TC_avltree_element * temporaryRoot = mRoot ;
   mRoot = (TC_avltree_element *) NULL ;
   return internalRecursiveSweep (temporaryRoot) ;
@@ -239,7 +239,7 @@ void TC_AVL_TreeForCollision<INFO>::unmarkAllObjects (void) {
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//       Tranfert objects in a new map array                                 *
+//       Tranfert objects in a new map array                                   *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
@@ -247,14 +247,14 @@ template <class INFO>
 void TC_AVL_TreeForCollision<INFO>
    ::recursiveTransfertElementsInNewMapArray (TC_avltree_element * inElementPointer,
                                               TC_AVL_TreeForCollision<INFO> * inNewMapArray,
-                                              const PMUInt32 inNewSize) {
+                                              const uint32_t inNewSize) {
   if (inElementPointer != NULL) {
     recursiveTransfertElementsInNewMapArray (inElementPointer->mPtrToInf, inNewMapArray, inNewSize) ;
     recursiveTransfertElementsInNewMapArray (inElementPointer->mPtrToSup, inNewMapArray, inNewSize) ;
     inElementPointer->mPtrToInf = (TC_avltree_element *) NULL ;
     inElementPointer->mPtrToSup = (TC_avltree_element *) NULL ;
     inElementPointer->mBalance = 0 ;
-    const PMUInt32 hash = inElementPointer->mInfo.getHashCodeForMap () % inNewSize ;
+    const uint32_t hash = inElementPointer->mInfo.getHashCodeForMap () % inNewSize ;
     bool extension ; // Unused
     bool insertionPerformed ; // Unused
     recursiveInsertElement (inNewMapArray [hash].mRoot, inElementPointer, extension, insertionPerformed) ;
@@ -266,7 +266,7 @@ void TC_AVL_TreeForCollision<INFO>
 template <class INFO>
 void TC_AVL_TreeForCollision<INFO>
       ::transfertElementsInNewMapArray (TC_AVL_TreeForCollision<INFO> * inNewMapArray,
-                                        const PMUInt32 inNewSize) {
+                                        const uint32_t inNewSize) {
   recursiveTransfertElementsInNewMapArray (mRoot, inNewMapArray, inNewSize) ;
   mRoot = (TC_avltree_element *) NULL ;
 }

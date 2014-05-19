@@ -1,18 +1,14 @@
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//  T H I S   C L A S S   H A S   N O T   B E E N   T E S T E D              *
+//  Declaration and implementation of the template class 'TC_Array2'           *
 //                                                                             *
-//-----------------------------------------------------------------------------*
+//  It implements a generic two dimensions dynamic sized array.                *
 //                                                                             *
-//  Declaration and implementation of the template class 'TC_Array2'         *
-//                                                                             *
-//  It implements a generic two dimensions dynamic sized array.              *
-//                                                                             *
-//  COPY OF ITS INSTANCES IS ALLOWED AND FULLY IMPLEMENTED BY DUPLICATION.   *
+//  COPY OF ITS INSTANCES IS ALLOWED AND FULLY IMPLEMENTED BY DUPLICATION.     *
 //                                                                             *
 //  This file is part of libpm library                                         *
 //                                                                             *
-//  Copyright (C) 1997 Pierre Molinaro.                                      *
+//  Copyright (C) 1997 Pierre Molinaro.                                        *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                               *
 //  IRCCyN, Institut de Recherche en Communications et Cybernétique de Nantes  *
 //  ECN, École Centrale de Nantes (France)                                     *
@@ -52,14 +48,14 @@ template <typename TYPE> void swap (TC_Array2 <TYPE> & ioOperand1,
 
 template <typename TYPE> class TC_Array2 {
   protected : TYPE * mArray ;
-  protected : PMSInt32 mCurrentRowCount ;
-  protected : PMSInt32 mCurrentColumnCount ;
-  protected : PMSInt32 mCapacity ;
+  protected : int32_t mCurrentRowCount ;
+  protected : int32_t mCurrentColumnCount ;
+  protected : int32_t mCapacity ;
 
 //--- Constructors
   public : TC_Array2 (void) ;
-  public : TC_Array2 (const PMSInt32 inRowCount,
-                      const PMSInt32 inColumnCount COMMA_LOCATION_ARGS) ;
+  public : TC_Array2 (const int32_t inRowCount,
+                      const int32_t inColumnCount COMMA_LOCATION_ARGS) ;
 
 //--- Destructor
   public : virtual ~TC_Array2 (void) ;
@@ -69,14 +65,14 @@ template <typename TYPE> class TC_Array2 {
   public : TC_Array2 <TYPE> & operator = (TC_Array2 <TYPE> & inSource) ;
 
 //--- Get Row and Column count
-  public : inline PMSInt32 rowCount (void) const { return mCurrentRowCount ; }
-  public : inline PMSInt32 columnCount (void) const { return mCurrentColumnCount ; }
+  public : inline int32_t rowCount (void) const { return mCurrentRowCount ; }
+  public : inline int32_t columnCount (void) const { return mCurrentColumnCount ; }
 
 //--- Acces
   #ifndef DO_NOT_GENERATE_CHECKINGS
-    public : TYPE & operator () (const PMSInt32 indiceLigne, const PMSInt32 indiceColonne COMMA_LOCATION_ARGS) ;
-    public : const TYPE & operator () (const PMSInt32 indiceLigne, const PMSInt32 indiceColonne COMMA_LOCATION_ARGS) const ;
-    protected : size_t long2size_t (const PMSInt32 indiceLigne, const PMSInt32 indiceColonne COMMA_LOCATION_ARGS) const {
+    public : TYPE & operator () (const int32_t indiceLigne, const int32_t indiceColonne COMMA_LOCATION_ARGS) ;
+    public : const TYPE & operator () (const int32_t indiceLigne, const int32_t indiceColonne COMMA_LOCATION_ARGS) const ;
+    protected : size_t long2size_t (const int32_t indiceLigne, const int32_t indiceColonne COMMA_LOCATION_ARGS) const {
       MF_AssertThere (indiceLigne >= 0, "indice ligne (%ld) < 0", indiceLigne, 0) ;
       MF_AssertThere (indiceLigne < mCurrentRowCount, "indice ligne (%ld) >= nombre de lignes (%ld)", indiceLigne, mCurrentRowCount) ;
       MF_AssertThere (indiceColonne >= 0, "indice colonne (%ld) < 0", indiceColonne, 0) ;
@@ -86,12 +82,12 @@ template <typename TYPE> class TC_Array2 {
   #endif
 
   #ifdef DO_NOT_GENERATE_CHECKINGS
-    public : inline TYPE & operator () (const PMSInt32 indiceLigne,
-                                        const PMSInt32 indiceColonne) {
+    public : inline TYPE & operator () (const int32_t indiceLigne,
+                                        const int32_t indiceColonne) {
       return mArray [(size_t) (indiceLigne * mCurrentColumnCount + indiceColonne)] ;
     }
-    public : inline const TYPE & operator () (const PMSInt32 indiceLigne,
-                                              const PMSInt32 indiceColonne) const {
+    public : inline const TYPE & operator () (const int32_t indiceLigne,
+                                              const int32_t indiceColonne) const {
       return mArray [(size_t) (indiceLigne * mCurrentColumnCount + indiceColonne)] ;
     }
   #endif
@@ -104,13 +100,13 @@ template <typename TYPE> class TC_Array2 {
                            TC_Array2 <TYPE> & ioOperand2) ;
 
 //--- Changer la taille da la matrice
-  public : void reallocArray (const PMSInt32 inRowCount,
-                              const PMSInt32 inColumnCount COMMA_LOCATION_ARGS) ;
+  public : void reallocArray (const int32_t inRowCount,
+                              const int32_t inColumnCount COMMA_LOCATION_ARGS) ;
 } ;
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//                         Implementation                                    *
+//                         Implementation                                      *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
@@ -136,8 +132,8 @@ mCapacity (0) {
 //-----------------------------------------------------------------------------*
 
 template <typename TYPE>
-TC_Array2 <TYPE>::TC_Array2 (const PMSInt32 inRowCount,
-                             const PMSInt32 inColumnCount
+TC_Array2 <TYPE>::TC_Array2 (const int32_t inRowCount,
+                             const int32_t inColumnCount
                              COMMA_LOCATION_ARGS)  :
 mArray (NULL),
 mCurrentRowCount (0),
@@ -151,14 +147,14 @@ mCapacity (0){
 template <typename TYPE>
 TC_Array2 <TYPE> & TC_Array2 <TYPE>::operator = (TC_Array2 <TYPE> & inSource) {
   vider () ;
-  const PMSInt32 tailleSource = inSource.mCurrentRowCount * inSource.mCurrentColumnCount ;
+  const int32_t tailleSource = inSource.mCurrentRowCount * inSource.mCurrentColumnCount ;
   if (tailleSource == 0) {
     mCurrentRowCount = inSource.mCurrentRowCount ;
     mCurrentColumnCount = inSource.mCurrentColumnCount ;
   }else{
     try{
       macroMyNewArray (mArray, TYPE, tailleSource) ;
-      for (PMSInt32 i=0 ; i<tailleSource ; i++) {
+      for (int32_t i=0 ; i<tailleSource ; i++) {
         mArray [(size_t) i] = inSource.mArray [(size_t) i] ;
       }
       mCurrentRowCount = inSource.mCurrentRowCount ;
@@ -192,22 +188,22 @@ void TC_Array2<TYPE>::vider (void) {
 
 template <typename TYPE>
 void TC_Array2<TYPE>::
-reallocArray (const PMSInt32 inRowCount,
-              const PMSInt32 inColumnCount COMMA_LOCATION_ARGS) {
+reallocArray (const int32_t inRowCount,
+              const int32_t inColumnCount COMMA_LOCATION_ARGS) {
   if ((inRowCount != mCurrentRowCount) || (inColumnCount != mCurrentColumnCount)) {
     MF_AssertThere (inRowCount >= 0L, "inRowCount (%ld) < 0", inRowCount, 0) ;
     MF_AssertThere (inColumnCount >= 0L, "inColumnCount (%ld) < 0", inColumnCount, 0) ;
-    const PMSInt32 newNeededSize = inRowCount * inColumnCount ;
-    PMSInt32 newCapacity = (mCapacity > 32) ? mCapacity : 32 ;
+    const int32_t newNeededSize = inRowCount * inColumnCount ;
+    int32_t newCapacity = (mCapacity > 32) ? mCapacity : 32 ;
     while (newCapacity < newNeededSize) {
       newCapacity <<= 1 ;
     }
     TYPE * newArray = NULL ;
     macroMyNewArray (newArray, TYPE, (size_t) newCapacity) ;
-    const PMSInt32 maxLigne = (mCurrentRowCount < inRowCount) ? mCurrentRowCount : inRowCount ;
-    const PMSInt32 maxColonne = (mCurrentColumnCount < inColumnCount) ? mCurrentColumnCount : inColumnCount ;
-    for (PMSInt32 i=0 ; i<maxLigne ; i++) {
-      for (PMSInt32 j=0 ; j<maxColonne ; j++) {
+    const int32_t maxLigne = (mCurrentRowCount < inRowCount) ? mCurrentRowCount : inRowCount ;
+    const int32_t maxColonne = (mCurrentColumnCount < inColumnCount) ? mCurrentColumnCount : inColumnCount ;
+    for (int32_t i=0 ; i<maxLigne ; i++) {
+      for (int32_t j=0 ; j<maxColonne ; j++) {
         newArray [(size_t) (i * inColumnCount + j)] = mArray [(size_t) (i * mCurrentColumnCount + j)] ;
       }
     }
@@ -223,7 +219,7 @@ reallocArray (const PMSInt32 inRowCount,
 
 #ifndef DO_NOT_GENERATE_CHECKINGS
   template <typename TYPE>
-  TYPE & TC_Array2 <TYPE>::operator () (const PMSInt32 indiceLigne, const PMSInt32 indiceColonne COMMA_LOCATION_ARGS) {
+  TYPE & TC_Array2 <TYPE>::operator () (const int32_t indiceLigne, const int32_t indiceColonne COMMA_LOCATION_ARGS) {
     return mArray [long2size_t (indiceLigne, indiceColonne COMMA_THERE)] ;
   }
 #endif
@@ -232,7 +228,7 @@ reallocArray (const PMSInt32 inRowCount,
 
 #ifndef DO_NOT_GENERATE_CHECKINGS
   template <typename TYPE>
-  const TYPE & TC_Array2 <TYPE>::operator () (const PMSInt32 indiceLigne, const PMSInt32 indiceColonne COMMA_LOCATION_ARGS) const {
+  const TYPE & TC_Array2 <TYPE>::operator () (const int32_t indiceLigne, const int32_t indiceColonne COMMA_LOCATION_ARGS) const {
     return mArray [long2size_t (indiceLigne, indiceColonne COMMA_THERE)] ;
   }
 #endif

@@ -33,7 +33,7 @@
 
 //---------------------------------------------------------------------------*
 
-const PMSInt32 MARK_VDL_NODE = (PMSInt32) 0x80000000 ;
+const int32_t MARK_VDL_NODE = (int32_t) 0x80000000 ;
 
 //---------------------------------------------------------------------------*
 
@@ -58,30 +58,30 @@ class C_activitiesToSchedule {
   public : void setToEmptyList (void) ;
 
 //--- Add a new entry
-  public : void addEntry (const PMSInt32 inActivityIndex,
-                          const PMSInt32 inActivityPriority,
-                          const PMSInt32 inActivityScheduleInstant) ;
+  public : void addEntry (const int32_t inActivityIndex,
+                          const int32_t inActivityPriority,
+                          const int32_t inActivityScheduleInstant) ;
 
 //--- Get first activity to schedule
-  public : PMSInt32 getFirstToScheduleAndSuppress (const PMSInt32 inCurrentInstant) ;
-  public : PMSInt32 getMinimumBusyPeriod4Activity  (const PMSInt32 inCurrentActivity,
+  public : int32_t getFirstToScheduleAndSuppress (const int32_t inCurrentInstant) ;
+  public : int32_t getMinimumBusyPeriod4Activity  (const int32_t inCurrentActivity,
                                                     const TC_UniqueArray <cActivity> & inActivities) const ;
  
-  public : PMSInt32 getMaximumBusyPeriod (const PMSInt32 currentActivityIndex,
+  public : int32_t getMaximumBusyPeriod (const int32_t currentActivityIndex,
                                           const TC_UniqueArray <cActivity> & inActivities) const ; 
  
-  public : PMSInt32 getMinimumBusyPeriod (const PMSInt32 currentActivityIndex,
+  public : int32_t getMinimumBusyPeriod (const int32_t currentActivityIndex,
                                           const TC_UniqueArray <cActivity> & inActivities) const ; 
  
-  public : PMSInt32 getLowerPriority (const PMSInt32 currentActivityIndex, 
+  public : int32_t getLowerPriority (const int32_t currentActivityIndex, 
                                       const TC_UniqueArray <cActivity> & inActivities) const ;
 
-  public : PMSInt32 getFirstToSchedule (const PMSInt32 inCurrentInstant) const ;
-  public : PMSInt32 getFirstScheduledInstant (const PMSInt32 inCurrentInstant) const ;
-  public : bool AnyReadyToScheduleAt (const PMSInt32 inCurrentInstant) const ;
-  public : bool AnyNotReadyToScheduleAt (const PMSInt32 inCurrentInstant) const;
+  public : int32_t getFirstToSchedule (const int32_t inCurrentInstant) const ;
+  public : int32_t getFirstScheduledInstant (const int32_t inCurrentInstant) const ;
+  public : bool AnyReadyToScheduleAt (const int32_t inCurrentInstant) const ;
+  public : bool AnyNotReadyToScheduleAt (const int32_t inCurrentInstant) const;
 
-  public : PMSInt32 getNextScheduleTime (void) const ;
+  public : int32_t getNextScheduleTime (void) const ;
 
 //--- Test for equality (returns true if the two lists are the same)
   public : bool operator == (const C_activitiesToSchedule & inOperand) const ;
@@ -101,12 +101,12 @@ class C_activitiesToSchedule {
 //--- Internal nodes
   public : class cVDLnodeInfo {
     public : cVDLnodeInfo * mPtrToNext ;
-    public : PMSInt mID ;
-    public : PMSInt32 mActivityIndex ;
-    public : PMSInt32 mActivityPriority ;
-    public : PMSInt32 mScheduleInstant ;
+    public : intptr_t mID ;
+    public : int32_t mActivityIndex ;
+    public : int32_t mActivityPriority ;
+    public : int32_t mScheduleInstant ;
     
-    public : PMSInt compare (const cVDLnodeInfo & inOperand) const ;
+    public : intptr_t compare (const cVDLnodeInfo & inOperand) const ;
     
     public : inline bool isMarked (void) const {
       return (mID & MARK_VDL_NODE) != 0 ;
@@ -120,8 +120,8 @@ class C_activitiesToSchedule {
       mID &= ~ MARK_VDL_NODE ;
     }
     
-    public : inline PMUInt32 getHashCodeForMap (void) const {
-      return (PMUInt32) ((mActivityIndex << 17)
+    public : inline uint32_t getHashCodeForMap (void) const {
+      return (uint32_t) ((mActivityIndex << 17)
                      ^ (mActivityPriority << 13) 
                      ^ (mScheduleInstant << 7)
                      ^ ((mPtrToNext == NULL) ? -1 : mPtrToNext->mID)) ;
@@ -129,65 +129,65 @@ class C_activitiesToSchedule {
   } ;
 
 //--- Realloc unique table
-  public : static void reallocUniqueTable (const PMSInt32 inTableUniqueNewSize) ;
+  public : static void reallocUniqueTable (const int32_t inTableUniqueNewSize) ;
 
 //--- Realloc addition cache
-  public : static void reallocAdditionCache (const PMSInt32 inNewCacheSize) ;
+  public : static void reallocAdditionCache (const int32_t inNewCacheSize) ;
 
 //--- Decision list
   protected : cVDLnodeInfo * mRootPointer ;
 
 //--- Get pointer value
-  public : inline PMSInt getPtr (void) const { return (PMSInt) mRootPointer ; }
+  public : inline intptr_t getPtr (void) const { return (intptr_t) mRootPointer ; }
 
-//--- Get value ID (as PMSInt integer)
-  public : inline PMSInt getLongID (void) const {
-    return (mRootPointer != NULL) ? ((PMSInt) mRootPointer->mID) : 0 ;
+//--- Get value ID (as intptr_t integer)
+  public : inline intptr_t getLongID (void) const {
+    return (mRootPointer != NULL) ? ((intptr_t) mRootPointer->mID) : 0 ;
   }
 
 //--- Collect unused elements
   public : static void collectUnusedNodes (void) ;
 
 //--- Internal methods
-  protected : static cVDLnodeInfo * find_or_add (const PMSInt32 inIndex,
-                                                 const PMSInt32 inActivityPriority,
-                                                 const PMSInt32 inScheduleInstant,
+  protected : static cVDLnodeInfo * find_or_add (const int32_t inIndex,
+                                                 const int32_t inActivityPriority,
+                                                 const int32_t inScheduleInstant,
                                                  cVDLnodeInfo * const inPointerToNext) ;
 
-  protected : static cVDLnodeInfo * internalAddEntry (const PMSInt32 inIndex,
-                                                      const PMSInt32 inActivityPriority,
-                                                      const PMSInt32 inScheduleInstant,
+  protected : static cVDLnodeInfo * internalAddEntry (const int32_t inIndex,
+                                                      const int32_t inActivityPriority,
+                                                      const int32_t inScheduleInstant,
                                                        cVDLnodeInfo * const inPointerToNext) ;
 
   protected : static void internalGetFirstToScheduleAndSuppress (cVDLnodeInfo * & inPtr,
-                                                      const PMSInt32 inActivityIndex) ;
+                                                      const int32_t inActivityIndex) ;
 
-  protected : static PMSInt32 smNodeCompare ;
-  public : static PMUInt32 getNodeSize (void) ;
-  public : static PMSInt32 getNodeComparesCount (void) { return smNodeCompare ; }
-  protected : static PMSInt32 smNodeCount ;
-  public : static PMSInt32 getVDLnodeCount (void) { return smNodeCount ; }
+  protected : static int32_t smNodeCompare ;
+  public : static uint32_t getNodeSize (void) ;
+  public : static int32_t getNodeComparesCount (void) { return smNodeCompare ; }
+  protected : static int32_t smNodeCount ;
+  public : static int32_t getVDLnodeCount (void) { return smNodeCount ; }
   
   friend class cVDLnodeInfo ;
 } ;
 
 //--------------------------------------------------------------------------------
 
-void SuccessorsMaxBusyDuration (PMSInt32 & ioBusyDuration, const PMSInt32 activityIndex, 
-                                const PMSInt32 ResourceIndex,
+void SuccessorsMaxBusyDuration (int32_t & ioBusyDuration, const int32_t activityIndex, 
+                                const int32_t ResourceIndex,
                                 const TC_UniqueArray <cActivity> & inActivities);
 
-void LowerPriorityOnResource (PMSInt32 & lowerPriority, const PMSInt32 activityIndex, 
-                              const PMSInt32 ResourceIndex,
+void LowerPriorityOnResource (int32_t & lowerPriority, const int32_t activityIndex, 
+                              const int32_t ResourceIndex,
                               const TC_UniqueArray <cActivity> & inActivities);
                               
-void SuccessorsMinBusyDuration (PMSInt32 & ioBusyDuration, const PMSInt32 activityIndex, 
-                                const PMSInt32 ResourceIndex,
+void SuccessorsMinBusyDuration (int32_t & ioBusyDuration, const int32_t activityIndex, 
+                                const int32_t ResourceIndex,
                                 const TC_UniqueArray <cActivity> & inActivities);
                                 
-void SuccessorsMinBusyDuration4Activity (PMSInt32 & ioBusyDuration, const PMSInt32 activityIndex, 
-                                const PMSInt32 ResourceIndex,
-                                const PMSInt32 priorityOfCurrentActivity,
+void SuccessorsMinBusyDuration4Activity (int32_t & ioBusyDuration, const int32_t activityIndex, 
+                                const int32_t ResourceIndex,
+                                const int32_t priorityOfCurrentActivity,
                                 const TC_UniqueArray <cActivity> & inActivities);
     
 //---------------------------------------------------------------------------*

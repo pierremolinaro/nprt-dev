@@ -11,8 +11,8 @@ NecessaryConditions_OK (C_Compiler * inCompiler,
                         const TC_UniqueArray <cElement> & Element,
             						const TC_UniqueArray <cResource> & Resource){
                         
-  const PMSInt32 NumOfElements = Element.count ();
-  const PMSInt32 NumOfResources = Resource.count ();            
+  const int32_t NumOfElements = Element.count ();
+  const int32_t NumOfResources = Resource.count ();            
 	
   bool NecessaryConditionOK = true ;
   
@@ -20,9 +20,9 @@ NecessaryConditions_OK (C_Compiler * inCompiler,
 
 //Verify if the maximum load for each resource is not greater than 1
 
-  for (PMSInt32 index = 0; index < NumOfResources ;index++){
+  for (int32_t index = 0; index < NumOfResources ;index++){
     double ResourceLoad = 0.0 ;
-    for (PMSInt32 i = 0; i < NumOfElements ;i++){
+    for (int32_t i = 0; i < NumOfElements ;i++){
       if( index == Element (i COMMA_HERE).mResourceId){
        	ResourceLoad += double( Element (i COMMA_HERE).mMaxDuration)/ (Element (i COMMA_HERE).mPeriod * Element (i COMMA_HERE).mEveryMultiple );
       }

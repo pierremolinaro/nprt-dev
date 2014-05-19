@@ -51,29 +51,29 @@ class C_VDL_hashmap {
   public : C_activitiesToSchedule::cVDLnodeInfo * search (const C_activitiesToSchedule::cVDLnodeInfo & inInfo) ;
 
 //--- Change size
-  public : void reallocMap (const PMSInt32 inNewSize) ;
+  public : void reallocMap (const int32_t inNewSize) ;
 
 //--- Get map size (in bytes)
-  public : PMUInt32 getMapSizeInBytes (void) const ;
+  public : uint32_t getMapSizeInBytes (void) const ;
 
 //--- Get marked nodes count
-  public : PMSInt32 getMarkedNodesCount (void) const ;
+  public : int32_t getMarkedNodesCount (void) const ;
 
 //--- Sweep unmarked objects
-  public : PMUInt32 sweepUnmarkedObjects (void) ;
+  public : uint32_t sweepUnmarkedObjects (void) ;
 
 //--- Unmarked all objects
   public : void unmarkAllObjects (void) ;
 
 //--- Current Entry count
-  protected : PMSInt32 mEntryCurrentCount ;
-  public : inline PMSInt32 getHashMapEntryCount (void) const { return mEntryCurrentCount ; }
+  protected : int32_t mEntryCurrentCount ;
+  public : inline int32_t getHashMapEntryCount (void) const { return mEntryCurrentCount ; }
 
 //--- Get node size (in bytes)
-  public : static PMUInt32 getNodeSize (void) { return (PMUInt32) sizeof (MyBlockavltree_element_for_collision) ; }
+  public : static uint32_t getNodeSize (void) { return (uint32_t) sizeof (MyBlockavltree_element_for_collision) ; }
 
 //--- Get allocated size (in bytes)
-  public : static PMUInt32 getAllocatedSizeInBytes (void) ;
+  public : static uint32_t getAllocatedSizeInBytes (void) ;
 
 //--- No copy
   private : C_VDL_hashmap (const C_VDL_hashmap &) ;
@@ -95,10 +95,10 @@ class C_VDL_hashmap {
   public : inline C_activitiesToSchedule::cVDLnodeInfo * search (const C_activitiesToSchedule::cVDLnodeInfo & inInfo) ;
 
 //--- Get marked nodes count
-  public : PMSInt32 getMarkedNodesCount (void) const ;
+  public : int32_t getMarkedNodesCount (void) const ;
 
 //--- Sweep unmarked objects
-  public : PMUInt32 sweepUnmarkedObjects (void) ;
+  public : uint32_t sweepUnmarkedObjects (void) ;
 
 //--- No copy
   private : C_TreeForCollision (const C_TreeForCollision &) ;
@@ -115,7 +115,7 @@ class C_VDL_hashmap {
 
 //--- Transfer object in a new map array
   public : void transfertElementsInNewMapArray (C_TreeForCollision * inNewMapArray,
-                                                const PMUInt32 inNewSize) ;
+                                                const uint32_t inNewSize) ;
 
 //--- Internal methods
   protected : static void rotateLeft (MyBlockavltree_element_for_collision * & ioPtr) ;
@@ -135,16 +135,16 @@ class C_VDL_hashmap {
                                            bool & outExtension,
                                            bool & outInsertionPerformed) ;
 
-  protected : PMSInt32 internalMarkedNodeCount (const MyBlockavltree_element_for_collision * const inElement) const ;
+  protected : int32_t internalMarkedNodeCount (const MyBlockavltree_element_for_collision * const inElement) const ;
 
-  protected : PMUInt32 internalRecursiveSweep (MyBlockavltree_element_for_collision * inElement) ;
+  protected : uint32_t internalRecursiveSweep (MyBlockavltree_element_for_collision * inElement) ;
 
   protected : void internalRecursiveUnmark (MyBlockavltree_element_for_collision * inElement) ;
 
   protected : static void recursiveTransfertElementsInNewMapArray
                                              (MyBlockavltree_element_for_collision * const inElementPointer,
                                               C_TreeForCollision * inNewMapArray,
-                                              const PMUInt32 inNewSize) ;
+                                              const uint32_t inNewSize) ;
 //--- Friend
   friend class MyBlockavltree_element_for_collision ;
   friend class cAllocInfo ;
@@ -155,7 +155,7 @@ class C_VDL_hashmap {
     public : C_activitiesToSchedule::cVDLnodeInfo mInfo ;
     public : MyBlockavltree_element_for_collision * mPtrToSup ;
     public : MyBlockavltree_element_for_collision * mPtrToInf ;
-    public : PMSInt32 mBalance ;
+    public : int32_t mBalance ;
     public : MyBlockavltree_element_for_collision (const C_activitiesToSchedule::cVDLnodeInfo & inInfo) :
       mInfo (inInfo),
       mPtrToSup (NULL),
@@ -166,7 +166,7 @@ class C_VDL_hashmap {
       delete mPtrToSup ;
       delete mPtrToInf ;
     }
-    public : PMSInt compare (const MyBlockavltree_element_for_collision & inElement) const {
+    public : intptr_t compare (const MyBlockavltree_element_for_collision & inElement) const {
       return mInfo.compare (inElement.mInfo) ;
     }
     public : void * operator new (const size_t inByteSize) ;
@@ -179,10 +179,10 @@ class C_VDL_hashmap {
   private : class cAllocInfo {
     public : char * * mAllocatedBlockList ;
     public : MyBlockavltree_element_for_collision * mFreeList ;
-    public : PMSInt32 mAllocatedBlockListSize ;
-    public : PMSInt32 mAllocatedBlockCount ;
-    public : PMSInt32 mAllocatedObjectCount ;
-    public : PMSInt32 mCreatedObjectCount ;
+    public : int32_t mAllocatedBlockListSize ;
+    public : int32_t mAllocatedBlockCount ;
+    public : int32_t mAllocatedObjectCount ;
+    public : int32_t mCreatedObjectCount ;
 
     public : cAllocInfo (void) :
     mAllocatedBlockList (NULL),
@@ -201,10 +201,10 @@ class C_VDL_hashmap {
   protected : C_TreeForCollision * mMapArray ;
 
 //--- Get created element count
-  public : static PMSInt32 getCreatedObjectCount (void) { return smAllocInfo.mCreatedObjectCount ; }
+  public : static int32_t getCreatedObjectCount (void) { return smAllocInfo.mCreatedObjectCount ; }
 
 //--- Get currently used element count
-  public : static PMSInt32 getCurrentObjectCount (void) { return smAllocInfo.mAllocatedObjectCount ; }
+  public : static int32_t getCurrentObjectCount (void) { return smAllocInfo.mAllocatedObjectCount ; }
 
 //--- Allocation info (static variable)
   protected : static cAllocInfo smAllocInfo ;

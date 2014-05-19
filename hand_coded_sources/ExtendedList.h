@@ -11,87 +11,87 @@ class C_HTML_FileWrite ;
 #define MAX(x, y)   ((x) > (y) ? (x) : (y))
 
 class cActivity {
-  public : PMSInt32 mOccurrence ; //Element occurrence during the hyper period
+  public : int32_t mOccurrence ; //Element occurrence during the hyper period
   public : char mElementName[14]; //Name of the activivty
-  public : PMSInt32 mResourceId; //
-  public : PMSInt32 mPriority ;
-  public : PMSInt32 mOffset ; 
-  public : PMSInt32 mEvery ;
-  public : PMSInt32 mMinDuration ;
-  public : PMSInt32 mMaxDuration ; 
-  public : PMSInt32 mDeadline ;
-  public : PMSInt32 mPredecessorId ; // -1 if independant
-  public : PMSInt32 mSuccessorId;  // -1 if no successor, or its index
-  public : PMSInt32 mOtherHeirId; //
-  public : PMSInt32 mOtherReadyAtThisInst;
+  public : int32_t mResourceId; //
+  public : int32_t mPriority ;
+  public : int32_t mOffset ; 
+  public : int32_t mEvery ;
+  public : int32_t mMinDuration ;
+  public : int32_t mMaxDuration ; 
+  public : int32_t mDeadline ;
+  public : int32_t mPredecessorId ; // -1 if independant
+  public : int32_t mSuccessorId;  // -1 if no successor, or its index
+  public : int32_t mOtherHeirId; //
+  public : int32_t mOtherReadyAtThisInst;
 };
 
 class cResponseTime {
-  public : PMSInt32 mBestResponseTime;
-  public : PMSInt32 mWorstResponseTime;
+  public : int32_t mBestResponseTime;
+  public : int32_t mWorstResponseTime;
   public : cResponseTime (void) ;
 } ;
 
 class cReadyAtThisInstant {
-  public : PMSInt32 mThisInstant;
-  public : PMSInt32 mActivityIndex;
+  public : int32_t mThisInstant;
+  public : int32_t mActivityIndex;
   public : bool mMarked;
 
 };
 
 class cResource {
   public : char mResourceName[14];
-  public : PMSInt32 mResourceType; //CAN = 1, VAN = 0 & Processor = 2
-  public : PMSInt32 mStep; // Granularity temporel
-  public : PMSInt32 mMinDuration;
+  public : int32_t mResourceType; //CAN = 1, VAN = 0 & Processor = 2
+  public : int32_t mStep; // Granularity temporel
+  public : int32_t mMinDuration;
 };
 
 class cElement {
   public : char mElementName[14]; //Name of the activivty
   public : char mElementType ; // Message--->M or Task ---->T
-  public : PMSInt32 mId_inList;
-  public : PMSInt32 mResourceId; //
-  public : PMSInt32 mPriority ;
-  public : PMSInt32 mOffset ;
-  public : PMSInt32 mEvery ;
-  public : PMSInt32 mMinDuration ;
-  public : PMSInt32 mMaxDuration ; 
-  public : PMSInt32 mDeadline ;
-  public : PMSInt32 mPeriod ;
+  public : int32_t mId_inList;
+  public : int32_t mResourceId; //
+  public : int32_t mPriority ;
+  public : int32_t mOffset ;
+  public : int32_t mEvery ;
+  public : int32_t mMinDuration ;
+  public : int32_t mMaxDuration ; 
+  public : int32_t mDeadline ;
+  public : int32_t mPeriod ;
   public : bool mIsIndependant;
-  public : PMSInt32 mEveryMultiple;
+  public : int32_t mEveryMultiple;
   public : char mPredecessorType ; // Message--->M or Task ---->T
-  public : PMSInt32 mPredecessorId;
-  public : PMSInt32 mSuccessorId;
-  public : PMSInt32 mInExtendedList;
-  public : PMSInt32 mOtherHeirId; //
+  public : int32_t mPredecessorId;
+  public : int32_t mSuccessorId;
+  public : int32_t mInExtendedList;
+  public : int32_t mOtherHeirId; //
 } ;
 
 
 class cMTElement {
   public :char mElementName[14];
-  public : PMSInt32 mWidth;
-  public : PMSInt32 mEvery ;
-  public : PMSInt32 mResourceId; //
-  public : PMSInt32 mPriority;
-  public : PMSInt32 mOffset ;
-  public : PMSInt32 mBestResponseTime ;
-  public : PMSInt32 mWorstResponseTime ; 
-  public : PMSInt32 mPeriod ; 
-  public : PMSInt32 mDeadline ;
+  public : int32_t mWidth;
+  public : int32_t mEvery ;
+  public : int32_t mResourceId; //
+  public : int32_t mPriority;
+  public : int32_t mOffset ;
+  public : int32_t mBestResponseTime ;
+  public : int32_t mWorstResponseTime ; 
+  public : int32_t mPeriod ; 
+  public : int32_t mDeadline ;
 } ;
 
 class C_CompilerEx ;
 
 
-PMSInt32
+int32_t
 BuildExtendedList (C_CompilerEx & inLexique,
                    TC_UniqueArray < cReadyAtThisInstant> & ReadyAtThisInstant,
                    TC_UniqueArray <cElement> & Element,
                    const TC_UniqueArray <cResource> & Resource,
                    TC_UniqueArray <cActivity> & exElement,
                    TC_UniqueArray <cMTElement> & outMTElement,
-                   const PMSInt32 Nu_oftasks, const PMSInt32 Nu_ofMessages,
+                   const int32_t Nu_oftasks, const int32_t Nu_ofMessages,
                    bool CreateIntermediateFiles,
                    bool & ioUseBalgorithm,
                    const C_String & activitiesHTMLFileName);

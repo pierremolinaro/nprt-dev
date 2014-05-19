@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//  GALGAS_enumerable : Base class for GALGAS enumerable object              *
+//  GALGAS_enumerable : Base class for GALGAS enumerable object                *
 //                                                                             *
 //  This file is part of libpm library                                         *
 //                                                                             *
@@ -107,7 +107,7 @@ void capSortedListElement::insulate (void) {
 
 //-----------------------------------------------------------------------------*
 
-void capSortedListElement::description (C_String & ioString, const PMSInt32 inIndentation) const {
+void capSortedListElement::description (C_String & ioString, const int32_t inIndentation) const {
   if (NULL == mPtr) {
     ioString << "NULL" ;
   }else{

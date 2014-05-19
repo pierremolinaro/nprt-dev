@@ -1,20 +1,20 @@
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//  Declaration and implementation of the template class                     *
-//                'TC_LinearListForCollision'                                *
+//  Declaration and implementation of the template class                       *
+//                'TC_LinearListForCollision'                                  *
 //                                                                             *
-//  This class implements hash table collision resolution with a linear      *
-//  ordered list.                                                            *
+//  This class implements hash table collision resolution with a linear        *
+//  ordered list.                                                              *
 //                                                                             *
-//  COPY OF ITS INSTANCES IS FORBIDDEN BY REDEFINITION OF COPY CONSTRUCTOR   *
-//  AND ASSIGNMENT OPERATOR.                                                 *
+//  COPY OF ITS INSTANCES IS FORBIDDEN BY REDEFINITION OF COPY CONSTRUCTOR     *
+//  AND ASSIGNMENT OPERATOR.                                                   *
 //                                                                             *
 //  This file is part of libpm library                                         *
 //                                                                             *
-//  Copyright (C) 2001 Pierre Molinaro.                                      *
+//  Copyright (C) 2001 Pierre Molinaro.                                        *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                               *
 //  IRCCyN, Institut de Recherche en Communications et Cybernétique de Nantes  *
-//  ECN, Ecole Centrale de Nantes                                            *
+//  ECN, École Centrale de Nantes                                              *
 //                                                                             *
 //  This library is free software; you can redistribute it and/or modify it    *
 //  under the terms of the GNU Lesser General Public License as published      *
@@ -37,7 +37,7 @@
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//       Class of linear list                                                *
+//       Class of linear list                                                  *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
@@ -53,13 +53,13 @@ class TC_LinearListForCollision {
 
 //--- Tranfert object in a new map array
   public : void transfertElementsInNewMapArray (TC_LinearListForCollision<INFO> * inNewMapArray,
-                                                const PMUInt32 inNewSize) ;
+                                                const uint32_t inNewSize) ;
 
 //--- Unmark objects
   public : void unmarkAllObjects (void) ;
 
 //--- Sweep unmarked objects
-  public : PMUInt32 sweepUnmarkedObjects (void) ;
+  public : uint32_t sweepUnmarkedObjects (void) ;
 
 //--- Internal class of an element
   protected : class TC_linearlist_element {
@@ -75,7 +75,7 @@ class TC_LinearListForCollision {
 
 //--- Class of allocation info
   protected : class cAllocInfo {
-    public : PMSInt32 mCreatedObjectsCount ;
+    public : int32_t mCreatedObjectsCount ;
     public : cAllocInfo (void) {
       mCreatedObjectsCount = 0 ;
     }
@@ -85,10 +85,10 @@ class TC_LinearListForCollision {
   protected : static cAllocInfo smAllocInfo ;
 
 //--- Get created element count
-  public : static PMSInt32 getCreatedObjectsCount (void) { return smAllocInfo.mCreatedObjectsCount ; }
+  public : static int32_t getCreatedObjectsCount (void) { return smAllocInfo.mCreatedObjectsCount ; }
 
 //--- Get node size (in bytes)
-  public : static PMUInt32 getNodeSize (void) { return sizeof (TC_linearlist_element) ; }
+  public : static uint32_t getNodeSize (void) { return sizeof (TC_linearlist_element) ; }
 
 //--- Root
   protected : TC_linearlist_element * mRoot ;
@@ -98,17 +98,17 @@ class TC_LinearListForCollision {
   private : TC_LinearListForCollision <INFO> & operator = (const TC_LinearListForCollision <INFO> & inSource) ;
 
 //--- Internal methods
-  protected : PMUInt32 internalRecursiveSweep (TC_linearlist_element * inElement) ;
+  protected : uint32_t internalRecursiveSweep (TC_linearlist_element * inElement) ;
   protected : bool insertElement (TC_linearlist_element * inElement) ;
   protected : static void recursiveTransfertElementsInNewMapArray
                                              (TC_linearlist_element * inElementPointer,
                                               TC_LinearListForCollision<INFO> * inNewMapArray,
-                                              const PMUInt32 inNewSize) ;
+                                              const uint32_t inNewSize) ;
 } ;
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//       Constructor for linear list                                         *
+//       Constructor for linear list                                           *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
@@ -119,7 +119,7 @@ TC_LinearListForCollision<INFO>::TC_LinearListForCollision (void) {
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//       Destructor for linear list                                          *
+//       Destructor for linear list                                            *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
@@ -134,7 +134,7 @@ TC_LinearListForCollision<INFO>::~TC_LinearListForCollision (void) {
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//       Search and insert if not found                                      *
+//       Search and insert if not found                                        *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
@@ -152,7 +152,7 @@ INFO * TC_LinearListForCollision<INFO>::search_or_insert (const INFO & inInfo,
       outInsertionPerformed = true ;
       smAllocInfo.mCreatedObjectsCount ++ ;
     }else{
-      const PMSInt32 c = (*p)->mInfo.compare (inInfo) ;
+      const int32_t c = (*p)->mInfo.compare (inInfo) ;
       if (c > 0) { // Go to next
         p = & ((*p)->mPtrToNext) ;
       }else if (c < 0) { // Insert
@@ -171,7 +171,7 @@ INFO * TC_LinearListForCollision<INFO>::search_or_insert (const INFO & inInfo,
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//       Insert element                                                      *
+//       Insert element                                                        *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
@@ -187,7 +187,7 @@ bool TC_LinearListForCollision<INFO>::insertElement (TC_linearlist_element * inE
       insertionPerformed = true ;
       continueLooping = false ;
     }else{
-      const PMSInt32 c = p->mInfo.compare (inElement->mInfo) ;
+      const int32_t c = p->mInfo.compare (inElement->mInfo) ;
       if (c > 0) { // Go to next
         & p = & (p->mPtrToNext) ;
       }else if (c < 0) { // Insert
@@ -205,13 +205,13 @@ bool TC_LinearListForCollision<INFO>::insertElement (TC_linearlist_element * inE
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//       Sweep unmarked objects                                              *
+//       Sweep unmarked objects                                                *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
 template <class INFO>
-PMUInt32 TC_LinearListForCollision<INFO>::internalRecursiveSweep (TC_linearlist_element * inElement) {
-  PMUInt32 sweepedNodes = 0 ;
+uint32_t TC_LinearListForCollision<INFO>::internalRecursiveSweep (TC_linearlist_element * inElement) {
+  uint32_t sweepedNodes = 0 ;
   if (inElement != NULL) {
     sweepedNodes += internalRecursiveSweep (inElement->mPtrToNext) ;
     if (inElement->mInfo.isMarked ()) {
@@ -229,7 +229,7 @@ PMUInt32 TC_LinearListForCollision<INFO>::internalRecursiveSweep (TC_linearlist_
 //-----------------------------------------------------------------------------*
 
 template <class INFO>
-PMUInt32 TC_LinearListForCollision<INFO>::sweepUnmarkedObjects (void) {
+uint32_t TC_LinearListForCollision<INFO>::sweepUnmarkedObjects (void) {
   TC_linearlist_element * temporaryRoot = mRoot ;
   mRoot = (TC_linearlist_element *) NULL ;
   return internalRecursiveSweep (temporaryRoot) ;
@@ -248,7 +248,7 @@ void TC_LinearListForCollision<INFO>::unmarkAllObjects (void) {
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//       Tranfert objects in a new map array                                 *
+//       Tranfert objects in a new map array                                   *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
@@ -256,11 +256,11 @@ template <class INFO>
 void TC_LinearListForCollision<INFO>
    ::recursiveTransfertElementsInNewMapArray (TC_linearlist_element * inElementPointer,
                                               TC_LinearListForCollision<INFO> * inNewMapArray,
-                                              const PMUInt32 inNewSize) {
+                                              const uint32_t inNewSize) {
   if (inElementPointer != NULL) {
     recursiveTransfertElementsInNewMapArray (inElementPointer->mPtrToNext, inNewMapArray, inNewSize) ;
     inElementPointer->mPtrToNext = (TC_linearlist_element *) NULL ;
-    const PMUInt32 hash = inElementPointer->mInfo.getHashCodeForMap () % inNewSize ;
+    const uint32_t hash = inElementPointer->mInfo.getHashCodeForMap () % inNewSize ;
     inNewMapArray [hash].insertElement (inElementPointer) ;
   }
 }
@@ -270,7 +270,7 @@ void TC_LinearListForCollision<INFO>
 template <class INFO>
 void TC_LinearListForCollision<INFO>
       ::transfertElementsInNewMapArray (TC_LinearListForCollision<INFO> * inNewMapArray,
-                                        const PMUInt32 inNewSize) {
+                                        const uint32_t inNewSize) {
   recursiveTransfertElementsInNewMapArray (mRoot, inNewMapArray, inNewSize) ;
   mRoot = (TC_linearlist_element *) NULL ;
 }

@@ -9,7 +9,7 @@ static bool ComputeWithMaxNumberOfBitStuffing = true;
 
 //---------------------------------------------------------------------------*
 
-static PMUInt32 getStandardDataMessageMinSize ( PMUInt32 inLengthInBytes) {
+static uint32_t getStandardDataMessageMinSize ( uint32_t inLengthInBytes) {
 static const unsigned char kStandardMessageMinSize [9] = {
  //   0, 1, 2, 3, 4, 5, 6, 7, 8 }; 
   47, 55, 63, 71, 79, 87, 95, 103, 111} ;
@@ -18,7 +18,7 @@ static const unsigned char kStandardMessageMinSize [9] = {
 
 //---------------------------------------------------------------------------*
 
-static PMUInt32 getExtendedDataMessageMinSize ( PMUInt32 inLengthInBytes) {
+static uint32_t getExtendedDataMessageMinSize ( uint32_t inLengthInBytes) {
 static const unsigned char kExtendedMessageMinSize [9] = {
   67, 75, 83, 91, 99, 107, 115, 123, 131} ;
   return kExtendedMessageMinSize [inLengthInBytes] ;
@@ -26,7 +26,7 @@ static const unsigned char kExtendedMessageMinSize [9] = {
 
 //---------------------------------------------------------------------------*
 
-static PMUInt32 getStandardDataMessageMaxSize ( PMUInt32 inLengthInBytes) {
+static uint32_t getStandardDataMessageMaxSize ( uint32_t inLengthInBytes) {
 static const unsigned char kStandardMessageMaxSize [9] = {
  //0, 1, 2, 3, 4, 5, 6, 7, 8 }; 
  55, 65, 75, 85, 95, 105, 115, 125, 135} ;
@@ -34,21 +34,21 @@ static const unsigned char kStandardMessageMaxSize [9] = {
 }
 
 //---------------------------------------------------------------------------*
-static PMUInt32 getExtendedDataMessageMaxSize ( PMUInt32 inLengthInBytes) {
+static uint32_t getExtendedDataMessageMaxSize ( uint32_t inLengthInBytes) {
 static const unsigned char kExtendedMessageMaxSize [9] = {
   80, 90, 100, 110, 120, 130, 140, 150, 160} ;
   return  kExtendedMessageMaxSize [inLengthInBytes] ;
 }
 
 //---------------------------------------------------------------------------*
-static PMUInt32
-computeMaxStuffBitsForStandardMessage (PMUInt32 inPriority,
-                                   PMUInt32 inLengthInBytes) {
+static uint32_t
+computeMaxStuffBitsForStandardMessage (uint32_t inPriority,
+                                   uint32_t inLengthInBytes) {
   
-  PMUInt32 bitStream = 0 ;
+  uint32_t bitStream = 0 ;
 //--- Enter DLC
-  PMUInt32 x = inLengthInBytes ;
-  for (PMUInt32 i=0 ; i<3 ; i++) {
+  uint32_t x = inLengthInBytes ;
+  for (uint32_t i=0 ; i<3 ; i++) {
     bitStream <<= 1 ;
     bitStream |= (x & 1) ;
     x >>= 1 ;
@@ -57,7 +57,7 @@ computeMaxStuffBitsForStandardMessage (PMUInt32 inPriority,
   bitStream <<= 1 ;
 //--- Enter Identifier
   x = inPriority ;
-  for (PMUInt32 i=0 ; i<11 ; i++) {
+  for (uint32_t i=0 ; i<11 ; i++) {
     bitStream <<= 1 ;
     bitStream |= (x & 1) ;
     x >>= 1 ;
@@ -65,10 +65,10 @@ computeMaxStuffBitsForStandardMessage (PMUInt32 inPriority,
 //--- Enter SOF
   bitStream <<= 1 ;
 //--- Now compute bit stuffs
-  PMUInt32 bitStuffs = 0 ;
+  uint32_t bitStuffs = 0 ;
   bool currentBitValue = false ;
-  PMUInt32 currentCount = 0 ;
-  for (PMUInt32 i=0 ; i<19 ; i++) {
+  uint32_t currentCount = 0 ;
+  for (uint32_t i=0 ; i<19 ; i++) {
     bool c = (bitStream & 1) != 0 ;
     if (currentBitValue == c) {
       currentCount ++ ;
@@ -88,14 +88,14 @@ computeMaxStuffBitsForStandardMessage (PMUInt32 inPriority,
 }
 //---------------------------------------------------------------------------*
 
-static PMUInt32
-computeMaxStuffBitsForExtendedMessage (PMUInt32 inPriority,
-                                     PMUInt32 inLengthInBytes) {
+static uint32_t
+computeMaxStuffBitsForExtendedMessage (uint32_t inPriority,
+                                     uint32_t inLengthInBytes) {
 
-  PMUInt64 bitStream = 0 ;
+  uint64_t bitStream = 0 ;
 //--- Enter DLC
-  PMUInt32 x = inLengthInBytes ;
-  for (PMUInt32 i=0 ; i<3 ; i++) {
+  uint32_t x = inLengthInBytes ;
+  for (uint32_t i=0 ; i<3 ; i++) {
     bitStream <<= 1 ;
     bitStream |= (x & 1) ;
     x >>= 1 ;
@@ -104,7 +104,7 @@ computeMaxStuffBitsForExtendedMessage (PMUInt32 inPriority,
   bitStream <<= 1 ;
 //--- Enter 18 least significant bits of Identifier
   x = inPriority ;
-  for (PMUInt32 i=0 ; i<18 ; i++) {
+  for (uint32_t i=0 ; i<18 ; i++) {
     bitStream <<= 1 ;
     bitStream |= (x & 1) ;
     x >>= 1 ;
@@ -113,7 +113,7 @@ computeMaxStuffBitsForExtendedMessage (PMUInt32 inPriority,
   bitStream <<= 2 ;
   bitStream |= 3 ;
 //--- Enter 11 most significant bits of Identifier
-  for (PMUInt32 i=0 ; i<11 ; i++) {
+  for (uint32_t i=0 ; i<11 ; i++) {
     bitStream <<= 1 ;
     bitStream |= (x & 1) ;
     x >>= 1 ;
@@ -121,10 +121,10 @@ computeMaxStuffBitsForExtendedMessage (PMUInt32 inPriority,
 //--- Enter SOF
   bitStream <<= 1 ;
 //--- Now compute bit stuffs
-  PMUInt32 bitStuffs = 0 ;
+  uint32_t bitStuffs = 0 ;
   bool currentBitValue = false ;
-  PMUInt32 currentCount = 0 ;
-  for (PMUInt32 i=0 ; i<19 ; i++) {
+  uint32_t currentCount = 0 ;
+  for (uint32_t i=0 ; i<19 ; i++) {
     bool c = (bitStream & 1) != 0 ;
     if (currentBitValue == c) {
       currentCount ++ ;
@@ -145,9 +145,9 @@ computeMaxStuffBitsForExtendedMessage (PMUInt32 inPriority,
 
 //---------------------------------------------------------------------------*
 
-PMSInt32 minCANMessageTime(const char c, const PMUInt32 priority, const PMUInt32 Num_Bytes){
+int32_t minCANMessageTime(const char c, const uint32_t priority, const uint32_t Num_Bytes){
 
-  PMUInt32 minTransTime = 0 ;
+  uint32_t minTransTime = 0 ;
      switch (c) {
       case 'S' :
        if (ComputeWithMaxNumberOfBitStuffing) {
@@ -167,14 +167,14 @@ PMSInt32 minCANMessageTime(const char c, const PMUInt32 priority, const PMUInt32
         break ;
       
   }
-  return (PMSInt32) minTransTime;     
+  return (int32_t) minTransTime;     
 }
 
 //---------------------------------------------------------------------------*
 
-PMSInt32 maxCANMessageTime(const char c, const PMUInt32 minTrTime, const PMUInt32 Num_Bytes){
+int32_t maxCANMessageTime(const char c, const uint32_t minTrTime, const uint32_t Num_Bytes){
 
-  PMUInt32 maxTransTime = 0 ;
+  uint32_t maxTransTime = 0 ;
      switch (c) {
       case 'S' :
        if (ComputeWithMaxNumberOfBitStuffing) {
@@ -192,7 +192,7 @@ PMSInt32 maxCANMessageTime(const char c, const PMUInt32 minTrTime, const PMUInt3
         break ;
    }
       
-    return (PMSInt32) maxTransTime;
+    return (int32_t) maxTransTime;
 }
 
 /*---------------------------------------------------------------------------*/ 
