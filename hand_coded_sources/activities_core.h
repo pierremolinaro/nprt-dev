@@ -27,7 +27,7 @@
 //---------------------------------------------------------------------------*
 
 void
-scheduleActivities (const PMSInt32 NoInterButUseB,
+scheduleActivities (const int32_t NoInterButUseB,
                     const bool DependentHasOffset,
                     const TC_UniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
                     const TC_UniqueArray <cActivity> & inActivities,

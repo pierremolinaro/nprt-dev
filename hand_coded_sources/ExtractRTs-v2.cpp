@@ -24,11 +24,11 @@ ExtractWorstBestRT (C_Compiler * inCompiler,
           C_HTML_FileWrite & in_htmlFile) {
 
 
- 	const PMSInt32 Num_ofResources = Resource.count () ;
-  const PMSInt32 Num_ofElements = MTElement.count () ;
+ 	const int32_t Num_ofResources = Resource.count () ;
+  const int32_t Num_ofElements = MTElement.count () ;
   
-  PMSInt32 Smallest_bit_time = PMSINT32_MAX ;
-  for (PMSInt32 i=0 ; i < Num_ofResources ; i++ ){
+  int32_t Smallest_bit_time = INT32_MAX ;
+  for (int32_t i=0 ; i < Num_ofResources ; i++ ){
   	Smallest_bit_time = min(Smallest_bit_time, Resource (i COMMA_HERE).mStep);
   }
   
@@ -51,7 +51,7 @@ ExtractWorstBestRT (C_Compiler * inCompiler,
   	raw_file.outputRawData ("Offset</td><td>BRT</td><td>WRT</td></tr>") ;
 		
 		
-		for (PMSInt32 i=0 ; i<inResponseTimeArray.count () ; i++) {
+		for (int32_t i=0 ; i<inResponseTimeArray.count () ; i++) {
 		  if ( (exElement (i COMMA_HERE).mOccurrence % exElement (i COMMA_HERE).mEvery) == 0 ){
 				raw_file.outputRawData ("<tr class=\"result_line\"><td>") ;
 		    raw_file << cStringWithSigned (i) ;
@@ -65,7 +65,7 @@ ExtractWorstBestRT (C_Compiler * inCompiler,
 		    raw_file << cStringWithSigned (exElement (i COMMA_HERE).mOffset) ;
 		    raw_file.outputRawData ("</td><td>") ;
 		    
-		    if (inResponseTimeArray (i COMMA_HERE).mBestResponseTime == PMSINT32_MAX) {
+		    if (inResponseTimeArray (i COMMA_HERE).mBestResponseTime == INT32_MAX) {
 	      		raw_file.outputRawData ("Error</td><td>") ;
 	      }else{
 	      		raw_file << cStringWithSigned (inResponseTimeArray ( i COMMA_HERE).mBestResponseTime) ;
@@ -83,12 +83,12 @@ ExtractWorstBestRT (C_Compiler * inCompiler,
 		raw_file.outputRawData ("</table>") ;
 	  raw_file.outputRawData ("<br>");
 	}
-	PMSInt32 DC= 0;     
-  for( PMSInt32 index =0; index< Num_ofElements; index++){
+	int32_t DC= 0;     
+  for( int32_t index =0; index< Num_ofElements; index++){
 
 //In extended o/p list, elements will be subjected to the extraction process
     
-    for(PMSInt32 i= DC ; i< DC+MTElement ( index COMMA_HERE).mWidth ; i++){
+    for(int32_t i= DC ; i< DC+MTElement ( index COMMA_HERE).mWidth ; i++){
 //If the is the 1st occurence, maintain parameters
 
       if (i == (DC+exElement (i COMMA_HERE).mEvery-1)){
@@ -116,21 +116,21 @@ ExtractWorstBestRT (C_Compiler * inCompiler,
                            
       }
     }  
-    PMSInt32 resourceIndex = MTElement ( index COMMA_HERE).mResourceId ;
-    PMSInt32 resourceStep = Resource (resourceIndex COMMA_HERE).mStep ;
+    int32_t resourceIndex = MTElement ( index COMMA_HERE).mResourceId ;
+    int32_t resourceStep = Resource (resourceIndex COMMA_HERE).mStep ;
     
     MTElement ( index COMMA_HERE).mPeriod = MTElement ( index COMMA_HERE).mPeriod / resourceStep ;
-    if ( MTElement ( index COMMA_HERE).mDeadline !=  PMSINT32_MAX){ // PMUINT32_MAX -> PMSINT32_MAX by PM 17/1/2005
+    if ( MTElement ( index COMMA_HERE).mDeadline !=  INT32_MAX){ // PMUINT32_MAX -> INT32_MAX by PM 17/1/2005
          MTElement ( index COMMA_HERE).mDeadline = MTElement ( index COMMA_HERE).mDeadline / resourceStep ;
     }
     MTElement ( index COMMA_HERE).mBestResponseTime = 
      (MTElement ( index COMMA_HERE).mBestResponseTime  -
       MTElement ( index COMMA_HERE).mOffset)/resourceStep ;
     MTElement ( index COMMA_HERE).mWorstResponseTime = 
-     	(PMSInt32) ceil((MTElement ( index COMMA_HERE).mWorstResponseTime -
+     	(int32_t) ceil((MTElement ( index COMMA_HERE).mWorstResponseTime -
       MTElement ( index COMMA_HERE).mOffset)*1.0/resourceStep);
     
-    DC=DC + PMSInt32 (MTElement(index COMMA_HERE).mWidth) ;
+    DC=DC + int32_t (MTElement(index COMMA_HERE).mWidth) ;
   }
 
 	in_htmlFile.appendCppTitleComment ("Final results map", "title") ;
@@ -138,9 +138,9 @@ ExtractWorstBestRT (C_Compiler * inCompiler,
 	in_htmlFile.outputRawData ("#</td><td>Element</td><td>Resource</td><td>BRT</td><td>");
   in_htmlFile.outputRawData ("WRT</td><td>Period</td><td>Deadline</td><td>&nbsp;</td></tr>") ;
 		
-	PMSInt32 ElementIndex = 1;
-	for(PMSInt32 index = 0; index <Num_ofResources ;index++) {
-  	for(PMSInt32 i = 0; i<Num_ofElements; i++){
+	int32_t ElementIndex = 1;
+	for(int32_t index = 0; index <Num_ofResources ;index++) {
+  	for(int32_t i = 0; i<Num_ofElements; i++){
   		if(index == MTElement ( i COMMA_HERE).mResourceId){
 				in_htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
 		    in_htmlFile << cStringWithSigned (ElementIndex) ;
@@ -150,7 +150,7 @@ ExtractWorstBestRT (C_Compiler * inCompiler,
 		    in_htmlFile << Resource ( index COMMA_HERE).mResourceName ;
 	  		in_htmlFile.outputRawData ("</td><td>") ;
 		    
-		    if (MTElement ( i COMMA_HERE).mBestResponseTime == PMSINT32_MAX) {
+		    if (MTElement ( i COMMA_HERE).mBestResponseTime == INT32_MAX) {
       		in_htmlFile.outputRawData ("Error</td><td>") ;
       	}else{
       		in_htmlFile << cStringWithSigned (MTElement ( i COMMA_HERE).mBestResponseTime) ;
@@ -167,7 +167,7 @@ ExtractWorstBestRT (C_Compiler * inCompiler,
 		    in_htmlFile << cStringWithSigned (MTElement ( i COMMA_HERE).mPeriod * MTElement ( i COMMA_HERE).mEvery) ;
 		    in_htmlFile.outputRawData ("</td><td>") ;
 		    
-		    if (MTElement ( i COMMA_HERE).mDeadline ==  PMSINT32_MAX){// PMUINT32_MAX -> PMSINT32_MAX by PM 17/1/2005
+		    if (MTElement ( i COMMA_HERE).mDeadline ==  INT32_MAX){// PMUINT32_MAX -> INT32_MAX by PM 17/1/2005
   				in_htmlFile.outputRawData ("Unkown</td><td>&nbsp;</td></tr>") ;
   			}else{
         	in_htmlFile << cStringWithSigned (MTElement ( i COMMA_HERE).mDeadline) ;

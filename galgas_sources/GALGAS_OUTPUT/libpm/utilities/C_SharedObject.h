@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//  C_SharedObject : Base class for GALGAS object handling                   *
+//  C_SharedObject : Base class for GALGAS object handling                     *
 //                                                                             *
 //  This file is part of libpm library                                         *
 //                                                                             *
@@ -41,16 +41,16 @@ class C_SharedObject {
   #endif
 
 //--- Object index
-  public : const PMUInt32 mObjectIndex ;
+  public : const uint32_t mObjectIndex ;
 
 //--- Link between existing instances
   private : C_SharedObject * mPtrToPreviousObject ;
   private : C_SharedObject * mPtrToNextObject ;
 
 //--- Retain count
-  private : mutable PMSInt32 mRetainCount ;
+  private : mutable int32_t mRetainCount ;
 
-  public : inline PMSInt32 retainCount (void) const { return mRetainCount ; }
+  public : inline int32_t retainCount (void) const { return mRetainCount ; }
 
   public : static void retain (const C_SharedObject * inObject COMMA_LOCATION_ARGS) ;
 

@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//     C++ class for displaying BDDs (use with the BDD package 'C_BDD.cpp')  *
+//     C++ class for displaying BDDs (use with the BDD package 'C_BDD.cpp')    *
 //                                                                             *
 //  This file is part of libpm library                                         *
 //                                                                             *
@@ -25,26 +25,26 @@
 #include "streams/AC_OutputStream.h"
 #include "utilities/MF_MemoryControl.h"
 
-//---------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 #include <string.h>
 
-//---------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
-C_Display_BDD::C_Display_BDD (const PMUInt32 nombreChaines) :
+C_Display_BDD::C_Display_BDD (const uint32_t nombreChaines) :
 aNombreChaines (0),
 aTab (),
 aDimensions (NULL) {
   allouer (nombreChaines) ;
 }
 
-//---------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 C_Display_BDD::~C_Display_BDD (void) {
   vider () ;
 }
 
-//---------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 void C_Display_BDD::vider (void) {
   aTab.free () ;
@@ -52,13 +52,13 @@ void C_Display_BDD::vider (void) {
   aNombreChaines = 0 ;
 }
 
-//---------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
-void C_Display_BDD::allouer (const PMUInt32 nombreChaines) {
+void C_Display_BDD::allouer (const uint32_t nombreChaines) {
   vider () ;
-  aTab.makeRoom ((PMSInt32) nombreChaines) ;
+  aTab.makeRoom ((int32_t) nombreChaines) ;
   macroMyDeleteArray (aDimensions) ;
-  macroMyNewArray (aDimensions, PMUInt32, nombreChaines) ;
+  macroMyNewArray (aDimensions, uint32_t, nombreChaines) ;
   if (aDimensions != NULL) {
     aNombreChaines = nombreChaines ;
   }else{
@@ -67,40 +67,40 @@ void C_Display_BDD::allouer (const PMUInt32 nombreChaines) {
   }
 }
 
-//---------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
-void C_Display_BDD::defineVariableName (const PMUInt32 indice,
+void C_Display_BDD::defineVariableName (const uint32_t indice,
                                         const C_String & chaine,
-                                        const PMUInt32 dimensions) {
+                                        const uint32_t dimensions) {
   if (indice < aNombreChaines) {
     aDimensions [indice] = dimensions ;
-  //  aTab ((PMSInt32) indice COMMA_HERE) = chaine ;
+  //  aTab ((int32_t) indice COMMA_HERE) = chaine ;
     aTab.addObject (chaine) ;
   }
 }
 
-//---------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
-PMSInt32 C_Display_BDD::longueur (const PMUInt32 indice) const  {
-  return aTab ((PMSInt32) indice COMMA_HERE).length () ;
+int32_t C_Display_BDD::longueur (const uint32_t indice) const  {
+  return aTab ((int32_t) indice COMMA_HERE).length () ;
 }
 
-//---------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
-PMUInt32 C_Display_BDD::
-obtenirDimension (const PMUInt32 indice) const {
-  PMUInt32 dim = 1 ;
+uint32_t C_Display_BDD::
+obtenirDimension (const uint32_t indice) const {
+  uint32_t dim = 1 ;
   if (indice < aNombreChaines) {
     dim = aDimensions [indice] ;
   }
   return dim ;
 }
 
-//---------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
-void C_Display_BDD::ecrire (const PMUInt32 indice,
+void C_Display_BDD::ecrire (const uint32_t indice,
                             AC_OutputStream & inStream) const {
-  inStream << aTab ((PMSInt32) indice COMMA_HERE) ;
+  inStream << aTab ((int32_t) indice COMMA_HERE) ;
 }
 
-//---------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*

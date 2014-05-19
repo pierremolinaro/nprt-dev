@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//  'cEnumerator_range' : galgas range enumerator                            *
+//  'cEnumerator_range' : galgas range enumerator                              *
 //                                                                             *
 //  This file is part of libpm library                                         *
 //                                                                             *
@@ -74,7 +74,7 @@ void cEnumerator_range::gotoNextObject (void) {
 //-----------------------------------------------------------------------------*
 
 GALGAS_uint cEnumerator_range::current (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_uint (hasCurrentObject (), (PMUInt32) (mCurrent)) ;
+  return GALGAS_uint (hasCurrentObject (), (uint32_t) (mCurrent)) ;
 }
 
 //-----------------------------------------------------------------------------*

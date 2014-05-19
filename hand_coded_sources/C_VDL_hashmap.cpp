@@ -28,7 +28,7 @@
 
 //---------------------------------------------------------------------------*
 
-static const PMSInt32 BLOCK_SIZE = 131072 ;
+static const int32_t BLOCK_SIZE = 131072 ;
 
 //---------------------------------------------------------------------------*
 
@@ -58,7 +58,7 @@ void C_VDL_hashmap::MyBlockavltree_element_for_collision::operator delete (void 
   smAllocInfo.mFreeList = p ;
   smAllocInfo.mAllocatedObjectCount -- ;
   if (smAllocInfo.mAllocatedObjectCount == 0) {
-    for (PMSInt32 i=0 ; i<smAllocInfo.mAllocatedBlockCount ; i++) {
+    for (int32_t i=0 ; i<smAllocInfo.mAllocatedBlockCount ; i++) {
       delete [] smAllocInfo.mAllocatedBlockList [i] ;
     }
     delete [] smAllocInfo.mAllocatedBlockList ;
@@ -78,9 +78,9 @@ void C_VDL_hashmap::MyBlockavltree_element_for_collision::operator delete (void 
 void C_VDL_hashmap::C_TreeForCollision::allocBlock (void) {
 //--- Realloc block list ?
   if (smAllocInfo.mAllocatedBlockListSize <= smAllocInfo.mAllocatedBlockCount) {
-    const PMSInt32 newSize = smAllocInfo.mAllocatedBlockCount + 1024 ;
+    const int32_t newSize = smAllocInfo.mAllocatedBlockCount + 1024 ;
     char ** newBlockList = new char * [newSize] ;
-    for (PMSInt32 i=0 ; i<smAllocInfo.mAllocatedBlockCount ; i++) {
+    for (int32_t i=0 ; i<smAllocInfo.mAllocatedBlockCount ; i++) {
       newBlockList [i] = smAllocInfo.mAllocatedBlockList [i] ;
     }
     delete [] smAllocInfo.mAllocatedBlockList ;
@@ -91,15 +91,15 @@ void C_VDL_hashmap::C_TreeForCollision::allocBlock (void) {
   smAllocInfo.mAllocatedBlockList [smAllocInfo.mAllocatedBlockCount] = new char [BLOCK_SIZE] ;
   char * ptr = & (smAllocInfo.mAllocatedBlockList [smAllocInfo.mAllocatedBlockCount] [0]) ;
   smAllocInfo.mAllocatedBlockCount ++ ;
-  PMSInt32 blockSize = BLOCK_SIZE ;
-  const PMSInt32 ALIGNMENT = 32 ;
+  int32_t blockSize = BLOCK_SIZE ;
+  const int32_t ALIGNMENT = 32 ;
 //--- Align pointer
-  if ((((PMSInt) ptr) % ALIGNMENT) != 0) {
-    ptr = (char *) (((((PMSInt) ptr) / ALIGNMENT) + 1) * ALIGNMENT) ;
+  if ((((intptr_t) ptr) % ALIGNMENT) != 0) {
+    ptr = (char *) (((((intptr_t) ptr) / ALIGNMENT) + 1) * ALIGNMENT) ;
     blockSize -= ALIGNMENT ;
   }
-  const PMSInt32 nbNewObjects = blockSize / ((PMSInt32) sizeof (MyBlockavltree_element_for_collision)) ;
-  for (PMSInt32 i=0 ; i<nbNewObjects ; i++) {
+  const int32_t nbNewObjects = blockSize / ((int32_t) sizeof (MyBlockavltree_element_for_collision)) ;
+  for (int32_t i=0 ; i<nbNewObjects ; i++) {
     MyBlockavltree_element_for_collision * newObjectPtr = (MyBlockavltree_element_for_collision *) ptr ;
     newObjectPtr->mPtrToSup = smAllocInfo.mFreeList ;
     smAllocInfo.mFreeList = newObjectPtr ;
@@ -134,8 +134,8 @@ C_VDL_hashmap::C_TreeForCollision::~C_TreeForCollision (void) {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-PMUInt32 C_VDL_hashmap::getAllocatedSizeInBytes (void) {
-  return (PMUInt32) (BLOCK_SIZE * smAllocInfo.mAllocatedBlockCount) ;
+uint32_t C_VDL_hashmap::getAllocatedSizeInBytes (void) {
+  return (uint32_t) (BLOCK_SIZE * smAllocInfo.mAllocatedBlockCount) ;
 }
 
 //---------------------------------------------------------------------------*
@@ -199,7 +199,7 @@ avltree_search (MyBlockavltree_element_for_collision * ioRootPointer,
   if (ioRootPointer == NULL) {
     result = (C_activitiesToSchedule::cVDLnodeInfo *) NULL ;
   }else{
-    const PMSInt comp = ioRootPointer->mInfo.compare (inInfo) ;
+    const intptr_t comp = ioRootPointer->mInfo.compare (inInfo) ;
     if (comp > 0) {
       result = avltree_search (ioRootPointer->mPtrToSup, inInfo) ;
     }else if (comp < 0) {
@@ -230,7 +230,7 @@ recursiveSearchOrInsert (MyBlockavltree_element_for_collision * & ioRootPointer,
     outInsertionPerformed = true ;
   }else{
     outInsertionPerformed = false ;
-    const PMSInt comp = ioRootPointer->mInfo.compare (inInfo) ;
+    const intptr_t comp = ioRootPointer->mInfo.compare (inInfo) ;
     if (comp > 0) {
       result = recursiveSearchOrInsert (ioRootPointer->mPtrToSup, inInfo, outExtension, outInsertionPerformed) ;
       if (outExtension) {
@@ -320,7 +320,7 @@ recursiveInsertElement (MyBlockavltree_element_for_collision * & ioRootPointer,
     outExtension = true ;
     outInsertionPerformed = true ;
   }else{
-    const PMSInt comp = ioRootPointer->compare (* inElementPointer) ;
+    const intptr_t comp = ioRootPointer->compare (* inElementPointer) ;
     if (comp > 0) {
       recursiveInsertElement (ioRootPointer->mPtrToSup, inElementPointer, outExtension, outInsertionPerformed) ;
       if (outExtension) {
@@ -376,8 +376,8 @@ recursiveInsertElement (MyBlockavltree_element_for_collision * & ioRootPointer,
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-PMUInt32 C_VDL_hashmap::C_TreeForCollision::internalRecursiveSweep (C_VDL_hashmap::MyBlockavltree_element_for_collision * inElement) {
-  PMUInt32 sweepedNodes = 0 ;
+uint32_t C_VDL_hashmap::C_TreeForCollision::internalRecursiveSweep (C_VDL_hashmap::MyBlockavltree_element_for_collision * inElement) {
+  uint32_t sweepedNodes = 0 ;
   if (inElement != NULL) {
     sweepedNodes += internalRecursiveSweep (inElement->mPtrToInf) ;
     sweepedNodes += internalRecursiveSweep (inElement->mPtrToSup) ;
@@ -399,7 +399,7 @@ PMUInt32 C_VDL_hashmap::C_TreeForCollision::internalRecursiveSweep (C_VDL_hashma
 
 //---------------------------------------------------------------------------*
 
-PMUInt32 C_VDL_hashmap::C_TreeForCollision::sweepUnmarkedObjects (void) {
+uint32_t C_VDL_hashmap::C_TreeForCollision::sweepUnmarkedObjects (void) {
   MyBlockavltree_element_for_collision * temporaryRoot = mRoot ;
   mRoot = (MyBlockavltree_element_for_collision *) NULL ;
   return internalRecursiveSweep (temporaryRoot) ;
@@ -414,14 +414,14 @@ PMUInt32 C_VDL_hashmap::C_TreeForCollision::sweepUnmarkedObjects (void) {
 void C_VDL_hashmap::C_TreeForCollision::
 recursiveTransfertElementsInNewMapArray (MyBlockavltree_element_for_collision * const inElementPointer,
                                          C_TreeForCollision * inNewMapArray,
-                                         const PMUInt32 inNewSize) {
+                                         const uint32_t inNewSize) {
   if (inElementPointer != NULL) {
     recursiveTransfertElementsInNewMapArray (inElementPointer->mPtrToInf, inNewMapArray, inNewSize) ;
     recursiveTransfertElementsInNewMapArray (inElementPointer->mPtrToSup, inNewMapArray, inNewSize) ;
     inElementPointer->mPtrToInf = (MyBlockavltree_element_for_collision *) NULL ;
     inElementPointer->mPtrToSup = (MyBlockavltree_element_for_collision *) NULL ;
     inElementPointer->mBalance = 0 ;
-    const PMUInt32 hash = inElementPointer->mInfo.getHashCodeForMap () % inNewSize ;
+    const uint32_t hash = inElementPointer->mInfo.getHashCodeForMap () % inNewSize ;
     bool extension ; // Unused
     bool insertionPerformed ; // Unused
     recursiveInsertElement (inNewMapArray [hash].mRoot, inElementPointer, extension, insertionPerformed) ;
@@ -432,7 +432,7 @@ recursiveTransfertElementsInNewMapArray (MyBlockavltree_element_for_collision * 
 
 void C_VDL_hashmap::C_TreeForCollision::
 transfertElementsInNewMapArray (C_TreeForCollision * inNewMapArray,
-                                const PMUInt32 inNewSize) {
+                                const uint32_t inNewSize) {
   recursiveTransfertElementsInNewMapArray (mRoot, inNewMapArray, inNewSize) ;
   mRoot = (MyBlockavltree_element_for_collision *) NULL ;
 }
@@ -457,9 +457,9 @@ unmarkAllObjects (void) {
 
 //---------------------------------------------------------------------------*
 
-PMSInt32 C_VDL_hashmap::C_TreeForCollision::
+int32_t C_VDL_hashmap::C_TreeForCollision::
 internalMarkedNodeCount (const MyBlockavltree_element_for_collision * const inElement) const {
-  PMSInt32 result = 0 ;
+  int32_t result = 0 ;
   if (inElement != NULL) {
     if (inElement->mInfo.isMarked ()) {
       result ++ ;
@@ -472,7 +472,7 @@ internalMarkedNodeCount (const MyBlockavltree_element_for_collision * const inEl
 
 //---------------------------------------------------------------------------*
 
-PMSInt32 C_VDL_hashmap::C_TreeForCollision::
+int32_t C_VDL_hashmap::C_TreeForCollision::
 getMarkedNodesCount (void) const {
   return internalMarkedNodeCount (mRoot) ;
 }
@@ -498,8 +498,8 @@ C_VDL_hashmap::~C_VDL_hashmap (void) {
 C_activitiesToSchedule::cVDLnodeInfo * C_VDL_hashmap::
 search_or_insert (const C_activitiesToSchedule::cVDLnodeInfo & inInfo,
                   bool & outInsertionPerformed) {
-  PMUInt32 hashCode = inInfo.getHashCodeForMap () ;
-  hashCode %= (PMUInt32) mEntryCurrentCount ;
+  uint32_t hashCode = inInfo.getHashCodeForMap () ;
+  hashCode %= (uint32_t) mEntryCurrentCount ;
   return mMapArray [hashCode].search_or_insert (inInfo, outInsertionPerformed) ;
 }
 
@@ -507,16 +507,16 @@ search_or_insert (const C_activitiesToSchedule::cVDLnodeInfo & inInfo,
 
 C_activitiesToSchedule::cVDLnodeInfo * C_VDL_hashmap::
 search (const C_activitiesToSchedule::cVDLnodeInfo & inInfo) {
-  PMUInt32 hashCode = inInfo.getHashCodeForMap () ;
-  hashCode %= (PMUInt32) mEntryCurrentCount ;
+  uint32_t hashCode = inInfo.getHashCodeForMap () ;
+  hashCode %= (uint32_t) mEntryCurrentCount ;
   return mMapArray [hashCode].search (inInfo) ;
 }
 
 //---------------------------------------------------------------------------*
 
-PMUInt32 C_VDL_hashmap::sweepUnmarkedObjects (void) {
-  PMUInt32 sweepedNodes = 0 ;
-  for (PMSInt32 i=0 ; i<mEntryCurrentCount ; i++) {
+uint32_t C_VDL_hashmap::sweepUnmarkedObjects (void) {
+  uint32_t sweepedNodes = 0 ;
+  for (int32_t i=0 ; i<mEntryCurrentCount ; i++) {
     sweepedNodes += mMapArray [i].sweepUnmarkedObjects () ;
   }
   return sweepedNodes ;
@@ -524,19 +524,19 @@ PMUInt32 C_VDL_hashmap::sweepUnmarkedObjects (void) {
 
 //---------------------------------------------------------------------------*
 
-PMUInt32 C_VDL_hashmap::getMapSizeInBytes (void) const {
-  return (PMUInt32) mEntryCurrentCount * (PMUInt32) sizeof (C_TreeForCollision) ;
+uint32_t C_VDL_hashmap::getMapSizeInBytes (void) const {
+  return (uint32_t) mEntryCurrentCount * (uint32_t) sizeof (C_TreeForCollision) ;
 }
 
 //---------------------------------------------------------------------------*
 
 void C_VDL_hashmap
-::reallocMap (const PMSInt32 inNewSize) {
-  const PMSInt32 newSize = (inNewSize < 1) ? 1 : (PMSInt32) getPrimeGreaterThan ((PMUInt32) inNewSize) ;
+::reallocMap (const int32_t inNewSize) {
+  const int32_t newSize = (inNewSize < 1) ? 1 : (int32_t) getPrimeGreaterThan ((uint32_t) inNewSize) ;
   if (newSize != mEntryCurrentCount) {
     C_TreeForCollision * newMapArray = (newSize > 1) ? new C_TreeForCollision [newSize] : (& mMinimumMapArray) ;
-    for (PMSInt32 i=0 ; i<mEntryCurrentCount ; i++) {
-      mMapArray [i].transfertElementsInNewMapArray (newMapArray, (PMUInt32) newSize) ;
+    for (int32_t i=0 ; i<mEntryCurrentCount ; i++) {
+      mMapArray [i].transfertElementsInNewMapArray (newMapArray, (uint32_t) newSize) ;
     }
     if (mEntryCurrentCount > 1) {
       delete [] mMapArray ;
@@ -549,16 +549,16 @@ void C_VDL_hashmap
 //---------------------------------------------------------------------------*
 
 void C_VDL_hashmap::unmarkAllObjects (void) {
-  for (PMSInt32 i=0 ; i<mEntryCurrentCount ; i++) {
+  for (int32_t i=0 ; i<mEntryCurrentCount ; i++) {
     mMapArray [i].unmarkAllObjects () ;
   }
 }
 
 //---------------------------------------------------------------------------*
 
-PMSInt32 C_VDL_hashmap::getMarkedNodesCount (void) const {
-  PMSInt32 count = 0 ;
-  for (PMSInt32 i=0 ; i<mEntryCurrentCount ; i++) {
+int32_t C_VDL_hashmap::getMarkedNodesCount (void) const {
+  int32_t count = 0 ;
+  for (int32_t i=0 ; i<mEntryCurrentCount ; i++) {
     count += mMapArray [i].getMarkedNodesCount () ;
   }
   return count ;
