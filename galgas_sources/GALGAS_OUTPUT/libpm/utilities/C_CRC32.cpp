@@ -1,43 +1,43 @@
-//---------------------------------------------------------------------------*
-//                                                                           *
+//-----------------------------------------------------------------------------*
+//                                                                             *
 //  'C_CRC32' : a class for computing CRC32                                  *
-//                                                                           *
+//                                                                             *
 //  This file is part of libpm library                                       *
-//                                                                           *
+//                                                                             *
 //  Copyright (C) 1997 Pierre Molinaro.                                      *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                             *
 //  IRCCyN, Institut de Recherche en Communications et Cybernetique de Nantes*
 //  ECN, Ecole Centrale de Nantes                                            *
-//                                                                           *
+//                                                                             *
 //  This library is free software; you can redistribute it and/or modify it  *
 //  under the terms of the GNU Lesser General Public License as published    *
 //  by the Free Software Foundation; either version 2 of the License, or     *
 //  (at your option) any later version.                                      *
-//                                                                           *
+//                                                                             *
 //  This program is distributed in the hope it will be useful, but WITHOUT   *
 //  ANY WARRANTY; without even the implied warranty of MERCHANDIBILITY or    *
 //  FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for *
 //  more details.                                                            *
-//                                                                           *
-//---------------------------------------------------------------------------*
+//                                                                             *
+//-----------------------------------------------------------------------------*
 
 #include "C_CRC32.h"
 #include <string.h>
 
-//---------------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 //            Initialisation du tableau des sommes de controle               *
-//---------------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 static uint32_t tableCRC [256] ;
 
-//---------------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 class cInitTableCRC {
   public : cInitTableCRC (void) ;
 } ;
 
 
-//---------------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 cInitTableCRC::cInitTableCRC (void) {
   const uint32_t polynome_CRC32 = 0xEDB88320UL ;
@@ -54,22 +54,22 @@ cInitTableCRC::cInitTableCRC (void) {
   }
 }
 
-//---------------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 void C_CRC32::addCharToChecksum (const char car, uint32_t & somme) {
   int32_t valeurLong = car ;
-  if (valeurLong < 0L) valeurLong += 256L ;
+  if (valeurLong < 0) valeurLong += 256L ;
   addLongToChecksum (valeurLong, somme) ;
 }
 
-//---------------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 void C_CRC32::addShortToChecksum (const int16_t valeur, uint32_t & somme) {
   const int32_t valeurLong = valeur ;
   addLongToChecksum (valeurLong, somme) ;
 }
 
-//---------------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 void C_CRC32::addLongToChecksum (const int32_t valeur, uint32_t & somme) {
   const uint32_t temp1 = (somme >> 8) & 0x00FFFFFFUL ;
@@ -77,7 +77,7 @@ void C_CRC32::addLongToChecksum (const int32_t valeur, uint32_t & somme) {
   somme = temp1 ^ temp2 ;
 }
 
-//---------------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 void C_CRC32::addUnsignedLongToChecksum (const uint32_t valeur, uint32_t & somme) {
   const uint32_t temp1 = (somme >> 8) & 0x00FFFFFFUL ;
@@ -85,11 +85,11 @@ void C_CRC32::addUnsignedLongToChecksum (const uint32_t valeur, uint32_t & somme
   somme = temp1 ^ temp2 ;
 }
 
-//---------------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 void C_CRC32::addStringToChecksum (const char * chaine, uint32_t & somme) {
   if (chaine == NULL) {
-    addLongToChecksum (0L, somme) ;
+    addLongToChecksum (0, somme) ;
   }else{
     const int32_t longueurChaine = (int32_t) ::strlen (chaine) ;
     for (int32_t i=0 ; i<longueurChaine ; i++) {
@@ -98,4 +98,4 @@ void C_CRC32::addStringToChecksum (const char * chaine, uint32_t & somme) {
   }
 }
 
-//---------------------------------------------------------------------------*
+//-----------------------------------------------------------------------------*
