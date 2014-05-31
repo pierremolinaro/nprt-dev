@@ -1,10 +1,10 @@
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//     BDD package (implementation of ROBDD)                                 *
+//     BDD package (implementation of ROBDD)                                   *
 //                                                                             *
 //  This file is part of libpm library                                         *
 //                                                                             *
-//  Copyright (C) 1999, ..., 2010 Pierre Molinaro.                             *
+//  Copyright (C) 1999, ..., 2014 Pierre Molinaro.                             *
 //                                                                             *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                               *
 //  IRCCyN, Institut de Recherche en Communications et Cybernétique de Nantes  *
@@ -38,7 +38,6 @@
 
 //-----------------------------------------------------------------------------*
 
-class C_bdd_node_traversing ;
 class C_bdd_value_traversing ;
 class C_Display_BDD ;
 class C_String ;
@@ -76,8 +75,9 @@ class C_BDD {
   public : inline bool isFalse (void) const { return mBDDvalue == 0 ; }
   public : inline bool isTrue (void) const { return mBDDvalue == 1 ; }
   public : bool isComplemented (void) const ;
-//  public : bool infPtr (const C_BDD & inOperand) const ;
-  public : inline bool isEqualToBDD (const C_BDD & inOperand) const { return mBDDvalue == inOperand.mBDDvalue ; }
+
+  public : inline bool operator == (const C_BDD & inOperand) const { return mBDDvalue == inOperand.mBDDvalue ; }
+  public : inline bool operator != (const C_BDD & inOperand) const { return mBDDvalue != inOperand.mBDDvalue ; }
   public : inline uint32_t integerValue (void) const { return mBDDvalue ; }
 
 //--- Operations on a BDD
@@ -88,16 +88,15 @@ class C_BDD {
 //--- Operations between BDDs
   public : C_BDD operator & (const C_BDD & inOperand) const ; // And
   public : C_BDD operator | (const C_BDD & inOperand) const ; // Or
-  public : C_BDD operator == (const C_BDD & inOperand) const ; // Equivalent
-  public : C_BDD operator != (const C_BDD & inOperand) const ; // Different
-  public : C_BDD operator <= (const C_BDD & inOperand) const ; 
-  public : C_BDD operator < (const C_BDD & inOperand) const ;
-  public : C_BDD operator >= (const C_BDD & inOperand) const ;
-  public : C_BDD operator > (const C_BDD & inOperand) const ;
+  public : C_BDD equalTo (const C_BDD & inOperand) const ; // Equivalent
+  public : C_BDD notEqualTo (const C_BDD & inOperand) const ; // Different
+  public : C_BDD lowerOrEqual (const C_BDD & inOperand) const ; 
+  public : C_BDD lowerThan (const C_BDD & inOperand) const ;
+  public : C_BDD greaterOrEqual (const C_BDD & inOperand) const ;
+  public : C_BDD greaterThan (const C_BDD & inOperand) const ;
   public : C_BDD implies (const C_BDD & inOperand) const ; // ->
   public : static C_BDD ite (const C_BDD & f, const C_BDD & g, const C_BDD & h) ; // ite (f, g, h)
   public : C_BDD operator ~ (void) const ; // get complement
-  public : C_BDD getOpposite (void) const ;
   public : C_BDD bddByLeftShifting (const uint32_t inLeftShiftCount) const ;
   public : C_BDD bddByRightShifting (const uint32_t inRightShiftCount) const ;
 
@@ -209,6 +208,11 @@ class C_BDD {
   public : C_BDD transitiveClosure (const uint32_t inBitSize,
                                     int32_t * outIterationCount) const ;
 
+  public : void getArray2 (TC_UniqueArray <TC_UniqueArray <uint64_t> > & outArray,
+                           const uint32_t inMaxValueCount,
+                           const uint32_t inBitSize1,
+                           const uint32_t inBitSize2) const ;
+
 //--- BDD as 3-relations
   public : C_BDD swap132 (const uint32_t inBitSize1,
                           const uint32_t inBitSize2,
@@ -230,11 +234,6 @@ class C_BDD {
                           const uint32_t inBitSize2,
                           const uint32_t inBitSize3) const ;
 
-  public : void
-  getArray2 (TC_UniqueArray <TC_UniqueArray <int32_t> > & outArray,
-             const uint32_t inMaxValueCount,
-             const uint32_t inBitSize1,
-             const uint32_t inBitSize2) const ;
 
 
 //--- Printing
@@ -308,9 +307,6 @@ class C_BDD {
   public : void traverseBDDvalues (C_bdd_value_traversing & inTraversing,
                                    const uint32_t inVariableCount) const ;
 
-//--- Traversing BBD (call C_bdd_node_traversing::action method for every node) 
-  public : void traversBDDnodes (C_bdd_node_traversing & inTraversing) const ;
-
 //--- Internal method
   private : void initLinks (void) ;
 
@@ -356,7 +352,7 @@ class C_BDD {
 
 //-----------------------------------------------------------------------------*
 //                                                                             *
-//   Abstract class for value traversing of a BDD                            *
+//   Abstract class for value traversing of a BDD                              *
 //                                                                             *
 //-----------------------------------------------------------------------------*
 
@@ -372,29 +368,6 @@ class C_bdd_value_traversing {
 //--- No instance copy
   private : C_bdd_value_traversing (const C_bdd_value_traversing &) ;
   private : C_bdd_value_traversing & operator = (const C_bdd_value_traversing &) ;
-} ;
-
-//-----------------------------------------------------------------------------*
-//                                                                             *
-//   Abstract class for node traversing of a BDD                             *
-//                                                                             *
-//-----------------------------------------------------------------------------*
-
-class C_bdd_node_traversing {
-//--- Constructor et destructor
-  public : C_bdd_node_traversing (void) {}
-  public : virtual ~C_bdd_node_traversing (void) {}
-
-//--- Virtual method called for every node
-  public : virtual void action (const uint32_t inNodeID,
-                                const uint32_t inVariable,
-                                const uint32_t inBranchIfFalse,
-                                const uint32_t inTrueBranchComplement,
-                                const uint32_t inBranchIfTrue) = 0 ;
-  
-//--- No instance copy
-  private : C_bdd_node_traversing (const C_bdd_node_traversing &) ;
-  private : C_bdd_node_traversing & operator = (const C_bdd_node_traversing &) ;
 } ;
 
 //-----------------------------------------------------------------------------*
