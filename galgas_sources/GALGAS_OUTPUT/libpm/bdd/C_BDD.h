@@ -39,7 +39,6 @@
 //-----------------------------------------------------------------------------*
 
 class C_bdd_value_traversing ;
-class C_Display_BDD ;
 class C_String ;
 class AC_OutputStream ;
 
@@ -198,7 +197,7 @@ class C_BDD {
   public : C_BDD rollUpVariables (const uint32_t var1, const uint32_t var2) const ;
 
 //--- BDD as 2-relations
-  public : C_BDD swap21 (const uint32_t inBitSize1,
+  public : C_BDD swap10 (const uint32_t inBitSize1,
                          const uint32_t inBitSize2) const ;
 
   public : C_BDD accessibleStates (const C_BDD & inInitialStateSet,
@@ -214,53 +213,56 @@ class C_BDD {
                            const uint32_t inBitSize2) const ;
 
 //--- BDD as 3-relations
-  public : C_BDD swap132 (const uint32_t inBitSize1,
+  public : C_BDD swap021 (const uint32_t inBitSize1,
                           const uint32_t inBitSize2,
                           const uint32_t inBitSize3) const ;
 
-  public : C_BDD swap213 (const uint32_t inBitSize1,
+  public : C_BDD swap102 (const uint32_t inBitSize1,
                           const uint32_t inBitSize2,
                           const uint32_t inBitSize3) const ;
 
-  public : C_BDD swap231 (const uint32_t inBitSize1,
+  public : C_BDD swap120 (const uint32_t inBitSize1,
                           const uint32_t inBitSize2,
                           const uint32_t inBitSize3) const ;
 
-  public : C_BDD swap312 (const uint32_t inBitSize1,
+  public : C_BDD swap201 (const uint32_t inBitSize1,
                           const uint32_t inBitSize2,
                           const uint32_t inBitSize3) const ;
 
-  public : C_BDD swap321 (const uint32_t inBitSize1,
+  public : C_BDD swap210 (const uint32_t inBitSize1,
                           const uint32_t inBitSize2,
                           const uint32_t inBitSize3) const ;
 
 
 
 //--- Printing
-  public : void printBDDwithSeparator (const TC_UniqueArray <C_String> & inSeparatorArray) const ;
+  public : C_String graphvizRepresentation (void) const ;
 
-  public : void printBDD (const TC_UniqueArray <C_String> & inVariablesNames,
-                          const int32_t inLeadingSpacesCount) const ;
+  public : void print (AC_OutputStream & outputStream) const ;
 
-  public : void printBDD (const TC_UniqueArray <C_String> & inVariablesNames,
-                          const int32_t inVariableCount,
-                          const int32_t inLeadingSpacesCount) const ;
+  public : void printWithSeparator (AC_OutputStream & outputStream,
+                                    const TC_UniqueArray <C_String> & inSeparatorArray) const ;
 
-  public : void printBDDHeader (const TC_UniqueArray <C_String> & inVariablesNames,
-                                const int32_t inVariableCount,
-                                const int32_t inLeadingSpacesCount) const ;
+  public : void print (AC_OutputStream & outputStream,
+                       const TC_UniqueArray <C_String> & inVariablesNames,
+                       const int32_t inLeadingSpacesCount) const ;
 
-  public : void printBDDwithoutHeader (const TC_UniqueArray <C_String> & inVariablesNames,
-                                       const int32_t inVariableCount,
-                                       const int32_t inLeadingSpacesCount) const ;
+  public : void print (AC_OutputStream & outputStream,
+                       const TC_UniqueArray <C_String> & inVariablesNames,
+                       const int32_t inVariableCount,
+                       const int32_t inLeadingSpacesCount) const ;
 
-  public : void printBDD (AC_OutputStream & inStream,
-                          const uint32_t inVariableCount,
-                          const C_Display_BDD & inVariablesNames) const ;
+  public : void printHeader (AC_OutputStream & outputStream,
+                             const TC_UniqueArray <C_String> & inVariablesNames,
+                             const int32_t inVariableCount,
+                             const int32_t inLeadingSpacesCount) const ;
 
-  public : void printBDDnodes (AC_OutputStream & inStream,
-                               const C_Display_BDD & inVariablesNames) const ;
+  public : void printWithoutHeader (AC_OutputStream & outputStream,
+                                    const TC_UniqueArray <C_String> & inVariablesNames,
+                                    const int32_t inVariableCount,
+                                    const int32_t inLeadingSpacesCount) const ;
 
+//--- Buid string compressed representation
   public : void buildCompressedLittleEndianStringValueArray (TC_UniqueArray <C_String> & outStringArray
                                                              COMMA_LOCATION_ARGS) const ;
 

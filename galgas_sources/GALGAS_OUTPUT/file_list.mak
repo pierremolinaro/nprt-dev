@@ -57,7 +57,6 @@ SOURCES += C_BoolCommandLineOption.cpp
 SOURCES += C_UIntCommandLineOption.cpp
 SOURCES += C_StringCommandLineOption.cpp
 SOURCES += C_builtin_CLI_Options.cpp
-SOURCES += C_galgas_CLI_Options.cpp
 SOURCES += F_Analyze_CLI_Options.cpp
 
 #--- BDD
@@ -65,7 +64,6 @@ SOURCES += C_BDD.cpp
 SOURCES += C_BDD-find-or-add.cpp
 SOURCES += C_BDD-single-operand-ops.cpp
 SOURCES += C_BDD-and-operation.cpp
-SOURCES += C_Display_BDD.cpp
 SOURCES += C_RelationSingleType.cpp
 SOURCES += C_RelationConfiguration.cpp
 SOURCES += C_Relation.cpp
@@ -114,6 +112,7 @@ SOURCES += C_DirectedGraph.cpp
 #    G A L G A S    2                                                          *
 #------------------------------------------------------------------------------*
 
+SOURCES += C_galgas_CLI_Options.cpp
 SOURCES += typeComparisonResult.cpp
 SOURCES += C_Compiler.cpp
 SOURCES += C_Lexique.cpp
