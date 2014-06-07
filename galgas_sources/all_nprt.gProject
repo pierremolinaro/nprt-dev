@@ -6,7 +6,7 @@ project all_nprt (1:2:0) -> "nprt" :
   feature "makefile_x86_64_linux_on_macosx" ;
   feature "makefile_mingw_on_macosx" ;
   feature "makefile_msys_on_win32" ;
-  feature "SnowLeopard" ;
+  feature "LatestMacOS" ;
   feature applicationBundleBase : "fr.irccyn" ;
 
   lexique "oa_scanner.gLexique" ;
