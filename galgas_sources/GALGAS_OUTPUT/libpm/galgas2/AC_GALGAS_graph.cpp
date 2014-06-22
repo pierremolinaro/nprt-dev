@@ -407,10 +407,10 @@ void cSharedGraph::subGraph (AC_GALGAS_graph & outResultingGraph,
     if (NULL == nodePtr) {
       C_String message = "subgraphFromNodes: '" ;
       message << enumerator1.current_mValue (THERE).mAttribute_string.stringValue() ;
-      message << "' is not a declared node" ;
-      inCompiler->emitSemanticError(enumerator1.current_mValue (THERE).mAttribute_location,
-                                    message
-                                    COMMA_THERE) ;
+      message << "' is not a declared node, cannot start from it" ;
+      inCompiler->emitSemanticError (enumerator1.current_mValue (THERE).mAttribute_location,
+                                     message
+                                     COMMA_THERE) ;
     }else{
       startNodeSet.add (nodePtr->mNodeID) ;
     }
@@ -425,7 +425,7 @@ void cSharedGraph::subGraph (AC_GALGAS_graph & outResultingGraph,
       C_String message = "subgraphFromNodes: '" ;
       message << enumerator2.current_key (THERE).stringValue() ;
       message << "' is not a declared node, cannot be excluded" ;
-      inCompiler->onTheFlySemanticError(message COMMA_THERE) ;
+      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
     }else{
       nodesToExcludeSet.add (nodePtr->mNodeID) ;
     }
