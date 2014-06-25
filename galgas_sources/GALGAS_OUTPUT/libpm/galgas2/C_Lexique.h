@@ -5,7 +5,7 @@
 //                                                                             *
 //  This file is part of libpm library                                         *
 //                                                                             *
-//  Copyright (C) 1996, ..., 2010 Pierre Molinaro.                             *
+//  Copyright (C) 1996, ..., 2014 Pierre Molinaro.                             *
 //                                                                             *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                               *
 //  IRCCyN, Institut de Recherche en Communications et Cybernétique de Nantes  *
@@ -80,6 +80,12 @@ class C_Lexique : public C_Compiler {
   private : cToken * mLastToken ;
   protected : cToken * mCurrentTokenPtr ;
   protected : void enterTokenFromPointer (cToken * inToken) ;
+  protected : int32_t mLastSeparatorIndex ;
+  public : void displayTokenList (void) const ;
+
+//--- Syntax directed translation : accessing current token
+  public : C_String preceedingSeparatorString (void) const ;
+  public : C_String tokenString (void) const ;
 
 //--- Current character
   protected : utf32 mCurrentChar ;
