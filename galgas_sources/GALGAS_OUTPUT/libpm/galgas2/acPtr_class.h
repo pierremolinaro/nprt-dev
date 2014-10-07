@@ -1,10 +1,10 @@
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//  acPtr_class : Base class for GALGAS class                                  *
+//  acPtr_class : Base class for GALGAS class                                                                          *
 //                                                                                                                     *
-//  This file is part of libpm library                                         *
+//  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2008, ..., 2011 Pierre Molinaro.                             *
+//  Copyright (C) 2008, ..., 2011 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
 //                                                                                                                     *
@@ -47,6 +47,8 @@ class acPtr_class : public C_SharedObject {
   public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const = 0 ;
 
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const = 0 ;
+
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const = 0 ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
