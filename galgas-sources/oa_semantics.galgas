@@ -1,0 +1,87 @@
+#---------------------------------------------------------------------------*
+#                                                                           *
+#   S E M A N T I C S                                                       *
+#                                                                           *
+#---------------------------------------------------------------------------*
+
+
+
+  map @M_processor {
+    @uint mIndex
+    @luint mStep
+    insert insertKey error message "the processor '%K' has been already declared in %L"
+    search searchKey error message "the processor '%K' is not declared"
+  }
+
+  map @M_network {
+    @uint mIndex
+    @bool mCANnetwork
+    @luint mScalingFactor
+    insert insertKey error message "the processor '%K' has been already declared in %L"
+    search searchKey error message "the processor '%K' is not declared"
+  }
+
+  abstract class @AC_canMessage %generatedInSeparateFile {
+  }
+  
+  class @C_canIndependantMessage : @AC_canMessage  {
+  }
+  
+  class @C_canMessageFromMessage : @AC_canMessage {
+    @uint mMessageIndex
+  }
+  
+  class @C_canMessageFromTask : @AC_canMessage  {
+    @uint mTaskIndex
+  }
+    
+  map @M_messages {
+    @uint mIndex
+    @luint mClass # 0 : standard can, 1 : extented can, 2 : van
+    @uint mNetworkIndex
+    @luint mBytesCount
+    @luint mPriority
+    @luint mOffset
+    @luint mDeadline
+    @luint mPeriod
+    @AC_canMessage mMessageKind
+    insert insertKey error message "the CAN message '%K' has been already declared in %L"
+    search searchKey error message "the CAN message '%K' is not declared"
+  }
+  
+  abstract class @AC_task %generatedInSeparateFile {
+  }
+  
+  class @C_independantTask : @AC_task  {
+  }
+  
+  class @C_taskDependsFromTask : @AC_task {
+    @uint mTask
+    @luint mEvery
+ }
+  
+  class @C_taskDependsFromMessage : @AC_task {
+    @uint mMessage
+    @luint mEvery
+  }
+  
+  map @M_tasks {
+    @uint mIndex
+    @luint mPriority
+    @luint mOffset
+    @luint mDeadline
+    @luint mDurationMin
+    @luint mDurationMax
+    @uint mProcessor
+    @luint mPeriod
+    @AC_task mTaskKind
+    insert insertKey error message "the task '%K' has been already declared in %L"
+    search searchKey error message "the task '%K' is not declared"
+  }
+
+extern proc performComputations
+  ?!@M_processor outProcessorMap
+  ?!@M_network outNetworkMap
+  ?!@M_messages outMessagesMap
+  ?!@M_tasks outTaskMap
+

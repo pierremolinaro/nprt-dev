@@ -1,0 +1,243 @@
+#---------------------------------------------------------------------------*
+#                                                                           *
+#   S Y N T A X                                                             *
+#                                                                           *
+#---------------------------------------------------------------------------*
+
+syntax oa_parser (oa_scanner) {
+
+rule <axiome>
+
+rule <axiome> {
+  @M_processor outProcessorMap = @M_processor. emptyMap
+  @M_network outNetworkMap = @M_network. emptyMap
+  @M_messages outMessagesMap = @M_messages. emptyMap
+  @M_tasks outTaskMap = @M_tasks. emptyMap
+  $system$
+  repeat
+  while
+    $processor$
+    @lstring processorName
+    $identifier$ ? processorName
+    @luint step
+    select
+     step = @luint. new { !1 !@location.here}
+    or
+      $scalingfactor$
+      $literal_integer$ ? step
+      if [step uint] == 0 then
+        error step : "the step value must be > 0"
+      end
+    end
+    [!?outProcessorMap insertKey !processorName ![outProcessorMap count] !step]
+    $;$
+  while
+    @bool network
+    select
+      $can$
+      network = true
+    or
+      $van$
+      network = false
+    end
+    $network$
+    @lstring networkName
+    $identifier$ ? networkName
+    @luint factor
+    select
+     factor = @luint. new { !1 !@location.here}
+    or
+      $scalingfactor$
+      $literal_integer$ ? factor
+      if [factor uint] == 0 then
+        error factor : "the factor value must be > 0"
+      end
+    end
+    [!?outNetworkMap insertKey !networkName ![outNetworkMap count] !network !factor]
+    $;$
+  while
+    $task$
+    @lstring taskName
+    $identifier$ ? taskName
+    $priority$
+    @luint taskPriority
+    $literal_integer$ ? taskPriority
+    $duration$
+    @luint taskDurationMin
+    $literal_integer$ ? taskDurationMin
+    $..$
+    @luint taskDurationMax
+    $literal_integer$ ? taskDurationMax
+    @luint taskOffset
+    @bool explicitOffset
+    select
+      $offset$
+      $literal_integer$ ? taskOffset
+      explicitOffset = true
+    or
+      taskOffset = @luint. new { !0 ! @location.here}
+      explicitOffset = false
+    end
+    @luint taskDeadline
+    select
+      $deadline$
+      $literal_integer$ ? taskDeadline
+    or
+      taskDeadline = @luint. new { !4294967295 !@location.here}
+    end
+    @AC_task taskKind
+    @uint taskProcessorIndex
+    @luint taskPeriod
+    select
+      $period$
+      $literal_integer$ ? taskPeriod
+      $processor$
+      @lstring taskProcessorName
+      $identifier$ ? taskProcessorName
+      [outProcessorMap searchKey !taskProcessorName ?taskProcessorIndex ?*]
+      taskKind = @C_independantTask. new
+    or
+      $on$
+      if explicitOffset then
+        error @location.here : "A dependant task cannot have an offset"
+      end
+      select
+        $task$
+        @lstring masterTaskName
+        $identifier$ ? masterTaskName
+        @luint every
+        select
+          every = @luint. new { !1 !@location.here}
+        or
+          $every$
+          $literal_integer$ ? every
+        end
+        @uint masterTaskIndex
+        [outTaskMap searchKey !masterTaskName ?masterTaskIndex ?* ?* ?* ?* ?* ?taskProcessorIndex ?taskPeriod ?*]
+        taskKind = @C_taskDependsFromTask. new { !masterTaskIndex !every}
+      or
+        $message$
+        @lstring masterMessageName
+        $identifier$ ? masterMessageName
+        @uint masterMessageIndex
+        [outMessagesMap searchKey !masterMessageName ?masterMessageIndex ?* ?* ?* ?* ?* ?* ?taskPeriod ?*]
+        $processor$
+        @lstring taskProcessorName
+        $identifier$ ? taskProcessorName
+        @luint every
+        select
+          every = @luint. new { !1 !@location.here}
+        or
+          $every$
+          $literal_integer$ ? every
+        end
+        [outProcessorMap searchKey !taskProcessorName ?taskProcessorIndex ?*]
+        taskKind = @C_taskDependsFromMessage. new { !masterMessageIndex !every}
+      end
+    end
+    [!?outTaskMap insertKey !taskName ![outTaskMap count]
+                                      !taskPriority
+                                        !taskOffset
+                                        !taskDeadline
+                                        !taskDurationMin
+                                        !taskDurationMax
+                                        !taskProcessorIndex
+                                        !taskPeriod
+                                        !taskKind]
+    $;$
+  while
+    @luint messageClass
+    select
+      $standard$
+      messageClass = @luint. new { !0 !@location.here}
+      $message$
+    or
+      $extended$
+      messageClass = @luint. new { !1 !@location.here}
+      $message$
+    or
+      $message$
+      messageClass = @luint. new { !2 !@location.here}
+    end
+    @lstring messageName
+    $identifier$ ? messageName
+    $network$
+    @lstring networkName
+    $identifier$ ? networkName
+    @uint networkIndex
+    @bool CANnetwork
+    [outNetworkMap searchKey !networkName ?networkIndex ?CANnetwork ?*]
+    if CANnetwork & ([messageClass uint] == 2) then
+      error messageClass : "a CAN message must be either standard either extended"
+    elsif (not CANnetwork) & ([messageClass uint] != 2) then
+      error messageClass : "a VAN message cannot be standard or extended"
+    end
+    $length$
+    @luint bytesCount
+    $literal_integer$ ? bytesCount
+    if CANnetwork & ([bytesCount uint] > 8) then
+      error bytesCount : "CAN message length must be <= 8 bytes"
+    elsif (not CANnetwork) & ([bytesCount uint] > 28) then
+      error bytesCount : "VAN message must be <= 28 bytes"
+    end
+    $priority$
+    @luint priority
+    $literal_integer$ ? priority
+    @luint offset
+    @bool explicitOffset
+    select
+      $offset$
+      $literal_integer$ ? offset
+      explicitOffset = true
+    or
+      offset = @luint. new { !0 !@location.here}
+      explicitOffset = false
+    end
+    @luint deadline
+    select
+      $deadline$
+      $literal_integer$ ? deadline
+    or
+      deadline = @luint. new { !4294967295 !@location.here}
+    end
+    @AC_canMessage messageKind
+    @luint period
+    select
+      $period$
+      $literal_integer$ ? period
+      messageKind = @C_canIndependantMessage. new
+    or
+      $on$
+      if explicitOffset then
+        error @location.here : "A dependant task cannot have an offset"
+      end
+      select
+        $message$
+        @lstring name
+        $identifier$ ? name
+        @uint messageIndex
+        [outMessagesMap searchKey !name ?messageIndex ?* ?* ?* ?* ?* ?* ?period ?*]
+        messageKind = @C_canMessageFromMessage. new { !messageIndex}
+      or
+        $task$
+        @lstring taskName
+        $identifier$ ? taskName
+        @uint taskIndex
+        [outTaskMap searchKey !taskName ?taskIndex ?* ?* ?* ?* ?* ?* ?period ?*]
+        messageKind = @C_canMessageFromTask. new { !taskIndex}
+      end
+    end
+    [!?outMessagesMap insertKey !messageName ![outMessagesMap count]
+         !messageClass !networkIndex !bytesCount !priority !offset !deadline !period !messageKind]
+    $;$        
+  end
+  $end$
+  performComputations (
+    !?outProcessorMap
+    !?outNetworkMap
+    !?outMessagesMap
+    !?outTaskMap
+  )
+}
+
+}

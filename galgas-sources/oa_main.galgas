@@ -1,0 +1,17 @@
+#---------------------------------------------------------------------------*
+#                                                                           *
+#   P R O G R A M                                                           *
+#                                                                           *
+#---------------------------------------------------------------------------*
+
+
+#--- max error and warning count
+  before {
+  }
+
+  case . "nprt" message "an '.nprt' source file" ?sourceFilePath:@lstring inSourceFile {
+    grammar oa_grammar in inSourceFile
+  }
+
+  after {
+  }
