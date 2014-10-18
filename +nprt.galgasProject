@@ -1,0 +1,32 @@
+project (1:2:0) -> "nprt" {
+#--- Targets
+  %makefile-macosx
+  %makefile-unix
+  %makefile-x86linux32-on-macosx
+  %makefile-x86linux64-on-macosx
+  %makefile-win32-on-macosx
+  %makefile-msys32-on-windows
+  %Mavericks
+  %applicationBundleBase : "fr.irccyn"
+
+  "galgas-sources/oa_scanner.galgas"
+  "galgas-sources/oa_semantics.galgas"
+  "galgas-sources/oa_cli_options.galgas"
+  "galgas-sources/oa_parser.galgas"
+  "galgas-sources/oa_grammar.galgas"
+  "galgas-sources/cocoaOA.galgas"
+  "galgas-sources/oa_main.galgas"
+
+  %tool-source : "hand_coded_sources/C_us.cpp"
+  %tool-source : "hand_coded_sources/activities_core.cpp"
+  %tool-source : "hand_coded_sources/C_activitiesToSchedule.cpp"
+  %tool-source : "hand_coded_sources/C_VDL_hashmap.cpp"
+  %tool-source : "hand_coded_sources/calculs_activites-v2.cpp"
+  %tool-source : "hand_coded_sources/CANMmessageBounds.cpp"
+  %tool-source : "hand_coded_sources/ExtendedList-v2.cpp"
+  %tool-source : "hand_coded_sources/ExtractRTs-v2.cpp"
+  %tool-source : "hand_coded_sources/independant_resources_core.cpp"
+  %tool-source : "hand_coded_sources/VerifyConditions-v2.cpp"
+  %tool-source : "hand_coded_sources/C_us_hashmap.cpp"
+}
+
