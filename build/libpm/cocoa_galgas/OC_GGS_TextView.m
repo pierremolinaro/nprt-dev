@@ -29,7 +29,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//       I N I T                                                               *
+//       I N I T                                                                                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -44,6 +44,19 @@
     noteObjectAllocation (self) ;
     mDocumentUsedForDisplaying = inDocumentUsedForDisplaying ;
     mDisplayDescriptor = inDisplayDescriptor ;
+    NSUserDefaults * df = [NSUserDefaults standardUserDefaults] ;
+    [df
+      addObserver:self
+      forKeyPath:GGS_uses_page_guide
+      options:0
+      context:NULL
+    ] ;
+    [df
+      addObserver:self
+      forKeyPath:GGS_page_guide_column
+      options:0
+      context:NULL
+    ] ;
   }
   return self;
 }
@@ -51,6 +64,15 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (void) FINALIZE_OR_DEALLOC {
+  NSUserDefaults * df = [NSUserDefaults standardUserDefaults] ;
+  [df
+    removeObserver:self
+    forKeyPath:GGS_uses_page_guide
+  ] ;
+  [df
+    removeObserver:self
+    forKeyPath:GGS_page_guide_column
+  ] ;
   noteObjectDeallocation (self) ;
   macroSuperFinalize ;
 }
@@ -60,6 +82,27 @@
 - (void) detachTextView {
   mDocumentUsedForDisplaying = nil ;
   mDisplayDescriptor = nil ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+- (void) observeValueForKeyPath:(NSString *) inKeyPath
+         ofObject:(id) inObject
+         change:(NSDictionary *) inChange
+         context:(void *) inContext {
+  NSUserDefaults * df = [NSUserDefaults standardUserDefaults] ;
+  if ((inObject == df) && [inKeyPath isEqualToString:GGS_uses_page_guide]) {
+    [self setNeedsDisplay:YES] ;
+  }else if ((inObject == df) && [inKeyPath isEqualToString:GGS_page_guide_column]) {
+    [self setNeedsDisplay:YES] ;
+  }else{
+    [super
+      observeValueForKeyPath:inKeyPath
+      ofObject:inObject
+      change:inChange
+      context:inContext
+    ] ;
+  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -96,6 +139,38 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (void) drawRect: (NSRect) inRect {
+//--- Draw page guide
+  NSUserDefaults * ud = [NSUserDefaults standardUserDefaults] ;
+  if ([ud boolForKey:GGS_uses_page_guide] && (self.string.length > 0)) {
+    NSDictionary * attributes = [self.textStorage fontAttributesInRange:NSMakeRange(0, 0)] ;
+    const NSInteger pageGuideColumn = [ud integerForKey:GGS_page_guide_column] ;
+    NSMutableString * str = [NSMutableString new] ;
+    for (NSInteger i=0 ; i<=pageGuideColumn ; i++) {
+      [str appendString:@"0"] ;
+    }
+    const NSSize s = [str sizeWithAttributes:attributes] ;
+    const double column = rint (s.width) + 0.5 ;
+  //--- Page rect
+    const NSRect pageRect = {{0.0, 0.0}, {column, NSMaxY (self.frame)}} ;
+    const NSRect pageRectToDraw = NSIntersectionRect (inRect, pageRect) ;
+    if (! NSIsEmptyRect (pageRectToDraw)) {
+      [[NSColor whiteColor] setFill] ;
+      NSRectFill (pageRectToDraw) ;
+    }
+    const NSRect outsidePageRect = {{column, 0.0}, {NSMaxX (self.frame) - column, NSMaxY (self.frame)}} ;
+    const NSRect outsidePageRectToDraw = NSIntersectionRect (inRect, outsidePageRect) ;
+    if (! NSIsEmptyRect (outsidePageRectToDraw)) {
+      [[NSColor windowBackgroundColor] setFill] ;
+      NSRectFill (outsidePageRectToDraw) ;
+    }
+    NSBezierPath * bp = [NSBezierPath bezierPath] ;
+    [bp moveToPoint:NSMakePoint (column, NSMinY (inRect))] ;
+    [bp lineToPoint:NSMakePoint (column, NSMaxY (inRect))] ;
+    [bp setLineWidth:0.0] ;
+    [[NSColor windowFrameColor] setStroke] ;
+    [bp stroke] ;
+  }
+//--- Draw text
   [super drawRect:inRect] ;
 //--- Draw issues
   NSBezierPath * errorHiliteBezierPath = [NSBezierPath bezierPath] ;
