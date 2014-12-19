@@ -22,7 +22,6 @@
 
 #include "galgas2/predefined-types.h"
 #include "utilities/MF_MemoryControl.h"
-#include "utilities/M_Threads.h"
 #include "galgas2/C_Compiler.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -447,7 +446,7 @@ void AC_GALGAS_list::detachSharedList (cSharedList * & ioSharedList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-//    AC_GALGAS_list                                                           *
+//    AC_GALGAS_list                                                                                                   *
 //---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_list::AC_GALGAS_list (void) :
@@ -568,7 +567,6 @@ void AC_GALGAS_list::drop (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 void AC_GALGAS_list::insulateList (LOCATION_ARGS) {
-  macroMutexLock (gInsulationMutex) ;
   if ((mSharedList != NULL) && (mSharedList->retainCount () > 1)) {
     cSharedList * p = NULL ;
     macroMyNew (p, cSharedList (THERE)) ;
@@ -576,7 +574,6 @@ void AC_GALGAS_list::insulateList (LOCATION_ARGS) {
     macroAssignSharedObject (mSharedList, p) ;
     macroDetachSharedObject (p) ;
   }
-  macroMutexLock (gInsulationMutex) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -720,7 +717,7 @@ typeComparisonResult AC_GALGAS_list::objectCompare (const AC_GALGAS_list & inOpe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//  c L i s t M a p N o d e                                                    *
+//  c L i s t M a p N o d e                                                                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -764,7 +761,7 @@ cListMapNode::~ cListMapNode (void) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//  c L i s t M a p N o d e                                                    *
+//  c L i s t M a p N o d e                                                                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1304,7 +1301,7 @@ void cListMapElement::description (C_String & /* ioString */,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                 'GALGAS_stringset::cEnumerator' class                     *
+//                 'GALGAS_stringset::cEnumerator' class                                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
