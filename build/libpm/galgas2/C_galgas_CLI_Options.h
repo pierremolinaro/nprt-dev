@@ -69,7 +69,16 @@ extern C_StringCommandLineOption gOption_galgas_5F_builtin_5F_options_mode ;
 
 void setExecutionMode (C_String & outErrorMessage) ;
 
-bool executionModeIsNormal (void) ;
+typedef enum {
+ kExecutionModeNormal,
+ kExecutionModeLexicalAnalysisOnly,
+ kExecutionModeSyntaxAnalysisOnly,
+ kExecutionModeIndexing,
+ kExecutionModeLatex,
+ 
+} EnumExecutionMode ;
+
+EnumExecutionMode executionMode (void) ;
 
 bool executionModeIsLexicalAnalysisOnly (void) ;
 
@@ -79,15 +88,7 @@ bool executionModeIsIndexing (void) ;
 
 bool executionModeIsLatex (void) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-
-uint32_t contextHelpStartLocation (void) ;
-
-uint32_t contextHelpEndLocation (void) ;
-
-void setCurrentCompiledFilePath (const C_String & inPath) ;
-
-bool isCurrentCompiledFilePath (const C_String & inPath) ;
+C_String latexModeStyleSuffixString (void) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
