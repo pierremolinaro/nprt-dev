@@ -4,7 +4,7 @@
 //                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2006, ..., 2011 Pierre Molinaro.                                                                     *
+//  Copyright (C) 2006, ..., 2014 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
 //                                                                                                                     *
@@ -106,96 +106,95 @@ C_StringCommandLineOption gOption_galgas_5F_builtin_5F_options_mode ("galgas_cli
                                          "mode",
                                          0,
                                          "mode",
-                                         "'lexical-only' or 'syntax-only'",
+                                         "'lexical-only', 'syntax-only' or 'latex'",
                                          "") ;
 
 //---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//   EXECUTION MODE                                                                                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
 
-static uint32_t gMode ;
-static uint32_t gContextHelpStartLocation ;
-static uint32_t gContextHelpEndLocation ;
-static C_String gCurrentlyCompiledBaseFilePath ;
+static EnumExecutionMode gExecutionMode = kExecutionModeNormal ;
+static C_String gModeLatexSuffixString ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void setExecutionMode (C_String & outErrorMessage) {
   const C_String mode = gOption_galgas_5F_builtin_5F_options_mode.mValue ;
+  TC_UniqueArray <C_String> modeComponents ;
+  mode.componentsSeparatedByString (":", modeComponents) ;
   if (mode == "") {
-    gMode = 0 ;
+    gExecutionMode = kExecutionModeNormal ;
   }else if (mode == "lexical-only") {
-    gMode = 1 ;
+    gExecutionMode = kExecutionModeLexicalAnalysisOnly ;
   }else if (mode == "syntax-only") {
-    gMode = 2 ;
+    gExecutionMode = kExecutionModeSyntaxAnalysisOnly ;
   }else if (mode == "indexing") {
-    gMode = 3 ;
-  }else if (mode == "latex") {
-    gMode = 4 ;
+    gExecutionMode = kExecutionModeIndexing ;
+  }else if ((modeComponents.count () == 2) && (modeComponents (0 COMMA_HERE) == "latex")) {
+    gExecutionMode = kExecutionModeLatex ;
+    gModeLatexSuffixString = modeComponents (1 COMMA_HERE) ;
+    bool ok = true ;
+    for (int32_t i=0 ; (i<gModeLatexSuffixString.length ()) && ok ; i++) {
+      const uint32_t c = UNICODE_VALUE (gModeLatexSuffixString (i COMMA_HERE)) ;
+      ok = ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) ;
+    }
+    if (! ok) {
+      outErrorMessage << "** Fatal Error: invalid '--mode=latex:suffix' parameter; suffix should contain only letters\n" ;
+    }
+  }else if ((modeComponents.count () == 1) && (mode == "latex")) {
+    gExecutionMode = kExecutionModeLatex ;
+    gModeLatexSuffixString = "" ;
   }else{
     outErrorMessage << "** Fatal Error: invalid '--mode=" << mode << "' parameter; it should be:\n"
       "  --mode=                     default mode: perform compilation;\n"
       "  --mode=lexical-only         perform only lexical analysis;\n"
-      "  --mode=syntax-only          perform only syntax analysis.\n" ;
+      "  --mode=syntax-only          perform only syntax analysis;\n"
+      "  --mode=latex:suffix         perform latex formatting.\n" ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool executionModeIsNormal (void) {
-  return gMode == 0 ;
+EnumExecutionMode executionMode (void) {
+  return gExecutionMode ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool executionModeIsLexicalAnalysisOnly (void) {
-  return gMode == 1 ;
+  return gExecutionMode == kExecutionModeLexicalAnalysisOnly ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool executionModeIsSyntaxAnalysisOnly (void) {
-  return gMode == 2 ;
+  return gExecutionMode == kExecutionModeSyntaxAnalysisOnly ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool executionModeIsIndexing (void) {
-  return gMode == 3 ;
+  return gExecutionMode == kExecutionModeIndexing ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool executionModeIsLatex (void) {
-  return gMode == 4 ;
+  return gExecutionMode == kExecutionModeLatex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-uint32_t contextHelpStartLocation (void) {
-  return gContextHelpStartLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-uint32_t contextHelpEndLocation (void) {
-  return gContextHelpEndLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void setCurrentCompiledFilePath (const C_String & inPath) {
-  gCurrentlyCompiledBaseFilePath = inPath ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool isCurrentCompiledFilePath (const C_String & inPath) {
-  return gCurrentlyCompiledBaseFilePath == inPath ;
+C_String latexModeStyleSuffixString (void) {
+  return gModeLatexSuffixString ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void epilogueAction (void) {
-  gCurrentlyCompiledBaseFilePath.releaseString () ;
+  gModeLatexSuffixString.releaseString () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

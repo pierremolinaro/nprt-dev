@@ -1325,14 +1325,14 @@ void C_Lexique_oa_5F_scanner::enterToken (const cTokenFor_oa_5F_scanner & inToke
 
 //---------------------------------------------------------------------------------------------------------------------*
 //               A T T R I B U T E   A C C E S S                                                                       *
-//-----------------------------------------------------------------------------*
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_String C_Lexique_oa_5F_scanner::attributeValue_identifierString (void) const {
   cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) mCurrentTokenPtr ;
   return ptr->mLexicalAttribute_identifierString ;
 }
 
-//-----------------------------------------------------------------------------*
+//---------------------------------------------------------------------------------------------------------------------*
 
 uint32_t C_Lexique_oa_5F_scanner::attributeValue_ulongValue (void) const {
   cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) mCurrentTokenPtr ;
@@ -1341,7 +1341,7 @@ uint32_t C_Lexique_oa_5F_scanner::attributeValue_ulongValue (void) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //         A S S I G N    F R O M    A T T R I B U T E                                                                 *
-//-----------------------------------------------------------------------------*
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring C_Lexique_oa_5F_scanner::synthetizedAttribute_identifierString (void) const {
   cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) mCurrentTokenPtr ;
@@ -1352,7 +1352,7 @@ GALGAS_lstring C_Lexique_oa_5F_scanner::synthetizedAttribute_identifierString (v
   return result ;
 }
 
-//-----------------------------------------------------------------------------*
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_luint C_Lexique_oa_5F_scanner::synthetizedAttribute_ulongValue (void) const {
   cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) mCurrentTokenPtr ;
@@ -1393,6 +1393,59 @@ GALGAS_stringlist C_Lexique_oa_5F_scanner::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string (",") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string (";") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("..") COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   S T Y L E   I N D E X    F O R    T E R M I N A L                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+uint32_t C_Lexique_oa_5F_scanner::styleIndexForTerminal (const int32_t inTerminalIndex) const {
+  static const uint32_t kTerminalSymbolStyles [25] = {0,
+    1 /* oa_scanner_1_identifier */,
+    4 /* oa_scanner_1_literal_5F_integer */,
+    2 /* oa_scanner_1_system */,
+    2 /* oa_scanner_1_end */,
+    2 /* oa_scanner_1_task */,
+    2 /* oa_scanner_1_standard */,
+    2 /* oa_scanner_1_extended */,
+    2 /* oa_scanner_1_message */,
+    2 /* oa_scanner_1_length */,
+    2 /* oa_scanner_1_priority */,
+    2 /* oa_scanner_1_period */,
+    2 /* oa_scanner_1_offset */,
+    2 /* oa_scanner_1_on */,
+    2 /* oa_scanner_1_deadline */,
+    2 /* oa_scanner_1_duration */,
+    2 /* oa_scanner_1_processor */,
+    2 /* oa_scanner_1_can */,
+    2 /* oa_scanner_1_van */,
+    2 /* oa_scanner_1_network */,
+    2 /* oa_scanner_1_scalingfactor */,
+    2 /* oa_scanner_1_every */,
+    3 /* oa_scanner_1__2C_ */,
+    3 /* oa_scanner_1__3B_ */,
+    3 /* oa_scanner_1__2E__2E_ */
+  } ;
+  return (inTerminalIndex >= 0) ? kTerminalSymbolStyles [inTerminalIndex] : 0 ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   S T Y L E   N A M E    F O R    S T Y L E    I N D E X                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_String C_Lexique_oa_5F_scanner::styleNameForIndex (const uint32_t inStyleIndex) const {
+  C_String result ;
+  if (inStyleIndex < 5) {
+    static const char * kStyleArray [5] = {
+      "",
+      "identifier",
+      "keyWords",
+      "delimitors",
+      "integerStyle"
+    } ;
+    result = kStyleArray [inStyleIndex] ;
+  }
   return result ;
 }
 
@@ -4404,6 +4457,31 @@ void cGrammar_oa_5F_grammar::nt_axiome_ (C_Lexique_oa_5F_scanner * inLexique) {
   rule_oa_5F_parser_axiome_i0_(inLexique) ;
 }
 
+void cGrammar_oa_5F_grammar::performIndexing (C_Compiler * /* inCompiler */,
+             const C_String & /* inSourceFilePath */) {
+}
+
+void cGrammar_oa_5F_grammar::performOnlyLexicalAnalysis (C_Compiler * inCompiler,
+             const C_String & inSourceFilePath) {
+  C_Lexique_oa_5F_scanner * scanner = NULL ;
+  macroMyNew (scanner, C_Lexique_oa_5F_scanner (inCompiler, "", "", inSourceFilePath COMMA_HERE)) ;
+  if (scanner->sourceText () != NULL) {
+    scanner->performLexicalAnalysis () ;
+  }
+  macroDetachSharedObject (scanner) ;
+}
+
+void cGrammar_oa_5F_grammar::performOnlySyntaxAnalysis (C_Compiler * inCompiler,
+             const C_String & inSourceFilePath) {
+  C_Lexique_oa_5F_scanner * scanner = NULL ;
+  macroMyNew (scanner, C_Lexique_oa_5F_scanner (inCompiler, "", "", inSourceFilePath COMMA_HERE)) ;
+  if (scanner->sourceText () != NULL) {
+    scanner->performTopDownParsing (gProductions_oa_grammar, gProductionNames_oa_grammar, gProductionIndexes_oa_grammar,
+                                    gFirstProductionIndexes_oa_grammar, gDecision_oa_grammar, gDecisionIndexes_oa_grammar, 120) ;
+  }
+  macroDetachSharedObject (scanner) ;
+}
+
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                        Grammar start symbol implementation                                          *
@@ -5807,8 +5885,6 @@ static const char * kSourceFileHelpMessages [] = {
 
 static void routine_before (C_Compiler * /* inCompiler */
                             COMMA_UNUSED_LOCATION_ARGS) {
-  {
-  }
 }
 
 
@@ -5820,8 +5896,6 @@ static void routine_before (C_Compiler * /* inCompiler */
 
 static void routine_after (C_Compiler * /* inCompiler */
                            COMMA_UNUSED_LOCATION_ARGS) {
-  {
-  }
 }
 
 
@@ -5834,7 +5908,7 @@ static void routine_after (C_Compiler * /* inCompiler */
 static void routine_programRule_5F__30_ (const GALGAS_lstring constinArgument_inSourceFile,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
-  cGrammar_oa_5F_grammar::_performSourceFileParsing_ (inCompiler, constinArgument_inSourceFile  COMMA_SOURCE_FILE ("oa_main.galgas", 13)) ;
+  cGrammar_oa_5F_grammar::_performSourceFileParsing_ (inCompiler, constinArgument_inSourceFile  COMMA_SOURCE_FILE ("oa_main.galgas", 11)) ;
 }
 
 
@@ -5870,7 +5944,6 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
       routine_before (commonLexique COMMA_HERE) ;
       verboseOptionOn = gOption_galgas_5F_builtin_5F_options_verbose_5F_output.mValue ;
       for (int32_t i=0 ; i<sourceFilesArray.count () ; i++) {
-        setCurrentCompiledFilePath (sourceFilesArray (i COMMA_HERE)) ;
         if (gOption_galgas_5F_builtin_5F_options_trace.mValue) {
           enableTraceWithPath (sourceFilesArray (i COMMA_HERE)) ;
         }
@@ -5880,7 +5953,23 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
         const GALGAS_lstring sourceFilePath (sfp, location) ;
         int16_t r = 0 ;
         if (fileExtension == "nprt") {
-          routine_programRule_5F__30_ (sourceFilePath, commonLexique COMMA_HERE) ;
+          switch (executionMode ()) {
+          case kExecutionModeNormal :
+            routine_programRule_5F__30_ (sourceFilePath, commonLexique COMMA_HERE) ;
+            break ;
+          case kExecutionModeLexicalAnalysisOnly :
+            cGrammar_oa_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          case kExecutionModeSyntaxAnalysisOnly :
+            cGrammar_oa_5F_grammar::performOnlySyntaxAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          case kExecutionModeIndexing :
+            cGrammar_oa_5F_grammar::performIndexing (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          case kExecutionModeLatex :
+            cGrammar_oa_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          }
         }else{
           printf ("*** Error: unhandled extension for file '%s' ***\n", sourceFilesArray (i COMMA_HERE).cString (HERE)) ;
           r = 1 ;

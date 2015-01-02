@@ -10,7 +10,7 @@ lexique oa_scanner {
 style identifier -> "Identifiers"
 style keyWords -> "Key words"
 style delimitors -> "Delimitors"
-style integer_csts -> "Integer constants"
+style integerStyle -> "Integer constants"
 
 # -------------------------- identifier or key word --------------------
 # keywords can be written in lower
@@ -35,7 +35,7 @@ rule 'a'->'z' | 'A'->'Z' {
     ",", ";", ".." }
   rule list delimitorsList
 #------------------------------- Decimal positive number ------------------
-$literal_integer$ ! ulongValue  style integer_csts error message "a decimal number"
+$literal_integer$ ! ulongValue  style integerStyle error message "a decimal number"
 
 message decimalNumberTooLarge : "decimal number too large"
 
