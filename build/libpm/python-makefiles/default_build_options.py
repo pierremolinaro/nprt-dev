@@ -1,57 +1,93 @@
-#----------------------------------------------------------------------------------------------------------------------*
-#                                                                                                                      *
-# MAKEFILE for building "nprt" 64-bits command line tools for Mac OS X                                      *
-#                                                                                                                      *
-#----------------------------------------------------------------------------------------------------------------------*
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
-#                               Executables                                                                            *
+#     Options for all compilers                                                                                        *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-EXECUTABLE := nprt
-EXECUTABLE_DEBUG := nprt-debug
+def allCompilerOptions (platformOptions):
+  result = platformOptions
+  result.append ("-Wall")
+  result.append ("-Werror")
+  result.append ("-Wreturn-type")
+  result.append ("-Wformat")
+  result.append ("-Wsign-compare")
+  result.append ("-Wpointer-arith")
+#--- Options added for GALGAS 1.9.0
+  result.append ("-ansi")
+  result.append ("-W")
+#  result.append ("-Wshadow")
+#  result.append ("-Wcast-qual")
+  result.append ("-Wwrite-strings")
+  result.append ("-ffunction-sections")
+  result.append ("-fdata-sections")
+  return result
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
-#                         Object files directories                                                                     *
+#     Release options                                                                                                  *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-OBJECTS_DIR       := ../build/cli-objects/makefile-x86linux32-objects
-DEBUG_OBJECTS_DIR := ../build/cli-objects/makefile-x86linux32-debug-objects
+def compilerReleaseOptions (platformOptions):
+  result = platformOptions
+  result.append ("-fomit-frame-pointer")
+  result.append ("-DDO_NOT_GENERATE_CHECKINGS")
+  result.append ("-Wunused-variable")
+  return result
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
-#                       Linker Options for Mac OS X                                                                    *
+#     Debug options                                                                                                    *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-PLATFORM_LINKER_OPTIONS :=
+def compilerDebugOptions (platformOptions):
+  result = platformOptions
+  result.append ("-g")
+  return result
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
-#                        Include Common Definitions                                                                    *
+#     C compiler options                                                                                               *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-include ../build/output/file-list.mak
+def C_CompilerOptions (platformOptions):
+  result = platformOptions
+  return result
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
-#                   Include X86 Linux 32 tools for MAC OS X                                                            *
+#     C++ compiler options                                                                                             *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-include $(LIBPM_DIRECTORY_PATH)/included_makefiles/x86linux_on_macosx_gcc_tools_32.mak
+def Cpp_CompilerOptions (platformOptions):
+  result = platformOptions
+  result.append ("-Woverloaded-virtual")
+  return result
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
-#                Include makefile that performs actual work                                                            *
+#     Objective C compiler options                                                                                     *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-include $(LIBPM_DIRECTORY_PATH)/included_makefiles/generic-makefile.mak
+def ObjectiveC_CompilerOptions (platformOptions):
+  result = platformOptions
+  return result
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
+#     Objective C++ compiler options                                                                                   *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def ObjectiveCpp_CompilerOptions (platformOptions):
+  result = platformOptions
+  return result
 
 #----------------------------------------------------------------------------------------------------------------------*
