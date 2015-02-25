@@ -1,23 +1,19 @@
 #! /usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-#----------------------------------------------------------------------------------------------------------------------*
-# https://docs.python.org/2/library/subprocess.html#module-subprocess
+#----------------------------------------------------------------------------*
 
 import subprocess, sys, os, copy
-import urllib, shutil
-import subprocess, re
-from time import time
-import platform
-import json
-import threading, operator
+import urllib, shutil, subprocess
+import platform, json, operator
+import threading
 
 if sys.version_info >= (2, 6) :
   import multiprocessing
 
-#----------------------------------------------------------------------------------------------------------------------*
-#   processorCount                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
+#   processorCount                                                           *
+#----------------------------------------------------------------------------*
 
 def processorCount () :
   if sys.version_info >= (2, 6) :
@@ -26,86 +22,86 @@ def processorCount () :
     coreCount = 1
   return coreCount
 
-#----------------------------------------------------------------------------------------------------------------------*
-#   FOR PRINTING IN COLOR                                                                                              *
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
+#   FOR PRINTING IN COLOR                                                    *
+#----------------------------------------------------------------------------*
 
 def BLACK () :
   return '\033[90m'
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def RED () :
   return '\033[91m'
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def GREEN () :
   return '\033[92m'
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def YELLOW () :
   return '\033[93m'
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def BLUE () :
   return '\033[94m'
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def MAGENTA () :
   return '\033[95m'
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def CYAN () :
   return '\033[96m'
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def WHITE () :
   return '\033[97m'
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def ENDC () :
   return '\033[0m'
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def BOLD () :
   return '\033[1m'
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def UNDERLINE () :
   return '\033[4m'
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def BLINK () :
   return '\033[5m'
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def BOLD_BLUE () :
   return BOLD () + BLUE ()
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def BOLD_GREEN () :
   return BOLD () + GREEN ()
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
 
 def BOLD_RED () :
   return BOLD () + RED ()
 
-#----------------------------------------------------------------------------------------------------------------------*
-#   runHiddenCommand                                                                                                   *
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
+#   runHiddenCommand                                                         *
+#----------------------------------------------------------------------------*
 
 def runHiddenCommand (cmd) :
   result = ""
@@ -120,9 +116,9 @@ def runHiddenCommand (cmd) :
         sys.exit (childProcess.returncode)
       return result
 
-#----------------------------------------------------------------------------------------------------------------------*
-#   runCommand                                                                                                         *
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
+#   runCommand                                                               *
+#----------------------------------------------------------------------------*
 
 def runCommand (cmd, title, showCommand) :
   if title != "":
@@ -140,9 +136,9 @@ def runCommand (cmd, title, showCommand) :
   if childProcess.returncode != 0 :
     sys.exit (childProcess.returncode)
 
-#----------------------------------------------------------------------------------------------------------------------*
-#   runInThread                                                                                                        *
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
+#   runInThread                                                              *
+#----------------------------------------------------------------------------*
 
 def runInThread (job, displayLock, terminationSemaphore):
   childProcess = subprocess.Popen (job.mCommand, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -158,9 +154,9 @@ def runInThread (job, displayLock, terminationSemaphore):
       terminationSemaphore.release ()
       break
 
-#----------------------------------------------------------------------------------------------------------------------*
-#   modificationDateForFile                                                                                            *
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
+#   modificationDateForFile                                                  *
+#----------------------------------------------------------------------------*
 
 def modificationDateForFile (dateCacheDictionary, file):
   absFilePath = os.path.abspath (file)
@@ -175,9 +171,9 @@ def modificationDateForFile (dateCacheDictionary, file):
     dateCacheDictionary [absFilePath] = date
     return date
 
-#----------------------------------------------------------------------------------------------------------------------*
-#   class PostCommand                                                                                                  *
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
+#   class PostCommand                                                        *
+#----------------------------------------------------------------------------*
 
 class PostCommand:
   mCommand = []
@@ -189,9 +185,9 @@ class PostCommand:
     self.mCommand = []
     self.mTitle = title
 
-#----------------------------------------------------------------------------------------------------------------------*
-#   class Job                                                                                                          *
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
+#   class Job                                                                *
+#----------------------------------------------------------------------------*
 
 class Job:
   mTarget = ""
@@ -250,9 +246,9 @@ class Job:
     thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))
     thread.start()
 
-#----------------------------------------------------------------------------------------------------------------------*
-#   class Rule                                                                                                         *
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
+#   class Rule                                                               *
+#----------------------------------------------------------------------------*
 
 class Rule:
   mTarget = ""
@@ -262,6 +258,8 @@ class Rule:
   mTitle = ""
   mPostCommands = []
   mPriority = 0
+  mOnErrorDeleteTarget = False # No operation on error
+  mCleanOperation = 0 # No operation on clean
   
   #--------------------------------------------------------------------------*
 
@@ -272,6 +270,8 @@ class Rule:
     self.mSecondaryMostRecentModificationDate = 0.0
     self.mPostCommands = []
     self.mPriority = 0
+    self.mOnErrorDeleteTarget = False # No operation on error
+    self.mCleanOperation = 0 # No operation on clean
     if title == "":
       self.mTitle = "Building " + target
     else:
@@ -279,32 +279,43 @@ class Rule:
   
   #--------------------------------------------------------------------------*
 
+  def deleteTargetFileOnClean (self):
+    self.mCleanOperation = 1
+  
+  #--------------------------------------------------------------------------*
+
+  def deleteTargetDirectoryOnClean (self):
+    self.mCleanOperation = 2
+  
+  #--------------------------------------------------------------------------*
+
   def enterSecondaryDependanceFile (self, secondaryDependanceFile):
-    if secondaryDependanceFile != "":
-      filePath = os.path.abspath (secondaryDependanceFile)
-      if os.path.exists (filePath):
-        f = open (filePath, "r")
-        s = f.read ().replace ("\\ ", "\x01") # Read and replace escaped spaces by \0x01
-        f.close ()
-        s = s.replace ("\\\n", "")
-        liste = s.split ("\n\n")
-        dateCacheDictionary = {}
-        for s in liste:
-          components = s.split (':')
-          target = components [0].replace ("\x01", " ")
-          #print "------- Optional dependency rules for target '" + target + "'"
-          #print "Secondary target '" + target + "'"
-          for src in components [1].split ():
-            secondarySource = src.replace ("\x01", " ")
-            #print "  '" + secondarySource + "'"
-            modifDate = modificationDateForFile (dateCacheDictionary, secondarySource)
-            if self.mSecondaryMostRecentModificationDate < modifDate :
-              self.mSecondaryMostRecentModificationDate = modifDate
-              #print BOLD_BLUE () + str (modifDate) + ENDC ()
+    filePath = os.path.abspath (secondaryDependanceFile)
+    if not os.path.exists (filePath):
+      self.mSecondaryMostRecentModificationDate = sys.float_info.max # Very far in future
+    else:
+      f = open (filePath, "r")
+      s = f.read ().replace ("\\ ", "\x01") # Read and replace escaped spaces by \0x01
+      f.close ()
+      s = s.replace ("\\\n", "")
+      liste = s.split ("\n\n")
+      dateCacheDictionary = {}
+      for s in liste:
+        components = s.split (':')
+        target = components [0].replace ("\x01", " ")
+        #print "------- Optional dependency rules for target '" + target + "'"
+        #print "Secondary target '" + target + "'"
+        for src in components [1].split ():
+          secondarySource = src.replace ("\x01", " ")
+          #print "  '" + secondarySource + "'"
+          modifDate = modificationDateForFile (dateCacheDictionary, secondarySource)
+          if self.mSecondaryMostRecentModificationDate < modifDate :
+            self.mSecondaryMostRecentModificationDate = modifDate
+            #print BOLD_BLUE () + str (modifDate) + ENDC ()
     
-#----------------------------------------------------------------------------------------------------------------------*
-#   class Make                                                                                                         *
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
+#   class Make                                                               *
+#----------------------------------------------------------------------------*
 
 class Make:
   mRuleList = []
@@ -321,16 +332,16 @@ class Make:
   #--------------------------------------------------------------------------*
 
   def printRules (self):
-    print BOLD_BLUE () + "--- Print the " + str (len (self.mRuleList)) + " rule" + ("s" if len (self.mRuleList) > 1 else "") + " ---" + ENDC ()
+    print BOLD_BLUE () + "--- Print " + str (len (self.mRuleList)) + " rule" + ("s" if len (self.mRuleList) > 1 else "") + " ---" + ENDC ()
     for rule in self.mRuleList:
-      print BOLD_GREEN () + "Target: '" + rule.mTarget + "'" + ENDC ()
+      print BOLD_GREEN () + "Target: \"" + rule.mTarget + "\"" + ENDC ()
       for dep in rule.mDependences:
-        print "  Dependence: '" + dep + "'"
+        print "  Dependence: \"" + dep + "\""
       s = "  Command: "
       for cmd in rule.mCommand:
         s += " \"" + cmd + "\""
       print s
-      print "  Title: '" + rule.mTitle + "'"
+      print "  Title: \"" + rule.mTitle + "\""
       index = 0
       for (command, title) in rule.mPostCommands:
         index = index + 1
@@ -338,7 +349,7 @@ class Make:
         for cmd in command:
           s += " \"" + cmd + "\""
         print s
-        print "  Its title: '" + title + "'"
+        print "  Its title: \"" + title + "\""
         
     print BOLD_BLUE () + "--- End of print rule ---" + ENDC ()
 
@@ -504,7 +515,7 @@ class Make:
                 absTargetDirectory = os.path.dirname (os.path.abspath (job.mTarget))
                 if not os.path.exists (absTargetDirectory):
                   displayLock.acquire ()
-                  runCommand (["mkdir", "-p", absTargetDirectory], "Making " + absTargetDirectory + " directory", showCommand)
+                  runCommand (["mkdir", "-p", os.path.dirname (job.mTarget)], "Making \"" + os.path.dirname (job.mTarget) + "\" directory", showCommand)
                   displayLock.release ()
                 #--- Run job
                 job.run (displayLock, terminationSemaphore, showCommand)
@@ -597,13 +608,13 @@ class Make:
   #--------------------------------------------------------------------------*
 
   def printGoals (self):
-    print BOLD_BLUE () + "--- Print the " + str (len (self.mGoals)) + " goal" + ("s" if len (self.mGoals) > 1 else "") + " ---" + ENDC ()
+    print BOLD_BLUE () + "--- Print " + str (len (self.mGoals)) + " goal" + ("s" if len (self.mGoals) > 1 else "") + " ---" + ENDC ()
     for goalKey in self.mGoals.keys ():
-      print BOLD_GREEN () + "Goal: '" + goalKey + "'" + ENDC ()
+      print BOLD_GREEN () + "Goal: \"" + goalKey + "\"" + ENDC ()
       (targetList, message) = self.mGoals [goalKey]
       for target in targetList:
-        print "  Target: '" + target + "'"
-      print "  Message: '" + message + "'"
+        print "  Target: \"" + target + "\""
+      print "  Message: \"" + message + "\""
         
     print BOLD_BLUE () + "--- End of print goals ---" + ENDC ()
 
@@ -615,6 +626,22 @@ class Make:
       for target in targetList:
         self.makeJob (target)
       self.runJobs (maxConcurrentJobs, showCommand)
+      if self.mErrorCount > 0:
+        for rule in self.mRuleList:
+          if rule.mOnErrorDeleteTarget and os.path.exists (os.path.abspath (rule.mTarget)):
+            runCommand (["rm", rule.mTarget], "Delete \"" + rule.mTarget + "\" on error", showCommand)
+    elif goal == "clean" :
+      filesToRemoveList = []
+      directoriesToRemoveSet = set ()
+      for rule in self.mRuleList:
+        if rule.mCleanOperation == 1: # Delete target
+          filesToRemoveList.append (rule.mTarget)
+        elif rule.mCleanOperation == 2: # Delete target directories
+          directoriesToRemoveSet.add (os.path.dirname (rule.mTarget))
+      for dir in directoriesToRemoveSet:
+        runCommand (["rm", "-fr", dir], "Removing \"" + dir + "\"", showCommand)
+      for file in filesToRemoveList:
+        runCommand (["rm", "-f", file], "Deleting \"" + file + "\"", showCommand)
     else:
       errorMessage = "The '" + goal + "' goal is not defined; defined goals:"
       for key in self.mGoals:
@@ -652,4 +679,4 @@ class Make:
   def errorCount (self):
     return self.mErrorCount
 
-#----------------------------------------------------------------------------------------------------------------------*
+#----------------------------------------------------------------------------*
