@@ -4,7 +4,7 @@
 //                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2004, ..., 2010 Pierre Molinaro.                                                                     *
+//  Copyright (C) 2004, ..., 2015 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
 //                                                                                                                     *
@@ -134,6 +134,18 @@ void GALGAS_sint::description (C_String & ioString,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_sint::increment_operation_no_overflow (void) {
+  mSIntValue ++ ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_sint::decrement_operation_no_overflow (void) {
+  mSIntValue -- ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_sint::increment_operation (C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) {
   if (isValid ()) {
@@ -158,6 +170,16 @@ void GALGAS_sint::decrement_operation (C_Compiler * inCompiler
       mSIntValue -- ;
     }
   }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sint GALGAS_sint::add_operation_no_ovf (const GALGAS_sint & inOperand) const {
+  GALGAS_sint result ;
+  if (isValid () && inOperand.isValid ()) {
+    result = GALGAS_sint (mSIntValue + inOperand.mSIntValue) ;
+  }
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -194,6 +216,26 @@ GALGAS_sint GALGAS_sint::substract_operation (const GALGAS_sint & inOperand2,
     }else{
       result = GALGAS_sint ((int32_t) (mSIntValue - inOperand2.mSIntValue)) ;
     }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sint GALGAS_sint::substract_operation_no_ovf (const GALGAS_sint & inOperand2) const {
+  GALGAS_sint result ;
+  if (isValid () && inOperand2.isValid ()) {
+    result = GALGAS_sint (mSIntValue - inOperand2.mSIntValue) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sint GALGAS_sint::multiply_operation_no_ovf (const GALGAS_sint & inOperand2) const {
+  GALGAS_sint result ;
+  if (isValid () && inOperand2.isValid ()) {
+    result = GALGAS_sint (mSIntValue * inOperand2.mSIntValue) ;
   }
   return result ;
 }

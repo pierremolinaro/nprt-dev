@@ -4,7 +4,7 @@
 //                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2006, ..., 2011 Pierre Molinaro.                                                                     *
+//  Copyright (C) 2006, ..., 2015 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
 //                                                                                                                     *
@@ -161,6 +161,18 @@ void GALGAS_sint_36__34_::increment_operation (C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_sint_36__34_::increment_operation_no_overflow (void) {
+  mSInt64Value ++ ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_sint_36__34_::decrement_operation_no_overflow (void) {
+  mSInt64Value -- ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_sint_36__34_::decrement_operation (C_Compiler * inCompiler 
                                                  COMMA_LOCATION_ARGS) {
   if (isValid ()) {
@@ -172,6 +184,16 @@ void GALGAS_sint_36__34_::decrement_operation (C_Compiler * inCompiler
       mSInt64Value -- ;
     }
   }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sint_36__34_ GALGAS_sint_36__34_::add_operation_no_ovf (const GALGAS_sint_36__34_ & inOperand) const {
+  GALGAS_sint_36__34_ result ;
+  if (isValid () && inOperand.isValid ()) {
+    result = GALGAS_sint_36__34_ (mSInt64Value + inOperand.mSInt64Value) ;
+  }
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -196,6 +218,26 @@ GALGAS_sint_36__34_ GALGAS_sint_36__34_::substract_operation (const GALGAS_sint_
   if (isValid () && inOperand2.isValid ()) {
     const int64_t v = mSInt64Value - inOperand2.mSInt64Value ;
     result = GALGAS_sint_36__34_ (v) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sint_36__34_ GALGAS_sint_36__34_::substract_operation_no_ovf (const GALGAS_sint_36__34_ & inOperand2) const {
+  GALGAS_sint_36__34_ result ;
+  if (isValid () && inOperand2.isValid ()) {
+    result = GALGAS_sint_36__34_ (mSInt64Value - inOperand2.mSInt64Value) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sint_36__34_ GALGAS_sint_36__34_::multiply_operation_no_ovf (const GALGAS_sint_36__34_ & inOperand2) const {
+  GALGAS_sint_36__34_ result ;
+  if (isValid () && inOperand2.isValid ()) {
+    result = GALGAS_sint_36__34_ (mSInt64Value * inOperand2.mSInt64Value) ;
   }
   return result ;
 }
