@@ -4,7 +4,7 @@
 //                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2009, ..., 2011 Pierre Molinaro.                                                                     *
+//  Copyright (C) 2009, ..., 2015 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
 //                                                                                                                     *
@@ -330,6 +330,18 @@ GALGAS_bool GALGAS_uint::reader_isUnicodeValueAssigned (UNUSED_LOCATION_ARGS) co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_uint::increment_operation_no_overflow (void) {
+  mUIntValue ++ ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_uint::decrement_operation_no_overflow (void) {
+  mUIntValue -- ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_uint::increment_operation (C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) {
   if (isValid ()) {
@@ -345,7 +357,7 @@ void GALGAS_uint::increment_operation (C_Compiler * inCompiler
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_uint::decrement_operation (C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) {
+                                       COMMA_LOCATION_ARGS) {
   if (isValid ()) {
   //--- Overflow ?
     if (mUIntValue == 0) {
@@ -360,8 +372,8 @@ void GALGAS_uint::decrement_operation (C_Compiler * inCompiler
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_uint::add_operation (const GALGAS_uint & inOperand,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) const {
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) const {
   GALGAS_uint result ;
   if (isValid () && inOperand.isValid ()) {
     const uint64_t v = ((uint64_t) mUIntValue) + ((uint64_t) inOperand.mUIntValue) ;
@@ -370,6 +382,16 @@ GALGAS_uint GALGAS_uint::add_operation (const GALGAS_uint & inOperand,
     }else{
       result = GALGAS_uint ((uint32_t) (v & UINT32_MAX)) ;
     }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_uint::add_operation_no_ovf (const GALGAS_uint & inOperand) const {
+  GALGAS_uint result ;
+  if (isValid () && inOperand.isValid ()) {
+    result = GALGAS_uint (mUIntValue + inOperand.mUIntValue) ;
   }
   return result ;
 }
@@ -386,6 +408,26 @@ GALGAS_uint GALGAS_uint::substract_operation (const GALGAS_uint & inOperand,
     }else{
       result = GALGAS_uint (mUIntValue - inOperand.mUIntValue) ;
     }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_uint::substract_operation_no_ovf (const GALGAS_uint & inOperand2) const {
+  GALGAS_uint result ;
+  if (isValid () && inOperand2.isValid ()) {
+    result = GALGAS_uint (mUIntValue - inOperand2.mUIntValue) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_uint::multiply_operation_no_ovf (const GALGAS_uint & inOperand2) const {
+  GALGAS_uint result ;
+  if (isValid () && inOperand2.isValid ()) {
+    result = GALGAS_uint (mUIntValue * inOperand2.mUIntValue) ;
   }
   return result ;
 }
