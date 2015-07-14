@@ -3,7 +3,6 @@
 
 //--- END OF USER ZONE 1
 
-
 #import "lexique-oa_scanner-cocoa.h"
 #import "PMDebug.h"
 
@@ -343,6 +342,5 @@ static NSInteger search_into_oa_5F_scanner_keyWordList (NSString * inSearchedStr
 
 
 //--- END OF USER ZONE 2
-
 
 
