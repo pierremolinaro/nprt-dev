@@ -4188,7 +4188,6 @@
       buildSettings = {
       ALWAYS_SEARCH_USER_PATHS = NO ;
       ARCHS = "$(ARCHS_STANDARD_64_BIT)" ;
-      CLANG_ENABLE_OBJC_ARC = YES ;
       GCC_GENERATE_DEBUGGING_SYMBOLS = NO ;
       GCC_PRECOMPILE_PREFIX_HEADER = YES ;
       GCC_THREADSAFE_STATICS = NO ;
@@ -4221,6 +4220,7 @@
       HEADER_SEARCH_PATHS = ("../build/output", "../build/libpm", "../build/user-headers", "../hand_coded_sources/**") ;
       SDKROOT = macosx10.9 ;
       COPY_PHASE_STRIP = NO ;
+      CLANG_ENABLE_OBJC_ARC = YES ;
     };
     name = Default;
   };
