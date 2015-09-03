@@ -162,6 +162,7 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (void) drawRect: (NSRect) inRect {
+  // NSLog (@"%s", __PRETTY_FUNCTION__) ;
 //--- Draw page guide
   NSUserDefaults * ud = [NSUserDefaults standardUserDefaults] ;
   if ([ud boolForKey:GGS_uses_page_guide] && (self.string.length > 0)) {
@@ -253,6 +254,9 @@
             && ([self.string characterAtIndex:(NSUInteger)characterAfterSelection] == ' ')) {
           characterAfterSelection ++ ;
           spacesToInsert -- ;
+        }
+        if (spacesToInsert == 0) {
+          spacesToInsert = alignment ;
         }
         NSMutableString * s = [NSMutableString new] ;
         for (NSInteger i=0 ; i<spacesToInsert ; i++) {

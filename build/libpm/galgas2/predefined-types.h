@@ -9,6 +9,7 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 #include "strings/C_String.h"
+#include "time/C_Timer.h"
 #include "galgas2/AC_GALGAS_root.h"
 #include "galgas2/C_galgas_type_descriptor.h"
 #include "galgas2/typeComparisonResult.h"
@@ -40,6 +41,7 @@ class GALGAS__32_stringlist ;
 class GALGAS__32_stringlist_2D_element ;
 class GALGAS_application ;
 class GALGAS_binaryset ;
+class GALGAS_bitstring ;
 class GALGAS_bool ;
 class GALGAS_char ;
 class GALGAS_data ;
@@ -71,6 +73,7 @@ class GALGAS_string ;
 class GALGAS_stringlist ;
 class GALGAS_stringlist_2D_element ;
 class GALGAS_stringset ;
+class GALGAS_timer ;
 class GALGAS_type ;
 class GALGAS_typelist ;
 class GALGAS_typelist_2D_element ;
@@ -83,12 +86,73 @@ class GALGAS_uintlist_2D_element ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                                     @timer type                                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_timer : public AC_GALGAS_root {
+//--------------------------------- Private properties
+  private : bool mIsValid ;
+  private : C_Timer mTimer ;
+
+//--------------------------------- Accessors
+  public : inline bool isValid (void) const { return mIsValid ; }
+  public : VIRTUAL_IN_DEBUG void drop (void) { mIsValid = false ; }
+
+//--------------------------------- Default constructor
+  public : GALGAS_timer (void) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_timer extractObject (const GALGAS_object & inObject,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_timer constructor_start (LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of reader 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_timer & inOperand) const ;
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void modifier_resume (LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void modifier_stop (LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_msFromStart (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string reader_string (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_timer class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_timer ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                                  @application type                                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_application : public AC_GALGAS_root
- {
+class GALGAS_application : public AC_GALGAS_root {
 //--------------------------------- Accessors
   public : inline bool isValid (void) const { return false ; }
   public : inline void drop (void) { }
@@ -178,6 +242,81 @@ class GALGAS_application : public AC_GALGAS_root
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_application ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                   @bitstring type                                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bitstring : public AC_GALGAS_root {
+//--------------------------------- Private properties
+  private : bool mIsValid ;
+  private : TC_Array <bool> mBitStringValue ;
+
+//--------------------------------- Accessors
+  public : inline bool isValid (void) const { return mIsValid ; }
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_bitstring (void) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_bitstring extractObject (const GALGAS_object & inObject,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_bitstring constructor_zero (LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of reader 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_bitstring & inOperand) const ;
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void modifier_orInPlaceWith (class GALGAS_uint_36__34_ constinArgument0,
+                                                         class GALGAS_uint constinArgument1,
+                                                         class GALGAS_uint constinArgument2
+                                                         COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_bitAtIndex (const class GALGAS_uint & constinOperand0
+                                                                 COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_byteAtIndex (const class GALGAS_uint & constinOperand0
+                                                                  COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isZero (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_size (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint_36__34_ reader_uint_36__34_AtIndex (const class GALGAS_uint & constinOperand0
+                                                                                  COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_uintAtIndex (const class GALGAS_uint & constinOperand0
+                                                                  COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_bitstring class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_bitstring ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2007,7 +2146,7 @@ class GALGAS_stringset : public AC_GALGAS_root
 } ; // End of GALGAS_stringset class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_stringset : public cGenericAbstractEnumerator {
@@ -2334,6 +2473,12 @@ public : VIRTUAL_IN_DEBUG GALGAS_binaryset right_shift_operation (const GALGAS_u
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
+  public : static void class_method_setAndTableSize (class GALGAS_uint constinArgument0
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public : static void class_method_setNodeTableSize (class GALGAS_uint constinArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_binaryset reader_ITE (const class GALGAS_binaryset & constinOperand0,
@@ -2378,6 +2523,9 @@ public : VIRTUAL_IN_DEBUG GALGAS_binaryset right_shift_operation (const GALGAS_u
   public : VIRTUAL_IN_DEBUG class GALGAS_binaryset reader_forAllOnBitIndexAndBeyond (const class GALGAS_uint & constinOperand0
                                                                                      COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_string reader_graphviz (const class GALGAS_stringlist & constinOperand0
+                                                                 COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_binaryset reader_greaterOrEqualTo (const class GALGAS_binaryset & constinOperand0
                                                                             COMMA_LOCATION_ARGS) const ;
 
@@ -2391,10 +2539,16 @@ public : VIRTUAL_IN_DEBUG GALGAS_binaryset right_shift_operation (const GALGAS_u
   public : VIRTUAL_IN_DEBUG class GALGAS_binaryset reader_lowerOrEqualTo (const class GALGAS_binaryset & constinOperand0
                                                                           COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint_36__34_ reader_nodeCount (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_binaryset reader_notEqualTo (const class GALGAS_binaryset & constinOperand0
                                                                       COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string reader_predicateStringValue (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string reader_print (const class GALGAS_stringlist & constinOperand0,
+                                                              const class GALGAS_uintlist & constinOperand1
+                                                              COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_significantVariableCount (LOCATION_ARGS) const ;
 
@@ -2440,6 +2594,9 @@ public : VIRTUAL_IN_DEBUG GALGAS_binaryset right_shift_operation (const GALGAS_u
                                                                             const class GALGAS_uint & constinOperand1,
                                                                             const class GALGAS_uint & constinOperand2
                                                                             COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_binaryset reader_transformedBy (const class GALGAS_uintlist & constinOperand0
+                                                                         COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_binaryset reader_transitiveClosure (const class GALGAS_uint & constinOperand0
                                                                              COMMA_LOCATION_ARGS) const ;
@@ -2568,7 +2725,7 @@ class GALGAS_data : public AC_GALGAS_root {
 } ; // End of GALGAS_data class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_data : public cGenericAbstractEnumerator {
@@ -2695,7 +2852,7 @@ class GALGAS_luintlist : public AC_GALGAS_list {
 } ; // End of GALGAS_luintlist class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_luintlist : public cGenericAbstractEnumerator {
@@ -2822,7 +2979,7 @@ class GALGAS_uintlist : public AC_GALGAS_list {
 } ; // End of GALGAS_uintlist class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_uintlist : public cGenericAbstractEnumerator {
@@ -2949,7 +3106,7 @@ class GALGAS_uint_36__34_list : public AC_GALGAS_list {
 } ; // End of GALGAS_uint_36__34_list class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_uint_36__34_list : public cGenericAbstractEnumerator {
@@ -3076,7 +3233,7 @@ class GALGAS_functionlist : public AC_GALGAS_list {
 } ; // End of GALGAS_functionlist class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_functionlist : public cGenericAbstractEnumerator {
@@ -3203,7 +3360,7 @@ class GALGAS_stringlist : public AC_GALGAS_list {
 } ; // End of GALGAS_stringlist class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_stringlist : public cGenericAbstractEnumerator {
@@ -3330,7 +3487,7 @@ class GALGAS_lstringlist : public AC_GALGAS_list {
 } ; // End of GALGAS_lstringlist class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_lstringlist : public cGenericAbstractEnumerator {
@@ -3457,7 +3614,7 @@ class GALGAS_typelist : public AC_GALGAS_list {
 } ; // End of GALGAS_typelist class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_typelist : public cGenericAbstractEnumerator {
@@ -3584,7 +3741,7 @@ class GALGAS_objectlist : public AC_GALGAS_list {
 } ; // End of GALGAS_objectlist class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_objectlist : public cGenericAbstractEnumerator {
@@ -3729,7 +3886,7 @@ class GALGAS__32_stringlist : public AC_GALGAS_list {
 } ; // End of GALGAS__32_stringlist class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator__32_stringlist : public cGenericAbstractEnumerator {
@@ -3875,7 +4032,7 @@ class GALGAS__32_lstringlist : public AC_GALGAS_list {
 } ; // End of GALGAS__32_lstringlist class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator__32_lstringlist : public cGenericAbstractEnumerator {

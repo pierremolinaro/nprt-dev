@@ -243,7 +243,7 @@ class GALGAS_M_5F_processor : public AC_GALGAS_map {
 } ; // End of GALGAS_M_5F_processor class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_M_5F_processor : public cGenericAbstractEnumerator {
@@ -478,7 +478,7 @@ class GALGAS_M_5F_network : public AC_GALGAS_map {
 } ; // End of GALGAS_M_5F_network class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_M_5F_network : public cGenericAbstractEnumerator {
@@ -793,7 +793,7 @@ class GALGAS_M_5F_messages : public AC_GALGAS_map {
 } ; // End of GALGAS_M_5F_messages class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_M_5F_messages : public cGenericAbstractEnumerator {
@@ -1199,7 +1199,7 @@ class GALGAS_M_5F_tasks : public AC_GALGAS_map {
 } ; // End of GALGAS_M_5F_tasks class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_M_5F_tasks : public cGenericAbstractEnumerator {

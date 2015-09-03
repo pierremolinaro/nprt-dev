@@ -63,25 +63,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-/*- (void) refreshRulers {
-  #ifdef DEBUG_MESSAGES
-    NSLog (@"%s", __PRETTY_FUNCTION__) ;
-  #endif
-  for (NSLayoutManager * lm in mSourceTextStorage.layoutManagers) {
-    for (NSTextContainer * tc in lm.textContainers) {
-      NSTextView * tw = [tc textView] ;
-      NSScrollView * sv = (NSScrollView *) [[tw superview] superview] ;
-      // NSLog (@"%@", sv) ;
-      if ([sv isKindOfClass:[NSScrollView class]]) {
-        NSRulerView * ruler = [sv verticalRulerView] ;
-        [ruler setNeedsDisplay:YES] ;
-      }
-    }    
-  }
-}*/
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 - (void) computeMaxLineHeight: (BOOL *) outLineHeightDidChange {
   #ifdef DEBUG_MESSAGES
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
@@ -572,10 +553,8 @@
   for (OC_GGS_TextDisplayDescriptor * textDisplay in mTextDisplayDescriptorSet) {
     [textDisplay setTextDisplayIssueArray:mIssueArray] ; 
   }
-//--- mIssueArray is nil on init, so this prevent search result to be changed
-//    by insertion of file contents
+//--- mIssueArray is nil on init, so this prevent search result to be changed by insertion of file contents
   if (nil != mIssueArray) {
-  
     for (OC_GGS_Document * doc in [[NSDocumentController sharedDocumentController] documents]) {
       [doc
         updateSearchResultForFile:self.documentData.fileURL.path
@@ -783,24 +762,21 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       U N C O M M E N T R A N G E                           *
+//                       U N C O M M E N T R A N G E                                                                   *
 //                                                                                                                     *
-// Cette méthode a plusieurs rôles :                                           *
-//   - supprimer les marques de commentaires des lignes concernées par la      *
-//     sélection, uniquement quand ces le commentaire commence une ligne ;     *
-//   - ajuster la sélection en conséquence ; en effet, dès que la méthode      *
-//     replaceCharactersInRange:withString: est appelée, Cocoa ramène la       *
-//     sélection à un point d'insertion. La sélection est ajustée et           *
-//     maintenue dans la variable finalSelectedRange.                          *
+// Cette méthode a plusieurs rôles :                                                                                   *
+//   - supprimer les marques de commentaires des lignes concernées par la sélection, uniquement quand ces le           *
+//     commentaire commence une ligne ;                                                                                *
+//   - ajuster la sélection en conséquence ; en effet, dès que la méthode replaceCharactersInRange:withString: est     *
+//     appelée, Cocoa ramène la sélection à un point d'insertion. La sélection est ajustée et maintenue dans la        *
+//     variable finalSelectedRange.                                                                                    *
 //                                                                                                                     *
-// Le plus difficile est l'ajustement de la sélection. Pour cela, on calcule:  *
-//   - le nombre beforeSelectionCharacterCount de caractères du commentaire    *
-//     supprimé qui sont avant la sélection ; si ce nombre est > 0, on         *
-//     le début de la sélection du min entre ce nombre et le nombre de carac-  *
-//     tères du commentaire ;                                                  *
-//   - le nombre withinSelectionCharacterCount de caractères du commentaire    *
-//     supprimé qui sont à l'intérieur de la sélection ; si ce nombre est      *
-//     > 0, on le retranche de la longueur de la sélection.                    *
+// Le plus difficile est l'ajustement de la sélection. Pour cela, on calcule :                                         *
+//   - le nombre beforeSelectionCharacterCount de caractères du commentaire supprimé qui sont avant la sélection ; si  *
+//     ce nombre est > 0, on le début de la sélection du min entre ce nombre et le nombre de caractères du             *
+//     commentaire ;                                                                                                   *
+//   - le nombre withinSelectionCharacterCount de caractères du commentair supprimé qui sont à l'intérieur de la       *
+//     sélection ; si ce nombre est > 0, on le retranche de la longueur de la sélection.                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
