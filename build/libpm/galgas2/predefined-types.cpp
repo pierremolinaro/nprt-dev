@@ -106,42 +106,42 @@ GALGAS_application GALGAS_application::extractObject (const GALGAS_object & inOb
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                   @bitstring type                                                   *
+//                                                    @bigint type                                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_bitstring ("bitstring",
-                                  NULL) ;
+kTypeDescriptor_GALGAS_bigint ("bigint",
+                               NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_bitstring::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_bitstring ;
+const C_galgas_type_descriptor * GALGAS_bigint::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_bigint ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_bitstring::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_bigint::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_bitstring (*this)) ;
+    macroMyNew (result, GALGAS_bigint (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bitstring GALGAS_bitstring::extractObject (const GALGAS_object & inObject,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_bitstring result ;
-  const GALGAS_bitstring * p = (const GALGAS_bitstring *) inObject.embeddedObject () ;
+GALGAS_bigint GALGAS_bigint::extractObject (const GALGAS_object & inObject,
+                                            C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) {
+  GALGAS_bigint result ;
+  const GALGAS_bigint * p = (const GALGAS_bigint *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_bitstring *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_bigint *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("bitstring", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("bigint", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -5852,6 +5852,143 @@ GALGAS_string GALGAS_lstring::reader_string (UNUSED_LOCATION_ARGS) const {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location GALGAS_lstring::reader_location (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_location ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                    @lbigint type                                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_lbigint ("lbigint",
+                                NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_lbigint::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_lbigint ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_lbigint::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_lbigint (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint GALGAS_lbigint::extractObject (const GALGAS_object & inObject,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  GALGAS_lbigint result ;
+  const GALGAS_lbigint * p = (const GALGAS_lbigint *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_lbigint *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("lbigint", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint::GALGAS_lbigint (void) :
+mAttribute_bigint (),
+mAttribute_location () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint::~ GALGAS_lbigint (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint::GALGAS_lbigint (const GALGAS_bigint & inOperand0,
+                                const GALGAS_location & inOperand1) :
+mAttribute_bigint (inOperand0),
+mAttribute_location (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint GALGAS_lbigint::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_lbigint (GALGAS_bigint::constructor_zero (HERE),
+                         GALGAS_location::constructor_nowhere (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint GALGAS_lbigint::constructor_new (const GALGAS_bigint & inOperand0,
+                                                const GALGAS_location & inOperand1 
+                                                COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_lbigint result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_lbigint (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_lbigint::objectCompare (const GALGAS_lbigint & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAttribute_bigint.objectCompare (inOperand.mAttribute_bigint) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_location.objectCompare (inOperand.mAttribute_location) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_lbigint::isValid (void) const {
+  return mAttribute_bigint.isValid () && mAttribute_location.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_lbigint::drop (void) {
+  mAttribute_bigint.drop () ;
+  mAttribute_location.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_lbigint::description (C_String & ioString,
+                                  const int32_t inIndentation) const {
+  ioString << "<struct @lbigint:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mAttribute_bigint.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_location.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint GALGAS_lbigint::reader_bigint (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_bigint ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_lbigint::reader_location (UNUSED_LOCATION_ARGS) const {
   return mAttribute_location ;
 }
 

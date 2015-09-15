@@ -124,6 +124,16 @@ GALGAS_sint GALGAS_sint_36__34_::reader_sint (C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_bigint GALGAS_sint_36__34_::reader_bigint (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bigint result ;
+  if (isValid ()) {
+    result = GALGAS_bigint (C_BigInt (mSInt64Value)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_double GALGAS_sint_36__34_::reader_double (UNUSED_LOCATION_ARGS) const {
   return GALGAS_double ((double) mSInt64Value) ;
 }
@@ -133,6 +143,24 @@ GALGAS_double GALGAS_sint_36__34_::reader_double (UNUSED_LOCATION_ARGS) const {
 GALGAS_string GALGAS_sint_36__34_::reader_string (UNUSED_LOCATION_ARGS) const {
   C_String s ;
   s.appendSigned (mSInt64Value) ;
+  return GALGAS_string (s) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_sint_36__34_::reader_hexString (UNUSED_LOCATION_ARGS) const {
+  const uint64_t v = (uint64_t) mSInt64Value ;
+  C_String s ;
+  s << "0x" ;
+  s.appendUnsignedHex16 (v) ;
+  return GALGAS_string (s) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_sint_36__34_::reader_xString (UNUSED_LOCATION_ARGS) const {
+  const uint64_t v = (uint64_t) mSInt64Value ;
+  C_String s ; s.appendUnsignedHex16 (v) ;
   return GALGAS_string (s) ;
 }
 

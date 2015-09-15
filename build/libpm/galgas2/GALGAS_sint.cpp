@@ -114,8 +114,36 @@ GALGAS_double GALGAS_sint::reader_double (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_bigint GALGAS_sint::reader_bigint (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bigint result ;
+  if (isValid ()) {
+    result = GALGAS_bigint (C_BigInt (mSIntValue)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_string GALGAS_sint::reader_string (UNUSED_LOCATION_ARGS) const {
   C_String s ; s.appendSigned (mSIntValue) ;
+  return GALGAS_string (s) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_sint::reader_hexString (UNUSED_LOCATION_ARGS) const {
+  const uint32_t v = (uint32_t) mSIntValue ;
+  C_String s ;
+  s << "0x" ;
+  s.appendUnsignedHex8 (v) ;
+  return GALGAS_string (s) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_sint::reader_xString (UNUSED_LOCATION_ARGS) const {
+  const uint32_t v = (uint32_t) mSIntValue ;
+  C_String s ; s.appendUnsignedHex8 (v) ;
   return GALGAS_string (s) ;
 }
 

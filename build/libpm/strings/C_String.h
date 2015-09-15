@@ -109,6 +109,9 @@ class C_String : public AC_OutputStream {
 //--- Suppress 'inLength' characters from 'inLocation' index
   public : void suppress (const int32_t inLocation, const int32_t inLength COMMA_LOCATION_ARGS) ;
 
+//--- Insert 'inChar' character at 'inIndex' index
+  public : void insertCharacterAtIndex (const utf32 inChar, const int32_t inIndex COMMA_LOCATION_ARGS) ;
+
 //--- Init from a string
   public : void setFromCstring (const char * inCstring) ;
   public : void setFromString (const C_String & inString) ;
@@ -203,8 +206,7 @@ class C_String : public AC_OutputStream {
   public : C_String stringByReplacingStringByString (const C_String inSearchedString,
                                                      const C_String & inReplacementString,
                                                      uint32_t & outReplacementCount,
-                                                     bool & outOk
-                                                     COMMA_LOCATION_ARGS) const ;
+                                                     bool & outOk) const ;
 
 //--- Get character last occurrence (returns -1 if not found)
   public : int32_t lastOccurrenceIndexOfChar (const utf32 inChar) const ;
@@ -274,6 +276,7 @@ class C_String : public AC_OutputStream {
 
 //--- Return reversed string
   public : C_String reversedString (void) const ;
+  public : void reverseStringInPlace (void) ;
 
 //--- Return unsigned integer value
   public : uint32_t unsignedIntegerValue (void) const ;
