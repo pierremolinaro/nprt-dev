@@ -4526,12 +4526,14 @@ void cGrammar_oa_5F_grammar::_performSourceFileParsing_ (C_Compiler * inCompiler
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_oa_5F_grammar::_performSourceStringParsing_ (C_Compiler * inCompiler,
-                                GALGAS_string inSourceString
+                                GALGAS_string inSourceString,
+                                GALGAS_string inNameString
                                 COMMA_UNUSED_LOCATION_ARGS) {
-  if (inSourceString.isValid ()) {
+  if (inSourceString.isValid () && inNameString.isValid ()) {
     const C_String sourceString = inSourceString.stringValue () ;
+    const C_String nameString = inNameString.stringValue () ;
     C_Lexique_oa_5F_scanner * scanner = NULL ;
-    macroMyNew (scanner, C_Lexique_oa_5F_scanner (inCompiler, sourceString, "" COMMA_HERE)) ;
+    macroMyNew (scanner, C_Lexique_oa_5F_scanner (inCompiler, sourceString, nameString COMMA_HERE)) ;
     const bool ok = scanner->performTopDownParsing (gProductions_oa_grammar, gProductionNames_oa_grammar, gProductionIndexes_oa_grammar,
                                                     gFirstProductionIndexes_oa_grammar, gDecision_oa_grammar, gDecisionIndexes_oa_grammar, 120) ;
     if (ok && ! executionModeIsSyntaxAnalysisOnly ()) {
