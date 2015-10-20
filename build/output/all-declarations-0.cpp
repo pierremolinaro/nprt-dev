@@ -1541,7 +1541,7 @@ GALGAS_M_5F_processor GALGAS_M_5F_processor::constructor_mapWithMapToOverride (c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_M_5F_processor GALGAS_M_5F_processor::reader_overriddenMap (C_Compiler * inCompiler
+GALGAS_M_5F_processor GALGAS_M_5F_processor::getter_overriddenMap (C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) const {
   GALGAS_M_5F_processor result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
@@ -1609,7 +1609,7 @@ void GALGAS_M_5F_processor::method_searchKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_M_5F_processor::reader_mIndexForKey (const GALGAS_string & inKey,
+GALGAS_uint GALGAS_M_5F_processor::getter_mIndexForKey (const GALGAS_string & inKey,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -1624,7 +1624,7 @@ GALGAS_uint GALGAS_M_5F_processor::reader_mIndexForKey (const GALGAS_string & in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_processor::reader_mStepForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_processor::getter_mStepForKey (const GALGAS_string & inKey,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -1859,7 +1859,7 @@ GALGAS_M_5F_network GALGAS_M_5F_network::constructor_mapWithMapToOverride (const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_M_5F_network GALGAS_M_5F_network::reader_overriddenMap (C_Compiler * inCompiler
+GALGAS_M_5F_network GALGAS_M_5F_network::getter_overriddenMap (C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) const {
   GALGAS_M_5F_network result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
@@ -1932,7 +1932,7 @@ void GALGAS_M_5F_network::method_searchKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_M_5F_network::reader_mIndexForKey (const GALGAS_string & inKey,
+GALGAS_uint GALGAS_M_5F_network::getter_mIndexForKey (const GALGAS_string & inKey,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -1947,7 +1947,7 @@ GALGAS_uint GALGAS_M_5F_network::reader_mIndexForKey (const GALGAS_string & inKe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_M_5F_network::reader_mCANnetworkForKey (const GALGAS_string & inKey,
+GALGAS_bool GALGAS_M_5F_network::getter_mCANnetworkForKey (const GALGAS_string & inKey,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -1962,7 +1962,7 @@ GALGAS_bool GALGAS_M_5F_network::reader_mCANnetworkForKey (const GALGAS_string &
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_network::reader_mScalingFactorForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_network::getter_mScalingFactorForKey (const GALGAS_string & inKey,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -2273,7 +2273,7 @@ GALGAS_M_5F_messages GALGAS_M_5F_messages::constructor_mapWithMapToOverride (con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_M_5F_messages GALGAS_M_5F_messages::reader_overriddenMap (C_Compiler * inCompiler
+GALGAS_M_5F_messages GALGAS_M_5F_messages::getter_overriddenMap (C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) const {
   GALGAS_M_5F_messages result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
@@ -2376,7 +2376,7 @@ void GALGAS_M_5F_messages::method_searchKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_M_5F_messages::reader_mIndexForKey (const GALGAS_string & inKey,
+GALGAS_uint GALGAS_M_5F_messages::getter_mIndexForKey (const GALGAS_string & inKey,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -2391,7 +2391,7 @@ GALGAS_uint GALGAS_M_5F_messages::reader_mIndexForKey (const GALGAS_string & inK
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_messages::reader_mClassForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_messages::getter_mClassForKey (const GALGAS_string & inKey,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -2406,7 +2406,7 @@ GALGAS_luint GALGAS_M_5F_messages::reader_mClassForKey (const GALGAS_string & in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_M_5F_messages::reader_mNetworkIndexForKey (const GALGAS_string & inKey,
+GALGAS_uint GALGAS_M_5F_messages::getter_mNetworkIndexForKey (const GALGAS_string & inKey,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -2421,7 +2421,7 @@ GALGAS_uint GALGAS_M_5F_messages::reader_mNetworkIndexForKey (const GALGAS_strin
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_messages::reader_mBytesCountForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_messages::getter_mBytesCountForKey (const GALGAS_string & inKey,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -2436,7 +2436,7 @@ GALGAS_luint GALGAS_M_5F_messages::reader_mBytesCountForKey (const GALGAS_string
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_messages::reader_mPriorityForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_messages::getter_mPriorityForKey (const GALGAS_string & inKey,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -2451,7 +2451,7 @@ GALGAS_luint GALGAS_M_5F_messages::reader_mPriorityForKey (const GALGAS_string &
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_messages::reader_mOffsetForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_messages::getter_mOffsetForKey (const GALGAS_string & inKey,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -2466,7 +2466,7 @@ GALGAS_luint GALGAS_M_5F_messages::reader_mOffsetForKey (const GALGAS_string & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_messages::reader_mDeadlineForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_messages::getter_mDeadlineForKey (const GALGAS_string & inKey,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -2481,7 +2481,7 @@ GALGAS_luint GALGAS_M_5F_messages::reader_mDeadlineForKey (const GALGAS_string &
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_messages::reader_mPeriodForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_messages::getter_mPeriodForKey (const GALGAS_string & inKey,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -2496,7 +2496,7 @@ GALGAS_luint GALGAS_M_5F_messages::reader_mPeriodForKey (const GALGAS_string & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_AC_5F_canMessage GALGAS_M_5F_messages::reader_mMessageKindForKey (const GALGAS_string & inKey,
+GALGAS_AC_5F_canMessage GALGAS_M_5F_messages::getter_mMessageKindForKey (const GALGAS_string & inKey,
                                                                          C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -2939,7 +2939,7 @@ GALGAS_M_5F_tasks GALGAS_M_5F_tasks::constructor_mapWithMapToOverride (const GAL
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_M_5F_tasks GALGAS_M_5F_tasks::reader_overriddenMap (C_Compiler * inCompiler
+GALGAS_M_5F_tasks GALGAS_M_5F_tasks::getter_overriddenMap (C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) const {
   GALGAS_M_5F_tasks result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
@@ -3042,7 +3042,7 @@ void GALGAS_M_5F_tasks::method_searchKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_M_5F_tasks::reader_mIndexForKey (const GALGAS_string & inKey,
+GALGAS_uint GALGAS_M_5F_tasks::getter_mIndexForKey (const GALGAS_string & inKey,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -3057,7 +3057,7 @@ GALGAS_uint GALGAS_M_5F_tasks::reader_mIndexForKey (const GALGAS_string & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_tasks::reader_mPriorityForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_tasks::getter_mPriorityForKey (const GALGAS_string & inKey,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -3072,7 +3072,7 @@ GALGAS_luint GALGAS_M_5F_tasks::reader_mPriorityForKey (const GALGAS_string & in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_tasks::reader_mOffsetForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_tasks::getter_mOffsetForKey (const GALGAS_string & inKey,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -3087,7 +3087,7 @@ GALGAS_luint GALGAS_M_5F_tasks::reader_mOffsetForKey (const GALGAS_string & inKe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_tasks::reader_mDeadlineForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_tasks::getter_mDeadlineForKey (const GALGAS_string & inKey,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -3102,7 +3102,7 @@ GALGAS_luint GALGAS_M_5F_tasks::reader_mDeadlineForKey (const GALGAS_string & in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_tasks::reader_mDurationMinForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_tasks::getter_mDurationMinForKey (const GALGAS_string & inKey,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -3117,7 +3117,7 @@ GALGAS_luint GALGAS_M_5F_tasks::reader_mDurationMinForKey (const GALGAS_string &
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_tasks::reader_mDurationMaxForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_tasks::getter_mDurationMaxForKey (const GALGAS_string & inKey,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -3132,7 +3132,7 @@ GALGAS_luint GALGAS_M_5F_tasks::reader_mDurationMaxForKey (const GALGAS_string &
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_M_5F_tasks::reader_mProcessorForKey (const GALGAS_string & inKey,
+GALGAS_uint GALGAS_M_5F_tasks::getter_mProcessorForKey (const GALGAS_string & inKey,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -3147,7 +3147,7 @@ GALGAS_uint GALGAS_M_5F_tasks::reader_mProcessorForKey (const GALGAS_string & in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_tasks::reader_mPeriodForKey (const GALGAS_string & inKey,
+GALGAS_luint GALGAS_M_5F_tasks::getter_mPeriodForKey (const GALGAS_string & inKey,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -3162,7 +3162,7 @@ GALGAS_luint GALGAS_M_5F_tasks::reader_mPeriodForKey (const GALGAS_string & inKe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_AC_5F_task GALGAS_M_5F_tasks::reader_mTaskKindForKey (const GALGAS_string & inKey,
+GALGAS_AC_5F_task GALGAS_M_5F_tasks::getter_mTaskKindForKey (const GALGAS_string & inKey,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
@@ -3479,9 +3479,9 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_oa_5F_scanner::kToken_scalingfactor) COMMA_SOURCE_FILE ("oa_parser.galgas", 26)) ;
         var_step = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer) COMMA_SOURCE_FILE ("oa_parser.galgas", 27)) ;
-        const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, var_step.reader_uint (SOURCE_FILE ("oa_parser.galgas", 28)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+        const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, var_step.getter_uint (SOURCE_FILE ("oa_parser.galgas", 28)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
         if (kBoolTrue == test_1) {
-          GALGAS_location location_2 (var_step.reader_location (HERE)) ; // Implicit use of 'location' reader
+          GALGAS_location location_2 (var_step.getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_2, GALGAS_string ("the step value must be > 0")  COMMA_SOURCE_FILE ("oa_parser.galgas", 29)) ;
         }
       } break ;
@@ -3489,7 +3489,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         break ;
       }
       {
-      var_outProcessorMap.modifier_insertKey (var_processorName, var_outProcessorMap.reader_count (SOURCE_FILE ("oa_parser.galgas", 32)), var_step, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 32)) ;
+      var_outProcessorMap.modifier_insertKey (var_processorName, var_outProcessorMap.getter_count (SOURCE_FILE ("oa_parser.galgas", 32)), var_step, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 32)) ;
       }
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_oa_5F_scanner::kToken__3B_) COMMA_SOURCE_FILE ("oa_parser.galgas", 33)) ;
     } break ;
@@ -3520,9 +3520,9 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_oa_5F_scanner::kToken_scalingfactor) COMMA_SOURCE_FILE ("oa_parser.galgas", 50)) ;
         var_factor = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer) COMMA_SOURCE_FILE ("oa_parser.galgas", 51)) ;
-        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_factor.reader_uint (SOURCE_FILE ("oa_parser.galgas", 52)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_factor.getter_uint (SOURCE_FILE ("oa_parser.galgas", 52)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
         if (kBoolTrue == test_3) {
-          GALGAS_location location_4 (var_factor.reader_location (HERE)) ; // Implicit use of 'location' reader
+          GALGAS_location location_4 (var_factor.getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_4, GALGAS_string ("the factor value must be > 0")  COMMA_SOURCE_FILE ("oa_parser.galgas", 53)) ;
         }
       } break ;
@@ -3530,7 +3530,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         break ;
       }
       {
-      var_outNetworkMap.modifier_insertKey (var_networkName, var_outNetworkMap.reader_count (SOURCE_FILE ("oa_parser.galgas", 56)), var_network, var_factor, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 56)) ;
+      var_outNetworkMap.modifier_insertKey (var_networkName, var_outNetworkMap.getter_count (SOURCE_FILE ("oa_parser.galgas", 56)), var_network, var_factor, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 56)) ;
       }
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_oa_5F_scanner::kToken__3B_) COMMA_SOURCE_FILE ("oa_parser.galgas", 57)) ;
     } break ;
@@ -3674,7 +3674,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         break ;
       }
       {
-      var_outTaskMap.modifier_insertKey (var_taskName, var_outTaskMap.reader_count (SOURCE_FILE ("oa_parser.galgas", 138)), var_taskPriority, var_taskOffset, var_taskDeadline, var_taskDurationMin, var_taskDurationMax, var_taskProcessorIndex, var_taskPeriod, var_taskKind, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 138)) ;
+      var_outTaskMap.modifier_insertKey (var_taskName, var_outTaskMap.getter_count (SOURCE_FILE ("oa_parser.galgas", 138)), var_taskPriority, var_taskOffset, var_taskDeadline, var_taskDurationMin, var_taskDurationMax, var_taskProcessorIndex, var_taskPeriod, var_taskKind, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 138)) ;
       }
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_oa_5F_scanner::kToken__3B_) COMMA_SOURCE_FILE ("oa_parser.galgas", 147)) ;
     } break ;
@@ -3709,14 +3709,14 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
       GALGAS_bool var_CANnetwork ;
       GALGAS_luint joker_5000 ; // Joker input parameter
       var_outNetworkMap.method_searchKey (var_networkName, var_networkIndex, var_CANnetwork, joker_5000, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 169)) ;
-      const enumGalgasBool test_6 = var_CANnetwork.operator_and (GALGAS_bool (kIsEqual, var_messageClass.reader_uint (SOURCE_FILE ("oa_parser.galgas", 170)).objectCompare (GALGAS_uint ((uint32_t) 2U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 170)).boolEnum () ;
+      const enumGalgasBool test_6 = var_CANnetwork.operator_and (GALGAS_bool (kIsEqual, var_messageClass.getter_uint (SOURCE_FILE ("oa_parser.galgas", 170)).objectCompare (GALGAS_uint ((uint32_t) 2U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 170)).boolEnum () ;
       if (kBoolTrue == test_6) {
-        GALGAS_location location_7 (var_messageClass.reader_location (HERE)) ; // Implicit use of 'location' reader
+        GALGAS_location location_7 (var_messageClass.getter_location (HERE)) ; // Implicit use of 'location' getter
         inCompiler->emitSemanticError (location_7, GALGAS_string ("a CAN message must be either standard either extended")  COMMA_SOURCE_FILE ("oa_parser.galgas", 171)) ;
       }else if (kBoolFalse == test_6) {
-        const enumGalgasBool test_8 = var_CANnetwork.operator_not (SOURCE_FILE ("oa_parser.galgas", 172)).operator_and (GALGAS_bool (kIsNotEqual, var_messageClass.reader_uint (SOURCE_FILE ("oa_parser.galgas", 172)).objectCompare (GALGAS_uint ((uint32_t) 2U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 172)).boolEnum () ;
+        const enumGalgasBool test_8 = var_CANnetwork.operator_not (SOURCE_FILE ("oa_parser.galgas", 172)).operator_and (GALGAS_bool (kIsNotEqual, var_messageClass.getter_uint (SOURCE_FILE ("oa_parser.galgas", 172)).objectCompare (GALGAS_uint ((uint32_t) 2U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 172)).boolEnum () ;
         if (kBoolTrue == test_8) {
-          GALGAS_location location_9 (var_messageClass.reader_location (HERE)) ; // Implicit use of 'location' reader
+          GALGAS_location location_9 (var_messageClass.getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_9, GALGAS_string ("a VAN message cannot be standard or extended")  COMMA_SOURCE_FILE ("oa_parser.galgas", 173)) ;
         }
       }
@@ -3724,14 +3724,14 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
       GALGAS_luint var_bytesCount ;
       var_bytesCount = inCompiler->synthetizedAttribute_ulongValue () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer) COMMA_SOURCE_FILE ("oa_parser.galgas", 177)) ;
-      const enumGalgasBool test_10 = var_CANnetwork.operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount.reader_uint (SOURCE_FILE ("oa_parser.galgas", 178)).objectCompare (GALGAS_uint ((uint32_t) 8U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 178)).boolEnum () ;
+      const enumGalgasBool test_10 = var_CANnetwork.operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount.getter_uint (SOURCE_FILE ("oa_parser.galgas", 178)).objectCompare (GALGAS_uint ((uint32_t) 8U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 178)).boolEnum () ;
       if (kBoolTrue == test_10) {
-        GALGAS_location location_11 (var_bytesCount.reader_location (HERE)) ; // Implicit use of 'location' reader
+        GALGAS_location location_11 (var_bytesCount.getter_location (HERE)) ; // Implicit use of 'location' getter
         inCompiler->emitSemanticError (location_11, GALGAS_string ("CAN message length must be <= 8 bytes")  COMMA_SOURCE_FILE ("oa_parser.galgas", 179)) ;
       }else if (kBoolFalse == test_10) {
-        const enumGalgasBool test_12 = var_CANnetwork.operator_not (SOURCE_FILE ("oa_parser.galgas", 180)).operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount.reader_uint (SOURCE_FILE ("oa_parser.galgas", 180)).objectCompare (GALGAS_uint ((uint32_t) 28U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 180)).boolEnum () ;
+        const enumGalgasBool test_12 = var_CANnetwork.operator_not (SOURCE_FILE ("oa_parser.galgas", 180)).operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount.getter_uint (SOURCE_FILE ("oa_parser.galgas", 180)).objectCompare (GALGAS_uint ((uint32_t) 28U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 180)).boolEnum () ;
         if (kBoolTrue == test_12) {
-          GALGAS_location location_13 (var_bytesCount.reader_location (HERE)) ; // Implicit use of 'location' reader
+          GALGAS_location location_13 (var_bytesCount.getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_13, GALGAS_string ("VAN message must be <= 28 bytes")  COMMA_SOURCE_FILE ("oa_parser.galgas", 181)) ;
         }
       }
@@ -3824,7 +3824,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         break ;
       }
       {
-      var_outMessagesMap.modifier_insertKey (var_messageName, var_outMessagesMap.reader_count (SOURCE_FILE ("oa_parser.galgas", 230)), var_messageClass, var_networkIndex, var_bytesCount, var_priority, var_offset, var_deadline, var_period, var_messageKind, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 230)) ;
+      var_outMessagesMap.modifier_insertKey (var_messageName, var_outMessagesMap.getter_count (SOURCE_FILE ("oa_parser.galgas", 230)), var_messageClass, var_networkIndex, var_bytesCount, var_priority, var_offset, var_deadline, var_period, var_messageKind, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 230)) ;
       }
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_oa_5F_scanner::kToken__3B_) COMMA_SOURCE_FILE ("oa_parser.galgas", 232)) ;
     } break ;
@@ -4492,7 +4492,7 @@ void cGrammar_oa_5F_grammar::_performSourceFileParsing_ (C_Compiler * inCompiler
                                 GALGAS_lstring inFilePath
                                 COMMA_LOCATION_ARGS) {
   if (inFilePath.isValid ()) {
-    const GALGAS_string filePathAsString = inFilePath.reader_string (HERE) ;
+    const GALGAS_string filePathAsString = inFilePath.getter_string (HERE) ;
     C_String filePath = filePathAsString.stringValue () ;
     if (! C_FileManager::isAbsolutePath (filePath)) {
       filePath = inCompiler->sourceFilePath ().stringByDeletingLastPathComponent ().stringByAppendingPathComponent (filePath) ;
@@ -4510,14 +4510,14 @@ void cGrammar_oa_5F_grammar::_performSourceFileParsing_ (C_Compiler * inCompiler
       }else{
         C_String message ;
         message << "the '" << filePath << "' file exists, but cannot be read" ;
-        const GALGAS_location errorLocation (inFilePath.reader_location (THERE)) ;
+        const GALGAS_location errorLocation (inFilePath.getter_location (THERE)) ;
         inCompiler->semanticErrorAtLocation (errorLocation, message COMMA_THERE) ;
       }
       macroDetachSharedObject (scanner) ;
     }else{
       C_String message ;
       message << "the '" << filePath << "' file does not exist" ;
-      const GALGAS_location errorLocation (inFilePath.reader_location (THERE)) ;
+      const GALGAS_location errorLocation (inFilePath.getter_location (THERE)) ;
       inCompiler->semanticErrorAtLocation (errorLocation, message COMMA_THERE) ;
     }
   }
@@ -5013,7 +5013,7 @@ GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage::constructor
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_C_5F_canMessageFromMessage::reader_mMessageIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_C_5F_canMessageFromMessage::getter_mMessageIndex (UNUSED_LOCATION_ARGS) const {
   GALGAS_uint result ;
   if (NULL != mObjectPtr) {
     const cPtr_C_5F_canMessageFromMessage * p = (const cPtr_C_5F_canMessageFromMessage *) mObjectPtr ;
@@ -5025,7 +5025,7 @@ GALGAS_uint GALGAS_C_5F_canMessageFromMessage::reader_mMessageIndex (UNUSED_LOCA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cPtr_C_5F_canMessageFromMessage::reader_mMessageIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint cPtr_C_5F_canMessageFromMessage::getter_mMessageIndex (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mMessageIndex ;
 }
 
@@ -5170,7 +5170,7 @@ GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask::constructor_new (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_C_5F_canMessageFromTask::reader_mTaskIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_C_5F_canMessageFromTask::getter_mTaskIndex (UNUSED_LOCATION_ARGS) const {
   GALGAS_uint result ;
   if (NULL != mObjectPtr) {
     const cPtr_C_5F_canMessageFromTask * p = (const cPtr_C_5F_canMessageFromTask *) mObjectPtr ;
@@ -5182,7 +5182,7 @@ GALGAS_uint GALGAS_C_5F_canMessageFromTask::reader_mTaskIndex (UNUSED_LOCATION_A
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cPtr_C_5F_canMessageFromTask::reader_mTaskIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint cPtr_C_5F_canMessageFromTask::getter_mTaskIndex (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTaskIndex ;
 }
 
@@ -5544,7 +5544,7 @@ GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage::construct
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_C_5F_taskDependsFromMessage::reader_mMessage (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_C_5F_taskDependsFromMessage::getter_mMessage (UNUSED_LOCATION_ARGS) const {
   GALGAS_uint result ;
   if (NULL != mObjectPtr) {
     const cPtr_C_5F_taskDependsFromMessage * p = (const cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
@@ -5556,13 +5556,13 @@ GALGAS_uint GALGAS_C_5F_taskDependsFromMessage::reader_mMessage (UNUSED_LOCATION
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cPtr_C_5F_taskDependsFromMessage::reader_mMessage (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint cPtr_C_5F_taskDependsFromMessage::getter_mMessage (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mMessage ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_C_5F_taskDependsFromMessage::reader_mEvery (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_C_5F_taskDependsFromMessage::getter_mEvery (UNUSED_LOCATION_ARGS) const {
   GALGAS_luint result ;
   if (NULL != mObjectPtr) {
     const cPtr_C_5F_taskDependsFromMessage * p = (const cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
@@ -5574,7 +5574,7 @@ GALGAS_luint GALGAS_C_5F_taskDependsFromMessage::reader_mEvery (UNUSED_LOCATION_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint cPtr_C_5F_taskDependsFromMessage::reader_mEvery (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint cPtr_C_5F_taskDependsFromMessage::getter_mEvery (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEvery ;
 }
 
@@ -5728,7 +5728,7 @@ GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::constructor_new
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_C_5F_taskDependsFromTask::reader_mTask (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_C_5F_taskDependsFromTask::getter_mTask (UNUSED_LOCATION_ARGS) const {
   GALGAS_uint result ;
   if (NULL != mObjectPtr) {
     const cPtr_C_5F_taskDependsFromTask * p = (const cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
@@ -5740,13 +5740,13 @@ GALGAS_uint GALGAS_C_5F_taskDependsFromTask::reader_mTask (UNUSED_LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cPtr_C_5F_taskDependsFromTask::reader_mTask (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint cPtr_C_5F_taskDependsFromTask::getter_mTask (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTask ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_C_5F_taskDependsFromTask::reader_mEvery (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_C_5F_taskDependsFromTask::getter_mEvery (UNUSED_LOCATION_ARGS) const {
   GALGAS_luint result ;
   if (NULL != mObjectPtr) {
     const cPtr_C_5F_taskDependsFromTask * p = (const cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
@@ -5758,7 +5758,7 @@ GALGAS_luint GALGAS_C_5F_taskDependsFromTask::reader_mEvery (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint cPtr_C_5F_taskDependsFromTask::reader_mEvery (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint cPtr_C_5F_taskDependsFromTask::getter_mEvery (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEvery ;
 }
 
@@ -6120,19 +6120,19 @@ void GALGAS_M_5F_processor_2D_element::description (C_String & ioString,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_M_5F_processor_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_M_5F_processor_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
   return mAttribute_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_M_5F_processor_2D_element::reader_mIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_M_5F_processor_2D_element::getter_mIndex (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_processor_2D_element::reader_mStep (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_processor_2D_element::getter_mStep (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mStep ;
 }
 
@@ -6285,25 +6285,25 @@ void GALGAS_M_5F_network_2D_element::description (C_String & ioString,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_M_5F_network_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_M_5F_network_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
   return mAttribute_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_M_5F_network_2D_element::reader_mIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_M_5F_network_2D_element::getter_mIndex (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_M_5F_network_2D_element::reader_mCANnetwork (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_M_5F_network_2D_element::getter_mCANnetwork (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mCANnetwork ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_network_2D_element::reader_mScalingFactor (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_network_2D_element::getter_mScalingFactor (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mScalingFactor ;
 }
 
@@ -6507,61 +6507,61 @@ void GALGAS_M_5F_messages_2D_element::description (C_String & ioString,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_M_5F_messages_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_M_5F_messages_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
   return mAttribute_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_M_5F_messages_2D_element::reader_mIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_M_5F_messages_2D_element::getter_mIndex (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_messages_2D_element::reader_mClass (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_messages_2D_element::getter_mClass (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mClass ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_M_5F_messages_2D_element::reader_mNetworkIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_M_5F_messages_2D_element::getter_mNetworkIndex (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mNetworkIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_messages_2D_element::reader_mBytesCount (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_messages_2D_element::getter_mBytesCount (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mBytesCount ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_messages_2D_element::reader_mPriority (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_messages_2D_element::getter_mPriority (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mPriority ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_messages_2D_element::reader_mOffset (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_messages_2D_element::getter_mOffset (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOffset ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_messages_2D_element::reader_mDeadline (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_messages_2D_element::getter_mDeadline (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mDeadline ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_messages_2D_element::reader_mPeriod (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_messages_2D_element::getter_mPeriod (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mPeriod ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_AC_5F_canMessage GALGAS_M_5F_messages_2D_element::reader_mMessageKind (UNUSED_LOCATION_ARGS) const {
+GALGAS_AC_5F_canMessage GALGAS_M_5F_messages_2D_element::getter_mMessageKind (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mMessageKind ;
 }
 
@@ -6765,61 +6765,61 @@ void GALGAS_M_5F_tasks_2D_element::description (C_String & ioString,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_M_5F_tasks_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_M_5F_tasks_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
   return mAttribute_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_M_5F_tasks_2D_element::reader_mIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_M_5F_tasks_2D_element::getter_mIndex (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_tasks_2D_element::reader_mPriority (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_tasks_2D_element::getter_mPriority (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mPriority ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_tasks_2D_element::reader_mOffset (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_tasks_2D_element::getter_mOffset (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOffset ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_tasks_2D_element::reader_mDeadline (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_tasks_2D_element::getter_mDeadline (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mDeadline ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_tasks_2D_element::reader_mDurationMin (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_tasks_2D_element::getter_mDurationMin (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mDurationMin ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_tasks_2D_element::reader_mDurationMax (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_tasks_2D_element::getter_mDurationMax (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mDurationMax ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_M_5F_tasks_2D_element::reader_mProcessor (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_M_5F_tasks_2D_element::getter_mProcessor (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mProcessor ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint GALGAS_M_5F_tasks_2D_element::reader_mPeriod (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint GALGAS_M_5F_tasks_2D_element::getter_mPeriod (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mPeriod ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_AC_5F_task GALGAS_M_5F_tasks_2D_element::reader_mTaskKind (UNUSED_LOCATION_ARGS) const {
+GALGAS_AC_5F_task GALGAS_M_5F_tasks_2D_element::getter_mTaskKind (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTaskKind ;
 }
 
