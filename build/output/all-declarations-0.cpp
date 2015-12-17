@@ -5873,11 +5873,9 @@ static const char * kSourceFileHelpMessages [] = {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  static const char * kVersionString = "version " PROJECT_VERSION_STRING " [debug]" ;
-#else
-  static const char * kVersionString = "version " PROJECT_VERSION_STRING ;
-#endif
+const char * projectVersionString (void) {
+  return "1.2.0" ;
+}
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -5924,7 +5922,6 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
 //--- Analyze Command Line Options
   TC_UniqueArray <C_String> sourceFilesArray ;
   F_Analyze_CLI_Options (inArgc, inArgv,
-                         kVersionString,
                          sourceFilesArray,
                          kSourceFileExtensions,
                          kSourceFileHelpMessages,
