@@ -3,7 +3,7 @@
 //                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2010, ..., 2012 Pierre Molinaro.                                                                     *
+//  Copyright (C) 2010, ..., 2015 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
 //                                                                                                                     *
@@ -24,6 +24,7 @@
 #include "command_line_interface/C_BoolCommandLineOption.h"
 #include "command_line_interface/C_UIntCommandLineOption.h"
 #include "command_line_interface/C_StringCommandLineOption.h"
+#include "command_line_interface/F_Analyze_CLI_Options.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -79,9 +80,9 @@ GALGAS__32_stringlist GALGAS_application::constructor_boolOptionNameList (LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_char GALGAS_application::constructor_boolOptionInvocationLetter (const GALGAS_string & inDomainName,
-                                                                        const GALGAS_string & inIdentifier
-                                                                        COMMA_UNUSED_LOCATION_ARGS) {
+GALGAS_char GALGAS_application::constructor_boolOptionInvocationCharacter (const GALGAS_string & inDomainName,
+                                                                           const GALGAS_string & inIdentifier
+                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_char result ;
   if (inDomainName.isValid () && inIdentifier.isValid ()) {
     const utf32 c = C_BoolCommandLineOption::getBoolOptionInvocationLetter (inDomainName.stringValue (), inIdentifier.stringValue ()) ;
@@ -130,9 +131,9 @@ GALGAS__32_stringlist GALGAS_application::constructor_uintOptionNameList (LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_char GALGAS_application::constructor_uintOptionInvocationLetter (const GALGAS_string & inDomainName,
-                                                                        const GALGAS_string & inIdentifier
-                                                                        COMMA_UNUSED_LOCATION_ARGS) {
+GALGAS_char GALGAS_application::constructor_uintOptionInvocationCharacter (const GALGAS_string & inDomainName,
+                                                                           const GALGAS_string & inIdentifier
+                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_char result ;
   if (inDomainName.isValid () && inIdentifier.isValid ()) {
     const utf32 c = C_UIntCommandLineOption::getUIntOptionInvocationLetter (inDomainName.stringValue (), inIdentifier.stringValue ()) ;
@@ -181,9 +182,9 @@ GALGAS__32_stringlist GALGAS_application::constructor_stringOptionNameList (LOCA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_char GALGAS_application::constructor_stringOptionInvocationLetter (const GALGAS_string & inDomainName,
-                                                                          const GALGAS_string & inIdentifier
-                                                                          COMMA_UNUSED_LOCATION_ARGS) {
+GALGAS_char GALGAS_application::constructor_stringOptionInvocationCharacter (const GALGAS_string & inDomainName,
+                                                                             const GALGAS_string & inIdentifier
+                                                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_char result ;
   if (inDomainName.isValid () && inIdentifier.isValid ()) {
     const utf32 c = C_StringCommandLineOption::getStringOptionInvocationLetter (inDomainName.stringValue (), inIdentifier.stringValue ()) ;
@@ -214,6 +215,50 @@ GALGAS_string GALGAS_application::constructor_stringOptionCommentString (const G
   if (inDomainName.isValid () && inIdentifier.isValid ()) {
     const C_String s = C_StringCommandLineOption::getStringOptionCommentString (inDomainName.stringValue (), inIdentifier.stringValue ()) ;
     result = GALGAS_string (s) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Version strings
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_application::constructor_projectVersionString (UNUSED_LOCATION_ARGS) {
+  return GALGAS_string (projectVersionString ()) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_application::constructor_galgasVersionString (UNUSED_LOCATION_ARGS) {
+  return GALGAS_string (galgasVersionString ()) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Command line arguments
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_application::constructor_commandLineArgumentCount (UNUSED_LOCATION_ARGS) {
+  return GALGAS_uint (commandLineArgumentCount ()) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_application::constructor_commandLineArgumentAtIndex (const GALGAS_uint & inIndex,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_string result ;
+  if (inIndex.isValid ()) {
+    const uint32_t idx = inIndex.uintValue () ;
+    if (idx < commandLineArgumentCount ()) {
+      result = GALGAS_string (commandLineArgumentAtIndex (idx)) ;
+    }else{
+      C_String message ;
+      message << "@application.commandLineArgumentAtIndex: index "
+              << cStringWithUnsigned (idx)
+              << " >= argument count = "
+              << cStringWithUnsigned (commandLineArgumentCount ()) ;
+      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
+    }
   }
   return result ;
 }
