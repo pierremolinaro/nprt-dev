@@ -37,15 +37,15 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-#ifdef COMPILE_FOR_WIN32
-  #include <windows.h>
-  #include <direct.h>
+#ifndef COMPILE_FOR_WINDOWS
+  #error COMPILE_FOR_WINDOWS is undefined
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-#ifndef MACHINE_IS_DEFINED
-  #error "Undefined machine"
+#if COMPILE_FOR_WINDOWS == 1
+  #include <windows.h>
+  #include <direct.h>
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -274,7 +274,7 @@ static void analyze_one_option (const char * inCommand,
   if (! found) {
     if (inCommand [0] != '-') {
       C_String fileName ;
-      #ifdef COMPILE_FOR_WIN32
+      #if COMPILE_FOR_WINDOWS == 1
         const int32_t fileLength = (int32_t) strlen (inCommand) ;
         int32_t firstChar = 0 ;
         if ((fileLength > 3)
@@ -303,6 +303,66 @@ static void analyze_one_option (const char * inCommand,
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+#if COMPILE_FOR_WINDOWS == 1
+  static void getSourceFileFromWin32OpenDialog (TC_UniqueArray <C_String> & outSourceFileArray,
+                                                const char * inExtensions []) {
+    char szFile[260] ;       // buffer for file name
+    OPENFILENAME ofn ;
+  //--- Initialize OPENFILENAME
+    ZeroMemory (& ofn, sizeof(ofn)) ;
+    ofn.lStructSize = sizeof (ofn) ;
+    ofn.hwndOwner = NULL ;
+    ofn.lpstrFile = szFile ;
+  // Set lpstrFile[0] to '\0' so that GetOpenFileName does not 
+  // use the contents of szFile to initialize itself.
+    ofn.lpstrFile[0] = '\0';
+    ofn.nMaxFile = sizeof (szFile) ;
+    char filterString [1000] = "";
+    int32_t filterIndex = 0 ;
+    while (inExtensions [filterIndex] != NULL) {
+      if (filterIndex != 0) {
+        strcat (filterString, ";") ;
+      }
+      strcat (filterString, "*.") ;
+      strcat (filterString, inExtensions [filterIndex]) ;
+      filterIndex ++ ;
+    }
+    char filter [1000] ;
+    const char zero = '\0' ;
+    snprintf (filter, 999, "%c%s%c", zero, filterString, zero) ;
+    ofn.lpstrFilter = filter ;
+  //  ofn.lpstrFilter = "All\0*.*\0Text\0*.TXT\0";
+    ofn.nFilterIndex = 1;
+    ofn.lpstrFileTitle = NULL;
+    ofn.nMaxFileTitle = 0 ;
+    char * currentDir = getcwd (NULL, 0) ;
+    ofn.lpstrInitialDir = currentDir ;
+    ofn.lpstrTitle = NULL ;
+    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY ;
+    if (GetOpenFileName (& ofn)) {
+      C_String fileName ;
+      const int32_t fileLength = (int32_t) strlen (szFile) ;
+      int32_t firstChar = 0 ;
+      if ((fileLength > 3)
+       && isalpha (szFile [0])
+       && (szFile [1] == ':')
+       && (szFile [2] == '\\')) {
+        fileName << "/" ;
+        fileName.appendUnicodeCharacter (TO_UNICODE (szFile [0]) COMMA_HERE) ;
+        fileName << "/" ;
+        firstChar = 3 ;
+      }
+      for (int32_t i=firstChar ; i<fileLength ; i++) {
+        fileName.appendUnicodeCharacter (TO_UNICODE ((szFile [i] == '\\') ? '/' : szFile [i]) COMMA_HERE) ;
+      }
+      outSourceFileArray.addObject (fileName) ;
+    }
+    ::free (currentDir) ;
+  }
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //     F_Analyze_CLI_Options                                                                                           *
 //                                                                                                                     *
@@ -329,7 +389,7 @@ void F_Analyze_CLI_Options (const int argv,
     print_option_list () ;
   }
 //--- No colored output ?
-  #ifndef COMPILE_FOR_WIN32
+  #if COMPILE_FOR_WINDOWS == 0
     if (gOption_generic_5F_cli_5F_options_no_5F_color.mValue) {
       C_ColoredConsole::setUseTextAttributes (false) ;
     }
@@ -346,6 +406,12 @@ void F_Analyze_CLI_Options (const int argv,
   if (gOption_generic_5F_cli_5F_options_display_5F_help.mValue) {
     print_help (argv, argc, inExtensions, inHelpMessages, print_tool_help_message) ;
   }
+//--- WIN32 : if got no file, display file open dialog
+  #if COMPILE_FOR_WINDOWS == 1
+    if ((outSourceFileArray.count () == 0) && ! gOption_generic_5F_cli_5F_options_nodialog.mValue) {
+      getSourceFileFromWin32OpenDialog (outSourceFileArray, inExtensions) ;
+    }
+  #endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
