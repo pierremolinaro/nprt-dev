@@ -5,6 +5,7 @@
         "all-galgas.cpp",
         "all-libpm.cpp",
         "all-declarations-0.cpp",
+        "C_galgas_quiet_option.cpp",
         "C_us.cpp",
         "activities_core.cpp",
         "C_activitiesToSchedule.cpp",
