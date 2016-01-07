@@ -55,702 +55,94 @@ C_String C_Lexique_oa_5F_scanner::indexingDirectory (void) const {
 //                        Lexical error message list                                                                   *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const utf32 gLexicalMessage_oa_5F_scanner_decimalNumberTooLarge [] = {
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('l'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('b'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('o'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (0)
-} ;
+static const char * gLexicalMessage_oa_5F_scanner_decimalNumberTooLarge = "decimal number too large" ;
 
-static const utf32 gLexicalMessage_oa_5F_scanner_incorrectEndOfComment [] = {
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('f'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE (0)
-} ;
+static const char * gLexicalMessage_oa_5F_scanner_incorrectEndOfComment = "incorrect end of comment" ;
 
-static const utf32 gLexicalMessage_oa_5F_scanner_internalError [] = {
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('l'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gLexicalMessage_oa_5F_scanner_internalError = "internal error" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //          Syntax error messages, for every terminal symbol                                                           *
 //---------------------------------------------------------------------------------------------------------------------*
 
 //--- Syntax error message for terminal '$identifier$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_identifier [] = {
-  TO_UNICODE ('a'),
-  TO_UNICODE ('n'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_identifier = "an identifier" ;
 
 //--- Syntax error message for terminal '$literal_integer$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_literal_5F_integer [] = {
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('l'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('b'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_literal_5F_integer = "a decimal number" ;
 
 //--- Syntax error message for terminal '$system$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_system [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_system = "the 'system' key word" ;
 
 //--- Syntax error message for terminal '$end$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_end [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_end = "the 'end' key word" ;
 
 //--- Syntax error message for terminal '$task$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_task [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_task = "the 'task' key word" ;
 
 //--- Syntax error message for terminal '$standard$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_standard [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_standard = "the 'standard' key word" ;
 
 //--- Syntax error message for terminal '$extended$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_extended [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('x'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_extended = "the 'extended' key word" ;
 
 //--- Syntax error message for terminal '$message$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_message [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_message = "the 'message' key word" ;
 
 //--- Syntax error message for terminal '$length$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_length [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_length = "the 'length' key word" ;
 
 //--- Syntax error message for terminal '$priority$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_priority [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_priority = "the 'priority' key word" ;
 
 //--- Syntax error message for terminal '$period$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_period [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_period = "the 'period' key word" ;
 
 //--- Syntax error message for terminal '$offset$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_offset [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_offset = "the 'offset' key word" ;
 
 //--- Syntax error message for terminal '$on$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_on [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_on = "the 'on' key word" ;
 
 //--- Syntax error message for terminal '$deadline$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_deadline [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_deadline = "the 'deadline' key word" ;
 
 //--- Syntax error message for terminal '$duration$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_duration [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_duration = "the 'duration' key word" ;
 
 //--- Syntax error message for terminal '$processor$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_processor [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_processor = "the 'processor' key word" ;
 
 //--- Syntax error message for terminal '$can$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_can [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_can = "the 'can' key word" ;
 
 //--- Syntax error message for terminal '$van$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_van [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('v'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_van = "the 'van' key word" ;
 
 //--- Syntax error message for terminal '$network$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_network [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_network = "the 'network' key word" ;
 
 //--- Syntax error message for terminal '$scalingfactor$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_scalingfactor [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_scalingfactor = "the 'scalingfactor' key word" ;
 
 //--- Syntax error message for terminal '$every$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner_every [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('v'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner_every = "the 'every' key word" ;
 
 //--- Syntax error message for terminal '$,$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner__2C_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('\''),
-  TO_UNICODE (','),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner__2C_ = "the '','' delimitor" ;
 
 //--- Syntax error message for terminal '$;$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner__3B_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('\''),
-  TO_UNICODE (';'),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner__3B_ = "the '';'' delimitor" ;
 
 //--- Syntax error message for terminal '$..$' :
-static const utf32 gSyntaxErrorMessage_oa_5F_scanner__2E__2E_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_oa_5F_scanner__2E__2E_ = "the ''..'' delimitor" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                getMessageForTerminal                                                                                *
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_String C_Lexique_oa_5F_scanner::getMessageForTerminal (const int16_t inTerminalIndex) const {
-  static const utf32 * syntaxErrorMessageArray [25] = {kEndOfSourceLexicalErrorMessage,
+  static const char * syntaxErrorMessageArray [25] = {kEndOfSourceLexicalErrorMessage,
     gSyntaxErrorMessage_oa_5F_scanner_identifier,
     gSyntaxErrorMessage_oa_5F_scanner_literal_5F_integer,
     gSyntaxErrorMessage_oa_5F_scanner_system,
@@ -1567,11 +959,11 @@ void GALGAS_M_5F_processor::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_processor::modifier_insertKey (GALGAS_lstring inKey,
-                                                GALGAS_uint inArgument0,
-                                                GALGAS_luint inArgument1,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_processor::setter_insertKey (GALGAS_lstring inKey,
+                                              GALGAS_uint inArgument0,
+                                              GALGAS_luint inArgument1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_processor * p = NULL ;
   macroMyNew (p, cMapElement_M_5F_processor (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -1639,10 +1031,10 @@ GALGAS_luint GALGAS_M_5F_processor::getter_mStepForKey (const GALGAS_string & in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_processor::modifier_setMIndexForKey (GALGAS_uint inAttributeValue,
-                                                      GALGAS_string inKey,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_processor::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
+                                                    GALGAS_string inKey,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_processor * p = (cMapElement_M_5F_processor *) attributes ;
   if (NULL != p) {
@@ -1653,10 +1045,10 @@ void GALGAS_M_5F_processor::modifier_setMIndexForKey (GALGAS_uint inAttributeVal
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_processor::modifier_setMStepForKey (GALGAS_luint inAttributeValue,
-                                                     GALGAS_string inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_processor::setter_setMStepForKey (GALGAS_luint inAttributeValue,
+                                                   GALGAS_string inKey,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_processor * p = (cMapElement_M_5F_processor *) attributes ;
   if (NULL != p) {
@@ -1886,12 +1278,12 @@ void GALGAS_M_5F_network::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_network::modifier_insertKey (GALGAS_lstring inKey,
-                                              GALGAS_uint inArgument0,
-                                              GALGAS_bool inArgument1,
-                                              GALGAS_luint inArgument2,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_network::setter_insertKey (GALGAS_lstring inKey,
+                                            GALGAS_uint inArgument0,
+                                            GALGAS_bool inArgument1,
+                                            GALGAS_luint inArgument2,
+                                            C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_network * p = NULL ;
   macroMyNew (p, cMapElement_M_5F_network (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -1977,10 +1369,10 @@ GALGAS_luint GALGAS_M_5F_network::getter_mScalingFactorForKey (const GALGAS_stri
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_network::modifier_setMIndexForKey (GALGAS_uint inAttributeValue,
-                                                    GALGAS_string inKey,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_network::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
+                                                  GALGAS_string inKey,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_network * p = (cMapElement_M_5F_network *) attributes ;
   if (NULL != p) {
@@ -1991,10 +1383,10 @@ void GALGAS_M_5F_network::modifier_setMIndexForKey (GALGAS_uint inAttributeValue
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_network::modifier_setMCANnetworkForKey (GALGAS_bool inAttributeValue,
-                                                         GALGAS_string inKey,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_network::setter_setMCANnetworkForKey (GALGAS_bool inAttributeValue,
+                                                       GALGAS_string inKey,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_network * p = (cMapElement_M_5F_network *) attributes ;
   if (NULL != p) {
@@ -2005,10 +1397,10 @@ void GALGAS_M_5F_network::modifier_setMCANnetworkForKey (GALGAS_bool inAttribute
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_network::modifier_setMScalingFactorForKey (GALGAS_luint inAttributeValue,
-                                                            GALGAS_string inKey,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_network::setter_setMScalingFactorForKey (GALGAS_luint inAttributeValue,
+                                                          GALGAS_string inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_network * p = (cMapElement_M_5F_network *) attributes ;
   if (NULL != p) {
@@ -2306,18 +1698,18 @@ void GALGAS_M_5F_messages::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_messages::modifier_insertKey (GALGAS_lstring inKey,
-                                               GALGAS_uint inArgument0,
-                                               GALGAS_luint inArgument1,
-                                               GALGAS_uint inArgument2,
-                                               GALGAS_luint inArgument3,
-                                               GALGAS_luint inArgument4,
-                                               GALGAS_luint inArgument5,
-                                               GALGAS_luint inArgument6,
-                                               GALGAS_luint inArgument7,
-                                               GALGAS_AC_5F_canMessage inArgument8,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_messages::setter_insertKey (GALGAS_lstring inKey,
+                                             GALGAS_uint inArgument0,
+                                             GALGAS_luint inArgument1,
+                                             GALGAS_uint inArgument2,
+                                             GALGAS_luint inArgument3,
+                                             GALGAS_luint inArgument4,
+                                             GALGAS_luint inArgument5,
+                                             GALGAS_luint inArgument6,
+                                             GALGAS_luint inArgument7,
+                                             GALGAS_AC_5F_canMessage inArgument8,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_messages * p = NULL ;
   macroMyNew (p, cMapElement_M_5F_messages (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -2511,10 +1903,10 @@ GALGAS_AC_5F_canMessage GALGAS_M_5F_messages::getter_mMessageKindForKey (const G
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_messages::modifier_setMIndexForKey (GALGAS_uint inAttributeValue,
-                                                     GALGAS_string inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_messages::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
+                                                   GALGAS_string inKey,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
@@ -2525,10 +1917,10 @@ void GALGAS_M_5F_messages::modifier_setMIndexForKey (GALGAS_uint inAttributeValu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_messages::modifier_setMClassForKey (GALGAS_luint inAttributeValue,
-                                                     GALGAS_string inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_messages::setter_setMClassForKey (GALGAS_luint inAttributeValue,
+                                                   GALGAS_string inKey,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
@@ -2539,10 +1931,10 @@ void GALGAS_M_5F_messages::modifier_setMClassForKey (GALGAS_luint inAttributeVal
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_messages::modifier_setMNetworkIndexForKey (GALGAS_uint inAttributeValue,
-                                                            GALGAS_string inKey,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_messages::setter_setMNetworkIndexForKey (GALGAS_uint inAttributeValue,
+                                                          GALGAS_string inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
@@ -2553,10 +1945,10 @@ void GALGAS_M_5F_messages::modifier_setMNetworkIndexForKey (GALGAS_uint inAttrib
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_messages::modifier_setMBytesCountForKey (GALGAS_luint inAttributeValue,
-                                                          GALGAS_string inKey,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_messages::setter_setMBytesCountForKey (GALGAS_luint inAttributeValue,
+                                                        GALGAS_string inKey,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
@@ -2567,10 +1959,10 @@ void GALGAS_M_5F_messages::modifier_setMBytesCountForKey (GALGAS_luint inAttribu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_messages::modifier_setMPriorityForKey (GALGAS_luint inAttributeValue,
-                                                        GALGAS_string inKey,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_messages::setter_setMPriorityForKey (GALGAS_luint inAttributeValue,
+                                                      GALGAS_string inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
@@ -2581,10 +1973,10 @@ void GALGAS_M_5F_messages::modifier_setMPriorityForKey (GALGAS_luint inAttribute
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_messages::modifier_setMOffsetForKey (GALGAS_luint inAttributeValue,
-                                                      GALGAS_string inKey,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_messages::setter_setMOffsetForKey (GALGAS_luint inAttributeValue,
+                                                    GALGAS_string inKey,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
@@ -2595,10 +1987,10 @@ void GALGAS_M_5F_messages::modifier_setMOffsetForKey (GALGAS_luint inAttributeVa
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_messages::modifier_setMDeadlineForKey (GALGAS_luint inAttributeValue,
-                                                        GALGAS_string inKey,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_messages::setter_setMDeadlineForKey (GALGAS_luint inAttributeValue,
+                                                      GALGAS_string inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
@@ -2609,10 +2001,10 @@ void GALGAS_M_5F_messages::modifier_setMDeadlineForKey (GALGAS_luint inAttribute
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_messages::modifier_setMPeriodForKey (GALGAS_luint inAttributeValue,
-                                                      GALGAS_string inKey,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_messages::setter_setMPeriodForKey (GALGAS_luint inAttributeValue,
+                                                    GALGAS_string inKey,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
@@ -2623,10 +2015,10 @@ void GALGAS_M_5F_messages::modifier_setMPeriodForKey (GALGAS_luint inAttributeVa
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_messages::modifier_setMMessageKindForKey (GALGAS_AC_5F_canMessage inAttributeValue,
-                                                           GALGAS_string inKey,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_messages::setter_setMMessageKindForKey (GALGAS_AC_5F_canMessage inAttributeValue,
+                                                         GALGAS_string inKey,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
@@ -2972,18 +2364,18 @@ void GALGAS_M_5F_tasks::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_tasks::modifier_insertKey (GALGAS_lstring inKey,
-                                            GALGAS_uint inArgument0,
-                                            GALGAS_luint inArgument1,
-                                            GALGAS_luint inArgument2,
-                                            GALGAS_luint inArgument3,
-                                            GALGAS_luint inArgument4,
-                                            GALGAS_luint inArgument5,
-                                            GALGAS_uint inArgument6,
-                                            GALGAS_luint inArgument7,
-                                            GALGAS_AC_5F_task inArgument8,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_tasks::setter_insertKey (GALGAS_lstring inKey,
+                                          GALGAS_uint inArgument0,
+                                          GALGAS_luint inArgument1,
+                                          GALGAS_luint inArgument2,
+                                          GALGAS_luint inArgument3,
+                                          GALGAS_luint inArgument4,
+                                          GALGAS_luint inArgument5,
+                                          GALGAS_uint inArgument6,
+                                          GALGAS_luint inArgument7,
+                                          GALGAS_AC_5F_task inArgument8,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_tasks * p = NULL ;
   macroMyNew (p, cMapElement_M_5F_tasks (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -3177,10 +2569,10 @@ GALGAS_AC_5F_task GALGAS_M_5F_tasks::getter_mTaskKindForKey (const GALGAS_string
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_tasks::modifier_setMIndexForKey (GALGAS_uint inAttributeValue,
-                                                  GALGAS_string inKey,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_tasks::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
+                                                GALGAS_string inKey,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
@@ -3191,10 +2583,10 @@ void GALGAS_M_5F_tasks::modifier_setMIndexForKey (GALGAS_uint inAttributeValue,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_tasks::modifier_setMPriorityForKey (GALGAS_luint inAttributeValue,
-                                                     GALGAS_string inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_tasks::setter_setMPriorityForKey (GALGAS_luint inAttributeValue,
+                                                   GALGAS_string inKey,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
@@ -3205,10 +2597,10 @@ void GALGAS_M_5F_tasks::modifier_setMPriorityForKey (GALGAS_luint inAttributeVal
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_tasks::modifier_setMOffsetForKey (GALGAS_luint inAttributeValue,
-                                                   GALGAS_string inKey,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_tasks::setter_setMOffsetForKey (GALGAS_luint inAttributeValue,
+                                                 GALGAS_string inKey,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
@@ -3219,10 +2611,10 @@ void GALGAS_M_5F_tasks::modifier_setMOffsetForKey (GALGAS_luint inAttributeValue
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_tasks::modifier_setMDeadlineForKey (GALGAS_luint inAttributeValue,
-                                                     GALGAS_string inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_tasks::setter_setMDeadlineForKey (GALGAS_luint inAttributeValue,
+                                                   GALGAS_string inKey,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
@@ -3233,10 +2625,10 @@ void GALGAS_M_5F_tasks::modifier_setMDeadlineForKey (GALGAS_luint inAttributeVal
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_tasks::modifier_setMDurationMinForKey (GALGAS_luint inAttributeValue,
-                                                        GALGAS_string inKey,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_tasks::setter_setMDurationMinForKey (GALGAS_luint inAttributeValue,
+                                                      GALGAS_string inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
@@ -3247,10 +2639,10 @@ void GALGAS_M_5F_tasks::modifier_setMDurationMinForKey (GALGAS_luint inAttribute
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_tasks::modifier_setMDurationMaxForKey (GALGAS_luint inAttributeValue,
-                                                        GALGAS_string inKey,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_tasks::setter_setMDurationMaxForKey (GALGAS_luint inAttributeValue,
+                                                      GALGAS_string inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
@@ -3261,10 +2653,10 @@ void GALGAS_M_5F_tasks::modifier_setMDurationMaxForKey (GALGAS_luint inAttribute
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_tasks::modifier_setMProcessorForKey (GALGAS_uint inAttributeValue,
-                                                      GALGAS_string inKey,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_tasks::setter_setMProcessorForKey (GALGAS_uint inAttributeValue,
+                                                    GALGAS_string inKey,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
@@ -3275,10 +2667,10 @@ void GALGAS_M_5F_tasks::modifier_setMProcessorForKey (GALGAS_uint inAttributeVal
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_tasks::modifier_setMPeriodForKey (GALGAS_luint inAttributeValue,
-                                                   GALGAS_string inKey,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_tasks::setter_setMPeriodForKey (GALGAS_luint inAttributeValue,
+                                                 GALGAS_string inKey,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
@@ -3289,10 +2681,10 @@ void GALGAS_M_5F_tasks::modifier_setMPeriodForKey (GALGAS_luint inAttributeValue
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_M_5F_tasks::modifier_setMTaskKindForKey (GALGAS_AC_5F_task inAttributeValue,
-                                                     GALGAS_string inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_M_5F_tasks::setter_setMTaskKindForKey (GALGAS_AC_5F_task inAttributeValue,
+                                                   GALGAS_string inKey,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
@@ -3489,7 +2881,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         break ;
       }
       {
-      var_outProcessorMap.modifier_insertKey (var_processorName, var_outProcessorMap.getter_count (SOURCE_FILE ("oa_parser.galgas", 32)), var_step, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 32)) ;
+      var_outProcessorMap.setter_insertKey (var_processorName, var_outProcessorMap.getter_count (SOURCE_FILE ("oa_parser.galgas", 32)), var_step, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 32)) ;
       }
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_oa_5F_scanner::kToken__3B_) COMMA_SOURCE_FILE ("oa_parser.galgas", 33)) ;
     } break ;
@@ -3530,7 +2922,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         break ;
       }
       {
-      var_outNetworkMap.modifier_insertKey (var_networkName, var_outNetworkMap.getter_count (SOURCE_FILE ("oa_parser.galgas", 56)), var_network, var_factor, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 56)) ;
+      var_outNetworkMap.setter_insertKey (var_networkName, var_outNetworkMap.getter_count (SOURCE_FILE ("oa_parser.galgas", 56)), var_network, var_factor, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 56)) ;
       }
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_oa_5F_scanner::kToken__3B_) COMMA_SOURCE_FILE ("oa_parser.galgas", 57)) ;
     } break ;
@@ -3674,7 +3066,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         break ;
       }
       {
-      var_outTaskMap.modifier_insertKey (var_taskName, var_outTaskMap.getter_count (SOURCE_FILE ("oa_parser.galgas", 138)), var_taskPriority, var_taskOffset, var_taskDeadline, var_taskDurationMin, var_taskDurationMax, var_taskProcessorIndex, var_taskPeriod, var_taskKind, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 138)) ;
+      var_outTaskMap.setter_insertKey (var_taskName, var_outTaskMap.getter_count (SOURCE_FILE ("oa_parser.galgas", 138)), var_taskPriority, var_taskOffset, var_taskDeadline, var_taskDurationMin, var_taskDurationMax, var_taskProcessorIndex, var_taskPeriod, var_taskKind, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 138)) ;
       }
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_oa_5F_scanner::kToken__3B_) COMMA_SOURCE_FILE ("oa_parser.galgas", 147)) ;
     } break ;
@@ -3824,7 +3216,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         break ;
       }
       {
-      var_outMessagesMap.modifier_insertKey (var_messageName, var_outMessagesMap.getter_count (SOURCE_FILE ("oa_parser.galgas", 230)), var_messageClass, var_networkIndex, var_bytesCount, var_priority, var_offset, var_deadline, var_period, var_messageKind, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 230)) ;
+      var_outMessagesMap.setter_insertKey (var_messageName, var_outMessagesMap.getter_count (SOURCE_FILE ("oa_parser.galgas", 230)), var_messageClass, var_networkIndex, var_bytesCount, var_priority, var_offset, var_deadline, var_period, var_messageKind, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 230)) ;
       }
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_oa_5F_scanner::kToken__3B_) COMMA_SOURCE_FILE ("oa_parser.galgas", 232)) ;
     } break ;

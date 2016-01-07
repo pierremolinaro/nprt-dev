@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//  GALGAS_timer                                                                                                       *
+//  Built-in GALGAS Command Line Interface Options                                                                     *
 //                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
@@ -20,82 +20,24 @@
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-#include "galgas2/predefined-types.h"
-#include "galgas2/C_Compiler.h"
+#include "galgas2/C_galgas_quiet_option.h"
+#include "galgas2/F_verbose_output.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_timer::GALGAS_timer (void) :
-AC_GALGAS_root (),
-mIsValid (false),
-mTimer () {
-}
+C_BoolCommandLineOption
+gOption_galgas_5F_builtin_5F_options_quiet_5F_output ("galgas_builtin_options",
+                                                      "quiet_output",
+                                                      'q',
+                                                      "quiet",
+                                                      "Quiet Output",
+                                                      false) ; // Not visible in GALGAS
+
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_timer::description (C_String & ioString,
-                                    const int32_t /* inIndentation */) const {
-  ioString << "<@timer: " ;
-  if (!mIsValid) {
-    ioString << "not built" ;
-  }else{
-    ioString << mTimer.timeString () ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_timer GALGAS_timer::constructor_start (UNUSED_LOCATION_ARGS) {
-  GALGAS_timer result ;
-  result.mIsValid = true ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_timer::setter_stop (UNUSED_LOCATION_ARGS) {
-  if (isValid ()) {
-    mTimer.stopTimer () ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_timer::setter_resume (UNUSED_LOCATION_ARGS) {
-  if (isValid ()) {
-    mTimer = C_Timer () ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_timer::getter_isRunning (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  if (isValid ()) {
-    result = GALGAS_bool (mTimer.isRunning ()) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint GALGAS_timer::getter_msFromStart (UNUSED_LOCATION_ARGS) const {
-  GALGAS_uint result ;
-  if (isValid ()) {
-    result = GALGAS_uint (mTimer.msFromStart ()) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_timer::getter_string (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (isValid ()) {
-    result = GALGAS_string (mTimer.timeString ()) ;
-  }
-  return result ;
+bool verboseOutput (void) {
+  return !gOption_galgas_5F_builtin_5F_options_quiet_5F_output.getter_value () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
