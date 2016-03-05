@@ -16,6 +16,7 @@
 
 #include "strings/unicode_character_cpp.h"
 #include "galgas2/scanner_actions.h"
+#include "galgas2/cLexiqueIntrospection.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -787,6 +788,56 @@ GALGAS_stringlist C_Lexique_oa_5F_scanner::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("..") COMMA_THERE) ;
   return result ;
 }
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void getKeywordLists_oa_5F_scanner (TC_UniqueArray <C_String> & ioList) {
+  ioList.addObject ("oa_scanner:delimitorsList") ;
+  ioList.addObject ("oa_scanner:keyWordList") ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void getKeywordsForIdentifier_oa_5F_scanner (const C_String & inIdentifier,
+                                                    bool & ioFound,
+                                                    TC_UniqueArray <C_String> & ioList) {
+  if (inIdentifier == "oa_scanner:delimitorsList") {
+    ioFound = true ;
+    ioList.addObject (",") ;
+    ioList.addObject (";") ;
+    ioList.addObject ("..") ;
+    ioList.sortArrayUsingCompareMethod() ;
+  }
+  if (inIdentifier == "oa_scanner:keyWordList") {
+    ioFound = true ;
+    ioList.addObject ("on") ;
+    ioList.addObject ("can") ;
+    ioList.addObject ("end") ;
+    ioList.addObject ("van") ;
+    ioList.addObject ("task") ;
+    ioList.addObject ("every") ;
+    ioList.addObject ("length") ;
+    ioList.addObject ("offset") ;
+    ioList.addObject ("period") ;
+    ioList.addObject ("system") ;
+    ioList.addObject ("message") ;
+    ioList.addObject ("network") ;
+    ioList.addObject ("deadline") ;
+    ioList.addObject ("duration") ;
+    ioList.addObject ("extended") ;
+    ioList.addObject ("priority") ;
+    ioList.addObject ("standard") ;
+    ioList.addObject ("processor") ;
+    ioList.addObject ("scalingfactor") ;
+    ioList.sortArrayUsingCompareMethod() ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static cLexiqueIntrospection lexiqueIntrospection_oa_5F_scanner
+__attribute__ ((used))
+__attribute__ ((unused)) (getKeywordLists_oa_5F_scanner, getKeywordsForIdentifier_oa_5F_scanner) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //   S T Y L E   I N D E X    F O R    T E R M I N A L                                                                 *
@@ -5239,6 +5290,7 @@ GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::extractObject (
 #include "utilities/F_DisplayException.h"
 #include "galgas2/C_galgas_CLI_Options.h"
 #include "galgas2/F_verbose_output.h"
+#include "galgas2/cLexiqueIntrospection.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -5333,6 +5385,7 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
     macroMyNew (commonLexique, C_Compiler (NULL, "", "" COMMA_HERE)) ;
     try{
       routine_before (commonLexique COMMA_HERE) ;
+      cLexiqueIntrospection::handleGetKeywordListOption (commonLexique) ;
       const bool verboseOptionOn = verboseOutput () ;
       for (int32_t i=0 ; i<sourceFilesArray.count () ; i++) {
         if (gOption_galgas_5F_builtin_5F_options_trace.mValue) {

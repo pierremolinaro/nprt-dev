@@ -1,10 +1,10 @@
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//  GALGAS Command Line Interface Options                                                                              *
+//  Lexique introspection                                                                                              *
 //                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2006, ..., 2015 Pierre Molinaro.                                                                     *
+//  Copyright (C) 2016, ..., 2016 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
 //                                                                                                                     *
@@ -20,75 +20,46 @@
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-#ifndef GALGAS_CLI_OPTIONS_DEFINED
-#define GALGAS_CLI_OPTIONS_DEFINED
+#ifndef cLexiqueIntrospection_hpp
+#define cLexiqueIntrospection_hpp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-#include "command_line_interface/C_BoolCommandLineOption.h"
-#include "command_line_interface/C_UIntCommandLineOption.h"
-#include "command_line_interface/C_StringCommandLineOption.h"
+#include "C_String.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern C_BoolCommandLineOption gOption_galgas_5F_builtin_5F_options_trace ;
+typedef void (* Type_appendKeywordListNames) (TC_UniqueArray <C_String> & ioList) ;
+
+typedef void (* Type_getKeywordsForIdentifier) (const C_String & inIdentifier,
+                                                bool & ioFound,
+                                                TC_UniqueArray <C_String> & ioList) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern C_BoolCommandLineOption gOption_galgas_5F_builtin_5F_options_outputConcreteSyntaxTree ;
+class cLexiqueIntrospection {
+//--- Constructor
+  public : cLexiqueIntrospection (Type_appendKeywordListNames appendKeywordListNames,
+                                  Type_getKeywordsForIdentifier getKeywordsForIdentifier) ;
+
+//--- Accessors
+  public : static void getKeywordListNames (TC_UniqueArray <C_String> & outList) ;
+  public : static void getKeywordListForIdentifier (const C_String & inIdentifier,
+                                                    bool & outFound,
+                                                    TC_UniqueArray <C_String> & outList) ;
+
+  public : static void handleGetKeywordListOption (class C_Compiler * inCompiler) ;
+
+//--- No copy
+  private : cLexiqueIntrospection (const cLexiqueIntrospection &) ;
+  private : cLexiqueIntrospection & operator = (const cLexiqueIntrospection &) ;
+
+//--- Private member
+  private : cLexiqueIntrospection * mNext ;
+  private : Type_appendKeywordListNames mAppendKeywordListNames ;
+  private : Type_getKeywordsForIdentifier mGetKeywordsForIdentifier ;
+} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern C_BoolCommandLineOption gOption_galgas_5F_builtin_5F_options_log_5F_file_5F_read ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern C_BoolCommandLineOption gOption_galgas_5F_builtin_5F_options_do_5F_not_5F_generate_5F_any_5F_file ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern C_BoolCommandLineOption gOption_galgas_5F_builtin_5F_options_treat_5F_warnings_5F_as_5F_error ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern C_UIntCommandLineOption gOption_galgas_5F_builtin_5F_options_max_5F_errors ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern C_UIntCommandLineOption gOption_galgas_5F_builtin_5F_options_max_5F_warnings ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern C_StringCommandLineOption gOption_galgas_5F_builtin_5F_options_mode ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern C_StringCommandLineOption gOption_galgas_5F_builtin_5F_options_outputKeywordList ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void setExecutionMode (C_String & outErrorMessage) ;
-
-typedef enum {
- kExecutionModeNormal,
- kExecutionModeLexicalAnalysisOnly,
- kExecutionModeSyntaxAnalysisOnly,
- kExecutionModeIndexing,
- kExecutionModeLatex
-} EnumExecutionMode ;
-
-EnumExecutionMode executionMode (void) ;
-
-bool executionModeIsLexicalAnalysisOnly (void) ;
-
-bool executionModeIsSyntaxAnalysisOnly (void) ;
-
-bool executionModeIsIndexing (void) ;
-
-bool executionModeIsLatex (void) ;
-
-C_String latexModeStyleSuffixString (void) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-#endif
+#endif /* cLexiqueIntrospection_hpp */
