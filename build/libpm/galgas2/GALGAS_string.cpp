@@ -408,6 +408,8 @@ void GALGAS_string::plusAssign_operation (GALGAS_string inOperand,
                                           COMMA_UNUSED_LOCATION_ARGS) {
   if (isValid () && inOperand.isValid ()) {
     mString << inOperand.mString ;
+  }else{
+    drop () ;
   }
 }
 
@@ -438,6 +440,17 @@ GALGAS_lstring GALGAS_string::getter_nowhere (LOCATION_ARGS) const {
   if (isValid ()) {
     result.mAttribute_string = * this ;
     result.mAttribute_location = GALGAS_location::constructor_nowhere (THERE) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_string::getter_here (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (isValid ()) {
+    result.mAttribute_string = * this ;
+    result.mAttribute_location = GALGAS_location::constructor_here (inCompiler COMMA_THERE) ;
   }
   return result ;
 }
