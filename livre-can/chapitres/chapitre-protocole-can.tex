@@ -7,13 +7,14 @@
 
 \newcommand\startcanbit{\pgfmathparse{0}\let\x\pgfmathresult}
 
-\newcommand\cantextstyle{\small\tt}
-\newcommand\canbitwidth{.75}
+\newcommand\cancommentstyle{\small}
+\newcommand\cantextstyle{\footnotesize\tt}
+\newcommand\canbitwidth{.7}
 \newcommand\canbitheight{.5}
 
 \newcommand\canbitstyle{[thick, fill=lightgray!25]}
 
-\newcommand\cannobit[1]{
+\newcommand\canspace[1]{
   \pgfmathparse{\x + \canbitwidth * #1}\let\x\pgfmathresult
 }
 \newcommand\canbit[1]{
@@ -43,6 +44,13 @@
   \pgfmathparse{\x + \canbitwidth}\let\x\pgfmathresult
   \draw (\x, 0)\canbitstyle -- ++ (0, \canbitheight) ;
 }
+\newcommand\canidle{
+  \draw (\x, 0)\canbitstyle -- ++ (0, \canbitheight) ;
+  \draw (\x, \canbitheight)\canbitstyle -- ++ (3 * \canbitwidth, 0) ;
+  \draw (\x + \canbitwidth * 1.5, \canbitheight * 0.5) node {\cantextstyle \dots} ;
+  \pgfmathparse{\x + 3 * \canbitwidth}\let\x\pgfmathresult
+  \draw (\x, 0)\canbitstyle -- ++ (0, \canbitheight) ;
+}
 
 \newcommand\candots{
   \draw (\x, 0)[dotted]\canbitstyle -- ++ (\canbitwidth, 0) ;
@@ -61,66 +69,73 @@
 \begin{figure}[h!]
   \centering
   \begin{tikzpicture}[transform shape, rotate=90]
+    \draw (3 * \canbitwidth, -2 + .5 * \canbitheight) node[left]{\cancommentstyle Standard} ;
+    \draw (3 * \canbitwidth, -4 + .5 * \canbitheight) node[left]{\cancommentstyle Étendue} ;
     \draw ( 2 * \canbitwidth, 0)[dotted] -- ++ (0, 4) ;
     \draw ( 3 * \canbitwidth, -4.5)[dotted] -- (3 * \canbitwidth, 1.25) ;
     \draw ( 6 * \canbitwidth, -4.5)[dotted] -- ++ (0, 1) ;
-    \draw ( 3 * \canbitwidth, -4.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{11 bits} ;
+    \draw ( 3 * \canbitwidth, -4.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{\cancommentstyle11 bits} ;
     \draw ( 8 * \canbitwidth, -4.5)[dotted] -- ++ (0, 1) ;
     \draw ( 11 * \canbitwidth, -4.5)[dotted] -- ++ (0, 1) ;
-    \draw ( 8 * \canbitwidth, -4.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{19 bits} ;
+    \draw ( 8 * \canbitwidth, -4.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{\cancommentstyle 19 bits} ;
     \draw ( 6 * \canbitwidth, 1.25)[dotted] -- ++ (0, -2) -- ++ (\canbitwidth, 0) -- ++ (0, -2) -- ++ (5 * \canbitwidth, 0) -- ++ (0, -1) ;
     \draw ( 9 * \canbitwidth, 1.25)[dotted] -- ++ (0, -2.25) -- ++ (3 * \canbitwidth, 0) -- ++ (0, -1.5) -- ++ (5 * \canbitwidth, 0) -- ++ (0, -1) ;
     \draw (14 * \canbitwidth, -4.5)[dotted] -- ++ (0, 1) ;
     \draw (17 * \canbitwidth, -4.5)[dotted] -- ++ (0, 1) ;
-    \draw (14 * \canbitwidth, -4.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{4 bits} ;
+    \draw (14 * \canbitwidth, -4.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{\cancommentstyle4 bits} ;
     \draw (9 * \canbitwidth, -2.5)[dotted] -- ++ (0, 1) ;
-    \draw (9 * \canbitwidth, -2.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{4 bits} ;
-    \draw (9 * \canbitwidth, -.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{0 à 8 octets} ;
+    \draw (9 * \canbitwidth, -2.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{\cancommentstyle4 bits} ;
+    \draw (9 * \canbitwidth, -.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{\cancommentstyle0 à 8 octets} ;
     \draw (12 * \canbitwidth, -.5)[dotted] -- ++ (0, 1.75) ;
     \draw (15 * \canbitwidth, 0)[dotted] -- ++ (0, -.5) ;
-    \draw (12 * \canbitwidth, -.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{15 bits} ;
+    \draw (12 * \canbitwidth, -.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{\cancommentstyle 15 bits} ;
+    \draw (15.5 * \canbitwidth, 0) node[right,rotate=-90]{\cancommentstyle CRC DELIMITER} ;
+    \draw (16.5 * \canbitwidth, 0) node[right,rotate=-90]{\cancommentstyle ACK SLOT} ;
+    \draw (17.5 * \canbitwidth, 0) node[right,rotate=-90]{\cancommentstyle ACK DELIMITER} ;
     \draw (16 * \canbitwidth, 0)[dotted] -- ++ (0, 3) ;
-    \draw (18 * \canbitwidth, 0)[dotted] -- ++ (0, 1.25) ;
-    \draw (21 * \canbitwidth, 0)[dotted] -- ++ (0, 4) ;
-    \draw (2 * \canbitwidth, 4)[<->] -- (21 * \canbitwidth, 4) node[midway, above]{DATA FRAME ou REMOTE FRAME} ;
-    \draw (2 * \canbitwidth, 3)[<->] -- (16 * \canbitwidth, 3) node[midway, above]{\emph{Champs où le « bit stuffing » est actif}} ;
-    \draw (24 * \canbitwidth, 0)[dotted] -- ++ (0, 1.25) ;
-    \draw (27 * \canbitwidth, 0)[dotted] -- ++ (0, 4) ;
-    \draw (21 * \canbitwidth, 4)[<->] -- (27 * \canbitwidth, 4) node[midway, above]{INTERFRAME SPACE} ;
+    \draw (18 * \canbitwidth, -.5)[dotted] -- ++ (0, 1.75) ;
+    \draw (18 * \canbitwidth, -.5)[<->] -- (21 * \canbitwidth, -.5) node[midway, above]{\cancommentstyle 7 bits à 1} ;
+    \draw (21 * \canbitwidth, -.5)[dotted] -- ++ (0, 4) ;
+    \draw (21 * \canbitwidth, -.5)[<->] -- (24 * \canbitwidth, -.5) node[midway, above]{\cancommentstyle 3 bits à 1} ;
+    \draw (2 * \canbitwidth, 4)[<->] -- (21 * \canbitwidth, 4) node[midway, above]{\cancommentstyle DATA FRAME ou REMOTE FRAME} ;
+    \draw (2 * \canbitwidth, 3)[<->] -- (16 * \canbitwidth, 3) node[midway, above]{\cancommentstyle\emph{Champs où le « bit stuffing » est actif}} ;
+    \draw (24 * \canbitwidth, -.5)[dotted] -- ++ (0, 1.75) ;
+    \draw (25 * \canbitwidth, 0)[dotted] -- ++ (0, 4) ;
+    \draw (21 * \canbitwidth, 4)[<->] -- (25 * \canbitwidth, 4) node[midway, above]{\cancommentstyle INTERFRAME SPACE} ;
     \startcanbit
     \candots
     \canbith{1}
-    \draw (2.5 * \canbitwidth, 1) node {SOF} ; \canbitl{0}
-    \draw (4.5 * \canbitwidth, 1) node {ARBITRATION} ; \canbitfield{}
-    \draw (7.5 * \canbitwidth, 1) node {CONTROL} ; \canbitfield{}
-    \draw (10.5 * \canbitwidth, 1) node {DATA} ; \canbitfield{}
-    \draw (13.5 * \canbitwidth, 1) node {CRC} ; \canbitfield{CRC SEQUENCE}\canbith{1}
-    \draw (17 * \canbitwidth, 1) node {ACK} ; \canbit{*} \canbith{1}
-    \draw (19.5 * \canbitwidth, 1) node {EOF} ; \canbitfield{7 bits à 1}
-    \draw (22.5 * \canbitwidth, 1) node {INTERMISSION} ; \canbitfield{3 bits à 1}
-    \draw (25.5 * \canbitwidth, 1) node {IDLE} ; \canbit{1} \canbit{\dots} \canbit{1}
-    \draw (27.5 * \canbitwidth, 1) node {SOF} ; \canbit{0}
+    \draw (2.5 * \canbitwidth, 1) node {\cancommentstyle SOF} ; \canbitl{0}
+    \draw (4.5 * \canbitwidth, 1) node {\cancommentstyle ARBITRATION} ; \canbitfield{}
+    \draw (7.5 * \canbitwidth, 1) node {\cancommentstyle CONTROL} ; \canbitfield{}
+    \draw (10.5 * \canbitwidth, 1) node {\cancommentstyle DATA} ; \canbitfield{}
+    \draw (13.5 * \canbitwidth, 1) node {\cancommentstyle CRC} ; \canbitfield{CRC SEQUENCE}\canbith{1}
+    \draw (17 * \canbitwidth, 1) node {\cancommentstyle ACK} ; \canbit{*} \canbith{1}
+    \draw (19.5 * \canbitwidth, 1) node {\cancommentstyle EOF} ; \canbith{1} \canbith{\dots} \canbith{1}
+    \draw (22.5 * \canbitwidth, 1) node {\cancommentstyle INTERMISSION} ; \canbith{1} \canbith{1} \canbith{1}
+    \draw (24.5 * \canbitwidth, 1) node {\cancommentstyle IDLE} ; \canbith{\dots}
+    \draw (25.5 * \canbitwidth, 1) node {\cancommentstyle SOF} ; \canbitl{0}
     \candots
     \begin{scope}[yshift=-2cm] % Standard
       \startcanbit
-      \cannobit{3}
-      \canbitfield{id10 à id0}
+      \canspace{3}
+      \canbitfield{ID10 à ID0}
       \canbit{RTR}
       \canbitl{IDE}
       \canbitl{r0}
-      \canbitfield{lg3 à lg0}
+      \canbitfield{DLC3 à DLC0}
     \end{scope}
     \begin{scope}[yshift=-4cm]
       \startcanbit
-      \cannobit{3}
-      \canbitfield{id28 à id18}
+      \canspace{3}
+      \canbitfield{ID28 à ID18}
       \canbith{SRR}
       \canbith{IDE}
-      \canbitfield{id17 à id0}
+      \canbitfield{ID17 à ID0}
       \canbit{RTR}
       \canbitl{r1}
       \canbitl{r0}
-      \canbitfield{lg3 à lg0}
+      \canbitfield{DLC3 à DLC0}
     \end{scope}
   \end{tikzpicture}
   \caption{Format d'une trame CAN}
@@ -134,11 +149,10 @@ La spécification du protocole CAN définit les types suivants de messages :
 \begin{itemize}
 \item  la trame de données (« DATA FRAME »), qui transporte des données ;
 \item  la trame de requête (« REMOTE FRAME »), qui demande la transmission d’une trame de données avec le même identificateur ;
-\item  la trame d’erreur (« ERROR FRAME »), transmise par une station qui détecte une erreur ;
-\item  la trame de surcharge (« OVERLOAD FRAME »), transmise par une station en surcharge.
+\item  les trames d’erreur (« ERROR FRAME »), émises par une station qui détecte une erreur ;
 \end{itemize}
 
-Les deux premières font l'objet de la section suivante.
+Les deux premières font l'objet de la section suivante. Il y a plusieurs trames d'erreurs, décrites au §§. Notons l'existence d'une trame de surcharge (« \emph{OVERLOAD FRAME} ») qui est aujourd'hui considérée comme \emph{deprecated} et les contrôleurs CAN actuels ne l'engendrent pas (voir §§).
 
 
 
@@ -147,7 +161,19 @@ Les deux premières font l'objet de la section suivante.
 
 \section{Format d'une trame de données et de requête}
 
-Le format de cette trame est décrit par la \refFigure{}{figureFormatTrameDonnees}. La composition et le rôle de chaque champ seront détaillés dans les sections qui suivent. 
+Le format de cette trame est décrit par la \refFigure{}{figureFormatTrameDonnees}. La composition et le rôle de chaque champ seront détaillés dans les sections qui suivent. Pour comprendre ce que ce shéma illustre, il faut considérer que l'on est dans la situation suivante :
+\begin{itemize}
+  \item un seul contrôleur CAN est en émission, les autres sont en réception (§§) ;
+  \item les valeurs indiquées sont les niveaux logiques qui apparaissent sur le signal \texttt{TxD} du contrôleur CAN en émission ;
+  \item les autres contrôleurs CAN (qui sont en réception) émettent un niveau logique $1$ sur \texttt{TxD} ;
+  \item la logique de diffusion ($0$ -> \emph{dominant}, $1$ -> \emph{récessif}) fait que ce signal est reporté tel quel sur les entrées \texttt{RX} des contrôleurs CAN en réception, ainsi que celui en émission ;
+  \item seule exception : le bit \texttt{ACK SLOT}. 
+\end{itemize}
+
+Note : la durée d'un bit dépend de la fréquence du bus.
+
+
+
 
 
 
@@ -161,52 +187,77 @@ Le format de cette trame est décrit par la \refFigure{}{figureFormatTrameDonnee
   \begin{tikzpicture}
     \startcanbit
     \candots
-    \canbit{SOF}
+    \draw (1.5 * \canbitwidth, 1) node {\cancommentstyle SOF} ;
+    \canbitl{0}
     \candots
   \end{tikzpicture}
   \caption{Début de trame}
   \labelFigure{figureDebutTrame}
 \end{figure}
 
-\subsection{Champs \emph{arbitrage} et \emph{contrôle} (« Arbitration Field », « Control Field »)}
+Une trame commence par l'émission d'un bit dominant ($0$), le bit « \emph{SOF} » (« \emph{Start of Frame} »). Le champ qui précède est un champ \emph{IDLE} (bus au repos), qui a une durée quelconque qui n'est pas un multiple de la durée d'un bit. Aussi, les contrôleurs CAN en réception peuvent être complètement désynchronisés par rapport au contrôleur CAN en émission. Les contrôleurs CAN en réception réalisent donc une synchronisation forte (« Hard Synchronization ») ; ce mécanisme sera étudié dans le \refChapterTitlePage{chapitreCalculBit}. Durant l'explication du format d'une trame, nous supposons qu'émetteur et récepteurs sont parfaitement synchronisés.
 
-Ces deux champs sont décrits simultanément pour être plus facilement compréhensibles. Leur composition est illustrée par la \refFigure{}{figureChampArbitrage}.
+
+
+
+
+
+
+
+
+
+\subsection{Champs arbitrage, de contrôle (« \emph{Arbitration Field} », « \emph{Control Field} »)}
+
+Ces deux champs sont décrits simultanément pour être plus facilement compréhensibles. Leur composition est illustrée par la \refFigure{}{figureChampArbitrage}. La composition du champ arbitrage peut paraître étrange et bizarremment compliquée. Mais cela s'explique pour des raisons historiques qui vont être exposées.
 
 \begin{figure}[h]
   \centering
   \begin{tikzpicture}
-    \draw (\canbitwidth, 0)[dotted] -- ++ (0, 3) ;
-    \draw (3 * \canbitwidth, 3) node {Champ Arbitrage} ;
-    \draw (7.5 * \canbitwidth, 3) node {Champ de contrôle} ;
-    \draw (5 * \canbitwidth, 3)[dotted]
+    \draw (\canbitwidth, 0)[dotted] -- ++ (0, 4.5) ;
+    \draw (3 * \canbitwidth, 4.5) node {ARBITRATION} ;
+    \draw (7.5 * \canbitwidth, 4.5) node {CONTROL} ;
+    \draw (5 * \canbitwidth, 4.5)[dotted]
        -- (5 * \canbitwidth, 0.75 + .5 * \canbitheight - 0.1)
        -- ++ (5 * \canbitwidth, 0)
        -- ++ (0, -0.75 - .5 * \canbitheight) ;
-    \draw (10 * \canbitwidth, 3)[dotted]
+    \draw (10 * \canbitwidth, 4.5)[dotted]
        -- (10 * \canbitwidth, 0.75 + .5 * \canbitheight + 0.1)
        -- ++ (5 * \canbitwidth, 0)
        -- ++ (0, -0.75 - .5 * \canbitheight) ;
+    \draw (0, 3 + \canbitheight * .5) node [left] {Trame $1.x$} ;
+    \draw (0, 1.5 + \canbitheight * .5) node [left] {Trame standard $2.x$} ;
+    \draw (0, \canbitheight * .5) node [left] {Trame étendue $2.x$} ;
+    \begin{scope}[yshift=3cm]
+      \startcanbit
+      \candots
+      \canbitfield{ID10 à ID0}
+      \canbit{RTR}
+      \canbitl{r1}
+      \canbitl{r0}
+      \canbitfield{DLC3 à DLC0}
+      \candots
+    \end{scope}
     \begin{scope}[yshift=1.5cm]
       \startcanbit
       \candots
-      \canbitfield{id10 à id0}
+      \canbitfield{ID10 à ID0}
       \canbit{RTR}
       \canbitl{IDE}
       \canbitl{r0}
-      \canbitfield{lg3 à lg0}
+      \canbitfield{DLC3 à DLC0}
       \candots
     \end{scope}
     \begin{scope}
       \startcanbit
       \candots
-      \canbitfield{id28 à id18}
+      \canbitfield{ID28 à ID18}
       \canbith{SRR}
       \canbith{IDE}
-      \canbitfield{id17 à id0}
+      \canbitfield{ID17 à ID0}
       \canbit{RTR}
       \canbitl{r1}
       \canbitl{r0}
-      \canbitfield{lg3 à lg0}
+      \canbitfield{DLC3 à DLC0}
       \candots
     \end{scope}
   \end{tikzpicture}
@@ -214,33 +265,340 @@ Ces deux champs sont décrits simultanément pour être plus facilement compréh
   \labelFigure{figureChampArbitrage}
 \end{figure}
 
-\subsection{Champ \emph{de contrôle} (« Control Field »)}
+La première version du bus CAN ne définissait qu'un seul type de trame (« \emph{Trame 1.x} » sur la \refFigure{}{figureChampArbitrage}), et la composition des champs « \emph{ARBITRATION} » et « \emph{CONTROL} »  était simple et logique : $12$ bits pour le premier (les $11$ bits de l'identificateur et le bit \texttt{RTR}), $6$ bits pour le second (les deux bits \texttt{r1} et \texttt{r0} à $0$ suivis des quatre bits du champ \texttt{DLC}.
+
+Le bit \texttt{RTR} (« \emph{Remote Transmission Request} ») est le bit qui permet de distinguer une trame de requête (\texttt{RTR} est à $1$), d'une trame de données (\texttt{RTR} à $0$).
+
+Les bits \texttt{r1} et \texttt{r0} sont toujours à $0$ et étaient réservés à des extensions futures.
+
+Les quatre bits \texttt{DLC3} à \texttt{DLC0} codent le nombre d'octets de la trame suivant le \refTableau{codageDLC}. À noter qu'une trame CAN contient au plus huit octets de données, les codes correspondants aux valeurs $9$ à $15$ sont invalides.
+
+\begin{table}[!t]
+  \small
+  \centering
+  \begin{tabular}{ccccl}
+    \textbf{DLC3}& \textbf{DLC2} & \textbf{DLC1} & \textbf{DLC0}  & \textbf{Nombre d'octets de la trame} \\
+     0 & 0 & 0 & 0 & 0 \\
+     0 & 0 & 0 & 1 & 1 \\
+     0 & 0 & 1 & 0 & 2 \\
+     0 & 0 & 1 & 1 & 3 \\
+     0 & 1 & 0 & 0 & 4 \\
+     0 & 1 & 0 & 1 & 5 \\
+     0 & 1 & 1 & 0 & 6 \\
+     0 & 1 & 1 & 1 & 7 \\
+     1 & 0 & 0 & 0 & 8 \\
+     1 & 0 & 0 & 1 & \emph{Invalide} \\
+     1 & 0 & 1 & $x$ & \emph{Invalide} \\
+     1 & 1 & $x$ & $x$ & \emph{Invalide} \\
+   \end{tabular}
+  \caption{Nombre d'octets de la trame, en fonction du champ \texttt{DLC}}
+  \labelTableau{codageDLC}
+  \ligne
+\end{table}
+
+Puis le retour d'expérience a montré que $11$ bits pour l'identificateur étaient insuffisants pour certaines applications. Aussi, pour la deuxième version du bus CAN, il a été décidé de porter le nombre de bits de l'identificateur à $29$ bits, tout en gardant la compatibilité avec les trames de la première version. La signification du bit \texttt{r1} de la première version a été changé : ce bit est maintenant nommé \texttt{IDE} et permet aux récepteurs de distinguer les deux types de trames.
+
+Les trames standard de la version 2 (« \emph{Trame standard $2.x$} » sur la \refFigure{}{figureChampArbitrage}) ont leur bit \texttt{IDE} à $0$, de façon qu'une trame standard $2.x$ soit identique à une trame $1.x$.
+
+Les trames étendues de la version 2 (« \emph{Trame étendue $2.x$} » sur la \refFigure{}{figureChampArbitrage}) ont leur bit \texttt{IDE} à $1$ ; mais il n'a pas été possible de placer consécutivement les $29$ bits de l'identicateur étendu : les $11$ bits de poids fort \texttt{ID28} à \texttt{ID18} sont d'abord transmis, puis, après le bit \texttt{IDE}, les $17$ bits de poids faible \texttt{ID17} à \texttt{ID0}. Le bit \texttt{SRR} (« \emph{???} ») est toujours à $1$  et doit être considéré comme réservé pour extension future.
+
+
+
+
 
 
 \subsection{Champ \emph{de données} (« Data Field »)}
 
+Si le bit \texttt{RTR} (« \emph{Remote Transmission Request} ») est à $1$, la trame est une trame de requête, et ce champ est toujours vide, quelque soit la valeur contenue dans le champ \texttt{DLC}.
 
-\subsection{Champ \emph{somme de contrôle} (« Cyclic Redundancy Check Field »)}
+Si le bit \texttt{RTR} est à $0$, la trame est une trame de données, et ce champ contient les octets de données, en fonction de la valeur contenue dans le champ \texttt{DLC} (\refTableau{codageDLC}). Comme le montre la \refFigure{}{figureChampDATA}, les octets sont transmis dans l'ordre \texttt{$D_0$}, ..., \texttt{$D_N$}, chaque octet étant transmis en commençant par le poids fort.
 
 
-\subsection{Champ \emph{d'acquittement} (« Acknowledge Field »)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw (4 * \canbitwidth, \canbitheight)[dotted] -- (1.5 * \canbitwidth, 1.5) ;
+    \draw (7 * \canbitwidth, \canbitheight)[dotted] -- (9.5 * \canbitwidth, 1.5) ;
+    \begin{scope}[yshift=1.5cm]
+      \startcanbit
+      \canspace{1.5}
+      \canbit{$b_7$}
+      \canbit{$b_6$}
+      \canbit{$b_5$}
+      \canbit{$b_4$}
+      \canbit{$b_3$}
+      \canbit{$b_2$}
+      \canbit{$b_1$}
+      \canbit{$b_0$}
+    \end{scope}
+    \startcanbit
+    \candots
+    \canbitfield{$D_0$}
+    \canbitfield{$D_1$}
+    \candots
+    \canbitfield{$D_N$}
+    \candots
+  \end{tikzpicture}
+  \caption{Composition du champ \emph{DATA}}
+  \labelFigure{figureChampDATA}
+\end{figure}
+
+
+
+
+
+\subsection{Champ somme de contrôle (« \emph{Cyclic Redundancy Check Field} »)}
+
+Après le champ \texttt{DATA}, toute l'information utile de la trame est transmise. Comme celle-ci peut être corrompue, une somme de contrôle est transmise. 
+
+La somme de contrôle est calculée par l'émetteur à partir des valeurs de l'identificateur et des données, puis transmise.
+
+Chaque récepteur la recalcule à partir des valeurs de l'identificateur et des données reçues, puis la compare à la somme de contrôle reçue :
+\begin{itemize}
+  \item si somme recalculée et somme reçue sont égales, la trame reçue est considérée valide et acceptée ;
+  \item sinon, la réception est considérée invalide et rejetée.
+\end{itemize}
+
+Chaque récepteur signale l'acceptation de la réception en activant le bit \texttt{ACK SLOT}, décrit à la \refSubsectionPage{champAcquittement}. Un récepteur signale qu'il rejette la trame reçue en émettant une trame d'erreur (\refChapterPage{chapitreGestionErreurs}).
+
+Comme l'illustre la \refFigure{}{figureChampCRC}, le champ \texttt{CRC} est composé du sous-champ « \emph{CRC SEQUENCE} » de $15$ bits, qui contient la somme de contrôle proprement dite ; il est suivi d'un bit à $1$, le « \emph{CRC DELIMITER} » qui permet aux récepteurs d'avoir le temps de décider si la trame reçue est valide ou doit être rejetée.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw (\canbitwidth, 0)[dotted] -- ++ (0, 1) ;
+    \draw (16 * \canbitwidth, 0)[dotted] -- ++ (0, 1) ;
+    \draw (17 * \canbitwidth, 0)[dotted] -- ++ (0, 1) ;
+    \draw (\canbitwidth, 1)[<->] -- ++ (15 * \canbitwidth, 0) node[midway, above]{\cancommentstyle CRC SEQUENCE} ;
+    \draw (16 * \canbitwidth, 1)[<->] -- ++ (\canbitwidth, 0) ;
+    \draw (16.5 * \canbitwidth, 1) node [above]{\cancommentstyle CRC DELIMITER} ;
+    \startcanbit
+    \candots
+    \canbit{$b_{14}$}
+    \canbit{$b_{13}$}
+    \canbit{$b_{12}$}
+    \canbit{$b_{11}$}
+    \canbit{$b_{10}$}
+    \canbit{$b_{9}$}
+    \canbit{$b_{8}$}
+    \canbit{$b_{7}$}
+    \canbit{$b_{6}$}
+    \canbit{$b_{5}$}
+    \canbit{$b_{4}$}
+    \canbit{$b_{3}$}
+    \canbit{$b_{2}$}
+    \canbit{$b_{1}$}
+    \canbit{$b_{0}$}
+    \canbith{1}
+    \candots
+  \end{tikzpicture}
+  \caption{Composition du champ \emph{CRC}}
+  \labelFigure{figureChampCRC}
+\end{figure}
+
+
+La technique utilisée pour calculer la somme de contrôle est celle des \emph{codes cycliques} : elle présente le double intérêt d'être très efficace et d'être facilement réalisable à partir de registres à décalage et de portes \emph{ou-exclusif}. Il existe une infinité de codes cycliques, chacun étant caractérisé par un polynome premier : celui utilisé par les contrôleurs CAN est $X^{15}+X^{14}+X^{10}+X^8+X^7+X^4+X^3+1$.
+
+
+
+
+\subsectionLabel{Champ d'acquittement (« \emph{Acknowledge Field} »)}{champAcquittement}
+
+Le champ d'acquittement (\refFigure{}{figureChampACK}) est composé de deux bits, le bit \texttt{ACK SLOT} et le bit \texttt{ACK DELIMITER} qui est toujours à $1$.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw (\canbitwidth, 0)[dotted] -- ++ (0, 1) ;
+    \draw (2 * \canbitwidth, 0)[dotted] -- ++ (0, 1) ;
+    \draw (3 * \canbitwidth, 0)[dotted] -- ++ (0, 1) ;
+    \draw (2 * \canbitwidth, 1) node [left]{\cancommentstyle ACK SLOT} ;
+    \draw (2 * \canbitwidth, 1) node [right]{\cancommentstyle ACK DELIMITER} ;
+    \startcanbit
+    \candots
+    \canbit{*}
+    \canbith{1}
+    \candots
+  \end{tikzpicture}
+  \caption{Composition du champ \emph{ACK}}
+  \labelFigure{figureChampACK}
+\end{figure}
+
+Le bit \texttt{ACK SLOT} présente une particularité unique, c'est pour cela qu'il est représenté par une étoile dans la \refFigure{}{figureChampACK} :
+\begin{itemize}
+  \item l'émetteur émet toujours un bit récessif ($1$) ;
+  \item chaque récepteur qui accepte la trame reçue émet un bit dominant ($0$).
+\end{itemize}
+
+Noter qu'un contrôleur CAN en réception émet des bits récessifs pendant la durée de la trame, sauf lors du bit \texttt{ACK SLOT} si il accepte la trame, et lorsqu'il a détecté une erreur.
+
+Ainsi, lorsqu'un contrôleur transmet une trame, il envoie un bit récessif pour le bit \texttt{ACK SLOT}, et, si il est seul sur le bus, reçoit à cet emplacement un bit récessif, puisqu'aucun contrôleur sur le bus n'envoie de bit dominant. Cette situation peut être considérée comme une erreur par l'émetteur (voir §§).
+
+Si il y a un plusieurs contrôleurs CAN en réception, certains peuvent accepter la trame, d'autres la rejeter. Tous ceux qui acceptent envoient un bit dominant pour le bit \texttt{ACK SLOT}. L'émetteur reçoit donc un bit dominant, ce qui signifie qu'au moins un récepteur a accepté la trame. Mais il peut pas savoir combien ont accepté la trame. Ceux qui rejettent la trame envoient une trame d'erreur.
+
 
 
 
 \subsection{Fin de la trame (« End of Frame »)}
 
+Le champ \texttt{END OF FRAME} est constitué de $7$ bits récessifs. Si un contrôleur CAN en réception a détecté une erreur, il émet une trame d'erreur qui écrase ce champ.
 
 
-\subsection{Espace inter-trames (« Interframe Space »)}
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \startcanbit
+    \candots
+    \canbith{1}
+    \canbith{1}
+    \canbith{1}
+    \canbith{1}
+    \canbith{1}
+    \canbith{1}
+    \canbith{1}
+    \candots
+  \end{tikzpicture}
+  \caption{Composition du champ \emph{END OF FRAME}}
+  \labelFigure{figureChampACK}
+\end{figure}
 
 
-\section{Trame d'erreur}
+\subsection{Espace inter-trames (« \emph{Interframe Space} »)}
+
+Le champ \texttt{INTERFRAME SPACE} commence par trois bits récessifs (qui peuvent être écrasés par une trame d'erreur émise par un récepteur), et du sous-champ \texttt{IDLE}.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw (\canbitwidth, 0)[dotted] -- ++ (0, 1) ;
+    \draw (4 * \canbitwidth, 0)[dotted] -- ++ (0, 1) ;
+    \draw (2.5 * \canbitwidth, 1) node {\cancommentstyle INTERMISSION} ;
+    \draw (7 * \canbitwidth, 0) [dotted] -- ++ (0, 1) ;
+    \draw (5.5 * \canbitwidth, 1) node {\cancommentstyle IDLE} ;
+    \startcanbit
+    \candots
+    \canbith{1}
+    \canbith{1}
+    \canbith{1}
+    
+    \canidle
+    \candots
+  \end{tikzpicture}
+  \caption{Composition de l'espace inter-trames « \emph{INTERFRAME SPACE} »}
+  \labelFigure{figureChampInterframeSpace}
+\end{figure}
+
+Le sous-champ \texttt{IDLE} a une longueur quelconque :
+\begin{itemize}
+  \item nulle si une autre trame est émise (par le même contrôleur CAN ou par un autre) ; le champ \texttt{SOF} de la nouvelle trame suit directement le sous-champ \texttt{INTERMISSION} de la trame qui se termine ;
+  \item si aucun contrôleur CAN ne désire émettre une trame, le bus CAN passe à l'état récessif, et le champ \texttt{IDLE} a une longueur quelconque, et ne sera interrompu que par le champ \texttt{SOF} d'une trame ; noter que durant l'état de repos, aucune synchronisation d'horloge n'a lieu entre les contrôleurs CAN du réseau, aussi la durée du champ \texttt{IDLE} n'au aucune raison d'être un multiple de la durée d'un bit.
+\end{itemize}
+
+
+
+
+\section{Décision d'émettre : condition \emph{bus libre}}
+
+Quand un contrôleur CAN peut-il commencer à émettre une trame de données ?
+
+Une trame en cours de transmission ne peut pas être préemptée : sa transmission doit se terminer avant qu'une autre soit transmise. Un contrôleur CAN voulant émettre doit donc surveiller le bus, et attendre qu'il soit libre.
+
+{\bf Un contrôleur CAN considère que le bus est libre si le bus est dans l’état récessif pendant 11 bits consécutifs.}
+
+En examinant le format d'une trame CAN (\refFigurePage{}{figureFormatTrameDonnees}), on constate en effet que la fin d'une trame est constituée des champs \texttt{ACK DELIMITER}, \texttt{END OF FRAME} et \texttt{INTERMISSION} qui totalisent $11$ bits. Aussi un contrôleur CAN désirant émettre place son bit \texttt{SOF} dès la fin du champ \texttt{INTERMISSION}, le champ \texttt{IDLE} étant vide.
+
+%Pourquoi 11 ?
+%le bit stuffing (voir plus loin) garantit que durant l’émission d’un message il n’y a pas de séquence de plus de 5 bits consécutifs égaux, un contrôleur CAN peut s’apercevoir que le bus est occupé ;
+%les exigences particulières de la fin des trames (champs ACK, EOF, INTERFRAME SPACE) imposent cette règle.
+%
+%Un contrôleur CAN sollicité par son processeur peut donc commencer à émettre dès qu’il détecte la condition de bus libre.
+
+Mais l'énoncé ci-dessus de la condition bus libre pose a priori deux problèmes.
+
+D'abord, que se passe-t'il si $11$ bits récessifs sont rencontrés au cours de la transmission de la trame ? Par exemple, si un identicateur standard est constitué de $11$ bits à $1$, ou les données comportent $11$ bits consécutifs ou plus à $1$ ? En fait, cette situation ne peut jamais arriver, quelque soient la valeur de l'identificateur ou des données : ces champs sont soumis au mécanisme du « \emph{bit stuffing} » qui garantit qu'il n'y ait jamais de séquence de plus de $5$ bits consécutifs de même valeur. Ce mécanisme est décrit à la \refSectionPage{descriptionBitStuffing}.
+
+Ensuite, supposons que plusieurs contrôleurs CAN sont sollicités pour émettre une trame alors qu'une autre est en cours de transmission. Ces contrôleurs attendent tous la condition bus libre, et en même temps s'aperçoivent que le bus devient libre. Ils commencent donc à émettre leur bit \texttt{SOF} et leur identificateur simultanément : il en résulte une collision sur le bus. Le protocole CAN a évidemment prévu cette situation en instaurant une priorité entre les trames : la \refSectionPage{resolutionCollision} montre comment la trame la plus prioritaire sort indemne de la collision et est transmise comme si elle avait été la seule à être émise. 
 
 
 
 
 
-\section{Trame de surchrage}
+
+
+
+\section{Synchronisation des contrôleurs en réception}
+
+Il y a un autre problème, que le mécanisme du \emph{bit stuffing} présenté à la section suivante va aider à résoudre : celui de la synchronisation des contrôleurs en réception.
+
+En effet, le bus CAN véhicule les données, mais pas d'horloge ; chaque contrôleur CAN possède donc sa propre horloge locale. Or deux horloges différentes ont des fréquences (légèrement) différentes. Par exemple, une horloge à Quartz a une précision d'environ $10^{-4}$, donc la différence relative entre deux horloges à Quartz de même fréquence peut atteindre $2\times10^{-4}$.
+
+
+
+
+
+\sectionLabel{Le \emph{bit stuffing}}{descriptionBitStuffing}
+
+
+
+
+
+
+\section{Longueur des trames CAN}
+
+\begin{table}[!t]
+  \small
+  \centering
+  \begin{tabular}{cccc}
+    \textbf{Type de trame}& \textbf{Champ DLC} & \textbf{Longueur minimum} & \textbf{Longueur maximum} \\
+    Requête Standard & 0 à 8 & 47 & 55 \\
+    Donnée Standard & 0 & 47 & 55 \\
+             & 1 & 55 & 65 \\
+             & 2 & 63 & 75 \\
+             & 3 & 71 & 85 \\
+             & 4 & 79 & 95 \\
+             & 5 & 87 & 105 \\
+             & 6 & 95 & 115 \\
+             & 7 & 103 & 125 \\
+             & 8 & 111 & 135 \\
+    Requête étendue  & 0 à 8 & 67 & 80 \\
+    Donnée étendue  & 0 & 67 & 80 \\
+             & 1 & 75 & 90 \\
+             & 2 & 83 & 100 \\
+             & 3 & 91 & 110 \\
+             & 4 & 99 & 120 \\
+             & 5 & 107 & 130 \\
+             & 6 & 115 & 140 \\
+             & 7 & 123 & 150 \\
+             & 8 & 131 & 160 \\
+   \end{tabular}
+  \caption{Longueur d'une trame CAN, en fonction de son type et du champ \texttt{DLC}}
+  \labelTableau{codageLongueurTrames}
+  \ligne
+\end{table}
+
+
+
+
+\sectionLabel{Résolution des collisions}{resolutionCollision}
+
+
+
+
+
+
+
+
+\section{Cohabitation des trames standards et étendues}
+
+
+
+
+
+
+
+
+\section{Trame de surcharge}
 
 
 
