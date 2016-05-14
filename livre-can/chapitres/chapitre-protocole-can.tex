@@ -37,12 +37,22 @@
   \draw (\x, 0)\canbitstyle -- ++ (0, \canbitheight) ;
 }
 
+\newcommand\canbitstufflow{
+  \fill[lightgray!25] (\x, 0) rectangle (\x + \canbitwidth, \canbitheight) ;
+  \canbitl{S}
+}
+
 \newcommand\canbith[1]{
   \draw (\x, 0)\canbitstyle -- ++ (0, \canbitheight) ;
   \draw (\x, \canbitheight)\canbitstyle -- ++ (\canbitwidth, 0) ;
   \draw (\x + \canbitwidth * 0.5, \canbitheight * 0.5) node {\cantextstyle #1} ;
   \pgfmathparse{\x + \canbitwidth}\let\x\pgfmathresult
   \draw (\x, 0)\canbitstyle -- ++ (0, \canbitheight) ;
+}
+
+\newcommand\canbitstuffhigh{
+  \fill[lightgray!25] (\x, 0) rectangle (\x + \canbitwidth, \canbitheight) ;
+  \canbith{S}
 }
 \newcommand\canidle{
   \draw (\x, 0)\canbitstyle -- ++ (0, \canbitheight) ;
@@ -77,7 +87,7 @@
     \draw ( 3 * \canbitwidth, -4.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{\cancommentstyle11 bits} ;
     \draw ( 8 * \canbitwidth, -4.5)[dotted] -- ++ (0, 1) ;
     \draw ( 11 * \canbitwidth, -4.5)[dotted] -- ++ (0, 1) ;
-    \draw ( 8 * \canbitwidth, -4.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{\cancommentstyle 19 bits} ;
+    \draw ( 8 * \canbitwidth, -4.5)[<->] -- ++ (3 * \canbitwidth, 0) node[midway, above]{\cancommentstyle 18 bits} ;
     \draw ( 6 * \canbitwidth, 1.25)[dotted] -- ++ (0, -2) -- ++ (\canbitwidth, 0) -- ++ (0, -2) -- ++ (5 * \canbitwidth, 0) -- ++ (0, -1) ;
     \draw ( 9 * \canbitwidth, 1.25)[dotted] -- ++ (0, -2.25) -- ++ (3 * \canbitwidth, 0) -- ++ (0, -1.5) -- ++ (5 * \canbitwidth, 0) -- ++ (0, -1) ;
     \draw (14 * \canbitwidth, -4.5)[dotted] -- ++ (0, 1) ;
@@ -296,11 +306,11 @@ Les quatre bits \texttt{DLC3} à \texttt{DLC0} codent le nombre d'octets de la t
   \ligne
 \end{table}
 
-Puis le retour d'expérience a montré que $11$ bits pour l'identificateur étaient insuffisants pour certaines applications. Aussi, pour la deuxième version du bus CAN, il a été décidé de porter le nombre de bits de l'identificateur à $29$ bits, tout en gardant la compatibilité avec les trames de la première version. La signification du bit \texttt{r1} de la première version a été changé : ce bit est maintenant nommé \texttt{IDE} et permet aux récepteurs de distinguer les deux types de trames.
+Puis le retour d'expérience a montré que $11$ bits pour l'identificateur étaient insuffisants pour certaines applications. Aussi, pour la deuxième version du bus CAN, il a été décidé de porter le nombre de bits de l'identificateur à $29$ bits, tout en gardant la compatibilité avec les trames de la première version. La signification du bit \texttt{r1} de la première version a été changé : ce bit est maintenant nommé \texttt{IDE} et permet de distinguer deux types de trame, les trames \emph{standard} et les trames \emph{étendues}.
 
 Les trames standard de la version 2 (« \emph{Trame standard $2.x$} » sur la \refFigure{}{figureChampArbitrage}) ont leur bit \texttt{IDE} à $0$, de façon qu'une trame standard $2.x$ soit identique à une trame $1.x$.
 
-Les trames étendues de la version 2 (« \emph{Trame étendue $2.x$} » sur la \refFigure{}{figureChampArbitrage}) ont leur bit \texttt{IDE} à $1$ ; mais il n'a pas été possible de placer consécutivement les $29$ bits de l'identicateur étendu : les $11$ bits de poids fort \texttt{ID28} à \texttt{ID18} sont d'abord transmis, puis, après le bit \texttt{IDE}, les $17$ bits de poids faible \texttt{ID17} à \texttt{ID0}. Le bit \texttt{SRR} (« \emph{???} ») est toujours à $1$  et doit être considéré comme réservé pour extension future.
+Les trames étendues de la version 2 (« \emph{Trame étendue $2.x$} » sur la \refFigure{}{figureChampArbitrage}) ont leur bit \texttt{IDE} à $1$ ; mais il n'a pas été possible de placer consécutivement les $29$ bits de l'identicateur étendu : les $11$ bits de poids fort \texttt{ID28} à \texttt{ID18} sont d'abord transmis, puis, après le bit \texttt{IDE}, les $17$ bits de poids faible \texttt{ID17} à \texttt{ID0}. Le bit \texttt{SRR} (« \emph{SUBSTITUTE RTR BIT} ») est toujours à $1$  et doit être considéré comme réservé pour extension future.
 
 
 
@@ -442,7 +452,7 @@ Si il y a un plusieurs contrôleurs CAN en réception, certains peuvent accepter
 
 \subsection{Fin de la trame (« End of Frame »)}
 
-Le champ \texttt{END OF FRAME} est constitué de $7$ bits récessifs. Si un contrôleur CAN en réception a détecté une erreur, il émet une trame d'erreur qui écrase ce champ.
+Le champ \texttt{END OF FRAME} (\refFigure{}{figureChampEOF}) est constitué de $7$ bits récessifs. Si un contrôleur CAN en réception a détecté une erreur, il émet une trame d'erreur qui écrase ce champ.
 
 
 \begin{figure}[h]
@@ -460,7 +470,7 @@ Le champ \texttt{END OF FRAME} est constitué de $7$ bits récessifs. Si un cont
     \candots
   \end{tikzpicture}
   \caption{Composition du champ \emph{END OF FRAME}}
-  \labelFigure{figureChampACK}
+  \labelFigure{figureChampEOF}
 \end{figure}
 
 
@@ -533,19 +543,173 @@ Il y a un autre problème, que le mécanisme du \emph{bit stuffing} présenté �
 
 En effet, le bus CAN véhicule les données, mais pas d'horloge ; chaque contrôleur CAN possède donc sa propre horloge locale. Or deux horloges différentes ont des fréquences (légèrement) différentes. Par exemple, une horloge à Quartz a une précision d'environ $10^{-4}$, donc la différence relative entre deux horloges à Quartz de même fréquence peut atteindre $2\times10^{-4}$.
 
+Les règles définies par le protocole CAN sont :
+\begin{itemize}
+\item {\bf lors de la réception d'un bit \texttt{SOF}, les contrôleurs CAN en réception effectuent une synchronisation forte (« \emph{Hard Synchronization} ») en utilisant la transition récessif vers dominant du signal \texttt{RxD} ;} 
+\item {\bf durant la transmission d'une trame, les contrôleurs CAN en réception utilisent les transitions récessif vers dominant du signal \texttt{RxD} pour se resynchroniser.} 
+\end{itemize}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw (-.5, .5 * \canbitheight) node[left] {\cancommentstyle RxD} ;
+    \draw (-.5, -1.75) node[left] {\cancommentstyle Resynchronisation} ;
+    \draw (-.5, -.75) node[left] {\cancommentstyle Synchronisation forte} ;
+    \draw (0 * \canbitwidth, -.5) [->] -- ++ (0, -.5) ;
+    \draw (3 * \canbitwidth, -1.5) [->] -- ++ (0, -.5) ;
+    \draw (6 * \canbitwidth, -1.5) [->] -- ++ (0, -.5) ;
+    \draw (11 * \canbitwidth, -1.5) [->] -- ++ (0, -.5) ;
+    \startcanbit
+    \canbitl{SOF}
+    \canbith{}
+    \canbith{}
+    \canbitl{}
+    \canbith{}
+    \canbith{}
+    \canbitl{}
+    \canbith{}
+    \canbith{}
+    \canbith{}
+    \canbith{}
+    \canbitl{}
+    \candots
+  \end{tikzpicture}
+  \caption{Synchronisation des contrôleurs en réception}
+  \labelFigure{figureResynchronisation}
+\end{figure}
+
+Quand un émetteur émet un bit \texttt{SOF}, les récepteurs se synchronisent grâce au front descendant du signal \texttt{RxD}. Mais les différences relatives des fréquences d'horloge font que les récepteurs dérivent continuellement par rapport à l'émetteur : il faut donc que les récepteurs se resynchronisent régulièrement tout au long de la transmission d'une trame.
+
+Lors de l'occurrence d'un top de resynchronisation, les contrôleurs en réception allongent ou raccourcissent leur durée de bit, de façon à rattraper ou attendre la phase du contrôleur en émission. Le mécanisme précis est décrit au \refChapterTitlePage{chapitreCalculBit}.
+
+
+
+
+
+
+
 
 
 
 
 \sectionLabel{Le \emph{bit stuffing}}{descriptionBitStuffing}
 
+{\bf Le « \emph{bit stuffing} » consiste pour le contrôleur en émission à intercaler après une séquence de cinq bits identiques un bit de polarité inverse.}
 
+Il est complètement transparent pour le programmeur, c'est-à-dire que le contrôleur effectue cette opération sans que l'on ait besoin de la programmer. À la réception, les bits insérés sont automatiquement éliminés.
+
+La \refFigure{}{figureExemplesBitStuffing} montre quelques scénarios d'insertion de bits par ce mécanisme dans des trames standard.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{scope}[yshift=4cm]
+      \draw (-.5, .5 * \canbitheight) node[left] {\cancommentstyle (a)} ;
+      \startcanbit
+      \canbitl{SOF}
+      \canbitl{ID10}
+      \canbitl{ID9}
+      \canbitl{ID8}
+      \canbitl{ID7}
+      \canbitstuffhigh
+      \canbitl{ID6}
+      \canbitl{ID5}
+      \canbitl{ID4}
+      \canbitl{ID3}
+      \canbitl{ID2}
+      \canbitstuffhigh
+      \canbitl{ID1}
+    \end{scope}
+    \begin{scope}[yshift=3cm]
+      \draw (-.5, .5 * \canbitheight) node[left] {\cancommentstyle (b)} ;
+      \startcanbit
+      \canbitl{SOF}
+      \canbitl{ID10}
+      \canbitl{ID9}
+      \canbith{ID8}
+      \canbith{ID7}
+      \canbith{ID6}
+      \canbith{ID5}
+      \canbith{ID4}
+      \canbitstufflow
+      \canbith{ID3}
+      \canbith{ID2}
+      \canbitl{ID1}
+      \canbitl{ID0}
+    \end{scope}
+    \begin{scope}[yshift=2cm]
+      \draw (-.5, .5 * \canbitheight) node[left] {\cancommentstyle (c)} ;
+      \startcanbit
+      \canbitl{SOF}
+      \canbitl{ID10}
+      \canbitl{ID9}
+      \canbith{ID8}
+      \canbith{ID7}
+      \canbith{ID6}
+      \canbith{ID5}
+      \canbith{ID4}
+      \canbitstufflow
+      \canbitl{ID3}
+      \canbith{ID2}
+      \canbitl{ID1}
+      \canbitl{ID0}
+    \end{scope}
+    \begin{scope}[yshift=1cm]
+      \draw (-.5, .5 * \canbitheight) node[left] {\cancommentstyle (d)} ;
+      \startcanbit
+      \canbitl{SOF}
+      \canbitl{ID10}
+      \canbitl{ID9}
+      \canbitl{ID8}
+      \canbitl{ID7}
+      \canbitstuffhigh
+      \canbith{ID6}
+      \canbith{ID5}
+      \canbith{ID4}
+      \canbith{ID3}
+      \canbitstufflow
+      \canbitl{ID2}
+      \canbitl{ID1}
+    \end{scope}
+    \begin{scope}
+      \draw (-.5, .5 * \canbitheight) node[left] {\cancommentstyle (e)} ;
+      \startcanbit
+      \canbitl{SOF}
+      \canbitl{ID10}
+      \canbitl{ID9}
+      \canbith{ID8}
+      \canbitl{ID7}
+      \canbitl{ID6}
+      \canbitl{ID5}
+      \canbith{ID4}
+      \canbith{ID3}
+      \canbith{ID2}
+      \canbitl{ID1}
+      \canbith{ID0}
+    \end{scope}
+  \end{tikzpicture}
+  \caption{Exemples d'insertion de bit par le mécanisme de « \emph{bit stuffing} »}
+  \labelFigure{figureExemplesBitStuffing}
+\end{figure}
+
+Dans la \refFigure{a}{figureExemplesBitStuffing} est considéré le cas d'un identificateur égal à $0$ : tous les bits \texttt{ID10} à \texttt{ID0} sont nuls, donc émis dominants. L'émission de la trame commence donc par cinq bits dominants : \texttt{SOF}, \texttt{ID10} à \texttt{ID7}. Le mécanisme de « \emph{bit stuffing} » insère donc un bit récessif après \texttt{ID7}. Ensuite, cinq nouveaux bits dominants sont transmis : \texttt{ID6} à \texttt{ID2} ; un nouveau bit récessif est donc inséré après \texttt{ID2}.
+
+L'identificateur de la \refFigure{b}{figureExemplesBitStuffing} présente cinq bits consécutifs récessifs -- \texttt{ID8} à \texttt{ID4} -- le mécanisme de « \emph{bit stuffing} » insère donc un bit dominant après \texttt{ID4}. À noter que l'insertion d'un bit est décidé quand une séquence de cinq consécutifs de même polarité est rencontrée (ici \texttt{ID8} à \texttt{ID4}), sans tenir de la polarité du bit suivant (ici \texttt{ID3}). Autrement dit, il y a insertion d'un bit dominant après \texttt{ID4} même si \texttt{ID3} est dominant, ce qui est illustré par la \refFigure{c}{figureExemplesBitStuffing}.
+
+La \refFigure{d}{figureExemplesBitStuffing} montre que le bit inséré par le mécanisme de « \emph{bit stuffing} » intervient dans le décompte des cinq bits consécutifs de même polarité. 
+
+
+Enfin, la \refFigure{e}{figureExemplesBitStuffing} illustre le cas d'un identificateur pour lequel aucun bit n'a besoin d'être ajouté.
 
 
 
 
 \section{Longueur des trames CAN}
 
+Une conséquence du mécanisme de « \emph{bit stuffing} » est que la longueur d'une trame dépend non seulement de son type (standard / étendue, données / requête) et du nombre d'octets de données ($0$ à $8$), mais aussi de la valeur de l'identificateur et des données.
+
+Le \refTableau{codageLongueurTrames} donne la borne inférieure et supérieure de la longueur de chaque type de trame, exprimée en nombre de bits.
+ 
 \begin{table}[!t]
   \small
   \centering
@@ -577,8 +741,45 @@ En effet, le bus CAN véhicule les données, mais pas d'horloge ; chaque contrô
   \ligne
 \end{table}
 
+Une trame de requête a la même taille qu'une trame de données sans données.
+
+Pour une trame de données, les formules générales sont ($n$ est le nombre d'octets de données, $s$ est le nombre de bits ajoutés par le mécanisme de « \emph{bit stuffing} ») :
+\begin{itemize}
+  \item pour une trame standard de données : $47 + 8 \times n + s$, avec $0 \leqslant s \leqslant \displaystyle\frac{35 + 8 \times n}{4}$ ;
+  \item pour une trame étendue de données : $67 + 8 \times n + s$, avec $0 \leqslant s \leqslant \displaystyle\frac{55 + 8 \times n}{4}$ ;
+\end{itemize}
+
+On peut facilement retrouver ces formules en se basant sur la description du format d'une trame de la \refFigurePage{}{figureFormatTrameDonnees}. Le \refTableau{calculLongueurTrames} donne la longueur minimum d'une trame de données contenant $n$ octets de données, en additionnant les longueurs minimum de chaque champ.
+
+Pour le calcul de la valeur maximum de $s$, considérer que les champs sujets au « \emph{bit stuffing} » s'étendent depuis le \texttt{SOF} jusqu'au \texttt{CRC} inclus, ce qui représente $35 + 8 \times n$ bits pour une trame standard de données, et $55 + 8 \times n$ bits pour une trame étendue de données. Quelle est la fréquence maximum d'insertion des bits \texttt{S} ? Le chronograme de la \refFigure{d}{figureExemplesBitStuffing} qu'un bit \texttt{S} peut être inséré tous les quatre bits. On obtient donc les bornes maximum de $s$ : $\frac{35 + 8 \times n}{4}$ bits pour une trame standard de données, et $\frac{55 + 8 \times n}{4}$ bits pour une trame étendue de données.
 
 
+
+
+\begin{table}[!t]
+  \small
+  \centering
+  \begin{tabular}{rrr}
+    \textbf{Champ}& \textbf{Trame Standard} & \textbf{Trame étendue} \\
+    SOF & $1$ & $1$ \\
+    ARBITRATION & $12$ & $32$ \\
+    CONTROL & $6$ & $6$ \\
+    DATA & $8\times n$ & $8\times n$ \\
+    CRC & $16$ & $16$ \\
+    ACK & $2$ & $2$ \\
+    EOF & $7$ & $7$ \\
+    INTERMISSION & $3$ & $3$ \\
+    {\bf Total :} & $47 + 8\times n$ & $67 + 8\times n$ \\
+   \end{tabular}
+  \caption{Calcul de la longueur minimum d'une trame de données}
+  \labelTableau{calculLongueurTrames}
+  \ligne
+\end{table}
+
+
+
+
+ 
 
 \sectionLabel{Résolution des collisions}{resolutionCollision}
 
