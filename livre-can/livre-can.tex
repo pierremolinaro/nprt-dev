@@ -701,11 +701,11 @@
 % où figure le texte "À COMPLÉTER"
 % Quand l'ouvrage sera terminé, cette commande sera supprimée
 
-%\ifthenelse{\equal{\sortieEnCouleur}{true}}{
-%  \newcommand\pasFini{\textbf{\textcolor{red}{[À COMPLÉTER]\cite{pasFini}}}}
-%}{
-%  \newcommand \pasFini{\textbf{[À COMPLÉTER]\cite{pasFini}}}
-%}
+\ifthenelse{\equal{\sortieEnCouleur}{true}}{
+  \newcommand\pasFini{\textbf{\textcolor{red}{[À COMPLÉTER]\cite{pasFini}}}}
+}{
+  \newcommand \pasFini{\textbf{[À COMPLÉTER]\cite{pasFini}}}
+}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
@@ -846,7 +846,7 @@
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
 
-%\input{bibliographie/bibliographie.tex}
+\input{chapitres/bibliographie.tex}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *

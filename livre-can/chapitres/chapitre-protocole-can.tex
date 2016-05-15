@@ -37,9 +37,9 @@
   \draw (\x, 0)\canbitstyle -- ++ (0, \canbitheight) ;
 }
 
-\newcommand\canbitstufflow{
+\newcommand\cangraybitlow[1]{
   \fill[lightgray!25] (\x, 0) rectangle (\x + \canbitwidth, \canbitheight) ;
-  \canbitl{S}
+  \canbitl{#1}
 }
 
 \newcommand\canbith[1]{
@@ -50,9 +50,9 @@
   \draw (\x, 0)\canbitstyle -- ++ (0, \canbitheight) ;
 }
 
-\newcommand\canbitstuffhigh{
+\newcommand\cangraybithigh[1]{
   \fill[lightgray!25] (\x, 0) rectangle (\x + \canbitwidth, \canbitheight) ;
-  \canbith{S}
+  \canbith{#1}
 }
 \newcommand\canidle{
   \draw (\x, 0)\canbitstyle -- ++ (0, \canbitheight) ;
@@ -147,11 +147,20 @@
       \canbitl{r0}
       \canbitfield{DLC3 à DLC0}
     \end{scope}
+    \draw (22 * \canbitwidth, -4) node[rotate=-90] {
+      \begin{tabular}{c|l}
+        \texttt{RTR} & Type de trame \\
+        \hline
+        \texttt{0} & Trame de données \\
+        \texttt{1} & Trame de requête \\
+      \end{tabular}
+    } ;
   \end{tikzpicture}
   \caption{Format d'une trame CAN}
   \labelFigure{figureFormatTrameDonnees}
 \end{figure}
 
+\cite{pasFini}. Dire que l'on s'intéresse à la situation suivante : un émetteur, des récepteurs, pas d'erreur.
 
 \section{Les différents types de trame}
 
@@ -190,7 +199,7 @@ Note : la durée d'un bit dépend de la fréquence du bus.
 
 
 
-\subsection{Champ \emph{début de trame} (« Start of Frame »)}
+\subsection{Début de trame (« \emph{Start of Frame} »)}
 
 \begin{figure}[h]
   \centering
@@ -205,7 +214,7 @@ Note : la durée d'un bit dépend de la fréquence du bus.
   \labelFigure{figureDebutTrame}
 \end{figure}
 
-Une trame commence par l'émission d'un bit dominant ($0$), le bit « \emph{SOF} » (« \emph{Start of Frame} »). Le champ qui précède est un champ \emph{IDLE} (bus au repos), qui a une durée quelconque qui n'est pas un multiple de la durée d'un bit. Aussi, les contrôleurs CAN en réception peuvent être complètement désynchronisés par rapport au contrôleur CAN en émission. Les contrôleurs CAN en réception réalisent donc une synchronisation forte (« Hard Synchronization ») ; ce mécanisme sera étudié dans le \refChapterTitlePage{chapitreCalculBit}. Durant l'explication du format d'une trame, nous supposons qu'émetteur et récepteurs sont parfaitement synchronisés.
+Une trame commence par l'émission d'un bit dominant ($0$), le bit \texttt{SOF} (« \emph{Start of Frame} »). Le champ qui précède est un champ \texttt{IDLE} (bus au repos), qui a une durée quelconque qui n'est pas un multiple de la durée d'un bit. Aussi, les contrôleurs CAN en réception peuvent être complètement désynchronisés par rapport au contrôleur CAN en émission. Les contrôleurs CAN en réception réalisent donc une synchronisation forte (« \emph{Hard Synchronization} ») ; ce mécanisme sera étudié dans le \refChapterTitlePage{chapitreCalculBit}. Durant l'explication du format d'une trame, nous supposons qu'émetteur et récepteurs sont parfaitement synchronisés.
 
 
 
@@ -372,7 +381,7 @@ Chaque récepteur la recalcule à partir des valeurs de l'identificateur et des 
 
 Chaque récepteur signale l'acceptation de la réception en activant le bit \texttt{ACK SLOT}, décrit à la \refSubsectionPage{champAcquittement}. Un récepteur signale qu'il rejette la trame reçue en émettant une trame d'erreur (\refChapterPage{chapitreGestionErreurs}).
 
-Comme l'illustre la \refFigure{}{figureChampCRC}, le champ \texttt{CRC} est composé du sous-champ « \emph{CRC SEQUENCE} » de $15$ bits, qui contient la somme de contrôle proprement dite ; il est suivi d'un bit à $1$, le « \emph{CRC DELIMITER} » qui permet aux récepteurs d'avoir le temps de décider si la trame reçue est valide ou doit être rejetée.
+Comme l'illustre la \refFigure{}{figureChampCRC}, le champ \texttt{CRC} est composé du sous-champ \texttt{CRC SEQUENCE} de $15$ bits, qui contient la somme de contrôle proprement dite ; il est suivi d'un bit à $1$, le \texttt{CRC DELIMITER} qui permet aux récepteurs d'avoir le temps de décider si la trame reçue est valide ou doit être rejetée.
 
 \begin{figure}[h]
   \centering
@@ -408,7 +417,7 @@ Comme l'illustre la \refFigure{}{figureChampCRC}, le champ \texttt{CRC} est comp
 \end{figure}
 
 
-La technique utilisée pour calculer la somme de contrôle est celle des \emph{codes cycliques} : elle présente le double intérêt d'être très efficace et d'être facilement réalisable à partir de registres à décalage et de portes \emph{ou-exclusif}. Il existe une infinité de codes cycliques, chacun étant caractérisé par un polynome premier : celui utilisé par les contrôleurs CAN est $X^{15}+X^{14}+X^{10}+X^8+X^7+X^4+X^3+1$.
+La technique utilisée pour calculer la somme de contrôle est celle des \emph{codes cycliques} : elle présente le double intérêt d'être très efficace et d'être facilement réalisable à partir de registres à décalage et de portes \emph{ou-exclusif}. Il existe une infinité de codes cycliques, chacun étant caractérisé par un polynome premier : celui utilisé par les contrôleurs CAN est $X^{15}+X^{14}+X^{10}+X^8+X^7+X^4+X^3+1$. La probabilité qu'une trame erronée vérifie la somme de contrôle est extrèmement faible\footnote{Unruh, J., Mathony, H.J., Kaiser, K.H.: Error Detection Analysis of Automotive Communication Protocols, SAE International Congress 1990.}, et évaluée à $4,7 \times 10^{-11}$.
 
 
 
@@ -423,8 +432,8 @@ Le champ d'acquittement (\refFigure{}{figureChampACK}) est composé de deux bits
     \draw (\canbitwidth, 0)[dotted] -- ++ (0, 1) ;
     \draw (2 * \canbitwidth, 0)[dotted] -- ++ (0, 1) ;
     \draw (3 * \canbitwidth, 0)[dotted] -- ++ (0, 1) ;
-    \draw (2 * \canbitwidth, 1) node [left]{\cancommentstyle ACK SLOT} ;
-    \draw (2 * \canbitwidth, 1) node [right]{\cancommentstyle ACK DELIMITER} ;
+    \draw (1.5 * \canbitwidth, \canbitheight) node [right, rotate=90]{\cancommentstyle ACK SLOT} ;
+    \draw (2.5 * \canbitwidth, \canbitheight) node [right, rotate=90]{\cancommentstyle ACK DELIMITER} ;
     \startcanbit
     \candots
     \canbit{*}
@@ -508,7 +517,7 @@ Le sous-champ \texttt{IDLE} a une longueur quelconque :
 
 
 
-\section{Décision d'émettre : condition \emph{bus libre}}
+\sectionLabel{Décision d'émettre : condition \emph{bus libre}}{decisionEmettre}
 
 Quand un contrôleur CAN peut-il commencer à émettre une trame de données ?
 
@@ -594,11 +603,11 @@ Lors de l'occurrence d'un top de resynchronisation, les contrôleurs en récepti
 
 \sectionLabel{Le \emph{bit stuffing}}{descriptionBitStuffing}
 
-{\bf Le « \emph{bit stuffing} » consiste pour le contrôleur en émission à intercaler après une séquence de cinq bits identiques un bit de polarité inverse.}
+{\bf Le « \emph{bit stuffing} » consiste pour le contrôleur en émission à intercaler après une séquence de cinq bits identiques un bit de polarité inverse. Ce mécanisme est actif depuis le champ \texttt{SOF} jusqu'au champ \texttt{CRC} inclus.}
 
 Il est complètement transparent pour le programmeur, c'est-à-dire que le contrôleur effectue cette opération sans que l'on ait besoin de la programmer. À la réception, les bits insérés sont automatiquement éliminés.
 
-La \refFigure{}{figureExemplesBitStuffing} montre quelques scénarios d'insertion de bits par ce mécanisme dans des trames standard.
+La \refFigure{}{figureExemplesBitStuffing} montre quelques scénarios d'insertion de bits par ce mécanisme dans des trames standard. Les bits ainsi insérés sont notés \texttt{S}.
 
 \begin{figure}[h]
   \centering
@@ -611,13 +620,13 @@ La \refFigure{}{figureExemplesBitStuffing} montre quelques scénarios d'insertio
       \canbitl{ID9}
       \canbitl{ID8}
       \canbitl{ID7}
-      \canbitstuffhigh
+      \cangraybithigh{S}
       \canbitl{ID6}
       \canbitl{ID5}
       \canbitl{ID4}
       \canbitl{ID3}
       \canbitl{ID2}
-      \canbitstuffhigh
+      \cangraybithigh{S}
       \canbitl{ID1}
     \end{scope}
     \begin{scope}[yshift=3cm]
@@ -631,7 +640,7 @@ La \refFigure{}{figureExemplesBitStuffing} montre quelques scénarios d'insertio
       \canbith{ID6}
       \canbith{ID5}
       \canbith{ID4}
-      \canbitstufflow
+      \cangraybitlow{S}
       \canbith{ID3}
       \canbith{ID2}
       \canbitl{ID1}
@@ -648,7 +657,7 @@ La \refFigure{}{figureExemplesBitStuffing} montre quelques scénarios d'insertio
       \canbith{ID6}
       \canbith{ID5}
       \canbith{ID4}
-      \canbitstufflow
+      \cangraybitlow{S}
       \canbitl{ID3}
       \canbith{ID2}
       \canbitl{ID1}
@@ -662,12 +671,12 @@ La \refFigure{}{figureExemplesBitStuffing} montre quelques scénarios d'insertio
       \canbitl{ID9}
       \canbitl{ID8}
       \canbitl{ID7}
-      \canbitstuffhigh
+      \cangraybithigh{S}
       \canbith{ID6}
       \canbith{ID5}
       \canbith{ID4}
       \canbith{ID3}
-      \canbitstufflow
+      \cangraybitlow{S}
       \canbitl{ID2}
       \canbitl{ID1}
     \end{scope}
@@ -701,6 +710,35 @@ La \refFigure{d}{figureExemplesBitStuffing} montre que le bit inséré par le m�
 
 Enfin, la \refFigure{e}{figureExemplesBitStuffing} illustre le cas d'un identificateur pour lequel aucun bit n'a besoin d'être ajouté.
 
+Pour terminer, la \refFigure{}{figureExempleInsertionMaxBitStuffing} montre un scénario d'insertion maximum de bits \texttt{S}. L'identificateur a une valeur telle que trois bits doivent être insérés durant sa transmission.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+      \startcanbit
+      \canbitl{SOF}
+      \canbitl{ID10}
+      \canbitl{ID9}
+      \canbitl{ID8}
+      \canbitl{ID7}
+      \cangraybithigh{S}
+      \canbith{ID6}
+      \canbith{ID5}
+      \canbith{ID4}
+      \canbith{ID3}
+      \cangraybitlow{S}
+      \canbitl{ID2}
+      \canbitl{ID1}
+      \canbitl{ID0}
+      \canbitl{RTR}
+      \cangraybithigh{S}
+      \canbitl{IDE}
+      \canbitl{r0}
+    \candots
+  \end{tikzpicture}
+  \caption{Scénario d'insertion maximum de bits par le mécanisme de « \emph{bit stuffing} »}
+  \labelFigure{figureExempleInsertionMaxBitStuffing}
+\end{figure}
 
 
 
@@ -743,15 +781,14 @@ Le \refTableau{codageLongueurTrames} donne la borne inférieure et supérieure d
 
 Une trame de requête a la même taille qu'une trame de données sans données.
 
-Pour une trame de données, les formules générales sont ($n$ est le nombre d'octets de données, $s$ est le nombre de bits ajoutés par le mécanisme de « \emph{bit stuffing} ») :
+Pour une trame de données, les formules générales sont ($n$ étant le nombre d'octets de données, $s$ le nombre de bits ajoutés par le mécanisme de « \emph{bit stuffing} ») :
 \begin{itemize}
-  \item pour une trame standard de données : $47 + 8 \times n + s$, avec $0 \leqslant s \leqslant \displaystyle\frac{35 + 8 \times n}{4}$ ;
-  \item pour une trame étendue de données : $67 + 8 \times n + s$, avec $0 \leqslant s \leqslant \displaystyle\frac{55 + 8 \times n}{4}$ ;
+  \item pour une trame standard de données : $47 + 8 \times n + s$, avec $0 \leqslant s \leqslant 8 + 2 \times n$ ;
+  \item pour une trame étendue de données : $67 + 8 \times n + s$, avec $0 \leqslant s \leqslant 13 + 2 \times n$.
 \end{itemize}
 
 On peut facilement retrouver ces formules en se basant sur la description du format d'une trame de la \refFigurePage{}{figureFormatTrameDonnees}. Le \refTableau{calculLongueurTrames} donne la longueur minimum d'une trame de données contenant $n$ octets de données, en additionnant les longueurs minimum de chaque champ.
 
-Pour le calcul de la valeur maximum de $s$, considérer que les champs sujets au « \emph{bit stuffing} » s'étendent depuis le \texttt{SOF} jusqu'au \texttt{CRC} inclus, ce qui représente $35 + 8 \times n$ bits pour une trame standard de données, et $55 + 8 \times n$ bits pour une trame étendue de données. Quelle est la fréquence maximum d'insertion des bits \texttt{S} ? Le chronograme de la \refFigure{d}{figureExemplesBitStuffing} qu'un bit \texttt{S} peut être inséré tous les quatre bits. On obtient donc les bornes maximum de $s$ : $\frac{35 + 8 \times n}{4}$ bits pour une trame standard de données, et $\frac{55 + 8 \times n}{4}$ bits pour une trame étendue de données.
 
 
 
@@ -776,23 +813,202 @@ Pour le calcul de la valeur maximum de $s$, considérer que les champs sujets au
   \ligne
 \end{table}
 
+Pour le calcul de la valeur maximum de $s$, on remarque que les champs sujets au « \emph{bit stuffing} » s'étendent depuis le champ \texttt{SOF} jusqu'au champ \texttt{CRC} inclus (les champs \texttt{ACK}, \texttt{EOF} et \texttt{INTERMISSION} ne sont pas concernés), ce qui représente $35 + 8 \times n$ bits pour une trame standard de données, et $55 + 8 \times n$ bits pour une trame étendue de données. Quelle est la fréquence maximum d'insertion des bits \texttt{S} ? Le chronogramme de la \refFigure{d}{figureExemplesBitStuffing} indique qu'un bit \texttt{S} peut être inséré tous les quatre bits d'information. On obtient donc ainsi les bornes maximum de $s$ : $\frac{35 + 8 \times n}{4} = 8 + 2 \times n$ bits pour une trame standard de données, et $\frac{55 + 8 \times n}{4} = 13 + 2 \times n$ bits pour une trame étendue de données.
+
+Mais ce calcul est pessimiste : il suppose que tous les bits des champs soumis au « \emph{bit stuffing} » puissent librement être dominants ou récessifs. Or, ce n'est pas le cas : les bits \texttt{RTR}, \texttt{SRR}, \texttt{r0}, \texttt{r1}, \texttt{CRC DELIMITER} ont des valeurs fixées ; toutes les combinaisons du champ \texttt{DLC} ne sont pas acceptées ; enfin, le champ \texttt{CRC SEQUENCE} a une valeur qui dépend uniquement de la valeur des champs qui le précèdent. Autrement dit, il se peut qu'il y ait aucune trame sans insertion de bit \texttt{S}, ou que le nombre maximum d'insertions ne soit jamais atteint. Les bornes énoncées dans le \refTableau{codageLongueurTrames} ne sont peut-être jamais atteintes.
 
 
 
- 
+
+
+
+
+
+
 
 \sectionLabel{Résolution des collisions}{resolutionCollision}
 
+Les explications données jusqu'à présent dans ce chapitre supposent qu'il y a qu'un seul contrôleur CAN en émission à la fois. Dans cette section, le cas de plusieurs émissions simultanées va être étudié.
+
+D'abord, dans quelle circonstance cette situation survient elle ? Rappelons le début de la \refSectionPage{decisionEmettre} :
+
+\begin{tabular}{|l}
+\begin{minipage}[flushright]{0.95\textwidth}
+Une trame en cours de transmission ne peut pas être préemptée : sa transmission doit se terminer avant qu'une autre soit transmise. Un contrôleur CAN voulant émettre doit donc surveiller le bus, et attendre qu'il soit libre.
+
+{\bf Un contrôleur CAN considère que le bus est libre si le bus est dans l’état récessif pendant 11 bits consécutifs.}
+\end{minipage}
+\end{tabular}
+
+
+Considérons la situation suivante :
+\begin{itemize}
+  \item une trame est en cours de transmission ;
+  \item durant cette transmission, trois contrôleurs désirent émettre chacun une trame ;
+  \item ils attendent donc tous les trois la condition \emph{bus libre} ;
+  \item à la fin de la transmission en cours, les trois contrôleurs s'aperçoivent en même temps que le bus devient libre ;
+  \item en conséquence, les trois contrôleurs commencent à émettre leur trame en même temps : il en résulte une collision.
+\end{itemize}
+
+
+L'originalité du bus CAN est que la collision n'est pas destructive, la trame la plus prioritaire sortant indemne de la collision. La priorité entre les trames est donnée par la valeur de leur identificateurs :
+
+{\bf Plus l'identificateur a une valeur numérique faible, plus la trame est prioritaire.}
+
+Ainsi, pour des trames standard, la valeur $0$ est plus prioritaire que $1$, lui-même plus prioritaire que $2$, \dots, lui-même plus prioritaire que $2^{11}-1$. Il en est de même pour les trames étendues, l'identificateur le moins prioritaire étant $2^{29}-1$. La priorité relative entre une trame standard et une trame étendue est un peu long à décrire, ceci sera fait à la \refSectionPage{cohabitationStandardEtendue}.
+
+La collision décrite ci-dessus est illustrée par la \refFigure{}{figureExempleArbitrage}. Bien que cette figure et les explications n'envisagent le cas d'une collision entre trois émissions de trames standard, le même mécanisme de résolution s'applique pour une collision entre un nombre quelconque d'émissions standard ou étendues. 
+
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw (-.5, 4) node[left] {\cancommentstyle Identificateur} ;
+    \draw (.5 * \canbitwidth, 4) node {\cantextstyle SOF} ;
+    \draw (1.5 * \canbitwidth, 4) node {\cantextstyle ID10} ;
+    \draw (2.5 * \canbitwidth, 4) node {\cantextstyle ID9} ;
+    \draw (3.5 * \canbitwidth, 4) node {\cantextstyle ID8} ;
+    \draw (4.5 * \canbitwidth, 4) node {\cantextstyle ID7} ;
+    \draw (5.5 * \canbitwidth, 4) node {\cantextstyle ID6} ;
+    \begin{scope}[yshift=3cm]
+      \draw (-2.5, .5 * \canbitheight) node[left] {\cancommentstyle \texttt{TxD} contrôleur $A$ :} ;
+      \draw (-.5, .5 * \canbitheight) node[left] {\cantextstyle 01xxx\dots} ;
+      \startcanbit
+      \canbitl{0}
+      \canbitl{0}
+      \canbith{1}
+      \cangraybithigh{1}
+      \cangraybithigh{1}
+      \cangraybithigh{1}
+      \candots
+    \end{scope}
+    \begin{scope}[yshift=2cm]
+      \draw (-2.5, .5 * \canbitheight) node[left] {\cancommentstyle \texttt{TxD} contrôleur $B$ :} ;
+      \draw (-.5, .5 * \canbitheight) node[left] {\cantextstyle 00101\dots} ;
+      \startcanbit
+      \canbitl{0}
+      \canbitl{0}
+      \canbitl{0}
+      \canbith{1}
+      \canbitl{0}
+      \canbith{1}
+      \candots
+    \end{scope}
+    \begin{scope}[yshift=1cm]
+      \draw (-2.5, .5 * \canbitheight) node[left] {\cancommentstyle \texttt{TxD} contrôleur $C$ :} ;
+      \draw (-.5, .5 * \canbitheight) node[left] {\cantextstyle 0011x\dots} ;
+      \startcanbit
+      \canbitl{0}
+      \canbitl{0}
+      \canbitl{0}
+      \canbith{1}
+      \canbith{1}
+      \cangraybithigh{1}
+      \candots
+    \end{scope}
+    \begin{scope}
+      \draw (-2.5, .5 * \canbitheight) node[left] {\cancommentstyle État du bus, \texttt{RxD} des contrôleurs :} ;
+      \startcanbit
+      \canbitl{0}
+      \canbitl{0}
+      \canbitl{0}
+      \canbith{1}
+      \canbitl{0}
+      \canbith{1}
+      \candots
+    \end{scope}
+  \draw (2.5 * \canbitwidth, -.1) [<-] -- ++ (0, -.4) ;
+  \draw (3 * \canbitwidth, -.75) node[left] {\cancommentstyle \emph{Le contrôleur 1 perd l'arbitrage}} ;
+  \draw (4.5 * \canbitwidth, -.1) [<-] -- ++ (0, -.9) ;
+  \draw (5 * \canbitwidth, -1.25) node[left] {\cancommentstyle \emph{Le contrôleur 3 perd l'arbitrage}} ;
+  \end{tikzpicture}
+  \caption{Exemple d'arbitrage entre trois contrôleurs}
+  \labelFigure{figureExempleArbitrage}
+\end{figure}
+
+Dans la \refFigure{}{figureExempleArbitrage}, Les trois contrôleurs émettent des trames dont seul le début des identificateurs est cité ; par exemple, pour le contrôleur $A$, l'identificateur est \texttt{01xxx\dots}, c'est-à-dire que \texttt{ID10} vaut $0$, \texttt{ID9} vaut $1$, et les bits suivants -- symbolisés par \texttt{x} ou des points de suspension -- n'ont pas d'importance pour la collision étudiée. Les chronogrammes montrent les lignes \texttt{TxD} des trois contrôleurs. La dernière ligne montre l'état du bus résultant de la collision des trois émissions, qui est un \emph{et} logique entre les trois signaux \texttt{TxD}; cet état est l'information qui remonte vers chaque contrôleur via sa ligne \texttt{RxD}.
+
+{\bf Émission de \texttt{SOF}.} Chaque contrôleur émet un bit dominant ($0$), et reçoit un bit dominant. Tout est normal pour chaque contrôleur, qui ne sait même pas qu'il est compétition avec d'autres.
+
+{\bf Émission de \texttt{ID10}.} Situation identique à la précédente.
+
+{\bf Émission de \texttt{ID9}.} À ce moment, la situation évolue. Considérons d'abord les contrôleurs $B$ et $C$ : ils émettent un bit dominant, et reçoivent un bit dominant, rien n'a changé pour eux. Considérons d'abord le contrôleur $A$ : il émet un bit récessif ($1$), et reçoit un bit dominant : c'est l'indication pour lui qu'il vient de perdre la compétition, qu'il y a une ou plusieurs trames plus prioritaires qui sont en cours d'émission. Il acte sa défaite en renonçant à émettre sa trame immédiatement, et à partir de ce moment se met à envoyer des bits récessifs ($1$), qui ne perturberont pas l'émission en cours. Sur les chronogrammes de la \refFigure{}{figureExempleArbitrage}, ces bits apparaissent sur un fond gris.
+
+{\bf Émission de \texttt{ID8}.} Chaque contrôleur émet un bit récessif, mais pour des raisons différentes : le contrôleur $A$ parce qu'il a perdu la compétition, et les contrôleurs $B$ et $C$ parce que cette valeur est celle du $8^e$ bit de leur identificateur. L'état du bus est récessif, chacun reçoit la valeur qu'il a émise : pas d'information nouvelle.
+
+
+{\bf Émission de \texttt{ID7}.} Maintenant, $A$ émet toujours un bit récessif parce qu'il a perdu la compétition, $B$ un bit dominant, et $C$ un bit récessif. L'état résultant du bus est dominant. C'est maintenant $C$ qui envoie un récéssif et reçoit un dominant : à son tour, il perd la compétition, et, comme $A$ auparavant renonçe à émettre sa trame immédiatement, et se met à envoyer des bits récessifs.
+
+{\bf Émission de \texttt{ID6}.}  À partir de cet instant, seul $B$ continue à transmettre sa trame : il a gagné la compétition : $B$ n'a jamais su qu'il était en compétition avec d'autres et les récepteurs ne savent pas qu'une compétition entre plusieurs émetteurs a eu lieu.
+
+Donc, $B$ transmet sa trame, qui d'ailleurs peut être reçue par $A$ et par $C$ (et aussi par d'autres). À l'issue de cette transmission, le bus redeviendra libre, $A$ et $C$ entreront de nouveau en compétition. $C$ gagnera\footnote{À moins qu'un autre contrôleur entre dans la compétition avec une trame dont l'identificateur est plus prioritaire que celui de $C$.}, et émettra sa trame. Puis ce sera au tour de $A$ d'émettre sa trame.
 
 
 
+\sectionLabel{Cohabitation des trames standards et étendues}{cohabitationStandardEtendue}
 
+Un même réseau peut-il véhiculer trames standards et trames étendues ? Actuellement, la réponse est positive, même si cela n'a pas toujours été le cas, pour des raisons qui vont être expliquées.
 
+{\bf Contrôleurs version 1.} Ces contrôleurs ne connaissent pas l'existence de trames étendues : il ne peuvent évidemment pas les émettre, et leur réception provoque une erreur (réception d'un bit \texttt{r1} récessif alors qu'un bit dominant est attendu, voir \refFigurePage{}{figureChampArbitrage}). Ces contrôleurs ont pratiquement tous disparu aujourd'hui. On peut citer le \texttt{PCA82C200} de Philips, remplacé par le \texttt{SJA1000} à partir de l'année 2000.
 
+{\bf Contrôleurs version 1, tolérants.} Ces contrôleurs ne peuvent pas émettre de trame étendues, mais laissent passer les trames étendues : ils ne peuvent pas les recevoir, mais ne signalent pas d'erreur. Ces contrôleurs ont aussi pratiquement tous disparu aujourd'hui.
 
-\section{Cohabitation des trames standards et étendues}
+{\bf Contrôleurs version 2.} Ces contrôleurs peuvent émettre et recevoir trames standards et trames étendues. Tous les contrôleurs actuels sont de cette nature.
 
+Un point plus délicat à comprendre est la priorité relative entre trame standard et trame étendue\footnote{Entre deux trames standard, ou entre deux trames étendues, c'est la valeur de l'identificateur qui détermine la priorité : plus sa valeur est faible, plus la trame est prioritaire, voir \refSectionPage{resolutionCollision}.}. Pour illustrer le raisonnement, la \refFigure{}{figureChampArbitrageStandardEtendue} montre les champs \texttt{ARBITRATION} et \texttt{CONTROL} des trames standard et étendues\footnote{Ces champs apparaissent aussi dans la \refFigurePage{}{figureChampArbitrage}.}.
 
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw (\canbitwidth, 0)[dotted] -- ++ (0, 2.5) ;
+    \draw (3 * \canbitwidth, 2.5) node {ARBITRATION} ;
+    \draw (7.5 * \canbitwidth, 2.5) node {CONTROL} ;
+    \draw (5 * \canbitwidth, 2.5)[dotted]
+       -- (5 * \canbitwidth, 0.75 + .5 * \canbitheight - 0.1)
+       -- ++ (5 * \canbitwidth, 0)
+       -- ++ (0, -0.75 - .5 * \canbitheight) ;
+    \draw (10 * \canbitwidth, 2.5)[dotted]
+       -- (10 * \canbitwidth, 0.75 + .5 * \canbitheight + 0.1)
+       -- ++ (5 * \canbitwidth, 0)
+       -- ++ (0, -0.75 - .5 * \canbitheight) ;
+    \draw (0, 1.5 + \canbitheight * .5) node [left] {Trame standard} ;
+    \draw (0, \canbitheight * .5) node [left] {Trame étendue} ;
+    \begin{scope}[yshift=1.5cm]
+      \startcanbit
+      \candots
+      \canbitfield{ID10 à ID0}
+      \canbit{RTR}
+      \canbitl{IDE}
+      \canbitl{r0}
+      \canbitfield{DLC3 à DLC0}
+      \candots
+    \end{scope}
+    \begin{scope}
+      \startcanbit
+      \candots
+      \canbitfield{ID28 à ID18}
+      \canbith{SRR}
+      \canbith{IDE}
+      \canbitfield{ID17 à ID0}
+      \canbit{RTR}
+      \canbitl{r1}
+      \canbitl{r0}
+      \canbitfield{DLC3 à DLC0}
+      \candots
+    \end{scope}
+  \end{tikzpicture}
+  \caption{Champ arbitrage et contrôle des trames standards et des trames étendues}
+  \labelFigure{figureChampArbitrageStandardEtendue}
+\end{figure}
+
+L'arbitrage commençant par les poids forts, il y a compétition entre l'identificateur de la trame standard et les onze bits de poids fort de l'identificateur de la trame étendue. La valeur la plus faible est la plus prioritaire. Si il y a égalité :
+\begin{itemize}
+  \item si la trame standard est une trame de données, son bit \texttt{RTR} est dominant ; comme le bit \texttt{SRR} est récessif, la trame standard est prioritaire ;
+  \item si la trame standard est une trame de requête, son bit \texttt{RTR} est récessif, comme le bit \texttt{SRR} ; la décision ne peut pas être prise sur ce bit ;
+  \item le bit \texttt{IDE} est dominant pour une trame standard, et récessif pour une trame étendue ; la trame standard est donc prioritaire.
+\end{itemize}
+
+La règle est donc la suivante : {\bf une trame étendue est plus prioritaire qu'une trame standard si le nombre formé par les onze bits de poids fort de l'identificateur de la trame étendue est strictement inférieur à la valeur de l'identificateur de la trame standard}.
 
 
 
@@ -801,6 +1017,6 @@ Pour le calcul de la valeur maximum de $s$, considérer que les champs sujets au
 
 \section{Trame de surcharge}
 
-
+Pas à sa place ici, laissé pour mémoire. \cite{pasFini}
 
 

@@ -7,4 +7,28 @@
 %--- Pour supprimer tout en-tête et pied de page sur la 1re page d'un chapitre
 \thispagestyle{empty}
 
+Peut-on toujours atteindre les fréquences de bus désirées avec les cartes dont on dispose ?
 
+Par exemple, l'auteur a été confronté au problème suivant : il voulait réaliser un réseau CAN entre un micro-contrôleur LPC2294 de NXP, conduit par un quartz de fréquence $14,7456$ MHz, et des PIC18F26K80 de Microchip, conduits par des quartz à $16$ MHz.
+
+Le micro-contrôleur LPC2294 est équipé d'un multiplieur de fréquence programmable, la fréquence obtenue ne devant pas dépasser $60$ MHz. En programmant le facteur $4$, on aboutit à $59,9824$ MHz. Cette horloge sert de base de temps pour les modules CAN intégrés. 
+
+Le PIC18F26K80 dispose aussi d'un multiplieur de fréquence optionnel, non programmable, d'un facteur fixe égal à $4$ : l'horloge du module CAN intégré a donc une fréquence de $64$ MHz.
+
+Peut-on réaliser un bus à $1$ Mbit/s ? Cela ne pose pas de problème particulier pour les PIC18F26K80, mais, par une division entière de $58,9824$ MHz, on ne peut jamais atteindre exactement $1$ Mbit/s : en divisant par $60$, on obtient $983$ kbit/s, soit un écart de $1,7$ \% avec $1$ Mbit/s. En appliquant les résultats du \refChapterTitlePage{chapitreCalculBit}, on peut constater que c'est très limite \pasFini.
+
+Les questions que l'on se pose alors :
+\begin{itemize}
+  \item existe-t'il pour le LPC2294 un réglage qui permette de mieux s'approcher de la fréquence de $1$ Mbit/s, et qui soit acceptable ?
+  \item sinon, quelle fréquence choisir, qui puisse être commune aux PICs et au LPC2294 ?
+\end{itemize}
+
+Ce sont les réponses à ces deux questions qui vont être apportées dans ce chapitre.
+
+Nous allons présenter des codes écrits en C++, basés sur une recherche exhaustive de toutes les réglages possibles des modules CAN d'un micro-contrôleur. Avec la vitesse actuelle des ordinateurs de bureau, il est inutile d'adopter des algorithmes efficaces : avec une recherche en force brute, les réponses sont quasi instantanées.
+
+
+
+
+
+% \footnote{\url{http://www.nxp.com/products/microcontrollers-and-processors/arm-processors/lpc-arm7-arm9-mcus/lpc-arm7-microcontrollers/lpc2100-200-300-400/16-32-bit-arm-microcontrollers-256-kb-isp-iap-flash-with-can-10-bit-adc-and-external-memory-interface:LPC2294FBD144}}
