@@ -1,6 +1,6 @@
 %!TEX encoding = UTF-8 Unicode
 
-\documentclass[a4paper,10pt,obeyspaces,openany]{book}
+\documentclass[a4paper,12pt,obeyspaces,openany]{book}
 \usepackage{verbatim}
 % L'option 'openany' permet de démarrer un chapitre sur une page paire
 
@@ -442,7 +442,7 @@
 
 % Grâce à ce paquetage, il est possible de placer plusieurs figures, tables, côte à côte.
 % Voir http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
-\usepackage{subfig}
+%\usepackage{subfig}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
@@ -450,8 +450,8 @@
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
 
-\usepackage{multicol}
-\setlength{\columnsep}{30pt}
+%\usepackage{multicol}
+%\setlength{\columnsep}{30pt}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
@@ -484,177 +484,36 @@
 \usepgflibrary{shapes.geometric}
 \usepgfmodule{plot}
 
-%--- Contrôle de l'affichage des circuits électroniques
-\ifthenelse{\equal{\sortieEnCouleur}{true} \and \equal{\afficherDetailSchema}{true}}{
-
-}{
-  \newcommand\PMCouleurGrilleSchema{white} % Pour afficher la grille des schémas en blanc (donc invisible)
-  \newcommand\PMAfficherPoint{0} % Pour ne pas afficher les points (par défaut, ils sont affichés)
-  \newcommand\PMCouleurFondComposantsIntegres{\fondTableau} % Couleur de fond des composants intégrés
-}
-
-%--- Autre couleur utilisée
-\ifthenelse{\equal{\sortieEnCouleur}{true}}{
-  \newcommand\couleurAlterneeSchema{green!50}
-}{
-  \newcommand\couleurAlterneeSchema{gray!50}
-}
-
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
-%   P A Q U E T A G E    « L I S T I N G S »    ( p o u r    P I C C O L O )                                            *
+%   P A Q U E T A G E    « L I S T I N G S »    (pour le code C++)                                                      *
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
+%  http://pgoutet.free.fr/latex/seance_9/seance_9-bis.pdf
 
 \usepackage{listings}
 
-%-----------------------------------------------------------------------------------------------------------------------*
-
-\lstdefinelanguage{assembleur}{
-  style=assembleur,
-  comment=[l]{\%},
+\lstset{
+  language=C++,
+  upquote=true,
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{lightgray!25},
 }
 
-\newcommand\couleurCodeASSEMBLEUR{black!5}
-
-\ifthenelse{\equal{\sortieEnCouleur}{true}}{
-  \lstdefinestyle{assembleur}{
-    basicstyle=\ttfamily\small,
-    backgroundcolor=\color{\couleurCodeASSEMBLEUR},
-    numberstyle=\ttfamily\small,
-    xleftmargin=20pt
-  }
-}{
-  \lstdefinestyle{assembleur}{
-    basicstyle=\ttfamily\small,
-    numberstyle=\ttfamily\small,
-    xleftmargin=20pt
-  }
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\EUR}}1 {£}{{\pounds}}1
 }
-
-
-\newcommand\assembleur[1]{\colorbox{\couleurCodeASSEMBLEUR}{\lstinline[language=assembleur]@#1@}}
-
-
-%-----------------------------------------------------------------------------------------------------------------------*
-
-\lstdefinelanguage{sortie}{
-  style=sortie,
-}
-
-\lstdefinestyle{sortie}{
-  basicstyle=\ttfamily\scriptsize,
-  frame=l,
-%  numberstyle=\ttfamily\small,
-}
-
-%-----------------------------------------------------------------------------------------------------------------------*
-%   A F F I C H A G E    D U    C O D E    P I C C O L O                                                                *
-%-----------------------------------------------------------------------------------------------------------------------*
-
-\usepackage{mdframed}
-\usepackage{lineno}
-
-%-----------------------------------------------------------------------------------------------------------------------*
-
-\newcommand\keywordStylePiccolo[1]{\textcolor{blue}{\textbf{#1}}}
-\newcommand\instructionStylePiccolo[1]{\textcolor{brown}{\textbf{#1}}}
-\newcommand\delimitersStylePiccolo[1]{\textcolor{orange}{#1}}
-\newcommand\integerStylePiccolo[1]{\textcolor{orange}{#1}}
-\newcommand\characterStylePiccolo[1]{\textcolor{orange}{#1}}
-\newcommand\stringStylePiccolo[1]{\textcolor{gray}{#1}}
-\newcommand\commentStylePiccolo[1]{\textcolor{red}{#1}}
-
-\newcommand\lexicalErrorPiccolo{\textcolor{red}{\textbullet ERRLEX\textbullet}}
-
-\newmdenv[
-  topline=false,
-  bottomline=false,
-  rightline=false,
-  linecolor=blue!25,
-  linewidth=2pt
-]{siderules}
-
-\newwrite\tempfile
-
-\makeatletter
-\newenvironment{piccolo}{%
-  \begingroup
-  \@bsphack
-  \immediate\openout\tempfile=temp.piccolo%
-  \let\do\@makeother\dospecials
-  \catcode`\^^M\active
-  \verbatim@startline
-  \verbatim@addtoline
-  \verbatim@finish
-  \def\verbatim@processline{\immediate\write\tempfile{\the\verbatim@line}}%
-  \verbatim@start
-}{
-  \immediate\closeout\tempfile
-  \@esphack
-  \endgroup
-  \immediate\write18{piccolo --mode=latex:Piccolo temp.piccolo}
-  {\singlespacing\begin{siderules}\ttfamily\input{temp.piccolo.tex}\end{siderules}}
-}
-\makeatother
-
-%-----------------------------------------------------------------------------------------------------------------------*
-% COMMANDE \ggs : affichage de code en ligne galgas                                                                     *
-%-----------------------------------------------------------------------------------------------------------------------*
-
-\newcommand\keywordStylepiccolo[1]{\textcolor{blue}{\textbf{#1}}}
-\newcommand\instructionStylepiccolo[1]{\textcolor{brown}{\textbf{#1}}}
-\newcommand\delimitersStylepiccolo[1]{\textcolor{orange}{#1}}
-\newcommand\integerStylepiccolo[1]{\textcolor{orange}{#1}}
-\newcommand\characterStylepiccolo[1]{\textcolor{orange}{#1}}
-\newcommand\stringStylepiccolo[1]{\textcolor{gray}{#1}}
-\newcommand\commentStylepiccolo[1]{\textcolor{red}{#1}}
-
-\newcommand\lexicalErrorpiccolo{\textcolor{red}{\textbullet ERRLEX\textbullet}}
-
-
-\makeatletter
-\newcommand*\pic{%
-  \@bsphack%
-  \begingroup%
-  \let\do\@makeother\dospecials%
-  \let\do\do@noligs\verbatim@nolig@list%
-  \catcode`\^^M=15\relax%
-  \@vobeyspaces%
-  \@pic{\temporary}%
-}%
-\newcommand\@pic[2]{%
-  \catcode`-=12\relax%
-  \catcode`<=12\relax%
-  \catcode`>=12\relax%
-  \catcode`,=12\relax%
-  \catcode`'=12\relax%
-  \catcode``=12\relax%
-  \catcode`#2\active%
-  \catcode`~\active%
-  \lccode`\~`#2\relax%
-  \begingroup%
-  \lowercase{%
-    \def\@tempa##1~{%
-      \expandafter\endgroup%
-      \expandafter\DeclareRobustCommand%
-      \expandafter*%
-      \expandafter#1%
-      \expandafter{\@tempa}%
-      \@esphack%
-      \immediate\openout\tempfile=temp.piccolo%
-      \immediate\write\tempfile{##1}%
-      \immediate\closeout\tempfile%
-      \immediate\write18{piccolo --mode=latex:Piccolo temp.piccolo}%
-      \colorbox{gray!6}{\ttfamily\input{temp.piccolo.tex}\unskip}%
-    }%
-  }%
-  \ifnum`#2=`\~\else\@makeother\~\fi%
-  \expandafter\endgroup%
-  \@tempa%
-}%
-\makeatother
-
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
 %   F O O T N O T E    P A C K A G E                                                                                    *
@@ -690,6 +549,31 @@
 
 \renewcommand{\chaptermark}[1]{\markboth{\bsc{\chaptername~\thechapter{}.} #1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\bsc{\thesection{}.} #1}{}}
+
+%-----------------------------------------------------------------------------------------------------------------------*
+%                                                                                                                       *
+%   T O C L O F T   : P O U R    É T A B L I R    L A    L I S T E    D E S    P R O G R A M M E S    S P I C E         *
+%                                                                                                                       *
+%-----------------------------------------------------------------------------------------------------------------------*
+
+%http://texblog.wordpress.com/tag/listoftables/
+% DOIT ÊTRE PLACÉ APRÈS HYPERREF !
+\usepackage{tocloft}
+
+\newcommand{\listprogrammesname}{Listings}
+
+\newlistof[chapter]{programmes}{prgm}{\listprogrammesname}
+
+\newcommand{\programmes}[2]{
+  \refstepcounter{programmes}
+  \par\noindent\center{\label{prgm:#1}\emph{\textbf{Listing \theprogrammes~-- }#2}}
+  \addcontentsline{prgm}{programmes}
+  {\protect\numberline{\theprogrammes}~~~#2}\par % Ceci est la numérotation dans la table des matières
+}
+
+\newcommand\refProgramme[1]{\hyperref[prgm:#1]{listing \ref*{prgm:#1}}}
+
+\newcommand\refProgrammePage[1]{\hyperref[prgm:#1]{listing \ref*{prgm:#1} page \pageref{prgm:#1}}}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
@@ -782,7 +666,7 @@
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
 
-\cleardoublepage
+\clearpage % \cleardoublepage
 \listoftables
 \addtocontents{lot}{\protect\thispagestyle{empty}\protect\pagestyle{fancy}}
 
@@ -792,21 +676,21 @@
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
 
-\cleardoublepage
+\clearpage
 \listoffigures
 \addtocontents{lof}{\protect\thispagestyle{empty}\protect\pagestyle{fancy}}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
-%   L I S T E    D E S    P R O G R A M M E S    S P I C E                                                              *
+%   L I S T E    D E S    P R O G R A M M E S                                                                           *
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
 
-%\cleardoublepage
-%\addtocontents{prgm-spice}{\protect\thispagestyle{empty}\protect\pagestyle{fancy}}
-%\begingroup
-%  \tocfile{\listprogrammeSpicename}{prgm-spice}
-%\endgroup
+\clearpage
+\addtocontents{prgm}{\protect\thispagestyle{empty}\protect\pagestyle{fancy}}
+\begingroup
+  \tocfile{\listprogrammesname}{prgm}
+\endgroup
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *

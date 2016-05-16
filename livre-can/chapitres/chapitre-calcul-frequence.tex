@@ -2,7 +2,7 @@
 %!TEX root = ../livre-can.tex
 
 
-\chapter{Calcul de la fréquence}
+\chapter{Calcul de la fréquence du bus}
 
 %--- Pour supprimer tout en-tête et pied de page sur la 1re page d'un chapitre
 \thispagestyle{empty}
@@ -11,24 +11,350 @@ Peut-on toujours atteindre les fréquences de bus désirées avec les cartes don
 
 Par exemple, l'auteur a été confronté au problème suivant : il voulait réaliser un réseau CAN entre un micro-contrôleur LPC2294 de NXP, conduit par un quartz de fréquence $14,7456$ MHz, et des PIC18F26K80 de Microchip, conduits par des quartz à $16$ MHz.
 
-Le micro-contrôleur LPC2294 est équipé d'un multiplieur de fréquence programmable, la fréquence obtenue ne devant pas dépasser $60$ MHz. En programmant le facteur $4$, on aboutit à $59,9824$ MHz. Cette horloge sert de base de temps pour les modules CAN intégrés. 
+Le micro-contrôleur LPC2294 est équipé d'un multiplieur de fréquence programmable, la fréquence obtenue ne devant pas dépasser $60$ MHz. En programmant le facteur $4$, on aboutit à $59,9824$ MHz. Cette horloge sert de base de temps pour les contôleurs CAN intégrés. 
 
-Le PIC18F26K80 dispose aussi d'un multiplieur de fréquence optionnel, non programmable, d'un facteur fixe égal à $4$ : l'horloge du module CAN intégré a donc une fréquence de $64$ MHz.
+Le PIC18F26K80 dispose aussi d'un multiplieur de fréquence optionnel, non programmable, d'un facteur fixe égal à $4$ : l'horloge du contôleur CAN intégré a donc une fréquence de $64$ MHz.
 
 Peut-on réaliser un bus à $1$ Mbit/s ? Cela ne pose pas de problème particulier pour les PIC18F26K80, mais, par une division entière de $58,9824$ MHz, on ne peut jamais atteindre exactement $1$ Mbit/s : en divisant par $60$, on obtient $983$ kbit/s, soit un écart de $1,7$ \% avec $1$ Mbit/s. En appliquant les résultats du \refChapterTitlePage{chapitreCalculBit}, on peut constater que c'est très limite \pasFini.
 
 Les questions que l'on se pose alors :
 \begin{itemize}
-  \item existe-t'il pour le LPC2294 un réglage qui permette de mieux s'approcher de la fréquence de $1$ Mbit/s, et qui soit acceptable ?
+  \item existe-t'il pour le LPC2294 un réglage qui permette de mieux s'approcher de la fréquence de $1$ Mbit/s, et qui soit acceptable ? Plus généralement, quel réglage permet de s'approcher au mieux d'une fréquence donnée ?
   \item sinon, quelle fréquence choisir, qui puisse être commune aux PICs et au LPC2294 ?
 \end{itemize}
 
 Ce sont les réponses à ces deux questions qui vont être apportées dans ce chapitre.
 
-Nous allons présenter des codes écrits en C++, basés sur une recherche exhaustive de toutes les réglages possibles des modules CAN d'un micro-contrôleur. Avec la vitesse actuelle des ordinateurs de bureau, il est inutile d'adopter des algorithmes efficaces : avec une recherche en force brute, les réponses sont quasi instantanées.
+Nous allons présenter des codes écrits en C++, basés sur une recherche exhaustive de toutes les réglages possibles des contôleurs CAN d'un micro-contrôleur. Avec la vitesse actuelle des ordinateurs de bureau, il est inutile d'adopter des algorithmes plus efficaces : avec une recherche en force brute, les réponses sont quasi instantanées.
 
 
 
 
 
 % \footnote{\url{http://www.nxp.com/products/microcontrollers-and-processors/arm-processors/lpc-arm7-arm9-mcus/lpc-arm7-microcontrollers/lpc2100-200-300-400/16-32-bit-arm-microcontrollers-256-kb-isp-iap-flash-with-can-10-bit-adc-and-external-memory-interface:LPC2294FBD144}}
+
+
+\section{Décomposition temporelle d'un bit}
+
+Les paramètres de définition de la décomposition d'un bit sont définis par les documents CAN de Bosch\cite{canSpecifBosch}. Aussi, tous les contrôleurs CAN intègrent les mêmes paramètres, à quelques variantes près. Pour calculer toutes les vitesses programmables possibles, le détail de la décomposition d'un bit est sans importance, seule la valeur d'un paramètre $B$ que nous allons définir importe. Bien sûr, pour faire fonctionner effectivement le bus, la définition de la décomposition est importante et fera l'objet du \refChapterTitlePage{chapitreCalculBit}.
+
+La décomposition temporelle d'un bit CAN\footnote{Le détail de la composition du paramètre programmable $B$ n'est pas expliqué dans ce chapitre, il est présenté dans le \refChapterTitlePage{chapitreCalculBit}.} est effectuée comme suit :
+\begin{itemize}
+\item une horloge de fréquence $f_{CAN}$ conduit le contrôleur CAN ;
+\item un prédiviseur $D$, souvent nommé « \emph{Baud Rate Prescaler} », divise cette fréquence pour obtenir le « \emph{Time Quantum} » $T_Q$ ; la spécification CAN précise que l'intervalle des valeurs possibles doit s'étendre au moins de $1$ à $32$ ;
+\item la durée d'un bit CAN est $T_{BIT} = B\times T_Q$, où $B$ est un paramètre programmable dont la spécification CAN \cite{canSpecifBosch} précise qu'il doit s'étendre au moins entre $4$ et $25$.
+\end{itemize}
+
+En résumé :
+\begin{equation*}
+  T_Q = \frac{D}{f_{CAN}} \text{, et~}T_{BIT} = B \times T_Q = \frac{B\times D}{f_{CAN}}\text{, avec~} 4 \leqslant B \leqslant 25
+\end{equation*}
+
+
+Les micro-contrôleurs peuvent apporter quelques variations à ces spécifications. Ainsi, le « \emph{Baud Rate Prescaler} » du PIC16F26K80 peut atteindre $64$ (donc $1 \leqslant D \leqslant 64$), et pour le LPC2294 :
+\begin{itemize}
+  \item son « \emph{Baud Rate Prescaler} » peut atteindre $512$ (donc $1 \leqslant D \leqslant 512$) ;
+  \item l'intervalle des valeurs programmables de $B$ est différent : $5 \leqslant B \leqslant 27$.
+\end{itemize}
+
+Par exemple, pour le PIC16F26K80, choisir $D=8$ et $B=8$ permet d'obtenir un bus à $1$ Mbit/s. En effet :
+\begin{equation*}
+  T_{BIT} \frac{B\times D}{f_{CAN}} = \frac{8\times 8}{64~\text{MHz}} = 1~\text{µs}
+\end{equation*}
+
+\section{Programme de calcul de toutes les configurations}
+
+Le premier programme présenté calcule toutes les configurations de la programmation de la durée d'un bit. Pour le LPC2294, comme on a $1 \leqslant D \leqslant 512$ et $5 \leqslant B \leqslant 27$, on obtient $512 \times (27 - 5 + 1) = 11776$ configurations possibles.
+
+Le programme est présenté pas-à-pas, de manière progressive sous la forme de listings séparés. Terminé, il comprend deux cents lignes environ, dans un seul fichier. Le lecteur pourra le reconstituer en concaténant :
+\begin{enumerate}
+  \item l'en-tête du programme, \refProgramme{enTetePrgmCalculConfigs} ;
+  \item la classe \texttt{cSetting}, \refProgramme{classeSettingPrgmCalculConfigs} ;
+  \item la fonction \texttt{computeSettings} de calcul de toutes les configurations d'un contrôleur CAN, \refProgramme{fonctionComputeSettingsPrgmCalculConfigs} ou \refProgramme{fonctionComputeSettingsFiltrePrgmCalculConfigs} ;
+  \item la fonction \texttt{displayBestSettings}, qui affiche les configurations qui permettent d'approcher au mieux une vitesse donnée, \refProgramme{fonctionDisplayBestSettingsPrgmCalculConfigs} ;
+  \item la fonction \texttt{main}, qui appelle les fonctions précédentes, \refProgramme{fonctionMainPrgmCalculConfigs} ;
+\end{enumerate}
+
+
+
+
+
+
+
+
+\subsection{En-tête du programme}
+
+Comme pour tout programme C++, il faut commencer (\refProgramme{enTetePrgmCalculConfigs}) par inclure les fichiers d'en-tête correspondants aux classes de la « \emph{Standard C++ Library} » utilisées dans la suite. La déclaration \lstinline!using namespace std ;! permet d'omettre  \lstinline!std::!, et d'écrire par exemple directement  \lstinline!cout! au lieu de  \lstinline!std::cout!.
+
+\begin{figure}[!ht]
+\begin{lstlisting}
+#include <iostream>
+#include <vector>
+#include <array>
+#include <utility>
+#include <math.h>
+
+using namespace std ;
+\end{lstlisting}
+  \programmes{enTetePrgmCalculConfigs}{En-tête}
+\end{figure}
+
+
+\subsection{La classe \texttt{cSetting}}
+
+La classe \texttt{cSetting} est décrite par le \refProgramme{classeSettingPrgmCalculConfigs}. Un objet de cette classe définit une configuration particulière d'un contrôleur CAN, caractérisée par :
+\begin{itemize}
+  \item la valeur de l'horloge $f_{CAN}$, exprimée en MHz (donnée membre \texttt{mClockFrequency}) ;
+  \item la valeur du paramètre $D$ (donnée membre \texttt{mClockDivisor}) ;
+  \item la valeur du paramètre $B$ (donnée membre \texttt{mB}).
+\end{itemize}
+
+Cette classe est \emph{non mutable} car ces paramètres ne peuvent pas être modifiés : toutes les fonctions membres sont déclarées constantes.
+
+\begin{figure}[!ht]
+\begin{lstlisting}
+class cSetting {
+  private : double mClockFrequency ; // In MHz
+  private : int mClockDivisor ;
+  private : int mB ;
+  
+  public : cSetting (const double inClockFrequency,
+                     const int inClockDivisor,
+                     const int inB) :
+  mClockFrequency (inClockFrequency),
+  mClockDivisor (inClockDivisor),
+  mB (inB) {
+  }
+  
+  public : cSetting (void) :
+  mClockFrequency (1E-6), // Very low frequency: 1 Hz
+  mClockDivisor (1),
+  mB (1) {
+  }
+
+  public : double bitDuration (void) const {  // In micro-s
+    return ((double) (mClockDivisor * mB)) / mClockFrequency ;
+  }
+
+  public : double distanceFrom (const double inBitDuration) const {
+    return fabs (inBitDuration - bitDuration ()) ; // In micro-s
+  }
+
+  public : void display (void) const {
+    printf ("| %3d | %3d |  %8.4f us ",
+            mClockDivisor, mB, bitDuration ()) ;
+  }
+} ;
+\end{lstlisting}
+  \programmes{classeSettingPrgmCalculConfigs}{Classe \texttt{cSetting}}
+\end{figure}
+
+La classe \texttt{cSetting} déclare :
+\begin{itemize}
+\item un constructeur dédié qui définit la configuration ;
+\item le constructeur par défaut qui est nécessaire pour faire figurer les objets de cette classe dans des tableaux de taille fixe ; le constructeur par défaut initialise les données membres à des valeurs non plausibles ($f_{CAN} = 1$ Hz, $B = D = 1$)  ;
+\item la fonction \texttt{bitDuration} qui retourne la durée du bit (en µs) correspondant à la configuration définie ;
+\item la fonction \texttt{distanceFrom} qui retourne distance temporelle entre la durée du bit correspondant à la configuration définie et la valeur (en µs) fournie en argument ; cette fonction sera utile pour classer les configurations qui s'approche le mieux d'une valeur donnée ;
+\item la fonction \texttt{display} qui affiche sur le terminal la valeur des paramètres de cette configuration.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+\subsection{Calcul de toutes les configurations : la fonction \texttt{computeSettings}}
+
+La fonction \texttt{computeSettings} (\refProgramme{fonctionComputeSettingsPrgmCalculConfigs}) calcule la liste de toutes les configurations possibles d'un contrôleur CAN. Elle est appelée avec cinq arguments :
+\begin{enumerate}
+  \item la fréquence de l'horloge du contrôleur CAN (\texttt{inClockFrequency}) ;
+  \item la valeur minimum du prédiviseur $D$ (\texttt{inClockDivisorMin}) ;
+  \item la valeur maximum du prédiviseur $D$ (\texttt{inClockDivisorMax}) ;
+  \item la valeur minimum du paramètre $B$ (\texttt{inBMin}) ;
+  \item la valeur maximum du paramètre $B$ (\texttt{inBMax}).
+\end{enumerate}
+
+
+
+\begin{figure}[!ht]
+\begin{lstlisting}
+static vector <cSetting>
+computeSettings (const double inClockFrequency,
+                 const int inClockDivisorMin,
+                 const int inClockDivisorMax,
+                 const int inBMin,
+                 const int inBMax) {
+  vector <cSetting> allSettings ;
+  for (int d = inClockDivisorMin ; d <= inClockDivisorMax ; d++) {
+    for (int b = inBMin ; b <= inBMax ; b++) {
+      const cSetting setting (inClockFrequency, d, b) ;
+      allSettings.push_back (setting) ;
+    }
+  }
+  return allSettings ;
+}
+\end{lstlisting}
+  \programmes{fonctionComputeSettingsPrgmCalculConfigs}{La fonction \texttt{computeSettings}}
+\end{figure}
+
+
+Le calcul de toutes les configurations consiste à balayer toutes les configurations de $B$ et $D$, et à les insérer dans un tableau dynamique C++ de type \texttt{vector<cSetting>}. Ce tableau n'est pas trié, les configurations apparaissent dans l'ordre où elles insérées. Ce tableau est la valeur retournée par la fonction.
+
+On peut apporter une modification à cette fonction pour ne retenir que les configurations qui présentent une certaine propriété. Par exemple, la fonction décrite par le \refProgramme{fonctionComputeSettingsFiltrePrgmCalculConfigs} ne retient que les configurations dont la durée de bit est comprise en $1$ µs et $2$ µs, c'est-à-dire un bus entre $500$ kbit/s et $1$ Mbit/s.
+
+
+
+\begin{figure}[!ht]
+\begin{lstlisting}
+static vector <cSetting>
+computeSettings (const double inClockFrequency,
+                 const int inClockDivisorMin,
+                 const int inClockDivisorMax,
+                 const int inBMin,
+                 const int inBMax) {
+  vector <cSetting> allSettings ;
+  for (int d = inClockDivisorMin ; d <= inClockDivisorMax ; d++) {
+    for (int b = inBMin ; b <= inBMax ; b++) {
+      const cSetting setting (inClockFrequency, d, b) ;
+      const double bitDuration = setting.bitDuration () ;
+      if ((bitDuration >= 1.0) && (bitDuration <= 2.0)) {
+        allSettings.push_back (setting) ;
+      }
+    }
+  }
+  return allSettings ;
+}
+\end{lstlisting}
+  \programmes{fonctionComputeSettingsFiltrePrgmCalculConfigs}{La fonction \texttt{computeSettings} modifiée}
+\end{figure}
+
+
+
+\subsection{Obtention des configurations pour obtenir une vitesse donnée}
+
+Commençons par la fonction \texttt{main} du programme (\refProgramme{fonctionMainPrgmCalculConfigs}). Celle-ci va permettre de répondre à la question : \emph{existe-t'il pour le LPC2294 dont l'horloge du contrôleur CAN est à $58,9824$ MHz un réglage acceptable qui permette de s'approcher de la fréquence de $1$ Mbit/s ?}
+
+
+\begin{figure}[!ht]
+\begin{lstlisting}
+int main (int /* argc */, const char * /* argv */ []) {
+//--- Compute all settings for LPC2294
+  const vector <cSetting> allLPC2294settings
+    = computeSettings (58.9824, 1, 512, 5, 27) ;
+  cout << "LPC2294: " << allLPC2294settings.size ()
+       << " configurations\n" ;
+//--- Compute nearest setting from a given bit time
+  const double nominalBitDuration = 1.0 ; // in us
+  displayBestSettings (allLPC2294settings, nominalBitDuration) ;
+//---
+  return 0 ;
+}
+\end{lstlisting}
+  \programmes{fonctionMainPrgmCalculConfigs}{La fonction \texttt{main}}
+\end{figure}
+
+La fonction \texttt{main} commence par calculer toutes les configurations du contrôleur CAN dont l'horloge est à $58,9824$ MHz, $1 \leqslant D \leqslant 512$ et $5 \leqslant B \leqslant 27$. Si la fonction \texttt{computeSettings} modifiée a été choisie (\refProgramme{fonctionComputeSettingsFiltrePrgmCalculConfigs}), on obtient $106$ configurations (au lieu de $11776$ avec la fonction du \refProgramme{fonctionComputeSettingsPrgmCalculConfigs}).
+
+Ensuite, la constante \texttt{nominalBitDuration} fixe la durée nominale recherchée : \texttt{1.0} pour $1$ µs, c'est-à-dire un bus à $1$ Mbit/s. La fonction \texttt{displayBestSettings}, décrite ci-après (\refProgramme{fonctionDisplayBestSettingsPrgmCalculConfigs}) calcule et affiche les dix configurations les plus proches de $1$ Mbit/s :
+
+{\small\singlespacing
+\begin{verbatim}
+Best settings for bit duration 1 us, frequency 1 MHz
+|   D |   B | Bit duration |  distance
+|   3 |  20 |    1.0173 us |   1.7253 %
+|   4 |  15 |    1.0173 us |   1.7253 %
+|   5 |  12 |    1.0173 us |   1.7253 %
+|   6 |  10 |    1.0173 us |   1.7253 %
+|  10 |   6 |    1.0173 us |   1.7253 %
+|  12 |   5 |    1.0173 us |   1.7253 %
+|   9 |   7 |    1.0681 us |   6.8115 %
+|   3 |  21 |    1.0681 us |   6.8115 %
+|   7 |   9 |    1.0681 us |   6.8115 %
+|   8 |   8 |    1.0851 us |   8.5069 %
+\end{verbatim}
+}
+
+Les six meilleures présentent un écart supérieur à $1,7$ \% avec la durée désirée $1$ µs (\pasFini). Les suivantes, à plus de $6$ \% sont à rejeter sans hésiter. Des configurations différentes peuvent fournir la même durée de bit (c'est le cas des six premières), car c'est la valeur du produit $D\times B$ qui intervient dans les calculs. 
+
+Autre exemple : existe-t'il un réglage pour obtenir un bus à par exemple $577$ kbit/s ? Il suffit de changer la ligne qui fixe la durée nominale du bit : 
+
+\begin{lstlisting}
+  const double nominalBitDuration = 1.0 / 0.577 ; // in us
+\end{lstlisting}
+
+L'exécution du programme affiche le résultat :
+{\small\singlespacing
+\begin{verbatim}
+Best settings for bit duration 1.7331 us, frequency 0.577 MHz
+|   D |   B | Bit duration |  distance
+|   6 |  17 |    1.7293 us |   0.2177 %
+|  17 |   6 |    1.7293 us |   0.2177 %
+|   8 |  13 |    1.7632 us |   1.7388 %
+|  13 |   8 |    1.7632 us |   1.7388 %
+|   4 |  26 |    1.7632 us |   1.7388 %
+|  10 |  10 |    1.6954 us |   2.1742 %
+|   4 |  25 |    1.6954 us |   2.1742 %
+|   5 |  20 |    1.6954 us |   2.1742 %
+|  20 |   5 |    1.6954 us |   2.1742 %
+|  15 |   7 |    1.7802 us |   2.7171 %
+\end{verbatim}
+}
+
+Deux configurations présentent un écart de $0,2$ \% avec la durée nominale et peuvent donc être adoptées (\pasFini).
+
+
+
+
+
+
+
+
+ 
+
+\subsection{Calcul et affichage des meilleures configurations : la fonction \texttt{displayBestSettings}}
+
+
+
+
+\begin{figure}[!ht]
+\begin{lstlisting}
+static void
+displayBestSettings (const vector <cSetting> & inAllSettings,
+                     const double inNominalBitDuration) {
+  const int RESULT_COUNT = 10 ;
+  cSetting resultArray [RESULT_COUNT] ;
+  for (auto it = inAllSettings.cbegin () ;
+            it != inAllSettings.cend () ; ++it) {
+    cSetting setting = * it ;
+    for (int i=0 ; i<RESULT_COUNT ; i++) {
+      if (setting.distanceFrom (inNominalBitDuration)
+        < resultArray [i].distanceFrom (inNominalBitDuration)) {
+        swap <cSetting> (setting, resultArray [i]) ;
+      }
+    }
+  }
+//--- Display results
+  cout << "Best setting for bit duration "
+       << inNominalBitDuration << " us, frequency "
+       << (1.0 / inNominalBitDuration) << " MHz\n" ;
+  printf ("|   D |   B | Bit duration |  distance\n") ;
+  for (int i=0 ; i<RESULT_COUNT ; i++) {
+    resultArray [i].display () ;
+    const double perCent = 100.0
+      * resultArray [i].distanceFrom (inNominalBitDuration)
+      / inNominalBitDuration ;
+    printf ("|  %7.4f %%\n", perCent) ;
+  }
+}
+\end{lstlisting}
+  \programmes{fonctionDisplayBestSettingsPrgmCalculConfigs}{La fonction \texttt{displayBestSettings}}
+\end{figure}
+
+
+
+
+
+
