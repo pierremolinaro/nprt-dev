@@ -146,7 +146,7 @@ class cSetting {
   }
 } ;
 \end{lstlisting}
-  \programmes{classeSettingPrgmCalculConfigs}{Classe \texttt{cSetting}}
+  \programmes{classeSettingPrgmCalculConfigs}{La classe \texttt{cSetting}}
 \end{figure}
 
 La classe \texttt{cSetting} déclare :
@@ -314,8 +314,13 @@ Deux configurations présentent un écart de $0,2$ \% avec la durée nominale et
 
  
 
-\subsection{Calcul et affichage des meilleures configurations : la fonction \texttt{displayBestSettings}}
+\subsection{Affichage des meilleures configurations : la fonction \texttt{displayBestSettings}}
 
+La fonction \texttt{displayBestSettings} (\refProgramme{fonctionDisplayBestSettingsPrgmCalculConfigs}) affichage les configurations dont la durée de bit est la plus proche d'une durée donnée. Elle présente deux arguments : 
+\begin{enumerate}
+  \item le tableau de toutes les configurations possibles (\texttt{inAllSettings}) ;
+  \item la durée nominale du bit que l'on cherche à atteindre (\texttt{inNominalBitDuration}, en µs).
+\end{enumerate}
 
 
 
@@ -354,7 +359,11 @@ displayBestSettings (const vector <cSetting> & inAllSettings,
 \end{figure}
 
 
+La fonction affiche les $10$ meilleures configurations, on peut facilement changer cette valeur en modifiant la constante \texttt{RESULT\_COUNT}. Ces meilleures configurations sont mémorisées dans le tableau statique \texttt{resultArray}. Chaque élément de ce tableau est initialisé à une valeur la plus éloignée possible d'une valeur acceptable. Ici, c'est le constructeur par défaut de la classe \texttt{cSetting} qui est implicitement appelé, qui définit un bus CAN à $1$ bit/s : il est évident que n'importe quel réglage est meilleur que cette valeur initiale.
 
+Ensuite, on énumère le tableau \texttt{inAllSettings}, qui contient toutes les configurations possibles. Vient alors le cœur de l'algorithme : chaque configuration est testée avec les éléments du tableau \texttt{resultArray}. Si la configuration est meilleure, on effectue un échange (fonction \texttt{swap}) : la meilleure configuration est entrée dans le tableau, et on récupère dans la variable \texttt{setting} l'ancienne configuration. Celle-ci sera testée avec l'élément suivant. Ainsi, la meilleure configuration se place à l'indice $0$, et au cours de l'exécution, les configurations les moins favorables sont progressivement chassées vers le haut du tableau et éliminées.
+
+C'est un algorithme simple à mettre au point, et sans aucun doute il doit en exister de plus rapides. Mais comme la réponse est quasiment instantanée, il n'y a pas lieu à notre avis de rechercher un algorithme plus efficace.
 
 
 
