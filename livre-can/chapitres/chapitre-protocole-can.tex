@@ -7,8 +7,8 @@
 
 \newcommand\startcanbit{\pgfmathparse{0}\let\x\pgfmathresult}
 
-\newcommand\cancommentstyle{\small}
-\newcommand\cantextstyle{\footnotesize\tt}
+\newcommand\cancommentstyle{\scriptsize}
+\newcommand\cantextstyle{\scriptsize\tt}
 \newcommand\canbitwidth{.7}
 \newcommand\canbitheight{.5}
 
@@ -182,14 +182,14 @@ Les deux premières font l'objet de la section suivante. Il y a plusieurs trames
 
 Le format de cette trame est décrit par la \refFigure{}{figureFormatTrameDonnees}. La composition et le rôle de chaque champ seront détaillés dans les sections qui suivent. Pour comprendre ce que ce shéma illustre, il faut considérer que l'on est dans la situation suivante :
 \begin{itemize}
-  \item un seul contrôleur CAN est en émission, les autres sont en réception (§§) ;
+  \item un seul contrôleur CAN est en émission, les autres sont en réception (\pasFini) ;
   \item les valeurs indiquées sont les niveaux logiques qui apparaissent sur le signal \texttt{TxD} du contrôleur CAN en émission ;
   \item les autres contrôleurs CAN (qui sont en réception) émettent un niveau logique $1$ sur \texttt{TxD} ;
   \item la logique de diffusion ($0$ -> \emph{dominant}, $1$ -> \emph{récessif}) fait que ce signal est reporté tel quel sur les entrées \texttt{RX} des contrôleurs CAN en réception, ainsi que celui en émission ;
   \item seule exception : le bit \texttt{ACK SLOT}. 
 \end{itemize}
 
-Note : la durée d'un bit dépend de la fréquence du bus.
+Note : la durée d'un bit dépend de la fréquence du bus.\pasFini
 
 
 
@@ -736,7 +736,7 @@ Pour terminer, la \refFigure{}{figureExempleInsertionMaxBitStuffing} montre un s
       \canbitl{r0}
     \candots
   \end{tikzpicture}
-  \caption{Scénario d'insertion maximum de bits par le mécanisme de « \emph{bit stuffing} »}
+  \caption{Scénario d'insertion maximum de bits par le « \emph{bit stuffing} »}
   \labelFigure{figureExempleInsertionMaxBitStuffing}
 \end{figure}
 
@@ -918,9 +918,9 @@ La collision décrite ci-dessus est illustrée par la \refFigure{}{figureExemple
       \candots
     \end{scope}
   \draw (2.5 * \canbitwidth, -.1) [<-] -- ++ (0, -.4) ;
-  \draw (3 * \canbitwidth, -.75) node[left] {\cancommentstyle \emph{Le contrôleur 1 perd l'arbitrage}} ;
+  \draw (3 * \canbitwidth, -.75) node[left] {\cancommentstyle \emph{Le contrôleur $A$ perd l'arbitrage}} ;
   \draw (4.5 * \canbitwidth, -.1) [<-] -- ++ (0, -.9) ;
-  \draw (5 * \canbitwidth, -1.25) node[left] {\cancommentstyle \emph{Le contrôleur 3 perd l'arbitrage}} ;
+  \draw (5 * \canbitwidth, -1.25) node[left] {\cancommentstyle \emph{Le contrôleur $C$ perd l'arbitrage}} ;
   \end{tikzpicture}
   \caption{Exemple d'arbitrage entre trois contrôleurs}
   \labelFigure{figureExempleArbitrage}
