@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>calcul-vitesse-can-lpc2294-pics.xcscheme</key>
+		<key>can-bus-speed-computations.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>CF3F249A179F22BF00CF7A58</key>
+		<key>CF34C6811CE8D7CD00739132</key>
 		<dict>
 			<key>primary</key>
 			<true/>

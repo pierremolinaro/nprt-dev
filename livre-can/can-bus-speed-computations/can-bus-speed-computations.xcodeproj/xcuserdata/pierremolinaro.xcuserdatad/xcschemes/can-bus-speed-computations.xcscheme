@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0630"
+   LastUpgradeVersion = "0730"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,67 +14,70 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CF3F249A179F22BF00CF7A58"
-               BuildableName = "calcul-vitesse-can-lpc2294-pics"
-               BlueprintName = "calcul-vitesse-can-lpc2294-pics"
-               ReferencedContainer = "container:calcul-vitesse-can-lpc2294-pics.xcodeproj">
+               BlueprintIdentifier = "CF34C6811CE8D7CD00739132"
+               BuildableName = "can-bus-speed-computations"
+               BlueprintName = "can-bus-speed-computations"
+               ReferencedContainer = "container:can-bus-speed-computations.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      buildConfiguration = "Debug">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CF3F249A179F22BF00CF7A58"
-            BuildableName = "calcul-vitesse-can-lpc2294-pics"
-            BlueprintName = "calcul-vitesse-can-lpc2294-pics"
-            ReferencedContainer = "container:calcul-vitesse-can-lpc2294-pics.xcodeproj">
+            BlueprintIdentifier = "CF34C6811CE8D7CD00739132"
+            BuildableName = "can-bus-speed-computations"
+            BlueprintName = "can-bus-speed-computations"
+            ReferencedContainer = "container:can-bus-speed-computations.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CF3F249A179F22BF00CF7A58"
-            BuildableName = "calcul-vitesse-can-lpc2294-pics"
-            BlueprintName = "calcul-vitesse-can-lpc2294-pics"
-            ReferencedContainer = "container:calcul-vitesse-can-lpc2294-pics.xcodeproj">
+            BlueprintIdentifier = "CF34C6811CE8D7CD00739132"
+            BuildableName = "can-bus-speed-computations"
+            BlueprintName = "can-bus-speed-computations"
+            ReferencedContainer = "container:can-bus-speed-computations.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CF3F249A179F22BF00CF7A58"
-            BuildableName = "calcul-vitesse-can-lpc2294-pics"
-            BlueprintName = "calcul-vitesse-can-lpc2294-pics"
-            ReferencedContainer = "container:calcul-vitesse-can-lpc2294-pics.xcodeproj">
+            BlueprintIdentifier = "CF34C6811CE8D7CD00739132"
+            BuildableName = "can-bus-speed-computations"
+            BlueprintName = "can-bus-speed-computations"
+            ReferencedContainer = "container:can-bus-speed-computations.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
