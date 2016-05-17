@@ -201,7 +201,7 @@ Note : la durée d'un bit dépend de la fréquence du bus.\pasFini
 
 \subsection{Début de trame (« \emph{Start of Frame} »)}
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
     \startcanbit
@@ -225,11 +225,11 @@ Une trame commence par l'émission d'un bit dominant ($0$), le bit \texttt{SOF} 
 
 
 
-\subsection{Champs arbitrage, de contrôle (« \emph{Arbitration Field} », « \emph{Control Field} »)}
+\subsection{Champs arbitrage, de contrôle (« \emph{Arbitration, Control Fields}~»)}
 
 Ces deux champs sont décrits simultanément pour être plus facilement compréhensibles. Leur composition est illustrée par la \refFigure{}{figureChampArbitrage}. La composition du champ arbitrage peut paraître étrange et bizarremment compliquée. Mais cela s'explique pour des raisons historiques qui vont être exposées.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
     \draw (\canbitwidth, 0)[dotted] -- ++ (0, 4.5) ;
@@ -334,7 +334,7 @@ Si le bit \texttt{RTR} est à $0$, la trame est une trame de données, et ce cha
 
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
     \draw (4 * \canbitwidth, \canbitheight)[dotted] -- (1.5 * \canbitwidth, 1.5) ;
@@ -383,7 +383,7 @@ Chaque récepteur signale l'acceptation de la réception en activant le bit \tex
 
 Comme l'illustre la \refFigure{}{figureChampCRC}, le champ \texttt{CRC} est composé du sous-champ \texttt{CRC SEQUENCE} de $15$ bits, qui contient la somme de contrôle proprement dite ; il est suivi d'un bit à $1$, le \texttt{CRC DELIMITER} qui permet aux récepteurs d'avoir le temps de décider si la trame reçue est valide ou doit être rejetée.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
     \draw (\canbitwidth, 0)[dotted] -- ++ (0, 1) ;
@@ -417,7 +417,7 @@ Comme l'illustre la \refFigure{}{figureChampCRC}, le champ \texttt{CRC} est comp
 \end{figure}
 
 
-La technique utilisée pour calculer la somme de contrôle est celle des \emph{codes cycliques} : elle présente le double intérêt d'être très efficace et d'être facilement réalisable à partir de registres à décalage et de portes \emph{ou-exclusif}. Il existe une infinité de codes cycliques, chacun étant caractérisé par un polynome premier : celui utilisé par les contrôleurs CAN est $X^{15}+X^{14}+X^{10}+X^8+X^7+X^4+X^3+1$. La probabilité qu'une trame erronée vérifie la somme de contrôle est extrèmement faible\footnote{Unruh, J., Mathony, H.J., Kaiser, K.H.: Error Detection Analysis of Automotive Communication Protocols, SAE International Congress 1990.}, et évaluée à $4,7 \times 10^{-11}$.
+La technique utilisée pour calculer la somme de contrôle est celle des \emph{codes cycliques} : elle présente le double intérêt d'être très efficace et d'être facilement réalisable à partir de registres à décalage et de portes \emph{ou-exclusif}. Il existe une infinité de codes cycliques, chacun étant caractérisé par un polynome : celui utilisé par les contrôleurs CAN est $X^{15}+X^{14}+X^{10}+X^8+X^7+X^4+X^3+1$. La probabilité qu'une trame erronée vérifie la somme de contrôle est très faible\footnote{Unruh, J., Mathony, H.J., Kaiser, K.H.: Error Detection Analysis of Automotive Communication Protocols, SAE International Congress 1990.}, et évaluée à $4,7 \times 10^{-11}$.
 
 
 
@@ -426,7 +426,7 @@ La technique utilisée pour calculer la somme de contrôle est celle des \emph{c
 
 Le champ d'acquittement (\refFigure{}{figureChampACK}) est composé de deux bits, le bit \texttt{ACK SLOT} et le bit \texttt{ACK DELIMITER} qui est toujours à $1$.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
     \draw (\canbitwidth, 0)[dotted] -- ++ (0, 1) ;
@@ -452,7 +452,7 @@ Le bit \texttt{ACK SLOT} présente une particularité unique, c'est pour cela qu
 
 Noter qu'un contrôleur CAN en réception émet des bits récessifs pendant la durée de la trame, sauf lors du bit \texttt{ACK SLOT} si il accepte la trame, et lorsqu'il a détecté une erreur.
 
-Ainsi, lorsqu'un contrôleur transmet une trame, il envoie un bit récessif pour le bit \texttt{ACK SLOT}, et, si il est seul sur le bus, reçoit à cet emplacement un bit récessif, puisqu'aucun contrôleur sur le bus n'envoie de bit dominant. Cette situation peut être considérée comme une erreur par l'émetteur (voir §§).
+Ainsi, lorsqu'un contrôleur transmet une trame, il envoie un bit récessif pour le bit \texttt{ACK SLOT}, et, si il est seul sur le bus, reçoit à cet emplacement un bit récessif, puisqu'aucun contrôleur sur le bus n'envoie de bit dominant. Cette situation peut être considérée comme une erreur par l'émetteur (voir \pasFini).
 
 Si il y a un plusieurs contrôleurs CAN en réception, certains peuvent accepter la trame, d'autres la rejeter. Tous ceux qui acceptent envoient un bit dominant pour le bit \texttt{ACK SLOT}. L'émetteur reçoit donc un bit dominant, ce qui signifie qu'au moins un récepteur a accepté la trame. Mais il peut pas savoir combien ont accepté la trame. Ceux qui rejettent la trame envoient une trame d'erreur.
 
@@ -464,7 +464,7 @@ Si il y a un plusieurs contrôleurs CAN en réception, certains peuvent accepter
 Le champ \texttt{END OF FRAME} (\refFigure{}{figureChampEOF}) est constitué de $7$ bits récessifs. Si un contrôleur CAN en réception a détecté une erreur, il émet une trame d'erreur qui écrase ce champ.
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
     \startcanbit
@@ -485,9 +485,9 @@ Le champ \texttt{END OF FRAME} (\refFigure{}{figureChampEOF}) est constitué de 
 
 \subsection{Espace inter-trames (« \emph{Interframe Space} »)}
 
-Le champ \texttt{INTERFRAME SPACE} commence par trois bits récessifs (qui peuvent être écrasés par une trame d'erreur émise par un récepteur), et du sous-champ \texttt{IDLE}.
+Le champ \texttt{INTERFRAME SPACE} commence par le champ \texttt{INTERMISSION} (trois bits récessifs, qui peuvent être écrasés par une trame d'erreur émise par un récepteur \pasFini), et est suivi par le champ \texttt{IDLE}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
     \draw (\canbitwidth, 0)[dotted] -- ++ (0, 1) ;
@@ -521,7 +521,7 @@ Le sous-champ \texttt{IDLE} a une longueur quelconque :
 
 Quand un contrôleur CAN peut-il commencer à émettre une trame de données ?
 
-Une trame en cours de transmission ne peut pas être préemptée : sa transmission doit se terminer avant qu'une autre soit transmise. Un contrôleur CAN voulant émettre doit donc surveiller le bus, et attendre qu'il soit libre.
+Une trame en cours de transmission ne peut pas être préemptée : sa transmission doit se terminer avant qu'une autre ne soit transmise. Un contrôleur CAN voulant émettre doit donc surveiller le bus, et attendre qu'il soit libre.
 
 {\bf Un contrôleur CAN considère que le bus est libre si le bus est dans l’état récessif pendant 11 bits consécutifs.}
 
@@ -535,7 +535,7 @@ En examinant le format d'une trame CAN (\refFigurePage{}{figureFormatTrameDonnee
 
 Mais l'énoncé ci-dessus de la condition bus libre pose a priori deux problèmes.
 
-D'abord, que se passe-t'il si $11$ bits récessifs sont rencontrés au cours de la transmission de la trame ? Par exemple, si un identificateur standard est constitué de $11$ bits à $1$, ou les données comportent $11$ bits consécutifs ou plus à $1$ ? En fait, cette situation ne peut jamais arriver, quelque soient la valeur de l'identificateur ou des données : ces champs sont soumis au mécanisme du « \emph{bit stuffing} » qui garantit qu'il n'y ait jamais de séquence de plus de $5$ bits consécutifs de même valeur. Ce mécanisme est décrit à la \refSectionPage{descriptionBitStuffing}.
+D'abord, que se passe-t'il si $11$ bits récessifs sont rencontrés au cours de la transmission de la trame ? Par exemple, si un identificateur standard est constitué de $11$ bits à $1$, ou les données comportent $11$ bits consécutifs ou plus à $1$ ? En fait, cette situation ne peut jamais arriver, quelque soient la valeur de l'identificateur ou des données : ces champs sont soumis au mécanisme du « \emph{bit stuffing} » qui garantit qu'il n'y ait jamais de séquence de plus de $5$ bits consécutifs de même polarité. Ce mécanisme est décrit à la \refSectionPage{descriptionBitStuffing}.
 
 Ensuite, supposons que plusieurs contrôleurs CAN sont sollicités pour émettre une trame alors qu'une autre est en cours de transmission. Ces contrôleurs attendent tous la condition bus libre, et en même temps s'aperçoivent que le bus devient libre. Ils commencent donc à émettre leur bit \texttt{SOF} et leur identificateur simultanément : il en résulte une collision sur le bus. Le protocole CAN a évidemment prévu cette situation en instaurant une priorité entre les trames : la \refSectionPage{resolutionCollision} montre comment la trame la plus prioritaire sort indemne de la collision et est transmise comme si elle avait été la seule à être émise. 
 
@@ -558,7 +558,7 @@ Les règles définies par le protocole CAN sont :
 \item {\bf durant la transmission d'une trame, les contrôleurs CAN en réception utilisent les transitions récessif vers dominant du signal \texttt{RxD} pour se resynchroniser.} 
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
     \draw (-.5, .5 * \canbitheight) node[left] {\cancommentstyle RxD} ;
@@ -609,7 +609,7 @@ Il est complètement transparent pour le programmeur, c'est-à-dire que le contr
 
 La \refFigure{}{figureExemplesBitStuffing} montre quelques scénarios d'insertion de bits par ce mécanisme dans des trames standard. Les bits ainsi insérés sont notés \texttt{S}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
     \begin{scope}[yshift=4cm]
@@ -712,7 +712,7 @@ Enfin, la \refFigure{e}{figureExemplesBitStuffing} illustre le cas d'un identifi
 
 Pour terminer, la \refFigure{}{figureExempleInsertionMaxBitStuffing} montre un scénario d'insertion maximum de bits \texttt{S}. L'identificateur a une valeur telle que trois bits doivent être insérés durant sa transmission.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
       \startcanbit
@@ -781,7 +781,7 @@ Le \refTableau{codageLongueurTrames} donne la borne inférieure et supérieure d
 
 Une trame de requête a la même taille qu'une trame de données sans données.
 
-Pour une trame de données, les formules générales sont ($n$ étant le nombre d'octets de données, $s$ le nombre de bits ajoutés par le mécanisme de « \emph{bit stuffing} ») :
+Pour une trame de données, les formules générales sont ($n$ étant le nombre d'octets de données, $s$ le nombre de bits ajoutés par le « \emph{bit stuffing} ») :
 \begin{itemize}
   \item pour une trame standard de données : $47 + 8 \times n + s$, avec $0 \leqslant s \leqslant 8 + 2 \times n$ ;
   \item pour une trame étendue de données : $67 + 8 \times n + s$, avec $0 \leqslant s \leqslant 13 + 2 \times n$.
@@ -860,7 +860,7 @@ Ainsi, pour des trames standard, la valeur $0$ est plus prioritaire que $1$, lui
 La collision décrite ci-dessus est illustrée par la \refFigure{}{figureExempleArbitrage}. Bien que cette figure et les explications n'envisagent le cas d'une collision entre trois émissions de trames standard, le même mécanisme de résolution s'applique pour une collision entre un nombre quelconque d'émissions standard ou étendues. 
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
     \draw (-.5, 4) node[left] {\cancommentstyle Identificateur} ;
@@ -957,7 +957,7 @@ Un même réseau peut-il véhiculer trames standards et trames étendues ? Actue
 
 Un point plus délicat à comprendre est la priorité relative entre trame standard et trame étendue\footnote{Entre deux trames standard, ou entre deux trames étendues, c'est la valeur de l'identificateur qui détermine la priorité : plus sa valeur est faible, plus la trame est prioritaire, voir \refSectionPage{resolutionCollision}.}. Pour illustrer le raisonnement, la \refFigure{}{figureChampArbitrageStandardEtendue} montre les champs \texttt{ARBITRATION} et \texttt{CONTROL} des trames standard et étendues\footnote{Ces champs apparaissent aussi dans la \refFigurePage{}{figureChampArbitrage}.}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
     \draw (\canbitwidth, 0)[dotted] -- ++ (0, 2.5) ;
@@ -997,7 +997,7 @@ Un point plus délicat à comprendre est la priorité relative entre trame stand
       \candots
     \end{scope}
   \end{tikzpicture}
-  \caption{Champ arbitrage et contrôle des trames standards et des trames étendues}
+  \caption{Champ arbitrage et contrôle des trames standards et étendues}
   \labelFigure{figureChampArbitrageStandardEtendue}
 \end{figure}
 
