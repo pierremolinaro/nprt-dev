@@ -9,13 +9,13 @@
 
 Peut-on toujours atteindre les fréquences de bus désirées avec les cartes dont on dispose ?
 
-Par exemple, l'auteur a été confronté au problème suivant : il voulait réaliser un réseau CAN entre un micro-contrôleur LPC2294 de NXP, conduit par un quartz de fréquence $14,7456$ MHz, et des PIC18F26K80 de Microchip, conduits par des quartz à $16$ MHz.
+Par exemple, l'auteur a été confronté au problème suivant : il voulait réaliser un réseau CAN entre un micro-contrôleur LPC2294 de NXP, conduit par un quartz de fréquence $14,7456$ MHz, et des PIC18F26K80 de Microchip, conduits par des quartz à $16$ MHz. La fréquence de ce réseau n'était pas imposé, on voulait simplement qu'il se situe en $500$ kbit/s et $1$ Mbit/s.
 
-Le micro-contrôleur LPC2294 est équipé d'un multiplieur de fréquence programmable, la fréquence obtenue ne devant pas dépasser $60$ MHz. En programmant le facteur $4$, on aboutit à $59,9824$ MHz. Cette horloge sert de base de temps pour les contôleurs CAN intégrés. 
+Le micro-contrôleur LPC2294 est équipé d'un multiplieur de fréquence programmable, la fréquence obtenue ne devant pas dépasser $60$ MHz. En programmant le facteur $4$, on aboutit à $58,9824$ MHz. Cette horloge sert de base de temps pour les contôleurs CAN intégrés. 
 
-Le PIC18F26K80 dispose aussi d'un multiplieur de fréquence optionnel, non programmable, d'un facteur fixe égal à $4$ : l'horloge du contôleur CAN intégré a donc une fréquence de $64$ MHz.
+Le PIC18F26K80 dispose aussi d'un multiplieur de fréquence optionnel, non programmable, d'un facteur fixe égal à $4$ : l'horloge du contrôleur CAN intégré a donc une fréquence de $64$ MHz.
 
-Peut-on réaliser un bus à $1$ Mbit/s ? Cela ne pose pas de problème particulier pour les PIC18F26K80, mais, par une division entière de $58,9824$ MHz, on ne peut jamais atteindre exactement $1$ Mbit/s : en divisant par $60$, on obtient $983$ kbit/s, soit un écart de $1,7$ \% avec $1$ Mbit/s. En appliquant les résultats du \refChapterTitlePage{chapitreCalculBit}, on peut constater que c'est très limite \pasFini.
+Peut-on réaliser un bus à $1$ Mbit/s ? Cela ne pose pas de problème particulier pour les PIC18F26K80, mais, par une division entière de $58,9824$ MHz, on ne peut jamais atteindre exactement $1$ Mbit/s : en divisant par $60$, on obtient $983$ kbit/s, soit un écart de $1,7$ \% avec $1$ Mbit/s. En appliquant les résultats du \refChapterTitlePage{chapitreCalculBit}, on peut constater que c'est très limite. [note : on ne peut pas diviser par 59 ! \pasFini]
 
 Les questions que l'on se pose alors :
 \begin{itemize}
@@ -27,7 +27,7 @@ Ce sont les réponses à ces deux questions qui vont être apportées dans ce ch
 
 Nous allons présenter des codes écrits en C++, basés sur une recherche exhaustive de toutes les réglages possibles des contôleurs CAN d'un micro-contrôleur. Avec la vitesse actuelle des ordinateurs de bureau, il est inutile d'adopter des algorithmes plus efficaces : avec une recherche en force brute, les réponses sont quasi instantanées.
 
-
+[Plan du chapitre] \pasFini
 
 
 
@@ -42,7 +42,7 @@ La décomposition temporelle d'un bit CAN\footnote{Le détail de la composition 
 \begin{itemize}
 \item une horloge de fréquence $f_{CAN}$ conduit le contrôleur CAN ;
 \item un prédiviseur $D$, souvent nommé « \emph{Baud Rate Prescaler} », divise cette fréquence pour obtenir le « \emph{Time Quantum} » $T_Q$ ; la spécification CAN précise que l'intervalle des valeurs possibles doit s'étendre au moins de $1$ à $32$ ;
-\item la durée d'un bit CAN est $T_{BIT} = B\times T_Q$, où $B$ est un paramètre programmable dont la spécification CAN \cite{canSpecifBosch} précise qu'il doit s'étendre au moins entre $4$ et $25$.
+\item la durée nominale d'un bit CAN est $T_{BIT} = B\times T_Q$, où $B$ est un paramètre programmable dont la spécification CAN \cite{canSpecifBosch} précise qu'il doit s'étendre au moins entre $4$ et $25$.
 \end{itemize}
 
 En résumé :
@@ -141,7 +141,7 @@ class cSetting {
   }
 
   public : void display (void) const {
-    printf ("| %3d | %3d |  %8.4f us ",
+    printf ("| %3d | %2d |  %8.4f us ",
             mClockDivisor, mB, bitDuration ()) ;
   }
 } ;
@@ -263,17 +263,17 @@ Ensuite, la constante \texttt{nominalBitDuration} fixe la durée nominale recher
 {\small\singlespacing
 \begin{verbatim}
 Best settings for bit duration 1 us, frequency 1 MHz
-|   D |   B | Bit duration |  distance
-|   3 |  20 |    1.0173 us |   1.7253 %
-|   4 |  15 |    1.0173 us |   1.7253 %
-|   5 |  12 |    1.0173 us |   1.7253 %
-|   6 |  10 |    1.0173 us |   1.7253 %
-|  10 |   6 |    1.0173 us |   1.7253 %
-|  12 |   5 |    1.0173 us |   1.7253 %
-|   9 |   7 |    1.0681 us |   6.8115 %
-|   3 |  21 |    1.0681 us |   6.8115 %
-|   7 |   9 |    1.0681 us |   6.8115 %
-|   8 |   8 |    1.0851 us |   8.5069 %
+|   D |  B | Bit duration |  distance
+|   3 | 20 |    1.0173 us |   1.7253 %
+|   4 | 15 |    1.0173 us |   1.7253 %
+|   5 | 12 |    1.0173 us |   1.7253 %
+|   6 | 10 |    1.0173 us |   1.7253 %
+|  10 |  6 |    1.0173 us |   1.7253 %
+|  12 |  5 |    1.0173 us |   1.7253 %
+|   9 |  7 |    1.0681 us |   6.8115 %
+|   3 | 21 |    1.0681 us |   6.8115 %
+|   7 |  9 |    1.0681 us |   6.8115 %
+|   8 |  8 |    1.0851 us |   8.5069 %
 \end{verbatim}
 }
 
@@ -289,17 +289,17 @@ L'exécution du programme affiche le résultat :
 {\small\singlespacing
 \begin{verbatim}
 Best settings for bit duration 1.7331 us, frequency 0.577 MHz
-|   D |   B | Bit duration |  distance
-|   6 |  17 |    1.7293 us |   0.2177 %
-|  17 |   6 |    1.7293 us |   0.2177 %
-|   8 |  13 |    1.7632 us |   1.7388 %
-|  13 |   8 |    1.7632 us |   1.7388 %
-|   4 |  26 |    1.7632 us |   1.7388 %
-|  10 |  10 |    1.6954 us |   2.1742 %
-|   4 |  25 |    1.6954 us |   2.1742 %
-|   5 |  20 |    1.6954 us |   2.1742 %
-|  20 |   5 |    1.6954 us |   2.1742 %
-|  15 |   7 |    1.7802 us |   2.7171 %
+|   D |  B | Bit duration |  distance
+|   6 | 17 |    1.7293 us |   0.2177 %
+|  17 |  6 |    1.7293 us |   0.2177 %
+|   8 | 13 |    1.7632 us |   1.7388 %
+|  13 |  8 |    1.7632 us |   1.7388 %
+|   4 | 26 |    1.7632 us |   1.7388 %
+|  10 | 10 |    1.6954 us |   2.1742 %
+|   4 | 25 |    1.6954 us |   2.1742 %
+|   5 | 20 |    1.6954 us |   2.1742 %
+|  20 |  5 |    1.6954 us |   2.1742 %
+|  15 |  7 |    1.7802 us |   2.7171 %
 \end{verbatim}
 }
 
@@ -366,6 +366,211 @@ Ensuite, on énumère le tableau \texttt{inAllSettings}, qui contient toutes les
 C'est un algorithme simple à mettre au point, et sans aucun doute il doit en exister de plus rapides. Mais comme la réponse est quasiment instantanée, il n'y a pas lieu à notre avis de rechercher un algorithme plus efficace.
 
 
+
+
+
+
+
 \section{Calcul de fréquences communes à deux contrôleurs CAN}
+
+On va maintenant répondre à la question de recherche d'une fréquence de bus commune à deux contrôleurs CAN dont les horloges ont des fréquences différentes. Plus précisément, on cherche une fréquence de bus entre $500$ kbit/s et $1$ Mbit/s commune à un LPC2294 dont l'horloge CAN est à $58,9824$ MHz, et à un PIC18F26K80 dont l'horloge CAN est à $64$ MHz.
+
+Comme le programme précédent, celui-ci est présenté de manière progressive sous la forme de listings séparés. Le lecteur pourra le reconstituer en concaténant :
+\begin{enumerate}
+  \item l'en-tête du programme, \refProgramme{enTetePrgmCalculConfigs} ;
+  \item la classe \texttt{cSetting}, \refProgramme{classeSettingPrgmCalculConfigs} ;
+  \item la fonction \texttt{computeSettings} de calcul de toutes les configurations d'un contrôleur CAN pour des durées de bit comprises entre $1$ µs et $2$ µs, \refProgramme{fonctionComputeSettingsFiltrePrgmCalculConfigs} ;
+  \item la fonction \texttt{relativeDistance}, qui calcule la distance relative entre deux durées de bit, l'une du LPC2294, l'autre du PIC18F26K80, \refProgramme{fonctionDistanceSettings} ;
+  \item la fonction \texttt{displayBestFrequencies}, qui affiche les couples de configurations qui ont les durées de bit les plus proches, \refProgramme{fonctionCalculMeilleuresFrequences} ;
+  \item la fonction \texttt{main}, qui appelle les fonctions précédentes, \refProgramme{fonctionMainPrgmCalculMeilleuresFrequences}.
+\end{enumerate}
+
+Ce programme contient des codes communs avec le programme précédent.
+
+
+
+
+
+\subsection{La fonction \texttt{main}}
+
+
+La fonction \texttt{main} (\refProgramme{fonctionMainPrgmCalculMeilleuresFrequences}) commence par calculer pour chaque contrôleur toutes les configurations possibles correspondant à une durée de bit comprise entre $1$ µs et $2$ µs (on appelle la fonction \texttt{computeSettings} du \refProgramme{fonctionComputeSettingsFiltrePrgmCalculConfigs}). On obtient ainsi $106$ configurations pour le LPC2294 et $131$ pour le PIC18F26K80.
+
+
+
+
+
+\begin{figure}[!ht]
+\begin{lstlisting}
+int main (int /* argc */, const char * /* argv */ []) {
+//--- Compute all settings for LPC2294
+  const vector <cSetting> allLPC2294settings
+    = computeSettings (58.9824, 1, 512, 5, 27) ;
+  cout << "LPC2294: " << allLPC2294settings.size ()
+       << " configurations\n" ;
+//--- Compute all settings for PIC18F26K80
+  const vector <cSetting> allPICsettings
+    = computeSettings (64.0, 1, 64, 4, 25) ;
+  cout << "PIC: " << allPICsettings.size ()
+       << " configurations\n" ;
+//--- Display best frequencies for LPC2294 and PIC
+  displayBestFrequencies (allLPC2294settings, allPICsettings) ;
+//---
+  return 0 ;
+}
+\end{lstlisting}
+  \programmes{fonctionMainPrgmCalculMeilleuresFrequences}{La fonction \texttt{main}}
+\end{figure}
+
+Ensuite la fonction \texttt{fonctionMainPrgmCalculMeilleuresFrequences}, décrite à la \refSubsectionPage{fonctiondisplayBestFrequencies}, est appelée. Celle-ci affiche les $30$ couples de configurations dont les durées de bit sont les plus proches :
+
+
+{\footnotesize\singlespacing
+\begin{verbatim}
+LPC2294: 106 configurations
+PIC: 131 configurations
+                       |-------- LPC2294 --------|------ PIC18F26K80 -----
+| Frequency | Distance |   D |  B | Bit duration |   D |  B | Bit duration
+| 842.4 kHz | 0.0594 % |   5 | 14 |    1.1868 µs |   4 | 19 |    1.1875 µs 
+| 842.4 kHz | 0.0594 % |   5 | 14 |    1.1868 µs |  19 |  4 |    1.1875 µs 
+| 561.6 kHz | 0.0594 % |   5 | 21 |    1.7802 µs |   6 | 19 |    1.7812 µs 
+| 561.6 kHz | 0.0594 % |   5 | 21 |    1.7802 µs |  19 |  6 |    1.7812 µs 
+| 842.4 kHz | 0.0594 % |   7 | 10 |    1.1868 µs |   4 | 19 |    1.1875 µs 
+| 842.4 kHz | 0.0594 % |   7 | 10 |    1.1868 µs |  19 |  4 |    1.1875 µs 
+| 561.6 kHz | 0.0594 % |   7 | 15 |    1.7802 µs |   6 | 19 |    1.7812 µs 
+| 561.6 kHz | 0.0594 % |   7 | 15 |    1.7802 µs |  19 |  6 |    1.7812 µs 
+| 842.4 kHz | 0.0594 % |  10 |  7 |    1.1868 µs |   4 | 19 |    1.1875 µs 
+| 842.4 kHz | 0.0594 % |  10 |  7 |    1.1868 µs |  19 |  4 |    1.1875 µs 
+| 842.4 kHz | 0.0594 % |  14 |  5 |    1.1868 µs |   4 | 19 |    1.1875 µs 
+| 842.4 kHz | 0.0594 % |  14 |  5 |    1.1868 µs |  19 |  4 |    1.1875 µs 
+| 561.6 kHz | 0.0594 % |  15 |  7 |    1.7802 µs |   6 | 19 |    1.7812 µs 
+| 561.6 kHz | 0.0594 % |  15 |  7 |    1.7802 µs |  19 |  6 |    1.7812 µs 
+| 561.6 kHz | 0.0594 % |  21 |  5 |    1.7802 µs |   6 | 19 |    1.7812 µs 
+| 561.6 kHz | 0.0594 % |  21 |  5 |    1.7802 µs |  19 |  6 |    1.7812 µs 
+| 727.7 kHz | 0.1244 % |   3 | 27 |    1.3733 µs |   4 | 22 |    1.3750 µs 
+| 727.7 kHz | 0.1244 % |   3 | 27 |    1.3733 µs |   8 | 11 |    1.3750 µs 
+| 727.7 kHz | 0.1244 % |   3 | 27 |    1.3733 µs |  11 |  8 |    1.3750 µs 
+| 727.7 kHz | 0.1244 % |   3 | 27 |    1.3733 µs |  22 |  4 |    1.3750 µs 
+| 727.7 kHz | 0.1244 % |   9 |  9 |    1.3733 µs |   4 | 22 |    1.3750 µs 
+| 727.7 kHz | 0.1244 % |   9 |  9 |    1.3733 µs |   8 | 11 |    1.3750 µs 
+| 727.7 kHz | 0.1244 % |   9 |  9 |    1.3733 µs |  11 |  8 |    1.3750 µs 
+| 727.7 kHz | 0.1244 % |   9 |  9 |    1.3733 µs |  22 |  4 |    1.3750 µs 
+| 819.9 kHz | 0.1601 % |   9 |  8 |    1.2207 µs |   6 | 13 |    1.2188 µs 
+| 819.9 kHz | 0.1601 % |   9 |  8 |    1.2207 µs |  13 |  6 |    1.2188 µs 
+| 819.9 kHz | 0.1601 % |   4 | 18 |    1.2207 µs |   6 | 13 |    1.2188 µs 
+| 819.9 kHz | 0.1601 % |   4 | 18 |    1.2207 µs |  13 |  6 |    1.2188 µs 
+| 819.9 kHz | 0.1601 % |   6 | 12 |    1.2207 µs |   6 | 13 |    1.2188 µs 
+| 819.9 kHz | 0.1601 % |   6 | 12 |    1.2207 µs |  13 |  6 |    1.2188 µs 
+\end{verbatim}
+}
+
+Nous obtenons une large gamme de fréquences possibles, allant de $561,6$ kbit/s à $842.4$ kbit/s, toutes avec une distance relative inférieure ou égale à $0,16$ \%. Toutes ces solutions sont a priori acceptables. En portant le nombre de résultats à $300$, le dernier affiché présente une distance relative de $0,76$ \% ; avec $500$, le dernier annonce $1,3$ \%.
+
+
+Il est utile d'utiliser la fonction \texttt{computeSettings} contrainte à une gamme de durées de bits ; en effet, appeler la fonction qui fournit toutes les configurations sans contrainte \refProgramme{fonctionComputeSettingsPrgmCalculConfigs} présente deux inconvénients :
+\begin{itemize}
+\item d'abord, le temps de réponse est plus long (une vingtaine de secondes) : en effet, comme chaque configuration d'un micro-contrôleur est comparée à toutes les configurations de l'autre, le nombre de comparaisons augmente : $11~776$ configurations du LPC2294, $1408$ configurations du PIC18F26K80, donc $11~776\times1408=16~580~608$ comparaisons ;
+\item ensuite, les meilleures configurations ne sont pas forcément dans la gamme de fréquences recherchée.
+\end{itemize}
+
+Sans contrainte, on obtient comme meilleures combinaisons :
+
+{\footnotesize\singlespacing
+\begin{verbatim}
+LPC2294: 11776 configurations
+PIC: 1408 configurations
+|----------------------|-------- LPC2294 --------|------ PIC18F26K80 -----
+| Frequency | Distance |   D |  B | Bit duration |   D |  B | Bit duration
+| 102.4 kHz | 0.0000 % |  24 | 24 |    9.7656 µs |  25 | 25 |    9.7656 µs 
+| 102.4 kHz | 0.0000 % |  32 | 18 |    9.7656 µs |  25 | 25 |    9.7656 µs 
+| 102.4 kHz | 0.0000 % |  36 | 16 |    9.7656 µs |  25 | 25 |    9.7656 µs 
+| 102.4 kHz | 0.0000 % |  48 | 12 |    9.7656 µs |  25 | 25 |    9.7656 µs 
+|  51.2 kHz | 0.0000 % |  48 | 24 |   19.5312 µs |  50 | 25 |   19.5312 µs 
+...
+\end{verbatim}
+}
+
+Parmi les $30$ meilleures combinaisons, la plus haute fréquence de bus est $135,6$ kHz (distance relative $0,0011$ \%).
+
+
+\subsection{La fonction \texttt{relativeDistance}}
+
+La fonction \texttt{relativeDistance} calcule la distance relative entre les durées de bit d'une combinaison de deux configurations. Elle établit la relation d'ordre qui permet de savoir si une combinaison est meilleure qu'une autre.
+
+\begin{figure}[!ht]
+\begin{lstlisting}
+static double
+relativeDistance (const pair <cSetting, cSetting> & inSetting) {
+  const double firstBitDuration = inSetting.first.bitDuration () ;
+  const double secondBitDuration = inSetting.second.bitDuration ();
+  const double nominal = (firstBitDuration+secondBitDuration) * .5;
+  const double distance = fabs(firstBitDuration-secondBitDuration);
+  return distance / nominal ;
+}
+\end{lstlisting}
+  \programmes{fonctionDistanceSettings}{La fonction \texttt{relativeDistance}}
+\end{figure}
+
+La durée nominale du bit de la première configuration étant notée $T_{BIT_1}$ et celle de la seconde $T_{BIT_2}$, la valeur retournée par la fonction \texttt{relativeDistance} est $\displaystyle\frac{distance}{nominal}$, où :
+
+\begin{equation*}
+  nominal = \frac{T_{BIT_1} + T_{BIT_2}}{2}\text{~~~et~~~}distance = |T_{BIT_1} - T_{BIT_2}|
+\end{equation*}
+
+\subsectionLabel{La fonction \texttt{displayBestFrequencies}}{fonctiondisplayBestFrequencies}
+
+La fonction \texttt{displayBestFrequencies} (\refProgramme{fonctionCalculMeilleuresFrequences}) explore toutes les combinaisons de configurations, en retenant que les plus proches. Le fonctionnement de cette fonction est très semblable à celui de la fonction \texttt{displayBestSettings} (\refProgrammePage{fonctionDisplayBestSettingsPrgmCalculConfigs}).
+
+Le tableau résultat \texttt{resultArray} est initialisé à des couples de configurations les plus mal assortis : la première a une durée de bit de $1$ s (appel du constructeur par défaut de la classe \texttt{cSetting}), et la seconde une durée de bit de $1$ µs.
+
+La double boucle imbriquée énumère tous les couples possibles de configuration. Chaque couple est testé avec les éléments du tableau \texttt{resultArray}. Si le couple est meilleur, on effectue un échange (fonction \texttt{swap}) : le meilleur couple est entré dans le tableau, et on récupère dans la variable \texttt{setting} l'ancien couple. Celui-ci sera testé avec l'élément suivant du tableau. Ainsi, le meilleur couple se place à l'indice $0$, et au cours de l'exécution, les couples les moins favorables sont progressivement chassés vers le haut du tableau et éliminés.
+
+
+\begin{figure}[!ht]
+\begin{lstlisting}
+static void
+displayBestFrequencies (const vector <cSetting> & inAllSettings1,
+                        const vector <cSetting> & inAllSettings2) {
+  const int RESULT_COUNT = 30 ;
+  pair <cSetting, cSetting> resultArray [RESULT_COUNT] ;
+  for (int i=0 ; i<RESULT_COUNT ; i++) {
+    resultArray [i].second = cSetting (1.0, 1, 1) ;
+  }
+  for (auto it1 = inAllSettings1.cbegin () ;
+                  it1 != inAllSettings1.cend () ; ++it1) {
+    for (auto it2 = inAllSettings2.cbegin () ;
+              it2 != inAllSettings2.cend () ; ++it2) {
+      pair <cSetting, cSetting> setting (* it1, * it2) ;
+      for (int i=0 ; i<RESULT_COUNT ; i++) {
+        const double d = relativeDistance (setting) ;
+        if (d < relativeDistance (resultArray [i])) {
+          swap <cSetting> (setting, resultArray [i]) ;
+        }
+      }
+    }
+  }
+//--- Display results
+  printf ("|---------------------|-------- LPC2294 --------"
+          "|------ PIC18F26K80 ------\n"
+          "| Frequency | Distance |   D |  B | Bit duration "
+          "|   D |  B | Bit duration\n") ;
+  for (int i=0 ; i<RESULT_COUNT ; i++) {
+    const double nominal = (resultArray [i].first.bitDuration ()
+                            + resultArray [i].second.bitDuration ()
+                           ) / 2.0 ;
+    const double perCent = 100. * relativeDistance(resultArray[i]);
+    printf ("| %5.1f kHz | %6.4f %% ", 1000.0 / nominal, perCent) ;
+    resultArray [i].first.display () ;
+    resultArray [i].second.display () ;
+    printf ("\n") ;
+  }
+}
+\end{lstlisting}
+  \programmes{fonctionCalculMeilleuresFrequences}{La fonction \texttt{displayBestFrequencies}}
+\end{figure}
+
+
+
+
 
 
