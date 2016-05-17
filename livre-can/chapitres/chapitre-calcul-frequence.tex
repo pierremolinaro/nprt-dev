@@ -72,7 +72,7 @@ Le programme est présenté pas-à-pas, de manière progressive sous la forme de
   \item la classe \texttt{cSetting}, \refProgramme{classeSettingPrgmCalculConfigs} ;
   \item la fonction \texttt{computeSettings} de calcul de toutes les configurations d'un contrôleur CAN, \refProgramme{fonctionComputeSettingsPrgmCalculConfigs} ou \refProgramme{fonctionComputeSettingsFiltrePrgmCalculConfigs} ;
   \item la fonction \texttt{displayBestSettings}, qui affiche les configurations qui permettent d'approcher au mieux une vitesse donnée, \refProgramme{fonctionDisplayBestSettingsPrgmCalculConfigs} ;
-  \item la fonction \texttt{main}, qui appelle les fonctions précédentes, \refProgramme{fonctionMainPrgmCalculConfigs} ;
+  \item la fonction \texttt{main}, qui appelle les fonctions précédentes, \refProgramme{fonctionMainPrgmCalculConfigs}.
 \end{enumerate}
 
 
@@ -152,7 +152,7 @@ class cSetting {
 La classe \texttt{cSetting} déclare :
 \begin{itemize}
 \item un constructeur dédié qui définit la configuration ;
-\item le constructeur par défaut qui est nécessaire pour faire figurer les objets de cette classe dans des tableaux de taille fixe ; le constructeur par défaut initialise les données membres à des valeurs non plausibles ($f_{CAN} = 1$ Hz, $B = D = 1$)  ;
+\item le constructeur par défaut qui est nécessaire pour faire figurer les objets de cette classe dans des tableaux de taille fixe ; le constructeur par défaut initialise les données membres à des valeurs non plausibles ($f_{CAN} = 1$ Hz, $B = D = 1$, ce qui définit un bus à $1$ bit/s)  ;
 \item la fonction \texttt{bitDuration} qui retourne la durée du bit (en µs) correspondant à la configuration définie ;
 \item la fonction \texttt{distanceFrom} qui retourne distance temporelle entre la durée du bit correspondant à la configuration définie et la valeur (en µs) fournie en argument ; cette fonction sera utile pour classer les configurations qui s'approche le mieux d'une valeur donnée ;
 \item la fonction \texttt{display} qui affiche sur le terminal la valeur des paramètres de cette configuration.
@@ -201,7 +201,7 @@ computeSettings (const double inClockFrequency,
 \end{figure}
 
 
-Le calcul de toutes les configurations consiste à balayer toutes les configurations de $B$ et $D$, et à les insérer dans un tableau dynamique C++ de type \texttt{vector<cSetting>}. Ce tableau n'est pas trié, les configurations apparaissent dans l'ordre où elles insérées. Ce tableau est la valeur retournée par la fonction.
+Le calcul de toutes les configurations consiste à balayer toutes les configurations de $B$ et $D$, et à les insérer dans un vecteur C++ de type \texttt{vector<cSetting>}. Ce tableau n'est pas trié, les configurations apparaissent dans l'ordre où elles insérées. Ce tableau est la valeur retournée par la fonction.
 
 On peut apporter une modification à cette fonction pour ne retenir que les configurations qui présentent une certaine propriété. Par exemple, la fonction décrite par le \refProgramme{fonctionComputeSettingsFiltrePrgmCalculConfigs} ne retient que les configurations dont la durée de bit est comprise en $1$ µs et $2$ µs, c'est-à-dire un bus entre $500$ kbit/s et $1$ Mbit/s.
 
@@ -365,5 +365,7 @@ Ensuite, on énumère le tableau \texttt{inAllSettings}, qui contient toutes les
 
 C'est un algorithme simple à mettre au point, et sans aucun doute il doit en exister de plus rapides. Mais comme la réponse est quasiment instantanée, il n'y a pas lieu à notre avis de rechercher un algorithme plus efficace.
 
+
+\section{Calcul de fréquences communes à deux contrôleurs CAN}
 
 
