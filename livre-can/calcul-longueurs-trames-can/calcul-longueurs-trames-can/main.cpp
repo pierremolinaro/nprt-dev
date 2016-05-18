@@ -8,6 +8,13 @@
 //----------------------------------------------------------------------------------------------------------------------
 
 #include <iostream>
+#include <utility>
+
+using namespace std ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+static const int RESULT_COUNT = 10 ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -77,9 +84,8 @@ static int zeroDataStandardFrameLength (const uint16_t inIdentifier) {
     bitEngine.enterBit (bit) ;
   }
 //---
-//---
   if (bitEngine.crc () != 0) {
-    std::cout << "CRC error for standard idf 0x" << inIdentifier << ": " << bitEngine.crc () << std::endl ;
+    cout << "CRC error for standard idf 0x" << inIdentifier << ": " << bitEngine.crc () << endl ;
   }
   return bitEngine.frameLength () ;
 }
@@ -113,20 +119,20 @@ static int zeroDataExtendedFrameLength (const uint32_t inIdentifier) {
   }
 //---
   if (bitEngine.crc () != 0) {
-    std::cout << "CRC error for extended idf 0x" << inIdentifier << ": " << bitEngine.crc () << std::endl ;
+    cout << "CRC error for extended idf 0x" << inIdentifier << ": " << bitEngine.crc () << endl ;
   }
   return bitEngine.frameLength () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-class cResult {
+class cZeroByteResult {
   public : uint32_t mIdentifier ;
   public : int mFrameLength ;
   
-  public : cResult (void) : mIdentifier (0), mFrameLength (0) {}
+  public : cZeroByteResult (void) : mIdentifier (0), mFrameLength (0) {}
   
-  public : cResult (const uint32_t inIdentifier, const int inFrameLength) :
+  public : cZeroByteResult (const uint32_t inIdentifier, const int inFrameLength) :
   mIdentifier (inIdentifier),
   mFrameLength (inFrameLength) {
   }
@@ -134,79 +140,168 @@ class cResult {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-const int RESULT_COUNT = 10 ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
 static void compareAllStandardFramesZeroData (void) {
-  cResult shortestFrames [RESULT_COUNT] ;
-  cResult longuestFrames [RESULT_COUNT] ;
+  cZeroByteResult shortestFrames [RESULT_COUNT] ;
+  cZeroByteResult longuestFrames [RESULT_COUNT] ;
   for (int i=0 ; i<RESULT_COUNT ; i++) {
     shortestFrames [i].mFrameLength = INT_MAX ;
   }
   for (uint16_t identifier = 0 ; identifier < (1 << 11) ; identifier ++) {
-    const cResult result (identifier, zeroDataStandardFrameLength (identifier)) ;
-    cResult r = result ;
+    const cZeroByteResult result (identifier, zeroDataStandardFrameLength (identifier)) ;
+    cZeroByteResult r = result ;
     for (int i=0 ; i<RESULT_COUNT ; i++) {
       if (r.mFrameLength < shortestFrames [i].mFrameLength) {
-        cResult temp = r ; r = shortestFrames [i] ; shortestFrames [i] = temp ;
+        swap (r, shortestFrames [i]) ;
       }
     }
     r = result ;
     for (int i=0 ; i<RESULT_COUNT ; i++) {
       if (r.mFrameLength > longuestFrames [i].mFrameLength) {
-        cResult temp = r ; r = longuestFrames [i] ; longuestFrames [i] = temp ;
+        swap (r, longuestFrames [i]) ;
       }
     }
   }
 //--- Display shortest frames
-  std::cout << "Shortest standard frames:\n" ;
+  cout << "Shortest standard frames:\n" ;
   for (int i=0 ; i<RESULT_COUNT ; i++) {
-    std::cout << std::dec << shortestFrames [i].mFrameLength << " for identifier 0x"
-              << std::hex << shortestFrames [i].mIdentifier << std::endl ;
+    cout << dec << shortestFrames [i].mFrameLength << " for identifier 0x"
+              << hex << shortestFrames [i].mIdentifier << endl ;
   }
 //--- Display longuest frames
-  std::cout << "Longuest standard frames:\n" ;
+  cout << "Longuest standard frames:\n" ;
   for (int i=0 ; i<RESULT_COUNT ; i++) {
-    std::cout << std::dec << longuestFrames [i].mFrameLength << " for identifier 0x"
-              << std::hex << longuestFrames [i].mIdentifier << std::endl ;
+    cout << dec << longuestFrames [i].mFrameLength << " for identifier 0x"
+              << hex << longuestFrames [i].mIdentifier << endl ;
   }
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 static void compareAllExtendedFramesZeroData (void) {
-  cResult shortestFrames [RESULT_COUNT] ;
-  cResult longuestFrames [RESULT_COUNT] ;
+  cZeroByteResult shortestFrames [RESULT_COUNT] ;
+  cZeroByteResult longuestFrames [RESULT_COUNT] ;
   for (int i=0 ; i<RESULT_COUNT ; i++) {
     shortestFrames [i].mFrameLength = INT_MAX ;
   }
   for (uint32_t identifier = 0 ; identifier < (1 << 29) ; identifier ++) {
-    const cResult result (identifier, zeroDataExtendedFrameLength (identifier)) ;
-    cResult r = result ;
+    const cZeroByteResult result (identifier, zeroDataExtendedFrameLength (identifier)) ;
+    cZeroByteResult r = result ;
     for (int i=0 ; i<RESULT_COUNT ; i++) {
       if (r.mFrameLength < shortestFrames [i].mFrameLength) {
-        cResult temp = r ; r = shortestFrames [i] ; shortestFrames [i] = temp ;
+        swap (r, shortestFrames [i]) ;
       }
     }
     r = result ;
     for (int i=0 ; i<RESULT_COUNT ; i++) {
       if (r.mFrameLength > longuestFrames [i].mFrameLength) {
-        cResult temp = r ; r = longuestFrames [i] ; longuestFrames [i] = temp ;
+        swap (r, longuestFrames [i]) ;
       }
     }
   }
 //--- Display shortest frames
-  std::cout << "Shortest extended frames:\n" ;
+  cout << "Shortest extended frames:\n" ;
   for (int i=0 ; i<RESULT_COUNT ; i++) {
-    std::cout << std::dec << shortestFrames [i].mFrameLength << " for identifier 0x"
-              << std::hex << shortestFrames [i].mIdentifier << std::endl ;
+    cout << dec << shortestFrames [i].mFrameLength << " for identifier 0x"
+         << hex << shortestFrames [i].mIdentifier << endl ;
   }
 //--- Display longuest frames
-  std::cout << "Longuest extended frames:\n" ;
+  cout << "Longuest extended frames:\n" ;
   for (int i=0 ; i<RESULT_COUNT ; i++) {
-    std::cout << std::dec << longuestFrames [i].mFrameLength << " for identifier 0x"
-              << std::hex << longuestFrames [i].mIdentifier << std::endl ;
+    cout << dec << longuestFrames [i].mFrameLength << " for identifier 0x"
+         << hex << longuestFrames [i].mIdentifier << endl ;
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+static int oneByteStandardFrameLength (const uint16_t inIdentifier, const uint8_t inByte) {
+  cBitEngine bitEngine ;
+  bitEngine.enterBit (false) ; // SOF
+  for (int idx = 10 ; idx >= 0 ; idx--) { // Identifier
+    const bool bit = (inIdentifier & (1 << idx)) != 0 ;
+    bitEngine.enterBit (bit ) ;
+  }
+  bitEngine.enterBit (false) ; // RTR
+  bitEngine.enterBit (false) ; // r1
+  bitEngine.enterBit (false) ; // r0
+  bitEngine.enterBit (false) ; // dlc3
+  bitEngine.enterBit (false) ; // dlc2
+  bitEngine.enterBit (false) ; // dlc1
+  bitEngine.enterBit (true) ; // dlc0
+//--- Enter byte
+  for (int idx = 7 ; idx >= 0 ; idx--) { // Data 0
+    const bool bit = (inByte & (1 << idx)) != 0 ;
+    bitEngine.enterBit (bit ) ;
+  }
+//--- Enter CRC SEQUENCE
+  const uint16_t computed_crc = bitEngine.crc () ;
+  for (int idx = 14 ; idx >= 0 ; idx--) {
+    const bool bit = (computed_crc & (1 << idx)) != 0 ;
+    bitEngine.enterBit (bit) ;
+  }
+//---
+  if (bitEngine.crc () != 0) {
+    cout << "CRC error for standard idf 0x" << inIdentifier << ": " << bitEngine.crc () << endl ;
+  }
+  return bitEngine.frameLength () ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+class cOneByteResult {
+  public : uint32_t mIdentifier ;
+  public : int mByte ;
+  public : int mFrameLength ;
+  
+  public : cOneByteResult (void) : mIdentifier (0), mByte (0), mFrameLength (0) {}
+  
+  public : cOneByteResult (const uint32_t inIdentifier, const int inByte, const int inFrameLength) :
+  mIdentifier (inIdentifier),
+  mByte (inByte),
+  mFrameLength (inFrameLength) {
+  }
+} ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+static void compareAllStandardFramesOneByteData (void) {
+  cOneByteResult shortestFrames [RESULT_COUNT] ;
+  cOneByteResult longuestFrames [RESULT_COUNT] ;
+  for (int i=0 ; i<RESULT_COUNT ; i++) {
+    shortestFrames [i].mFrameLength = INT_MAX ;
+  }
+  for (uint16_t identifier = 0 ; identifier < (1 << 11) ; identifier ++) {
+    for (int byte = 0 ; byte < 256 ; byte ++) {
+      const cOneByteResult result (identifier, byte, oneByteStandardFrameLength (identifier, uint8_t (byte))) ;
+      cOneByteResult r = result ;
+      for (int i=0 ; i<RESULT_COUNT ; i++) {
+        if (r.mFrameLength < shortestFrames [i].mFrameLength) {
+          swap (r, shortestFrames [i]) ;
+        }
+      }
+      r = result ;
+      for (int i=0 ; i<RESULT_COUNT ; i++) {
+        if (r.mFrameLength > longuestFrames [i].mFrameLength) {
+          swap (r, longuestFrames [i]) ;
+        }
+      }
+    }
+  }
+//--- Display shortest frames
+  cout << "Shortest one byte standard frames:\n" ;
+  for (int i=0 ; i<RESULT_COUNT ; i++) {
+    cout << dec << shortestFrames [i].mFrameLength << " for identifier 0x"
+         << hex << shortestFrames [i].mIdentifier
+         << ", byte 0x" << shortestFrames [i].mByte
+         << endl ;
+  }
+//--- Display longuest frames
+  cout << "Longuest one byte standard frames:\n" ;
+  for (int i=0 ; i<RESULT_COUNT ; i++) {
+    cout << dec << longuestFrames [i].mFrameLength << " for identifier 0x"
+         << hex << longuestFrames [i].mIdentifier
+         << ", byte 0x" << shortestFrames [i].mByte
+         << endl ;
   }
 }
 
@@ -214,7 +309,8 @@ static void compareAllExtendedFramesZeroData (void) {
 
 int main(int /* argc */, const char * /* argv */ []) {
   compareAllStandardFramesZeroData () ;
-  compareAllExtendedFramesZeroData () ;
+  compareAllStandardFramesOneByteData () ;
+//  compareAllExtendedFramesZeroData () ;
   return 0 ;
 }
 //----------------------------------------------------------------------------------------------------------------------
