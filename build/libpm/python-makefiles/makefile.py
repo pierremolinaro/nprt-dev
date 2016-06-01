@@ -19,7 +19,7 @@
 # 3.0: may 30th, 2016
 #        compatibility with Python 3:
 #             print xyz ---> print (xyz)
-#             change isinstance function arguments
+#             change isinstance function arguments ---> function argumentIsString
 #             subprocess.call: add "universal_newlines=True" argument
 #             added test (job.mReturnCode != None) lines 727 and 739
 #
@@ -332,7 +332,7 @@ class Job:
     postCommand = self.mPostCommands [0]
     self.mCommand = postCommand.mCommand
     displayLock.acquire ()
-    print (BOLD_BLUE () + postCommand.mTitle + ENDC ())
+    print (BOLD_BLUE () + "       " + postCommand.mTitle + ENDC ())
     if showCommand:
       cmdAsString = ""
       for s in self.mCommand:
