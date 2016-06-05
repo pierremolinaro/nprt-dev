@@ -3,36 +3,29 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 
-#include "galgas2/predefined-types.h"
+#include "all-predefined-types.h"
 
 //----------------------------------------------------------------------------------------------------------------------
 
 
-
-#ifndef oa_5F_scanner_CLASS_DEFINED
-#define oa_5F_scanner_CLASS_DEFINED
-
+//----------------------------------------------------------------------------------------------------------------------
+//                                                                                                                     *
+//                                                LEXIQUE oa_5F_scanner                                                *
+//                                                                                                                     *
 //----------------------------------------------------------------------------------------------------------------------
 
 #include "galgas2/C_Lexique.h"
-#include "galgas2/predefined-types.h"
 
 //----------------------------------------------------------------------------------------------------------------------
-//                                                                                                                     *
 //                    E X T E R N    R O U T I N E S                                                                   *
-//                                                                                                                     *
 //----------------------------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------------------------
-//                                                                                                                     *
 //                    E X T E R N    F U N C T I O N S                                                                 *
-//                                                                                                                     *
 //----------------------------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------------------------
-//                                                                                                                     *
 //                       T O K E N    C L A S S                                                                        *
-//                                                                                                                     *
 //----------------------------------------------------------------------------------------------------------------------
 
 class cTokenFor_oa_5F_scanner : public cToken {
@@ -43,9 +36,7 @@ class cTokenFor_oa_5F_scanner : public cToken {
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
-//                                                                                                                     *
 //                     S C A N N E R    C L A S S                                                                      *
-//                                                                                                                     *
 //----------------------------------------------------------------------------------------------------------------------
 
 class C_Lexique_oa_5F_scanner : public C_Lexique {
@@ -143,9 +134,6 @@ class C_Lexique_oa_5F_scanner : public C_Lexique {
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
-
-#endif
-//----------------------------------------------------------------------------------------------------------------------
 //                                                                                                                     *
 //                                                  @M_processor map                                                   *
 //                                                                                                                     *
@@ -178,10 +166,10 @@ class GALGAS_M_5F_processor : public AC_GALGAS_map {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_M_5F_processor constructor_emptyMap (LOCATION_ARGS) ;
+  public : static class GALGAS_M_5F_processor constructor_emptyMap (LOCATION_ARGS) ;
 
-  public : static GALGAS_M_5F_processor constructor_mapWithMapToOverride (const class GALGAS_M_5F_processor & inOperand0
-                                                                          COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_M_5F_processor constructor_mapWithMapToOverride (const class GALGAS_M_5F_processor & inOperand0
+                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
@@ -334,10 +322,10 @@ class GALGAS_M_5F_processor_2D_element : public AC_GALGAS_root {
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_M_5F_processor_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                    const class GALGAS_uint & inOperand1,
-                                                                    const class GALGAS_luint & inOperand2
-                                                                    COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_M_5F_processor_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                          const class GALGAS_uint & inOperand1,
+                                                                          const class GALGAS_luint & inOperand2
+                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
@@ -401,10 +389,10 @@ class GALGAS_M_5F_network : public AC_GALGAS_map {
                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_M_5F_network constructor_emptyMap (LOCATION_ARGS) ;
+  public : static class GALGAS_M_5F_network constructor_emptyMap (LOCATION_ARGS) ;
 
-  public : static GALGAS_M_5F_network constructor_mapWithMapToOverride (const class GALGAS_M_5F_network & inOperand0
-                                                                        COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_M_5F_network constructor_mapWithMapToOverride (const class GALGAS_M_5F_network & inOperand0
+                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
@@ -574,11 +562,11 @@ class GALGAS_M_5F_network_2D_element : public AC_GALGAS_root {
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_M_5F_network_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                  const class GALGAS_uint & inOperand1,
-                                                                  const class GALGAS_bool & inOperand2,
-                                                                  const class GALGAS_luint & inOperand3
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_M_5F_network_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                        const class GALGAS_uint & inOperand1,
+                                                                        const class GALGAS_bool & inOperand2,
+                                                                        const class GALGAS_luint & inOperand3
+                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
@@ -644,10 +632,10 @@ class GALGAS_M_5F_messages : public AC_GALGAS_map {
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_M_5F_messages constructor_emptyMap (LOCATION_ARGS) ;
+  public : static class GALGAS_M_5F_messages constructor_emptyMap (LOCATION_ARGS) ;
 
-  public : static GALGAS_M_5F_messages constructor_mapWithMapToOverride (const class GALGAS_M_5F_messages & inOperand0
-                                                                         COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_M_5F_messages constructor_mapWithMapToOverride (const class GALGAS_M_5F_messages & inOperand0
+                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
@@ -962,17 +950,17 @@ class GALGAS_M_5F_messages_2D_element : public AC_GALGAS_root {
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_M_5F_messages_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                   const class GALGAS_uint & inOperand1,
-                                                                   const class GALGAS_luint & inOperand2,
-                                                                   const class GALGAS_uint & inOperand3,
-                                                                   const class GALGAS_luint & inOperand4,
-                                                                   const class GALGAS_luint & inOperand5,
-                                                                   const class GALGAS_luint & inOperand6,
-                                                                   const class GALGAS_luint & inOperand7,
-                                                                   const class GALGAS_luint & inOperand8,
-                                                                   const class GALGAS_AC_5F_canMessage & inOperand9
-                                                                   COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_M_5F_messages_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                         const class GALGAS_uint & inOperand1,
+                                                                         const class GALGAS_luint & inOperand2,
+                                                                         const class GALGAS_uint & inOperand3,
+                                                                         const class GALGAS_luint & inOperand4,
+                                                                         const class GALGAS_luint & inOperand5,
+                                                                         const class GALGAS_luint & inOperand6,
+                                                                         const class GALGAS_luint & inOperand7,
+                                                                         const class GALGAS_luint & inOperand8,
+                                                                         const class GALGAS_AC_5F_canMessage & inOperand9
+                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
@@ -1050,10 +1038,10 @@ class GALGAS_M_5F_tasks : public AC_GALGAS_map {
                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_M_5F_tasks constructor_emptyMap (LOCATION_ARGS) ;
+  public : static class GALGAS_M_5F_tasks constructor_emptyMap (LOCATION_ARGS) ;
 
-  public : static GALGAS_M_5F_tasks constructor_mapWithMapToOverride (const class GALGAS_M_5F_tasks & inOperand0
-                                                                      COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_M_5F_tasks constructor_mapWithMapToOverride (const class GALGAS_M_5F_tasks & inOperand0
+                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
@@ -1368,17 +1356,17 @@ class GALGAS_M_5F_tasks_2D_element : public AC_GALGAS_root {
                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_M_5F_tasks_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                const class GALGAS_uint & inOperand1,
-                                                                const class GALGAS_luint & inOperand2,
-                                                                const class GALGAS_luint & inOperand3,
-                                                                const class GALGAS_luint & inOperand4,
-                                                                const class GALGAS_luint & inOperand5,
-                                                                const class GALGAS_luint & inOperand6,
-                                                                const class GALGAS_uint & inOperand7,
-                                                                const class GALGAS_luint & inOperand8,
-                                                                const class GALGAS_AC_5F_task & inOperand9
-                                                                COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_M_5F_tasks_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                      const class GALGAS_uint & inOperand1,
+                                                                      const class GALGAS_luint & inOperand2,
+                                                                      const class GALGAS_luint & inOperand3,
+                                                                      const class GALGAS_luint & inOperand4,
+                                                                      const class GALGAS_luint & inOperand5,
+                                                                      const class GALGAS_luint & inOperand6,
+                                                                      const class GALGAS_uint & inOperand7,
+                                                                      const class GALGAS_luint & inOperand8,
+                                                                      const class GALGAS_AC_5F_task & inOperand9
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
@@ -1514,7 +1502,7 @@ class GALGAS_C_5F_canIndependantMessage : public GALGAS_AC_5F_canMessage {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_C_5F_canIndependantMessage constructor_new (LOCATION_ARGS) ;
+  public : static class GALGAS_C_5F_canIndependantMessage constructor_new (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_C_5F_canIndependantMessage & inOperand) const ;
@@ -1568,8 +1556,8 @@ class GALGAS_C_5F_canMessageFromMessage : public GALGAS_AC_5F_canMessage {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_C_5F_canMessageFromMessage constructor_new (const class GALGAS_uint & inOperand0
-                                                                     COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_C_5F_canMessageFromMessage constructor_new (const class GALGAS_uint & inOperand0
+                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromMessage & inOperand) const ;
@@ -1625,8 +1613,8 @@ class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_C_5F_canMessageFromTask constructor_new (const class GALGAS_uint & inOperand0
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_C_5F_canMessageFromTask constructor_new (const class GALGAS_uint & inOperand0
+                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromTask & inOperand) const ;
@@ -1682,7 +1670,7 @@ class GALGAS_C_5F_independantTask : public GALGAS_AC_5F_task {
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_C_5F_independantTask constructor_new (LOCATION_ARGS) ;
+  public : static class GALGAS_C_5F_independantTask constructor_new (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_C_5F_independantTask & inOperand) const ;
@@ -1736,9 +1724,9 @@ class GALGAS_C_5F_taskDependsFromMessage : public GALGAS_AC_5F_task {
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_C_5F_taskDependsFromMessage constructor_new (const class GALGAS_uint & inOperand0,
-                                                                      const class GALGAS_luint & inOperand1
-                                                                      COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_C_5F_taskDependsFromMessage constructor_new (const class GALGAS_uint & inOperand0,
+                                                                            const class GALGAS_luint & inOperand1
+                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromMessage & inOperand) const ;
@@ -1796,9 +1784,9 @@ class GALGAS_C_5F_taskDependsFromTask : public GALGAS_AC_5F_task {
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_C_5F_taskDependsFromTask constructor_new (const class GALGAS_uint & inOperand0,
-                                                                   const class GALGAS_luint & inOperand1
-                                                                   COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_C_5F_taskDependsFromTask constructor_new (const class GALGAS_uint & inOperand0,
+                                                                         const class GALGAS_luint & inOperand1
+                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromTask & inOperand) const ;

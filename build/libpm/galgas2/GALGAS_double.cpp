@@ -4,7 +4,7 @@
 //                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2002, ..., 2013 Pierre Molinaro.                                                                     *
+//  Copyright (C) 2002, ..., 2016 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
 //                                                                                                                     *
@@ -20,7 +20,7 @@
 //                                                                                                                     *
 //----------------------------------------------------------------------------------------------------------------------
 
-#include "galgas2/predefined-types.h"
+#include "all-predefined-types.h"
 #include "galgas2/C_Compiler.h"
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -80,9 +80,9 @@ GALGAS_uint_36__34_ GALGAS_double::getter_binaryImage (UNUSED_LOCATION_ARGS) con
   if (isValid ()) {
     union {
       uint64_t unsignedIntegerValue ;
-      double   doubleValue ;
+      double theDoubleValue ;
     } ;
-    doubleValue = mDoubleValue ;
+    theDoubleValue = mDoubleValue ;
     result = GALGAS_uint_36__34_ (unsignedIntegerValue) ;
   }
   return result ;
