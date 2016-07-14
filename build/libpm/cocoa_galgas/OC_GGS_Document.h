@@ -2,7 +2,7 @@
 //                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2003, ..., 2014 Pierre Molinaro.                                                                     *
+//  Copyright (C) 2003, ..., 2016 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
 //                                                                                                                     *
@@ -145,7 +145,6 @@
 - (IBAction) actionShiftRight: (id) sender ;
 
 - (IBAction) actionBuildFirst: (id) sender ;
-- (IBAction) actionBuildSelected: (id) sender ;
 - (IBAction) stopBuild: (id) sender ;
 
 - (NSString *) sourceStringForGlobalSearch ;
