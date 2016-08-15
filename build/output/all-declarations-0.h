@@ -126,7 +126,7 @@ class C_Lexique_oa_5F_scanner : public C_Lexique {
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
 
 //--- Enter Token
-  protected : void enterToken (const cTokenFor_oa_5F_scanner & inToken) ;
+  protected : void enterToken (cTokenFor_oa_5F_scanner & ioToken) ;
 
 //--- Style name for Latex
   protected : virtual C_String styleNameForIndex (const uint32_t inStyleIndex) const ;

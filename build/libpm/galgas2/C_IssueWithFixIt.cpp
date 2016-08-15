@@ -1,8 +1,10 @@
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//  C_IssueWithFixIt                                                                                                   *
+//                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2011, ..., 2014 Pierre Molinaro.                                                                     *
+//  Copyright (C) 2016, ..., 2016 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
 //                                                                                                                     *
@@ -18,70 +20,62 @@
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-#import "CocoaGalgasPrefix.h"
+#include "galgas2/C_IssueWithFixIt.h"
+#include "all-predefined-types.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-@class OC_GGS_TextSyntaxColoring ;
-@class OC_GGS_DocumentData ;
-@class OC_GGS_Document ;
-@class OC_GGS_TextView ;
-@class PMIssueDescriptor ;
-@class OC_GGS_RulerViewForTextView ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-@interface OC_GGS_TextDisplayDescriptor : NSObject <NSTextViewDelegate, NSPortDelegate> {
-
-  @private OC_GGS_TextView * mTextView ;
-  @private NSPopUpButton * mEntryListPopUpButton ;
-  @private OC_GGS_RulerViewForTextView * mRulerView ;
-  @private NSScrollView * mScrollView ;
-  @private NSView * mEnclosingView ;
-  @private NSUInteger mTextSelectionStart ;
-  @private OC_GGS_Document * mDocumentUsedForDisplaying ;
+C_FixItDescription::C_FixItDescription (void) :
+mKind (kFixItRemove),
+mActionString ("") {
 }
 
-@property (assign, readonly PROPERTY_COMMA_ATOMIC) OC_GGS_DocumentData * documentData ;
-@property PROPERTY_ATOMIC BOOL isDirty ;
+//---------------------------------------------------------------------------------------------------------------------*
 
-- (OC_GGS_TextDisplayDescriptor *) initWithDocumentData: (OC_GGS_DocumentData *) inDocumentData
-                                   displayDocument: (OC_GGS_Document *) inDocumentUsedForDisplaying ;
+C_FixItDescription::C_FixItDescription (const EnumFixItKind inKind,
+                                        const C_String & inActionString) :
+mKind (inKind),
+mActionString (inActionString) {
+}
 
-- (void) detachTextDisplayDescriptor ;
+//---------------------------------------------------------------------------------------------------------------------*
 
-- (NSImage *) imageForClosingInUserInterface ;
+C_IssueWithFixIt::C_IssueWithFixIt (void) :
+mStartLocation (),
+mEndLocation (),
+mFixItArray () {
+}
 
-- (NSURL *) sourceURL ;
+//---------------------------------------------------------------------------------------------------------------------*
 
-- (NSString *) title ;
+C_IssueWithFixIt::C_IssueWithFixIt (const C_LocationInSource & inStartLocation,
+                                    const C_LocationInSource & inEndLocation,
+                                    const TC_Array <C_FixItDescription> & inFixItArray) :
+mStartLocation (inStartLocation),
+mEndLocation (inEndLocation),
+mFixItArray (inFixItArray) {
+}
 
-- (NSTextView *) textView ;
+//---------------------------------------------------------------------------------------------------------------------*
 
-- (NSView *) enclosingView ;
+void appendFixItActions (TC_Array <C_FixItDescription> & ioArray,
+                         const EnumFixItKind inKind,
+                         const GALGAS_stringlist & inList) {
+  cEnumerator_stringlist enumerator (inList, kEnumeration_up) ;
+  while (enumerator.hasCurrentObject ()) {
+    const C_String s = enumerator.current_mValue (HERE).stringValue () ;
+    ioArray.addObject (C_FixItDescription (inKind, s)) ;
+    enumerator.gotoNextObject () ;
+  }
+}
 
-- (NSUInteger) textSelectionStart ;
+//---------------------------------------------------------------------------------------------------------------------*
 
-- (void) gotoLine: (NSUInteger) inLine ;
-
-- (void) selectEntryPopUp ;
-
-- (void) populatePopUpButtonWithMenu: (NSMenu *) inMenu ;
-
-- (void) commentSelection ;
-- (void) uncommentSelection ;
-- (void) shiftLeftAction ;
-- (void) shiftRightAction ;
-
-- (void) setTextDisplayIssueArray: (NSArray *) inIssueArray ; 
-
-- (void) setSelectionRangeAndMakeItVisible: (NSRange) inRange ;
-
-- (void) actionInsertTextMacro: (NSMenuItem *) inSender ;
-
-//--- Fix it action
-- (void) replaceRange: (NSRange) inRange withString: (NSString *) inReplacement ;
-
-@end
+void appendFixItActions (TC_Array <C_FixItDescription> & ioArray,
+                         const EnumFixItKind inKind,
+                         const GALGAS_string & inString) {
+  const C_String s = inString.stringValue () ;
+  ioArray.addObject (C_FixItDescription (inKind, s)) ;
+}
 
 //---------------------------------------------------------------------------------------------------------------------*
