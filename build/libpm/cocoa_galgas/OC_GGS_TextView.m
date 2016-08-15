@@ -2,7 +2,7 @@
 //                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2011, ..., 2014 Pierre Molinaro.                                                                     *
+//  Copyright (C) 2011, ..., 2016 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
 //                                                                                                                     *
@@ -74,6 +74,7 @@
       options:NSKeyValueObservingOptionNew
       context:NULL
     ] ;
+    [self updateCursorColor] ;
   }
   return self;
 }
@@ -107,6 +108,20 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+- (void) updateCursorColor {
+  NSUserDefaults * df = [NSUserDefaults standardUserDefaults] ;
+  NSData * data = [df valueForKey:GGS_editor_background_color] ;
+  // NSLog (@"DATA %@", data) ;
+  NSColor * color = [[NSUnarchiver unarchiveObjectWithData:data] colorUsingColorSpaceName:NSCalibratedRGBColorSpace] ;
+  if ([color brightnessComponent] > 0.5) {
+    self.insertionPointColor = [color blendedColorWithFraction:0.5 ofColor:[NSColor blackColor]] ;
+  }else{
+    self.insertionPointColor = [color blendedColorWithFraction:0.5 ofColor:[NSColor whiteColor]] ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 - (void) observeValueForKeyPath:(NSString *) inKeyPath
          ofObject:(id) inObject
          change:(NSDictionary *) inChange
@@ -117,6 +132,7 @@
   }else if ((inObject == df) && [inKeyPath isEqualToString:GGS_page_guide_column]) {
     [self setNeedsDisplay:YES] ;
   }else if ((inObject == df) && [inKeyPath isEqualToString:GGS_editor_background_color]) {
+    [self updateCursorColor] ;
     [self setNeedsDisplay:YES] ;
   }else{
     [super
@@ -210,13 +226,17 @@
   for (PMIssueDescriptor * issue in mIssueArray) {
     if (issue.locationInSourceStringStatus == kLocationInSourceStringSolved) {
       // NSLog (@"lineRange [%u, %u]", lineRange.location, lineRange.length) ;
-      NSRect lineRect = [self.layoutManager lineFragmentUsedRectForGlyphAtIndex:issue.locationInSourceString effectiveRange:NULL] ;
+      NSRect lineRect = [self.layoutManager lineFragmentUsedRectForGlyphAtIndex:issue.startLocationInSourceString effectiveRange:NULL] ;
       lineRect.size.width = self.visibleRect.size.width ;
       // NSLog (@"r1 {{%g, %g}, {%g, %g}}", r1.origin.x, r1.origin.y, r1.size.width, r1.size.height) ;
       [issue.isError ? errorHiliteBezierPath : warningHiliteBezierPath appendBezierPathWithRect:lineRect] ;
-      const NSPoint p1 = [self.layoutManager locationForGlyphAtIndex:issue.locationInSourceString] ;
-      const NSRect r = {{p1.x - BULLET_SIZE / 2.0, lineRect.origin.y + lineRect.size.height - BULLET_SIZE}, {BULLET_SIZE, BULLET_SIZE}} ;
-      [issue.isError ? errorBulletBezierPath : warningBulletBezierPath appendBezierPathWithOvalInRect:r] ;
+      const NSPoint p1 = [self.layoutManager locationForGlyphAtIndex:issue.startLocationInSourceString] ;
+      const NSPoint p2 = [self.layoutManager locationForGlyphAtIndex:issue.endLocationInSourceString + 1] ;
+      const NSRect r = {
+        {p1.x - BULLET_SIZE / 2.0, lineRect.origin.y + lineRect.size.height},
+        {BULLET_SIZE + p2.x - p1.x, BULLET_SIZE}
+      } ;
+      [issue.isError ? errorBulletBezierPath : warningBulletBezierPath appendBezierPathWithRect:r] ;
     }
   }
 //--- Draw warning hilite
@@ -394,19 +414,26 @@
 
 - (void) mouseDown:(NSEvent *) inEvent {
   if ((inEvent.modifierFlags & NSCommandKeyMask) != 0) {
+  //--- Select range
     const NSPoint local_point = [self convertPoint:[inEvent locationInWindow] fromView:nil] ;
     const NSUInteger characterIndex = [self characterIndexForInsertionAtPoint:local_point] ;
     const NSRange selectedRange = {characterIndex, 0} ;
     const NSRange r = [self selectionRangeForProposedRange:selectedRange granularity:NSSelectByWord] ;
     [self setSelectedRange:r] ;
+    NSMenu * menu = [[NSMenu alloc] initWithTitle:@""] ;
+  //--- Add issues
+    for (PMIssueDescriptor * issue in mIssueArray) {
+      if ([issue intersectWithRange:r]) {
+        [issue storeItemsToMenu:menu displayDescriptor:mDisplayDescriptor] ;
+      }
+    }
+  //--- Source indexing
     OC_GGS_TextSyntaxColoring * dsc = mDisplayDescriptor.documentData.textSyntaxColoring ;
-    NSMenu * menu = [dsc indexMenuForRange:r textDisplayDescriptor:mDisplayDescriptor] ;
-    [NSMenu
-      popUpContextMenu:menu
-      withEvent:inEvent
-      forView:self
-      withFont:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]]
-    ] ;
+    [dsc appendIndexingToMenu:menu forRange:r textDisplayDescriptor:mDisplayDescriptor] ;
+  //--- Display menu
+    menu.font = [NSFont systemFontOfSize:[NSFont smallSystemFontSize]] ;
+    menu.allowsContextMenuPlugIns = NO ;
+    [NSMenu popUpContextMenu:menu withEvent:inEvent forView:self] ;
   }else{
     [super mouseDown:inEvent] ;
   }

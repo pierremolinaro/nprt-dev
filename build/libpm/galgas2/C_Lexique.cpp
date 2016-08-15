@@ -278,6 +278,10 @@ void C_Lexique::resetForSecondPass (void) {
   mPreviousChar = TO_UNICODE ('\0') ;
   mCurrentTokenPtr = mFirstToken ;
   if (mCurrentTokenPtr != NULL) {
+    mStartLocationForHere = mCurrentTokenPtr->mStartLocation ;
+    mEndLocationForHere = mCurrentTokenPtr->mEndLocation ;
+    mStartLocationForNext = mCurrentTokenPtr->mStartLocation ;
+    mEndLocationForNext = mCurrentTokenPtr->mEndLocation ;
     mTemplateString << mCurrentTokenPtr->mTemplateStringBeforeToken ;
     mCurrentLocation = mCurrentTokenPtr->mEndLocation ;
   }
@@ -517,7 +521,7 @@ void C_Lexique::unknownCharacterLexicalError (LOCATION_ARGS) {
 
 void C_Lexique::lexicalError (const C_String & inLexicalErrorMessage
                               COMMA_LOCATION_ARGS) {
-  signalLexicalError (sourceText (), currentLocationInSource (), inLexicalErrorMessage COMMA_THERE) ;
+  signalLexicalError (sourceText (), C_IssueWithFixIt (), inLexicalErrorMessage COMMA_THERE) ;
   if (executionModeIsLatex ()) {
     signalLexicalErrorInLatexOutput () ;
   }
@@ -528,8 +532,8 @@ void C_Lexique::lexicalError (const C_String & inLexicalErrorMessage
 
 void C_Lexique::lexicalErrorAtLocation (const C_String & inLexicalErrorMessage,
                                         const C_LocationInSource & inErrorLocation
-                                        COMMA_LOCATION_ARGS) {
-  signalLexicalError (sourceText (), inErrorLocation, inLexicalErrorMessage COMMA_THERE) ;
+                                        COMMA_LOCATION_ARGS) { // §
+  signalLexicalError (sourceText (), C_IssueWithFixIt (inErrorLocation, inErrorLocation, TC_Array <C_FixItDescription> ()), inLexicalErrorMessage COMMA_THERE) ;
   if (executionModeIsLatex ()) {
     signalLexicalErrorInLatexOutput () ;
   }
@@ -555,7 +559,7 @@ void C_Lexique::parsingError (const TC_UniqueArray <int16_t> & inExpectedTermina
 //--- Sort expected token name array
   expectedTokenNames.sortArrayUsingCompareMethod () ;
 //--- Signal error
-  signalParsingError (sourceText (), mCurrentLocation, foundTokenMessage, expectedTokenNames COMMA_THERE) ;
+  signalParsingError (sourceText (), C_IssueWithFixIt (mCurrentLocation, mCurrentLocation, TC_Array <C_FixItDescription> ()), foundTokenMessage, expectedTokenNames COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -567,8 +571,8 @@ void C_Lexique::parsingError (const TC_UniqueArray <int16_t> & inExpectedTermina
 //---------------------------------------------------------------------------------------------------------------------*
 
 void C_Lexique::lexicalWarning (const C_String & inLexicalWarningMessage
-                                COMMA_LOCATION_ARGS) {
-  signalLexicalWarning (sourceText (), mCurrentLocation, inLexicalWarningMessage COMMA_THERE) ;
+                                COMMA_LOCATION_ARGS) { // §
+  signalLexicalWarning (sourceText (), C_IssueWithFixIt (mCurrentLocation, mCurrentLocation, TC_Array <C_FixItDescription> ()), inLexicalWarningMessage COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1486,6 +1490,9 @@ void C_Lexique::acceptTerminal (FORMAL_ARG_ACCEPT_TERMINAL COMMA_LOCATION_ARGS) 
     mEndLocationForHere = mCurrentTokenPtr->mEndLocation ;
     mCurrentTokenPtr = mCurrentTokenPtr->mNextToken ;
     if (mCurrentTokenPtr != NULL) {
+      macroValidPointer (mCurrentTokenPtr) ;
+      mStartLocationForNext = mCurrentTokenPtr->mStartLocation ;
+      mEndLocationForNext = mCurrentTokenPtr->mEndLocation ;
       mTemplateString << mCurrentTokenPtr->mTemplateStringBeforeToken ;
       mTemplateStringLocation = mCurrentTokenPtr->mStartLocation ;
       mCurrentLocation = mCurrentTokenPtr->mEndLocation ;

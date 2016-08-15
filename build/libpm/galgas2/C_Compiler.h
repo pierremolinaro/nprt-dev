@@ -4,7 +4,7 @@
 //                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2009, ..., 2012 Pierre Molinaro.                                                                     *
+//  Copyright (C) 2009, ..., 2016 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
 //                                                                                                                     *
@@ -30,6 +30,7 @@
 #include "utilities/C_SharedObject.h"
 #include "galgas2/C_LocationInSource.h"
 #include "galgas2/C_SourceTextInString.h"
+#include "galgas2/C_IssueWithFixIt.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -100,6 +101,11 @@ class C_Compiler : public C_SharedObject {
   protected : C_LocationInSource mEndLocationForHere ; // Set by lexique
   public : GALGAS_location here (void) const ;
 
+//--- Handle 'next' in GALGAS
+  protected : C_LocationInSource mStartLocationForNext ; // Set by lexique
+  protected : C_LocationInSource mEndLocationForNext ; // Set by lexique
+  public : GALGAS_location next (void) const ;
+
 //--- Source file name
   public : C_String sourceFilePath (void) const ;
 
@@ -132,7 +138,8 @@ class C_Compiler : public C_SharedObject {
 
 //--- Print semantic error
   public : void semanticErrorAtLocation (const GALGAS_location & inErrorLocation,
-                                         const C_String & inErrorMessage
+                                         const C_String & inErrorMessage,
+                                         const TC_Array <C_FixItDescription> & inFixItArray
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Print semantic warning
@@ -151,12 +158,14 @@ class C_Compiler : public C_SharedObject {
 
 //--- Emit a warning
   public : void emitSemanticWarning (const GALGAS_location & inWarningLocation,
-                                     const GALGAS_string & inWarningMessage
+                                     const GALGAS_string & inWarningMessage,
+                                     const TC_Array <C_FixItDescription> & inFixItArray
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Emit an error
   public : void emitSemanticError (const GALGAS_location & inErrorLocation,
-                                   const GALGAS_string & inErrorMessage
+                                   const GALGAS_string & inErrorMessage,
+                                   const TC_Array <C_FixItDescription> & inFixItArray
                                    COMMA_LOCATION_ARGS) ;
 
 //--- Emit an error message with an error message that contains %K espace sequence
@@ -181,14 +190,6 @@ class C_Compiler : public C_SharedObject {
   public : void castError (const C_String & inTargetTypeName,
                            const C_galgas_type_descriptor * inObjectDynamicTypeDescriptor
                            COMMA_LOCATION_ARGS) ;
-
-//--- enterPragma
-  private : TC_UniqueArray <C_String> mCheckedVariableList ;
-  public : int32_t checkedVariableListEntryCount (void) const ;
-  public : C_String checkedVariableAtIndex (const int32_t inIndex COMMA_LOCATION_ARGS) const ;
-  public : void enterPragma (const GALGAS_lstring & inPragmaName,
-                             const GALGAS_lstring & inPragmaArgument
-                             COMMA_LOCATION_ARGS) ;
 
 //--- File read logging
   public : static bool performLogFileRead (void) ;

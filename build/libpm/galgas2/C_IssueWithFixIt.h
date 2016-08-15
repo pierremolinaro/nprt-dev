@@ -1,8 +1,10 @@
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//  C_IssueWithFixIt                                                                                                   *
+//                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2011, ..., 2014 Pierre Molinaro.                                                                     *
+//  Copyright (C) 2016, ..., 2016 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@irccyn.ec-nantes.fr                                                                       *
 //                                                                                                                     *
@@ -18,81 +20,77 @@
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-#import <Cocoa/Cocoa.h>
+#ifndef C_ISSUE_WITH_FIX_IT_CLASS_DEFINED
+#define C_ISSUE_WITH_FIX_IT_CLASS_DEFINED
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-@class OC_GGS_RulerViewForBuildOutput ;
-@class OC_GGS_TextDisplayDescriptor ;
+#include "galgas2/C_LocationInSource.h"
+#include "strings/C_String.h"
+#include "collections/TC_Array.h"
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_stringlist ;
+class GALGAS_string ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 typedef enum {
- kLocationInSourceStringNotSolved,
- kLocationInSourceStringSolved,
- kLocationInSourceStringInvalid
-} enumLocationInSourceStringStatus ;
+  kFixItRemove,
+  kFixItReplace,
+  kFixItInsertBefore,
+  kFixItInsertAfter
+} EnumFixItKind ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-@interface PMIssueDescriptor : NSObject {
-  @private BOOL mIsError ;
-  @private NSString * mFullMessage ;
-  @private NSURL * mURL ;
-  @private NSUInteger mLine ;
-  @private NSUInteger mStartColumn ;
-  @private NSUInteger mEndColumn ;
-  @private NSRange mRangeInOutputData ;
-  @private NSUInteger mStartLocationInSourceString ;
-  @private NSUInteger mEndLocationInSourceString ;
-  @private enumLocationInSourceStringStatus mLocationInSourceStringStatus ;
-  @private OC_GGS_RulerViewForBuildOutput * mBuildOutputRuler ;
-}
+class C_FixItDescription {
+//--- Default constructor
+  public : C_FixItDescription (void) ;
 
-- (PMIssueDescriptor *) initWithMessage: (NSString *) inMessage
-                        URL: (NSURL *) inURL
-                        line: (NSInteger) inLine
-                        startColumn: (NSInteger) inStartColumn
-                        endColumn: (NSInteger) inEndColumn
-                        isError: (BOOL) inIsError
-                        rangeInOutputData: (NSRange) inRangeInOutputData
-                        buildOutputRuler: (OC_GGS_RulerViewForBuildOutput *) inRuler ;
+//--- Constructor
+  public : C_FixItDescription (const EnumFixItKind inKind,
+                               const C_String & inActionString) ;
 
-- (void) detach ;
-
-- (NSString *) fullMessage ;
-
-- (NSURL *) issueStandardizedURL ;
-
-- (BOOL) isError ;
-
-- (NSUInteger) issueLine ;
-
-- (NSUInteger) issueStartColumn ;
-
-- (NSUInteger) issueEndColumn ;
-
-- (NSUInteger) locationInOutputData ;
-
-- (enumLocationInSourceStringStatus) locationInSourceStringStatus ;
-
-- (NSUInteger) startLocationInSourceString ;
-
-- (NSUInteger) endLocationInSourceString ;
-
-- (BOOL) intersectWithRange: (NSRange) inRange ;
-
-- (void) setStartLocationInSourceString: (NSUInteger) inStartLocationInSourceString
-         endLocation: (NSUInteger) inEndLocationInSourceString ;
-
-- (void) updateLocationForPreviousRange: (NSRange) inEditedRange
-         changeInLength: (NSInteger) inChangeInLength ;
-
-- (void) scrollAndSelectErrorMessage ;
-
-- (void) storeItemsToMenu: (NSMenu *) inMenu
-         displayDescriptor: (OC_GGS_TextDisplayDescriptor *) inTextView ;
-
-@end
+//--- Accessors
+  public : EnumFixItKind kind (void) const { return mKind ; }
+  public : C_String actionString (void) const { return mActionString ; }
+  
+//--- Private properties
+  private : EnumFixItKind mKind ;
+  private : C_String mActionString ;
+} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+class C_IssueWithFixIt {
+//--- Default constructor
+  public : C_IssueWithFixIt (void) ;
+
+//--- Constructor
+  public : C_IssueWithFixIt (const C_LocationInSource & inStartLocation,
+                             const C_LocationInSource & inEndLocation,
+                             const TC_Array <C_FixItDescription> & inFixItArray) ;
+
+//--- Properties
+  public : const C_LocationInSource mStartLocation ;
+  public : const C_LocationInSource mEndLocation ;
+  public : const TC_Array <C_FixItDescription> mFixItArray ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void appendFixItActions (TC_Array <C_FixItDescription> & ioArray,
+                         const EnumFixItKind inKind,
+                         const GALGAS_stringlist & inList) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void appendFixItActions (TC_Array <C_FixItDescription> & ioArray,
+                         const EnumFixItKind inKind,
+                         const GALGAS_string & inString) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+#endif
