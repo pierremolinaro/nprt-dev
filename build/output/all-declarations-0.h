@@ -601,6 +601,222 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_network_2D_ele
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                               @AC_5F_canMessage class                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_AC_5F_canMessage : public AC_GALGAS_class {
+//--- Constructor
+  public : GALGAS_AC_5F_canMessage (void) ;
+
+//---
+  public : inline const class cPtr_AC_5F_canMessage * ptr (void) const { return (const cPtr_AC_5F_canMessage *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_AC_5F_canMessage (const cPtr_AC_5F_canMessage * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_AC_5F_canMessage extractObject (const GALGAS_object & inObject,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_AC_5F_canMessage & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_AC_5F_canMessage class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_canMessage ;
+
+#include "separateHeaderFor_AC_5F_canMessage.h"
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @C_5F_canIndependantMessage class                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_C_5F_canIndependantMessage : public GALGAS_AC_5F_canMessage {
+//--- Constructor
+  public : GALGAS_C_5F_canIndependantMessage (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_C_5F_canIndependantMessage constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_C_5F_canIndependantMessage * ptr (void) const { return (const cPtr_C_5F_canIndependantMessage *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_C_5F_canIndependantMessage (const cPtr_C_5F_canIndependantMessage * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_C_5F_canIndependantMessage extractObject (const GALGAS_object & inObject,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_C_5F_canIndependantMessage constructor_new (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_C_5F_canIndependantMessage & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_C_5F_canIndependantMessage class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canIndependantMessage ;
+
+#include "separateHeaderFor_C_5F_canIndependantMessage.h"
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @C_5F_canMessageFromMessage class                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_C_5F_canMessageFromMessage : public GALGAS_AC_5F_canMessage {
+//--- Constructor
+  public : GALGAS_C_5F_canMessageFromMessage (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_C_5F_canMessageFromMessage constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_C_5F_canMessageFromMessage * ptr (void) const { return (const cPtr_C_5F_canMessageFromMessage *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_C_5F_canMessageFromMessage (const cPtr_C_5F_canMessageFromMessage * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_C_5F_canMessageFromMessage extractObject (const GALGAS_object & inObject,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_C_5F_canMessageFromMessage constructor_new (const class GALGAS_uint & inOperand0
+                                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromMessage & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mMessageIndex (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_C_5F_canMessageFromMessage class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromMessage ;
+
+#include "separateHeaderFor_C_5F_canMessageFromMessage.h"
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           @C_5F_canMessageFromTask class                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
+//--- Constructor
+  public : GALGAS_C_5F_canMessageFromTask (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_C_5F_canMessageFromTask constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_C_5F_canMessageFromTask * ptr (void) const { return (const cPtr_C_5F_canMessageFromTask *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_C_5F_canMessageFromTask (const cPtr_C_5F_canMessageFromTask * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_C_5F_canMessageFromTask extractObject (const GALGAS_object & inObject,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_C_5F_canMessageFromTask constructor_new (const class GALGAS_uint & inOperand0
+                                                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromTask & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mTaskIndex (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_C_5F_canMessageFromTask class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromTask ;
+
+#include "separateHeaderFor_C_5F_canMessageFromTask.h"
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                                   @M_messages map                                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -809,52 +1025,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                               @AC_5F_canMessage class                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_AC_5F_canMessage : public AC_GALGAS_class {
-//--- Constructor
-  public : GALGAS_AC_5F_canMessage (void) ;
-
-//---
-  public : inline const class cPtr_AC_5F_canMessage * ptr (void) const { return (const cPtr_AC_5F_canMessage *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_AC_5F_canMessage (const cPtr_AC_5F_canMessage * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_AC_5F_canMessage extractObject (const GALGAS_object & inObject,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_AC_5F_canMessage & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_AC_5F_canMessage class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_canMessage ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                       Class for element of '@M_messages' map                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1004,6 +1174,108 @@ class GALGAS_M_5F_messages_2D_element : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages_2D_element ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                  @AC_5F_task class                                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_AC_5F_task : public AC_GALGAS_class {
+//--- Constructor
+  public : GALGAS_AC_5F_task (void) ;
+
+//---
+  public : inline const class cPtr_AC_5F_task * ptr (void) const { return (const cPtr_AC_5F_task *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_AC_5F_task (const cPtr_AC_5F_task * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_AC_5F_task extractObject (const GALGAS_object & inObject,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_AC_5F_task & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_AC_5F_task class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_task ;
+
+#include "separateHeaderFor_AC_5F_task.h"
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             @C_5F_independantTask class                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_C_5F_independantTask : public GALGAS_AC_5F_task {
+//--- Constructor
+  public : GALGAS_C_5F_independantTask (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_C_5F_independantTask constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_C_5F_independantTask * ptr (void) const { return (const cPtr_C_5F_independantTask *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_C_5F_independantTask (const cPtr_C_5F_independantTask * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_C_5F_independantTask extractObject (const GALGAS_object & inObject,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_C_5F_independantTask constructor_new (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_C_5F_independantTask & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_C_5F_independantTask class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_independantTask ;
+
+#include "separateHeaderFor_C_5F_independantTask.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1215,52 +1487,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_tasks ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                  @AC_5F_task class                                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_AC_5F_task : public AC_GALGAS_class {
-//--- Constructor
-  public : GALGAS_AC_5F_task (void) ;
-
-//---
-  public : inline const class cPtr_AC_5F_task * ptr (void) const { return (const cPtr_AC_5F_task *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_AC_5F_task (const cPtr_AC_5F_task * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_AC_5F_task extractObject (const GALGAS_object & inObject,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_AC_5F_task & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_AC_5F_task class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_task ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                         Class for element of '@M_tasks' map                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1467,232 +1693,6 @@ class cParser_oa_5F_parser {
 
 
 } ;
-
-#include "separateHeaderFor_AC_5F_canMessage.h"
-
-#include "separateHeaderFor_AC_5F_task.h"
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @C_5F_canIndependantMessage class                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_C_5F_canIndependantMessage : public GALGAS_AC_5F_canMessage {
-//--- Constructor
-  public : GALGAS_C_5F_canIndependantMessage (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_C_5F_canIndependantMessage constructor_default (LOCATION_ARGS) ;
-
-//---
-  public : inline const class cPtr_C_5F_canIndependantMessage * ptr (void) const { return (const cPtr_C_5F_canIndependantMessage *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_C_5F_canIndependantMessage (const cPtr_C_5F_canIndependantMessage * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_C_5F_canIndependantMessage extractObject (const GALGAS_object & inObject,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_C_5F_canIndependantMessage constructor_new (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_C_5F_canIndependantMessage & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_C_5F_canIndependantMessage class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canIndependantMessage ;
-
-#include "separateHeaderFor_C_5F_canIndependantMessage.h"
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @C_5F_canMessageFromMessage class                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_C_5F_canMessageFromMessage : public GALGAS_AC_5F_canMessage {
-//--- Constructor
-  public : GALGAS_C_5F_canMessageFromMessage (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_C_5F_canMessageFromMessage constructor_default (LOCATION_ARGS) ;
-
-//---
-  public : inline const class cPtr_C_5F_canMessageFromMessage * ptr (void) const { return (const cPtr_C_5F_canMessageFromMessage *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_C_5F_canMessageFromMessage (const cPtr_C_5F_canMessageFromMessage * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_C_5F_canMessageFromMessage extractObject (const GALGAS_object & inObject,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_C_5F_canMessageFromMessage constructor_new (const class GALGAS_uint & inOperand0
-                                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromMessage & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mMessageIndex (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_C_5F_canMessageFromMessage class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromMessage ;
-
-#include "separateHeaderFor_C_5F_canMessageFromMessage.h"
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           @C_5F_canMessageFromTask class                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
-//--- Constructor
-  public : GALGAS_C_5F_canMessageFromTask (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_C_5F_canMessageFromTask constructor_default (LOCATION_ARGS) ;
-
-//---
-  public : inline const class cPtr_C_5F_canMessageFromTask * ptr (void) const { return (const cPtr_C_5F_canMessageFromTask *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_C_5F_canMessageFromTask (const cPtr_C_5F_canMessageFromTask * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_C_5F_canMessageFromTask extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_C_5F_canMessageFromTask constructor_new (const class GALGAS_uint & inOperand0
-                                                                        COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromTask & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mTaskIndex (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_C_5F_canMessageFromTask class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromTask ;
-
-#include "separateHeaderFor_C_5F_canMessageFromTask.h"
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @C_5F_independantTask class                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_C_5F_independantTask : public GALGAS_AC_5F_task {
-//--- Constructor
-  public : GALGAS_C_5F_independantTask (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_C_5F_independantTask constructor_default (LOCATION_ARGS) ;
-
-//---
-  public : inline const class cPtr_C_5F_independantTask * ptr (void) const { return (const cPtr_C_5F_independantTask *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_C_5F_independantTask (const cPtr_C_5F_independantTask * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_C_5F_independantTask extractObject (const GALGAS_object & inObject,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_C_5F_independantTask constructor_new (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_C_5F_independantTask & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_C_5F_independantTask class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_independantTask ;
-
-#include "separateHeaderFor_C_5F_independantTask.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
