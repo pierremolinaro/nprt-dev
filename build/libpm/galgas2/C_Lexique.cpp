@@ -109,10 +109,10 @@ mLatexOutputString (),
 mLatexNextCharacterToEnterIndex (0) {
 //---
   if (inSourceFileName.length () > 0) {
-    MF_Assert (UNICODE_VALUE (inSourceFileName (0 COMMA_HERE)) == '/',
-               "*** SOURCE FILE PATH '%s' IS NOT ABSOLUTE ***\n",
-               (intptr_t) inSourceFileName.cString (HERE),
-               0) ;
+//    MF_Assert (UNICODE_VALUE (inSourceFileName (0 COMMA_HERE)) == '/',
+//               "*** SOURCE FILE PATH '%s' IS NOT ABSOLUTE ***\n",
+//               (intptr_t) inSourceFileName.cString (HERE),
+//               0) ;
     // printf ("*** '%s'\n", inSourceFileName.cString (HERE)) ;
     /* if (mCallerCompiler != NULL) {
       macroValidPointer (mCallerCompiler) ;
@@ -327,7 +327,7 @@ int32_t C_Lexique::findTemplateDelimiterIndex (const cTemplateDelimiter inTempla
 
 void C_Lexique::performLexicalAnalysis (void) {
   if (executionModeIsLexicalAnalysisOnly ()) {
-    co << "*** PERFORM LEXICAL ANALYSIS ONLY (--mode=lexical-analysis option) ***\n" ;
+    co << "*** PERFORM LEXICAL ANALYSIS ONLY (--mode=lexical-only option) ***\n" ;
   }
   bool loop = true ;
   while (loop) {
