@@ -5,7 +5,7 @@
 
 #import "OC_Token.h"
 #import "F_CocoaWrapperForGalgas.h"
-#import "lexique-oa_scanner-cocoa.m"
+#import "lexique-oa-5F-scanner-cocoa.m"
 
 #ifdef USER_DEFAULT_COLORS_DEFINED
   #import "user_default_colors.h"
@@ -36,7 +36,7 @@ NSArray * nibsAndClasses (void) {
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-#import "option-oa_cli_options-cocoa.m"
+#import "option-oa-5F-cli-5F-options-cocoa.m"
 
 //---------------------------------------------------------------------------------------------------------------------*
 
