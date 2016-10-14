@@ -161,7 +161,7 @@ reallocIfNeeded (const int32_t inInstant) {
   if (inInstant >= mResourceScheduleArray.count ()) {
     const int32_t actualCount = mResourceScheduleArray.count () ;
     const int32_t newCount = inInstant + EXTRA + 1 ;
-    mResourceScheduleArray.addObjects (newCount - actualCount, NULL) ;
+    mResourceScheduleArray.appendObjects (newCount - actualCount, NULL) ;
   }
 }
 
@@ -458,8 +458,8 @@ independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inAct
 //  scheduleMap.dumpStructure () ;
 //--- Build response time array
   outResponseTimeArray.setCountToZero () ;
-  outResponseTimeArray.makeRoom (activitiesCount) ;
-  outResponseTimeArray.addObjects (activitiesCount, cResponseTime ()) ;
+  outResponseTimeArray.setCapacity (activitiesCount) ;
+  outResponseTimeArray.appendObjects (activitiesCount, cResponseTime ()) ;
   scheduleMap.computeBestAndWorstResponseTime (outResponseTimeArray) ;
   
   co << cStringWithSigned (gUsedResourceNodesCount) << " resource nodes used, "

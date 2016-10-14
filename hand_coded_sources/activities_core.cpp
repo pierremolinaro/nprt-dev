@@ -243,7 +243,7 @@ mPtrToInf (NULL),
 mPtrToSup (NULL),
 mBalance (0),
 mHash (0) {
-  mArray.addObjects (inResourceCount, cResource2 ()) ;
+  mArray.appendObjects (inResourceCount, cResource2 ()) ;
 }
 
 //---------------------------------------------------------------------------*
@@ -308,7 +308,7 @@ static inline cResourceSchedule * allocResourceNode (const int32_t inResourceCou
     gResourceFreeList = p->mPtrToOtherResource ;
     p->mPtrToOtherResource = NULL ;
     p->mArray.setCountToZero () ;
-    p->mArray.addObjects (inResourceCount, cResource2 ()) ;
+    p->mArray.appendObjects (inResourceCount, cResource2 ()) ;
   }
   return p ;
 }
@@ -1517,8 +1517,8 @@ scheduleActivities (const int32_t NoInterButUseB,
  
   const int32_t inResourceCount = inResource.count ();
   const int32_t activitiesCount = inActivities.count () ;
-  outResponseTimeArray.makeRoom (activitiesCount) ;
-  outResponseTimeArray.addObjects (activitiesCount, cResponseTime ()) ;
+  outResponseTimeArray.setCapacity (activitiesCount) ;
+  outResponseTimeArray.appendObjects (activitiesCount, cResponseTime ()) ;
   
   DependentActivitiesHasOffset = DependentHasOffset ;
   if (NoInterButUseB==1){

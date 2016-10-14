@@ -146,7 +146,7 @@ InsertInOrderedList(const TC_UniqueArray <cElement> & Element,
   }    
   element.mOtherHeirId= -1; 
   
-  ArrangedElement.addObject (element);  
+  ArrangedElement.appendObject (element);  
 }    
 
 /*---------------------------------------------------------------------------*/ 
@@ -298,7 +298,7 @@ DeployElements (TC_UniqueArray <cElement> & ArrangedElement,
        element.mOffset = outMTElement (predecessorId COMMA_HERE).mOffset;
      }
     
-    outMTElement.addObject (element);
+    outMTElement.appendObject (element);
     
     
     int32_t Repetition =0;
@@ -354,7 +354,7 @@ DeployElements (TC_UniqueArray <cElement> & ArrangedElement,
         }else{
           MTelement.mOtherHeirId = -1;
         }  
-      	exElement.addObject (MTelement) ;
+      	exElement.appendObject (MTelement) ;
       	if ( (MTelement.mOccurrence %MTelement.mEvery) == 0){
       		Num_of_Activties ++;
       	}
@@ -387,7 +387,7 @@ TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;
       readyAtThisInstant.mThisInstant=-1;
       readyAtThisInstant.mActivityIndex=-1; 
       readyAtThisInstant.mMarked = false;  
-    oReadyAtThisInstant.addObject(readyAtThisInstant); 
+    oReadyAtThisInstant.appendObject(readyAtThisInstant); 
 	}
   
     
@@ -469,7 +469,7 @@ TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;
     	readyAtThisInstant.mMarked = false;
     	
    // 	printf ("index : %ld Instant %ld\n",index,oReadyAtThisInstant (lIndex COMMA_HERE).mThisInstant);
-    ReadyAtThisInstant.addObject(readyAtThisInstant); 
+    ReadyAtThisInstant.appendObject(readyAtThisInstant); 
   }
 /*  for ( int32_t i = 0; i < sizeofStarting ; i ++) {
   	printf("------Activitites at : %ld are:\n",ReadyAtThisInstant (i COMMA_HERE).mThisInstant);

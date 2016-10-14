@@ -18,8 +18,8 @@ class cPtr_C_5F_taskDependsFromMessage : public cPtr_AC_5F_task {
 
 //--- END OF USER ZONE 2
 //--- Attributes
-  public : GALGAS_uint mAttribute_mMessage ;
-  public : GALGAS_luint mAttribute_mEvery ;
+  public : GALGAS_uint mProperty_mMessage ;
+  public : GALGAS_luint mProperty_mEvery ;
 
 //--- Constructor
   public : cPtr_C_5F_taskDependsFromMessage (const GALGAS_uint & in_mMessage,

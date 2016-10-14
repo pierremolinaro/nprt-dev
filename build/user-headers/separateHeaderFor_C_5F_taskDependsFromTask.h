@@ -18,8 +18,8 @@ class cPtr_C_5F_taskDependsFromTask : public cPtr_AC_5F_task {
 
 //--- END OF USER ZONE 2
 //--- Attributes
-  public : GALGAS_uint mAttribute_mTask ;
-  public : GALGAS_luint mAttribute_mEvery ;
+  public : GALGAS_uint mProperty_mTask ;
+  public : GALGAS_luint mProperty_mEvery ;
 
 //--- Constructor
   public : cPtr_C_5F_taskDependsFromTask (const GALGAS_uint & in_mTask,
