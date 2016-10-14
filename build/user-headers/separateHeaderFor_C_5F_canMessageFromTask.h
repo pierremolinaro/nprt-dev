@@ -17,7 +17,7 @@ class cPtr_C_5F_canMessageFromTask : public cPtr_AC_5F_canMessage {
 
 //--- END OF USER ZONE 2
 //--- Attributes
-  public : GALGAS_uint mAttribute_mTaskIndex ;
+  public : GALGAS_uint mProperty_mTaskIndex ;
 
 //--- Constructor
   public : cPtr_C_5F_canMessageFromTask (const GALGAS_uint & in_mTaskIndex

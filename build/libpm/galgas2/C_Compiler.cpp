@@ -63,9 +63,7 @@ bool C_Compiler::performLogFileRead (void) {
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_Compiler::C_Compiler (C_Compiler * inCallerCompiler,
-                        const C_String & /* inDependencyFileExtension */,
-                        const C_String & /* inDependencyFilePath */
+C_Compiler::C_Compiler (C_Compiler * inCallerCompiler
                         COMMA_LOCATION_ARGS) :
 C_SharedObject (THERE),
 mCallerCompiler (NULL),
@@ -73,7 +71,7 @@ mSentString (),
 mSentStringIsValid (true),
 mTemplateString (),
 mTemplateStringLocation (),
-mSourceTextPtr (NULL),
+mSourceText (),
 mCurrentLocation (),
 mStartLocationForHere (),
 mEndLocationForHere (),
@@ -85,17 +83,13 @@ mEndLocationForNext () {
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_Compiler::~C_Compiler (void) {
-  macroDetachSharedObject (mSourceTextPtr) ;
   macroDetachSharedObject (mCallerCompiler) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_String C_Compiler::sourceFilePath (void) const {
-  return (mSourceTextPtr == NULL)
-    ? C_String ()
-    : mSourceTextPtr->sourceFilePath ()
-  ;
+  return mSourceText.sourceFilePath () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -143,10 +137,9 @@ void C_Compiler::resetTemplateString (void) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void C_Compiler::resetAndLoadSourceFromText (C_SourceTextInString * & ioSourceTextPtr) {
-  macroAssignSharedObject (mSourceTextPtr, ioSourceTextPtr) ;
-  macroValidSharedObject (mSourceTextPtr, C_SourceTextInString) ;
-  mCurrentLocation.resetWithSourceText (mSourceTextPtr) ;
+void C_Compiler::resetAndLoadSourceFromText (const C_SourceTextInString & inSourceText) {
+  mSourceText = inSourceText ;
+  mCurrentLocation.resetWithSourceText (mSourceText) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -260,7 +253,7 @@ void C_Compiler::semanticErrorAtLocation (const GALGAS_location & inErrorLocatio
                                           const TC_Array <C_FixItDescription> & inFixItArray
                                           COMMA_LOCATION_ARGS) {
   if (inErrorLocation.isValid ()) { // No error raised if not built
-    if (NULL == inErrorLocation.sourceText ()) {
+    if (!inErrorLocation.sourceText ().isValid ()) {
       onTheFlyRunTimeError (inErrorMessage COMMA_THERE) ;
     }else{
       signalSemanticError (inErrorLocation.sourceText (),
@@ -279,7 +272,7 @@ void C_Compiler::emitSemanticError (const GALGAS_location & inErrorLocation,
                                     COMMA_LOCATION_ARGS) {
   if (inErrorLocation.isValid () && inErrorMessage.isValid ()) {
     const C_String errorMessage = inErrorMessage.stringValue () ;
-    if (NULL == inErrorLocation.sourceText ()) {
+    if (!inErrorLocation.sourceText ().isValid ()) {
       onTheFlyRunTimeError (errorMessage COMMA_THERE) ;
     }else{
       signalSemanticError (inErrorLocation.sourceText (),
@@ -296,7 +289,7 @@ void C_Compiler::semanticErrorWith_K_message (const GALGAS_lstring & inKey,
                                               TC_UniqueArray <C_String> & ioNearestKeyArray,
                                               const char * in_K_ErrorMessage
                                               COMMA_LOCATION_ARGS) {
-  const C_String key = inKey.mAttribute_string.stringValue () ;
+  const C_String key = inKey.mProperty_string.stringValue () ;
 //--- Build error message
   C_String message ;
   bool perCentFound = false ;
@@ -318,10 +311,10 @@ void C_Compiler::semanticErrorWith_K_message (const GALGAS_lstring & inKey,
 //--- Add nearest keys, if any
   TC_Array <C_FixItDescription> fixItArray ;
   for (int32_t i=0 ; i<ioNearestKeyArray.count () ; i++) {
-    fixItArray.addObject (C_FixItDescription (kFixItReplace, ioNearestKeyArray (i COMMA_HERE))) ;
+    fixItArray.appendObject (C_FixItDescription (kFixItReplace, ioNearestKeyArray (i COMMA_HERE))) ;
   }
 //--- Emit error message
-  const GALGAS_location key_location = inKey.mAttribute_location ;
+  const GALGAS_location key_location = inKey.mProperty_location ;
   semanticErrorAtLocation (key_location, message, fixItArray COMMA_THERE) ;
 }
 
@@ -331,7 +324,7 @@ void C_Compiler::semanticErrorWith_K_L_message (const GALGAS_lstring & inKey,
                                                 const char * in_K_L_ErrorMessage,
                                                 const GALGAS_location & inExistingKeyLocation
                                                 COMMA_LOCATION_ARGS) {
-  const C_String key = inKey.mAttribute_string.stringValue () ;
+  const C_String key = inKey.mProperty_string.stringValue () ;
 //--- Build error message
   C_String message ;
   bool perCentFound = false ;
@@ -353,7 +346,7 @@ void C_Compiler::semanticErrorWith_K_L_message (const GALGAS_lstring & inKey,
     }
   }
 //--- Emit error message
-  const GALGAS_location key_location = inKey.mAttribute_location ;
+  const GALGAS_location key_location = inKey.mProperty_location ;
   semanticErrorAtLocation (key_location, message, TC_Array <C_FixItDescription> () COMMA_THERE) ;
 }
 
@@ -363,7 +356,7 @@ void C_Compiler::semanticWarningWith_K_L_message (const GALGAS_lstring & inKey,
                                                   const char * in_K_L_ErrorMessage,
                                                   const GALGAS_location & inExistingKeyLocation
                                                   COMMA_LOCATION_ARGS) {
-  const C_String key = inKey.mAttribute_string.stringValue () ;
+  const C_String key = inKey.mProperty_string.stringValue () ;
 //--- Build error message
   C_String message ;
   bool perCentFound = false ;
@@ -385,7 +378,7 @@ void C_Compiler::semanticWarningWith_K_L_message (const GALGAS_lstring & inKey,
     }
   }
 //--- Emit error message
-  const GALGAS_location key_location = inKey.mAttribute_location ;
+  const GALGAS_location key_location = inKey.mProperty_location ;
   semanticWarningAtLocation (key_location, message COMMA_THERE) ;
 }
 
@@ -401,7 +394,7 @@ void C_Compiler::semanticWarningAtLocation (const GALGAS_location & inWarningLoc
                                             const C_String & inWarningMessage
                                             COMMA_LOCATION_ARGS) {
   if (inWarningLocation.isValid ()) { // No warning raised if not built
-    if (NULL == inWarningLocation.sourceText ()) {
+    if (!inWarningLocation.sourceText ().isValid ()) {
       signalRunTimeWarning (inWarningMessage COMMA_THERE) ;
     }else{
       signalSemanticWarning (inWarningLocation.sourceText (),
@@ -420,7 +413,7 @@ void C_Compiler::emitSemanticWarning (const GALGAS_location & inWarningLocation,
                                       COMMA_LOCATION_ARGS) {
   if (inWarningLocation.isValid () && inWarningMessage.isValid ()) {
     const C_String warningMessage = inWarningMessage.stringValue () ;
-    if (NULL == inWarningLocation.sourceText ()) {
+    if (!inWarningLocation.sourceText ().isValid ()) {
       signalRunTimeWarning (warningMessage COMMA_THERE) ;
     }else{
       signalSemanticWarning (inWarningLocation.sourceText (),
@@ -453,14 +446,14 @@ void C_Compiler::onTheFlyRunTimeError (const C_String & inRunTimeErrorMessage
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location C_Compiler::here (void) const {
-  return GALGAS_location (mStartLocationForHere, mEndLocationForHere, mSourceTextPtr) ;
+  return GALGAS_location (mStartLocationForHere, mEndLocationForHere, mSourceText) ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location C_Compiler::next (void) const {
-  return GALGAS_location (mStartLocationForNext, mEndLocationForNext, mSourceTextPtr) ;
+  return GALGAS_location (mStartLocationForNext, mEndLocationForNext, mSourceText) ;
 }
 
 
@@ -476,10 +469,10 @@ GALGAS_location C_Compiler::next (void) const {
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * START_OF_USER_ZONE_1 =  "--- START OF USER ZONE 1\n" ;
-static const char * END_OF_USER_ZONE_1   =  "--- END OF USER ZONE 1\n" ;
-static const char * START_OF_USER_ZONE_2 =  "--- START OF USER ZONE 2\n" ;
-static const char * END_OF_USER_ZONE_2   =  "--- END OF USER ZONE 2\n" ;
+static const char START_OF_USER_ZONE_1 [] =  "--- START OF USER ZONE 1\n" ;
+static const char END_OF_USER_ZONE_1   [] =  "--- END OF USER ZONE 1\n" ;
+static const char START_OF_USER_ZONE_2 [] =  "--- START OF USER ZONE 2\n" ;
+static const char END_OF_USER_ZONE_2   [] =  "--- END OF USER ZONE 2\n" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -540,7 +533,7 @@ void C_Compiler::generateFileFromPathes (const C_String & inStartPath,
         ggs_printFileOperationSuccess (C_String ("Created '") + fileName + "'.\n") ;
       }
     }else{
-      ggs_printWarning (NULL, C_IssueWithFixIt (), C_String ("Need to create '") + fileName + "'.\n" COMMA_HERE) ;
+      ggs_printWarning (C_SourceTextInString(), C_IssueWithFixIt (), C_String ("Need to create '") + fileName + "'.\n" COMMA_HERE) ;
     }
   }else{
     const C_String previousContents = C_FileManager::stringWithContentOfFile (fullPathName) ;
@@ -559,7 +552,7 @@ void C_Compiler::generateFileFromPathes (const C_String & inStartPath,
           }
         }
       }else{
-        ggs_printWarning (NULL, C_IssueWithFixIt (), C_String ("Need to replace '") + fullPathName + "'.\n" COMMA_HERE) ;
+        ggs_printWarning (C_SourceTextInString (), C_IssueWithFixIt (), C_String ("Need to replace '") + fullPathName + "'.\n" COMMA_HERE) ;
       }
     }
   }
@@ -627,7 +620,7 @@ void C_Compiler::generateFileWithPatternFromPathes (
         #endif
       }
     }else{
-      ggs_printWarning (NULL, C_IssueWithFixIt (), C_String ("Need to create '") + fileName + "'.\n" COMMA_HERE) ;
+      ggs_printWarning (C_SourceTextInString (), C_IssueWithFixIt (), C_String ("Need to create '") + fileName + "'.\n" COMMA_HERE) ;
     }
   }else{
     C_String firstUserPart ;
@@ -661,7 +654,7 @@ void C_Compiler::generateFileWithPatternFromPathes (
       secondGeneratedPart = stringArray (1 COMMA_HERE) ;
     }
     if (! ok) {
-      ggs_printError (NULL, C_IssueWithFixIt (), C_String ("BAD FILE '") + fullPathName + "'.\n" COMMA_HERE) ;
+      ggs_printError (C_SourceTextInString (), C_IssueWithFixIt (), C_String ("BAD FILE '") + fullPathName + "'.\n" COMMA_HERE) ;
     }else if ((firstGeneratedPart == inGeneratedZone2) && (secondGeneratedPart == inGeneratedZone3)) {
     }else if (performGeneration ()) {
       C_TextFileWrite f (fullPathName) ;
@@ -689,7 +682,7 @@ void C_Compiler::generateFileWithPatternFromPathes (
         #endif
       }
     }else{
-      ggs_printWarning (NULL, C_IssueWithFixIt (), C_String ("Need to replace '") + fullPathName + "'.\n" COMMA_HERE) ;
+      ggs_printWarning (C_SourceTextInString (), C_IssueWithFixIt (), C_String ("Need to replace '") + fullPathName + "'.\n" COMMA_HERE) ;
     }
   }
 }

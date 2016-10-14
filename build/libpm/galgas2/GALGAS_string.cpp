@@ -28,10 +28,12 @@
 #include "strings/unicode_character_cpp.h"
 #include "galgas2/C_galgas_io.h"
 #include "files/C_FileManager.h"
+#include "files/C_BinaryFileWrite.h"
 #include "galgas2/F_verbose_output.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+#include <math.h>
 #include <dirent.h>
 #include <stdlib.h>
 #include <string.h>
@@ -135,7 +137,7 @@ AC_OutputStream & operator << (AC_OutputStream & inStream,
 
 AC_OutputStream & operator << (AC_OutputStream & inStream,
                                const GALGAS_lstring & inString) {
-  inStream << inString.mAttribute_string.stringValue () ;
+  inStream << inString.mProperty_string.stringValue () ;
   return inStream ;
 }
 
@@ -319,7 +321,7 @@ GALGAS_string GALGAS_string::constructor_componentsJoinedByString (const GALGAS_
   if ((inComponents.isValid ()) && (inSeparator.isValid ())) {
     bool first = true ;
     C_String s ;
-    cEnumerator_stringlist current (inComponents, kEnumeration_up) ;
+    cEnumerator_stringlist current (inComponents, kENUMERATION_UP) ;
     while (current.hasCurrentObject ()) {
       if (first) {
         first = false ;
@@ -441,8 +443,8 @@ GALGAS_string GALGAS_string::getter_HTMLRepresentation (UNUSED_LOCATION_ARGS) co
 GALGAS_lstring GALGAS_string::getter_nowhere (LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (isValid ()) {
-    result.mAttribute_string = * this ;
-    result.mAttribute_location = GALGAS_location::constructor_nowhere (THERE) ;
+    result.mProperty_string = * this ;
+    result.mProperty_location = GALGAS_location::constructor_nowhere (THERE) ;
   }
   return result ;
 }
@@ -452,8 +454,8 @@ GALGAS_lstring GALGAS_string::getter_nowhere (LOCATION_ARGS) const {
 GALGAS_lstring GALGAS_string::getter_here (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (isValid ()) {
-    result.mAttribute_string = * this ;
-    result.mAttribute_location = GALGAS_location::constructor_here (inCompiler COMMA_THERE) ;
+    result.mProperty_string = * this ;
+    result.mProperty_location = GALGAS_location::constructor_here (inCompiler COMMA_THERE) ;
   }
   return result ;
 }
@@ -1129,7 +1131,7 @@ static void recursiveSearchForRegularFiles (const C_String & inUnixStartPath,
         }else if (C_FileManager::fileExistsAtPath (name)) {
           const C_String extension = name.pathExtension () ;
           bool extensionFound = false ;
-          cEnumerator_stringlist currentExtension (inExtensionList, kEnumeration_up) ;
+          cEnumerator_stringlist currentExtension (inExtensionList, kENUMERATION_UP) ;
           while (currentExtension.hasCurrentObject () && ! extensionFound) {
             extensionFound = currentExtension.current_mValue (HERE).stringValue () == extension ;
             currentExtension.gotoNextObject () ;
@@ -1184,7 +1186,7 @@ static void recursiveSearchForDirectories (const C_String & inUnixStartPath,
         //--- Look for extension
           const C_String extension = name.pathExtension () ;
           bool extensionFound = false ;
-          cEnumerator_stringlist currentExtension (inExtensionList, kEnumeration_up) ;
+          cEnumerator_stringlist currentExtension (inExtensionList, kENUMERATION_UP) ;
           while (currentExtension.hasCurrentObject () && ! extensionFound) {
             extensionFound = currentExtension.current_mValue (HERE).stringValue () == extension ;
             currentExtension.gotoNextObject () ;
@@ -1215,7 +1217,7 @@ GALGAS_stringlist GALGAS_string::getter_directoriesWithExtensions (const GALGAS_
                                                                    const GALGAS_stringlist & inExtensionList
                                                                    COMMA_LOCATION_ARGS) const {
   GALGAS_stringlist result ;
-  if ((inRecursiveSearch.isValid ()) && (inExtensionList.isValid ())) {
+  if (isValid () && inRecursiveSearch.isValid () && inExtensionList.isValid ()) {
     result = GALGAS_stringlist::constructor_emptyList (THERE) ;
     if (C_FileManager::directoryExists (mString)) {
       recursiveSearchForDirectories (mString,
@@ -1231,54 +1233,215 @@ GALGAS_stringlist GALGAS_string::getter_directoriesWithExtensions (const GALGAS_
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_string::getter_doesEnvironmentVariableExist (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (::getenv (mString.cString (HERE)) != NULL) ;
+  GALGAS_bool result ;
+  if (isValid ()) {
+    result = GALGAS_bool (::getenv (mString.cString (HERE)) != NULL) ;
+  }
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_string::getter_capacity (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_uint ((uint32_t) mString.capacity ()) ;
+  GALGAS_uint result ;
+  if (isValid ()) {
+    result = GALGAS_uint ((uint32_t) mString.capacity ())  ;
+  }
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_string::getter_isDecimalUnsignedNumber (UNUSED_LOCATION_ARGS) const {
-  bool isDecimalUnsignedNumber = true ;
-  for (int32_t i=0 ; (i<mString.length ()) && isDecimalUnsignedNumber ; i++) {
-    const utf32 c = mString (i COMMA_HERE) ;
-    isDecimalUnsignedNumber = (UNICODE_VALUE (c) >= '0') && (UNICODE_VALUE (c) <= '9') ;
+  GALGAS_bool result ;
+  if (isValid ()) {
+    uint32_t r = 0 ;
+    bool ok = false ;
+    mString.convertToUInt32 (r, ok) ;
+    result = GALGAS_bool (ok) ;
   }
-  return GALGAS_bool (isDecimalUnsignedNumber) ;
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_string::getter_decimalUnsignedNumber (C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const {
-  bool ok = true ;
-  const uint32_t max = UINT32_MAX / 10 ;
-  uint32_t decimalUnsignedValue = 0 ;
-  for (int32_t i=0 ; (i<mString.length ()) && ok ; i++) {
-    const utf32 c = mString (i COMMA_HERE) ;
-    if ((UNICODE_VALUE (c) < '0') || (UNICODE_VALUE (c) > '9')) {
-      inCompiler->onTheFlyRunTimeError ("cannot convert a string to a decimal number: it contains a non-digit character" COMMA_THERE) ;
-      ok = false ;
+  GALGAS_uint result ;
+  if (isValid ()) {
+    uint32_t r = 0 ;
+    bool ok = false ;
+    mString.convertToUInt32 (r, ok) ;
+    if (ok) {
+      result = GALGAS_uint (r) ;
     }else{
-      const uint32_t digit = UNICODE_VALUE (c) - '0' ;
-      if (decimalUnsignedValue > max) {
-        inCompiler->onTheFlyRunTimeError ("cannot convert a string to a decimal number: number is > 2**32 - 1" COMMA_THERE) ;
-        ok = false ;
-      }else if ((decimalUnsignedValue == max) && (digit > (UINT32_MAX % 10))) {
-        inCompiler->onTheFlyRunTimeError ("cannot convert a string to a decimal number: number is > 2**32 - 1" COMMA_THERE) ;
-        ok = false ;
-      }else{
-        decimalUnsignedValue = decimalUnsignedValue * 10 + digit ;
-      }
+      inCompiler->onTheFlyRunTimeError ("cannot convert a string to a decimal @uint number" COMMA_THERE) ;
     }
   }
-  GALGAS_uint result ;
-  if (ok) {
-    result = GALGAS_uint (decimalUnsignedValue) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_string::getter_isDecimalUnsigned_36__34_Number (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  if (isValid ()) {
+    uint64_t r = 0 ;
+    bool ok = false ;
+    mString.convertToUInt64 (r, ok) ;
+    result = GALGAS_bool (ok) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint_36__34_ GALGAS_string::getter_decimalUnsigned_36__34_Number (C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
+  GALGAS_uint_36__34_ result ;
+  if (isValid ()) {
+    uint64_t r = 0 ;
+    bool ok = false ;
+    mString.convertToUInt64 (r, ok) ;
+    if (ok) {
+      result = GALGAS_uint_36__34_ (r) ;
+    }else{
+      inCompiler->onTheFlyRunTimeError ("cannot convert a string to a decimal @uint64 number" COMMA_THERE) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_string::getter_isDecimalSignedNumber (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  if (isValid ()) {
+    int32_t r = 0 ;
+    bool ok = false ;
+    mString.convertToSInt32 (r, ok) ;
+    result = GALGAS_bool (ok) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sint GALGAS_string::getter_decimalSignedNumber (C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const {
+  GALGAS_sint result ;
+  if (isValid ()) {
+    int32_t r = 0 ;
+    bool ok = false ;
+    mString.convertToSInt32 (r, ok) ;
+    if (ok) {
+      result = GALGAS_sint (r) ;
+    }else{
+      inCompiler->onTheFlyRunTimeError ("cannot convert a string to a decimal @sint number" COMMA_THERE) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_string::getter_isDecimalSigned_36__34_Number (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  if (isValid ()) {
+    int64_t r = 0 ;
+    bool ok = false ;
+    mString.convertToSInt64 (r, ok) ;
+    result = GALGAS_bool (ok) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sint_36__34_ GALGAS_string::getter_decimalSigned_36__34_Number (C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const {
+  GALGAS_sint_36__34_ result ;
+  if (isValid ()) {
+    int64_t r = 0 ;
+    bool ok = false ;
+    mString.convertToSInt64 (r, ok) ;
+    if (ok) {
+      result = GALGAS_sint_36__34_ (r) ;
+    }else{
+      inCompiler->onTheFlyRunTimeError ("cannot convert a string to a decimal @sint64 number" COMMA_THERE) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_string::getter_isDecimalSignedBigInt (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  if (isValid ()) {
+    bool ok = mString.length () > 0 ;
+  //--- Sign
+    int32_t idx = 0 ;
+    if (ok) {
+      const utf32 c = mString (0 COMMA_HERE) ;
+      if ((UNICODE_VALUE (c) == '+') || (UNICODE_VALUE (c) == '-')) {
+        idx = 1 ;
+      }
+    }
+    while ((idx < mString.length ()) && ok) {
+      const utf32 c = mString (idx COMMA_HERE) ;
+      idx ++ ;
+      ok = (UNICODE_VALUE (c) >= '0') || (UNICODE_VALUE (c) <= '9') ;
+    }
+    result = GALGAS_bool (ok) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint GALGAS_string::getter_decimalSignedBigInt (C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
+  GALGAS_bigint result ;
+  if (isValid ()) {
+    bool ok = false ;
+    C_BigInt bigint (mString.cString (HERE), 10, ok) ;
+    if (ok) {
+      result = GALGAS_bigint (bigint) ;
+    }else{
+      inCompiler->onTheFlyRunTimeError ("cannot convert a string to a decimal @bigint number" COMMA_THERE) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_double GALGAS_string::getter_doubleNumber (C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
+  GALGAS_double result ;
+  if (isValid ()) {
+    double doubleValue = 0.0 ;
+    bool ok = true ;
+    mString.convertToDouble (doubleValue, ok) ;
+    if (ok) {
+      result = GALGAS_double (doubleValue) ;
+    }else{
+      inCompiler->onTheFlyRunTimeError ("cannot convert a string to a double number: it contains invalid character" COMMA_THERE) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_string::getter_isDoubleNumber (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  if (isValid ()) {
+    double doubleValue = 0.0 ;
+    bool ok = true ;
+    mString.convertToDouble (doubleValue, ok) ;
+    result = GALGAS_bool (ok) ;
   }
   return result ;
 }
@@ -1532,7 +1695,7 @@ void GALGAS_string::method_writeToFile (GALGAS_string inFilePath,
         inCompiler->onTheFlyRunTimeError (message COMMA_THERE) ;
       }
     }else{
-      ggs_printWarning (NULL, C_IssueWithFixIt (), C_String ("Need to write '") + inFilePath.mString + "'.\n" COMMA_THERE) ;
+      ggs_printWarning (C_SourceTextInString (), C_IssueWithFixIt (), C_String ("Need to write '") + inFilePath.mString + "'.\n" COMMA_THERE) ;
     }
   }
 }
@@ -1575,7 +1738,7 @@ void GALGAS_string::method_writeToFileWhenDifferentContents (GALGAS_string inFil
           }
         }
       }else{
-        ggs_printWarning (NULL, C_IssueWithFixIt (), C_String ("Need to write '") + inFilePath.mString + "'.\n" COMMA_THERE) ;
+        ggs_printWarning (C_SourceTextInString (), C_IssueWithFixIt (), C_String ("Need to write '") + inFilePath.mString + "'.\n" COMMA_THERE) ;
       }
     }
   }
@@ -1602,7 +1765,7 @@ void GALGAS_string::method_writeToExecutableFile (GALGAS_string inFilePath,
         inCompiler->onTheFlyRunTimeError (message COMMA_THERE) ;
       }
     }else{
-      ggs_printWarning (NULL, C_IssueWithFixIt (), C_String ("Need to write '") + inFilePath.mString + "'.\n" COMMA_THERE) ;
+      ggs_printWarning (C_SourceTextInString (), C_IssueWithFixIt (), C_String ("Need to write '") + inFilePath.mString + "'.\n" COMMA_THERE) ;
     }
   }
 }
@@ -1645,7 +1808,7 @@ void GALGAS_string::method_writeToExecutableFileWhenDifferentContents (GALGAS_st
           }
         }
       }else{
-        ggs_printWarning (NULL, C_IssueWithFixIt (), C_String ("Need to write '") + inFilePath.mString + "'.\n" COMMA_THERE) ;
+        ggs_printWarning (C_SourceTextInString (), C_IssueWithFixIt (), C_String ("Need to write '") + inFilePath.mString + "'.\n" COMMA_THERE) ;
       }
     }
   }
@@ -1803,7 +1966,7 @@ void GALGAS_string::class_method_deleteFile (GALGAS_string inFilePath,
                                              COMMA_LOCATION_ARGS) {
   if (inFilePath.isValid ()) {
     if (! C_Compiler::performGeneration ()) {
-      ggs_printWarning (NULL, C_IssueWithFixIt (), C_String ("Need to delete '") + inFilePath.mString + "'.\n" COMMA_THERE) ;
+      ggs_printWarning (C_SourceTextInString (), C_IssueWithFixIt (), C_String ("Need to delete '") + inFilePath.mString + "'.\n" COMMA_THERE) ;
     }else if (inFilePath.mString.length () == 0) {
       inCompiler->onTheFlyRunTimeError ("cannot perform file delete: file name is an empty string" COMMA_THERE) ;
     }else{
@@ -1836,7 +1999,7 @@ void GALGAS_string::class_method_removeEmptyDirectory (GALGAS_string inDirectory
                                                        COMMA_LOCATION_ARGS) {
   if (inDirectoryPath.isValid ()) {
     if (! C_Compiler::performGeneration ()) {
-      ggs_printWarning (NULL, C_IssueWithFixIt (), C_String ("Need to remove directory '") + inDirectoryPath.mString + "'.\n" COMMA_THERE) ;
+      ggs_printWarning (C_SourceTextInString (), C_IssueWithFixIt (), C_String ("Need to remove directory '") + inDirectoryPath.mString + "'.\n" COMMA_THERE) ;
     }else if (inDirectoryPath.mString.length () == 0) {
       inCompiler->onTheFlyRunTimeError ("cannot perform directory removing: directory path is an empty string" COMMA_THERE) ;
     }else{
@@ -1885,7 +2048,7 @@ void GALGAS_string::class_method_removeDirectoryRecursively (GALGAS_string inDir
                                                              COMMA_LOCATION_ARGS) {
   if (inDirectoryPath.isValid ()) {
     if (! C_Compiler::performGeneration ()) {
-      ggs_printWarning (NULL, C_IssueWithFixIt (), C_String ("Need to remove directory '") + inDirectoryPath.mString + "'.\n" COMMA_THERE) ;
+      ggs_printWarning (C_SourceTextInString (), C_IssueWithFixIt (), C_String ("Need to remove directory '") + inDirectoryPath.mString + "'.\n" COMMA_THERE) ;
     }else if (inDirectoryPath.mString.length () == 0) {
       inCompiler->onTheFlyRunTimeError ("cannot perform directory removing: directory path is an empty string" COMMA_THERE) ;
     }else{
@@ -1901,23 +2064,163 @@ void GALGAS_string::class_method_removeDirectoryRecursively (GALGAS_string inDir
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+static bool writeFile (const C_String & inMessage,
+                       const C_String & inFullPathName,
+                       const C_Data & inCurrentData,
+                       C_Compiler * inCompiler) {
+  bool ok = true ;
+  if (inCompiler->performGeneration ()) {
+    const bool verboseOptionOn = verboseOutput () ;
+    const C_String directory = inFullPathName.stringByDeletingLastPathComponent () ;
+    C_FileManager::makeDirectoryIfDoesNotExist (directory) ;
+    C_BinaryFileWrite binaryFile (inFullPathName) ;
+    ok = binaryFile.isOpened () ;
+    if (! ok) {
+      C_String message ;
+      message << "Cannot open '" << inFullPathName << "' file in write mode." ;
+      inCompiler->onTheFlySemanticError (message COMMA_HERE) ;
+    }
+    binaryFile.appendData (inCurrentData) ;
+  //--- Close file
+    if (ok) {
+      ok = binaryFile.close () ;
+    }
+    if (ok && verboseOptionOn) {
+      ggs_printFileOperationSuccess (inMessage + " '" + inFullPathName + "'.\n") ;
+    }
+  }else{
+    ggs_printWarning (C_SourceTextInString(), C_IssueWithFixIt (), C_String ("Need to write '") + inFullPathName + "'.\n" COMMA_HERE) ;
+  }
+  return ok ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool updateFile (const C_String & inFullPathName,
+                        const C_String & inContents,
+                        C_Compiler * inCompiler) {
+  C_Data currentData ; currentData.appendString (inContents) ;
+//--- Compare file length
+  const uint64_t fileSize = C_FileManager::fileSize (inFullPathName) ;
+  bool needsToWriteFile = fileSize != (uint64_t) currentData.length () ;
+  bool ok = true ;
+//--- Read file
+  if (! needsToWriteFile) {
+    C_Data fileData ;
+    ok = C_FileManager::binaryDataWithContentOfFile (inFullPathName, fileData) ;
+    if (ok) {
+      needsToWriteFile = fileData != currentData ;
+    }
+  }
+//--- File needs to be updated
+  if (ok && needsToWriteFile) {
+    ok = writeFile ("Updated", inFullPathName, currentData, inCompiler) ;
+  }
+  return ok ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void generateFile (const C_String & inStartPath,
+                          const C_String & inFileName,
+                          const C_String & inContents,
+                          const bool inMakeExecutable,
+                          C_Compiler * inCompiler) {
+  bool ok = true ;
+//--- File exists ?
+  const TC_UniqueArray <C_String> directoriesToExclude ;
+  const C_String fullPathName = C_FileManager::findFileInDirectory (inStartPath, inFileName, directoriesToExclude) ;
+  if (fullPathName.length () == 0) { // No, does not exist
+    C_Data currentData ; currentData.appendString (inContents) ;
+    ok = writeFile ("Created", inStartPath + "/" + inFileName, currentData, inCompiler) ;
+  }else{ //--- File exists: read it
+    ok = updateFile (fullPathName, inContents, inCompiler) ;
+  }
+//--- Make file executable
+  if (ok && inMakeExecutable) {
+    #if COMPILE_FOR_WINDOWS == 0
+      struct stat fileStat ;
+      ::stat (fullPathName.cString (HERE), & fileStat) ;
+      // printf ("FILE MODE 0x%X\n", fileStat.st_mode) ;
+      ::chmod (fullPathName.cString (HERE), fileStat.st_mode | S_IXUSR | S_IXGRP | S_IXOTH) ;
+    #endif
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_string::class_method_generateFile (GALGAS_string inStartPath,
                                                GALGAS_string inFileName,
                                                GALGAS_string inContents,
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
-  const bool built = (inStartPath.isValid ())
-    && (inFileName.isValid ())
-    && (inContents.isValid ())
-  ;
-  if (built) {
-    TC_UniqueArray <C_String> directoriesToExclude ;
-    inCompiler->generateFileFromPathes (inStartPath.mString,
-                                        directoriesToExclude,
-                                        inFileName.mString,
-                                        inContents.mString) ;
+  if (inStartPath.isValid () && inFileName.isValid () && inContents.isValid ()) {
+    generateFile (inStartPath.mString, inFileName.mString, inContents.mString, false, inCompiler) ;
   }
 }
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+/*static void generateFileWithCache (const C_String & inStartPath,
+                                   const C_String & inFileName,
+                                   const C_String & inContents,
+                                   const C_String & inCacheDirectory,
+                                   const bool inMakeExecutable,
+                                   C_Compiler * inCompiler) {
+  bool ok = true ;
+//--- File exists ?
+  const TC_UniqueArray <C_String> directoriesToExclude ;
+  C_String fullPathName = C_FileManager::findFileInDirectory (inStartPath, inFileName, directoriesToExclude) ;
+  if (fullPathName.length () == 0) { // No, does not exist
+    fullPathName = inStartPath + "/" + inFileName ;
+  }
+  const C_String cacheFile = inCacheDirectory + "/" + fullPathName.stringByReplacingStringByString ("/", "+") + ".md5.text" ;
+  // co << "CACHE '" << cacheFile << "'\n" ;
+//--- Cache file
+  bool writeCacheFile = true ;
+  C_Data md5ContentsData ; md5ContentsData.appendString (inContents.md5 ()) ;
+//---
+  if (!C_FileManager::fileExistsAtPath (fullPathName)) { // No, does not exist
+    C_Data currentData ; currentData.appendString (inContents) ;
+    ok = writeFile ("Created", fullPathName, currentData, inCompiler) ;
+  }else if (C_FileManager::fileExistsAtPath (cacheFile)) { //--- Cache file exists: compare cache files
+    C_Data cacheFileData ;
+    ok = C_FileManager::binaryDataWithContentOfFile (cacheFile, cacheFileData) ;
+    if (ok && (cacheFileData == md5ContentsData)) {
+      writeCacheFile = false ;
+    }else{
+      ok = updateFile (fullPathName, inContents, inCompiler) ;
+    }
+  }else{
+    ok = updateFile (fullPathName, inContents, inCompiler) ;
+  }
+//--- Make file executable
+  if (ok && inMakeExecutable) {
+    #if COMPILE_FOR_WINDOWS == 0
+      struct stat fileStat ;
+      ::stat (fullPathName.cString (HERE), & fileStat) ;
+      // printf ("FILE MODE 0x%X\n", fileStat.st_mode) ;
+      ::chmod (fullPathName.cString (HERE), fileStat.st_mode | S_IXUSR | S_IXGRP | S_IXOTH) ;
+    #endif
+  }
+//--- Write cache ?
+  if (ok && writeCacheFile) {
+    writeFile ("Written", cacheFile, md5ContentsData, inCompiler) ;
+  }
+} */
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+//void GALGAS_string::class_method_generateFileWithCache (GALGAS_string inStartPath,
+//                                                        GALGAS_string inFileName,
+//                                                        GALGAS_string inContents,
+//                                                        GALGAS_string inCacheDirectory,
+//                                                        C_Compiler * inCompiler
+//                                                        COMMA_UNUSED_LOCATION_ARGS) {
+//  if (inStartPath.isValid () && inFileName.isValid () && inContents.isValid () && inCacheDirectory.isValid ()) {
+//    generateFileWithCache (inStartPath.mString, inFileName.mString, inContents.mString, inCacheDirectory.mString, false, inCompiler) ;
+//  }
+//}
 
 //---------------------------------------------------------------------------------------------------------------------*
 

@@ -17,7 +17,7 @@ class cPtr_C_5F_canMessageFromMessage : public cPtr_AC_5F_canMessage {
 
 //--- END OF USER ZONE 2
 //--- Attributes
-  public : GALGAS_uint mAttribute_mMessageIndex ;
+  public : GALGAS_uint mProperty_mMessageIndex ;
 
 //--- Constructor
   public : cPtr_C_5F_canMessageFromMessage (const GALGAS_uint & in_mMessageIndex

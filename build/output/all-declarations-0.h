@@ -42,8 +42,6 @@ class cTokenFor_oa_5F_scanner : public cToken {
 class C_Lexique_oa_5F_scanner : public C_Lexique {
 //--- Constructors
   public : C_Lexique_oa_5F_scanner (C_Compiler * inCallerCompiler,
-                       const C_String & inDependencyFileExtension,
-                       const C_String & inDependencyFilePath,
                        const C_String & inSourceFileName
                        COMMA_LOCATION_ARGS) ;
 
@@ -258,8 +256,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_processor ;
 
 class cMapElement_M_5F_processor : public cMapElement {
 //--- Map attributes
-  public : GALGAS_uint mAttribute_mIndex ;
-  public : GALGAS_luint mAttribute_mStep ;
+  public : GALGAS_uint mProperty_mIndex ;
+  public : GALGAS_luint mProperty_mStep ;
 
 //--- Constructor
   public : cMapElement_M_5F_processor (const GALGAS_lstring & inKey,
@@ -288,9 +286,9 @@ class cMapElement_M_5F_processor : public cMapElement {
 
 class GALGAS_M_5F_processor_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_uint mAttribute_mIndex ;
-  public : GALGAS_luint mAttribute_mStep ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_uint mProperty_mIndex ;
+  public : GALGAS_luint mProperty_mStep ;
 
 
 //--------------------------------- Accessors
@@ -494,9 +492,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_network ;
 
 class cMapElement_M_5F_network : public cMapElement {
 //--- Map attributes
-  public : GALGAS_uint mAttribute_mIndex ;
-  public : GALGAS_bool mAttribute_mCANnetwork ;
-  public : GALGAS_luint mAttribute_mScalingFactor ;
+  public : GALGAS_uint mProperty_mIndex ;
+  public : GALGAS_bool mProperty_mCANnetwork ;
+  public : GALGAS_luint mProperty_mScalingFactor ;
 
 //--- Constructor
   public : cMapElement_M_5F_network (const GALGAS_lstring & inKey,
@@ -526,10 +524,10 @@ class cMapElement_M_5F_network : public cMapElement {
 
 class GALGAS_M_5F_network_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_uint mAttribute_mIndex ;
-  public : GALGAS_bool mAttribute_mCANnetwork ;
-  public : GALGAS_luint mAttribute_mScalingFactor ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_uint mProperty_mIndex ;
+  public : GALGAS_bool mProperty_mCANnetwork ;
+  public : GALGAS_luint mProperty_mScalingFactor ;
 
 
 //--------------------------------- Accessors
@@ -1031,15 +1029,15 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages ;
 
 class cMapElement_M_5F_messages : public cMapElement {
 //--- Map attributes
-  public : GALGAS_uint mAttribute_mIndex ;
-  public : GALGAS_luint mAttribute_mClass ;
-  public : GALGAS_uint mAttribute_mNetworkIndex ;
-  public : GALGAS_luint mAttribute_mBytesCount ;
-  public : GALGAS_luint mAttribute_mPriority ;
-  public : GALGAS_luint mAttribute_mOffset ;
-  public : GALGAS_luint mAttribute_mDeadline ;
-  public : GALGAS_luint mAttribute_mPeriod ;
-  public : GALGAS_AC_5F_canMessage mAttribute_mMessageKind ;
+  public : GALGAS_uint mProperty_mIndex ;
+  public : GALGAS_luint mProperty_mClass ;
+  public : GALGAS_uint mProperty_mNetworkIndex ;
+  public : GALGAS_luint mProperty_mBytesCount ;
+  public : GALGAS_luint mProperty_mPriority ;
+  public : GALGAS_luint mProperty_mOffset ;
+  public : GALGAS_luint mProperty_mDeadline ;
+  public : GALGAS_luint mProperty_mPeriod ;
+  public : GALGAS_AC_5F_canMessage mProperty_mMessageKind ;
 
 //--- Constructor
   public : cMapElement_M_5F_messages (const GALGAS_lstring & inKey,
@@ -1075,16 +1073,16 @@ class cMapElement_M_5F_messages : public cMapElement {
 
 class GALGAS_M_5F_messages_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_uint mAttribute_mIndex ;
-  public : GALGAS_luint mAttribute_mClass ;
-  public : GALGAS_uint mAttribute_mNetworkIndex ;
-  public : GALGAS_luint mAttribute_mBytesCount ;
-  public : GALGAS_luint mAttribute_mPriority ;
-  public : GALGAS_luint mAttribute_mOffset ;
-  public : GALGAS_luint mAttribute_mDeadline ;
-  public : GALGAS_luint mAttribute_mPeriod ;
-  public : GALGAS_AC_5F_canMessage mAttribute_mMessageKind ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_uint mProperty_mIndex ;
+  public : GALGAS_luint mProperty_mClass ;
+  public : GALGAS_uint mProperty_mNetworkIndex ;
+  public : GALGAS_luint mProperty_mBytesCount ;
+  public : GALGAS_luint mProperty_mPriority ;
+  public : GALGAS_luint mProperty_mOffset ;
+  public : GALGAS_luint mProperty_mDeadline ;
+  public : GALGAS_luint mProperty_mPeriod ;
+  public : GALGAS_AC_5F_canMessage mProperty_mMessageKind ;
 
 
 //--------------------------------- Accessors
@@ -1493,15 +1491,15 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_tasks ;
 
 class cMapElement_M_5F_tasks : public cMapElement {
 //--- Map attributes
-  public : GALGAS_uint mAttribute_mIndex ;
-  public : GALGAS_luint mAttribute_mPriority ;
-  public : GALGAS_luint mAttribute_mOffset ;
-  public : GALGAS_luint mAttribute_mDeadline ;
-  public : GALGAS_luint mAttribute_mDurationMin ;
-  public : GALGAS_luint mAttribute_mDurationMax ;
-  public : GALGAS_uint mAttribute_mProcessor ;
-  public : GALGAS_luint mAttribute_mPeriod ;
-  public : GALGAS_AC_5F_task mAttribute_mTaskKind ;
+  public : GALGAS_uint mProperty_mIndex ;
+  public : GALGAS_luint mProperty_mPriority ;
+  public : GALGAS_luint mProperty_mOffset ;
+  public : GALGAS_luint mProperty_mDeadline ;
+  public : GALGAS_luint mProperty_mDurationMin ;
+  public : GALGAS_luint mProperty_mDurationMax ;
+  public : GALGAS_uint mProperty_mProcessor ;
+  public : GALGAS_luint mProperty_mPeriod ;
+  public : GALGAS_AC_5F_task mProperty_mTaskKind ;
 
 //--- Constructor
   public : cMapElement_M_5F_tasks (const GALGAS_lstring & inKey,
@@ -1537,16 +1535,16 @@ class cMapElement_M_5F_tasks : public cMapElement {
 
 class GALGAS_M_5F_tasks_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_uint mAttribute_mIndex ;
-  public : GALGAS_luint mAttribute_mPriority ;
-  public : GALGAS_luint mAttribute_mOffset ;
-  public : GALGAS_luint mAttribute_mDeadline ;
-  public : GALGAS_luint mAttribute_mDurationMin ;
-  public : GALGAS_luint mAttribute_mDurationMax ;
-  public : GALGAS_uint mAttribute_mProcessor ;
-  public : GALGAS_luint mAttribute_mPeriod ;
-  public : GALGAS_AC_5F_task mAttribute_mTaskKind ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_uint mProperty_mIndex ;
+  public : GALGAS_luint mProperty_mPriority ;
+  public : GALGAS_luint mProperty_mOffset ;
+  public : GALGAS_luint mProperty_mDeadline ;
+  public : GALGAS_luint mProperty_mDurationMin ;
+  public : GALGAS_luint mProperty_mDurationMax ;
+  public : GALGAS_uint mProperty_mProcessor ;
+  public : GALGAS_luint mProperty_mPeriod ;
+  public : GALGAS_AC_5F_task mProperty_mTaskKind ;
 
 
 //--------------------------------- Accessors
