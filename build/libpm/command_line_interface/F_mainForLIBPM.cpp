@@ -31,6 +31,7 @@
 #include "utilities/basic-allocation.h"
 #include "utilities/C_PrologueEpilogue.h"
 #include "command_line_interface/F_Analyze_CLI_Options.h"
+#include "unicode_character_base.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -59,12 +60,8 @@ C_String commandLineArgumentAtIndex (const uint32_t inIndex) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-// #include "utilities/PMUInt128.h"
-// #include "galgas2/C_DirectedGraph.h"
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 int main (int argc, const char * argv []) {
+//  displayUnicodeCharacterRange () ;
   gArgc = (uint32_t) argc ;
   gArgv = argv ;
   // PMUInt128::example () ;
