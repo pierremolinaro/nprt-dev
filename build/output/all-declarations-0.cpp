@@ -616,7 +616,10 @@ C_String C_Lexique_oa_5F_scanner::getCurrentTokenString (const cToken * inTokenP
 //---------------------------------------------------------------------------------------------------------------------*
 
 
-
+//---------------------------------------------------------------------------------------------------------------------*
+//            Unicode test functions                                                                                   *
+//---------------------------------------------------------------------------------------------------------------------*
+ 
 //---------------------------------------------------------------------------------------------------------------------*
 //               P A R S E    L E X I C A L    T O K E N                                                               *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1085,7 +1088,7 @@ void GALGAS_M_5F_processor::setter_setMIndexForKey (GALGAS_uint inAttributeValue
                                                     GALGAS_string inKey,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_processor * p = (cMapElement_M_5F_processor *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_processor) ;
@@ -1099,7 +1102,7 @@ void GALGAS_M_5F_processor::setter_setMStepForKey (GALGAS_luint inAttributeValue
                                                    GALGAS_string inKey,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_processor * p = (cMapElement_M_5F_processor *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_processor) ;
@@ -1112,7 +1115,7 @@ void GALGAS_M_5F_processor::setter_setMStepForKey (GALGAS_luint inAttributeValue
 cMapElement_M_5F_processor * GALGAS_M_5F_processor::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                        const GALGAS_string & inKey
                                                                                        COMMA_LOCATION_ARGS) {
-  cMapElement_M_5F_processor * result = (cMapElement_M_5F_processor *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_M_5F_processor * result = (cMapElement_M_5F_processor *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
   macroNullOrValidSharedObject (result, cMapElement_M_5F_processor) ;
   return result ;
 }
@@ -1423,7 +1426,7 @@ void GALGAS_M_5F_network::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
                                                   GALGAS_string inKey,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_network * p = (cMapElement_M_5F_network *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_network) ;
@@ -1437,7 +1440,7 @@ void GALGAS_M_5F_network::setter_setMCANnetworkForKey (GALGAS_bool inAttributeVa
                                                        GALGAS_string inKey,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_network * p = (cMapElement_M_5F_network *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_network) ;
@@ -1451,7 +1454,7 @@ void GALGAS_M_5F_network::setter_setMScalingFactorForKey (GALGAS_luint inAttribu
                                                           GALGAS_string inKey,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_network * p = (cMapElement_M_5F_network *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_network) ;
@@ -1464,7 +1467,7 @@ void GALGAS_M_5F_network::setter_setMScalingFactorForKey (GALGAS_luint inAttribu
 cMapElement_M_5F_network * GALGAS_M_5F_network::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                    const GALGAS_string & inKey
                                                                                    COMMA_LOCATION_ARGS) {
-  cMapElement_M_5F_network * result = (cMapElement_M_5F_network *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_M_5F_network * result = (cMapElement_M_5F_network *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
   macroNullOrValidSharedObject (result, cMapElement_M_5F_network) ;
   return result ;
 }
@@ -1587,13 +1590,13 @@ typeComparisonResult GALGAS_AC_5F_canMessage::objectCompare (const GALGAS_AC_5F_
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_AC_5F_canMessage::GALGAS_AC_5F_canMessage (void) :
-AC_GALGAS_class () {
+AC_GALGAS_class (false) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_AC_5F_canMessage::GALGAS_AC_5F_canMessage (const cPtr_AC_5F_canMessage * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr) {
+AC_GALGAS_class (inSourcePtr, false) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_AC_5F_canMessage) ;
 }
 
@@ -2483,7 +2486,7 @@ void GALGAS_M_5F_messages::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
                                                    GALGAS_string inKey,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
@@ -2497,7 +2500,7 @@ void GALGAS_M_5F_messages::setter_setMClassForKey (GALGAS_luint inAttributeValue
                                                    GALGAS_string inKey,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
@@ -2511,7 +2514,7 @@ void GALGAS_M_5F_messages::setter_setMNetworkIndexForKey (GALGAS_uint inAttribut
                                                           GALGAS_string inKey,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
@@ -2525,7 +2528,7 @@ void GALGAS_M_5F_messages::setter_setMBytesCountForKey (GALGAS_luint inAttribute
                                                         GALGAS_string inKey,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
@@ -2539,7 +2542,7 @@ void GALGAS_M_5F_messages::setter_setMPriorityForKey (GALGAS_luint inAttributeVa
                                                       GALGAS_string inKey,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
@@ -2553,7 +2556,7 @@ void GALGAS_M_5F_messages::setter_setMOffsetForKey (GALGAS_luint inAttributeValu
                                                     GALGAS_string inKey,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
@@ -2567,7 +2570,7 @@ void GALGAS_M_5F_messages::setter_setMDeadlineForKey (GALGAS_luint inAttributeVa
                                                       GALGAS_string inKey,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
@@ -2581,7 +2584,7 @@ void GALGAS_M_5F_messages::setter_setMPeriodForKey (GALGAS_luint inAttributeValu
                                                     GALGAS_string inKey,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
@@ -2595,7 +2598,7 @@ void GALGAS_M_5F_messages::setter_setMMessageKindForKey (GALGAS_AC_5F_canMessage
                                                          GALGAS_string inKey,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
@@ -2608,7 +2611,7 @@ void GALGAS_M_5F_messages::setter_setMMessageKindForKey (GALGAS_AC_5F_canMessage
 cMapElement_M_5F_messages * GALGAS_M_5F_messages::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                      const GALGAS_string & inKey
                                                                                      COMMA_LOCATION_ARGS) {
-  cMapElement_M_5F_messages * result = (cMapElement_M_5F_messages *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_M_5F_messages * result = (cMapElement_M_5F_messages *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
   macroNullOrValidSharedObject (result, cMapElement_M_5F_messages) ;
   return result ;
 }
@@ -2779,13 +2782,13 @@ typeComparisonResult GALGAS_AC_5F_task::objectCompare (const GALGAS_AC_5F_task &
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_AC_5F_task::GALGAS_AC_5F_task (void) :
-AC_GALGAS_class () {
+AC_GALGAS_class (false) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_AC_5F_task::GALGAS_AC_5F_task (const cPtr_AC_5F_task * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr) {
+AC_GALGAS_class (inSourcePtr, false) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_AC_5F_task) ;
 }
 
@@ -3361,7 +3364,7 @@ void GALGAS_M_5F_tasks::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
                                                 GALGAS_string inKey,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
@@ -3375,7 +3378,7 @@ void GALGAS_M_5F_tasks::setter_setMPriorityForKey (GALGAS_luint inAttributeValue
                                                    GALGAS_string inKey,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
@@ -3389,7 +3392,7 @@ void GALGAS_M_5F_tasks::setter_setMOffsetForKey (GALGAS_luint inAttributeValue,
                                                  GALGAS_string inKey,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
@@ -3403,7 +3406,7 @@ void GALGAS_M_5F_tasks::setter_setMDeadlineForKey (GALGAS_luint inAttributeValue
                                                    GALGAS_string inKey,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
@@ -3417,7 +3420,7 @@ void GALGAS_M_5F_tasks::setter_setMDurationMinForKey (GALGAS_luint inAttributeVa
                                                       GALGAS_string inKey,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
@@ -3431,7 +3434,7 @@ void GALGAS_M_5F_tasks::setter_setMDurationMaxForKey (GALGAS_luint inAttributeVa
                                                       GALGAS_string inKey,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
@@ -3445,7 +3448,7 @@ void GALGAS_M_5F_tasks::setter_setMProcessorForKey (GALGAS_uint inAttributeValue
                                                     GALGAS_string inKey,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
@@ -3459,7 +3462,7 @@ void GALGAS_M_5F_tasks::setter_setMPeriodForKey (GALGAS_luint inAttributeValue,
                                                  GALGAS_string inKey,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
@@ -3473,7 +3476,7 @@ void GALGAS_M_5F_tasks::setter_setMTaskKindForKey (GALGAS_AC_5F_task inAttribute
                                                    GALGAS_string inKey,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
@@ -3486,7 +3489,7 @@ void GALGAS_M_5F_tasks::setter_setMTaskKindForKey (GALGAS_AC_5F_task inAttribute
 cMapElement_M_5F_tasks * GALGAS_M_5F_tasks::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                const GALGAS_string & inKey
                                                                                COMMA_LOCATION_ARGS) {
-  cMapElement_M_5F_tasks * result = (cMapElement_M_5F_tasks *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_M_5F_tasks * result = (cMapElement_M_5F_tasks *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
   macroNullOrValidSharedObject (result, cMapElement_M_5F_tasks) ;
   return result ;
 }

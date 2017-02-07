@@ -104,7 +104,8 @@ void scanner_routine_convertStringToDouble (C_Lexique & inLexique,
                                             const C_String & inString,
                                             double & outValue,
                                             const char * inConversionError) {
-  const double value = ::atof (inString.cString (HERE)) ;
+//  const double value = ::atof (inString.cString (HERE)) ;
+  const double value = ::strtod (inString.cString (HERE), NULL) ;
   if (errno == ERANGE) {
     inLexique.lexicalError (inConversionError LINE_AND_SOURCE_FILE_FOR_SCANNER_ACTIONS) ;
   }else{
@@ -872,3 +873,12 @@ void scanner_routine_convertBinaryStringIntoBigInt (C_Lexique & inLexique,
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+void scanner_routine_negateBigInt (C_Lexique & /* inLexique */,
+                                   C_BigInt & ioValue) {
+  ioValue.negateInPlace () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+

@@ -108,6 +108,8 @@ class C_Lexique_oa_5F_scanner : public C_Lexique {
 
 //--- Indexing keys
 
+//--- Unicode test functions
+
 //--- Indexing directory
   protected : virtual C_String indexingDirectory (void) const ;
 
@@ -285,11 +287,12 @@ class cMapElement_M_5F_processor : public cMapElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_M_5F_processor_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
-  public : GALGAS_uint mProperty_mIndex ;
-  public : GALGAS_luint mProperty_mStep ;
 
+  public : GALGAS_uint mProperty_mIndex ;
+
+  public : GALGAS_luint mProperty_mStep ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -523,12 +526,14 @@ class cMapElement_M_5F_network : public cMapElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_M_5F_network_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
-  public : GALGAS_uint mProperty_mIndex ;
-  public : GALGAS_bool mProperty_mCANnetwork ;
-  public : GALGAS_luint mProperty_mScalingFactor ;
 
+  public : GALGAS_uint mProperty_mIndex ;
+
+  public : GALGAS_bool mProperty_mCANnetwork ;
+
+  public : GALGAS_luint mProperty_mScalingFactor ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -1072,18 +1077,26 @@ class cMapElement_M_5F_messages : public cMapElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_M_5F_messages_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
-  public : GALGAS_uint mProperty_mIndex ;
-  public : GALGAS_luint mProperty_mClass ;
-  public : GALGAS_uint mProperty_mNetworkIndex ;
-  public : GALGAS_luint mProperty_mBytesCount ;
-  public : GALGAS_luint mProperty_mPriority ;
-  public : GALGAS_luint mProperty_mOffset ;
-  public : GALGAS_luint mProperty_mDeadline ;
-  public : GALGAS_luint mProperty_mPeriod ;
-  public : GALGAS_AC_5F_canMessage mProperty_mMessageKind ;
 
+  public : GALGAS_uint mProperty_mIndex ;
+
+  public : GALGAS_luint mProperty_mClass ;
+
+  public : GALGAS_uint mProperty_mNetworkIndex ;
+
+  public : GALGAS_luint mProperty_mBytesCount ;
+
+  public : GALGAS_luint mProperty_mPriority ;
+
+  public : GALGAS_luint mProperty_mOffset ;
+
+  public : GALGAS_luint mProperty_mDeadline ;
+
+  public : GALGAS_luint mProperty_mPeriod ;
+
+  public : GALGAS_AC_5F_canMessage mProperty_mMessageKind ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -1534,18 +1547,26 @@ class cMapElement_M_5F_tasks : public cMapElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_M_5F_tasks_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
-  public : GALGAS_uint mProperty_mIndex ;
-  public : GALGAS_luint mProperty_mPriority ;
-  public : GALGAS_luint mProperty_mOffset ;
-  public : GALGAS_luint mProperty_mDeadline ;
-  public : GALGAS_luint mProperty_mDurationMin ;
-  public : GALGAS_luint mProperty_mDurationMax ;
-  public : GALGAS_uint mProperty_mProcessor ;
-  public : GALGAS_luint mProperty_mPeriod ;
-  public : GALGAS_AC_5F_task mProperty_mTaskKind ;
 
+  public : GALGAS_uint mProperty_mIndex ;
+
+  public : GALGAS_luint mProperty_mPriority ;
+
+  public : GALGAS_luint mProperty_mOffset ;
+
+  public : GALGAS_luint mProperty_mDeadline ;
+
+  public : GALGAS_luint mProperty_mDurationMin ;
+
+  public : GALGAS_luint mProperty_mDurationMax ;
+
+  public : GALGAS_uint mProperty_mProcessor ;
+
+  public : GALGAS_luint mProperty_mPeriod ;
+
+  public : GALGAS_AC_5F_task mProperty_mTaskKind ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
