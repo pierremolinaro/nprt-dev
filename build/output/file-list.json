@@ -18,7 +18,6 @@
         "independant_resources_core.cpp",
         "VerifyConditions-v2.cpp",
         "C_us_hashmap.cpp",
-
         "32-mp_bases.c",
         "mpn-invertappr.c",
         "mpn-sub_1.c",
