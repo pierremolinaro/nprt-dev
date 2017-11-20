@@ -1,5 +1,4 @@
-#ifndef all_2D_declarations_2D__30__ENTITIES_DEFINED
-#define all_2D_declarations_2D__30__ENTITIES_DEFINED
+#pragma once
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1943,4 +1942,3 @@ extern C_BoolCommandLineOption gOption_oa_5F_cli_5F_options_useCANmaxLegth ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-#endif
