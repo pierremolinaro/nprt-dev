@@ -19,9 +19,9 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 void enterOptionsFor_oa_5F_cli_5F_options (NSMutableArray * ioBoolOptionArray,
-                                                       NSMutableArray * ioUIntOptionArray,
-                                                       NSMutableArray * ioStringOptionArray,
-                                                       NSMutableArray * ioStringListOptionArray) ;
+                                           NSMutableArray * ioUIntOptionArray,
+                                           NSMutableArray * ioStringOptionArray,
+                                           NSMutableArray * ioStringListOptionArray) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
