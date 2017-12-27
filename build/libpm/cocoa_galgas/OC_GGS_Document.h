@@ -144,6 +144,7 @@
 - (IBAction) actionShiftRight: (id) sender ;
 
 - (IBAction) actionBuildFirst: (id) sender ;
+- (IBAction) actionBuildRun: (id) sender ;
 - (IBAction) stopBuild: (id) sender ;
 
 - (NSString *) sourceStringForGlobalSearch ;

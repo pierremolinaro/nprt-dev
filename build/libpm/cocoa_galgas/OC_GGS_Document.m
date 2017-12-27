@@ -2,7 +2,7 @@
 //                                                                                                                     *
 //  This file is part of libpm library                                                                                 *
 //                                                                                                                     *
-//  Copyright (C) 2003, ..., 2016 Pierre Molinaro.                                                                     *
+//  Copyright (C) 2003, ..., 2017 Pierre Molinaro.                                                                     *
 //                                                                                                                     *
 //  e-mail : pierre.molinaro@ec-nantes.fr                                                                              *
 //                                                                                                                     *
@@ -33,6 +33,7 @@
 #import "PMDebug.h"
 #import "PMSearchResultDescriptor.h"
 #import "NSString+identifierRepresentation.h"
+#import "F_CocoaWrapperForGalgas.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -649,6 +650,8 @@
   if ((item.action == @selector (actionComment:)) || (item.action == @selector (actionUncomment:))) {
     OC_GGS_TextDisplayDescriptor * selectedObject = [mSourceDisplayArrayControllerHigh.selectedObjects objectAtIndex:0] ;
     result = selectedObject.documentData.textSyntaxColoring.tokenizer.blockComment.length > 0 ;
+  }else if (item.action == @selector (actionBuildRun:)) {
+    result = buildRunOption ().length > 0 ;
   }
   return result ;
 }
@@ -1042,13 +1045,26 @@
   #endif
   if (nil == mBuildTask) {
     OC_GGS_TextDisplayDescriptor * tdd = [mDisplayDescriptorArrayHigh objectAtIndex:0] ;
-    [self compileFileAtPath:tdd.sourceURL.path] ;
+    [self compileFileAtPath:tdd.sourceURL.path isBuildRun:NO] ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-- (void) compileFileAtPath: (NSString *) inFilePath {
+- (IBAction) actionBuildRun: (id) inUnusedSender {
+  #ifdef DEBUG_MESSAGES
+    NSLog (@"%s", __PRETTY_FUNCTION__) ;
+  #endif
+  if (nil == mBuildTask) {
+    OC_GGS_TextDisplayDescriptor * tdd = [mDisplayDescriptorArrayHigh objectAtIndex:0] ;
+    [self compileFileAtPath:tdd.sourceURL.path isBuildRun:YES] ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+- (void) compileFileAtPath: (NSString *) inFilePath
+         isBuildRun: (BOOL) inIsBuildRun {
   #ifdef DEBUG_MESSAGES
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
   #endif
@@ -1072,6 +1088,7 @@
   mBuildTask = [[OC_GGS_BuildTask alloc]
     initWithDocument:self
     filePath:inFilePath
+    isBuildRun:inIsBuildRun
   ] ;
   self.mBuildTaskIsRunning = YES ;
 //---
