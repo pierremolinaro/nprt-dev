@@ -304,7 +304,7 @@ class GALGAS_M_5F_processor_2D_element : public AC_GALGAS_root {
   public : GALGAS_M_5F_processor_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_M_5F_processor_2D_element (void) ;
+  public : virtual ~ GALGAS_M_5F_processor_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_M_5F_processor_2D_element (const GALGAS_lstring & in_lkey,
@@ -545,7 +545,7 @@ class GALGAS_M_5F_network_2D_element : public AC_GALGAS_root {
   public : GALGAS_M_5F_network_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_M_5F_network_2D_element (void) ;
+  public : virtual ~ GALGAS_M_5F_network_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_M_5F_network_2D_element (const GALGAS_lstring & in_lkey,
@@ -1105,7 +1105,7 @@ class GALGAS_M_5F_messages_2D_element : public AC_GALGAS_root {
   public : GALGAS_M_5F_messages_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_M_5F_messages_2D_element (void) ;
+  public : virtual ~ GALGAS_M_5F_messages_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_M_5F_messages_2D_element (const GALGAS_lstring & in_lkey,
@@ -1575,7 +1575,7 @@ class GALGAS_M_5F_tasks_2D_element : public AC_GALGAS_root {
   public : GALGAS_M_5F_tasks_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_M_5F_tasks_2D_element (void) ;
+  public : virtual ~ GALGAS_M_5F_tasks_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_M_5F_tasks_2D_element (const GALGAS_lstring & in_lkey,
