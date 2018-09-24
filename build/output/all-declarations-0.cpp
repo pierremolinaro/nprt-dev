@@ -3667,10 +3667,13 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 26)) ;
         var_step_775 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 27)) ;
-        const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, var_step_775.getter_uint (SOURCE_FILE ("oa_parser.galgas", 28)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+        enumGalgasBool test_1 = kBoolTrue ;
         if (kBoolTrue == test_1) {
-          TC_Array <C_FixItDescription> fixItArray2 ;
-          inCompiler->emitSemanticError (var_step_775.getter_location (SOURCE_FILE ("oa_parser.galgas", 29)), GALGAS_string ("the step value must be > 0"), fixItArray2  COMMA_SOURCE_FILE ("oa_parser.galgas", 29)) ;
+          test_1 = GALGAS_bool (kIsEqual, var_step_775.getter_uint (SOURCE_FILE ("oa_parser.galgas", 28)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+          if (kBoolTrue == test_1) {
+            TC_Array <C_FixItDescription> fixItArray2 ;
+            inCompiler->emitSemanticError (var_step_775.getter_location (SOURCE_FILE ("oa_parser.galgas", 29)), GALGAS_string ("the step value must be > 0"), fixItArray2  COMMA_SOURCE_FILE ("oa_parser.galgas", 29)) ;
+          }
         }
       } break ;
       default:
@@ -3708,10 +3711,13 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 50)) ;
         var_factor_1286 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 51)) ;
-        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_factor_1286.getter_uint (SOURCE_FILE ("oa_parser.galgas", 52)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+        enumGalgasBool test_3 = kBoolTrue ;
         if (kBoolTrue == test_3) {
-          TC_Array <C_FixItDescription> fixItArray4 ;
-          inCompiler->emitSemanticError (var_factor_1286.getter_location (SOURCE_FILE ("oa_parser.galgas", 53)), GALGAS_string ("the factor value must be > 0"), fixItArray4  COMMA_SOURCE_FILE ("oa_parser.galgas", 53)) ;
+          test_3 = GALGAS_bool (kIsEqual, var_factor_1286.getter_uint (SOURCE_FILE ("oa_parser.galgas", 52)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+          if (kBoolTrue == test_3) {
+            TC_Array <C_FixItDescription> fixItArray4 ;
+            inCompiler->emitSemanticError (var_factor_1286.getter_location (SOURCE_FILE ("oa_parser.galgas", 53)), GALGAS_string ("the factor value must be > 0"), fixItArray4  COMMA_SOURCE_FILE ("oa_parser.galgas", 53)) ;
+          }
         }
       } break ;
       default:
@@ -3786,10 +3792,13 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
       } break ;
       case 2: {
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 100)) ;
-        const enumGalgasBool test_5 = var_explicitOffset_1955.boolEnum () ;
+        enumGalgasBool test_5 = kBoolTrue ;
         if (kBoolTrue == test_5) {
-          TC_Array <C_FixItDescription> fixItArray6 ;
-          inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 102)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray6  COMMA_SOURCE_FILE ("oa_parser.galgas", 102)) ;
+          test_5 = var_explicitOffset_1955.boolEnum () ;
+          if (kBoolTrue == test_5) {
+            TC_Array <C_FixItDescription> fixItArray6 ;
+            inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 102)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray6  COMMA_SOURCE_FILE ("oa_parser.galgas", 102)) ;
+          }
         }
         switch (select_oa_5F_parser_7 (inCompiler)) {
         case 1: {
@@ -3898,30 +3907,44 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
       GALGAS_bool var_CANnetwork_4930 ;
       GALGAS_luint joker_5000 ; // Joker input parameter
       var_outNetworkMap_536.method_searchKey (var_networkName_4855, var_networkIndex_4909, var_CANnetwork_4930, joker_5000, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 169)) ;
-      const enumGalgasBool test_7 = var_CANnetwork_4930.operator_and (GALGAS_bool (kIsEqual, var_messageClass_4480.getter_uint (SOURCE_FILE ("oa_parser.galgas", 170)).objectCompare (GALGAS_uint ((uint32_t) 2U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 170)).boolEnum () ;
+      enumGalgasBool test_7 = kBoolTrue ;
       if (kBoolTrue == test_7) {
-        TC_Array <C_FixItDescription> fixItArray8 ;
-        inCompiler->emitSemanticError (var_messageClass_4480.getter_location (SOURCE_FILE ("oa_parser.galgas", 171)), GALGAS_string ("a CAN message must be either standard either extended"), fixItArray8  COMMA_SOURCE_FILE ("oa_parser.galgas", 171)) ;
-      }else if (kBoolFalse == test_7) {
-        const enumGalgasBool test_9 = var_CANnetwork_4930.operator_not (SOURCE_FILE ("oa_parser.galgas", 172)).operator_and (GALGAS_bool (kIsNotEqual, var_messageClass_4480.getter_uint (SOURCE_FILE ("oa_parser.galgas", 172)).objectCompare (GALGAS_uint ((uint32_t) 2U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 172)).boolEnum () ;
+        test_7 = var_CANnetwork_4930.operator_and (GALGAS_bool (kIsEqual, var_messageClass_4480.getter_uint (SOURCE_FILE ("oa_parser.galgas", 170)).objectCompare (GALGAS_uint ((uint32_t) 2U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 170)).boolEnum () ;
+        if (kBoolTrue == test_7) {
+          TC_Array <C_FixItDescription> fixItArray8 ;
+          inCompiler->emitSemanticError (var_messageClass_4480.getter_location (SOURCE_FILE ("oa_parser.galgas", 171)), GALGAS_string ("a CAN message must be either standard either extended"), fixItArray8  COMMA_SOURCE_FILE ("oa_parser.galgas", 171)) ;
+        }
+      }
+      if (kBoolFalse == test_7) {
+        enumGalgasBool test_9 = kBoolTrue ;
         if (kBoolTrue == test_9) {
-          TC_Array <C_FixItDescription> fixItArray10 ;
-          inCompiler->emitSemanticError (var_messageClass_4480.getter_location (SOURCE_FILE ("oa_parser.galgas", 173)), GALGAS_string ("a VAN message cannot be standard or extended"), fixItArray10  COMMA_SOURCE_FILE ("oa_parser.galgas", 173)) ;
+          test_9 = var_CANnetwork_4930.operator_not (SOURCE_FILE ("oa_parser.galgas", 172)).operator_and (GALGAS_bool (kIsNotEqual, var_messageClass_4480.getter_uint (SOURCE_FILE ("oa_parser.galgas", 172)).objectCompare (GALGAS_uint ((uint32_t) 2U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 172)).boolEnum () ;
+          if (kBoolTrue == test_9) {
+            TC_Array <C_FixItDescription> fixItArray10 ;
+            inCompiler->emitSemanticError (var_messageClass_4480.getter_location (SOURCE_FILE ("oa_parser.galgas", 173)), GALGAS_string ("a VAN message cannot be standard or extended"), fixItArray10  COMMA_SOURCE_FILE ("oa_parser.galgas", 173)) ;
+          }
         }
       }
       inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_length COMMA_SOURCE_FILE ("oa_parser.galgas", 175)) ;
       GALGAS_luint var_bytesCount_5315 ;
       var_bytesCount_5315 = inCompiler->synthetizedAttribute_ulongValue () ;
       inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 177)) ;
-      const enumGalgasBool test_11 = var_CANnetwork_4930.operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount_5315.getter_uint (SOURCE_FILE ("oa_parser.galgas", 178)).objectCompare (GALGAS_uint ((uint32_t) 8U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 178)).boolEnum () ;
+      enumGalgasBool test_11 = kBoolTrue ;
       if (kBoolTrue == test_11) {
-        TC_Array <C_FixItDescription> fixItArray12 ;
-        inCompiler->emitSemanticError (var_bytesCount_5315.getter_location (SOURCE_FILE ("oa_parser.galgas", 179)), GALGAS_string ("CAN message length must be <= 8 bytes"), fixItArray12  COMMA_SOURCE_FILE ("oa_parser.galgas", 179)) ;
-      }else if (kBoolFalse == test_11) {
-        const enumGalgasBool test_13 = var_CANnetwork_4930.operator_not (SOURCE_FILE ("oa_parser.galgas", 180)).operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount_5315.getter_uint (SOURCE_FILE ("oa_parser.galgas", 180)).objectCompare (GALGAS_uint ((uint32_t) 28U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 180)).boolEnum () ;
+        test_11 = var_CANnetwork_4930.operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount_5315.getter_uint (SOURCE_FILE ("oa_parser.galgas", 178)).objectCompare (GALGAS_uint ((uint32_t) 8U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 178)).boolEnum () ;
+        if (kBoolTrue == test_11) {
+          TC_Array <C_FixItDescription> fixItArray12 ;
+          inCompiler->emitSemanticError (var_bytesCount_5315.getter_location (SOURCE_FILE ("oa_parser.galgas", 179)), GALGAS_string ("CAN message length must be <= 8 bytes"), fixItArray12  COMMA_SOURCE_FILE ("oa_parser.galgas", 179)) ;
+        }
+      }
+      if (kBoolFalse == test_11) {
+        enumGalgasBool test_13 = kBoolTrue ;
         if (kBoolTrue == test_13) {
-          TC_Array <C_FixItDescription> fixItArray14 ;
-          inCompiler->emitSemanticError (var_bytesCount_5315.getter_location (SOURCE_FILE ("oa_parser.galgas", 181)), GALGAS_string ("VAN message must be <= 28 bytes"), fixItArray14  COMMA_SOURCE_FILE ("oa_parser.galgas", 181)) ;
+          test_13 = var_CANnetwork_4930.operator_not (SOURCE_FILE ("oa_parser.galgas", 180)).operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount_5315.getter_uint (SOURCE_FILE ("oa_parser.galgas", 180)).objectCompare (GALGAS_uint ((uint32_t) 28U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 180)).boolEnum () ;
+          if (kBoolTrue == test_13) {
+            TC_Array <C_FixItDescription> fixItArray14 ;
+            inCompiler->emitSemanticError (var_bytesCount_5315.getter_location (SOURCE_FILE ("oa_parser.galgas", 181)), GALGAS_string ("VAN message must be <= 28 bytes"), fixItArray14  COMMA_SOURCE_FILE ("oa_parser.galgas", 181)) ;
+          }
         }
       }
       inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas", 183)) ;
@@ -3968,10 +3991,13 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
       } break ;
       case 2: {
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 210)) ;
-        const enumGalgasBool test_15 = var_explicitOffset_5701.boolEnum () ;
+        enumGalgasBool test_15 = kBoolTrue ;
         if (kBoolTrue == test_15) {
-          TC_Array <C_FixItDescription> fixItArray16 ;
-          inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 212)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray16  COMMA_SOURCE_FILE ("oa_parser.galgas", 212)) ;
+          test_15 = var_explicitOffset_5701.boolEnum () ;
+          if (kBoolTrue == test_15) {
+            TC_Array <C_FixItDescription> fixItArray16 ;
+            inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 212)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray16  COMMA_SOURCE_FILE ("oa_parser.galgas", 212)) ;
+          }
         }
         switch (select_oa_5F_parser_14 (inCompiler)) {
         case 1: {
