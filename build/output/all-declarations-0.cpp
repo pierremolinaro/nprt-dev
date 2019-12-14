@@ -1865,6 +1865,25 @@ GALGAS_uint cPtr_C_5F_canMessageFromMessage::getter_mMessageIndex (UNUSED_LOCATI
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_C_5F_canMessageFromMessage::setter_setMMessageIndex (GALGAS_uint inValue
+                                                                 COMMA_LOCATION_ARGS) {
+  if (NULL != mObjectPtr) {
+    insulate (THERE) ;
+    cPtr_C_5F_canMessageFromMessage * p = (cPtr_C_5F_canMessageFromMessage *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_C_5F_canMessageFromMessage) ;
+    p->mProperty_mMessageIndex = inValue ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cPtr_C_5F_canMessageFromMessage::setter_setMMessageIndex (GALGAS_uint inValue
+                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  mProperty_mMessageIndex = inValue ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                  Pointer class for @C_canMessageFromMessage class                                   *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2019,6 +2038,25 @@ GALGAS_uint GALGAS_C_5F_canMessageFromTask::getter_mTaskIndex (UNUSED_LOCATION_A
 
 GALGAS_uint cPtr_C_5F_canMessageFromTask::getter_mTaskIndex (UNUSED_LOCATION_ARGS) const {
   return mProperty_mTaskIndex ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_C_5F_canMessageFromTask::setter_setMTaskIndex (GALGAS_uint inValue
+                                                           COMMA_LOCATION_ARGS) {
+  if (NULL != mObjectPtr) {
+    insulate (THERE) ;
+    cPtr_C_5F_canMessageFromTask * p = (cPtr_C_5F_canMessageFromTask *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_C_5F_canMessageFromTask) ;
+    p->mProperty_mTaskIndex = inValue ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cPtr_C_5F_canMessageFromTask::setter_setMTaskIndex (GALGAS_uint inValue
+                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  mProperty_mTaskIndex = inValue ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4363,6 +4401,44 @@ GALGAS_luint cPtr_C_5F_taskDependsFromTask::getter_mEvery (UNUSED_LOCATION_ARGS)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_C_5F_taskDependsFromTask::setter_setMTask (GALGAS_uint inValue
+                                                       COMMA_LOCATION_ARGS) {
+  if (NULL != mObjectPtr) {
+    insulate (THERE) ;
+    cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
+    p->mProperty_mTask = inValue ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cPtr_C_5F_taskDependsFromTask::setter_setMTask (GALGAS_uint inValue
+                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  mProperty_mTask = inValue ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_C_5F_taskDependsFromTask::setter_setMEvery (GALGAS_luint inValue
+                                                        COMMA_LOCATION_ARGS) {
+  if (NULL != mObjectPtr) {
+    insulate (THERE) ;
+    cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
+    p->mProperty_mEvery = inValue ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cPtr_C_5F_taskDependsFromTask::setter_setMEvery (GALGAS_luint inValue
+                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  mProperty_mEvery = inValue ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                   Pointer class for @C_taskDependsFromTask class                                    *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4544,6 +4620,44 @@ GALGAS_luint GALGAS_C_5F_taskDependsFromMessage::getter_mEvery (UNUSED_LOCATION_
 
 GALGAS_luint cPtr_C_5F_taskDependsFromMessage::getter_mEvery (UNUSED_LOCATION_ARGS) const {
   return mProperty_mEvery ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_C_5F_taskDependsFromMessage::setter_setMMessage (GALGAS_uint inValue
+                                                             COMMA_LOCATION_ARGS) {
+  if (NULL != mObjectPtr) {
+    insulate (THERE) ;
+    cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
+    p->mProperty_mMessage = inValue ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cPtr_C_5F_taskDependsFromMessage::setter_setMMessage (GALGAS_uint inValue
+                                                           COMMA_UNUSED_LOCATION_ARGS) {
+  mProperty_mMessage = inValue ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_C_5F_taskDependsFromMessage::setter_setMEvery (GALGAS_luint inValue
+                                                           COMMA_LOCATION_ARGS) {
+  if (NULL != mObjectPtr) {
+    insulate (THERE) ;
+    cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
+    p->mProperty_mEvery = inValue ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cPtr_C_5F_taskDependsFromMessage::setter_setMEvery (GALGAS_luint inValue
+                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  mProperty_mEvery = inValue ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

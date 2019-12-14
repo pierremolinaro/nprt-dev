@@ -31,7 +31,9 @@ class cPtr_C_5F_taskDependsFromMessage : public cPtr_AC_5F_task {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mMessage (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMMessage (GALGAS_uint inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_luint getter_mEvery (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEvery (GALGAS_luint inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

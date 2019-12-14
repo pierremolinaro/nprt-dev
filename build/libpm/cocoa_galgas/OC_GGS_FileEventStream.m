@@ -48,8 +48,8 @@ static NSMutableArray * gFileEventStreamArray = nil ;
                           void *eventPaths,
                           const FSEventStreamEventFlags eventFlags[],
                           const FSEventStreamEventId eventIds[]) {
-    OC_GGS_FileEventStream * object = (ARC_BRIDGE OC_GGS_FileEventStream *) clientCallBackInfo ;
-    NSArray * eventPathArray = (ARC_BRIDGE NSArray *) eventPaths ;
+    OC_GGS_FileEventStream * object = (__bridge OC_GGS_FileEventStream *) clientCallBackInfo ;
+    NSArray * eventPathArray = (__bridge NSArray *) eventPaths ;
     NSUInteger idx = 0 ;
     for (NSString * path in eventPathArray) {
       [object callbackMethodForPath:path flag:eventFlags [idx]] ;
@@ -64,12 +64,12 @@ static NSMutableArray * gFileEventStreamArray = nil ;
     if (self) {
       mDocuments = [NSMutableArray new] ;
       [mDocuments addObject:inDocument] ;
-      NSString * path = inDocument.fileURL.path.stringByDeletingLastPathComponent ;
+      NSString * path = inDocument.fileURL.path ;
       NSArray * pathsToWatch = [NSArray arrayWithObject:path] ;
       const CFAbsoluteTime latency = 1.0 ; // Latency in seconds
       FSEventStreamContext context = {
         0,
-        (ARC_BRIDGE void *) self,
+        (__bridge void *) self,
         NULL, // (CFAllocatorRetainCallBack)  CFRetain,
         NULL, // (CFAllocatorReleaseCallBack) CFRelease,
         NULL, // (CFAllocatorCopyDescriptionCallBack) CFCopyDescription
@@ -78,13 +78,13 @@ static NSMutableArray * gFileEventStreamArray = nil ;
         NULL,
         mycallback,
         & context,
-        (ARC_BRIDGE CFArrayRef) pathsToWatch,
+        (__bridge CFArrayRef) pathsToWatch,
         kFSEventStreamEventIdSinceNow,
         latency,
         kFSEventStreamCreateFlagNoDefer
         | kFSEventStreamCreateFlagUseCFTypes
         | kFSEventStreamCreateFlagWatchRoot
-        | 0x10 // kFSEventStreamCreateFlagFileEvents // Not defined in 10.6
+        | kFSEventStreamCreateFlagFileEvents
         | kFSEventStreamCreateFlagIgnoreSelf // Do not report events from current application
       ) ;
       FSEventStreamScheduleWithRunLoop (mFSEventStream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);

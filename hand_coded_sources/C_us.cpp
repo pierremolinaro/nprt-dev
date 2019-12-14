@@ -63,7 +63,8 @@ void C_us::reallocUniqueTable (const int32_t inTableUniqueNewSize) {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-static C_us gVDLlistRoot ;
+static C_us * gFirstUS = NULL ;
+static C_us * gLastUS = NULL ;
 
 //---------------------------------------------------------------------------*
 //                                                                           *
@@ -99,13 +100,21 @@ mRootPointer (NULL) {
 //---------------------------------------------------------------------------*
 
 void C_us::initLinks (void) {
-  mPtrToNextExisting = this ;
-  mPtrToPreviousExisting = this ;
-  C_us * nextFromRoot = gVDLlistRoot.mPtrToNextExisting ;
-  mPtrToPreviousExisting = & gVDLlistRoot ;
-  nextFromRoot->mPtrToPreviousExisting = this ;
-  mPtrToNextExisting = nextFromRoot ;
-  gVDLlistRoot.mPtrToNextExisting = this ;
+  if (gFirstUS == NULL) {
+    gLastUS = this ;
+  }else{
+    gFirstUS->mPtrToPreviousExisting = this ;
+  }
+  mPtrToNextExisting = gFirstUS ;
+  gFirstUS = this ;
+
+//  mPtrToNextExisting = this ;
+//  mPtrToPreviousExisting = this ;
+//  C_us * nextFromRoot = gVDLlistRoot.mPtrToNextExisting ;
+//  mPtrToPreviousExisting = & gVDLlistRoot ;
+//  nextFromRoot->mPtrToPreviousExisting = this ;
+//  mPtrToNextExisting = nextFromRoot ;
+//  gVDLlistRoot.mPtrToNextExisting = this ;
 }
 
 //---------------------------------------------------------------------------*
@@ -117,10 +126,21 @@ void C_us::initLinks (void) {
 C_us::~C_us (void) {
   mRootPointer = NULL ;
 //--- Unlink
-  C_us * next = mPtrToNextExisting ;
-  C_us * previous = mPtrToPreviousExisting ;
-  previous->mPtrToNextExisting = next ;
-  next->mPtrToPreviousExisting = previous ;
+  if (mPtrToPreviousExisting == NULL) {
+    gFirstUS = gFirstUS->mPtrToNextExisting ;
+  }else{
+    mPtrToPreviousExisting->mPtrToNextExisting = mPtrToNextExisting ;
+  }
+  if (mPtrToNextExisting == NULL) {
+    gLastUS = gLastUS->mPtrToPreviousExisting ;
+  }else{
+    mPtrToNextExisting->mPtrToPreviousExisting = mPtrToPreviousExisting ;
+  }
+
+//  C_us * next = mPtrToNextExisting ;
+//  C_us * previous = mPtrToPreviousExisting ;
+//  previous->mPtrToNextExisting = next ;
+//  next->mPtrToPreviousExisting = previous ;
 }
 
 //---------------------------------------------------------------------------*
@@ -365,8 +385,8 @@ void C_us::collectUnusedNodes (void) {
 //--- First : clear all addition cache entries
   gCache.clearAllCacheEntries () ;
 //--- Second : mark all used elements
-  C_us * p = gVDLlistRoot.mPtrToNextExisting ;
-  while (p != & gVDLlistRoot) {
+  C_us * p = gFirstUS ;
+  while (p != NULL) {
     C_us_nodeInfo * infoPtr = p->mRootPointer ;
     while ((infoPtr != NULL) && ! infoPtr->isMarked ()) {
       infoPtr->mark () ;

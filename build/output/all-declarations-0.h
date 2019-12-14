@@ -740,6 +740,9 @@ class GALGAS_C_5F_canMessageFromMessage : public GALGAS_AC_5F_canMessage {
   public : typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromMessage & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMMessageIndex (class GALGAS_uint inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -797,6 +800,9 @@ class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
   public : typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromTask & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMTaskIndex (class GALGAS_uint inArgument0
+                                                       COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -1750,6 +1756,12 @@ class GALGAS_C_5F_taskDependsFromMessage : public GALGAS_AC_5F_task {
   public : typeComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromMessage & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMEvery (class GALGAS_luint inArgument0
+                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMMessage (class GALGAS_uint inArgument0
+                                                     COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -1810,6 +1822,12 @@ class GALGAS_C_5F_taskDependsFromTask : public GALGAS_AC_5F_task {
   public : typeComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromTask & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMEvery (class GALGAS_luint inArgument0
+                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTask (class GALGAS_uint inArgument0
+                                                  COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
