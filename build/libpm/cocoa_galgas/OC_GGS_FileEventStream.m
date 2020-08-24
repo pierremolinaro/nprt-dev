@@ -3,17 +3,20 @@
 //  galgas-developer-v3
 //
 //  Created by Pierre Molinaro on 14/07/2015.
-//  LS2N, Laboratoire des Sciences du Numérique de Nantes, ECN, École Centrale de Nantes (France)                      *
-//
+//----------------------------------------------------------------------------------------------------------------------
+
+// https://stackoverflow.com/questions/22981497/fseventstream-filter-events-generated-from-my-own-application
+
+//----------------------------------------------------------------------------------------------------------------------
 
 #import "OC_GGS_DocumentData.h"
 #import "OC_GGS_FileEventStream.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 static NSMutableArray * gFileEventStreamArray = nil ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 @interface OC_GGS_FileEventStream : NSObject {
   @private FSEventStreamRef mFSEventStream ;
@@ -24,7 +27,7 @@ static NSMutableArray * gFileEventStreamArray = nil ;
 
 @end
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 @implementation OC_GGS_FileEventStream
 
@@ -32,9 +35,9 @@ static NSMutableArray * gFileEventStreamArray = nil ;
 
   - (void) callbackMethodForPath: (NSString *) inPath
            flag: (FSEventStreamEventFlags) inEventFlag {
-    // NSLog (@"path '%@' flag:%X", inPath, inEventFlag) ;
+    NSLog (@"path '%@' flag:%X", inPath, inEventFlag) ; // §
     for (OC_GGS_DocumentData * document in mDocuments) {
-      if ([document.fileURL.path isEqualToString:inPath]) {
+      if ([document.fileURL.path isEqualToString: inPath]) {
         [document fileDidChangeInFileSystem] ;
       }
     }
@@ -43,7 +46,7 @@ static NSMutableArray * gFileEventStreamArray = nil ;
   //····················································································································
 
   static void mycallback (ConstFSEventStreamRef streamRef,
-                          void * clientCallBackInfo,
+                          void* clientCallBackInfo,
                           size_t numEvents,
                           void *eventPaths,
                           const FSEventStreamEventFlags eventFlags[],
@@ -65,14 +68,15 @@ static NSMutableArray * gFileEventStreamArray = nil ;
       mDocuments = [NSMutableArray new] ;
       [mDocuments addObject:inDocument] ;
       NSString * path = inDocument.fileURL.path ;
-      NSArray * pathsToWatch = [NSArray arrayWithObject:path] ;
+      NSArray * pathsToWatch = [NSArray arrayWithObject: path] ;
+    //  NSLog (@"pathsToWatch %@", pathsToWatch) ;
       const CFAbsoluteTime latency = 1.0 ; // Latency in seconds
       FSEventStreamContext context = {
         0,
         (__bridge void *) self,
-        NULL, // (CFAllocatorRetainCallBack)  CFRetain,
-        NULL, // (CFAllocatorReleaseCallBack) CFRelease,
-        NULL, // (CFAllocatorCopyDescriptionCallBack) CFCopyDescription
+        CFRetain,
+        CFRelease,
+        CFCopyDescription
       } ;
       mFSEventStream = FSEventStreamCreate (
         NULL,
@@ -85,9 +89,10 @@ static NSMutableArray * gFileEventStreamArray = nil ;
         | kFSEventStreamCreateFlagUseCFTypes
         | kFSEventStreamCreateFlagWatchRoot
         | kFSEventStreamCreateFlagFileEvents
+        | kFSEventStreamCreateFlagMarkSelf // §§
         | kFSEventStreamCreateFlagIgnoreSelf // Do not report events from current application
       ) ;
-      FSEventStreamScheduleWithRunLoop (mFSEventStream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
+      FSEventStreamScheduleWithRunLoop (mFSEventStream, CFRunLoopGetMain(), kCFRunLoopDefaultMode);
       FSEventStreamStart (mFSEventStream) ;
     }
     return self ;
@@ -129,7 +134,7 @@ static NSMutableArray * gFileEventStreamArray = nil ;
 
 @end
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void addFileEventStreamForDocument (OC_GGS_DocumentData * inDocument) {
   if (nil == gFileEventStreamArray) {
@@ -148,7 +153,7 @@ void addFileEventStreamForDocument (OC_GGS_DocumentData * inDocument) {
   }
 }
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void removeFileEventStreamForDocument (OC_GGS_DocumentData * inDocument) {
   OC_GGS_FileEventStream * objectToRemove = nil ;
@@ -163,4 +168,4 @@ void removeFileEventStreamForDocument (OC_GGS_DocumentData * inDocument) {
   }
 }
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------

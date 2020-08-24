@@ -1,31 +1,31 @@
 #pragma once
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 #include "all-predefined-types.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                                LEXIQUE oa_5F_scanner                                                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//LEXIQUE oa_5F_scanner
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 #include "galgas2/C_Lexique.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                    E X T E R N    R O U T I N E S                                                                   *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//                    E X T E R N    R O U T I N E S                                             
+//----------------------------------------------------------------------------------------------------------------------
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                    E X T E R N    F U N C T I O N S                                                                 *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//                    E X T E R N    F U N C T I O N S                                           
+//----------------------------------------------------------------------------------------------------------------------
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                       T O K E N    C L A S S                                                                        *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//                       T O K E N    C L A S S                                                  
+//----------------------------------------------------------------------------------------------------------------------
 
 class cTokenFor_oa_5F_scanner : public cToken {
   public : C_String mLexicalAttribute_identifierString ;
@@ -34,9 +34,9 @@ class cTokenFor_oa_5F_scanner : public cToken {
   public : cTokenFor_oa_5F_scanner (void) ;
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                     S C A N N E R    C L A S S                                                                      *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//                     S C A N N E R    C L A S S                                                
+//----------------------------------------------------------------------------------------------------------------------
 
 class C_Lexique_oa_5F_scanner : public C_Lexique {
 //--- Constructors
@@ -132,19 +132,19 @@ class C_Lexique_oa_5F_scanner : public C_Lexique {
   protected : virtual uint32_t styleIndexForTerminal (const int32_t inTerminalIndex) const ;
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                                  @M_processor map                                                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @M_processor map
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cMapElement_M_5F_processor ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const char * kSearchErrorMessage_M_5F_processor_searchKey ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_M_5F_processor : public AC_GALGAS_map {
 //--------------------------------- Default constructor
@@ -153,7 +153,7 @@ class GALGAS_M_5F_processor : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_M_5F_processor (const GALGAS_M_5F_processor & inSource) ;
   public : GALGAS_M_5F_processor & operator = (const GALGAS_M_5F_processor & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -217,6 +217,12 @@ class GALGAS_M_5F_processor : public AC_GALGAS_map {
                                                                               COMMA_LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0,
+                                                     class GALGAS_uint & outOperand1,
+                                                     class GALGAS_luint & outOperand2) const ;
+
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
   public : VIRTUAL_IN_DEBUG cMapElement_M_5F_processor * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
@@ -229,9 +235,9 @@ class GALGAS_M_5F_processor : public AC_GALGAS_map {
  
 } ; // End of GALGAS_M_5F_processor class
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//   Enumerator declaration                                                                                            *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//   Enumerator declaration                                                                      
+//----------------------------------------------------------------------------------------------------------------------
 
 class cEnumerator_M_5F_processor : public cGenericAbstractEnumerator {
   public : cEnumerator_M_5F_processor (const GALGAS_M_5F_processor & inEnumeratedObject,
@@ -245,15 +251,15 @@ class cEnumerator_M_5F_processor : public cGenericAbstractEnumerator {
   public : class GALGAS_M_5F_processor_2D_element current (LOCATION_ARGS) const ;
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_processor ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Class for element of '@M_processor' map                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: class for element of '@M_processor' map
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cMapElement_M_5F_processor : public cMapElement {
 //--- Map attributes
@@ -279,11 +285,11 @@ class cMapElement_M_5F_processor : public cMapElement {
  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          @M_5F_processor_2D_element struct                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @M_5F_processor_2D_element struct
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_M_5F_processor_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
@@ -346,29 +352,31 @@ class GALGAS_M_5F_processor_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_luint getter_mStep (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_M_5F_processor_2D_element class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_processor_2D_element ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                                   @M_network map                                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @M_network map
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cMapElement_M_5F_network ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const char * kSearchErrorMessage_M_5F_network_searchKey ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_M_5F_network : public AC_GALGAS_map {
 //--------------------------------- Default constructor
@@ -377,7 +385,7 @@ class GALGAS_M_5F_network : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_M_5F_network (const GALGAS_M_5F_network & inSource) ;
   public : GALGAS_M_5F_network & operator = (const GALGAS_M_5F_network & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -453,6 +461,13 @@ class GALGAS_M_5F_network : public AC_GALGAS_map {
                                                                             COMMA_LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0,
+                                                     class GALGAS_uint & outOperand1,
+                                                     class GALGAS_bool & outOperand2,
+                                                     class GALGAS_luint & outOperand3) const ;
+
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
   public : VIRTUAL_IN_DEBUG cMapElement_M_5F_network * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
@@ -465,9 +480,9 @@ class GALGAS_M_5F_network : public AC_GALGAS_map {
  
 } ; // End of GALGAS_M_5F_network class
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//   Enumerator declaration                                                                                            *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//   Enumerator declaration                                                                      
+//----------------------------------------------------------------------------------------------------------------------
 
 class cEnumerator_M_5F_network : public cGenericAbstractEnumerator {
   public : cEnumerator_M_5F_network (const GALGAS_M_5F_network & inEnumeratedObject,
@@ -482,15 +497,15 @@ class cEnumerator_M_5F_network : public cGenericAbstractEnumerator {
   public : class GALGAS_M_5F_network_2D_element current (LOCATION_ARGS) const ;
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_network ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Class for element of '@M_network' map                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: class for element of '@M_network' map
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cMapElement_M_5F_network : public cMapElement {
 //--- Map attributes
@@ -518,11 +533,11 @@ class cMapElement_M_5F_network : public cMapElement {
  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           @M_5F_network_2D_element struct                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @M_5F_network_2D_element struct
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_M_5F_network_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
@@ -591,21 +606,23 @@ class GALGAS_M_5F_network_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_luint getter_mScalingFactor (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_M_5F_network_2D_element class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_network_2D_element ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                               @AC_5F_canMessage class                                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @AC_5F_canMessage class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_AC_5F_canMessage : public AC_GALGAS_class {
 //--- Constructor
@@ -637,23 +654,25 @@ class GALGAS_AC_5F_canMessage : public AC_GALGAS_class {
 
 //--------------------------------- Getters
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_AC_5F_canMessage class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_canMessage ;
 
 #include "separateHeaderFor_AC_5F_canMessage.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          @C_5F_canIndependantMessage class                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_canIndependantMessage class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_C_5F_canIndependantMessage : public GALGAS_AC_5F_canMessage {
 //--- Constructor
@@ -691,23 +710,25 @@ class GALGAS_C_5F_canIndependantMessage : public GALGAS_AC_5F_canMessage {
 
 //--------------------------------- Getters
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_C_5F_canIndependantMessage class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canIndependantMessage ;
 
 #include "separateHeaderFor_C_5F_canIndependantMessage.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          @C_5F_canMessageFromMessage class                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_canMessageFromMessage class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_C_5F_canMessageFromMessage : public GALGAS_AC_5F_canMessage {
 //--- Constructor
@@ -751,23 +772,25 @@ class GALGAS_C_5F_canMessageFromMessage : public GALGAS_AC_5F_canMessage {
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mMessageIndex (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_C_5F_canMessageFromMessage class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromMessage ;
 
 #include "separateHeaderFor_C_5F_canMessageFromMessage.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           @C_5F_canMessageFromTask class                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_canMessageFromTask class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
 //--- Constructor
@@ -811,31 +834,33 @@ class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mTaskIndex (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_C_5F_canMessageFromTask class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromTask ;
 
 #include "separateHeaderFor_C_5F_canMessageFromTask.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                                   @M_messages map                                                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @M_messages map
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cMapElement_M_5F_messages ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const char * kSearchErrorMessage_M_5F_messages_searchKey ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_M_5F_messages : public AC_GALGAS_map {
 //--------------------------------- Default constructor
@@ -844,7 +869,7 @@ class GALGAS_M_5F_messages : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_M_5F_messages (const GALGAS_M_5F_messages & inSource) ;
   public : GALGAS_M_5F_messages & operator = (const GALGAS_M_5F_messages & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -992,6 +1017,19 @@ class GALGAS_M_5F_messages : public AC_GALGAS_map {
                                                                              COMMA_LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0,
+                                                     class GALGAS_uint & outOperand1,
+                                                     class GALGAS_luint & outOperand2,
+                                                     class GALGAS_uint & outOperand3,
+                                                     class GALGAS_luint & outOperand4,
+                                                     class GALGAS_luint & outOperand5,
+                                                     class GALGAS_luint & outOperand6,
+                                                     class GALGAS_luint & outOperand7,
+                                                     class GALGAS_luint & outOperand8,
+                                                     class GALGAS_AC_5F_canMessage & outOperand9) const ;
+
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
   public : VIRTUAL_IN_DEBUG cMapElement_M_5F_messages * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
@@ -1004,9 +1042,9 @@ class GALGAS_M_5F_messages : public AC_GALGAS_map {
  
 } ; // End of GALGAS_M_5F_messages class
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//   Enumerator declaration                                                                                            *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//   Enumerator declaration                                                                      
+//----------------------------------------------------------------------------------------------------------------------
 
 class cEnumerator_M_5F_messages : public cGenericAbstractEnumerator {
   public : cEnumerator_M_5F_messages (const GALGAS_M_5F_messages & inEnumeratedObject,
@@ -1027,15 +1065,15 @@ class cEnumerator_M_5F_messages : public cGenericAbstractEnumerator {
   public : class GALGAS_M_5F_messages_2D_element current (LOCATION_ARGS) const ;
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Class for element of '@M_messages' map                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: class for element of '@M_messages' map
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cMapElement_M_5F_messages : public cMapElement {
 //--- Map attributes
@@ -1075,11 +1113,11 @@ class cMapElement_M_5F_messages : public cMapElement {
  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          @M_5F_messages_2D_element struct                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @M_5F_messages_2D_element struct
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_M_5F_messages_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
@@ -1181,21 +1219,23 @@ class GALGAS_M_5F_messages_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_luint getter_mPriority (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_M_5F_messages_2D_element class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages_2D_element ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                                  @AC_5F_task class                                                  *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @AC_5F_task class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_AC_5F_task : public AC_GALGAS_class {
 //--- Constructor
@@ -1227,23 +1267,25 @@ class GALGAS_AC_5F_task : public AC_GALGAS_class {
 
 //--------------------------------- Getters
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_AC_5F_task class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_task ;
 
 #include "separateHeaderFor_AC_5F_task.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                             @C_5F_independantTask class                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_independantTask class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_C_5F_independantTask : public GALGAS_AC_5F_task {
 //--- Constructor
@@ -1281,31 +1323,33 @@ class GALGAS_C_5F_independantTask : public GALGAS_AC_5F_task {
 
 //--------------------------------- Getters
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_C_5F_independantTask class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_independantTask ;
 
 #include "separateHeaderFor_C_5F_independantTask.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                                    @M_tasks map                                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @M_tasks map
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cMapElement_M_5F_tasks ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const char * kSearchErrorMessage_M_5F_tasks_searchKey ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_M_5F_tasks : public AC_GALGAS_map {
 //--------------------------------- Default constructor
@@ -1314,7 +1358,7 @@ class GALGAS_M_5F_tasks : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_M_5F_tasks (const GALGAS_M_5F_tasks & inSource) ;
   public : GALGAS_M_5F_tasks & operator = (const GALGAS_M_5F_tasks & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -1462,6 +1506,19 @@ class GALGAS_M_5F_tasks : public AC_GALGAS_map {
                                                                           COMMA_LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0,
+                                                     class GALGAS_uint & outOperand1,
+                                                     class GALGAS_luint & outOperand2,
+                                                     class GALGAS_luint & outOperand3,
+                                                     class GALGAS_luint & outOperand4,
+                                                     class GALGAS_luint & outOperand5,
+                                                     class GALGAS_luint & outOperand6,
+                                                     class GALGAS_uint & outOperand7,
+                                                     class GALGAS_luint & outOperand8,
+                                                     class GALGAS_AC_5F_task & outOperand9) const ;
+
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
   public : VIRTUAL_IN_DEBUG cMapElement_M_5F_tasks * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
@@ -1474,9 +1531,9 @@ class GALGAS_M_5F_tasks : public AC_GALGAS_map {
  
 } ; // End of GALGAS_M_5F_tasks class
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//   Enumerator declaration                                                                                            *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//   Enumerator declaration                                                                      
+//----------------------------------------------------------------------------------------------------------------------
 
 class cEnumerator_M_5F_tasks : public cGenericAbstractEnumerator {
   public : cEnumerator_M_5F_tasks (const GALGAS_M_5F_tasks & inEnumeratedObject,
@@ -1497,15 +1554,15 @@ class cEnumerator_M_5F_tasks : public cGenericAbstractEnumerator {
   public : class GALGAS_M_5F_tasks_2D_element current (LOCATION_ARGS) const ;
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_tasks ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                         Class for element of '@M_tasks' map                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: class for element of '@M_tasks' map
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cMapElement_M_5F_tasks : public cMapElement {
 //--- Map attributes
@@ -1545,11 +1602,11 @@ class cMapElement_M_5F_tasks : public cMapElement {
  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            @M_5F_tasks_2D_element struct                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @M_5F_tasks_2D_element struct
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_M_5F_tasks_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
@@ -1651,21 +1708,23 @@ class GALGAS_M_5F_tasks_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_AC_5F_task getter_mTaskKind (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_M_5F_tasks_2D_element class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_tasks_2D_element ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Parser class 'oa_parser' declaration                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Parser class 'oa_parser' declaration
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cParser_oa_5F_parser {
 //--- Virtual destructor
@@ -1718,11 +1777,11 @@ class cParser_oa_5F_parser {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                         @C_5F_taskDependsFromMessage class                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_taskDependsFromMessage class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_C_5F_taskDependsFromMessage : public GALGAS_AC_5F_task {
 //--- Constructor
@@ -1772,23 +1831,25 @@ class GALGAS_C_5F_taskDependsFromMessage : public GALGAS_AC_5F_task {
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mMessage (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_C_5F_taskDependsFromMessage class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFromMessage ;
 
 #include "separateHeaderFor_C_5F_taskDependsFromMessage.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           @C_5F_taskDependsFromTask class                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_taskDependsFromTask class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_C_5F_taskDependsFromTask : public GALGAS_AC_5F_task {
 //--- Constructor
@@ -1838,23 +1899,25 @@ class GALGAS_C_5F_taskDependsFromTask : public GALGAS_AC_5F_task {
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mTask (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_C_5F_taskDependsFromTask class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFromTask ;
 
 #include "separateHeaderFor_C_5F_taskDependsFromTask.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Routine 'performComputations'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Routine 'performComputations'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void routine_performComputations (class GALGAS_M_5F_processor & ioArgument0,
                                   class GALGAS_M_5F_network & ioArgument1,
@@ -1863,9 +1926,9 @@ void routine_performComputations (class GALGAS_M_5F_processor & ioArgument0,
                                   class C_Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 //  GRAMMAR oa_grammar
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 class cGrammar_oa_5F_grammar : public cParser_oa_5F_parser {
 //------------------------------------- 'axiome' non terminal
@@ -1928,35 +1991,35 @@ class cGrammar_oa_5F_grammar : public cParser_oa_5F_parser {
   public : virtual int32_t select_oa_5F_parser_14 (C_Lexique_oa_5F_scanner *) ;
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                               Bool options                                                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//                               Bool options                                                    
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 extern C_BoolCommandLineOption gOption_oa_5F_cli_5F_options_createIntermediateFiles ;
 
 extern C_BoolCommandLineOption gOption_oa_5F_cli_5F_options_useCANmaxLegth ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                               UInt options                                                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//                               UInt options                                                    
+//
+//----------------------------------------------------------------------------------------------------------------------
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              String options                                                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//                              String options                                                   
+//
+//----------------------------------------------------------------------------------------------------------------------
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              String List options                                                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//                              String List options                                              
+//
+//----------------------------------------------------------------------------------------------------------------------
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 

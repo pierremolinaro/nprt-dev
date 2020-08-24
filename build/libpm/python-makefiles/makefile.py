@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-#   Releases                                                                                                           *
+#   Releases                                                                                     
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 # 1.0: march 18th, 2015
 #        first release
@@ -24,8 +24,9 @@
 #             added test (job.mReturnCode != None) lines 727 and 739
 # 3.1: may 26th, 2018
 #        Added tolerance in secondary dependency file syntax:
-# 3.2: december 11th, 2019
+# 3.2: december 16th, 2019
 #             added test (job.mReturnCode != None) lines 771 and 779
+#             post command displayed is aligned
 #
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 # http://www.diveintopython3.net/porting-code-to-python-3-with-2to3.html
@@ -39,10 +40,10 @@ if sys.version_info >= (2, 6) :
   import multiprocessing
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-#   find_executable                                                                                                    *
-# From:                                                                                                                *
-# https://gist.github.com/4368898                                                                                      *
-# Public domain code by anatoly techtonik <techtonik@gmail.com>                                                        *
+#   find_executable                                                                              
+# From:                                                                                          
+# https://gist.github.com/4368898                                                                
+# Public domain code by anatoly techtonik <techtonik@gmail.com>                                  
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 def find_executable(executable, path=None):
@@ -79,7 +80,7 @@ def find_executable(executable, path=None):
         return None
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-#   processorCount                                                                                                     *
+#   processorCount                                                                               
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 def processorCount () :
@@ -90,7 +91,7 @@ def processorCount () :
   return coreCount
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-#   argumentIsString                                                                                                   *
+#   argumentIsString                                                                             
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 def argumentIsString (argument) :
@@ -100,7 +101,7 @@ def argumentIsString (argument) :
     return type (argument) is str
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-#   FOR PRINTING IN COLOR                                                                                              *
+#   FOR PRINTING IN COLOR                                                                        
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 def BLACK () :
@@ -177,7 +178,7 @@ def BOLD_RED () :
   return BOLD () + RED ()
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-#   runHiddenCommand                                                                                                   *
+#   runHiddenCommand                                                                             
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 def runHiddenCommand (cmd, logUtilityTool=False) :
@@ -200,7 +201,7 @@ def runHiddenCommand (cmd, logUtilityTool=False) :
       return result
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-#   runCommand                                                                                                         *
+#   runCommand                                                                                   
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 def runCommand (cmd, title, showCommand, logUtilityTool) :
@@ -225,7 +226,7 @@ def runCommand (cmd, title, showCommand, logUtilityTool) :
     sys.exit (returncode)
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-#   runInThread                                                                                                        *
+#   runInThread                                                                                  
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 def runInThread (job, displayLock, terminationSemaphore):
@@ -252,7 +253,7 @@ def runInThread (job, displayLock, terminationSemaphore):
         break
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-#   modificationDateForFile                                                                                            *
+#   modificationDateForFile                                                                      
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 def modificationDateForFile (dateCacheDictionary, file):
@@ -269,7 +270,7 @@ def modificationDateForFile (dateCacheDictionary, file):
     return date
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-#   class PostCommand                                                                                                  *
+#   class PostCommand                                                                            
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class PostCommand:
@@ -283,7 +284,7 @@ class PostCommand:
     self.mTitle = title
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-#   class Job                                                                                                          *
+#   class Job                                                                                    
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class Job:
@@ -336,7 +337,7 @@ class Job:
     postCommand = self.mPostCommands [0]
     self.mCommand = postCommand.mCommand
     displayLock.acquire ()
-    print (BOLD_BLUE () + postCommand.mTitle + ENDC ())
+    print (BOLD_BLUE () + "       " + postCommand.mTitle + ENDC ())
     if showCommand:
       cmdAsString = ""
       for s in self.mCommand:
@@ -350,7 +351,7 @@ class Job:
     thread.start()
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-#   class Rule                                                                                                         *
+#   class Rule                                                                                   
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class Rule:
@@ -446,7 +447,7 @@ class Rule:
                 #print (BOLD_BLUE () + str (modifDate) + ENDC ())
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-#   class Make                                                                                                         *
+#   class Make                                                                                   
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class Make:

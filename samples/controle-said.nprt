@@ -1,0 +1,12 @@
+system
+can network r1 ;
+
+
+standard message m1 network r1 length 1 priority 1 offset 0 deadline 1000 period 1000 ; 
+
+standard message m2 network r1 length 5 priority 2 offset 60 deadline 1000 period 2000 ; 
+
+standard message m3 network r1 length 2 priority 3 offset 50 deadline 1000 period 1000 ; 
+
+
+end

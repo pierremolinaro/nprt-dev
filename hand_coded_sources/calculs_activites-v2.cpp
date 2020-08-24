@@ -270,7 +270,7 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
 
   const bool CreateIntermediateFiles = gOption_oa_5F_cli_5F_options_createIntermediateFiles.mValue ;
   const bool useCANmaxLengthOnly = gOption_oa_5F_cli_5F_options_useCANmaxLegth.mValue ;
-  bool forceBalgorithm = true ;
+  bool forceBalgorithm = false ;
   const C_String sourceFile = inCompiler->sourceFilePath () ;
   
 
