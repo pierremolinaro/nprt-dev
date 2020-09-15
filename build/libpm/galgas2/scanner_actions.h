@@ -6,7 +6,7 @@
 //
 //  Copyright (C) 2009, ..., 2016 Pierre Molinaro.
 //
-//  e-mail : pcmolinaro@free.fr
+//  e-mail : pierre@pcmolinaro.name
 //
 //  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
 //  Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option)
@@ -39,8 +39,6 @@
 //  S C A N N E R    A C T I O N S                                                               
 //
 //----------------------------------------------------------------------------------------------------------------------
-
-//--- Predefined scanner actions: see http://galgas.rts-software.org/doku.php?id=lex#predefined_lexical_actions
 
 void scanner_routine_multiplyUInt (C_Lexique & inLexique,
                                   const uint32_t inFactor,
@@ -253,7 +251,6 @@ void scanner_routine_convertBinaryStringIntoBigInt (C_Lexique & inLexique,
 
 //----------------------------------------------------------------------------------------------------------------------
 
-//--- Predefined scanner functions: see http://galgas.rts-software.org/doku.php?id=lex#predefined_lexical_functions
 utf32 scanner_function_toLower (C_Lexique & inLexique, const utf32 inCharacter) ;
 
 utf32 scanner_function_toUpper (C_Lexique & inLexique, const utf32 inCharacter) ;

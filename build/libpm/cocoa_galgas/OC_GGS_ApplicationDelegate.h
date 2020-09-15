@@ -4,7 +4,7 @@
 //
 //  Copyright (C) 2003, ..., 2019 Pierre Molinaro.
 //
-//  e-mail : pcmolinaro@free.fr
+//  e-mail : pierre@pcmolinaro.name
 //
 //  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
 //  Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option)
@@ -121,9 +121,7 @@ extern OC_GGS_ApplicationDelegate * gCocoaApplicationDelegate ;
   @private IBOutlet NSPopUpButton * mNewDocumentTypePopUpButton ;
   @private IBOutlet NSView * mNewDocumentAccessoryView ;
 
-  #ifdef MAC_OS_X_VERSION_10_8
-    @private NSArray * mArrayOfNibTopObjects ;
-  #endif
+  @private NSArray * mArrayOfNibTopObjects ;
 
 //--- Page guide
   @private IBOutlet NSButton * mPageGuideCheckbox ;

@@ -4,7 +4,7 @@
 //
 //  Copyright (C) 2003, ..., 2019 Pierre Molinaro.
 //
-//  e-mail : pcmolinaro@free.fr
+//  e-mail : pierre@pcmolinaro.name
 //
 //  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
 //  Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option)
@@ -794,73 +794,6 @@
   [mUpdateFromFileSystemPanel orderOut:self] ;
   [NSApp endSheet:mUpdateFromFileSystemPanel] ;   
 }
-
-//----------------------------------------------------------------------------------------------------------------------
-
-/*- (void) askForUpdatingFromFileSystem {
-  #ifdef DEBUG_MESSAGES
-    NSLog (@"%s", __PRETTY_FUNCTION__) ;
-  #endif
-//--- Get application name
-  NSDictionary * bundleDictionary = [[NSBundle mainBundle] localizedInfoDictionary] ;
-  NSString * applicationName = [bundleDictionary objectForKey: @"CFBundleName"] ;
-//--- Build Alert
-  NSAlert *alert = [NSAlert
-    alertWithMessageText:@"Warning"
-    defaultButton:[NSString stringWithFormat:@"Keep %@ Version", applicationName]
-    alternateButton:@"Update From File Contents"
-    otherButton:nil
-    informativeTextWithFormat:@"This file for document at %@ has been modified by an other application."
-      " Do you want to keep the %@ version or update from file contents ?",
-      self.fileURL.path,
-      applicationName
-  ] ;
-//--- Display alert as window sheet
-  [alert
-    beginSheetModalForWindow:[self windowForSheet]
-    modalDelegate:self
-    didEndSelector:@selector (askForUpdatingFromFileSystemAlertEnding:returnCode:contextInfo:)
-    contextInfo:NULL
-  ] ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-- (void) askForUpdatingFromFileSystemAlertEnding:(NSAlert *) inAlert
-         returnCode:(int) returnCode
-         contextInfo:(void *) contextInfo {
-  #ifdef DEBUG_MESSAGES
-    NSLog (@"%s", __PRETTY_FUNCTION__) ;
-  #endif
-//  NSLog (@"returnCode %d", returnCode) ;
-  if (returnCode == NSAlertAlternateReturn) { // Revert button
-    [[NSRunLoop mainRunLoop]
-      performSelector: @selector (updateFromFileSystem:)
-      target:self
-      argument:nil
-      order:0
-      modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]
-    ] ;
-  }
-//--- Set new file modification date
-  [self setFileModificationDate:[self sourceFileModificationDateInFileSystem]] ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-- (void) windowDidBecomeKey: (NSNotification *) inNotification {
-  #ifdef DEBUG_MESSAGES
-    NSLog (@"%s", __PRETTY_FUNCTION__) ;
-  #endif
-  if (self.fileURL.path.length > 0) {
-    NSDate * modificationDateOnFileSystem = [self sourceFileModificationDateInFileSystem] ;
-    if ([modificationDateOnFileSystem compare:[self fileModificationDate]] != NSOrderedSame) {
-      [self askForUpdatingFromFileSystem] ;
-    }
-  }
-}
-*/
-
 //----------------------------------------------------------------------------------------------------------------------
 
 #pragma mark Document Save
@@ -895,7 +828,7 @@
     NSLog (@"%s, URL %@", __PRETTY_FUNCTION__, inAbsoluteURL) ;
   #endif
 //---
-  return [mDocumentData performSaveToURL:inAbsoluteURL] ;
+  return [mDocumentData performSaveToURL: inAbsoluteURL] ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -904,91 +837,91 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-- (NSDictionary *) fileAttributesToWriteToURL:(NSURL *) inDocumentURL
-    ofType:(NSString *)documentTypeName
-    forSaveOperation:(NSSaveOperationType)saveOperationType
-    originalContentsURL: (NSURL *) inOriginalURL
-    error: (NSError * __autoreleasing *) outError {
-  #ifdef DEBUG_MESSAGES
-    NSLog (@"%s", __PRETTY_FUNCTION__) ;
-  #endif
-    
-  NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
-  NSString *creatorCodeString;
-  NSArray *documentTypes;
-  NSNumber *typeCode, *creatorCode;
-  NSMutableDictionary *newAttributes;
-  
-  typeCode = creatorCode = nil;
-  
-  // First, set creatorCode to the HFS creator code for the application,
-  // if it exists.
-   creatorCodeString = [infoPlist objectForKey:@"CFBundleSignature"];
-  if(creatorCodeString)
-  {
-      creatorCode = [NSNumber
-          numberWithUnsignedLong:NSHFSTypeCodeFromFileType([NSString
-          stringWithFormat:@"'%@'",creatorCodeString])];
-  }
-  
-  // Then, find the matching Info.plist dictionary entry for this type.
-  // Use the first associated HFS type code, if any exist.
-  documentTypes = [infoPlist objectForKey:@"CFBundleDocumentTypes"];
-  if(documentTypes)
-  {
-      const NSUInteger count = [documentTypes count];
-      
-      for(NSUInteger i = 0; i < count; i++)
-      {
-          NSString *type = [[documentTypes objectAtIndex:i]
-              objectForKey:@"CFBundleTypeName"];
-          if(type && [type isEqualToString:documentTypeName])
-          {
-              NSArray *typeCodeStrings = [[documentTypes objectAtIndex:i]
-                  objectForKey:@"CFBundleTypeOSTypes"];
-              if(typeCodeStrings)
-              {
-                 NSString *firstTypeCodeString = [typeCodeStrings
-                      objectAtIndex:0];
-                  if (firstTypeCodeString)
-                  {
-                      typeCode = [NSNumber                            numberWithUnsignedLong:
-                         NSHFSTypeCodeFromFileType([NSString
-                         stringWithFormat:@"'%@'",firstTypeCodeString])];
-                  }
-              }
-              break;
-          }
-      }
-  }
-   // If neither type nor creator code exist, use the default implementation.
-  if(!(typeCode || creatorCode))
-  {
-      return [super
-        fileAttributesToWriteToURL:inDocumentURL
-        ofType:documentTypeName
-        forSaveOperation:saveOperationType
-        originalContentsURL:inOriginalURL
-        error:outError
-      ];
-  }
-  
-  // Otherwise, add the type and/or creator to the dictionary.
-  newAttributes = [NSMutableDictionary
-    dictionaryWithDictionary:[super
-      fileAttributesToWriteToURL:inDocumentURL
-      ofType:documentTypeName
-      forSaveOperation:saveOperationType
-      originalContentsURL:inOriginalURL
-      error:outError
-    ]
-  ];
-  if(typeCode)
-      [newAttributes setObject:typeCode forKey:NSFileHFSTypeCode];
-  if(creatorCode)
-      [newAttributes setObject:creatorCode forKey:NSFileHFSCreatorCode];
-  return newAttributes;
-}
+//- (NSDictionary *) fileAttributesToWriteToURL:(NSURL *) inDocumentURL
+//    ofType:(NSString *)documentTypeName
+//    forSaveOperation:(NSSaveOperationType)saveOperationType
+//    originalContentsURL: (NSURL *) inOriginalURL
+//    error: (NSError * __autoreleasing *) outError {
+//  #ifdef DEBUG_MESSAGES
+//    NSLog (@"%s", __PRETTY_FUNCTION__) ;
+//  #endif
+//
+//  NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
+//  NSString *creatorCodeString;
+//  NSArray *documentTypes;
+//  NSNumber *typeCode, *creatorCode;
+//  NSMutableDictionary *newAttributes;
+//
+//  typeCode = creatorCode = nil;
+//
+//  // First, set creatorCode to the HFS creator code for the application,
+//  // if it exists.
+//   creatorCodeString = [infoPlist objectForKey:@"CFBundleSignature"];
+//  if(creatorCodeString)
+//  {
+//      creatorCode = [NSNumber
+//          numberWithUnsignedLong:NSHFSTypeCodeFromFileType([NSString
+//          stringWithFormat:@"'%@'",creatorCodeString])];
+//  }
+//
+//  // Then, find the matching Info.plist dictionary entry for this type.
+//  // Use the first associated HFS type code, if any exist.
+//  documentTypes = [infoPlist objectForKey:@"CFBundleDocumentTypes"];
+//  if(documentTypes)
+//  {
+//      const NSUInteger count = [documentTypes count];
+//
+//      for(NSUInteger i = 0; i < count; i++)
+//      {
+//          NSString *type = [[documentTypes objectAtIndex:i]
+//              objectForKey:@"CFBundleTypeName"];
+//          if(type && [type isEqualToString:documentTypeName])
+//          {
+//              NSArray *typeCodeStrings = [[documentTypes objectAtIndex:i]
+//                  objectForKey:@"CFBundleTypeOSTypes"];
+//              if(typeCodeStrings)
+//              {
+//                 NSString *firstTypeCodeString = [typeCodeStrings
+//                      objectAtIndex:0];
+//                  if (firstTypeCodeString)
+//                  {
+//                      typeCode = [NSNumber                            numberWithUnsignedLong:
+//                         NSHFSTypeCodeFromFileType([NSString
+//                         stringWithFormat:@"'%@'",firstTypeCodeString])];
+//                  }
+//              }
+//              break;
+//          }
+//      }
+//  }
+//   // If neither type nor creator code exist, use the default implementation.
+//  if(!(typeCode || creatorCode))
+//  {
+//      return [super
+//        fileAttributesToWriteToURL:inDocumentURL
+//        ofType:documentTypeName
+//        forSaveOperation:saveOperationType
+//        originalContentsURL:inOriginalURL
+//        error:outError
+//      ];
+//  }
+//
+//  // Otherwise, add the type and/or creator to the dictionary.
+//  newAttributes = [NSMutableDictionary
+//    dictionaryWithDictionary:[super
+//      fileAttributesToWriteToURL:inDocumentURL
+//      ofType:documentTypeName
+//      forSaveOperation:saveOperationType
+//      originalContentsURL:inOriginalURL
+//      error:outError
+//    ]
+//  ];
+//  if(typeCode)
+//      [newAttributes setObject:typeCode forKey:NSFileHFSTypeCode];
+//  if(creatorCode)
+//      [newAttributes setObject:creatorCode forKey:NSFileHFSCreatorCode];
+//  return newAttributes;
+//}
 
 //----------------------------------------------------------------------------------------------------------------------
 

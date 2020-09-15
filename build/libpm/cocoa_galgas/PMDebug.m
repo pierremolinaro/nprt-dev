@@ -4,7 +4,7 @@
 //
 //  Copyright (C) 2011, ..., 2014 Pierre Molinaro.
 //
-//  e-mail : pcmolinaro@free.fr
+//  e-mail : pierre@pcmolinaro.name
 //
 //  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
 //  Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option)
@@ -27,15 +27,14 @@ static PMDebug * gDebugObject ;
 void noteObjectAllocation (NSObject * inObject) {
   if (nil == gDebugObject) {
     gDebugObject = [PMDebug new] ;
-    #ifdef MAC_OS_X_VERSION_10_8
-      NSArray * objects = nil ;
-      const BOOL ok = [[NSBundle mainBundle] loadNibNamed:@"PMDebug" owner:gDebugObject topLevelObjects:& objects] ;
-    #else
-      const BOOL ok = [NSBundle loadNibNamed:@"PMDebug" owner:gDebugObject] ;
-    #endif
-    if (! ok) {
+    NSArray * objects = nil ;
+    [[NSBundle mainBundle] loadNibNamed:@"PMDebug" owner:gDebugObject topLevelObjects:& objects] ;
+//    #else
+//      const BOOL ok = [NSBundle loadNibNamed:@"PMDebug" owner:gDebugObject] ;
+//    #endif
+//    if (! ok) {
 //      presentErrorWindow (__FILE__, __LINE__, @"Cannot load 'PMDebug' nib file") ;
-    }
+//    }
   }
   [gDebugObject pmNoteObjectAllocation:inObject] ;
 }
@@ -69,15 +68,14 @@ void noteObjectDeallocation (NSObject * inObject) {
 void showAllocationStatsWindow (void) {
   if (nil == gDebugObject) {
     gDebugObject = [PMDebug new] ;
-    #ifdef MAC_OS_X_VERSION_10_8
-      NSArray * objects = nil ;
-      const BOOL ok = [[NSBundle mainBundle] loadNibNamed:@"PMDebug" owner:gDebugObject topLevelObjects:& objects] ;
-    #else
-      const BOOL ok = [NSBundle loadNibNamed:@"PMDebug" owner:gDebugObject] ;
-    #endif
-    if (! ok) {
-//      presentErrorWindow (__FILE__, __LINE__, @"Cannot load 'PMDebug' nib file") ;
-    }
+    NSArray * objects = nil ;
+    [[NSBundle mainBundle] loadNibNamed:@"PMDebug" owner:gDebugObject topLevelObjects:& objects] ;
+//    #else
+//      const BOOL ok = [NSBundle loadNibNamed:@"PMDebug" owner:gDebugObject] ;
+//    #endif
+//    if (! ok) {
+////      presentErrorWindow (__FILE__, __LINE__, @"Cannot load 'PMDebug' nib file") ;
+//    }
   }
   [gDebugObject showAllocationWindow] ;
 }

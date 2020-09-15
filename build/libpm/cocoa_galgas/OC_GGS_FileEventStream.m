@@ -35,7 +35,7 @@ static NSMutableArray * gFileEventStreamArray = nil ;
 
   - (void) callbackMethodForPath: (NSString *) inPath
            flag: (FSEventStreamEventFlags) inEventFlag {
-    NSLog (@"path '%@' flag:%X", inPath, inEventFlag) ; // §
+   // NSLog (@"path '%@' flag:%X", inPath, inEventFlag) ; // §
     for (OC_GGS_DocumentData * document in mDocuments) {
       if ([document.fileURL.path isEqualToString: inPath]) {
         [document fileDidChangeInFileSystem] ;
@@ -78,19 +78,23 @@ static NSMutableArray * gFileEventStreamArray = nil ;
         CFRelease,
         CFCopyDescription
       } ;
-      mFSEventStream = FSEventStreamCreate (
+      const FSEventStreamCreateFlags creationFlags =
+          kFSEventStreamCreateFlagNoDefer
+        | kFSEventStreamCreateFlagUseCFTypes
+        | kFSEventStreamCreateFlagWatchRoot
+        | kFSEventStreamCreateFlagFileEvents
+        | kFSEventStreamCreateFlagMarkSelf // §§
+        | kFSEventStreamCreateFlagIgnoreSelf // Do not report events from current application
+      ;
+//      const FSEventStreamCreateFlags creationFlags = kFSEventStreamCreateFlagNone ;
+       mFSEventStream = FSEventStreamCreate (
         NULL,
         mycallback,
         & context,
         (__bridge CFArrayRef) pathsToWatch,
         kFSEventStreamEventIdSinceNow,
         latency,
-        kFSEventStreamCreateFlagNoDefer
-        | kFSEventStreamCreateFlagUseCFTypes
-        | kFSEventStreamCreateFlagWatchRoot
-        | kFSEventStreamCreateFlagFileEvents
-        | kFSEventStreamCreateFlagMarkSelf // §§
-        | kFSEventStreamCreateFlagIgnoreSelf // Do not report events from current application
+        creationFlags
       ) ;
       FSEventStreamScheduleWithRunLoop (mFSEventStream, CFRunLoopGetMain(), kCFRunLoopDefaultMode);
       FSEventStreamStart (mFSEventStream) ;
@@ -102,11 +106,11 @@ static NSMutableArray * gFileEventStreamArray = nil ;
 
   - (BOOL) tryToAddDocument: (OC_GGS_DocumentData *) inDocument {
     NSString * path = inDocument.fileURL.path.stringByDeletingLastPathComponent ;
-    OC_GGS_DocumentData * firstDocument = [mDocuments objectAtIndex:0] ;
+    OC_GGS_DocumentData * firstDocument = [mDocuments objectAtIndex: 0] ;
     NSString * referencePath = firstDocument.fileURL.path.stringByDeletingLastPathComponent ;
-    const BOOL result = [path isEqualToString:referencePath] ;
+    const BOOL result = [path isEqualToString: referencePath] ;
     if (result) {
-      [mDocuments addObject:inDocument] ;
+      [mDocuments addObject: inDocument] ;
     }
     return result ;
   }
