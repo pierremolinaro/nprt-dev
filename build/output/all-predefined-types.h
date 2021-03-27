@@ -2450,6 +2450,11 @@ class GALGAS_string : public AC_GALGAS_root {
 
 
 //--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_command (class GALGAS_stringlist constinArgument0,
+                                                 class GALGAS_string & outArgument1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_makeDirectory (C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
@@ -2534,6 +2539,10 @@ class GALGAS_string : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_char getter_characterAtIndex (const class GALGAS_uint & constinOperand0,
                                                                        C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_sint getter_commandWithArguments (const class GALGAS_stringlist & constinOperand0,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringlist getter_componentsSeparatedByString (const class GALGAS_string & constinOperand0
                                                                                         COMMA_LOCATION_ARGS) const ;
