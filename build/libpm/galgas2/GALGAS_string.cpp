@@ -1054,11 +1054,10 @@ GALGAS_sint GALGAS_string::getter_commandWithArguments (const GALGAS_stringlist 
 
  //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_string::method_command (GALGAS_stringlist inArguments,
-                                    GALGAS_string & outCommandOutput,
-                                    C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) const {
-  outCommandOutput.drop () ;
+GALGAS_string GALGAS_string::getter_hiddenCommandWithArguments (const GALGAS_stringlist & inArguments,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
+  GALGAS_string result ;
   if (isValid () && inArguments.isValid ()) {
     C_String command = C_String ("'") + mString + "'" ;
     for (uint32_t i=0 ; i<inArguments.count () ; i++) {
@@ -1066,8 +1065,9 @@ void GALGAS_string::method_command (GALGAS_stringlist inArguments,
       command.appendString (inArguments.getter_mValueAtIndex (GALGAS_uint (i), inCompiler COMMA_THERE).stringValue ()) ;
       command.appendString ("'") ;
     }
-    outCommandOutput = GALGAS_string (command).getter_popen (inCompiler COMMA_THERE) ;
+    result = GALGAS_string (command).getter_popen (inCompiler COMMA_THERE) ;
   }
+  return result ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
