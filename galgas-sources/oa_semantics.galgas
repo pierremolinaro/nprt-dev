@@ -21,17 +21,17 @@
     search searchKey error message "the processor '%K' is not declared"
   }
 
-  abstract class @AC_canMessage %generatedInSeparateFile {
+  abstract shared class @AC_canMessage %generatedInSeparateFile {
   }
   
-  class @C_canIndependantMessage : @AC_canMessage  {
+  shared class @C_canIndependantMessage : @AC_canMessage  {
   }
   
-  class @C_canMessageFromMessage : @AC_canMessage {
+  shared class @C_canMessageFromMessage : @AC_canMessage {
     @uint mMessageIndex
   }
   
-  class @C_canMessageFromTask : @AC_canMessage  {
+  shared class @C_canMessageFromTask : @AC_canMessage  {
     @uint mTaskIndex
   }
     
@@ -49,18 +49,18 @@
     search searchKey error message "the CAN message '%K' is not declared"
   }
   
-  abstract class @AC_task %generatedInSeparateFile {
+  abstract shared class @AC_task %generatedInSeparateFile {
   }
   
-  class @C_independantTask : @AC_task  {
+  shared class @C_independantTask : @AC_task  {
   }
   
-  class @C_taskDependsFromTask : @AC_task {
+  shared class @C_taskDependsFromTask : @AC_task {
     @uint mTask
     @luint mEvery
  }
   
-  class @C_taskDependsFromMessage : @AC_task {
+  shared class @C_taskDependsFromMessage : @AC_task {
     @uint mMessage
     @luint mEvery
   }
