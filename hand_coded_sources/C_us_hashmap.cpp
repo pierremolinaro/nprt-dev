@@ -58,7 +58,7 @@ void C_us_hashmap::MyBlockavltree_element_for_collision::operator delete (void *
   smAllocInfo.mFreeList = p ;
   smAllocInfo.mAllocatedObjectCount -- ;
   if (smAllocInfo.mAllocatedObjectCount == 0) {
-    for (int32_t i=0 ; i<smAllocInfo.mAllocatedBlockCount ; i++) {
+    for (size_t i=0 ; i<smAllocInfo.mAllocatedBlockCount ; i++) {
       delete [] smAllocInfo.mAllocatedBlockList [i] ;
     }
     delete [] smAllocInfo.mAllocatedBlockList ;
@@ -78,9 +78,9 @@ void C_us_hashmap::MyBlockavltree_element_for_collision::operator delete (void *
 void C_us_hashmap::C_TreeForCollision::allocBlock (void) {
 //--- Realloc block list ?
   if (smAllocInfo.mAllocatedBlockListSize <= smAllocInfo.mAllocatedBlockCount) {
-    const int32_t newSize = smAllocInfo.mAllocatedBlockCount + 1024 ;
+    const size_t newSize = smAllocInfo.mAllocatedBlockCount + 1024 ;
     char ** newBlockList = new char * [newSize] ;
-    for (int32_t i=0 ; i<smAllocInfo.mAllocatedBlockCount ; i++) {
+    for (size_t i=0 ; i<smAllocInfo.mAllocatedBlockCount ; i++) {
       newBlockList [i] = smAllocInfo.mAllocatedBlockList [i] ;
     }
     delete [] smAllocInfo.mAllocatedBlockList ;
@@ -91,15 +91,15 @@ void C_us_hashmap::C_TreeForCollision::allocBlock (void) {
   smAllocInfo.mAllocatedBlockList [smAllocInfo.mAllocatedBlockCount] = new char [BLOCK_SIZE] ;
   char * ptr = & (smAllocInfo.mAllocatedBlockList [smAllocInfo.mAllocatedBlockCount] [0]) ;
   smAllocInfo.mAllocatedBlockCount ++ ;
-  int32_t blockSize = BLOCK_SIZE ;
-  const int32_t ALIGNMENT = 32 ;
+  size_t blockSize = BLOCK_SIZE ;
+  const size_t ALIGNMENT = 32 ;
 //--- Align pointer
-  if ((((intptr_t) ptr) % ALIGNMENT) != 0) {
-    ptr = (char *) (((((intptr_t) ptr) / ALIGNMENT) + 1) * ALIGNMENT) ;
+  if ((size_t (ptr) % ALIGNMENT) != 0) {
+    ptr = (char *) (((size_t (ptr) / ALIGNMENT) + 1) * ALIGNMENT) ;
     blockSize -= ALIGNMENT ;
   }
-  const int32_t nbNewObjects = blockSize / ((int32_t) sizeof (MyBlockavltree_element_for_collision)) ;
-  for (int32_t i=0 ; i<nbNewObjects ; i++) {
+  const size_t nbNewObjects = blockSize / sizeof (MyBlockavltree_element_for_collision) ;
+  for (size_t i=0 ; i<nbNewObjects ; i++) {
     MyBlockavltree_element_for_collision * newObjectPtr = (MyBlockavltree_element_for_collision *) ptr ;
     newObjectPtr->mPtrToSup = smAllocInfo.mFreeList ;
     smAllocInfo.mFreeList = newObjectPtr ;
@@ -517,7 +517,7 @@ search (const C_us::C_us_nodeInfo & inInfo) {
 
 uint32_t C_us_hashmap::sweepUnmarkedObjects (void) {
   uint32_t sweepedNodes = 0 ;
-  for (int32_t i=0 ; i<mEntryCurrentCount ; i++) {
+  for (size_t i=0 ; i<mEntryCurrentCount ; i++) {
     sweepedNodes += mMapArray [i].sweepUnmarkedObjects () ;
   }
   return sweepedNodes ;
@@ -533,10 +533,10 @@ uint32_t C_us_hashmap::getMapSizeInBytes (void) const {
 
 void C_us_hashmap
 ::reallocMap (const int32_t inNewSize) {
-  const int32_t newSize = (inNewSize < 1) ? 1 : (int32_t) getPrimeGreaterThan ((uint32_t) inNewSize) ;
+  const size_t newSize = (inNewSize < 1) ? 1 : (size_t) getPrimeGreaterThan ((uint32_t) inNewSize) ;
   if (newSize != mEntryCurrentCount) {
     C_TreeForCollision * newMapArray = (newSize > 1) ? new C_TreeForCollision [newSize] : (& mMinimumMapArray) ;
-    for (int32_t i=0 ; i<mEntryCurrentCount ; i++) {
+    for (size_t i=0 ; i<mEntryCurrentCount ; i++) {
       mMapArray [i].transfertElementsInNewMapArray (newMapArray, (uint32_t) newSize) ;
     }
     if (mEntryCurrentCount > 1) {
@@ -550,7 +550,7 @@ void C_us_hashmap
 //---------------------------------------------------------------------------*
 
 void C_us_hashmap::unmarkAllObjects (void) {
-  for (int32_t i=0 ; i<mEntryCurrentCount ; i++) {
+  for (size_t i=0 ; i<mEntryCurrentCount ; i++) {
     mMapArray [i].unmarkAllObjects () ;
   }
 }
@@ -559,7 +559,7 @@ void C_us_hashmap::unmarkAllObjects (void) {
 
 int32_t C_us_hashmap::getMarkedNodesCount (void) const {
   int32_t count = 0 ;
-  for (int32_t i=0 ; i<mEntryCurrentCount ; i++) {
+  for (size_t i=0 ; i<mEntryCurrentCount ; i++) {
     count += mMapArray [i].getMarkedNodesCount () ;
   }
   return count ;

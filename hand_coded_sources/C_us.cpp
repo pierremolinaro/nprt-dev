@@ -80,7 +80,7 @@ int32_t C_us::smNodeCount = 0 ;
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-void C_us::reallocAdditionCache (const int32_t inNewCacheSize) {
+void C_us::reallocAdditionCache (const size_t inNewCacheSize) {
   gCache.reallocCache (inNewCacheSize) ;
 }
 
@@ -409,9 +409,9 @@ void C_us::printVDLsummary (AC_OutputStream & inOutputStream) {
   inOutputStream << "Summary of VDL operations :\n"
                     "  " << cStringWithSigned (getVDLnodeCount ())
                  << " VDL used nodes (size " << cStringWithUnsigned (getNodeSize ()) << " bytes) ;\n"
-                    "  " << cStringWithSigned (C_us_hashmap::getCreatedObjectCount ())
+                    "  " << cStringWithUnsigned (C_us_hashmap::getCreatedObjectCount ())
                  << " VDL created nodes (total size "
-                 << cStringWithUnsigned (((uint32_t) C_us_hashmap::getCreatedObjectCount () * getNodeSize ()) / 1024UL)
+                 << cStringWithUnsigned ((C_us_hashmap::getCreatedObjectCount () * getNodeSize ()) / 1024UL)
                  << " kbytes) ;\n"
                     "  " << cStringWithSigned (getNodeComparesCount ()) << " comparisons ;\n"
                     "  " << cStringWithUnsigned (getTrivialAddCount ())
