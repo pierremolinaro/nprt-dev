@@ -7,74 +7,74 @@
 
 
   map @M_processor {
-    @uint mIndex
-    @luint mStep
+    public var @uint mIndex
+    public var @luint mStep
     insert insertKey error message "the processor '%K' has been already declared in %L"
     search searchKey error message "the processor '%K' is not declared"
   }
 
   map @M_network {
-    @uint mIndex
-    @bool mCANnetwork
-    @luint mScalingFactor
+    public var @uint mIndex
+    public var @bool mCANnetwork
+    public var @luint mScalingFactor
     insert insertKey error message "the processor '%K' has been already declared in %L"
     search searchKey error message "the processor '%K' is not declared"
   }
 
-  abstract shared class @AC_canMessage %generatedInSeparateFile {
+  abstract refclass @AC_canMessage %generatedInSeparateFile {
   }
   
-  shared class @C_canIndependantMessage : @AC_canMessage  {
+  refclass @C_canIndependantMessage : @AC_canMessage  {
   }
   
-  shared class @C_canMessageFromMessage : @AC_canMessage {
-    @uint mMessageIndex
+  refclass @C_canMessageFromMessage : @AC_canMessage {
+    public var @uint mMessageIndex
   }
   
-  shared class @C_canMessageFromTask : @AC_canMessage  {
-    @uint mTaskIndex
+  refclass @C_canMessageFromTask : @AC_canMessage  {
+    public var @uint mTaskIndex
   }
     
   map @M_messages {
-    @uint mIndex
-    @luint mClass # 0 : standard can, 1 : extented can, 2 : van
-    @uint mNetworkIndex
-    @luint mBytesCount
-    @luint mPriority
-    @luint mOffset
-    @luint mDeadline
-    @luint mPeriod
-    @AC_canMessage mMessageKind
+    public var @uint mIndex
+    public var @luint mClass # 0 : standard can, 1 : extented can, 2 : van
+    public var @uint mNetworkIndex
+    public var @luint mBytesCount
+    public var @luint mPriority
+    public var @luint mOffset
+    public var @luint mDeadline
+    public var @luint mPeriod
+    public var @AC_canMessage mMessageKind
     insert insertKey error message "the CAN message '%K' has been already declared in %L"
     search searchKey error message "the CAN message '%K' is not declared"
   }
   
-  abstract shared class @AC_task %generatedInSeparateFile {
+  abstract refclass @AC_task %generatedInSeparateFile {
   }
   
-  shared class @C_independantTask : @AC_task  {
+  refclass @C_independantTask : @AC_task  {
   }
   
-  shared class @C_taskDependsFromTask : @AC_task {
-    @uint mTask
-    @luint mEvery
+  refclass @C_taskDependsFromTask : @AC_task {
+    public var @uint mTask
+    public var @luint mEvery
  }
   
-  shared class @C_taskDependsFromMessage : @AC_task {
-    @uint mMessage
-    @luint mEvery
+  refclass @C_taskDependsFromMessage : @AC_task {
+    public var @uint mMessage
+    public var @luint mEvery
   }
   
   map @M_tasks {
-    @uint mIndex
-    @luint mPriority
-    @luint mOffset
-    @luint mDeadline
-    @luint mDurationMin
-    @luint mDurationMax
-    @uint mProcessor
-    @luint mPeriod
-    @AC_task mTaskKind
+    public var @uint mIndex
+    public var @luint mPriority
+    public var @luint mOffset
+    public var @luint mDeadline
+    public var @luint mDurationMin
+    public var @luint mDurationMax
+    public var @uint mProcessor
+    public var @luint mPeriod
+    public var @AC_task mTaskKind
     insert insertKey error message "the task '%K' has been already declared in %L"
     search searchKey error message "the task '%K' is not declared"
   }

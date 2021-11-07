@@ -17,7 +17,7 @@ class cPtr_C_5F_independantTask : public cPtr_AC_5F_task {
   public : virtual uint32_t getTaskEveryParameter (void) const ;
 
 //--- END OF USER ZONE 2
-//--- Attributes
+//--- Properties
 
 //--- Constructor
   public: cPtr_C_5F_independantTask (LOCATION_ARGS) ;

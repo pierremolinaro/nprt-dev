@@ -1,10 +1,8 @@
 //----------------------------------------------------------------------------------------------------------------------
 //
-//  Built-in GALGAS Command Line Interface Options
-//
 //  This file is part of libpm library
 //
-//  Copyright (C) 2015, ..., 2021 Pierre Molinaro.
+//  Copyright (C) 2021, ..., 2021 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,22 +16,36 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-#include "galgas2/C_galgas_verbose_option.h"
-#include "galgas2/F_verbose_output.h"
+#import "OC_GGS_ColorTransformer.h"
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_BoolCommandLineOption gOption_galgas_5F_builtin_5F_options_verbose_5F_output ("galgas_builtin_options",
-                                                                                "verbose_output",
-                                                                                'v',
-                                                                                "verbose",
-                                                                                "Verbose Output",
-                                                                                false) ; // Not visible in GALGAS
+@implementation OC_GGS_ColorTransformer
 
-//----------------------------------------------------------------------------------------------------------------------
-
-bool verboseOutput (void) {
-  return gOption_galgas_5F_builtin_5F_options_verbose_5F_output.readProperty_value () ;
++ (Class) transformedValueClass {
+    return [NSColor class] ;
 }
+
++ (BOOL) allowsReverseTransformation {
+    return YES ;
+}
+
+- (NSData *) reverseTransformedValue: (NSColor *) inValue {
+//    NSError * error = nil ;
+//    NSData * archiveData = [NSKeyedArchiver archivedDataWithRootObject: inValue requiringSecureCoding: YES error: & error] ;
+//    NSLog (@"-transformedValue %@, error %@, archiveData %@", inValue, error, archiveData) ;
+    NSData * archiveData = [NSKeyedArchiver archivedDataWithRootObject: inValue] ;
+    return archiveData ;
+}
+
+- (NSColor *) transformedValue: (NSData *) inValue {
+//    NSError * error = nil ;
+//    NSColor * color = [NSKeyedUnarchiver unarchivedObjectOfClass: [NSColor class] fromData: inValue error: & error] ;
+//    NSLog (@"reverseTransformedValue %@", color) ;
+    NSColor * color = [NSKeyedUnarchiver unarchiveObjectWithData: inValue] ;
+    return color ;
+}
+
+@end
 
 //----------------------------------------------------------------------------------------------------------------------

@@ -1,10 +1,10 @@
 //----------------------------------------------------------------------------------------------------------------------
 //
-//  Built-in GALGAS Command Line Interface Options
+//  acStrongPtr_class : Base class for reference class class
 //
 //  This file is part of libpm library
 //
-//  Copyright (C) 2015, ..., 2021 Pierre Molinaro.
+//  Copyright (C) 2008, ..., 2011 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,22 +18,37 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-#include "galgas2/C_galgas_verbose_option.h"
-#include "galgas2/F_verbose_output.h"
+#pragma once
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_BoolCommandLineOption gOption_galgas_5F_builtin_5F_options_verbose_5F_output ("galgas_builtin_options",
-                                                                                "verbose_output",
-                                                                                'v',
-                                                                                "verbose",
-                                                                                "Verbose Output",
-                                                                                false) ; // Not visible in GALGAS
+#include "galgas2/acPtr_class.h"
 
 //----------------------------------------------------------------------------------------------------------------------
 
-bool verboseOutput (void) {
-  return gOption_galgas_5F_builtin_5F_options_verbose_5F_output.readProperty_value () ;
-}
+class cPtr_weakReference_class ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+class acStrongPtr_class : public acPtr_class {
+//--- Default constructor
+  public: acStrongPtr_class (LOCATION_ARGS) ;
+
+//--- Destructor
+  public: virtual ~ acStrongPtr_class (void) ;
+
+//--- Private property
+  private: cPtr_weakReference_class * mProxy ;
+
+//--- Get proxy
+  public: cPtr_weakReference_class * getProxy (void) ;
+
+//--- No Copy
+  private: acStrongPtr_class (const acStrongPtr_class &) = delete ;
+  private: acStrongPtr_class & operator = (const acStrongPtr_class &) = delete ;
+
+//--- Friend
+  friend class cPtr_weakReference_class ;
+} ;
 
 //----------------------------------------------------------------------------------------------------------------------

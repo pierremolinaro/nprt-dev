@@ -17,7 +17,7 @@ class cPtr_C_5F_taskDependsFromMessage : public cPtr_AC_5F_task {
   public : virtual uint32_t getTaskEveryParameter (void) const ;
 
 //--- END OF USER ZONE 2
-//--- Attributes
+//--- Properties
   public: GALGAS_uint mProperty_mMessage ;
   public: GALGAS_luint mProperty_mEvery ;
 
@@ -30,10 +30,6 @@ class cPtr_C_5F_taskDependsFromMessage : public cPtr_AC_5F_task {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_uint getter_mMessage (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMMessage (GALGAS_uint inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_luint getter_mEvery (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEvery (GALGAS_luint inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;

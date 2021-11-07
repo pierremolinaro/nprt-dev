@@ -1,10 +1,10 @@
 //----------------------------------------------------------------------------------------------------------------------
 //
-//  Built-in GALGAS Command Line Interface Options
+//  acStrongPtr_class : Base class for reference class class
 //
 //  This file is part of libpm library
 //
-//  Copyright (C) 2015, ..., 2021 Pierre Molinaro.
+//  Copyright (C) 2021, ..., 2021 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,22 +18,34 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-#include "galgas2/C_galgas_verbose_option.h"
-#include "galgas2/F_verbose_output.h"
+#include "galgas2/acStrongPtr_class.h"
+#include "galgas2/cPtr_weakReference_class.h"
+#include "utilities/cpp-allocation.h"
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_BoolCommandLineOption gOption_galgas_5F_builtin_5F_options_verbose_5F_output ("galgas_builtin_options",
-                                                                                "verbose_output",
-                                                                                'v',
-                                                                                "verbose",
-                                                                                "Verbose Output",
-                                                                                false) ; // Not visible in GALGAS
+acStrongPtr_class::acStrongPtr_class (LOCATION_ARGS) :
+acPtr_class (THERE),
+mProxy (NULL) {
+}
 
 //----------------------------------------------------------------------------------------------------------------------
 
-bool verboseOutput (void) {
-  return gOption_galgas_5F_builtin_5F_options_verbose_5F_output.readProperty_value () ;
+acStrongPtr_class::~ acStrongPtr_class (void) {
+  if (mProxy != NULL) {
+    mProxy->mStrongObject = NULL ;
+    macroDetachSharedObject (mProxy) ;
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+cPtr_weakReference_class * acStrongPtr_class::getProxy (void) {
+  if (mProxy == NULL) {
+    macroMyNew (mProxy, cPtr_weakReference_class (HERE)) ;
+    mProxy->mStrongObject = this ;
+  }
+  return mProxy ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------

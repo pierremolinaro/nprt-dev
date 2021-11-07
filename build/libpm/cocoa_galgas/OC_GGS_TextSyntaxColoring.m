@@ -16,6 +16,7 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
+#import "OC_GGS_ColorTransformer.h"
 #import "OC_GGS_TextSyntaxColoring.h"
 #import "OC_GGS_TextDisplayDescriptor.h"
 #import "OC_Lexique.h"
@@ -140,39 +141,40 @@
   //--------------------------------------------------- Add foreground color observers
     NSUserDefaultsController * udc = [NSUserDefaultsController sharedUserDefaultsController] ;
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults] ;
+    OC_GGS_ColorTransformer * colorTransformer = [OC_GGS_ColorTransformer new] ;
     if ([mTokenizer isTemplateLexique]) {
       NSString * keyPath = [NSString stringWithFormat:@"values.%@_%@", GGS_template_foreground_color, [mTokenizer styleIdentifierForStyleIndex:0]] ;
       [udc
-        addObserver:self
-        forKeyPath:keyPath
-        options:NSKeyValueObservingOptionNew
+        addObserver: self
+        forKeyPath: keyPath
+        options: NSKeyValueObservingOptionNew
         context:(void *) (TAG_FOR_TEMPLATE_FOREGROUND_COLOR)
       ] ;
       NSString * name = [NSString stringWithFormat:@"%@_%@", GGS_template_foreground_color, [mTokenizer styleIdentifierForStyleIndex:0]] ;
-      NSData * data = [defaults dataForKey:name] ;
+      NSData * data = [defaults dataForKey: name] ;
       if (data != nil) {
-        NSColor * color = (NSColor *) [NSUnarchiver unarchiveObjectWithData:data] ;
-        [mTemplateTextAttributeDictionary setObject:color forKey:NSForegroundColorAttributeName] ;
+        NSColor * color = [colorTransformer transformedValue: data] ;
+        [mTemplateTextAttributeDictionary setObject: color forKey: NSForegroundColorAttributeName] ;
       }else{
-        [mTemplateTextAttributeDictionary setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName] ;
+        [mTemplateTextAttributeDictionary setObject: [NSColor blackColor] forKey: NSForegroundColorAttributeName] ;
       }
     }
     for (NSInteger i=0 ; i< (NSInteger) mTokenizer.styleCount ; i++) {
       NSString * keyPath = [NSString stringWithFormat:@"values.%@_%@", GGS_named_color, [mTokenizer styleIdentifierForStyleIndex:i]] ;
       [udc
-        addObserver:self
-        forKeyPath:keyPath
-        options:NSKeyValueObservingOptionNew
-        context:(void *) (TAG_FOR_FOREGROUND_COLOR | i)
+        addObserver: self
+        forKeyPath: keyPath
+        options: NSKeyValueObservingOptionNew
+        context: (void *) (TAG_FOR_FOREGROUND_COLOR | i)
       ] ;
     }
   //--------------------------------------------------- Add background color observers
     if ([mTokenizer isTemplateLexique]) {
       NSString * keyPath = [NSString stringWithFormat:@"values.%@_%@", GGS_template_background_color, [mTokenizer styleIdentifierForStyleIndex:0]] ;
       [udc
-        addObserver:self
-        forKeyPath:keyPath
-        options:NSKeyValueObservingOptionNew
+        addObserver: self
+        forKeyPath: keyPath
+        options: NSKeyValueObservingOptionNew
         context:(void *) (TAG_FOR_TEMPLATE_BACKGROUND_COLOR)
       ] ;
       keyPath = [NSString stringWithFormat:@"values.%@_%@", GGS_enable_template_background, [mTokenizer styleIdentifierForStyleIndex:0]] ;
@@ -187,7 +189,7 @@
         name = [NSString stringWithFormat:@"%@_%@", GGS_template_background_color, [mTokenizer styleIdentifierForStyleIndex:0]] ;
         NSData * data = [defaults dataForKey:name] ;
         if (data != nil) {
-          NSColor * color = (NSColor *) [NSUnarchiver unarchiveObjectWithData:data] ;
+          NSColor * color = [colorTransformer transformedValue: data] ;
           [mTemplateTextAttributeDictionary setObject:color forKey:NSBackgroundColorAttributeName] ;
         }else{
           [mTemplateTextAttributeDictionary setObject:[NSColor blackColor] forKey:NSBackgroundColorAttributeName] ;
@@ -245,10 +247,13 @@
       NSString * name = [NSString stringWithFormat:@"%@_%@", GGS_named_color, [mTokenizer styleIdentifierForStyleIndex:i]] ;
       NSData * data = [defaults dataForKey:name] ;
       if (data != nil) {
-        NSColor * color = (NSColor *) [NSUnarchiver unarchiveObjectWithData:data] ;
+        NSColor * color = [colorTransformer transformedValue: data] ;
+        if (color == nil) {
+          color = [NSColor blackColor] ;
+        }
         [attributeDictionary setObject:color forKey:NSForegroundColorAttributeName] ;
       }else{
-        [attributeDictionary setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName] ;
+        [attributeDictionary setObject: [NSColor blackColor] forKey:NSForegroundColorAttributeName] ;
       }
     //--- Add background color   
       name = [NSString stringWithFormat:@"%@_%@", GGS_named_enable_background, [mTokenizer styleIdentifierForStyleIndex:i]] ;
@@ -257,9 +262,12 @@
         data = [defaults dataForKey:name] ;
         if (data != nil) {
           NSColor * color = (NSColor *) [NSUnarchiver unarchiveObjectWithData:data] ;
-          [attributeDictionary setObject:color forKey:NSBackgroundColorAttributeName] ;
+          if (color == nil) {
+            color = [NSColor whiteColor] ;
+          }
+          [attributeDictionary setObject:color forKey: NSBackgroundColorAttributeName] ;
         }else{
-          [attributeDictionary setObject:[NSColor blackColor] forKey:NSBackgroundColorAttributeName] ;
+          [attributeDictionary setObject:[NSColor blackColor] forKey: NSBackgroundColorAttributeName] ;
         }
       }
     //--- Add font attribute   
@@ -267,26 +275,26 @@
       data = [defaults dataForKey:name] ;
       if (data != nil) {
         NSFont * font = (NSFont *) [NSUnarchiver unarchiveObjectWithData:data] ;
-        [attributeDictionary setObject:font forKey:NSFontAttributeName] ;
+        [attributeDictionary setObject:font forKey: NSFontAttributeName] ;
       }
     //--- Add dictionary
-      [mFontAttributesDictionaryArray addObject:attributeDictionary] ;
+      [mFontAttributesDictionaryArray addObject: attributeDictionary] ;
     }
   //--- Max line height
     [self computeMaxLineHeight:NULL] ;
   //---
     [[NSNotificationCenter defaultCenter]
-      addObserver:self
-      selector:@selector(textStorageDidProcessEditingNotification:)
+      addObserver: self
+      selector: @selector(textStorageDidProcessEditingNotification:)
       name: NSTextStorageDidProcessEditingNotification
-      object:mSourceTextStorage
+      object: mSourceTextStorage
     ] ;
   //--- Enter source string
     [mSourceTextStorage beginEditing] ;
-    [mSourceTextStorage replaceCharactersInRange:NSMakeRange (0, mSourceTextStorage.length) withString:inSource] ;
+    [mSourceTextStorage replaceCharactersInRange: NSMakeRange (0, mSourceTextStorage.length) withString: inSource] ;
     [mSourceTextStorage endEditing] ;
   //---
-    [self setIssueArray:inIssueArray] ;
+    [self setIssueArray: inIssueArray] ;
   }
   return self ;
 }
@@ -298,25 +306,25 @@
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
   #endif
   [[NSNotificationCenter defaultCenter]
-    removeObserver:self
-    name:NSUndoManagerCheckpointNotification
-    object:mUndoManager
+    removeObserver: self
+    name: NSUndoManagerCheckpointNotification
+    object: mUndoManager
   ] ;
   [[NSNotificationCenter defaultCenter]
-    removeObserver:self
-    name:NSUndoManagerDidUndoChangeNotification
-    object:mUndoManager
+    removeObserver: self
+    name: NSUndoManagerDidUndoChangeNotification
+    object: mUndoManager
   ] ;
   [[NSNotificationCenter defaultCenter]
-    removeObserver:self
+    removeObserver: self
     name:NSUndoManagerDidRedoChangeNotification
-    object:mUndoManager
+    object: mUndoManager
   ] ;
 //---
   [[NSNotificationCenter defaultCenter]
-    removeObserver:self
+    removeObserver: self
     name: NSTextStorageDidProcessEditingNotification
-    object:mSourceTextStorage
+    object: mSourceTextStorage
   ] ;
 //---
 //  NSLog (@"%s:observationInfo %@", __PRETTY_FUNCTION__, (id) self.observationInfo) ;
@@ -383,12 +391,12 @@
     nil
   ] ;
   [mUndoManager
-    registerUndoWithTarget:self
-    selector:@selector (replaceUsingDictionary:)
-    object:d
+    registerUndoWithTarget: self
+    selector: @selector (replaceUsingDictionary:)
+    object: d
   ] ;
   [mSourceTextStorage beginEditing] ;
-  [mSourceTextStorage replaceCharactersInRange:inRange withString:inReplaceString] ;
+  [mSourceTextStorage replaceCharactersInRange: inRange withString: inReplaceString] ;
   [mSourceTextStorage endEditing] ;
 }
 

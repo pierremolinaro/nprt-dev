@@ -16,7 +16,7 @@ class cPtr_C_5F_canIndependantMessage : public cPtr_AC_5F_canMessage {
   public : virtual uint32_t getMessageDependanceValue (void) const ;
 
 //--- END OF USER ZONE 2
-//--- Attributes
+//--- Properties
 
 //--- Constructor
   public: cPtr_C_5F_canIndependantMessage (LOCATION_ARGS) ;

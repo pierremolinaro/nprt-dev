@@ -294,10 +294,19 @@ class cMapElement_M_5F_processor : public cMapElement {
 class GALGAS_M_5F_processor_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public: GALGAS_lstring mProperty_lkey ;
+  public: inline GALGAS_lstring readProperty_lkey (void) const {
+    return mProperty_lkey ;
+  }
 
   public: GALGAS_uint mProperty_mIndex ;
+  public: inline GALGAS_uint readProperty_mIndex (void) const {
+    return mProperty_mIndex ;
+  }
 
   public: GALGAS_luint mProperty_mStep ;
+  public: inline GALGAS_luint readProperty_mStep (void) const {
+    return mProperty_mStep ;
+  }
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -358,12 +367,6 @@ class GALGAS_M_5F_processor_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mIndex (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mStep (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -555,12 +558,24 @@ class cMapElement_M_5F_network : public cMapElement {
 class GALGAS_M_5F_network_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public: GALGAS_lstring mProperty_lkey ;
+  public: inline GALGAS_lstring readProperty_lkey (void) const {
+    return mProperty_lkey ;
+  }
 
   public: GALGAS_uint mProperty_mIndex ;
+  public: inline GALGAS_uint readProperty_mIndex (void) const {
+    return mProperty_mIndex ;
+  }
 
   public: GALGAS_bool mProperty_mCANnetwork ;
+  public: inline GALGAS_bool readProperty_mCANnetwork (void) const {
+    return mProperty_mCANnetwork ;
+  }
 
   public: GALGAS_luint mProperty_mScalingFactor ;
+  public: inline GALGAS_luint readProperty_mScalingFactor (void) const {
+    return mProperty_mScalingFactor ;
+  }
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -627,14 +642,6 @@ class GALGAS_M_5F_network_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mCANnetwork (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mIndex (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mScalingFactor (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -650,20 +657,23 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_network_2D_ele
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @AC_5F_canMessage class
+// Phase 1: @AC_5F_canMessage reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_AC_5F_canMessage : public AC_GALGAS_class {
-//--- Constructor
+class GALGAS_AC_5F_canMessage : public AC_GALGAS_reference_class {
+//--------------------------------- Default constructor
   public: GALGAS_AC_5F_canMessage (void) ;
 
-//---
-  public: inline const class cPtr_AC_5F_canMessage * ptr (void) const { return (const cPtr_AC_5F_canMessage *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_AC_5F_canMessage (const cPtr_AC_5F_canMessage * inSourcePtr) ;
+  public: GALGAS_AC_5F_canMessage (const class cPtr_AC_5F_canMessage * inSourcePtr) ;
 
+//--------------------------------- Property read access
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -700,23 +710,82 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_canMessage ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @C_5F_canIndependantMessage class
+// Phase 1: @AC_5F_canMessage_2D_weak weak reference class
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_AC_5F_canMessage_2D_weak : public AC_GALGAS_weak_reference {
+//--------------------------------- Default constructor
+  public: GALGAS_AC_5F_canMessage_2D_weak (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public: static GALGAS_AC_5F_canMessage_2D_weak constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GALGAS_AC_5F_canMessage_2D_weak (const class GALGAS_AC_5F_canMessage & inSource) ;
+
+  public: GALGAS_AC_5F_canMessage_2D_weak & operator = (const class GALGAS_AC_5F_canMessage & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GALGAS_AC_5F_canMessage bang_AC_5F_canMessage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_AC_5F_canMessage_2D_weak extractObject (const GALGAS_object & inObject,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public: static class GALGAS_AC_5F_canMessage_2D_weak constructor_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: typeComparisonResult objectCompare (const GALGAS_AC_5F_canMessage_2D_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_AC_5F_canMessage_2D_weak class
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_canMessage_2D_weak ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_canIndependantMessage reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_C_5F_canIndependantMessage : public GALGAS_AC_5F_canMessage {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_C_5F_canIndependantMessage (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_C_5F_canIndependantMessage constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_C_5F_canIndependantMessage * ptr (void) const { return (const cPtr_C_5F_canIndependantMessage *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_C_5F_canIndependantMessage (const cPtr_C_5F_canIndependantMessage * inSourcePtr) ;
+  public: GALGAS_C_5F_canIndependantMessage (const class cPtr_C_5F_canIndependantMessage * inSourcePtr) ;
 
+//--------------------------------- Property read access
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -756,22 +825,83 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canIndependant
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @C_5F_canMessageFromMessage class
+// Phase 1: @C_5F_canIndependantMessage_2D_weak weak reference class
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_C_5F_canIndependantMessage_2D_weak : public GALGAS_AC_5F_canMessage_2D_weak {
+//--------------------------------- Default constructor
+  public: GALGAS_C_5F_canIndependantMessage_2D_weak (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public: static GALGAS_C_5F_canIndependantMessage_2D_weak constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GALGAS_C_5F_canIndependantMessage_2D_weak (const class GALGAS_C_5F_canIndependantMessage & inSource) ;
+
+  public: GALGAS_C_5F_canIndependantMessage_2D_weak & operator = (const class GALGAS_C_5F_canIndependantMessage & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GALGAS_C_5F_canIndependantMessage bang_C_5F_canIndependantMessage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_C_5F_canIndependantMessage_2D_weak extractObject (const GALGAS_object & inObject,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public: static class GALGAS_C_5F_canIndependantMessage_2D_weak constructor_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: typeComparisonResult objectCompare (const GALGAS_C_5F_canIndependantMessage_2D_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_C_5F_canIndependantMessage_2D_weak class
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canIndependantMessage_2D_weak ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_canMessageFromMessage reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_C_5F_canMessageFromMessage : public GALGAS_AC_5F_canMessage {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_C_5F_canMessageFromMessage (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_C_5F_canMessageFromMessage constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_C_5F_canMessageFromMessage * ptr (void) const { return (const cPtr_C_5F_canMessageFromMessage *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_C_5F_canMessageFromMessage (const cPtr_C_5F_canMessageFromMessage * inSourcePtr) ;
+  public: GALGAS_C_5F_canMessageFromMessage (const class cPtr_C_5F_canMessageFromMessage * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_uint readProperty_mMessageIndex (void) const ;
 
 //-- Start of generic part --*
 
@@ -799,8 +929,6 @@ class GALGAS_C_5F_canMessageFromMessage : public GALGAS_AC_5F_canMessage {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mMessageIndex (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -818,22 +946,83 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFrom
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @C_5F_canMessageFromTask class
+// Phase 1: @C_5F_canMessageFromMessage_2D_weak weak reference class
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_C_5F_canMessageFromMessage_2D_weak : public GALGAS_AC_5F_canMessage_2D_weak {
+//--------------------------------- Default constructor
+  public: GALGAS_C_5F_canMessageFromMessage_2D_weak (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public: static GALGAS_C_5F_canMessageFromMessage_2D_weak constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GALGAS_C_5F_canMessageFromMessage_2D_weak (const class GALGAS_C_5F_canMessageFromMessage & inSource) ;
+
+  public: GALGAS_C_5F_canMessageFromMessage_2D_weak & operator = (const class GALGAS_C_5F_canMessageFromMessage & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GALGAS_C_5F_canMessageFromMessage bang_C_5F_canMessageFromMessage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_C_5F_canMessageFromMessage_2D_weak extractObject (const GALGAS_object & inObject,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public: static class GALGAS_C_5F_canMessageFromMessage_2D_weak constructor_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromMessage_2D_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_C_5F_canMessageFromMessage_2D_weak class
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromMessage_2D_weak ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_canMessageFromTask reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_C_5F_canMessageFromTask (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_C_5F_canMessageFromTask constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_C_5F_canMessageFromTask * ptr (void) const { return (const cPtr_C_5F_canMessageFromTask *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_C_5F_canMessageFromTask (const cPtr_C_5F_canMessageFromTask * inSourcePtr) ;
+  public: GALGAS_C_5F_canMessageFromTask (const class cPtr_C_5F_canMessageFromTask * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_uint readProperty_mTaskIndex (void) const ;
 
 //-- Start of generic part --*
 
@@ -861,8 +1050,6 @@ class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mTaskIndex (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -877,6 +1064,62 @@ class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromTask ;
 
 #include "separateHeaderFor_C_5F_canMessageFromTask.h"
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_canMessageFromTask_2D_weak weak reference class
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_C_5F_canMessageFromTask_2D_weak : public GALGAS_AC_5F_canMessage_2D_weak {
+//--------------------------------- Default constructor
+  public: GALGAS_C_5F_canMessageFromTask_2D_weak (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public: static GALGAS_C_5F_canMessageFromTask_2D_weak constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GALGAS_C_5F_canMessageFromTask_2D_weak (const class GALGAS_C_5F_canMessageFromTask & inSource) ;
+
+  public: GALGAS_C_5F_canMessageFromTask_2D_weak & operator = (const class GALGAS_C_5F_canMessageFromTask & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GALGAS_C_5F_canMessageFromTask bang_C_5F_canMessageFromTask_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_C_5F_canMessageFromTask_2D_weak extractObject (const GALGAS_object & inObject,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public: static class GALGAS_C_5F_canMessageFromTask_2D_weak constructor_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromTask_2D_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_C_5F_canMessageFromTask_2D_weak class
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromTask_2D_weak ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -1152,24 +1395,54 @@ class cMapElement_M_5F_messages : public cMapElement {
 class GALGAS_M_5F_messages_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public: GALGAS_lstring mProperty_lkey ;
+  public: inline GALGAS_lstring readProperty_lkey (void) const {
+    return mProperty_lkey ;
+  }
 
   public: GALGAS_uint mProperty_mIndex ;
+  public: inline GALGAS_uint readProperty_mIndex (void) const {
+    return mProperty_mIndex ;
+  }
 
   public: GALGAS_luint mProperty_mClass ;
+  public: inline GALGAS_luint readProperty_mClass (void) const {
+    return mProperty_mClass ;
+  }
 
   public: GALGAS_uint mProperty_mNetworkIndex ;
+  public: inline GALGAS_uint readProperty_mNetworkIndex (void) const {
+    return mProperty_mNetworkIndex ;
+  }
 
   public: GALGAS_luint mProperty_mBytesCount ;
+  public: inline GALGAS_luint readProperty_mBytesCount (void) const {
+    return mProperty_mBytesCount ;
+  }
 
   public: GALGAS_luint mProperty_mPriority ;
+  public: inline GALGAS_luint readProperty_mPriority (void) const {
+    return mProperty_mPriority ;
+  }
 
   public: GALGAS_luint mProperty_mOffset ;
+  public: inline GALGAS_luint readProperty_mOffset (void) const {
+    return mProperty_mOffset ;
+  }
 
   public: GALGAS_luint mProperty_mDeadline ;
+  public: inline GALGAS_luint readProperty_mDeadline (void) const {
+    return mProperty_mDeadline ;
+  }
 
   public: GALGAS_luint mProperty_mPeriod ;
+  public: inline GALGAS_luint readProperty_mPeriod (void) const {
+    return mProperty_mPeriod ;
+  }
 
   public: GALGAS_AC_5F_canMessage mProperty_mMessageKind ;
+  public: inline GALGAS_AC_5F_canMessage readProperty_mMessageKind (void) const {
+    return mProperty_mMessageKind ;
+  }
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -1269,26 +1542,6 @@ class GALGAS_M_5F_messages_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mBytesCount (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mClass (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mDeadline (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mIndex (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_AC_5F_canMessage getter_mMessageKind (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mNetworkIndex (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mOffset (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mPeriod (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mPriority (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -1304,20 +1557,23 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages_2D_el
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @AC_5F_task class
+// Phase 1: @AC_5F_task reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_AC_5F_task : public AC_GALGAS_class {
-//--- Constructor
+class GALGAS_AC_5F_task : public AC_GALGAS_reference_class {
+//--------------------------------- Default constructor
   public: GALGAS_AC_5F_task (void) ;
 
-//---
-  public: inline const class cPtr_AC_5F_task * ptr (void) const { return (const cPtr_AC_5F_task *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_AC_5F_task (const cPtr_AC_5F_task * inSourcePtr) ;
+  public: GALGAS_AC_5F_task (const class cPtr_AC_5F_task * inSourcePtr) ;
 
+//--------------------------------- Property read access
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -1354,23 +1610,82 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_task ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @C_5F_independantTask class
+// Phase 1: @AC_5F_task_2D_weak weak reference class
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_AC_5F_task_2D_weak : public AC_GALGAS_weak_reference {
+//--------------------------------- Default constructor
+  public: GALGAS_AC_5F_task_2D_weak (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public: static GALGAS_AC_5F_task_2D_weak constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GALGAS_AC_5F_task_2D_weak (const class GALGAS_AC_5F_task & inSource) ;
+
+  public: GALGAS_AC_5F_task_2D_weak & operator = (const class GALGAS_AC_5F_task & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GALGAS_AC_5F_task bang_AC_5F_task_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_AC_5F_task_2D_weak extractObject (const GALGAS_object & inObject,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public: static class GALGAS_AC_5F_task_2D_weak constructor_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: typeComparisonResult objectCompare (const GALGAS_AC_5F_task_2D_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_AC_5F_task_2D_weak class
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_task_2D_weak ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_independantTask reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_C_5F_independantTask : public GALGAS_AC_5F_task {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_C_5F_independantTask (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_C_5F_independantTask constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_C_5F_independantTask * ptr (void) const { return (const cPtr_C_5F_independantTask *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_C_5F_independantTask (const cPtr_C_5F_independantTask * inSourcePtr) ;
+  public: GALGAS_C_5F_independantTask (const class cPtr_C_5F_independantTask * inSourcePtr) ;
 
+//--------------------------------- Property read access
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -1407,6 +1722,62 @@ class GALGAS_C_5F_independantTask : public GALGAS_AC_5F_task {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_independantTask ;
 
 #include "separateHeaderFor_C_5F_independantTask.h"
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_independantTask_2D_weak weak reference class
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_C_5F_independantTask_2D_weak : public GALGAS_AC_5F_task_2D_weak {
+//--------------------------------- Default constructor
+  public: GALGAS_C_5F_independantTask_2D_weak (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public: static GALGAS_C_5F_independantTask_2D_weak constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GALGAS_C_5F_independantTask_2D_weak (const class GALGAS_C_5F_independantTask & inSource) ;
+
+  public: GALGAS_C_5F_independantTask_2D_weak & operator = (const class GALGAS_C_5F_independantTask & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GALGAS_C_5F_independantTask bang_C_5F_independantTask_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_C_5F_independantTask_2D_weak extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public: static class GALGAS_C_5F_independantTask_2D_weak constructor_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: typeComparisonResult objectCompare (const GALGAS_C_5F_independantTask_2D_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_C_5F_independantTask_2D_weak class
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_independantTask_2D_weak ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -1682,24 +2053,54 @@ class cMapElement_M_5F_tasks : public cMapElement {
 class GALGAS_M_5F_tasks_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public: GALGAS_lstring mProperty_lkey ;
+  public: inline GALGAS_lstring readProperty_lkey (void) const {
+    return mProperty_lkey ;
+  }
 
   public: GALGAS_uint mProperty_mIndex ;
+  public: inline GALGAS_uint readProperty_mIndex (void) const {
+    return mProperty_mIndex ;
+  }
 
   public: GALGAS_luint mProperty_mPriority ;
+  public: inline GALGAS_luint readProperty_mPriority (void) const {
+    return mProperty_mPriority ;
+  }
 
   public: GALGAS_luint mProperty_mOffset ;
+  public: inline GALGAS_luint readProperty_mOffset (void) const {
+    return mProperty_mOffset ;
+  }
 
   public: GALGAS_luint mProperty_mDeadline ;
+  public: inline GALGAS_luint readProperty_mDeadline (void) const {
+    return mProperty_mDeadline ;
+  }
 
   public: GALGAS_luint mProperty_mDurationMin ;
+  public: inline GALGAS_luint readProperty_mDurationMin (void) const {
+    return mProperty_mDurationMin ;
+  }
 
   public: GALGAS_luint mProperty_mDurationMax ;
+  public: inline GALGAS_luint readProperty_mDurationMax (void) const {
+    return mProperty_mDurationMax ;
+  }
 
   public: GALGAS_uint mProperty_mProcessor ;
+  public: inline GALGAS_uint readProperty_mProcessor (void) const {
+    return mProperty_mProcessor ;
+  }
 
   public: GALGAS_luint mProperty_mPeriod ;
+  public: inline GALGAS_luint readProperty_mPeriod (void) const {
+    return mProperty_mPeriod ;
+  }
 
   public: GALGAS_AC_5F_task mProperty_mTaskKind ;
+  public: inline GALGAS_AC_5F_task readProperty_mTaskKind (void) const {
+    return mProperty_mTaskKind ;
+  }
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -1799,26 +2200,6 @@ class GALGAS_M_5F_tasks_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mDeadline (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mDurationMax (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mDurationMin (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mIndex (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mOffset (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mPeriod (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mPriority (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mProcessor (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_AC_5F_task getter_mTaskKind (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -1891,22 +2272,29 @@ class cParser_oa_5F_parser {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @C_5F_taskDependsFromMessage class
+// Phase 1: @C_5F_taskDependsFromMessage reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_C_5F_taskDependsFromMessage : public GALGAS_AC_5F_task {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_C_5F_taskDependsFromMessage (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_C_5F_taskDependsFromMessage constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_C_5F_taskDependsFromMessage * ptr (void) const { return (const cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_C_5F_taskDependsFromMessage (const cPtr_C_5F_taskDependsFromMessage * inSourcePtr) ;
+  public: GALGAS_C_5F_taskDependsFromMessage (const class cPtr_C_5F_taskDependsFromMessage * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_uint readProperty_mMessage (void) const ;
+
+  public: class GALGAS_luint readProperty_mEvery (void) const ;
 
 //-- Start of generic part --*
 
@@ -1938,10 +2326,6 @@ class GALGAS_C_5F_taskDependsFromMessage : public GALGAS_AC_5F_task {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mEvery (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mMessage (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -1959,22 +2343,29 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFro
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @C_5F_taskDependsFromTask class
+// Phase 1: @C_5F_taskDependsFromTask reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_C_5F_taskDependsFromTask : public GALGAS_AC_5F_task {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_C_5F_taskDependsFromTask (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_C_5F_taskDependsFromTask constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_C_5F_taskDependsFromTask * ptr (void) const { return (const cPtr_C_5F_taskDependsFromTask *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_C_5F_taskDependsFromTask (const cPtr_C_5F_taskDependsFromTask * inSourcePtr) ;
+  public: GALGAS_C_5F_taskDependsFromTask (const class cPtr_C_5F_taskDependsFromTask * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_uint readProperty_mTask (void) const ;
+
+  public: class GALGAS_luint readProperty_mEvery (void) const ;
 
 //-- Start of generic part --*
 
@@ -2006,10 +2397,6 @@ class GALGAS_C_5F_taskDependsFromTask : public GALGAS_AC_5F_task {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_luint getter_mEvery (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mTask (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -2037,6 +2424,118 @@ void routine_performComputations (class GALGAS_M_5F_processor & ioArgument0,
                                   class GALGAS_M_5F_tasks & ioArgument3,
                                   class C_Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_taskDependsFromTask_2D_weak weak reference class
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_C_5F_taskDependsFromTask_2D_weak : public GALGAS_AC_5F_task_2D_weak {
+//--------------------------------- Default constructor
+  public: GALGAS_C_5F_taskDependsFromTask_2D_weak (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public: static GALGAS_C_5F_taskDependsFromTask_2D_weak constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GALGAS_C_5F_taskDependsFromTask_2D_weak (const class GALGAS_C_5F_taskDependsFromTask & inSource) ;
+
+  public: GALGAS_C_5F_taskDependsFromTask_2D_weak & operator = (const class GALGAS_C_5F_taskDependsFromTask & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GALGAS_C_5F_taskDependsFromTask bang_C_5F_taskDependsFromTask_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_C_5F_taskDependsFromTask_2D_weak extractObject (const GALGAS_object & inObject,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public: static class GALGAS_C_5F_taskDependsFromTask_2D_weak constructor_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: typeComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromTask_2D_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_C_5F_taskDependsFromTask_2D_weak class
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFromTask_2D_weak ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @C_5F_taskDependsFromMessage_2D_weak weak reference class
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_C_5F_taskDependsFromMessage_2D_weak : public GALGAS_AC_5F_task_2D_weak {
+//--------------------------------- Default constructor
+  public: GALGAS_C_5F_taskDependsFromMessage_2D_weak (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public: static GALGAS_C_5F_taskDependsFromMessage_2D_weak constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GALGAS_C_5F_taskDependsFromMessage_2D_weak (const class GALGAS_C_5F_taskDependsFromMessage & inSource) ;
+
+  public: GALGAS_C_5F_taskDependsFromMessage_2D_weak & operator = (const class GALGAS_C_5F_taskDependsFromMessage & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GALGAS_C_5F_taskDependsFromMessage bang_C_5F_taskDependsFromMessage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_C_5F_taskDependsFromMessage_2D_weak extractObject (const GALGAS_object & inObject,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public: static class GALGAS_C_5F_taskDependsFromMessage_2D_weak constructor_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: typeComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromMessage_2D_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_C_5F_taskDependsFromMessage_2D_weak class
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFromMessage_2D_weak ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //  GRAMMAR oa_grammar

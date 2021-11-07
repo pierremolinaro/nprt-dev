@@ -1,10 +1,10 @@
 //----------------------------------------------------------------------------------------------------------------------
 //
-//  acPtr_class : Base class for GALGAS class                                                    
+//  AC_GALGAS_reference_class : base class for reference class objects
 //
-//  This file is part of libpm library                                                           
+//  This file is part of libpm library
 //
-//  Copyright (C) 2008, ..., 2011 Pierre Molinaro.
+//  Copyright (C) 2021, ..., 2021 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -22,27 +22,45 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 
-#include "utilities/C_SharedObject.h"
-#include "galgas2/typeComparisonResult.h"
+#include "galgas2/AC_GALGAS_root.h"
 
 //----------------------------------------------------------------------------------------------------------------------
 
 class C_String ;
 class C_galgas_type_descriptor ;
+class acPtr_class ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
-class acPtr_class : public C_SharedObject {
-  public: acPtr_class (LOCATION_ARGS) ;
+class AC_GALGAS_reference_class : public AC_GALGAS_root { // AC_GALGAS_reference_class est une classe abstraite
+//--- Properties
+  protected: acPtr_class * mObjectPtr ;
+  public: inline const acPtr_class * ptr (void) const { return mObjectPtr ; }
+
+//--- Default constructor
+  protected: AC_GALGAS_reference_class (void) ;
+  
+//--- Constructor from pointer
+  protected: AC_GALGAS_reference_class (const acPtr_class * inPointer) ;
+  
+//--- Destructor
+  protected: virtual ~ AC_GALGAS_reference_class (void) ;
+
+//--- Is valid
+  public: virtual bool isValid (void) const { return NULL != mObjectPtr ; }
+  
+//--- Drop
+  public: virtual void drop (void) ;
+  
+//--- Handle copy
+  protected: AC_GALGAS_reference_class (const AC_GALGAS_reference_class & inSource) ;
+  protected: AC_GALGAS_reference_class & operator = (const AC_GALGAS_reference_class & inSource) ;
+  
+//--- Dynamic Type Descriptor
+  public: virtual const C_galgas_type_descriptor * dynamicTypeDescriptor (void) const ;
 
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const = 0 ;
-
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const = 0 ;
-
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const = 0 ;
-
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const = 0 ;
+                                    const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------

@@ -1,10 +1,8 @@
 //----------------------------------------------------------------------------------------------------------------------
 //
-//  Built-in GALGAS Command Line Interface Options
-//
 //  This file is part of libpm library
 //
-//  Copyright (C) 2015, ..., 2021 Pierre Molinaro.
+//  Copyright (C) 2021, ..., 2021 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,22 +16,21 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-#include "galgas2/C_galgas_verbose_option.h"
-#include "galgas2/F_verbose_output.h"
+#import <Cocoa/Cocoa.h>
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_BoolCommandLineOption gOption_galgas_5F_builtin_5F_options_verbose_5F_output ("galgas_builtin_options",
-                                                                                "verbose_output",
-                                                                                'v',
-                                                                                "verbose",
-                                                                                "Verbose Output",
-                                                                                false) ; // Not visible in GALGAS
-
-//----------------------------------------------------------------------------------------------------------------------
-
-bool verboseOutput (void) {
-  return gOption_galgas_5F_builtin_5F_options_verbose_5F_output.readProperty_value () ;
+@interface OC_GGS_ColorTransformer : NSValueTransformer {
 }
+
++ (Class) transformedValueClass ;
+
++ (BOOL) allowsReverseTransformation ;
+
+- (NSColor *) transformedValue: (NSData *) inValue ;
+
+- (NSData *) reverseTransformedValue: (NSColor *) inValue ;
+
+@end
 
 //----------------------------------------------------------------------------------------------------------------------

@@ -380,7 +380,8 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
 // §    element.mEvery = 1 ;
     int32_t Sca = Resource (element.mResourceId COMMA_HERE).mStep ;
 //    printf (" Sca : %ld \n",Sca);
-    element.mEvery = (int32_t) task.current_mTaskKind (HERE).ptr ()->getTaskEveryParameter () ;
+    auto p = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
+    element.mEvery = (int32_t) p->getTaskEveryParameter () ;
   	element.mOffset = Sca*(int32_t) task.current_mOffset (HERE).mProperty_uint.uintValue ();  
     element.mMaxDuration = Sca*(int32_t) task.current_mDurationMax (HERE).mProperty_uint.uintValue (); 
     element.mMinDuration = useCANmaxLengthOnly
@@ -390,29 +391,32 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     if ( element.mDeadline !=  INT32_MAX){ // PMUINT32_MAX -> INT32_MAX by PM, 17/1/2005
     	 element.mDeadline = Sca*element.mDeadline;
     }  
- //................................................   
-    if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnTask ()) {
-    	int32_t elementIndex = (int32_t) task.current_mTaskKind (HERE).ptr ()->getTaskDependanceValue ();
-    	element.mEveryMultiple = 
-    		 (int32_t) task.current_mTaskKind (HERE).ptr ()->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
+ //................................................
+    auto ptr = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
+    if (ptr->taskDependsOnTask ()) {
+    	int32_t elementIndex = (int32_t) ptr->getTaskDependanceValue ();
+      auto q = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
+    	element.mEveryMultiple =
+    		 (int32_t) q->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple;
    		element.mPeriod = Sca*(int32_t) task.current_mPeriod (HERE).mProperty_uint.uintValue ();
-    } else if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnMessage ()){
+    } else if (ptr->taskDependsOnMessage ()){
     
     }else{
-    	element.mEveryMultiple = (int32_t) task.current_mTaskKind (HERE).ptr ()->getTaskEveryParameter () ;
+      auto q = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
+    	element.mEveryMultiple = (int32_t) q->getTaskEveryParameter () ;
     	element.mPeriod = Sca*(int32_t) task.current_mPeriod (HERE).mProperty_uint.uintValue ();
     }
  //................................................
-  	if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnTask ()) {
+  	if (ptr->taskDependsOnTask ()) {
       element.mIsIndependant=false ;
     	element.mPredecessorType = 'T'; 
       element.mPredecessorId = 
-      int32_t (task.current_mTaskKind (HERE).ptr ()->getTaskDependanceValue ());
-    }else if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnMessage ()) {
+      int32_t (ptr->getTaskDependanceValue ());
+    }else if (ptr->taskDependsOnMessage ()) {
       element.mIsIndependant=false ;
     	element.mPredecessorType = 'M'; 
       element.mPredecessorId = 
-      int32_t (task.current_mTaskKind (HERE).ptr ()->getTaskDependanceValue ()) ;
+      int32_t (ptr->getTaskDependanceValue ()) ;
     }else{ 
     	element.mIsIndependant=true ;
     }
@@ -482,28 +486,28 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     }  
  //...........................................................................
     int32_t elementIndex ;
-   if (message.current_mMessageKind (HERE).ptr ()->messageDependsOnTask ()) {
-   	 elementIndex = (int32_t) message.current_mMessageKind (HERE).ptr ()->getMessageDependanceValue ();
+    auto ptr = (const cPtr_AC_5F_canMessage *) message.current_mMessageKind (HERE).ptr () ;
+   if (ptr->messageDependsOnTask ()) {
+   	 elementIndex = (int32_t) ptr->getMessageDependanceValue ();
      element.mEveryMultiple = Element (elementIndex COMMA_HERE).mEveryMultiple ;  
      element.mPeriod = Element (elementIndex COMMA_HERE).mPeriod ; 
-   }else if (message.current_mMessageKind (HERE).ptr ()->messageDependsOnMessage ()) {
-     elementIndex = (int32_t) message.current_mMessageKind (HERE).ptr ()->getMessageDependanceValue () + NumberOfTasks ;
+   }else if (ptr->messageDependsOnMessage ()) {
+     elementIndex = (int32_t) ptr->getMessageDependanceValue () + NumberOfTasks ;
      element.mEveryMultiple = Element (elementIndex COMMA_HERE).mEveryMultiple; 
      element.mPeriod = Element (elementIndex COMMA_HERE).mPeriod ;
-   } else{
+   }else{
    	 element.mEveryMultiple = 1;
-   	  element.mPeriod = ScalingFactor * (int32_t) message.current_mPeriod (HERE).mProperty_uint.uintValue ();
+     element.mPeriod = ScalingFactor * (int32_t) message.current_mPeriod (HERE).mProperty_uint.uintValue ();
    }
  //.................................................................................   
-  	if (message.current_mMessageKind (HERE).ptr ()->messageDependsOnTask ()) {
+  	if (ptr->messageDependsOnTask ()) {
       element.mIsIndependant=false ;
     	element.mPredecessorType = 'T'; 
-      element.mPredecessorId = 
-         (int32_t) message.current_mMessageKind (HERE).ptr ()->getMessageDependanceValue ();
-    }else if (message.current_mMessageKind (HERE).ptr ()->messageDependsOnMessage ()) {
+      element.mPredecessorId = (int32_t) ptr->getMessageDependanceValue ();
+    }else if (ptr->messageDependsOnMessage ()) {
     	element.mIsIndependant=false ;
     	element.mPredecessorType = 'M'; 
-      element.mPredecessorId = (int32_t) message.current_mMessageKind (HERE).ptr ()->getMessageDependanceValue () ;
+      element.mPredecessorId = (int32_t) ptr->getMessageDependanceValue () ;
     }else{ 
     	element.mIsIndependant=true ;
     }
@@ -546,10 +550,12 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     htmlFile << cStringWithUnsigned (task.current_mDurationMax (HERE).mProperty_uint.uintValue ()) ;
     htmlFile.outputRawData ("</td><td>") ;
 //....................................................................   
-    if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnMessage ()) {
-    	int32_t elementIndex = (int32_t) task.current_mTaskKind (HERE).ptr ()->getTaskDependanceValue () + NumberOfTasks ;
-    	Element (index-1 COMMA_HERE).mEveryMultiple = 
-    		 (int32_t) task.current_mTaskKind (HERE).ptr ()->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple; 
+    auto ptr = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
+    if (ptr->taskDependsOnMessage ()) {
+    	int32_t elementIndex = (int32_t) ptr->getTaskDependanceValue () + NumberOfTasks ;
+      auto q = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
+    	Element (index-1 COMMA_HERE).mEveryMultiple =
+    		 (int32_t) q->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple;
     	Element (index-1 COMMA_HERE).mPeriod = Element (elementIndex COMMA_HERE).mPeriod  ;
     }
  //...................................................................
@@ -564,17 +570,18 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
      	htmlFile << cStringWithUnsigned (task.current_mDeadline (HERE).mProperty_uint.uintValue ()) ;
     	htmlFile.outputRawData ("</td><td>") ;
     }
-    if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnTask ()) {
+    ptr = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
+    if (ptr->taskDependsOnTask ()) {
       htmlFile.outputRawData ("task #") ;
-      htmlFile << cStringWithUnsigned (task.current_mTaskKind (HERE).ptr ()->getTaskDependanceValue ()+1) ;
-    }else if (task.current_mTaskKind (HERE).ptr ()->taskDependsOnMessage ()) {
+      htmlFile << cStringWithUnsigned (ptr->getTaskDependanceValue ()+1) ;
+    }else if (ptr->taskDependsOnMessage ()) {
       htmlFile.outputRawData ("message #") ;
-      htmlFile << cStringWithUnsigned (task.current_mTaskKind (HERE).ptr ()->getTaskDependanceValue ()+1) ;
+      htmlFile << cStringWithUnsigned (ptr->getTaskDependanceValue ()+1) ;
     }else{
     	htmlFile.outputRawData (" ---") ;
     }
      htmlFile.outputRawData ("</td><td>") ;
-     htmlFile << cStringWithUnsigned (task.current_mTaskKind (HERE).ptr ()->getTaskEveryParameter ()) ;
+     htmlFile << cStringWithUnsigned (ptr->getTaskEveryParameter ()) ;
       
     htmlFile.outputRawData ("</td></tr>") ;
     task.gotoNextObject () ;
@@ -635,12 +642,13 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
      	htmlFile << cStringWithUnsigned (message.current_mDeadline (HERE).mProperty_uint.uintValue ()) ;
     	htmlFile.outputRawData ("</td><td>") ;
     }
-   	if (message.current_mMessageKind (HERE).ptr ()->messageDependsOnTask ()) {
+    auto ptr = (const cPtr_AC_5F_canMessage *) message.current_mMessageKind (HERE).ptr () ;
+   	if (ptr->messageDependsOnTask ()) {
     	htmlFile.outputRawData ("task #") ;
-     	htmlFile << cStringWithUnsigned (message.current_mMessageKind (HERE).ptr ()->getMessageDependanceValue ()+1) ;
-    }else if (message.current_mMessageKind (HERE).ptr ()->messageDependsOnMessage ()) {
+     	htmlFile << cStringWithUnsigned (ptr->getMessageDependanceValue ()+1) ;
+    }else if (ptr->messageDependsOnMessage ()) {
     	htmlFile.outputRawData ("message # ") ;
- 	   	htmlFile << cStringWithUnsigned (message.current_mMessageKind (HERE).ptr ()->getMessageDependanceValue ()+1) ;
+ 	   	htmlFile << cStringWithUnsigned (ptr->getMessageDependanceValue ()+1) ;
     }else{
     	htmlFile.outputRawData (" ---") ;
     }

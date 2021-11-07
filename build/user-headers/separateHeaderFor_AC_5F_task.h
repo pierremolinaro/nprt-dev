@@ -8,7 +8,7 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class cPtr_AC_5F_task : public acPtr_class {
+class cPtr_AC_5F_task : public acStrongPtr_class {
 //--- START OF USER ZONE 2
 
   public : virtual bool taskDependsOnTask (void) const = 0 ;
@@ -17,7 +17,7 @@ class cPtr_AC_5F_task : public acPtr_class {
   public : virtual uint32_t getTaskEveryParameter (void) const = 0 ;
 
 //--- END OF USER ZONE 2
-//--- Attributes
+//--- Properties
 
 //--- Constructor
   public: cPtr_AC_5F_task (LOCATION_ARGS) ;

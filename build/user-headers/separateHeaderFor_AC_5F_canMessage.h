@@ -8,7 +8,7 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class cPtr_AC_5F_canMessage : public acPtr_class {
+class cPtr_AC_5F_canMessage : public acStrongPtr_class {
 //--- START OF USER ZONE 2
 
   public : virtual bool messageDependsOnTask (void) const = 0 ;
@@ -16,7 +16,7 @@ class cPtr_AC_5F_canMessage : public acPtr_class {
   public : virtual uint32_t getMessageDependanceValue (void) const = 0 ;
 
 //--- END OF USER ZONE 2
-//--- Attributes
+//--- Properties
 
 //--- Constructor
   public: cPtr_AC_5F_canMessage (LOCATION_ARGS) ;

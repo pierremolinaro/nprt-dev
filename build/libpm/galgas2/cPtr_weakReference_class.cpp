@@ -1,10 +1,10 @@
 //----------------------------------------------------------------------------------------------------------------------
 //
-//  Built-in GALGAS Command Line Interface Options
+//  cPtr_weakReference_class : Base class for reference class class
 //
 //  This file is part of libpm library
 //
-//  Copyright (C) 2015, ..., 2021 Pierre Molinaro.
+//  Copyright (C) 2021, ..., 2021 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,22 +18,40 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-#include "galgas2/C_galgas_verbose_option.h"
-#include "galgas2/F_verbose_output.h"
+#include "galgas2/cPtr_weakReference_class.h"
+#include "galgas2/acStrongPtr_class.h"
+#include "strings/C_String.h"
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_BoolCommandLineOption gOption_galgas_5F_builtin_5F_options_verbose_5F_output ("galgas_builtin_options",
-                                                                                "verbose_output",
-                                                                                'v',
-                                                                                "verbose",
-                                                                                "Verbose Output",
-                                                                                false) ; // Not visible in GALGAS
+cPtr_weakReference_class::cPtr_weakReference_class (LOCATION_ARGS) :
+acPtr_class (THERE),
+mStrongObject (NULL) {
+}
 
 //----------------------------------------------------------------------------------------------------------------------
 
-bool verboseOutput (void) {
-  return gOption_galgas_5F_builtin_5F_options_verbose_5F_output.readProperty_value () ;
+cPtr_weakReference_class::~ cPtr_weakReference_class (void) {
+  if (mStrongObject != NULL) {
+    mStrongObject->mProxy = NULL ;
+    mStrongObject = NULL ;
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * cPtr_weakReference_class::classDescriptor (void) const {
+  const C_galgas_type_descriptor * result = NULL ;
+  if (mStrongObject != NULL) {
+    result = mStrongObject->classDescriptor () ;
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+acPtr_class * cPtr_weakReference_class::duplicate (UNUSED_LOCATION_ARGS) const {
+  return NULL ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
