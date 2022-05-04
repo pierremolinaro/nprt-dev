@@ -17,9 +17,8 @@ rule <axiome> {
   repeat
   while
     $processor$
-    var @lstring processorName
-    $identifier$ ? processorName
-    var @luint step
+    $identifier$ ?let processorName
+    let @luint step
     select
      step = @luint. new { !1 !@location.here}
     or
@@ -32,7 +31,7 @@ rule <axiome> {
     [!?outProcessorMap insertKey !processorName ![outProcessorMap count] !step]
     $;$
   while
-    var @bool network
+    let @bool network
     select
       $can$
       network = true
@@ -41,9 +40,8 @@ rule <axiome> {
       network = false
     end
     $network$
-    var @lstring networkName
-    $identifier$ ? networkName
-    var @luint factor
+    $identifier$ ?let networkName
+    let @luint factor
     select
      factor = @luint. new { !1 !@location.here}
     or
@@ -57,19 +55,15 @@ rule <axiome> {
     $;$
   while
     $task$
-    var @lstring taskName
-    $identifier$ ? taskName
+    $identifier$ ?let taskName
     $priority$
-    var @luint taskPriority
-    $literal_integer$ ? taskPriority
+    $literal_integer$ ?let taskPriority
     $duration$
-    var @luint taskDurationMin
-    $literal_integer$ ? taskDurationMin
+    $literal_integer$ ?let taskDurationMin
     $..$
-    var @luint taskDurationMax
-    $literal_integer$ ? taskDurationMax
-    var @luint taskOffset
-    var @bool explicitOffset
+    $literal_integer$ ?let taskDurationMax
+    let @luint taskOffset
+    let @bool explicitOffset
     select
       $offset$
       $literal_integer$ ? taskOffset
@@ -78,22 +72,21 @@ rule <axiome> {
       taskOffset = @luint. new { !0 ! @location.here}
       explicitOffset = false
     end
-    var @luint taskDeadline
+    let @luint taskDeadline
     select
       $deadline$
       $literal_integer$ ? taskDeadline
     or
       taskDeadline = @luint. new { !4294967295 !@location.here}
     end
-    var @AC_task taskKind
-    var @uint taskProcessorIndex
-    var @luint taskPeriod
+    let @AC_task taskKind
+    let @uint taskProcessorIndex
+    let @luint taskPeriod
     select
       $period$
       $literal_integer$ ? taskPeriod
       $processor$
-      var @lstring taskProcessorName
-      $identifier$ ? taskProcessorName
+      $identifier$ ?let taskProcessorName
       [outProcessorMap searchKey !taskProcessorName ?taskProcessorIndex ?*]
       taskKind = @C_independantTask. new
     or
@@ -103,28 +96,23 @@ rule <axiome> {
       end
       select
         $task$
-        var @lstring masterTaskName
-        $identifier$ ? masterTaskName
-        var @luint every
+        $identifier$ ?let masterTaskName
+        let @luint every
         select
           every = @luint. new { !1 !@location.here}
         or
           $every$
           $literal_integer$ ? every
         end
-        var @uint masterTaskIndex
-        [outTaskMap searchKey !masterTaskName ?masterTaskIndex ?* ?* ?* ?* ?* ?taskProcessorIndex ?taskPeriod ?*]
+        [outTaskMap searchKey !masterTaskName ?let masterTaskIndex ?* ?* ?* ?* ?* ?taskProcessorIndex ?taskPeriod ?*]
         taskKind = @C_taskDependsFromTask. new { !masterTaskIndex !every}
       or
         $message$
-        var @lstring masterMessageName
-        $identifier$ ? masterMessageName
-        var @uint masterMessageIndex
-        [outMessagesMap searchKey !masterMessageName ?masterMessageIndex ?* ?* ?* ?* ?* ?* ?taskPeriod ?*]
+        $identifier$ ?let masterMessageName
+        [outMessagesMap searchKey !masterMessageName ?let masterMessageIndex ?* ?* ?* ?* ?* ?* ?taskPeriod ?*]
         $processor$
-        var @lstring taskProcessorName
-        $identifier$ ? taskProcessorName
-        var @luint every
+        $identifier$ ?let taskProcessorName
+        let @luint every
         select
           every = @luint. new { !1 !@location.here}
         or
@@ -146,7 +134,7 @@ rule <axiome> {
                                         !taskKind]
     $;$
   while
-    var @luint messageClass
+    let @luint messageClass
     select
       $standard$
       messageClass = @luint. new { !0 !@location.here}
@@ -159,32 +147,26 @@ rule <axiome> {
       $message$
       messageClass = @luint. new { !2 !@location.here}
     end
-    var @lstring messageName
-    $identifier$ ? messageName
+    $identifier$ ?let messageName
     $network$
-    var @lstring networkName
-    $identifier$ ? networkName
-    var @uint networkIndex
-    var @bool CANnetwork
-    [outNetworkMap searchKey !networkName ?networkIndex ?CANnetwork ?*]
+    $identifier$ ?let networkName
+    [outNetworkMap searchKey !networkName ?let networkIndex ?let CANnetwork ?*]
     if CANnetwork & (messageClass.uint == 2) then
       error messageClass : "a CAN message must be either standard either extended"
     elsif (not CANnetwork) & (messageClass.uint != 2) then
       error messageClass : "a VAN message cannot be standard or extended"
     end
     $length$
-    var @luint bytesCount
-    $literal_integer$ ? bytesCount
+    $literal_integer$ ?let bytesCount
     if CANnetwork & (bytesCount.uint > 8) then
       error bytesCount : "CAN message length must be <= 8 bytes"
     elsif (not CANnetwork) & (bytesCount.uint > 28) then
       error bytesCount : "VAN message must be <= 28 bytes"
     end
     $priority$
-    var @luint priority
-    $literal_integer$ ? priority
-    var @luint offset
-    var @bool explicitOffset
+    $literal_integer$ ?let priority
+    let @luint offset
+    let @bool explicitOffset
     select
       $offset$
       $literal_integer$ ? offset
@@ -193,15 +175,15 @@ rule <axiome> {
       offset = @luint. new { !0 !@location.here}
       explicitOffset = false
     end
-    var @luint deadline
+    let @luint deadline
     select
       $deadline$
       $literal_integer$ ? deadline
     or
       deadline = @luint. new { !4294967295 !@location.here}
     end
-    var @AC_canMessage messageKind
-    var @luint period
+    let @AC_canMessage messageKind
+    let @luint period
     select
       $period$
       $literal_integer$ ? period
@@ -213,17 +195,13 @@ rule <axiome> {
       end
       select
         $message$
-        var @lstring name
-        $identifier$ ? name
-        var @uint messageIndex
-        [outMessagesMap searchKey !name ?messageIndex ?* ?* ?* ?* ?* ?* ?period ?*]
+        $identifier$ ?let name
+        [outMessagesMap searchKey !name ?let messageIndex ?* ?* ?* ?* ?* ?* ?period ?*]
         messageKind = @C_canMessageFromMessage. new { !messageIndex}
       or
         $task$
-        var @lstring taskName
-        $identifier$ ? taskName
-        var @uint taskIndex
-        [outTaskMap searchKey !taskName ?taskIndex ?* ?* ?* ?* ?* ?* ?period ?*]
+        $identifier$ ?let taskName
+        [outTaskMap searchKey !taskName ?let taskIndex ?* ?* ?* ?* ?* ?* ?period ?*]
         messageKind = @C_canMessageFromTask. new { !taskIndex}
       end
     end
