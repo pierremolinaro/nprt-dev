@@ -8,5 +8,5 @@ case . "nprt"
 message "an '.nprt' source file"
 grammar oa_grammar
 ?sourceFilePath:@lstring inSourceFile {
-  grammar oa_grammar in inSourceFile
+  grammar oa_grammar () in inSourceFile
 }
