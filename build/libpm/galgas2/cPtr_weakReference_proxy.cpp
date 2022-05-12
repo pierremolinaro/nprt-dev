@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------------------------------------------------
 //
-//  cPtr_weakReference_class : Base class for reference class class
+//  cPtr_weakReference_proxy : Base class for reference class class
 //
 //  This file is part of libpm library
 //
@@ -18,39 +18,38 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-#include "galgas2/cPtr_weakReference_class.h"
+#include "galgas2/cPtr_weakReference_proxy.h"
 #include "galgas2/acStrongPtr_class.h"
 #include "strings/C_String.h"
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cPtr_weakReference_class::cPtr_weakReference_class (LOCATION_ARGS) :
+cPtr_weakReference_proxy::cPtr_weakReference_proxy (LOCATION_ARGS) :
 acPtr_class (THERE),
-mStrongObject (NULL) {
+mStrongObjectPtr (NULL) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cPtr_weakReference_class::~ cPtr_weakReference_class (void) {
-  if (mStrongObject != NULL) {
-    mStrongObject->mProxy = NULL ;
-    mStrongObject = NULL ;
+cPtr_weakReference_proxy::~ cPtr_weakReference_proxy (void) {
+  if (mStrongObjectPtr != NULL) {
+    mStrongObjectPtr->mProxyPtr = NULL ;
   }
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * cPtr_weakReference_class::classDescriptor (void) const {
+const C_galgas_type_descriptor * cPtr_weakReference_proxy::classDescriptor (void) const {
   const C_galgas_type_descriptor * result = NULL ;
-  if (mStrongObject != NULL) {
-    result = mStrongObject->classDescriptor () ;
+  if (mStrongObjectPtr != NULL) {
+    result = mStrongObjectPtr->classDescriptor () ;
   }
   return result ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_weakReference_class::duplicate (UNUSED_LOCATION_ARGS) const {
+acPtr_class * cPtr_weakReference_proxy::duplicate (UNUSED_LOCATION_ARGS) const {
   return NULL ;
 }
 
