@@ -558,10 +558,10 @@
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
   #endif
   [NSApp
-    beginSheet:mGotoWindow
-    modalForWindow:self.windowForSheet
+    beginSheet: mGotoWindow
+    modalForWindow: self.windowForSheet
     modalDelegate: self
-    didEndSelector: @selector (sheetDidEnd:returnCode:contextInfo:)
+    didEndSelector: @selector (gotoLineSheetDidEnd:returnCode:contextInfo:)
     contextInfo: nil
   ] ;
 }
@@ -581,7 +581,7 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-- (void) sheetDidEnd: (NSWindow *) inSheet
+- (void) gotoLineSheetDidEnd: (NSWindow *) inSheet
          returnCode: (int) inReturnCode
          contextInfo: (void *) inContextInfo {
   #ifdef DEBUG_MESSAGES
@@ -592,7 +592,7 @@
     const NSUInteger selectedLine = (NSUInteger) [mGotoLineTextField integerValue] ;
   //--- Goto selected line
     OC_GGS_TextDisplayDescriptor * selectedObject = [mSourceDisplayArrayControllerHigh.selectedObjects objectAtIndex:0] ;
-    [selectedObject gotoLine:selectedLine] ;
+    [selectedObject gotoLine: selectedLine] ;
   }
 }
 
@@ -1092,13 +1092,13 @@ static const utf32 COCOA_ERROR_ID   = TO_UNICODE (4) ;
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
   #endif
   mBuildTask = nil ;
-  [NSApp requestUserAttention:NSInformationalRequest] ;
-  if ((! mHasSpoken) && (mErrorCount >= 40)) {
-    mHasSpoken = YES ;
-    NSString * thePhrase = [NSString stringWithFormat:@"OOOOOOOh! %@ a fait %lu erreurs", NSFullUserName (), mErrorCount] ;
-    NSSpeechSynthesizer * speech = [[NSSpeechSynthesizer alloc] initWithVoice:nil] ;
-    [speech startSpeakingString:thePhrase] ;
-  }
+  [NSApp requestUserAttention: NSInformationalRequest] ;
+//  if ((! mHasSpoken) && (mErrorCount >= 40)) {
+//    mHasSpoken = YES ;
+//    NSString * thePhrase = [NSString stringWithFormat:@"OOOOOOOh! %@ a fait %lu erreurs", NSFullUserName (), mErrorCount] ;
+//    NSSpeechSynthesizer * speech = [[NSSpeechSynthesizer alloc] initWithVoice:nil] ;
+//    [speech startSpeakingString:thePhrase] ;
+//  }
 }
 
 //----------------------------------------------------------------------------------------------------------------------

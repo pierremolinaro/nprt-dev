@@ -7,16 +7,12 @@
 #import "PMDebug.h"
 
 //----------------------------------------------------------------------------------------------------------------------
-//            Unicode test functions                                                             
-//----------------------------------------------------------------------------------------------------------------------
- 
-//----------------------------------------------------------------------------------------------------------------------
 
 @implementation OC_Lexique_oa_scanner
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//                           Template Replacements                                               
+//                           Template Replacements
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -24,7 +20,7 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//                           Template Delimiters                                                 
+//                           Template Delimiters
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -35,8 +31,8 @@
   self = [super init] ;
   if (self) {
     noteObjectAllocation (self) ;
-    mLexicalAttribute_identifierString = [[NSMutableString alloc] init] ;
-    mLexicalAttribute_ulongValue = 0 ;
+   mLexicalAttribute_identifierString = [[NSMutableString alloc] init] ;
+   mLexicalAttribute_ulongValue = 0 ;
   }
   return self ;
 }
@@ -49,7 +45,7 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//                 I N D E X I N G    D I R E C T O R Y                                          
+//                 I N D E X I N G    D I R E C T O R Y
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -59,7 +55,7 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//                 I N D E X I N G    T I T L E S                                                
+//                 I N D E X I N G    T I T L E S
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -70,7 +66,7 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//            Terminal Symbols as end of script in template mark                                 
+//            Terminal Symbols as end of script in template mark
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -111,81 +107,92 @@ static NSInteger search_into_oa_5F_scanner_keyWordList (NSString * inSearchedStr
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//               P A R S E    L E X I C A L    T O K E N                                         
+//               I N T E R N A L    P A R S E    L E X I C A L    T O K E N
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+- (BOOL) internalParseLexicalTokenForLexicalColoring {
+  BOOL loop = YES ;
+  BOOL scanningOk = YES ;
+  [mLexicalAttribute_identifierString setString:@""] ;
+  mLexicalAttribute_ulongValue = 0 ;
+  mTokenStartLocation = mCurrentLocation ;
+  if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90])) {
+    do {
+      scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_identifierString, mPreviousChar) ;
+      if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputChar:95] || [self testForInputFromChar:48 toChar:57])) {
+      }else{
+        loop = NO ;
+      }
+    }while (loop && scanningOk) ;
+    loop = YES ;
+    if (mTokenCode == 0) {
+      mTokenCode = search_into_oa_5F_scanner_keyWordList (mLexicalAttribute_identifierString) ;
+    }
+    if (mTokenCode == 0) {
+      mTokenCode = oa_scanner_1_identifier ;
+    }
+  }else if (scanningOk && [self testForInputString:@".." advance:YES]) {
+    mTokenCode = oa_scanner_1__2E__2E_ ;
+  }else if (scanningOk && [self testForInputString:@";" advance:YES]) {
+    mTokenCode = oa_scanner_1__3B_ ;
+  }else if (scanningOk && [self testForInputString:@"," advance:YES]) {
+    mTokenCode = oa_scanner_1__2C_ ;
+  }else if (scanningOk && ([self testForInputFromChar:48 toChar:57])) {
+    scanner_cocoa_routine_enterDigitIntoUInt (& scanningOk, mPreviousChar, & mLexicalAttribute_ulongValue) ;
+    do {
+      if (scanningOk && ([self testForInputFromChar:48 toChar:57])) {
+        scanner_cocoa_routine_enterDigitIntoUInt (& scanningOk, mPreviousChar, & mLexicalAttribute_ulongValue) ;
+      }else if (scanningOk && ([self testForInputChar:95])) {
+      }else{
+        loop = NO ;
+      }
+    }while (loop && scanningOk) ;
+    loop = YES ;
+    mTokenCode = oa_scanner_1_literal_5F_integer ;
+  }else if (scanningOk && ([self testForInputFromChar:1 toChar:32])) {
+  }else if (scanningOk && ([self testForInputChar:35])) {
+    do {
+      if (scanningOk && ([self testForInputFromChar:1 toChar:9] || [self testForInputFromChar:11 toChar:126])) {
+      }else{
+        loop = NO ;
+      }
+    }while (loop && scanningOk) ;
+    loop = YES ;
+    if (scanningOk && ([self testForInputChar:10])) {
+    }else{
+      scanningOk = NO ;
+    }
+  }else   if ([self testForInputChar:'\0']) { // End of source text ?
+    mTokenCode = oa_scanner_1_ ; // Empty string code
+  }else{ // Unknown input character
+    scanningOk = NO ;
+    [self advance] ;
+  }
+  return scanningOk ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//               P A R S E    L E X I C A L    T O K E N
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 - (void) parseLexicalTokenForLexicalColoring {
-  mLoop = YES ;
   BOOL scanningOk = YES ;
   mTokenCode = 0 ;
   while ((mTokenCode == 0) && (mCurrentChar != '\0')) {
-    mTokenStartLocation = mCurrentLocation ;
-    [mLexicalAttribute_identifierString setString:@""] ;
-    mLexicalAttribute_ulongValue = 0 ;
-    mTokenStartLocation = mCurrentLocation ;
-    if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90])) {
-      do {
-        scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_identifierString, mPreviousChar) ;
-        if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputChar:95] || [self testForInputFromChar:48 toChar:57])) {
-        }else{
-          mLoop = NO ;
-        }
-      }while (mLoop && scanningOk) ;
-      mLoop = YES ;
-      if (mTokenCode == 0) {
-        mTokenCode = search_into_oa_5F_scanner_keyWordList (mLexicalAttribute_identifierString) ;
-      }
-      if (mTokenCode == 0) {
-        mTokenCode = oa_scanner_1_identifier ;
-      }
-    }else if (scanningOk && [self testForInputString:@".." advance:YES]) {
-      mTokenCode = oa_scanner_1__2E__2E_ ;
-    }else if (scanningOk && [self testForInputString:@";" advance:YES]) {
-      mTokenCode = oa_scanner_1__3B_ ;
-    }else if (scanningOk && [self testForInputString:@"," advance:YES]) {
-      mTokenCode = oa_scanner_1__2C_ ;
-    }else if (scanningOk && ([self testForInputFromChar:48 toChar:57])) {
-      scanner_cocoa_routine_enterDigitIntoUInt (& scanningOk, mPreviousChar, & mLexicalAttribute_ulongValue) ;
-      do {
-        if (scanningOk && ([self testForInputFromChar:48 toChar:57])) {
-          scanner_cocoa_routine_enterDigitIntoUInt (& scanningOk, mPreviousChar, & mLexicalAttribute_ulongValue) ;
-        }else if (scanningOk && ([self testForInputChar:95])) {
-        }else{
-          mLoop = NO ;
-        }
-      }while (mLoop && scanningOk) ;
-      mLoop = YES ;
-      mTokenCode = oa_scanner_1_literal_5F_integer ;
-    }else if (scanningOk && ([self testForInputFromChar:1 toChar:32])) {
-    }else if (scanningOk && ([self testForInputChar:35])) {
-      do {
-        if (scanningOk && ([self testForInputFromChar:1 toChar:9] || [self testForInputFromChar:11 toChar:126])) {
-        }else{
-          mLoop = NO ;
-        }
-      }while (mLoop && scanningOk) ;
-      mLoop = YES ;
-      if (scanningOk && ([self testForInputChar:10])) {
-      }else{
-        scanningOk = NO ;
-      }
-    }else if ([self testForInputChar:'\0']) { // End of source text ? 
-      mTokenCode = oa_scanner_1_ ; // Empty string code
-    }else{ // Unknown input character
-      scanningOk = NO ;
-      [self advance] ;
-    }
-  //--- Error ?
-    if (! scanningOk) {
-      mTokenCode = -1 ;
-    }
+    scanningOk = [self internalParseLexicalTokenForLexicalColoring] ;
+  }
+//--- Error ?
+  if (! scanningOk) {
+    mTokenCode = -1 ;
   }
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//                   T E R M I N A L    C O U N T                                                
+//                   T E R M I N A L    C O U N T
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -195,7 +202,7 @@ static NSInteger search_into_oa_5F_scanner_keyWordList (NSString * inSearchedStr
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//                     S T Y L E   C O U N T                                                     
+//                     S T Y L E   C O U N T
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -205,7 +212,7 @@ static NSInteger search_into_oa_5F_scanner_keyWordList (NSString * inSearchedStr
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//                I S    T E M P L A T E    L E X I Q U E                                        
+//                I S    T E M P L A T E    L E X I Q U E
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -215,7 +222,7 @@ static NSInteger search_into_oa_5F_scanner_keyWordList (NSString * inSearchedStr
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//   S T Y L E   I N D E X    F O R    T E R M I N A L                                           
+//   S T Y L E   I N D E X    F O R    T E R M I N A L
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -251,7 +258,7 @@ static NSInteger search_into_oa_5F_scanner_keyWordList (NSString * inSearchedStr
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//    A T O M I C    S E L E C T I O N   F O R    T E R M I N A L                                
+//    A T O M I C    S E L E C T I O N   F O R    T E R M I N A L
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -287,7 +294,7 @@ static NSInteger search_into_oa_5F_scanner_keyWordList (NSString * inSearchedStr
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//             S T Y L E   N A M E    F O R    I N D E X                                         
+//             S T Y L E   N A M E    F O R    I N D E X
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -308,7 +315,7 @@ static NSInteger search_into_oa_5F_scanner_keyWordList (NSString * inSearchedStr
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//         S T Y L E   I D E N T I F I E R    F O R    I N D E X                                 
+//         S T Y L E   I D E N T I F I E R    F O R    I N D E X
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -329,7 +336,7 @@ static NSInteger search_into_oa_5F_scanner_keyWordList (NSString * inSearchedStr
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//         L E X I Q U E   I D E N T I F I E R                                                   
+//         L E X I Q U E   I D E N T I F I E R
 //
 //----------------------------------------------------------------------------------------------------------------------
 

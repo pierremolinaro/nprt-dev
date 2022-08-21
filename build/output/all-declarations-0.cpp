@@ -621,18 +621,11 @@ C_String C_Lexique_oa_5F_scanner::getCurrentTokenString (const cToken * inTokenP
 
 
 //----------------------------------------------------------------------------------------------------------------------
-//            Unicode test functions                                                             
-//----------------------------------------------------------------------------------------------------------------------
- 
-//----------------------------------------------------------------------------------------------------------------------
-//               P A R S E    L E X I C A L    T O K E N                                         
+//               INTERNAL PARSE LEXICAL TOKEN                                         
 //----------------------------------------------------------------------------------------------------------------------
 
-bool C_Lexique_oa_5F_scanner::parseLexicalToken (void) {
-  cTokenFor_oa_5F_scanner token ;
-  mLoop = true ;
-  token.mTokenCode = -1 ;
-  while ((token.mTokenCode < 0) && (UNICODE_VALUE (mCurrentChar) != '\0')) {
+void C_Lexique_oa_5F_scanner::internalParseLexicalToken (cTokenFor_oa_5F_scanner & token) {
+  bool loop = true ;
     token.mLexicalAttribute_identifierString.setLengthToZero () ;
     token.mLexicalAttribute_ulongValue = 0 ;
     mTokenStartLocation = mCurrentLocation ;
@@ -642,10 +635,10 @@ bool C_Lexique_oa_5F_scanner::parseLexicalToken (void) {
           ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_identifierString, previousChar ()) ;
           if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32Char (TO_UNICODE ('_')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
           }else{
-            mLoop = false ;
+            loop = false ;
           }
-        }while (mLoop) ;
-        mLoop = true ;
+        }while (loop) ;
+        loop = true ;
         if (token.mTokenCode == -1) {
           token.mTokenCode = search_into_keyWordList (token.mLexicalAttribute_identifierString) ;
         }
@@ -669,10 +662,10 @@ bool C_Lexique_oa_5F_scanner::parseLexicalToken (void) {
             ::scanner_routine_enterDigitIntoUInt (*this, previousChar (), token.mLexicalAttribute_ulongValue, gLexicalMessage_oa_5F_scanner_decimalNumberTooLarge, gLexicalMessage_oa_5F_scanner_internalError) ;
           }else if (testForInputUTF32Char (TO_UNICODE ('_'))) {
           }else{
-            mLoop = false ;
+            loop = false ;
           }
-        }while (mLoop) ;
-        mLoop = true ;
+        }while (loop) ;
+        loop = true ;
         token.mTokenCode = kToken_literal_5F_integer ;
         enterToken (token) ;
       }else if (testForInputUTF32CharRange (TO_UNICODE (1), TO_UNICODE (' '))) {
@@ -680,25 +673,36 @@ bool C_Lexique_oa_5F_scanner::parseLexicalToken (void) {
         do {
           if (testForInputUTF32CharRange (TO_UNICODE (1), TO_UNICODE ('\t')) || testForInputUTF32CharRange (TO_UNICODE ('\v'), TO_UNICODE ('~'))) {
           }else{
-            mLoop = false ;
+            loop = false ;
           }
-        }while (mLoop) ;
-        mLoop = true ;
+        }while (loop) ;
+        loop = true ;
         if (testForInputUTF32Char (TO_UNICODE ('\n'))) {
         }else{
           lexicalError (gLexicalMessage_oa_5F_scanner_incorrectEndOfComment COMMA_LINE_AND_SOURCE_FILE) ;
         }
       }else if (testForInputUTF32Char (TO_UNICODE ('\0'))) { // End of source text ? 
-        token.mTokenCode = kToken_ ; // Empty string code
-      }else{ // Unknown input character
-        unknownCharacterLexicalError (LINE_AND_SOURCE_FILE) ;
-        token.mTokenCode = -1 ; // No token
-        advance () ; // ... go throught unknown character
-      }
-    }catch (const C_lexicalErrorException &) {
+      token.mTokenCode = kToken_ ; // Empty string code
+    }else{ // Unknown input character
+      unknownCharacterLexicalError (LINE_AND_SOURCE_FILE) ;
       token.mTokenCode = -1 ; // No token
       advance () ; // ... go throught unknown character
     }
+  }catch (const C_lexicalErrorException &) {
+    token.mTokenCode = -1 ; // No token
+    advance () ; // ... go throught unknown character
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//               P A R S E    L E X I C A L    T O K E N                                         
+//----------------------------------------------------------------------------------------------------------------------
+
+bool C_Lexique_oa_5F_scanner::parseLexicalToken (void) {
+  cTokenFor_oa_5F_scanner token ;
+  token.mTokenCode = -1 ;
+  while ((token.mTokenCode < 0) && (UNICODE_VALUE (mCurrentChar) != '\0')) {
+    internalParseLexicalToken (token) ;
   }
   if (UNICODE_VALUE (mCurrentChar) == '\0') {
     token.mTokenCode = 0 ;
@@ -4661,7 +4665,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
       GALGAS_luint var_step_771 ;
       switch (select_oa_5F_parser_1 (inCompiler)) {
       case 1: {
-        var_step_771 = GALGAS_luint::constructor_new (GALGAS_uint ((uint32_t) 1U), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 23))  COMMA_SOURCE_FILE ("oa_parser.galgas", 23)) ;
+        var_step_771 = GALGAS_luint::constructor_new (GALGAS_uint (uint32_t (1U)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 23))  COMMA_SOURCE_FILE ("oa_parser.galgas", 23)) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 25)) ;
@@ -4669,7 +4673,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 26)) ;
         enumGalgasBool test_1 = kBoolTrue ;
         if (kBoolTrue == test_1) {
-          test_1 = GALGAS_bool (kIsEqual, var_step_771.readProperty_uint ().objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+          test_1 = GALGAS_bool (kIsEqual, var_step_771.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
           if (kBoolTrue == test_1) {
             TC_Array <C_FixItDescription> fixItArray2 ;
             inCompiler->emitSemanticError (var_step_771.readProperty_location (), GALGAS_string ("the step value must be > 0"), fixItArray2  COMMA_SOURCE_FILE ("oa_parser.galgas", 28)) ;
@@ -4704,7 +4708,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
       GALGAS_luint var_factor_1266 ;
       switch (select_oa_5F_parser_3 (inCompiler)) {
       case 1: {
-        var_factor_1266 = GALGAS_luint::constructor_new (GALGAS_uint ((uint32_t) 1U), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 46))  COMMA_SOURCE_FILE ("oa_parser.galgas", 46)) ;
+        var_factor_1266 = GALGAS_luint::constructor_new (GALGAS_uint (uint32_t (1U)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 46))  COMMA_SOURCE_FILE ("oa_parser.galgas", 46)) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 48)) ;
@@ -4712,7 +4716,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 49)) ;
         enumGalgasBool test_3 = kBoolTrue ;
         if (kBoolTrue == test_3) {
-          test_3 = GALGAS_bool (kIsEqual, var_factor_1266.readProperty_uint ().objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+          test_3 = GALGAS_bool (kIsEqual, var_factor_1266.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
           if (kBoolTrue == test_3) {
             TC_Array <C_FixItDescription> fixItArray4 ;
             inCompiler->emitSemanticError (var_factor_1266.readProperty_location (), GALGAS_string ("the factor value must be > 0"), fixItArray4  COMMA_SOURCE_FILE ("oa_parser.galgas", 51)) ;
@@ -4750,7 +4754,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         var_explicitOffset_1853 = GALGAS_bool (true) ;
       } break ;
       case 2: {
-        var_taskOffset_1824 = GALGAS_luint::constructor_new (GALGAS_uint ((uint32_t) 0U), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 72))  COMMA_SOURCE_FILE ("oa_parser.galgas", 72)) ;
+        var_taskOffset_1824 = GALGAS_luint::constructor_new (GALGAS_uint (uint32_t (0U)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 72))  COMMA_SOURCE_FILE ("oa_parser.galgas", 72)) ;
         var_explicitOffset_1853 = GALGAS_bool (false) ;
       } break ;
       default:
@@ -4764,7 +4768,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 78)) ;
       } break ;
       case 2: {
-        var_taskDeadline_2070 = GALGAS_luint::constructor_new (GALGAS_uint ((uint32_t) 4294967295U), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 80))  COMMA_SOURCE_FILE ("oa_parser.galgas", 80)) ;
+        var_taskDeadline_2070 = GALGAS_luint::constructor_new (GALGAS_uint (uint32_t (4294967295U)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 80))  COMMA_SOURCE_FILE ("oa_parser.galgas", 80)) ;
       } break ;
       default:
         break ;
@@ -4802,7 +4806,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
           GALGAS_luint var_every_2764 ;
           switch (select_oa_5F_parser_8 (inCompiler)) {
           case 1: {
-            var_every_2764 = GALGAS_luint::constructor_new (GALGAS_uint ((uint32_t) 1U), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 102))  COMMA_SOURCE_FILE ("oa_parser.galgas", 102)) ;
+            var_every_2764 = GALGAS_luint::constructor_new (GALGAS_uint (uint32_t (1U)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 102))  COMMA_SOURCE_FILE ("oa_parser.galgas", 102)) ;
           } break ;
           case 2: {
             inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas", 104)) ;
@@ -4841,7 +4845,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
           GALGAS_luint var_every_3371 ;
           switch (select_oa_5F_parser_9 (inCompiler)) {
           case 1: {
-            var_every_3371 = GALGAS_luint::constructor_new (GALGAS_uint ((uint32_t) 1U), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 117))  COMMA_SOURCE_FILE ("oa_parser.galgas", 117)) ;
+            var_every_3371 = GALGAS_luint::constructor_new (GALGAS_uint (uint32_t (1U)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 117))  COMMA_SOURCE_FILE ("oa_parser.galgas", 117)) ;
           } break ;
           case 2: {
             inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas", 119)) ;
@@ -4872,17 +4876,17 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
       switch (select_oa_5F_parser_10 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_standard COMMA_SOURCE_FILE ("oa_parser.galgas", 139)) ;
-        var_messageClass_4228 = GALGAS_luint::constructor_new (GALGAS_uint ((uint32_t) 0U), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 140))  COMMA_SOURCE_FILE ("oa_parser.galgas", 140)) ;
+        var_messageClass_4228 = GALGAS_luint::constructor_new (GALGAS_uint (uint32_t (0U)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 140))  COMMA_SOURCE_FILE ("oa_parser.galgas", 140)) ;
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 141)) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_extended COMMA_SOURCE_FILE ("oa_parser.galgas", 143)) ;
-        var_messageClass_4228 = GALGAS_luint::constructor_new (GALGAS_uint ((uint32_t) 1U), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 144))  COMMA_SOURCE_FILE ("oa_parser.galgas", 144)) ;
+        var_messageClass_4228 = GALGAS_luint::constructor_new (GALGAS_uint (uint32_t (1U)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 144))  COMMA_SOURCE_FILE ("oa_parser.galgas", 144)) ;
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 145)) ;
       } break ;
       case 3: {
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 147)) ;
-        var_messageClass_4228 = GALGAS_luint::constructor_new (GALGAS_uint ((uint32_t) 2U), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 148))  COMMA_SOURCE_FILE ("oa_parser.galgas", 148)) ;
+        var_messageClass_4228 = GALGAS_luint::constructor_new (GALGAS_uint (uint32_t (2U)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 148))  COMMA_SOURCE_FILE ("oa_parser.galgas", 148)) ;
       } break ;
       default:
         break ;
@@ -4898,7 +4902,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
       var_outNetworkMap_544.method_searchKey (var_networkName_4590, var_networkIndex_4650, var_CANnetwork_4666, joker_4668, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 153)) ;
       enumGalgasBool test_7 = kBoolTrue ;
       if (kBoolTrue == test_7) {
-        test_7 = var_CANnetwork_4666.operator_and (GALGAS_bool (kIsEqual, var_messageClass_4228.readProperty_uint ().objectCompare (GALGAS_uint ((uint32_t) 2U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 154)).boolEnum () ;
+        test_7 = var_CANnetwork_4666.operator_and (GALGAS_bool (kIsEqual, var_messageClass_4228.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 154)).boolEnum () ;
         if (kBoolTrue == test_7) {
           TC_Array <C_FixItDescription> fixItArray8 ;
           inCompiler->emitSemanticError (var_messageClass_4228.readProperty_location (), GALGAS_string ("a CAN message must be either standard either extended"), fixItArray8  COMMA_SOURCE_FILE ("oa_parser.galgas", 155)) ;
@@ -4907,7 +4911,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
       if (kBoolFalse == test_7) {
         enumGalgasBool test_9 = kBoolTrue ;
         if (kBoolTrue == test_9) {
-          test_9 = var_CANnetwork_4666.operator_not (SOURCE_FILE ("oa_parser.galgas", 156)).operator_and (GALGAS_bool (kIsNotEqual, var_messageClass_4228.readProperty_uint ().objectCompare (GALGAS_uint ((uint32_t) 2U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 156)).boolEnum () ;
+          test_9 = var_CANnetwork_4666.operator_not (SOURCE_FILE ("oa_parser.galgas", 156)).operator_and (GALGAS_bool (kIsNotEqual, var_messageClass_4228.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 156)).boolEnum () ;
           if (kBoolTrue == test_9) {
             TC_Array <C_FixItDescription> fixItArray10 ;
             inCompiler->emitSemanticError (var_messageClass_4228.readProperty_location (), GALGAS_string ("a VAN message cannot be standard or extended"), fixItArray10  COMMA_SOURCE_FILE ("oa_parser.galgas", 157)) ;
@@ -4919,7 +4923,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
       inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 160)) ;
       enumGalgasBool test_11 = kBoolTrue ;
       if (kBoolTrue == test_11) {
-        test_11 = var_CANnetwork_4666.operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount_4995.readProperty_uint ().objectCompare (GALGAS_uint ((uint32_t) 8U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 161)).boolEnum () ;
+        test_11 = var_CANnetwork_4666.operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount_4995.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (8U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 161)).boolEnum () ;
         if (kBoolTrue == test_11) {
           TC_Array <C_FixItDescription> fixItArray12 ;
           inCompiler->emitSemanticError (var_bytesCount_4995.readProperty_location (), GALGAS_string ("CAN message length must be <= 8 bytes"), fixItArray12  COMMA_SOURCE_FILE ("oa_parser.galgas", 162)) ;
@@ -4928,7 +4932,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
       if (kBoolFalse == test_11) {
         enumGalgasBool test_13 = kBoolTrue ;
         if (kBoolTrue == test_13) {
-          test_13 = var_CANnetwork_4666.operator_not (SOURCE_FILE ("oa_parser.galgas", 163)).operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount_4995.readProperty_uint ().objectCompare (GALGAS_uint ((uint32_t) 28U))) COMMA_SOURCE_FILE ("oa_parser.galgas", 163)).boolEnum () ;
+          test_13 = var_CANnetwork_4666.operator_not (SOURCE_FILE ("oa_parser.galgas", 163)).operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount_4995.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (28U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 163)).boolEnum () ;
           if (kBoolTrue == test_13) {
             TC_Array <C_FixItDescription> fixItArray14 ;
             inCompiler->emitSemanticError (var_bytesCount_4995.readProperty_location (), GALGAS_string ("VAN message must be <= 28 bytes"), fixItArray14  COMMA_SOURCE_FILE ("oa_parser.galgas", 164)) ;
@@ -4948,7 +4952,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         var_explicitOffset_5333 = GALGAS_bool (true) ;
       } break ;
       case 2: {
-        var_offset_5304 = GALGAS_luint::constructor_new (GALGAS_uint ((uint32_t) 0U), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 175))  COMMA_SOURCE_FILE ("oa_parser.galgas", 175)) ;
+        var_offset_5304 = GALGAS_luint::constructor_new (GALGAS_uint (uint32_t (0U)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 175))  COMMA_SOURCE_FILE ("oa_parser.galgas", 175)) ;
         var_explicitOffset_5333 = GALGAS_bool (false) ;
       } break ;
       default:
@@ -4962,7 +4966,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
         inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 181)) ;
       } break ;
       case 2: {
-        var_deadline_5537 = GALGAS_luint::constructor_new (GALGAS_uint ((uint32_t) 4294967295U), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 183))  COMMA_SOURCE_FILE ("oa_parser.galgas", 183)) ;
+        var_deadline_5537 = GALGAS_luint::constructor_new (GALGAS_uint (uint32_t (4294967295U)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 183))  COMMA_SOURCE_FILE ("oa_parser.galgas", 183)) ;
       } break ;
       default:
         break ;
@@ -7167,7 +7171,7 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
         message << ".\n" ;
         ggs_printMessage (message COMMA_HERE) ;
       }
-    }catch (const ::std:: exception & e) {
+    }catch (const ::std::exception & e) {
       F_default_display_exception (e) ;
       returnCode = 1 ; // Error code
     }catch (...) {
