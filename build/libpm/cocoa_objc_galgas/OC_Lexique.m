@@ -97,9 +97,6 @@
     mPreviousChar = mCurrentChar ;
     mCurrentLocation ++ ;
     mCurrentChar = [mSourceString characterAtIndex:mCurrentLocation] ;
-//    if (55357 == mCurrentChar) {
-//      NSLog (@"mCurrentChar %u", mCurrentChar) ;
-//    }
   }else{
     mCurrentLocation = [mSourceString length] ;
     mPreviousChar = mCurrentChar ;

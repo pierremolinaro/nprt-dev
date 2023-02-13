@@ -6320,13 +6320,13 @@ GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::constructor_d
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                    const GALGAS_uint & inOperand1,
-                                                                                    const GALGAS_luint & inOperand2 
+GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::constructor_new (const GALGAS_lstring & in_lkey,
+                                                                                    const GALGAS_uint & in_mIndex,
+                                                                                    const GALGAS_luint & in_mStep 
                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_M_5F_processor_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_M_5F_processor_2D_element (inOperand0, inOperand1, inOperand2) ;
+  if (in_lkey.isValid () && in_mIndex.isValid () && in_mStep.isValid ()) {
+    result = GALGAS_M_5F_processor_2D_element (in_lkey, in_mIndex, in_mStep) ;
   }
   return result ;
 }
@@ -6458,14 +6458,14 @@ GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::constructor_defau
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                const GALGAS_uint & inOperand1,
-                                                                                const GALGAS_bool & inOperand2,
-                                                                                const GALGAS_luint & inOperand3 
+GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::constructor_new (const GALGAS_lstring & in_lkey,
+                                                                                const GALGAS_uint & in_mIndex,
+                                                                                const GALGAS_bool & in_mCANnetwork,
+                                                                                const GALGAS_luint & in_mScalingFactor 
                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_M_5F_network_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
-    result = GALGAS_M_5F_network_2D_element (inOperand0, inOperand1, inOperand2, inOperand3) ;
+  if (in_lkey.isValid () && in_mIndex.isValid () && in_mCANnetwork.isValid () && in_mScalingFactor.isValid ()) {
+    result = GALGAS_M_5F_network_2D_element (in_lkey, in_mIndex, in_mCANnetwork, in_mScalingFactor) ;
   }
   return result ;
 }
@@ -6612,20 +6612,20 @@ mProperty_mMessageKind (inOperand9) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                  const GALGAS_uint & inOperand1,
-                                                                                  const GALGAS_luint & inOperand2,
-                                                                                  const GALGAS_uint & inOperand3,
-                                                                                  const GALGAS_luint & inOperand4,
-                                                                                  const GALGAS_luint & inOperand5,
-                                                                                  const GALGAS_luint & inOperand6,
-                                                                                  const GALGAS_luint & inOperand7,
-                                                                                  const GALGAS_luint & inOperand8,
-                                                                                  const GALGAS_AC_5F_canMessage & inOperand9 
+GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::constructor_new (const GALGAS_lstring & in_lkey,
+                                                                                  const GALGAS_uint & in_mIndex,
+                                                                                  const GALGAS_luint & in_mClass,
+                                                                                  const GALGAS_uint & in_mNetworkIndex,
+                                                                                  const GALGAS_luint & in_mBytesCount,
+                                                                                  const GALGAS_luint & in_mPriority,
+                                                                                  const GALGAS_luint & in_mOffset,
+                                                                                  const GALGAS_luint & in_mDeadline,
+                                                                                  const GALGAS_luint & in_mPeriod,
+                                                                                  const GALGAS_AC_5F_canMessage & in_mMessageKind 
                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_M_5F_messages_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
-    result = GALGAS_M_5F_messages_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9) ;
+  if (in_lkey.isValid () && in_mIndex.isValid () && in_mClass.isValid () && in_mNetworkIndex.isValid () && in_mBytesCount.isValid () && in_mPriority.isValid () && in_mOffset.isValid () && in_mDeadline.isValid () && in_mPeriod.isValid () && in_mMessageKind.isValid ()) {
+    result = GALGAS_M_5F_messages_2D_element (in_lkey, in_mIndex, in_mClass, in_mNetworkIndex, in_mBytesCount, in_mPriority, in_mOffset, in_mDeadline, in_mPeriod, in_mMessageKind) ;
   }
   return result ;
 }
@@ -6808,20 +6808,20 @@ mProperty_mTaskKind (inOperand9) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                            const GALGAS_uint & inOperand1,
-                                                                            const GALGAS_luint & inOperand2,
-                                                                            const GALGAS_luint & inOperand3,
-                                                                            const GALGAS_luint & inOperand4,
-                                                                            const GALGAS_luint & inOperand5,
-                                                                            const GALGAS_luint & inOperand6,
-                                                                            const GALGAS_uint & inOperand7,
-                                                                            const GALGAS_luint & inOperand8,
-                                                                            const GALGAS_AC_5F_task & inOperand9 
+GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::constructor_new (const GALGAS_lstring & in_lkey,
+                                                                            const GALGAS_uint & in_mIndex,
+                                                                            const GALGAS_luint & in_mPriority,
+                                                                            const GALGAS_luint & in_mOffset,
+                                                                            const GALGAS_luint & in_mDeadline,
+                                                                            const GALGAS_luint & in_mDurationMin,
+                                                                            const GALGAS_luint & in_mDurationMax,
+                                                                            const GALGAS_uint & in_mProcessor,
+                                                                            const GALGAS_luint & in_mPeriod,
+                                                                            const GALGAS_AC_5F_task & in_mTaskKind 
                                                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_M_5F_tasks_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
-    result = GALGAS_M_5F_tasks_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9) ;
+  if (in_lkey.isValid () && in_mIndex.isValid () && in_mPriority.isValid () && in_mOffset.isValid () && in_mDeadline.isValid () && in_mDurationMin.isValid () && in_mDurationMax.isValid () && in_mProcessor.isValid () && in_mPeriod.isValid () && in_mTaskKind.isValid ()) {
+    result = GALGAS_M_5F_tasks_2D_element (in_lkey, in_mIndex, in_mPriority, in_mOffset, in_mDeadline, in_mDurationMin, in_mDurationMax, in_mProcessor, in_mPeriod, in_mTaskKind) ;
   }
   return result ;
 }

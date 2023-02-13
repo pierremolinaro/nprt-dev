@@ -646,7 +646,7 @@ int32_t UTF8StringFromUTF32Character (const utf32 inUnicodeChar, char outSequenc
 #endif
 
 //----------------------------------------------------------------------------------------------------------------------
-//  https://msdn.microsoft.com/en-us/library/565w213d.aspx (??)
+//  https://msdn.microsoft.com/en-us/library/565w213d.aspx (]
 
 bool isRestrictedUnicodeLetter (const utf32 inUnicodeCharacter) {
   const uint32_t codePoint = UNICODE_VALUE (inUnicodeCharacter) ;
