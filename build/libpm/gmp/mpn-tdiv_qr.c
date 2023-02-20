@@ -6,7 +6,7 @@
 
    Preconditions:
    1. The most significant limb of of the divisor must be non-zero.
-   2. nn >= dn, even if qxn is non-zero.  (??? relax this ?]
+   2. nn >= dn, even if qxn is non-zero.  (??? relax this ???)
 
    The time complexity of this is O(qn*qn+M(dn,qn)), where M(m,n) is the time
    complexity of multiplication.
