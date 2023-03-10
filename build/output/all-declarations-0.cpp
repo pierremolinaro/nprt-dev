@@ -919,7 +919,8 @@ mProperty_mStep (in_mStep) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_M_5F_processor::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mStep.isValid () ;
+  /* return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mStep.isValid () ; */
+  return mProperty_lkey.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1246,7 +1247,8 @@ mProperty_mScalingFactor (in_mScalingFactor) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_M_5F_network::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mCANnetwork.isValid () && mProperty_mScalingFactor.isValid () ;
+  /* return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mCANnetwork.isValid () && mProperty_mScalingFactor.isValid () ; */
+  return mProperty_lkey.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2613,7 +2615,8 @@ mProperty_mMessageKind (in_mMessageKind) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_M_5F_messages::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mClass.isValid () && mProperty_mNetworkIndex.isValid () && mProperty_mBytesCount.isValid () && mProperty_mPriority.isValid () && mProperty_mOffset.isValid () && mProperty_mDeadline.isValid () && mProperty_mPeriod.isValid () && mProperty_mMessageKind.isValid () ;
+  /* return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mClass.isValid () && mProperty_mNetworkIndex.isValid () && mProperty_mBytesCount.isValid () && mProperty_mPriority.isValid () && mProperty_mOffset.isValid () && mProperty_mDeadline.isValid () && mProperty_mPeriod.isValid () && mProperty_mMessageKind.isValid () ; */
+  return mProperty_lkey.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -3970,7 +3973,8 @@ mProperty_mTaskKind (in_mTaskKind) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_M_5F_tasks::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mPriority.isValid () && mProperty_mOffset.isValid () && mProperty_mDeadline.isValid () && mProperty_mDurationMin.isValid () && mProperty_mDurationMax.isValid () && mProperty_mProcessor.isValid () && mProperty_mPeriod.isValid () && mProperty_mTaskKind.isValid () ;
+  /* return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mPriority.isValid () && mProperty_mOffset.isValid () && mProperty_mDeadline.isValid () && mProperty_mDurationMin.isValid () && mProperty_mDurationMax.isValid () && mProperty_mProcessor.isValid () && mProperty_mPeriod.isValid () && mProperty_mTaskKind.isValid () ; */
+  return mProperty_lkey.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
