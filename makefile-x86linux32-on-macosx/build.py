@@ -27,6 +27,6 @@ LIBPM_DIRECTORY_PATH = dictionary ["LIBPM_DIRECTORY_PATH"]
 sys.path.append (os.path.abspath (LIBPM_DIRECTORY_PATH + "/python-makefiles"))
 from x86linux_on_macosx_gcc_tools_32 import buildForLinux32OnMacOSX
 #----------------------------------------------------------------- Build
-buildForLinux32OnMacOSX (dictionary, jsonFilePath, "nprt", goal, maxParallelJobs, maxParallelJobs == 1)
+buildForLinux32OnMacOSX (dictionary, jsonFilePath, "nprt", "build", goal, maxParallelJobs, maxParallelJobs == 1)
 
 #-----------------------------------------------------------------------------------------------------------------------

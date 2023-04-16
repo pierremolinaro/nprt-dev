@@ -10,6 +10,9 @@
 
 class cPtr_AC_5F_canMessage : public acStrongPtr_class {
 
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    public: virtual void printNonNullClassInstanceProperties (void) const override ;
+  #endif
 //--- START OF USER ZONE 2
 
   public : virtual bool messageDependsOnTask (void) const = 0 ;

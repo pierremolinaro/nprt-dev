@@ -36,6 +36,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <iostream>
 #include <sys/types.h>
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2334,5 +2335,15 @@ bool GALGAS_string::optional_extractBigInt (GALGAS_bigint & outBigInt) const {
   }
   return extracted ;
 }
+
+//----------------------------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void GALGAS_string::printNonNullClassInstanceProperties (const char * inPropertyName) const {
+    if (isValid ()) {
+      std::cout << "    " << inPropertyName << " : " << mString.cString (HERE) << std::endl ;
+    }
+  }
+#endif
 
 //----------------------------------------------------------------------------------------------------------------------

@@ -48,6 +48,7 @@ class GenericGalgasMakefile :
   m_ObjectiveC_CompilerOptions = []
   m_ObjectiveCpp_CompilerOptions = []
   mTargetName = ""
+  mBuildDirName = ""
   mLinkerOptions = []
   mExecutableSuffix = ""
   mCrossCompilation = ""
@@ -90,7 +91,7 @@ class GenericGalgasMakefile :
     make = makefile.Make (self.mGoal, self.mMaxParallelJobs == 1) # Display command utility tool path if sequential build
   #--------------------------------------------------------------------------- Add Compile rule for sources (release)
   #--- Object file directory
-    objectDirectory = "../build/cli-objects/makefile-" + self.mTargetName + "-objects"
+    objectDirectory = "../" + self.mBuildDirName + "/cli-objects/makefile-" + self.mTargetName + "-objects"
   #---
     objectFileList = []
     for source in SOURCES:
@@ -134,7 +135,7 @@ class GenericGalgasMakefile :
     make.addRule (rule) ;
   #--------------------------------------------------------------------------- Add Compile rule for sources (debug)
   #--- Object file directory
-    debugObjectDirectory = "../build/cli-objects/makefile-" + self.mTargetName + "-debug-objects"
+    debugObjectDirectory = "../" + self.mBuildDirName + "/cli-objects/makefile-" + self.mTargetName + "-debug-objects"
   #---
     debugObjectFileList = []
     for source in SOURCES:
@@ -173,7 +174,7 @@ class GenericGalgasMakefile :
     make.addRule (rule) ;
   #--------------------------------------------------------------------------- Add Compile rule for sources (lto)
   #--- Object file directory
-    objectLTODirectory = "../build/cli-objects/makefile-" + self.mTargetName + "-objects-lto"
+    objectLTODirectory = "../" + self.mBuildDirName + "/cli-objects/makefile-" + self.mTargetName + "-objects-lto"
   #---
     ltoObjectFileList = []
     for source in SOURCES:

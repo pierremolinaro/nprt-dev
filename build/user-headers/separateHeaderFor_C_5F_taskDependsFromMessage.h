@@ -10,6 +10,9 @@
 
 class cPtr_C_5F_taskDependsFromMessage : public cPtr_AC_5F_task {
 
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    public: virtual void printNonNullClassInstanceProperties (void) const override ;
+  #endif
 //--- START OF USER ZONE 2
 
   public : virtual bool taskDependsOnTask (void) const override ;

@@ -42,14 +42,6 @@ C_Lexique (inCallerCompiler, inSourceString, inStringForError COMMA_THERE) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-//                 I N D E X I N G    D I R E C T O R Y                                          
-//----------------------------------------------------------------------------------------------------------------------
-
-C_String C_Lexique_oa_5F_scanner::indexingDirectory (void) const {
-  return "" ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
 //                        Lexical error message list                                             
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1190,7 +1182,7 @@ bool GALGAS_M_5F_processor::optional_searchKey (const GALGAS_string & inKey,
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@M_processor type
+//     @M_processor generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1570,7 +1562,7 @@ bool GALGAS_M_5F_network::optional_searchKey (const GALGAS_string & inKey,
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@M_network type
+//     @M_network generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1615,6 +1607,14 @@ GALGAS_M_5F_network GALGAS_M_5F_network::extractObject (const GALGAS_object & in
 // @AC_5F_canMessage reference class
 //----------------------------------------------------------------------------------------------------------------------
 
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+  }
+#endif
+
+//----------------------------------------------------------------------------------------------------------------------
+
 
 
 typeComparisonResult GALGAS_AC_5F_canMessage::objectCompare (const GALGAS_AC_5F_canMessage & inOperand) const {
@@ -1627,7 +1627,7 @@ typeComparisonResult GALGAS_AC_5F_canMessage::objectCompare (const GALGAS_AC_5F_
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
     }
   }
   return result ;
@@ -1656,7 +1656,7 @@ acStrongPtr_class (THERE) {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@AC_canMessage type
+//     @AC_canMessage generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1767,7 +1767,7 @@ GALGAS_AC_5F_canMessage GALGAS_AC_5F_canMessage_2D_weak::bang_AC_5F_canMessage_2
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@AC_canMessage-weak type
+//     @AC_canMessage-weak generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1812,6 +1812,14 @@ GALGAS_AC_5F_canMessage_2D_weak GALGAS_AC_5F_canMessage_2D_weak::extractObject (
 // @C_5F_canIndependantMessage reference class
 //----------------------------------------------------------------------------------------------------------------------
 
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_C_5F_canIndependantMessage::printNonNullClassInstanceProperties (void) const {
+    cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties () ;
+  }
+#endif
+
+//----------------------------------------------------------------------------------------------------------------------
+
 typeComparisonResult cPtr_C_5F_canIndependantMessage::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
   return kOperandEqual ;
 }
@@ -1829,7 +1837,7 @@ typeComparisonResult GALGAS_C_5F_canIndependantMessage::objectCompare (const GAL
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
     }
   }
   return result ;
@@ -1891,7 +1899,7 @@ acPtr_class * cPtr_C_5F_canIndependantMessage::duplicate (LOCATION_ARGS) const {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@C_canIndependantMessage type
+//     @C_canIndependantMessage generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2002,7 +2010,7 @@ GALGAS_C_5F_canIndependantMessage GALGAS_C_5F_canIndependantMessage_2D_weak::ban
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@C_canIndependantMessage-weak type
+//     @C_canIndependantMessage-weak generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2047,6 +2055,15 @@ GALGAS_C_5F_canIndependantMessage_2D_weak GALGAS_C_5F_canIndependantMessage_2D_w
 // @C_5F_canMessageFromMessage reference class
 //----------------------------------------------------------------------------------------------------------------------
 
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_C_5F_canMessageFromMessage::printNonNullClassInstanceProperties (void) const {
+    cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties () ;
+    mProperty_mMessageIndex.printNonNullClassInstanceProperties ("mMessageIndex") ;
+  }
+#endif
+
+//----------------------------------------------------------------------------------------------------------------------
+
 typeComparisonResult cPtr_C_5F_canMessageFromMessage::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_C_5F_canMessageFromMessage * p = (const cPtr_C_5F_canMessageFromMessage *) inOperandPtr ;
@@ -2070,7 +2087,7 @@ typeComparisonResult GALGAS_C_5F_canMessageFromMessage::objectCompare (const GAL
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
     }
   }
   return result ;
@@ -2163,7 +2180,7 @@ acPtr_class * cPtr_C_5F_canMessageFromMessage::duplicate (LOCATION_ARGS) const {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@C_canMessageFromMessage type
+//     @C_canMessageFromMessage generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2274,7 +2291,7 @@ GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage_2D_weak::ban
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@C_canMessageFromMessage-weak type
+//     @C_canMessageFromMessage-weak generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2319,6 +2336,15 @@ GALGAS_C_5F_canMessageFromMessage_2D_weak GALGAS_C_5F_canMessageFromMessage_2D_w
 // @C_5F_canMessageFromTask reference class
 //----------------------------------------------------------------------------------------------------------------------
 
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_C_5F_canMessageFromTask::printNonNullClassInstanceProperties (void) const {
+    cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties () ;
+    mProperty_mTaskIndex.printNonNullClassInstanceProperties ("mTaskIndex") ;
+  }
+#endif
+
+//----------------------------------------------------------------------------------------------------------------------
+
 typeComparisonResult cPtr_C_5F_canMessageFromTask::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_C_5F_canMessageFromTask * p = (const cPtr_C_5F_canMessageFromTask *) inOperandPtr ;
@@ -2342,7 +2368,7 @@ typeComparisonResult GALGAS_C_5F_canMessageFromTask::objectCompare (const GALGAS
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
     }
   }
   return result ;
@@ -2435,7 +2461,7 @@ acPtr_class * cPtr_C_5F_canMessageFromTask::duplicate (LOCATION_ARGS) const {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@C_canMessageFromTask type
+//     @C_canMessageFromTask generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2546,7 +2572,7 @@ GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask_2D_weak::bang_C_5F
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@C_canMessageFromTask-weak type
+//     @C_canMessageFromTask-weak generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3250,7 +3276,7 @@ bool GALGAS_M_5F_messages::optional_searchKey (const GALGAS_string & inKey,
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@M_messages type
+//     @M_messages generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3295,6 +3321,14 @@ GALGAS_M_5F_messages GALGAS_M_5F_messages::extractObject (const GALGAS_object & 
 // @AC_5F_task reference class
 //----------------------------------------------------------------------------------------------------------------------
 
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_AC_5F_task::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+  }
+#endif
+
+//----------------------------------------------------------------------------------------------------------------------
+
 
 
 typeComparisonResult GALGAS_AC_5F_task::objectCompare (const GALGAS_AC_5F_task & inOperand) const {
@@ -3307,7 +3341,7 @@ typeComparisonResult GALGAS_AC_5F_task::objectCompare (const GALGAS_AC_5F_task &
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
     }
   }
   return result ;
@@ -3336,7 +3370,7 @@ acStrongPtr_class (THERE) {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@AC_task type
+//     @AC_task generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3447,7 +3481,7 @@ GALGAS_AC_5F_task GALGAS_AC_5F_task_2D_weak::bang_AC_5F_task_2D_weak (C_Compiler
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@AC_task-weak type
+//     @AC_task-weak generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3492,6 +3526,14 @@ GALGAS_AC_5F_task_2D_weak GALGAS_AC_5F_task_2D_weak::extractObject (const GALGAS
 // @C_5F_independantTask reference class
 //----------------------------------------------------------------------------------------------------------------------
 
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_C_5F_independantTask::printNonNullClassInstanceProperties (void) const {
+    cPtr_AC_5F_task::printNonNullClassInstanceProperties () ;
+  }
+#endif
+
+//----------------------------------------------------------------------------------------------------------------------
+
 typeComparisonResult cPtr_C_5F_independantTask::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
   return kOperandEqual ;
 }
@@ -3509,7 +3551,7 @@ typeComparisonResult GALGAS_C_5F_independantTask::objectCompare (const GALGAS_C_
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
     }
   }
   return result ;
@@ -3571,7 +3613,7 @@ acPtr_class * cPtr_C_5F_independantTask::duplicate (LOCATION_ARGS) const {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@C_independantTask type
+//     @C_independantTask generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3682,7 +3724,7 @@ GALGAS_C_5F_independantTask GALGAS_C_5F_independantTask_2D_weak::bang_C_5F_indep
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@C_independantTask-weak type
+//     @C_independantTask-weak generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3793,7 +3835,7 @@ GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask_2D_weak::bang_C_
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@C_taskDependsFromTask-weak type
+//     @C_taskDependsFromTask-weak generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3904,7 +3946,7 @@ GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage_2D_weak::b
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@C_taskDependsFromMessage-weak type
+//     @C_taskDependsFromMessage-weak generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -4608,7 +4650,7 @@ bool GALGAS_M_5F_tasks::optional_searchKey (const GALGAS_string & inKey,
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@M_tasks type
+//     @M_tasks generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -5250,8 +5292,219 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_parse (C_Lexique_oa_5F_sc
   inCompiler->resetTemplateString () ;
 }
 
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_indexing (C_Lexique_oa_5F_scanner * inCompiler) {
+  inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_system COMMA_SOURCE_FILE ("oa_parser.galgas", 16)) ;
+  bool repeatFlag_0 = true ;
+  while (repeatFlag_0) {
+    switch (select_oa_5F_parser_0 (inCompiler)) {
+    case 2: {
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 19)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 20)) ;
+      switch (select_oa_5F_parser_1 (inCompiler)) {
+      case 1: {
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 25)) ;
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 26)) ;
+      } break ;
+      default:
+        break ;
+      }
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 32)) ;
+    } break ;
+    case 3: {
+      switch (select_oa_5F_parser_2 (inCompiler)) {
+      case 1: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_can COMMA_SOURCE_FILE ("oa_parser.galgas", 36)) ;
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_van COMMA_SOURCE_FILE ("oa_parser.galgas", 39)) ;
+      } break ;
+      default:
+        break ;
+      }
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas", 42)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 43)) ;
+      switch (select_oa_5F_parser_3 (inCompiler)) {
+      case 1: {
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 48)) ;
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 49)) ;
+      } break ;
+      default:
+        break ;
+      }
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 55)) ;
+    } break ;
+    case 4: {
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 57)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 58)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas", 59)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 60)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_duration COMMA_SOURCE_FILE ("oa_parser.galgas", 61)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 62)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken__2E__2E_ COMMA_SOURCE_FILE ("oa_parser.galgas", 63)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 64)) ;
+      switch (select_oa_5F_parser_4 (inCompiler)) {
+      case 1: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas", 68)) ;
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 69)) ;
+      } break ;
+      case 2: {
+      } break ;
+      default:
+        break ;
+      }
+      switch (select_oa_5F_parser_5 (inCompiler)) {
+      case 1: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas", 77)) ;
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 78)) ;
+      } break ;
+      case 2: {
+      } break ;
+      default:
+        break ;
+      }
+      switch (select_oa_5F_parser_6 (inCompiler)) {
+      case 1: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas", 86)) ;
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 87)) ;
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 88)) ;
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 89)) ;
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 93)) ;
+        switch (select_oa_5F_parser_7 (inCompiler)) {
+        case 1: {
+          inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 98)) ;
+          inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 99)) ;
+          switch (select_oa_5F_parser_8 (inCompiler)) {
+          case 1: {
+          } break ;
+          case 2: {
+            inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas", 104)) ;
+            inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 105)) ;
+          } break ;
+          default:
+            break ;
+          }
+        } break ;
+        case 2: {
+          inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 110)) ;
+          inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 111)) ;
+          inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 113)) ;
+          inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 114)) ;
+          switch (select_oa_5F_parser_9 (inCompiler)) {
+          case 1: {
+          } break ;
+          case 2: {
+            inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas", 119)) ;
+            inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 120)) ;
+          } break ;
+          default:
+            break ;
+          }
+        } break ;
+        default:
+          break ;
+        }
+      } break ;
+      default:
+        break ;
+      }
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 135)) ;
+    } break ;
+    case 5: {
+      switch (select_oa_5F_parser_10 (inCompiler)) {
+      case 1: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_standard COMMA_SOURCE_FILE ("oa_parser.galgas", 139)) ;
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 141)) ;
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_extended COMMA_SOURCE_FILE ("oa_parser.galgas", 143)) ;
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 145)) ;
+      } break ;
+      case 3: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 147)) ;
+      } break ;
+      default:
+        break ;
+      }
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 150)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas", 151)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 152)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_length COMMA_SOURCE_FILE ("oa_parser.galgas", 159)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 160)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas", 166)) ;
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 167)) ;
+      switch (select_oa_5F_parser_11 (inCompiler)) {
+      case 1: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas", 171)) ;
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 172)) ;
+      } break ;
+      case 2: {
+      } break ;
+      default:
+        break ;
+      }
+      switch (select_oa_5F_parser_12 (inCompiler)) {
+      case 1: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas", 180)) ;
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 181)) ;
+      } break ;
+      case 2: {
+      } break ;
+      default:
+        break ;
+      }
+      switch (select_oa_5F_parser_13 (inCompiler)) {
+      case 1: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas", 188)) ;
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 189)) ;
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 192)) ;
+        switch (select_oa_5F_parser_14 (inCompiler)) {
+        case 1: {
+          inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 197)) ;
+          inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 198)) ;
+        } break ;
+        case 2: {
+          inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 202)) ;
+          inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 203)) ;
+        } break ;
+        default:
+          break ;
+        }
+      } break ;
+      default:
+        break ;
+      }
+      inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 210)) ;
+    } break ;
+    default:
+      repeatFlag_0 = false ;
+      break ;
+    }
+  }
+  inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_end COMMA_SOURCE_FILE ("oa_parser.galgas", 212)) ;
+}
+
 //----------------------------------------------------------------------------------------------------------------------
 // @C_5F_taskDependsFromTask reference class
+//----------------------------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_C_5F_taskDependsFromTask::printNonNullClassInstanceProperties (void) const {
+    cPtr_AC_5F_task::printNonNullClassInstanceProperties () ;
+    mProperty_mTask.printNonNullClassInstanceProperties ("mTask") ;
+    mProperty_mEvery.printNonNullClassInstanceProperties ("mEvery") ;
+  }
+#endif
+
 //----------------------------------------------------------------------------------------------------------------------
 
 typeComparisonResult cPtr_C_5F_taskDependsFromTask::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
@@ -5280,7 +5533,7 @@ typeComparisonResult GALGAS_C_5F_taskDependsFromTask::objectCompare (const GALGA
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
     }
   }
   return result ;
@@ -5402,7 +5655,7 @@ acPtr_class * cPtr_C_5F_taskDependsFromTask::duplicate (LOCATION_ARGS) const {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@C_taskDependsFromTask type
+//     @C_taskDependsFromTask generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -5447,6 +5700,16 @@ GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::extractObject (
 // @C_5F_taskDependsFromMessage reference class
 //----------------------------------------------------------------------------------------------------------------------
 
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_C_5F_taskDependsFromMessage::printNonNullClassInstanceProperties (void) const {
+    cPtr_AC_5F_task::printNonNullClassInstanceProperties () ;
+    mProperty_mMessage.printNonNullClassInstanceProperties ("mMessage") ;
+    mProperty_mEvery.printNonNullClassInstanceProperties ("mEvery") ;
+  }
+#endif
+
+//----------------------------------------------------------------------------------------------------------------------
+
 typeComparisonResult cPtr_C_5F_taskDependsFromMessage::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_C_5F_taskDependsFromMessage * p = (const cPtr_C_5F_taskDependsFromMessage *) inOperandPtr ;
@@ -5473,7 +5736,7 @@ typeComparisonResult GALGAS_C_5F_taskDependsFromMessage::objectCompare (const GA
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
     }
   }
   return result ;
@@ -5595,7 +5858,7 @@ acPtr_class * cPtr_C_5F_taskDependsFromMessage::duplicate (LOCATION_ARGS) const 
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@C_taskDependsFromMessage type
+//     @C_taskDependsFromMessage generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -6048,12 +6311,29 @@ void cGrammar_oa_5F_grammar::nt_axiome_parse (C_Lexique_oa_5F_scanner * inLexiqu
   rule_oa_5F_parser_axiome_i0_parse(inLexique) ;
 }
 
+void cGrammar_oa_5F_grammar::nt_axiome_indexing (C_Lexique_oa_5F_scanner * inLexique) {
+  rule_oa_5F_parser_axiome_i0_indexing(inLexique) ;
+}
+
 void cGrammar_oa_5F_grammar::nt_axiome_ (C_Lexique_oa_5F_scanner * inLexique) {
   rule_oa_5F_parser_axiome_i0_(inLexique) ;
 }
 
-void cGrammar_oa_5F_grammar::performIndexing (C_Compiler * /* inCompiler */,
-             const C_String & /* inSourceFilePath */) {
+void cGrammar_oa_5F_grammar::performIndexing (C_Compiler * inCompiler,
+             const C_String & inSourceFilePath) {
+  C_Lexique_oa_5F_scanner * scanner = NULL ;
+  macroMyNew (scanner, C_Lexique_oa_5F_scanner (inCompiler, inSourceFilePath COMMA_HERE)) ;
+  scanner->enableIndexing () ;
+  if (scanner->sourceText ().isValid ()) {
+    const bool ok = scanner->performTopDownParsing (gProductions_oa_grammar, gProductionNames_oa_grammar, gProductionIndexes_oa_grammar,
+                                                    gFirstProductionIndexes_oa_grammar, gDecision_oa_grammar, gDecisionIndexes_oa_grammar, 120) ;
+    if (ok) {
+      cGrammar_oa_5F_grammar grammar ;
+      grammar.nt_axiome_indexing (scanner) ;
+    }
+    scanner->generateIndexFile () ;
+  }
+  macroDetachSharedObject (scanner) ;
 }
 
 void cGrammar_oa_5F_grammar::performOnlyLexicalAnalysis (C_Compiler * inCompiler,
@@ -6384,7 +6664,7 @@ void GALGAS_M_5F_processor_2D_element::description (C_String & ioString,
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@M_processor-element type
+//     @M_processor-element generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -6529,7 +6809,7 @@ void GALGAS_M_5F_network_2D_element::description (C_String & ioString,
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@M_network-element type
+//     @M_network-element generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -6725,7 +7005,7 @@ void GALGAS_M_5F_messages_2D_element::description (C_String & ioString,
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@M_messages-element type
+//     @M_messages-element generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -6921,7 +7201,7 @@ void GALGAS_M_5F_tasks_2D_element::description (C_String & ioString,
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@M_tasks-element type
+//     @M_tasks-element generic code implementation
 //
 //----------------------------------------------------------------------------------------------------------------------
 
