@@ -376,7 +376,7 @@
   }
 //---
   [mSourceFilePathControl
-    unbind:@"value"
+    unbind: NSValueBinding
   ] ;
 //---
   [mSourceDisplayArrayControllerHigh
@@ -388,7 +388,7 @@
   ] ;
 //---
   [mSourceDisplayArrayControllerHigh
-    removeObserver:self 
+    removeObserver: self
     forKeyPath:@"selection.textSelectionStart"
   ] ;
 //---
@@ -406,13 +406,13 @@
   ] ;
 //---
   [[mDisplayDescriptorTableViewHigh tableColumnWithIdentifier:@"source"]
-    unbind:@"value"
+    unbind: NSValueBinding
   ] ;
   [[mDisplayDescriptorTableViewHigh tableColumnWithIdentifier:@"source"]
     unbind:@"fontBold"
   ] ;
   [[mDisplayDescriptorTableViewHigh tableColumnWithIdentifier:@"remove"]
-    unbind:@"value"
+    unbind: NSValueBinding
   ] ;
 //---
   [mFoundEntryTreeController
@@ -423,10 +423,10 @@
     forKeyPath:@"selectionIndexPath"
   ] ;
   [[mResultOutlineView tableColumnWithIdentifier:@"count"]
-    unbind:@"value"
+    unbind: NSValueBinding
   ] ;
   [[mResultOutlineView tableColumnWithIdentifier:@"result"]
-    unbind:@"value"
+    unbind: NSValueBinding
   ] ;
   [[mResultOutlineView tableColumnWithIdentifier:@"result"]
     unbind:@"fontBold"
@@ -442,10 +442,10 @@
   ] ;
 //---
   [mCaseSensitiveSearchCheckbox
-    unbind:@"value"
+    unbind: NSValueBinding
   ] ;
   [mGlobalReplaceTextField
-    unbind:@"value"
+    unbind: NSValueBinding
   ] ;
 //  [mSearchMatrix
 //    unbind:@"selectedIndex"
@@ -457,13 +457,8 @@
 //---
   mSourceDisplayArrayControllerHigh = nil ;
   mDisplayDescriptorArray = nil ;
-//---
-//  [mRemoveExcludedDirectoryButton unbind:@"enabled"] ;
-//  [[mExcludedDirectoryTableView tableColumnWithIdentifier:@"path"] unbind:@"value"] ;
-//  [mExcludedDirectoryArrayController unbind:@"contentArray"] ;
-//  mExcludedDirectoryArrayController = nil ;
 //--- Last call
-  [OC_GGS_DocumentData cocoaDocumentWillClose:mDocumentData] ;
+  [OC_GGS_DocumentData cocoaDocumentWillClose: mDocumentData] ;
 //---
   [super removeWindowController:inWindowController] ;
 }
@@ -1000,7 +995,7 @@ static const utf32 COCOA_ERROR_ID   = TO_UNICODE (4) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
-- (void) buildCompleted {
+- (void) buildCompletedWithStatus: (int) inTerminationStatus {
   #ifdef DEBUG_MESSAGES
     NSLog (@"%s", __PRETTY_FUNCTION__) ;
   #endif
@@ -1009,18 +1004,42 @@ static const utf32 COCOA_ERROR_ID   = TO_UNICODE (4) ;
   [self enterOutputData:mBufferedOutputData] ;
   mBufferedOutputData = nil ;
 //---
-  [OC_GGS_DocumentData broadcastIssueArray:mIssueArray] ;
+  [OC_GGS_DocumentData broadcastIssueArray: mIssueArray] ;
 //---
-  NSDictionary * defaultDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-    mBuildTextFont, NSFontAttributeName,
-    [NSColor orangeColor], NSForegroundColorAttributeName,
-    nil
-  ] ;
-  NSAttributedString * attributedString = [[NSAttributedString alloc]
-    initWithString:mBuildTaskHasBeenAborted ? @"Aborted.\n" : @"Done.\n"
-    attributes:defaultDictionary
-  ] ;
-  [mOutputTextView.textStorage appendAttributedString:attributedString] ;
+  if (mBuildTaskHasBeenAborted) {
+    NSDictionary * defaultDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+      mBuildTextFont, NSFontAttributeName,
+      [NSColor redColor], NSForegroundColorAttributeName,
+      nil
+    ] ;
+    NSAttributedString * attributedString = [[NSAttributedString alloc]
+      initWithString: @"Aborted.\n"
+      attributes: defaultDictionary
+    ] ;
+    [mOutputTextView.textStorage appendAttributedString:attributedString] ;
+  }else if (inTerminationStatus == 0) {
+    NSDictionary * defaultDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+      mBuildTextFont, NSFontAttributeName,
+      [NSColor blueColor], NSForegroundColorAttributeName,
+      nil
+    ] ;
+    NSAttributedString * attributedString = [[NSAttributedString alloc]
+      initWithString: @"Done.\n"
+      attributes: defaultDictionary
+    ] ;
+    [mOutputTextView.textStorage appendAttributedString:attributedString] ;
+  }else{
+    NSDictionary * defaultDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+      mBuildTextFont, NSFontAttributeName,
+      [NSColor redColor], NSForegroundColorAttributeName,
+      nil
+    ] ;
+    NSAttributedString * attributedString = [[NSAttributedString alloc]
+      initWithString: [NSString stringWithFormat: @"Error, termination status %d.\n", inTerminationStatus]
+      attributes: defaultDictionary
+    ] ;
+    [mOutputTextView.textStorage appendAttributedString:attributedString] ;
+  }
 //---
   [[NSRunLoop mainRunLoop]
     performSelector:@selector (pmReleaseBuildTask)

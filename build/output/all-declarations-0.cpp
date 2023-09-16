@@ -911,7 +911,6 @@ mProperty_mStep (in_mStep) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_M_5F_processor::isValid (void) const {
-  /* return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mStep.isValid () ; */
   return mProperty_lkey.isValid () ;
 }
 
@@ -1010,6 +1009,20 @@ void GALGAS_M_5F_processor::addAssign_operation (const GALGAS_lstring & inKey,
   const char * kInsertErrorMessage = "@M_5F_processor insert error: '%K' already in map" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_M_5F_processor GALGAS_M_5F_processor::add_operation (const GALGAS_M_5F_processor & inOperand,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const {
+  GALGAS_M_5F_processor result = *this ;
+  cEnumerator_M_5F_processor enumerator (inOperand, kENUMERATION_UP) ;
+  while (enumerator.hasCurrentObject ()) {
+    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIndex (HERE), enumerator.current_mStep (HERE), inCompiler COMMA_THERE) ;
+    enumerator.gotoNextObject () ;
+  }
+  return result ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1239,7 +1252,6 @@ mProperty_mScalingFactor (in_mScalingFactor) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_M_5F_network::isValid (void) const {
-  /* return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mCANnetwork.isValid () && mProperty_mScalingFactor.isValid () ; */
   return mProperty_lkey.isValid () ;
 }
 
@@ -1346,6 +1358,20 @@ void GALGAS_M_5F_network::addAssign_operation (const GALGAS_lstring & inKey,
   const char * kInsertErrorMessage = "@M_5F_network insert error: '%K' already in map" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_M_5F_network GALGAS_M_5F_network::add_operation (const GALGAS_M_5F_network & inOperand,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const {
+  GALGAS_M_5F_network result = *this ;
+  cEnumerator_M_5F_network enumerator (inOperand, kENUMERATION_UP) ;
+  while (enumerator.hasCurrentObject ()) {
+    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIndex (HERE), enumerator.current_mCANnetwork (HERE), enumerator.current_mScalingFactor (HERE), inCompiler COMMA_THERE) ;
+    enumerator.gotoNextObject () ;
+  }
+  return result ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2641,7 +2667,6 @@ mProperty_mMessageKind (in_mMessageKind) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_M_5F_messages::isValid (void) const {
-  /* return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mClass.isValid () && mProperty_mNetworkIndex.isValid () && mProperty_mBytesCount.isValid () && mProperty_mPriority.isValid () && mProperty_mOffset.isValid () && mProperty_mDeadline.isValid () && mProperty_mPeriod.isValid () && mProperty_mMessageKind.isValid () ; */
   return mProperty_lkey.isValid () ;
 }
 
@@ -2796,6 +2821,20 @@ void GALGAS_M_5F_messages::addAssign_operation (const GALGAS_lstring & inKey,
   const char * kInsertErrorMessage = "@M_5F_messages insert error: '%K' already in map" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_M_5F_messages GALGAS_M_5F_messages::add_operation (const GALGAS_M_5F_messages & inOperand,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const {
+  GALGAS_M_5F_messages result = *this ;
+  cEnumerator_M_5F_messages enumerator (inOperand, kENUMERATION_UP) ;
+  while (enumerator.hasCurrentObject ()) {
+    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIndex (HERE), enumerator.current_mClass (HERE), enumerator.current_mNetworkIndex (HERE), enumerator.current_mBytesCount (HERE), enumerator.current_mPriority (HERE), enumerator.current_mOffset (HERE), enumerator.current_mDeadline (HERE), enumerator.current_mPeriod (HERE), enumerator.current_mMessageKind (HERE), inCompiler COMMA_THERE) ;
+    enumerator.gotoNextObject () ;
+  }
+  return result ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4015,7 +4054,6 @@ mProperty_mTaskKind (in_mTaskKind) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_M_5F_tasks::isValid (void) const {
-  /* return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mPriority.isValid () && mProperty_mOffset.isValid () && mProperty_mDeadline.isValid () && mProperty_mDurationMin.isValid () && mProperty_mDurationMax.isValid () && mProperty_mProcessor.isValid () && mProperty_mPeriod.isValid () && mProperty_mTaskKind.isValid () ; */
   return mProperty_lkey.isValid () ;
 }
 
@@ -4170,6 +4208,20 @@ void GALGAS_M_5F_tasks::addAssign_operation (const GALGAS_lstring & inKey,
   const char * kInsertErrorMessage = "@M_5F_tasks insert error: '%K' already in map" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_M_5F_tasks GALGAS_M_5F_tasks::add_operation (const GALGAS_M_5F_tasks & inOperand,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const {
+  GALGAS_M_5F_tasks result = *this ;
+  cEnumerator_M_5F_tasks enumerator (inOperand, kENUMERATION_UP) ;
+  while (enumerator.hasCurrentObject ()) {
+    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIndex (HERE), enumerator.current_mPriority (HERE), enumerator.current_mOffset (HERE), enumerator.current_mDeadline (HERE), enumerator.current_mDurationMin (HERE), enumerator.current_mDurationMax (HERE), enumerator.current_mProcessor (HERE), enumerator.current_mPeriod (HERE), enumerator.current_mTaskKind (HERE), inCompiler COMMA_THERE) ;
+    enumerator.gotoNextObject () ;
+  }
+  return result ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
