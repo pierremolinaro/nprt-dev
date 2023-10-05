@@ -301,18 +301,19 @@
   mSourceDisplayArrayControllerHigh.selectionIndex = (selectedTab < sourceDisplayArray.count) ? selectedTab : 0 ;
   // NSLog (@"DONE") ;
 //---
+  NSUserDefaultsController * udc = [NSUserDefaultsController sharedUserDefaultsController] ;
   [mCaseSensitiveSearchCheckbox
     bind: NSValueBinding
-    toObject: [NSUserDefaultsController sharedUserDefaultsController]
+    toObject: udc
     withKeyPath: @"values.SENSITIVE-SEARCH"
     options: nil
   ] ;
-  [mGlobalReplaceTextField
-    bind: NSValueBinding
-    toObject: [NSUserDefaultsController sharedUserDefaultsController]
-    withKeyPath: @"values.GLOBAL-REPLACE-FIELD"
-    options: nil
-  ] ;
+//  [mGlobalReplaceTextField
+//    bind: NSValueBinding
+//    toObject: udc
+//    withKeyPath: @"values.GLOBAL-REPLACE-FIELD"
+//    options: nil
+//  ] ;
   [[NSUserDefaults standardUserDefaults]
     addObserver: self
     forKeyPath: [NSString stringWithFormat:@"searchMatrixFor:%@", mBaseFilePreferenceKey]
@@ -444,9 +445,9 @@
   [mCaseSensitiveSearchCheckbox
     unbind: NSValueBinding
   ] ;
-  [mGlobalReplaceTextField
-    unbind: NSValueBinding
-  ] ;
+//  [mGlobalReplaceTextField
+//    unbind: NSValueBinding
+//  ] ;
 //  [mSearchMatrix
 //    unbind:@"selectedIndex"
 //  ] ;
@@ -1058,12 +1059,6 @@ static const utf32 COCOA_ERROR_ID   = TO_UNICODE (4) ;
   #endif
   mBuildTask = nil ;
   [NSApp requestUserAttention: NSInformationalRequest] ;
-//  if ((! mHasSpoken) && (mErrorCount >= 40)) {
-//    mHasSpoken = YES ;
-//    NSString * thePhrase = [NSString stringWithFormat:@"OOOOOOOh! %@ a fait %lu erreurs", NSFullUserName (), mErrorCount] ;
-//    NSSpeechSynthesizer * speech = [[NSSpeechSynthesizer alloc] initWithVoice:nil] ;
-//    [speech startSpeakingString:thePhrase] ;
-//  }
 }
 
 //----------------------------------------------------------------------------------------------------------------------
