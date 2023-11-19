@@ -360,7 +360,7 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     strcpy(resource.mResourceName,network.current_lkey (HERE).mProperty_string.stringValue ().cString (HERE));
   	resource.mResourceType= network.current_mCANnetwork (HERE).boolValue ();
     resource.mStep = (int32_t) network.current_mScalingFactor (HERE).mProperty_uint.uintValue () ;		
- 		min_NetworkStep = min (min_NetworkStep, resource.mStep);
+ 		min_NetworkStep = nprt_min_macro (min_NetworkStep, resource.mStep);
  	 	
  	 	Resource.appendObject (resource) ;
     network.gotoNextObject () ;

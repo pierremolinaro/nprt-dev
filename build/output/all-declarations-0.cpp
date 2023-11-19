@@ -52,113 +52,37 @@ static const char * gLexicalMessage_oa_5F_scanner_incorrectEndOfComment = "incor
 static const char * gLexicalMessage_oa_5F_scanner_internalError = "internal error" ;
 
 //----------------------------------------------------------------------------------------------------------------------
-//          Syntax error messages, for every terminal symbol                                     
-//----------------------------------------------------------------------------------------------------------------------
-
-//--- Syntax error message for terminal '$identifier$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_identifier = "an identifier" ;
-
-//--- Syntax error message for terminal '$literal_integer$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_literal_5F_integer = "a decimal number" ;
-
-//--- Syntax error message for terminal '$system$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_system = "the 'system' key word" ;
-
-//--- Syntax error message for terminal '$end$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_end = "the 'end' key word" ;
-
-//--- Syntax error message for terminal '$task$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_task = "the 'task' key word" ;
-
-//--- Syntax error message for terminal '$standard$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_standard = "the 'standard' key word" ;
-
-//--- Syntax error message for terminal '$extended$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_extended = "the 'extended' key word" ;
-
-//--- Syntax error message for terminal '$message$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_message = "the 'message' key word" ;
-
-//--- Syntax error message for terminal '$length$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_length = "the 'length' key word" ;
-
-//--- Syntax error message for terminal '$priority$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_priority = "the 'priority' key word" ;
-
-//--- Syntax error message for terminal '$period$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_period = "the 'period' key word" ;
-
-//--- Syntax error message for terminal '$offset$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_offset = "the 'offset' key word" ;
-
-//--- Syntax error message for terminal '$on$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_on = "the 'on' key word" ;
-
-//--- Syntax error message for terminal '$deadline$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_deadline = "the 'deadline' key word" ;
-
-//--- Syntax error message for terminal '$duration$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_duration = "the 'duration' key word" ;
-
-//--- Syntax error message for terminal '$processor$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_processor = "the 'processor' key word" ;
-
-//--- Syntax error message for terminal '$can$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_can = "the 'can' key word" ;
-
-//--- Syntax error message for terminal '$van$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_van = "the 'van' key word" ;
-
-//--- Syntax error message for terminal '$network$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_network = "the 'network' key word" ;
-
-//--- Syntax error message for terminal '$scalingfactor$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_scalingfactor = "the 'scalingfactor' key word" ;
-
-//--- Syntax error message for terminal '$every$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner_every = "the 'every' key word" ;
-
-//--- Syntax error message for terminal '$,$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner__2C_ = "the '','' delimitor" ;
-
-//--- Syntax error message for terminal '$;$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner__3B_ = "the '';'' delimitor" ;
-
-//--- Syntax error message for terminal '$..$' :
-static const char * gSyntaxErrorMessage_oa_5F_scanner__2E__2E_ = "the ''..'' delimitor" ;
-
-//----------------------------------------------------------------------------------------------------------------------
 //                getMessageForTerminal                                                          
 //----------------------------------------------------------------------------------------------------------------------
 
-C_String C_Lexique_oa_5F_scanner::getMessageForTerminal (const int16_t inTerminalIndex) const {
+C_String C_Lexique_oa_5F_scanner::getMessageForTerminal (const int32_t inTerminalIndex) const {
   C_String result = "<unknown>" ;
   if ((inTerminalIndex >= 0) && (inTerminalIndex < 25)) {
     static const char * syntaxErrorMessageArray [25] = {kEndOfSourceLexicalErrorMessage,
-        gSyntaxErrorMessage_oa_5F_scanner_identifier,
-        gSyntaxErrorMessage_oa_5F_scanner_literal_5F_integer,
-        gSyntaxErrorMessage_oa_5F_scanner_system,
-        gSyntaxErrorMessage_oa_5F_scanner_end,
-        gSyntaxErrorMessage_oa_5F_scanner_task,
-        gSyntaxErrorMessage_oa_5F_scanner_standard,
-        gSyntaxErrorMessage_oa_5F_scanner_extended,
-        gSyntaxErrorMessage_oa_5F_scanner_message,
-        gSyntaxErrorMessage_oa_5F_scanner_length,
-        gSyntaxErrorMessage_oa_5F_scanner_priority,
-        gSyntaxErrorMessage_oa_5F_scanner_period,
-        gSyntaxErrorMessage_oa_5F_scanner_offset,
-        gSyntaxErrorMessage_oa_5F_scanner_on,
-        gSyntaxErrorMessage_oa_5F_scanner_deadline,
-        gSyntaxErrorMessage_oa_5F_scanner_duration,
-        gSyntaxErrorMessage_oa_5F_scanner_processor,
-        gSyntaxErrorMessage_oa_5F_scanner_can,
-        gSyntaxErrorMessage_oa_5F_scanner_van,
-        gSyntaxErrorMessage_oa_5F_scanner_network,
-        gSyntaxErrorMessage_oa_5F_scanner_scalingfactor,
-        gSyntaxErrorMessage_oa_5F_scanner_every,
-        gSyntaxErrorMessage_oa_5F_scanner__2C_,
-        gSyntaxErrorMessage_oa_5F_scanner__3B_,
-        gSyntaxErrorMessage_oa_5F_scanner__2E__2E_
+        "an identifier",
+        "a decimal number",
+        "the 'system' key word",
+        "the 'end' key word",
+        "the 'task' key word",
+        "the 'standard' key word",
+        "the 'extended' key word",
+        "the 'message' key word",
+        "the 'length' key word",
+        "the 'priority' key word",
+        "the 'period' key word",
+        "the 'offset' key word",
+        "the 'on' key word",
+        "the 'deadline' key word",
+        "the 'duration' key word",
+        "the 'processor' key word",
+        "the 'can' key word",
+        "the 'van' key word",
+        "the 'network' key word",
+        "the 'scalingfactor' key word",
+        "the 'every' key word",
+        "the '','' delimitor",
+        "the '';'' delimitor",
+        "the ''..'' delimitor"
     } ;
     result = syntaxErrorMessageArray [inTerminalIndex] ;
   }
@@ -415,7 +339,7 @@ static const C_unicode_lexique_table_entry ktable_for_oa_5F_scanner_delimitorsLi
   C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner__2E__2E_, 2, C_Lexique_oa_5F_scanner::kToken__2E__2E_)
 } ;
 
-int16_t C_Lexique_oa_5F_scanner::search_into_delimitorsList (const C_String & inSearchedString) {
+int32_t C_Lexique_oa_5F_scanner::search_into_delimitorsList (const C_String & inSearchedString) {
   return searchInList (inSearchedString, ktable_for_oa_5F_scanner_delimitorsList, ktable_size_oa_5F_scanner_delimitorsList) ;
 }
 
@@ -447,7 +371,7 @@ static const C_unicode_lexique_table_entry ktable_for_oa_5F_scanner_keyWordList 
   C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_scalingfactor, 13, C_Lexique_oa_5F_scanner::kToken_scalingfactor)
 } ;
 
-int16_t C_Lexique_oa_5F_scanner::search_into_keyWordList (const C_String & inSearchedString) {
+int32_t C_Lexique_oa_5F_scanner::search_into_keyWordList (const C_String & inSearchedString) {
   return searchInList (inSearchedString, ktable_for_oa_5F_scanner_keyWordList, ktable_size_oa_5F_scanner_keyWordList) ;
 }
 
@@ -459,7 +383,7 @@ int16_t C_Lexique_oa_5F_scanner::search_into_keyWordList (const C_String & inSea
 C_String C_Lexique_oa_5F_scanner::getCurrentTokenString (const cToken * inTokenPtr) const {
   const cTokenFor_oa_5F_scanner * ptr = (const cTokenFor_oa_5F_scanner *) inTokenPtr ;
   C_String s ;
-  if (ptr == NULL) {
+  if (ptr == nullptr) {
     s.appendCString("$$") ;
   }else{
     switch (ptr->mTokenCode) {
@@ -708,7 +632,7 @@ bool C_Lexique_oa_5F_scanner::parseLexicalToken (void) {
 //----------------------------------------------------------------------------------------------------------------------
 
 void C_Lexique_oa_5F_scanner::enterToken (cTokenFor_oa_5F_scanner & ioToken) {
-  cTokenFor_oa_5F_scanner * ptr = NULL ;
+  cTokenFor_oa_5F_scanner * ptr = nullptr ;
   macroMyNew (ptr, cTokenFor_oa_5F_scanner ()) ;
   ptr->mTokenCode = ioToken.mTokenCode ;
   // ptr->mIsOptional = ioToken.mIsOptional ;
@@ -917,7 +841,7 @@ bool cMapElement_M_5F_processor::isValid (void) const {
 //----------------------------------------------------------------------------------------------------------------------
 
 cMapElement * cMapElement_M_5F_processor::copy (void) {
-  cMapElement * result = NULL ;
+  cMapElement * result = nullptr ;
   macroMyNew (result, cMapElement_M_5F_processor (mProperty_lkey, mProperty_mIndex, mProperty_mStep COMMA_HERE)) ;
   return result ;
 }
@@ -1001,7 +925,7 @@ void GALGAS_M_5F_processor::addAssign_operation (const GALGAS_lstring & inKey,
                                                  const GALGAS_luint & inArgument1,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
-  cMapElement_M_5F_processor * p = NULL ;
+  cMapElement_M_5F_processor * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_processor (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -1032,7 +956,7 @@ void GALGAS_M_5F_processor::setter_insertKey (GALGAS_lstring inKey,
                                               GALGAS_luint inArgument1,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) {
-  cMapElement_M_5F_processor * p = NULL ;
+  cMapElement_M_5F_processor * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_processor (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -1057,7 +981,7 @@ void GALGAS_M_5F_processor::method_searchKey (GALGAS_lstring inKey,
                                                                                              inCompiler,
                                                                                              kSearchErrorMessage_M_5F_processor_searchKey
                                                                                              COMMA_THERE) ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
   }else{
@@ -1075,7 +999,7 @@ GALGAS_uint GALGAS_M_5F_processor::getter_mIndexForKey (const GALGAS_string & in
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_processor * p = (const cMapElement_M_5F_processor *) attributes ;
   GALGAS_uint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_processor) ;
     result = p->mProperty_mIndex ;
   }
@@ -1090,7 +1014,7 @@ GALGAS_luint GALGAS_M_5F_processor::getter_mStepForKey (const GALGAS_string & in
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_processor * p = (const cMapElement_M_5F_processor *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_processor) ;
     result = p->mProperty_mStep ;
   }
@@ -1105,7 +1029,7 @@ void GALGAS_M_5F_processor::setter_setMIndexForKey (GALGAS_uint inAttributeValue
                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_processor * p = (cMapElement_M_5F_processor *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_processor) ;
     p->mProperty_mIndex = inAttributeValue ;
   }
@@ -1119,7 +1043,7 @@ void GALGAS_M_5F_processor::setter_setMStepForKey (GALGAS_luint inAttributeValue
                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_processor * p = (cMapElement_M_5F_processor *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_processor) ;
     p->mProperty_mStep = inAttributeValue ;
   }
@@ -1181,7 +1105,7 @@ bool GALGAS_M_5F_processor::optional_searchKey (const GALGAS_string & inKey,
                                                 GALGAS_uint & outArgument0,
                                                 GALGAS_luint & outArgument1) const {
   const cMapElement_M_5F_processor * p = (const cMapElement_M_5F_processor *) searchForKey (inKey) ;
-  const bool result = NULL != p ;
+  const bool result = nullptr != p ;
   if (result) {
     macroValidSharedObject (p, cMapElement_M_5F_processor) ;
     outArgument0 = p->mProperty_mIndex ;
@@ -1201,7 +1125,7 @@ bool GALGAS_M_5F_processor::optional_searchKey (const GALGAS_string & inKey,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_M_5F_processor ("M_processor",
-                                       NULL) ;
+                                       nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1212,7 +1136,7 @@ const C_galgas_type_descriptor * GALGAS_M_5F_processor::staticTypeDescriptor (vo
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_M_5F_processor::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_M_5F_processor (*this)) ;
   }
@@ -1226,8 +1150,8 @@ GALGAS_M_5F_processor GALGAS_M_5F_processor::extractObject (const GALGAS_object 
                                                             COMMA_LOCATION_ARGS) {
   GALGAS_M_5F_processor result ;
   const GALGAS_M_5F_processor * p = (const GALGAS_M_5F_processor *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_M_5F_processor *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_M_5F_processor *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("M_processor", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1258,7 +1182,7 @@ bool cMapElement_M_5F_network::isValid (void) const {
 //----------------------------------------------------------------------------------------------------------------------
 
 cMapElement * cMapElement_M_5F_network::copy (void) {
-  cMapElement * result = NULL ;
+  cMapElement * result = nullptr ;
   macroMyNew (result, cMapElement_M_5F_network (mProperty_lkey, mProperty_mIndex, mProperty_mCANnetwork, mProperty_mScalingFactor COMMA_HERE)) ;
   return result ;
 }
@@ -1350,7 +1274,7 @@ void GALGAS_M_5F_network::addAssign_operation (const GALGAS_lstring & inKey,
                                                const GALGAS_luint & inArgument2,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) {
-  cMapElement_M_5F_network * p = NULL ;
+  cMapElement_M_5F_network * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_network (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -1382,7 +1306,7 @@ void GALGAS_M_5F_network::setter_insertKey (GALGAS_lstring inKey,
                                             GALGAS_luint inArgument2,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) {
-  cMapElement_M_5F_network * p = NULL ;
+  cMapElement_M_5F_network * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_network (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -1408,7 +1332,7 @@ void GALGAS_M_5F_network::method_searchKey (GALGAS_lstring inKey,
                                                                                          inCompiler,
                                                                                          kSearchErrorMessage_M_5F_network_searchKey
                                                                                          COMMA_THERE) ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
@@ -1428,7 +1352,7 @@ GALGAS_uint GALGAS_M_5F_network::getter_mIndexForKey (const GALGAS_string & inKe
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_network * p = (const cMapElement_M_5F_network *) attributes ;
   GALGAS_uint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_network) ;
     result = p->mProperty_mIndex ;
   }
@@ -1443,7 +1367,7 @@ GALGAS_bool GALGAS_M_5F_network::getter_mCANnetworkForKey (const GALGAS_string &
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_network * p = (const cMapElement_M_5F_network *) attributes ;
   GALGAS_bool result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_network) ;
     result = p->mProperty_mCANnetwork ;
   }
@@ -1458,7 +1382,7 @@ GALGAS_luint GALGAS_M_5F_network::getter_mScalingFactorForKey (const GALGAS_stri
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_network * p = (const cMapElement_M_5F_network *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_network) ;
     result = p->mProperty_mScalingFactor ;
   }
@@ -1473,7 +1397,7 @@ void GALGAS_M_5F_network::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_network * p = (cMapElement_M_5F_network *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_network) ;
     p->mProperty_mIndex = inAttributeValue ;
   }
@@ -1487,7 +1411,7 @@ void GALGAS_M_5F_network::setter_setMCANnetworkForKey (GALGAS_bool inAttributeVa
                                                        COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_network * p = (cMapElement_M_5F_network *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_network) ;
     p->mProperty_mCANnetwork = inAttributeValue ;
   }
@@ -1501,7 +1425,7 @@ void GALGAS_M_5F_network::setter_setMScalingFactorForKey (GALGAS_luint inAttribu
                                                           COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_network * p = (cMapElement_M_5F_network *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_network) ;
     p->mProperty_mScalingFactor = inAttributeValue ;
   }
@@ -1572,7 +1496,7 @@ bool GALGAS_M_5F_network::optional_searchKey (const GALGAS_string & inKey,
                                               GALGAS_bool & outArgument1,
                                               GALGAS_luint & outArgument2) const {
   const cMapElement_M_5F_network * p = (const cMapElement_M_5F_network *) searchForKey (inKey) ;
-  const bool result = NULL != p ;
+  const bool result = nullptr != p ;
   if (result) {
     macroValidSharedObject (p, cMapElement_M_5F_network) ;
     outArgument0 = p->mProperty_mIndex ;
@@ -1594,7 +1518,7 @@ bool GALGAS_M_5F_network::optional_searchKey (const GALGAS_string & inKey,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_M_5F_network ("M_network",
-                                     NULL) ;
+                                     nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1605,7 +1529,7 @@ const C_galgas_type_descriptor * GALGAS_M_5F_network::staticTypeDescriptor (void
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_M_5F_network::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_M_5F_network (*this)) ;
   }
@@ -1619,8 +1543,8 @@ GALGAS_M_5F_network GALGAS_M_5F_network::extractObject (const GALGAS_object & in
                                                         COMMA_LOCATION_ARGS) {
   GALGAS_M_5F_network result ;
   const GALGAS_M_5F_network * p = (const GALGAS_M_5F_network *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_M_5F_network *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_M_5F_network *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("M_network", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1653,7 +1577,7 @@ typeComparisonResult GALGAS_AC_5F_canMessage::objectCompare (const GALGAS_AC_5F_
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -1688,7 +1612,7 @@ acStrongPtr_class (THERE) {
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_AC_5F_canMessage ("AC_canMessage",
-                                         NULL) ;
+                                         nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1699,7 +1623,7 @@ const C_galgas_type_descriptor * GALGAS_AC_5F_canMessage::staticTypeDescriptor (
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_AC_5F_canMessage::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_AC_5F_canMessage (*this)) ;
   }
@@ -1713,8 +1637,8 @@ GALGAS_AC_5F_canMessage GALGAS_AC_5F_canMessage::extractObject (const GALGAS_obj
                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_AC_5F_canMessage result ;
   const GALGAS_AC_5F_canMessage * p = (const GALGAS_AC_5F_canMessage *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_AC_5F_canMessage *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_AC_5F_canMessage *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("AC_canMessage", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1752,9 +1676,9 @@ AC_GALGAS_weak_reference () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_AC_5F_canMessage_2D_weak & GALGAS_AC_5F_canMessage_2D_weak::operator = (const GALGAS_AC_5F_canMessage & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -1779,9 +1703,9 @@ GALGAS_AC_5F_canMessage_2D_weak GALGAS_AC_5F_canMessage_2D_weak::constructor_nil
 
 GALGAS_AC_5F_canMessage GALGAS_AC_5F_canMessage_2D_weak::bang_AC_5F_canMessage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_AC_5F_canMessage result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_AC_5F_canMessage) ;
@@ -1799,7 +1723,7 @@ GALGAS_AC_5F_canMessage GALGAS_AC_5F_canMessage_2D_weak::bang_AC_5F_canMessage_2
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_AC_5F_canMessage_2D_weak ("AC_canMessage-weak",
-                                                 NULL) ;
+                                                 nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1810,7 +1734,7 @@ const C_galgas_type_descriptor * GALGAS_AC_5F_canMessage_2D_weak::staticTypeDesc
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_AC_5F_canMessage_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_AC_5F_canMessage_2D_weak (*this)) ;
   }
@@ -1824,8 +1748,8 @@ GALGAS_AC_5F_canMessage_2D_weak GALGAS_AC_5F_canMessage_2D_weak::extractObject (
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_AC_5F_canMessage_2D_weak result ;
   const GALGAS_AC_5F_canMessage_2D_weak * p = (const GALGAS_AC_5F_canMessage_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_AC_5F_canMessage_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_AC_5F_canMessage_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("AC_canMessage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1863,7 +1787,7 @@ typeComparisonResult GALGAS_C_5F_canIndependantMessage::objectCompare (const GAL
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -1917,7 +1841,7 @@ void cPtr_C_5F_canIndependantMessage::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_C_5F_canIndependantMessage::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_C_5F_canIndependantMessage (THERE)) ;
   return ptr ;
 }
@@ -1942,7 +1866,7 @@ const C_galgas_type_descriptor * GALGAS_C_5F_canIndependantMessage::staticTypeDe
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_C_5F_canIndependantMessage::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_C_5F_canIndependantMessage (*this)) ;
   }
@@ -1956,8 +1880,8 @@ GALGAS_C_5F_canIndependantMessage GALGAS_C_5F_canIndependantMessage::extractObje
                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_canIndependantMessage result ;
   const GALGAS_C_5F_canIndependantMessage * p = (const GALGAS_C_5F_canIndependantMessage *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_C_5F_canIndependantMessage *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_C_5F_canIndependantMessage *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_canIndependantMessage", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1995,9 +1919,9 @@ GALGAS_AC_5F_canMessage_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_C_5F_canIndependantMessage_2D_weak & GALGAS_C_5F_canIndependantMessage_2D_weak::operator = (const GALGAS_C_5F_canIndependantMessage & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -2022,9 +1946,9 @@ GALGAS_C_5F_canIndependantMessage_2D_weak GALGAS_C_5F_canIndependantMessage_2D_w
 
 GALGAS_C_5F_canIndependantMessage GALGAS_C_5F_canIndependantMessage_2D_weak::bang_C_5F_canIndependantMessage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_C_5F_canIndependantMessage result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_C_5F_canIndependantMessage) ;
@@ -2053,7 +1977,7 @@ const C_galgas_type_descriptor * GALGAS_C_5F_canIndependantMessage_2D_weak::stat
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_C_5F_canIndependantMessage_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_C_5F_canIndependantMessage_2D_weak (*this)) ;
   }
@@ -2067,8 +1991,8 @@ GALGAS_C_5F_canIndependantMessage_2D_weak GALGAS_C_5F_canIndependantMessage_2D_w
                                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_canIndependantMessage_2D_weak result ;
   const GALGAS_C_5F_canIndependantMessage_2D_weak * p = (const GALGAS_C_5F_canIndependantMessage_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_C_5F_canIndependantMessage_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_C_5F_canIndependantMessage_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_canIndependantMessage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2113,7 +2037,7 @@ typeComparisonResult GALGAS_C_5F_canMessageFromMessage::objectCompare (const GAL
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -2153,7 +2077,7 @@ GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage::constructor
 
 void GALGAS_C_5F_canMessageFromMessage::setter_setMMessageIndex (GALGAS_uint inValue
                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  if (NULL != mObjectPtr) {
+  if (nullptr != mObjectPtr) {
     cPtr_C_5F_canMessageFromMessage * p = (cPtr_C_5F_canMessageFromMessage *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_canMessageFromMessage) ;
     p->mProperty_mMessageIndex = inValue ;
@@ -2163,7 +2087,7 @@ void GALGAS_C_5F_canMessageFromMessage::setter_setMMessageIndex (GALGAS_uint inV
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_uint GALGAS_C_5F_canMessageFromMessage::readProperty_mMessageIndex (void) const {
-  if (NULL == mObjectPtr) {
+  if (nullptr == mObjectPtr) {
     return GALGAS_uint () ;
   }else{
     cPtr_C_5F_canMessageFromMessage * p = (cPtr_C_5F_canMessageFromMessage *) mObjectPtr ;
@@ -2198,7 +2122,7 @@ void cPtr_C_5F_canMessageFromMessage::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_C_5F_canMessageFromMessage::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_C_5F_canMessageFromMessage (mProperty_mMessageIndex COMMA_THERE)) ;
   return ptr ;
 }
@@ -2223,7 +2147,7 @@ const C_galgas_type_descriptor * GALGAS_C_5F_canMessageFromMessage::staticTypeDe
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_C_5F_canMessageFromMessage::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_C_5F_canMessageFromMessage (*this)) ;
   }
@@ -2237,8 +2161,8 @@ GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage::extractObje
                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_canMessageFromMessage result ;
   const GALGAS_C_5F_canMessageFromMessage * p = (const GALGAS_C_5F_canMessageFromMessage *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_C_5F_canMessageFromMessage *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_C_5F_canMessageFromMessage *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_canMessageFromMessage", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2276,9 +2200,9 @@ GALGAS_AC_5F_canMessage_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_C_5F_canMessageFromMessage_2D_weak & GALGAS_C_5F_canMessageFromMessage_2D_weak::operator = (const GALGAS_C_5F_canMessageFromMessage & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -2303,9 +2227,9 @@ GALGAS_C_5F_canMessageFromMessage_2D_weak GALGAS_C_5F_canMessageFromMessage_2D_w
 
 GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage_2D_weak::bang_C_5F_canMessageFromMessage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_C_5F_canMessageFromMessage result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_C_5F_canMessageFromMessage) ;
@@ -2334,7 +2258,7 @@ const C_galgas_type_descriptor * GALGAS_C_5F_canMessageFromMessage_2D_weak::stat
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_C_5F_canMessageFromMessage_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_C_5F_canMessageFromMessage_2D_weak (*this)) ;
   }
@@ -2348,8 +2272,8 @@ GALGAS_C_5F_canMessageFromMessage_2D_weak GALGAS_C_5F_canMessageFromMessage_2D_w
                                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_canMessageFromMessage_2D_weak result ;
   const GALGAS_C_5F_canMessageFromMessage_2D_weak * p = (const GALGAS_C_5F_canMessageFromMessage_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_C_5F_canMessageFromMessage_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_C_5F_canMessageFromMessage_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_canMessageFromMessage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2394,7 +2318,7 @@ typeComparisonResult GALGAS_C_5F_canMessageFromTask::objectCompare (const GALGAS
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -2434,7 +2358,7 @@ GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask::constructor_new (
 
 void GALGAS_C_5F_canMessageFromTask::setter_setMTaskIndex (GALGAS_uint inValue
                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  if (NULL != mObjectPtr) {
+  if (nullptr != mObjectPtr) {
     cPtr_C_5F_canMessageFromTask * p = (cPtr_C_5F_canMessageFromTask *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_canMessageFromTask) ;
     p->mProperty_mTaskIndex = inValue ;
@@ -2444,7 +2368,7 @@ void GALGAS_C_5F_canMessageFromTask::setter_setMTaskIndex (GALGAS_uint inValue
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_uint GALGAS_C_5F_canMessageFromTask::readProperty_mTaskIndex (void) const {
-  if (NULL == mObjectPtr) {
+  if (nullptr == mObjectPtr) {
     return GALGAS_uint () ;
   }else{
     cPtr_C_5F_canMessageFromTask * p = (cPtr_C_5F_canMessageFromTask *) mObjectPtr ;
@@ -2479,7 +2403,7 @@ void cPtr_C_5F_canMessageFromTask::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_C_5F_canMessageFromTask::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_C_5F_canMessageFromTask (mProperty_mTaskIndex COMMA_THERE)) ;
   return ptr ;
 }
@@ -2504,7 +2428,7 @@ const C_galgas_type_descriptor * GALGAS_C_5F_canMessageFromTask::staticTypeDescr
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_C_5F_canMessageFromTask::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_C_5F_canMessageFromTask (*this)) ;
   }
@@ -2518,8 +2442,8 @@ GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask::extractObject (co
                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_canMessageFromTask result ;
   const GALGAS_C_5F_canMessageFromTask * p = (const GALGAS_C_5F_canMessageFromTask *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_C_5F_canMessageFromTask *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_C_5F_canMessageFromTask *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_canMessageFromTask", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2557,9 +2481,9 @@ GALGAS_AC_5F_canMessage_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_C_5F_canMessageFromTask_2D_weak & GALGAS_C_5F_canMessageFromTask_2D_weak::operator = (const GALGAS_C_5F_canMessageFromTask & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -2584,9 +2508,9 @@ GALGAS_C_5F_canMessageFromTask_2D_weak GALGAS_C_5F_canMessageFromTask_2D_weak::c
 
 GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask_2D_weak::bang_C_5F_canMessageFromTask_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_C_5F_canMessageFromTask result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_C_5F_canMessageFromTask) ;
@@ -2615,7 +2539,7 @@ const C_galgas_type_descriptor * GALGAS_C_5F_canMessageFromTask_2D_weak::staticT
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_C_5F_canMessageFromTask_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_C_5F_canMessageFromTask_2D_weak (*this)) ;
   }
@@ -2629,8 +2553,8 @@ GALGAS_C_5F_canMessageFromTask_2D_weak GALGAS_C_5F_canMessageFromTask_2D_weak::e
                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_canMessageFromTask_2D_weak result ;
   const GALGAS_C_5F_canMessageFromTask_2D_weak * p = (const GALGAS_C_5F_canMessageFromTask_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_C_5F_canMessageFromTask_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_C_5F_canMessageFromTask_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_canMessageFromTask-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2673,7 +2597,7 @@ bool cMapElement_M_5F_messages::isValid (void) const {
 //----------------------------------------------------------------------------------------------------------------------
 
 cMapElement * cMapElement_M_5F_messages::copy (void) {
-  cMapElement * result = NULL ;
+  cMapElement * result = nullptr ;
   macroMyNew (result, cMapElement_M_5F_messages (mProperty_lkey, mProperty_mIndex, mProperty_mClass, mProperty_mNetworkIndex, mProperty_mBytesCount, mProperty_mPriority, mProperty_mOffset, mProperty_mDeadline, mProperty_mPeriod, mProperty_mMessageKind COMMA_HERE)) ;
   return result ;
 }
@@ -2813,7 +2737,7 @@ void GALGAS_M_5F_messages::addAssign_operation (const GALGAS_lstring & inKey,
                                                 const GALGAS_AC_5F_canMessage & inArgument8,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) {
-  cMapElement_M_5F_messages * p = NULL ;
+  cMapElement_M_5F_messages * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_messages (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -2851,7 +2775,7 @@ void GALGAS_M_5F_messages::setter_insertKey (GALGAS_lstring inKey,
                                              GALGAS_AC_5F_canMessage inArgument8,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) {
-  cMapElement_M_5F_messages * p = NULL ;
+  cMapElement_M_5F_messages * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_messages (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -2883,7 +2807,7 @@ void GALGAS_M_5F_messages::method_searchKey (GALGAS_lstring inKey,
                                                                                            inCompiler,
                                                                                            kSearchErrorMessage_M_5F_messages_searchKey
                                                                                            COMMA_THERE) ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
@@ -2915,7 +2839,7 @@ GALGAS_uint GALGAS_M_5F_messages::getter_mIndexForKey (const GALGAS_string & inK
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
   GALGAS_uint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mIndex ;
   }
@@ -2930,7 +2854,7 @@ GALGAS_luint GALGAS_M_5F_messages::getter_mClassForKey (const GALGAS_string & in
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mClass ;
   }
@@ -2945,7 +2869,7 @@ GALGAS_uint GALGAS_M_5F_messages::getter_mNetworkIndexForKey (const GALGAS_strin
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
   GALGAS_uint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mNetworkIndex ;
   }
@@ -2960,7 +2884,7 @@ GALGAS_luint GALGAS_M_5F_messages::getter_mBytesCountForKey (const GALGAS_string
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mBytesCount ;
   }
@@ -2975,7 +2899,7 @@ GALGAS_luint GALGAS_M_5F_messages::getter_mPriorityForKey (const GALGAS_string &
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mPriority ;
   }
@@ -2990,7 +2914,7 @@ GALGAS_luint GALGAS_M_5F_messages::getter_mOffsetForKey (const GALGAS_string & i
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mOffset ;
   }
@@ -3005,7 +2929,7 @@ GALGAS_luint GALGAS_M_5F_messages::getter_mDeadlineForKey (const GALGAS_string &
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mDeadline ;
   }
@@ -3020,7 +2944,7 @@ GALGAS_luint GALGAS_M_5F_messages::getter_mPeriodForKey (const GALGAS_string & i
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mPeriod ;
   }
@@ -3035,7 +2959,7 @@ GALGAS_AC_5F_canMessage GALGAS_M_5F_messages::getter_mMessageKindForKey (const G
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
   GALGAS_AC_5F_canMessage result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mMessageKind ;
   }
@@ -3050,7 +2974,7 @@ void GALGAS_M_5F_messages::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     p->mProperty_mIndex = inAttributeValue ;
   }
@@ -3064,7 +2988,7 @@ void GALGAS_M_5F_messages::setter_setMClassForKey (GALGAS_luint inAttributeValue
                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     p->mProperty_mClass = inAttributeValue ;
   }
@@ -3078,7 +3002,7 @@ void GALGAS_M_5F_messages::setter_setMNetworkIndexForKey (GALGAS_uint inAttribut
                                                           COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     p->mProperty_mNetworkIndex = inAttributeValue ;
   }
@@ -3092,7 +3016,7 @@ void GALGAS_M_5F_messages::setter_setMBytesCountForKey (GALGAS_luint inAttribute
                                                         COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     p->mProperty_mBytesCount = inAttributeValue ;
   }
@@ -3106,7 +3030,7 @@ void GALGAS_M_5F_messages::setter_setMPriorityForKey (GALGAS_luint inAttributeVa
                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     p->mProperty_mPriority = inAttributeValue ;
   }
@@ -3120,7 +3044,7 @@ void GALGAS_M_5F_messages::setter_setMOffsetForKey (GALGAS_luint inAttributeValu
                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     p->mProperty_mOffset = inAttributeValue ;
   }
@@ -3134,7 +3058,7 @@ void GALGAS_M_5F_messages::setter_setMDeadlineForKey (GALGAS_luint inAttributeVa
                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     p->mProperty_mDeadline = inAttributeValue ;
   }
@@ -3148,7 +3072,7 @@ void GALGAS_M_5F_messages::setter_setMPeriodForKey (GALGAS_luint inAttributeValu
                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     p->mProperty_mPeriod = inAttributeValue ;
   }
@@ -3162,7 +3086,7 @@ void GALGAS_M_5F_messages::setter_setMMessageKindForKey (GALGAS_AC_5F_canMessage
                                                          COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     p->mProperty_mMessageKind = inAttributeValue ;
   }
@@ -3287,7 +3211,7 @@ bool GALGAS_M_5F_messages::optional_searchKey (const GALGAS_string & inKey,
                                                GALGAS_luint & outArgument7,
                                                GALGAS_AC_5F_canMessage & outArgument8) const {
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) searchForKey (inKey) ;
-  const bool result = NULL != p ;
+  const bool result = nullptr != p ;
   if (result) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     outArgument0 = p->mProperty_mIndex ;
@@ -3321,7 +3245,7 @@ bool GALGAS_M_5F_messages::optional_searchKey (const GALGAS_string & inKey,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_M_5F_messages ("M_messages",
-                                      NULL) ;
+                                      nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3332,7 +3256,7 @@ const C_galgas_type_descriptor * GALGAS_M_5F_messages::staticTypeDescriptor (voi
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_M_5F_messages::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_M_5F_messages (*this)) ;
   }
@@ -3346,8 +3270,8 @@ GALGAS_M_5F_messages GALGAS_M_5F_messages::extractObject (const GALGAS_object & 
                                                           COMMA_LOCATION_ARGS) {
   GALGAS_M_5F_messages result ;
   const GALGAS_M_5F_messages * p = (const GALGAS_M_5F_messages *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_M_5F_messages *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_M_5F_messages *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("M_messages", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3380,7 +3304,7 @@ typeComparisonResult GALGAS_AC_5F_task::objectCompare (const GALGAS_AC_5F_task &
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -3415,7 +3339,7 @@ acStrongPtr_class (THERE) {
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_AC_5F_task ("AC_task",
-                                   NULL) ;
+                                   nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3426,7 +3350,7 @@ const C_galgas_type_descriptor * GALGAS_AC_5F_task::staticTypeDescriptor (void) 
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_AC_5F_task::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_AC_5F_task (*this)) ;
   }
@@ -3440,8 +3364,8 @@ GALGAS_AC_5F_task GALGAS_AC_5F_task::extractObject (const GALGAS_object & inObje
                                                     COMMA_LOCATION_ARGS) {
   GALGAS_AC_5F_task result ;
   const GALGAS_AC_5F_task * p = (const GALGAS_AC_5F_task *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_AC_5F_task *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_AC_5F_task *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("AC_task", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3479,9 +3403,9 @@ AC_GALGAS_weak_reference () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_AC_5F_task_2D_weak & GALGAS_AC_5F_task_2D_weak::operator = (const GALGAS_AC_5F_task & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -3506,9 +3430,9 @@ GALGAS_AC_5F_task_2D_weak GALGAS_AC_5F_task_2D_weak::constructor_nil (LOCATION_A
 
 GALGAS_AC_5F_task GALGAS_AC_5F_task_2D_weak::bang_AC_5F_task_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_AC_5F_task result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_AC_5F_task) ;
@@ -3526,7 +3450,7 @@ GALGAS_AC_5F_task GALGAS_AC_5F_task_2D_weak::bang_AC_5F_task_2D_weak (C_Compiler
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_AC_5F_task_2D_weak ("AC_task-weak",
-                                           NULL) ;
+                                           nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3537,7 +3461,7 @@ const C_galgas_type_descriptor * GALGAS_AC_5F_task_2D_weak::staticTypeDescriptor
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_AC_5F_task_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_AC_5F_task_2D_weak (*this)) ;
   }
@@ -3551,8 +3475,8 @@ GALGAS_AC_5F_task_2D_weak GALGAS_AC_5F_task_2D_weak::extractObject (const GALGAS
                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_AC_5F_task_2D_weak result ;
   const GALGAS_AC_5F_task_2D_weak * p = (const GALGAS_AC_5F_task_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_AC_5F_task_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_AC_5F_task_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("AC_task-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3590,7 +3514,7 @@ typeComparisonResult GALGAS_C_5F_independantTask::objectCompare (const GALGAS_C_
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -3644,7 +3568,7 @@ void cPtr_C_5F_independantTask::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_C_5F_independantTask::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_C_5F_independantTask (THERE)) ;
   return ptr ;
 }
@@ -3669,7 +3593,7 @@ const C_galgas_type_descriptor * GALGAS_C_5F_independantTask::staticTypeDescript
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_C_5F_independantTask::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_C_5F_independantTask (*this)) ;
   }
@@ -3683,8 +3607,8 @@ GALGAS_C_5F_independantTask GALGAS_C_5F_independantTask::extractObject (const GA
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_independantTask result ;
   const GALGAS_C_5F_independantTask * p = (const GALGAS_C_5F_independantTask *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_C_5F_independantTask *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_C_5F_independantTask *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_independantTask", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3722,9 +3646,9 @@ GALGAS_AC_5F_task_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_C_5F_independantTask_2D_weak & GALGAS_C_5F_independantTask_2D_weak::operator = (const GALGAS_C_5F_independantTask & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -3749,9 +3673,9 @@ GALGAS_C_5F_independantTask_2D_weak GALGAS_C_5F_independantTask_2D_weak::constru
 
 GALGAS_C_5F_independantTask GALGAS_C_5F_independantTask_2D_weak::bang_C_5F_independantTask_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_C_5F_independantTask result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_C_5F_independantTask) ;
@@ -3780,7 +3704,7 @@ const C_galgas_type_descriptor * GALGAS_C_5F_independantTask_2D_weak::staticType
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_C_5F_independantTask_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_C_5F_independantTask_2D_weak (*this)) ;
   }
@@ -3794,8 +3718,8 @@ GALGAS_C_5F_independantTask_2D_weak GALGAS_C_5F_independantTask_2D_weak::extract
                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_independantTask_2D_weak result ;
   const GALGAS_C_5F_independantTask_2D_weak * p = (const GALGAS_C_5F_independantTask_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_C_5F_independantTask_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_C_5F_independantTask_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_independantTask-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3833,9 +3757,9 @@ GALGAS_AC_5F_task_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_C_5F_taskDependsFromTask_2D_weak & GALGAS_C_5F_taskDependsFromTask_2D_weak::operator = (const GALGAS_C_5F_taskDependsFromTask & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -3860,9 +3784,9 @@ GALGAS_C_5F_taskDependsFromTask_2D_weak GALGAS_C_5F_taskDependsFromTask_2D_weak:
 
 GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask_2D_weak::bang_C_5F_taskDependsFromTask_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_C_5F_taskDependsFromTask result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_C_5F_taskDependsFromTask) ;
@@ -3891,7 +3815,7 @@ const C_galgas_type_descriptor * GALGAS_C_5F_taskDependsFromTask_2D_weak::static
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_C_5F_taskDependsFromTask_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_C_5F_taskDependsFromTask_2D_weak (*this)) ;
   }
@@ -3905,8 +3829,8 @@ GALGAS_C_5F_taskDependsFromTask_2D_weak GALGAS_C_5F_taskDependsFromTask_2D_weak:
                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_taskDependsFromTask_2D_weak result ;
   const GALGAS_C_5F_taskDependsFromTask_2D_weak * p = (const GALGAS_C_5F_taskDependsFromTask_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_C_5F_taskDependsFromTask_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_C_5F_taskDependsFromTask_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_taskDependsFromTask-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3944,9 +3868,9 @@ GALGAS_AC_5F_task_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_C_5F_taskDependsFromMessage_2D_weak & GALGAS_C_5F_taskDependsFromMessage_2D_weak::operator = (const GALGAS_C_5F_taskDependsFromMessage & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -3971,9 +3895,9 @@ GALGAS_C_5F_taskDependsFromMessage_2D_weak GALGAS_C_5F_taskDependsFromMessage_2D
 
 GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage_2D_weak::bang_C_5F_taskDependsFromMessage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_C_5F_taskDependsFromMessage result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_C_5F_taskDependsFromMessage) ;
@@ -4002,7 +3926,7 @@ const C_galgas_type_descriptor * GALGAS_C_5F_taskDependsFromMessage_2D_weak::sta
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_C_5F_taskDependsFromMessage_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_C_5F_taskDependsFromMessage_2D_weak (*this)) ;
   }
@@ -4016,8 +3940,8 @@ GALGAS_C_5F_taskDependsFromMessage_2D_weak GALGAS_C_5F_taskDependsFromMessage_2D
                                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_taskDependsFromMessage_2D_weak result ;
   const GALGAS_C_5F_taskDependsFromMessage_2D_weak * p = (const GALGAS_C_5F_taskDependsFromMessage_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_C_5F_taskDependsFromMessage_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_C_5F_taskDependsFromMessage_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_taskDependsFromMessage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -4060,7 +3984,7 @@ bool cMapElement_M_5F_tasks::isValid (void) const {
 //----------------------------------------------------------------------------------------------------------------------
 
 cMapElement * cMapElement_M_5F_tasks::copy (void) {
-  cMapElement * result = NULL ;
+  cMapElement * result = nullptr ;
   macroMyNew (result, cMapElement_M_5F_tasks (mProperty_lkey, mProperty_mIndex, mProperty_mPriority, mProperty_mOffset, mProperty_mDeadline, mProperty_mDurationMin, mProperty_mDurationMax, mProperty_mProcessor, mProperty_mPeriod, mProperty_mTaskKind COMMA_HERE)) ;
   return result ;
 }
@@ -4200,7 +4124,7 @@ void GALGAS_M_5F_tasks::addAssign_operation (const GALGAS_lstring & inKey,
                                              const GALGAS_AC_5F_task & inArgument8,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) {
-  cMapElement_M_5F_tasks * p = NULL ;
+  cMapElement_M_5F_tasks * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_tasks (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -4238,7 +4162,7 @@ void GALGAS_M_5F_tasks::setter_insertKey (GALGAS_lstring inKey,
                                           GALGAS_AC_5F_task inArgument8,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) {
-  cMapElement_M_5F_tasks * p = NULL ;
+  cMapElement_M_5F_tasks * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_tasks (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -4270,7 +4194,7 @@ void GALGAS_M_5F_tasks::method_searchKey (GALGAS_lstring inKey,
                                                                                      inCompiler,
                                                                                      kSearchErrorMessage_M_5F_tasks_searchKey
                                                                                      COMMA_THERE) ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
@@ -4302,7 +4226,7 @@ GALGAS_uint GALGAS_M_5F_tasks::getter_mIndexForKey (const GALGAS_string & inKey,
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
   GALGAS_uint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mIndex ;
   }
@@ -4317,7 +4241,7 @@ GALGAS_luint GALGAS_M_5F_tasks::getter_mPriorityForKey (const GALGAS_string & in
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mPriority ;
   }
@@ -4332,7 +4256,7 @@ GALGAS_luint GALGAS_M_5F_tasks::getter_mOffsetForKey (const GALGAS_string & inKe
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mOffset ;
   }
@@ -4347,7 +4271,7 @@ GALGAS_luint GALGAS_M_5F_tasks::getter_mDeadlineForKey (const GALGAS_string & in
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mDeadline ;
   }
@@ -4362,7 +4286,7 @@ GALGAS_luint GALGAS_M_5F_tasks::getter_mDurationMinForKey (const GALGAS_string &
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mDurationMin ;
   }
@@ -4377,7 +4301,7 @@ GALGAS_luint GALGAS_M_5F_tasks::getter_mDurationMaxForKey (const GALGAS_string &
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mDurationMax ;
   }
@@ -4392,7 +4316,7 @@ GALGAS_uint GALGAS_M_5F_tasks::getter_mProcessorForKey (const GALGAS_string & in
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
   GALGAS_uint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mProcessor ;
   }
@@ -4407,7 +4331,7 @@ GALGAS_luint GALGAS_M_5F_tasks::getter_mPeriodForKey (const GALGAS_string & inKe
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
   GALGAS_luint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mPeriod ;
   }
@@ -4422,7 +4346,7 @@ GALGAS_AC_5F_task GALGAS_M_5F_tasks::getter_mTaskKindForKey (const GALGAS_string
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
   GALGAS_AC_5F_task result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mTaskKind ;
   }
@@ -4437,7 +4361,7 @@ void GALGAS_M_5F_tasks::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     p->mProperty_mIndex = inAttributeValue ;
   }
@@ -4451,7 +4375,7 @@ void GALGAS_M_5F_tasks::setter_setMPriorityForKey (GALGAS_luint inAttributeValue
                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     p->mProperty_mPriority = inAttributeValue ;
   }
@@ -4465,7 +4389,7 @@ void GALGAS_M_5F_tasks::setter_setMOffsetForKey (GALGAS_luint inAttributeValue,
                                                  COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     p->mProperty_mOffset = inAttributeValue ;
   }
@@ -4479,7 +4403,7 @@ void GALGAS_M_5F_tasks::setter_setMDeadlineForKey (GALGAS_luint inAttributeValue
                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     p->mProperty_mDeadline = inAttributeValue ;
   }
@@ -4493,7 +4417,7 @@ void GALGAS_M_5F_tasks::setter_setMDurationMinForKey (GALGAS_luint inAttributeVa
                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     p->mProperty_mDurationMin = inAttributeValue ;
   }
@@ -4507,7 +4431,7 @@ void GALGAS_M_5F_tasks::setter_setMDurationMaxForKey (GALGAS_luint inAttributeVa
                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     p->mProperty_mDurationMax = inAttributeValue ;
   }
@@ -4521,7 +4445,7 @@ void GALGAS_M_5F_tasks::setter_setMProcessorForKey (GALGAS_uint inAttributeValue
                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     p->mProperty_mProcessor = inAttributeValue ;
   }
@@ -4535,7 +4459,7 @@ void GALGAS_M_5F_tasks::setter_setMPeriodForKey (GALGAS_luint inAttributeValue,
                                                  COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     p->mProperty_mPeriod = inAttributeValue ;
   }
@@ -4549,7 +4473,7 @@ void GALGAS_M_5F_tasks::setter_setMTaskKindForKey (GALGAS_AC_5F_task inAttribute
                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     p->mProperty_mTaskKind = inAttributeValue ;
   }
@@ -4674,7 +4598,7 @@ bool GALGAS_M_5F_tasks::optional_searchKey (const GALGAS_string & inKey,
                                             GALGAS_luint & outArgument7,
                                             GALGAS_AC_5F_task & outArgument8) const {
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) searchForKey (inKey) ;
-  const bool result = NULL != p ;
+  const bool result = nullptr != p ;
   if (result) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     outArgument0 = p->mProperty_mIndex ;
@@ -4708,7 +4632,7 @@ bool GALGAS_M_5F_tasks::optional_searchKey (const GALGAS_string & inKey,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_M_5F_tasks ("M_tasks",
-                                   NULL) ;
+                                   nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -4719,7 +4643,7 @@ const C_galgas_type_descriptor * GALGAS_M_5F_tasks::staticTypeDescriptor (void) 
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_M_5F_tasks::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_M_5F_tasks (*this)) ;
   }
@@ -4733,8 +4657,8 @@ GALGAS_M_5F_tasks GALGAS_M_5F_tasks::extractObject (const GALGAS_object & inObje
                                                     COMMA_LOCATION_ARGS) {
   GALGAS_M_5F_tasks result ;
   const GALGAS_M_5F_tasks * p = (const GALGAS_M_5F_tasks *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_M_5F_tasks *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_M_5F_tasks *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("M_tasks", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -5585,7 +5509,7 @@ typeComparisonResult GALGAS_C_5F_taskDependsFromTask::objectCompare (const GALGA
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -5627,7 +5551,7 @@ GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::constructor_new
 
 void GALGAS_C_5F_taskDependsFromTask::setter_setMTask (GALGAS_uint inValue
                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  if (NULL != mObjectPtr) {
+  if (nullptr != mObjectPtr) {
     cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
     p->mProperty_mTask = inValue ;
@@ -5638,7 +5562,7 @@ void GALGAS_C_5F_taskDependsFromTask::setter_setMTask (GALGAS_uint inValue
 
 void GALGAS_C_5F_taskDependsFromTask::setter_setMEvery (GALGAS_luint inValue
                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  if (NULL != mObjectPtr) {
+  if (nullptr != mObjectPtr) {
     cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
     p->mProperty_mEvery = inValue ;
@@ -5648,7 +5572,7 @@ void GALGAS_C_5F_taskDependsFromTask::setter_setMEvery (GALGAS_luint inValue
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_uint GALGAS_C_5F_taskDependsFromTask::readProperty_mTask (void) const {
-  if (NULL == mObjectPtr) {
+  if (nullptr == mObjectPtr) {
     return GALGAS_uint () ;
   }else{
     cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
@@ -5660,7 +5584,7 @@ GALGAS_uint GALGAS_C_5F_taskDependsFromTask::readProperty_mTask (void) const {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_luint GALGAS_C_5F_taskDependsFromTask::readProperty_mEvery (void) const {
-  if (NULL == mObjectPtr) {
+  if (nullptr == mObjectPtr) {
     return GALGAS_luint () ;
   }else{
     cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
@@ -5699,7 +5623,7 @@ void cPtr_C_5F_taskDependsFromTask::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_C_5F_taskDependsFromTask::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_C_5F_taskDependsFromTask (mProperty_mTask, mProperty_mEvery COMMA_THERE)) ;
   return ptr ;
 }
@@ -5724,7 +5648,7 @@ const C_galgas_type_descriptor * GALGAS_C_5F_taskDependsFromTask::staticTypeDesc
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_C_5F_taskDependsFromTask::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_C_5F_taskDependsFromTask (*this)) ;
   }
@@ -5738,8 +5662,8 @@ GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::extractObject (
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_taskDependsFromTask result ;
   const GALGAS_C_5F_taskDependsFromTask * p = (const GALGAS_C_5F_taskDependsFromTask *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_C_5F_taskDependsFromTask *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_C_5F_taskDependsFromTask *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_taskDependsFromTask", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -5788,7 +5712,7 @@ typeComparisonResult GALGAS_C_5F_taskDependsFromMessage::objectCompare (const GA
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -5830,7 +5754,7 @@ GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage::construct
 
 void GALGAS_C_5F_taskDependsFromMessage::setter_setMMessage (GALGAS_uint inValue
                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  if (NULL != mObjectPtr) {
+  if (nullptr != mObjectPtr) {
     cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
     p->mProperty_mMessage = inValue ;
@@ -5841,7 +5765,7 @@ void GALGAS_C_5F_taskDependsFromMessage::setter_setMMessage (GALGAS_uint inValue
 
 void GALGAS_C_5F_taskDependsFromMessage::setter_setMEvery (GALGAS_luint inValue
                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  if (NULL != mObjectPtr) {
+  if (nullptr != mObjectPtr) {
     cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
     p->mProperty_mEvery = inValue ;
@@ -5851,7 +5775,7 @@ void GALGAS_C_5F_taskDependsFromMessage::setter_setMEvery (GALGAS_luint inValue
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_uint GALGAS_C_5F_taskDependsFromMessage::readProperty_mMessage (void) const {
-  if (NULL == mObjectPtr) {
+  if (nullptr == mObjectPtr) {
     return GALGAS_uint () ;
   }else{
     cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
@@ -5863,7 +5787,7 @@ GALGAS_uint GALGAS_C_5F_taskDependsFromMessage::readProperty_mMessage (void) con
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_luint GALGAS_C_5F_taskDependsFromMessage::readProperty_mEvery (void) const {
-  if (NULL == mObjectPtr) {
+  if (nullptr == mObjectPtr) {
     return GALGAS_luint () ;
   }else{
     cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
@@ -5902,7 +5826,7 @@ void cPtr_C_5F_taskDependsFromMessage::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_C_5F_taskDependsFromMessage::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_C_5F_taskDependsFromMessage (mProperty_mMessage, mProperty_mEvery COMMA_THERE)) ;
   return ptr ;
 }
@@ -5927,7 +5851,7 @@ const C_galgas_type_descriptor * GALGAS_C_5F_taskDependsFromMessage::staticTypeD
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_C_5F_taskDependsFromMessage::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_C_5F_taskDependsFromMessage (*this)) ;
   }
@@ -5941,8 +5865,8 @@ GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage::extractOb
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_taskDependsFromMessage result ;
   const GALGAS_C_5F_taskDependsFromMessage * p = (const GALGAS_C_5F_taskDependsFromMessage *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_C_5F_taskDependsFromMessage *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_C_5F_taskDependsFromMessage *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_taskDependsFromMessage", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -5971,7 +5895,7 @@ GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage::extractOb
 #define NONTERMINAL(nt) ((-nt)-1)
 #define END_PRODUCTION  (0)
 
-static const int16_t gProductions_oa_grammar [] = {
+static const int32_t gProductions_oa_grammar [] = {
 // At index 0 : <axiome>, in file 'oa_parser.ggs', line 11
   TERMINAL (C_Lexique_oa_5F_scanner::kToken_system) // $system$
 , NONTERMINAL (1) // <select_oa_5F_parser_0>
@@ -6184,7 +6108,7 @@ static const cProductionNameDescriptor gProductionNames_oa_grammar [36] = {
 //                                                                                                                      
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const int16_t gProductionIndexes_oa_grammar [36] = {
+static const int32_t gProductionIndexes_oa_grammar [36] = {
 0, // index 0 : <axiome>, in file 'oa_parser.ggs', line 11
 4, // index 1 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
 5, // index 2 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
@@ -6229,7 +6153,7 @@ static const int16_t gProductionIndexes_oa_grammar [36] = {
 //                                                                                                                      
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const int16_t gFirstProductionIndexes_oa_grammar [18] = {
+static const int32_t gFirstProductionIndexes_oa_grammar [18] = {
 0, // at 0 : <axiome>
 1, // at 1 : <select_oa_5F_parser_0>
 6, // at 2 : <select_oa_5F_parser_1>
@@ -6255,7 +6179,7 @@ static const int16_t gFirstProductionIndexes_oa_grammar [18] = {
 //                                                                                                                      
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const int16_t gDecision_oa_grammar [] = {
+static const int32_t gDecision_oa_grammar [] = {
 // At index 0 : <axiome> only one production, no choice
   -1,
 //---- Added non terminal symbols from 'select' and 'repeat' instructions
@@ -6333,7 +6257,7 @@ C_Lexique_oa_5F_scanner::kToken_task, -1, // Choice 2
 //                                                                                                                      
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const int16_t gDecisionIndexes_oa_grammar [18] = {
+static const int32_t gDecisionIndexes_oa_grammar [18] = {
 0, // at 0 : <axiome>
 1, // at 1 : <select_oa_5F_parser_0>
 15, // at 2 : <select_oa_5F_parser_1>
@@ -6722,7 +6646,7 @@ void GALGAS_M_5F_processor_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_M_5F_processor_2D_element ("M_processor-element",
-                                                  NULL) ;
+                                                  nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -6733,7 +6657,7 @@ const C_galgas_type_descriptor * GALGAS_M_5F_processor_2D_element::staticTypeDes
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_M_5F_processor_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_M_5F_processor_2D_element (*this)) ;
   }
@@ -6747,8 +6671,8 @@ GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::extractObject
                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_M_5F_processor_2D_element result ;
   const GALGAS_M_5F_processor_2D_element * p = (const GALGAS_M_5F_processor_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_M_5F_processor_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_M_5F_processor_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("M_processor-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -6867,7 +6791,7 @@ void GALGAS_M_5F_network_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_M_5F_network_2D_element ("M_network-element",
-                                                NULL) ;
+                                                nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -6878,7 +6802,7 @@ const C_galgas_type_descriptor * GALGAS_M_5F_network_2D_element::staticTypeDescr
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_M_5F_network_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_M_5F_network_2D_element (*this)) ;
   }
@@ -6892,8 +6816,8 @@ GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::extractObject (co
                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_M_5F_network_2D_element result ;
   const GALGAS_M_5F_network_2D_element * p = (const GALGAS_M_5F_network_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_M_5F_network_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_M_5F_network_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("M_network-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -7063,7 +6987,7 @@ void GALGAS_M_5F_messages_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_M_5F_messages_2D_element ("M_messages-element",
-                                                 NULL) ;
+                                                 nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -7074,7 +6998,7 @@ const C_galgas_type_descriptor * GALGAS_M_5F_messages_2D_element::staticTypeDesc
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_M_5F_messages_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_M_5F_messages_2D_element (*this)) ;
   }
@@ -7088,8 +7012,8 @@ GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::extractObject (
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_M_5F_messages_2D_element result ;
   const GALGAS_M_5F_messages_2D_element * p = (const GALGAS_M_5F_messages_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_M_5F_messages_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_M_5F_messages_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("M_messages-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -7259,7 +7183,7 @@ void GALGAS_M_5F_tasks_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_M_5F_tasks_2D_element ("M_tasks-element",
-                                              NULL) ;
+                                              nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -7270,7 +7194,7 @@ const C_galgas_type_descriptor * GALGAS_M_5F_tasks_2D_element::staticTypeDescrip
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_M_5F_tasks_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_M_5F_tasks_2D_element (*this)) ;
   }
@@ -7284,8 +7208,8 @@ GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::extractObject (const 
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_M_5F_tasks_2D_element result ;
   const GALGAS_M_5F_tasks_2D_element * p = (const GALGAS_M_5F_tasks_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_M_5F_tasks_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_M_5F_tasks_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("M_tasks-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -7356,14 +7280,14 @@ static void print_tool_help_message (void) {
 
 static const char * kSourceFileExtensions [] = {
   "nprt",
-  NULL
+  nullptr
 } ;    
 
 //----------------------------------------------------------------------------------------------------------------------
 
 static const char * kSourceFileHelpMessages [] = {
   "an '.nprt' source file",
-  NULL
+  nullptr
 } ;    
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7431,8 +7355,8 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
     returnCode = 1 ;
   }else{
   //--- Common lexique object
-    C_Compiler * commonCompiler = NULL ;
-    macroMyNew (commonCompiler, C_Compiler (NULL COMMA_HERE)) ;
+    C_Compiler * commonCompiler = nullptr ;
+    macroMyNew (commonCompiler, C_Compiler (nullptr COMMA_HERE)) ;
     try{
       routine_before (commonCompiler COMMA_HERE) ;
       cLexiqueIntrospection::handleGetKeywordListOption (commonCompiler) ;

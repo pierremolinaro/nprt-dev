@@ -48,8 +48,8 @@ CalculateHyperPeriod (const TC_UniqueArray <cElement> & Element) {
         LCM = ((uint64_t) (Element (index COMMA_HERE).mPeriod * Element (index COMMA_HERE).mEvery)) * LCM / GCD ((uint64_t) (Element (index COMMA_HERE).mPeriod * Element (index COMMA_HERE).mEvery), LCM) ;
       }
       if (Element (index COMMA_HERE).mIsIndependant){
-        minimumOffset = min (minimumOffset, Element (index COMMA_HERE).mOffset);
-        maximumOffset = MAX (maximumOffset, Element (index COMMA_HERE).mOffset);
+        minimumOffset = nprt_min_macro (minimumOffset, Element (index COMMA_HERE).mOffset);
+        maximumOffset = nprt_max_macro (maximumOffset, Element (index COMMA_HERE).mOffset);
       }
     }
   }
@@ -97,7 +97,7 @@ int32_t minDuration=INT32_MAX;
 	for (int32_t index = 0; index < NumOfResources ;index++){
     for (int32_t i = 0; i < NumOfElements ;i++){
       if( index == Element (i COMMA_HERE).mResourceId){
-       	minDuration = min( minDuration, Element (i COMMA_HERE).mMinDuration);
+       	minDuration = nprt_min_macro( minDuration, Element (i COMMA_HERE).mMinDuration);
        	Element (i COMMA_HERE).mEvery = Element (i COMMA_HERE).mEveryMultiple;
       }
     }
@@ -456,7 +456,7 @@ TC_UniqueArray <cReadyAtThisInstant>  oReadyAtThisInstant ;
   	int32_t minStarting = INT32_MAX;
   	for (int32_t i = 0; i < sizeofStarting ; i ++) {
     	if ( !oReadyAtThisInstant (i COMMA_HERE).mMarked){
-    		if ( (minStarting=min(minStarting,oReadyAtThisInstant (i COMMA_HERE).mThisInstant))==
+    		if ( (minStarting=nprt_min_macro(minStarting,oReadyAtThisInstant (i COMMA_HERE).mThisInstant))==
     			oReadyAtThisInstant (i COMMA_HERE).mThisInstant ){
     		  lIndex=i;	
     		}

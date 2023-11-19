@@ -29,7 +29,7 @@ ExtractWorstBestRT (C_Compiler * inCompiler,
   
   int32_t Smallest_bit_time = INT32_MAX ;
   for (int32_t i=0 ; i < Num_ofResources ; i++ ){
-  	Smallest_bit_time = min(Smallest_bit_time, Resource (i COMMA_HERE).mStep);
+  	Smallest_bit_time = nprt_min_macro(Smallest_bit_time, Resource (i COMMA_HERE).mStep);
   }
   
   if(CreateIntermediateFiles){
@@ -105,12 +105,12 @@ ExtractWorstBestRT (C_Compiler * inCompiler,
       } else if ( (exElement (i COMMA_HERE).mOccurrence % exElement (i COMMA_HERE).mEvery) == 0 ){
               
       	MTElement ( index COMMA_HERE).mBestResponseTime = 
-      		min(MTElement ( index COMMA_HERE).mBestResponseTime,
+      		nprt_min_macro(MTElement ( index COMMA_HERE).mBestResponseTime,
         	 	inResponseTimeArray (i COMMA_HERE).mBestResponseTime - 
             (i-DC-(exElement (i COMMA_HERE).mEvery-1))*MTElement ( index COMMA_HERE).mPeriod);
                   
       	MTElement ( index COMMA_HERE).mWorstResponseTime = 
-      		MAX(MTElement ( index COMMA_HERE).mWorstResponseTime,
+      		nprt_max_macro(MTElement ( index COMMA_HERE).mWorstResponseTime,
            	inResponseTimeArray (i COMMA_HERE).mWorstResponseTime - 
            	(i-DC-(exElement (i COMMA_HERE).mEvery-1))*MTElement ( index COMMA_HERE).mPeriod);
                            

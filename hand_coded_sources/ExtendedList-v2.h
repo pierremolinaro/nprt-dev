@@ -11,8 +11,8 @@ extern "C" {
 
 class C_HTML_FileWrite ;
 
-#define min(x, y)   ((x) < (y) ? (x) : (y))
-#define MAX(x, y)   ((x) > (y) ? (x) : (y))
+#define nprt_min_macro(x, y)   ((x) < (y) ? (x) : (y))
+#define nprt_max_macro(x, y)   ((x) > (y) ? (x) : (y))
 
 class cActivity {
   public : int32_t mOccurrence ; //Element occurrence during the hyper period
