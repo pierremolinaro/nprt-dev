@@ -1,4 +1,4 @@
-#include "collections/TC_UniqueArray.h"
+#include "generic-arraies/TC_UniqueArray.h"
 #include "files/C_HTML_FileWrite.h"
 #include "galgas2/C_Compiler.h"
 #include <stdio.h>

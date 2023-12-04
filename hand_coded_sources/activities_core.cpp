@@ -18,7 +18,7 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#include "collections/TC_UniqueArray.h"
+#include "generic-arraies/TC_UniqueArray.h"
 #include "streams/C_ConsoleOut.h"
 #include "command_line_interface/F_Analyze_CLI_Options.h"
 #include "command_line_interface/F_mainForLIBPM.h"
@@ -307,7 +307,7 @@ static inline cResourceSchedule * allocResourceNode (const int32_t inResourceCou
    }else{
     gResourceFreeList = p->mPtrToOtherResource ;
     p->mPtrToOtherResource = NULL ;
-    p->mArray.setCountToZero () ;
+    p->mArray.removeAllKeepingCapacity () ;
     p->mArray.appendObjects (inResourceCount, cResource2 ()) ;
   }
   return p ;

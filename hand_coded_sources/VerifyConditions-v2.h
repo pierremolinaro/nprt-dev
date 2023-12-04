@@ -1,6 +1,6 @@
 #pragma once
 
-#include "collections/TC_UniqueArray.h"
+#include "generic-arraies/TC_UniqueArray.h"
 class C_Compiler ;
 
 bool 

@@ -23,7 +23,7 @@
 
 //---------------------------------------------------------------------------*
 
-#include "collections/TC_UniqueArray.h"
+#include "generic-arraies/TC_UniqueArray.h"
 #include "strings/C_String.h"
 #include "ExtendedList.h"
 

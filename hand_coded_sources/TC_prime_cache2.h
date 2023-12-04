@@ -5,7 +5,7 @@
 //
 //  This file is part of libpm library
 //
-//  Copyright (C) 2001, ..., 2005 Pierre Molinaro.
+//  Copyright (C) 2001, ..., 2023 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -35,16 +35,15 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-template <class RESULT>
-class TC_prime_cache2 {
+template <class RESULT> class TC_prime_cache2 final {
 //--- Constructor
   public: TC_prime_cache2 (void) ;
 
 //--- Destructor
-  public: virtual ~TC_prime_cache2 (void) ;
+  public: ~TC_prime_cache2 (void) ;
 
 //--- Cache entry type
-  protected: class cCacheEntry {
+  protected: class cCacheEntry final {
     public: intptr_t mOperand1 ;
     public: intptr_t mOperand2 ;
     public: RESULT mResult ;

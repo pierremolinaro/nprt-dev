@@ -37,7 +37,7 @@ uint64_t C_us::smTrivialAdd ;
 //---------------------------------------------------------------------------*
 
 //--- Cache is handled by an prime integer sized array 
-#include "cache/TC_prime_cache2.h"
+#include "TC_prime_cache2.h"
 typedef TC_prime_cache2 <C_us::C_us_nodeInfo *> cCacheClass ;
 static cCacheClass gCache ;
 

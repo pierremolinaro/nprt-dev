@@ -18,7 +18,7 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#include "collections/TC_UniqueArray.h"
+#include "generic-arraies/TC_UniqueArray.h"
 #include "streams/C_ConsoleOut.h"
 #include "command_line_interface/F_Analyze_CLI_Options.h"
 #include "command_line_interface/F_mainForLIBPM.h"
@@ -457,7 +457,7 @@ independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inAct
 //--- Dump data structure
 //  scheduleMap.dumpStructure () ;
 //--- Build response time array
-  outResponseTimeArray.setCountToZero () ;
+  outResponseTimeArray.removeAllKeepingCapacity () ;
   outResponseTimeArray.setCapacity (activitiesCount) ;
   outResponseTimeArray.appendObjects (activitiesCount, cResponseTime ()) ;
   scheduleMap.computeBestAndWorstResponseTime (outResponseTimeArray) ;
