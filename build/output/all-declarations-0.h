@@ -9,6 +9,242 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 //
+// Phase 1: @2lstringlist list
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS__32_lstringlist : public AC_GALGAS_list {
+//--------------------------------- Default constructor
+  public: GALGAS__32_lstringlist (void) ;
+
+//--------------------------------- List constructor used by listmap
+  public: GALGAS__32_lstringlist (const capCollectionElementArray & inSharedArray) ;
+
+//--------------------------------- Element constructor
+  public: static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                 const class GALGAS_lstring & in_mValue_30_,
+                                                 const class GALGAS_lstring & in_mValue_31_
+                                                 COMMA_LOCATION_ARGS) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS__32_lstringlist extractObject (const GALGAS_object & inObject,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public: static class GALGAS__32_lstringlist constructor_emptyList (LOCATION_ARGS) ;
+
+  public: static class GALGAS__32_lstringlist constructor_listWithValue (const class GALGAS_lstring & inOperand0,
+                                                                         const class GALGAS_lstring & inOperand1
+                                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with expression)
+  public: VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS__32_lstringlist inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public: VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
+                                                     const class GALGAS_lstring & inOperand1
+                                                     COMMA_LOCATION_ARGS) ;
+//--------------------------------- + operator
+  public: VIRTUAL_IN_DEBUG GALGAS__32_lstringlist add_operation (const GALGAS__32_lstringlist & inOperand,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public: VIRTUAL_IN_DEBUG void setter_append (class GALGAS_lstring constinArgument0,
+                                               class GALGAS_lstring constinArgument1,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstring constinArgument0,
+                                                      class GALGAS_lstring constinArgument1,
+                                                      class GALGAS_uint constinArgument2,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstring & outArgument0,
+                                                 class GALGAS_lstring & outArgument1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstring & outArgument0,
+                                                class GALGAS_lstring & outArgument1,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstring & outArgument0,
+                                                      class GALGAS_lstring & outArgument1,
+                                                      class GALGAS_uint constinArgument2,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMValue_30_AtIndex (class GALGAS_lstring constinArgument0,
+                                                             class GALGAS_uint constinArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMValue_31_AtIndex (class GALGAS_lstring constinArgument0,
+                                                             class GALGAS_uint constinArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public: VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
+                                              class GALGAS_lstring & outArgument1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
+                                             class GALGAS_lstring & outArgument1,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mValue_30_AtIndex (const class GALGAS_uint & constinOperand0,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mValue_31_AtIndex (const class GALGAS_uint & constinOperand0,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS__32_lstringlist getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS__32_lstringlist getter_subListToIndex (const class GALGAS_uint & constinOperand0,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS__32_lstringlist getter_subListWithRange (const class GALGAS_range & constinOperand0,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+//--------------------------------- Friend
+
+  friend class cEnumerator__32_lstringlist ;
+ 
+} ; // End of GALGAS__32_lstringlist class
+
+//----------------------------------------------------------------------------------------------------------------------
+//   Enumerator declaration                                                                      
+//----------------------------------------------------------------------------------------------------------------------
+
+class cEnumerator__32_lstringlist : public cGenericAbstractEnumerator {
+  public: cEnumerator__32_lstringlist (const GALGAS__32_lstringlist & inEnumeratedObject,
+                                       const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public: class GALGAS_lstring current_mValue_30_ (LOCATION_ARGS) const ;
+  public: class GALGAS_lstring current_mValue_31_ (LOCATION_ARGS) const ;
+//--- Current element access
+  public: class GALGAS__32_lstringlist_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS__32_lstringlist ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @_32_lstringlist_2D_element struct
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS__32_lstringlist_2D_element : public AC_GALGAS_root {
+//--------------------------------- Properties
+  public: GALGAS_lstring mProperty_mValue_30_ ;
+  public: inline GALGAS_lstring readProperty_mValue_30_ (void) const {
+    return mProperty_mValue_30_ ;
+  }
+
+  public: GALGAS_lstring mProperty_mValue_31_ ;
+  public: inline GALGAS_lstring readProperty_mValue_31_ (void) const {
+    return mProperty_mValue_31_ ;
+  }
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
+  public: VIRTUAL_IN_DEBUG void drop (void) override ;
+
+//--------------------------------- Default constructor
+  public: GALGAS__32_lstringlist_2D_element (void) ;
+
+//--------------------------------- Property setters
+  public: inline void setter_setMValue_30_ (const GALGAS_lstring & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mValue_30_ = inValue ;
+  }
+
+  public: inline void setter_setMValue_31_ (const GALGAS_lstring & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mValue_31_ = inValue ;
+  }
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public: virtual ~ GALGAS__32_lstringlist_2D_element (void) ;
+
+//--------------------------------- Native constructor
+  public: GALGAS__32_lstringlist_2D_element (const GALGAS_lstring & in_mValue_30_,
+                                             const GALGAS_lstring & in_mValue_31_) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS__32_lstringlist_2D_element extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public: static class GALGAS__32_lstringlist_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                          const class GALGAS_lstring & inOperand1,
+                                                                          class C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public: VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: typeComparisonResult objectCompare (const GALGAS__32_lstringlist_2D_element & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GALGAS__32_lstringlist_2D_element class
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS__32_lstringlist_2D_element ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
 //LEXIQUE oa_5F_scanner
 //
 //----------------------------------------------------------------------------------------------------------------------
@@ -313,9 +549,6 @@ class GALGAS_M_5F_processor_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
   public: VIRTUAL_IN_DEBUG void drop (void) override ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_M_5F_processor_2D_element constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Default constructor
   public: GALGAS_M_5F_processor_2D_element (void) ;
 
@@ -353,7 +586,8 @@ class GALGAS_M_5F_processor_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public: static class GALGAS_M_5F_processor_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                          const class GALGAS_uint & inOperand1,
-                                                                         const class GALGAS_luint & inOperand2
+                                                                         const class GALGAS_luint & inOperand2,
+                                                                         class C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -587,9 +821,6 @@ class GALGAS_M_5F_network_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
   public: VIRTUAL_IN_DEBUG void drop (void) override ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_M_5F_network_2D_element constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Default constructor
   public: GALGAS_M_5F_network_2D_element (void) ;
 
@@ -633,7 +864,8 @@ class GALGAS_M_5F_network_2D_element : public AC_GALGAS_root {
   public: static class GALGAS_M_5F_network_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                        const class GALGAS_uint & inOperand1,
                                                                        const class GALGAS_bool & inOperand2,
-                                                                       const class GALGAS_luint & inOperand3
+                                                                       const class GALGAS_luint & inOperand3,
+                                                                       class C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -719,9 +951,6 @@ class GALGAS_AC_5F_canMessage_2D_weak : public AC_GALGAS_weak_reference {
 //--------------------------------- Default constructor
   public: GALGAS_AC_5F_canMessage_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_AC_5F_canMessage_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_AC_5F_canMessage_2D_weak (const class GALGAS_AC_5F_canMessage & inSource) ;
 
@@ -775,9 +1004,6 @@ class GALGAS_C_5F_canIndependantMessage : public GALGAS_AC_5F_canMessage {
 //--------------------------------- Default constructor
   public: GALGAS_C_5F_canIndependantMessage (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_C_5F_canIndependantMessage constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor from pointer
   public: GALGAS_C_5F_canIndependantMessage (const class cPtr_C_5F_canIndependantMessage * inSourcePtr) ;
 
@@ -828,9 +1054,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canIndependant
 class GALGAS_C_5F_canIndependantMessage_2D_weak : public GALGAS_AC_5F_canMessage_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_C_5F_canIndependantMessage_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_C_5F_canIndependantMessage_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_C_5F_canIndependantMessage_2D_weak (const class GALGAS_C_5F_canIndependantMessage & inSource) ;
@@ -884,9 +1107,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canIndependant
 class GALGAS_C_5F_canMessageFromMessage : public GALGAS_AC_5F_canMessage {
 //--------------------------------- Default constructor
   public: GALGAS_C_5F_canMessageFromMessage (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_C_5F_canMessageFromMessage constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_C_5F_canMessageFromMessage (const class cPtr_C_5F_canMessageFromMessage * inSourcePtr) ;
@@ -945,9 +1165,6 @@ class GALGAS_C_5F_canMessageFromMessage_2D_weak : public GALGAS_AC_5F_canMessage
 //--------------------------------- Default constructor
   public: GALGAS_C_5F_canMessageFromMessage_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_C_5F_canMessageFromMessage_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_C_5F_canMessageFromMessage_2D_weak (const class GALGAS_C_5F_canMessageFromMessage & inSource) ;
 
@@ -1000,9 +1217,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFrom
 class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
 //--------------------------------- Default constructor
   public: GALGAS_C_5F_canMessageFromTask (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_C_5F_canMessageFromTask constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_C_5F_canMessageFromTask (const class cPtr_C_5F_canMessageFromTask * inSourcePtr) ;
@@ -1060,9 +1274,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFrom
 class GALGAS_C_5F_canMessageFromTask_2D_weak : public GALGAS_AC_5F_canMessage_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_C_5F_canMessageFromTask_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_C_5F_canMessageFromTask_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_C_5F_canMessageFromTask_2D_weak (const class GALGAS_C_5F_canMessageFromTask & inSource) ;
@@ -1518,7 +1729,8 @@ class GALGAS_M_5F_messages_2D_element : public AC_GALGAS_root {
                                                                         const class GALGAS_luint & inOperand6,
                                                                         const class GALGAS_luint & inOperand7,
                                                                         const class GALGAS_luint & inOperand8,
-                                                                        const class GALGAS_AC_5F_canMessage & inOperand9
+                                                                        const class GALGAS_AC_5F_canMessage & inOperand9,
+                                                                        class C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1604,9 +1816,6 @@ class GALGAS_AC_5F_task_2D_weak : public AC_GALGAS_weak_reference {
 //--------------------------------- Default constructor
   public: GALGAS_AC_5F_task_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_AC_5F_task_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_AC_5F_task_2D_weak (const class GALGAS_AC_5F_task & inSource) ;
 
@@ -1660,9 +1869,6 @@ class GALGAS_C_5F_independantTask : public GALGAS_AC_5F_task {
 //--------------------------------- Default constructor
   public: GALGAS_C_5F_independantTask (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_C_5F_independantTask constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor from pointer
   public: GALGAS_C_5F_independantTask (const class cPtr_C_5F_independantTask * inSourcePtr) ;
 
@@ -1713,9 +1919,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_independantTas
 class GALGAS_C_5F_independantTask_2D_weak : public GALGAS_AC_5F_task_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_C_5F_independantTask_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_C_5F_independantTask_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_C_5F_independantTask_2D_weak (const class GALGAS_C_5F_independantTask & inSource) ;
@@ -1769,9 +1972,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_independantTas
 class GALGAS_C_5F_taskDependsFromTask : public GALGAS_AC_5F_task {
 //--------------------------------- Default constructor
   public: GALGAS_C_5F_taskDependsFromTask (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_C_5F_taskDependsFromTask constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_C_5F_taskDependsFromTask (const class cPtr_C_5F_taskDependsFromTask * inSourcePtr) ;
@@ -1836,9 +2036,6 @@ class GALGAS_C_5F_taskDependsFromTask_2D_weak : public GALGAS_AC_5F_task_2D_weak
 //--------------------------------- Default constructor
   public: GALGAS_C_5F_taskDependsFromTask_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_C_5F_taskDependsFromTask_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_C_5F_taskDependsFromTask_2D_weak (const class GALGAS_C_5F_taskDependsFromTask & inSource) ;
 
@@ -1891,9 +2088,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFro
 class GALGAS_C_5F_taskDependsFromMessage : public GALGAS_AC_5F_task {
 //--------------------------------- Default constructor
   public: GALGAS_C_5F_taskDependsFromMessage (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_C_5F_taskDependsFromMessage constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_C_5F_taskDependsFromMessage (const class cPtr_C_5F_taskDependsFromMessage * inSourcePtr) ;
@@ -1957,9 +2151,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFro
 class GALGAS_C_5F_taskDependsFromMessage_2D_weak : public GALGAS_AC_5F_task_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_C_5F_taskDependsFromMessage_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_C_5F_taskDependsFromMessage_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_C_5F_taskDependsFromMessage_2D_weak (const class GALGAS_C_5F_taskDependsFromMessage & inSource) ;
@@ -2415,7 +2606,8 @@ class GALGAS_M_5F_tasks_2D_element : public AC_GALGAS_root {
                                                                      const class GALGAS_luint & inOperand6,
                                                                      const class GALGAS_uint & inOperand7,
                                                                      const class GALGAS_luint & inOperand8,
-                                                                     const class GALGAS_AC_5F_task & inOperand9
+                                                                     const class GALGAS_AC_5F_task & inOperand9,
+                                                                     class C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2586,6 +2778,26 @@ class cGrammar_oa_5F_grammar : public cParser_oa_5F_parser {
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Routine 'println'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void routine_println (const class GALGAS_string constinArgument0,
+                      class C_Compiler * inCompiler
+                      COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Routine 'print'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void routine_print (const class GALGAS_string constinArgument0,
+                    class C_Compiler * inCompiler
+                    COMMA_LOCATION_ARGS) ;
+
 
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -2616,14 +2828,4 @@ extern C_BoolCommandLineOption gOption_oa_5F_cli_5F_options_useCANmaxLegth ;
 //----------------------------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------------------------
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Routine 'print'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-void routine_print (const class GALGAS_string constinArgument0,
-                    class C_Compiler * inCompiler
-                    COMMA_LOCATION_ARGS) ;
 

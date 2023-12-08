@@ -129,25 +129,25 @@ static NSInteger search_into_oa_5F_scanner_keyWordList (NSString * inSearchedStr
     mTokenCode = oa_scanner_1__2C_ ;
   }else if (scanningOk && ([self testForInputFromChar:48 toChar:57])) {
     scanner_cocoa_routine_enterDigitIntoUInt (& scanningOk, mPreviousChar, & mLexicalAttribute_ulongValue) ;
-    BOOL loop1815 = YES ;
+    BOOL loop1829 = YES ;
     do {
       if (scanningOk && ([self testForInputFromChar:48 toChar:57])) {
         scanner_cocoa_routine_enterDigitIntoUInt (& scanningOk, mPreviousChar, & mLexicalAttribute_ulongValue) ;
       }else if (scanningOk && ([self testForInputChar:95])) {
       }else{
-        loop1815 = NO ;
+        loop1829 = NO ;
       }
-    }while (loop1815 && scanningOk) ;
+    }while (loop1829 && scanningOk) ;
     mTokenCode = oa_scanner_1_literal_5F_integer ;
   }else if (scanningOk && ([self testForInputFromChar:1 toChar:32])) {
   }else if (scanningOk && ([self testForInputChar:35])) {
-    BOOL loop2168 = YES ;
+    BOOL loop2188 = YES ;
     do {
       if (scanningOk && ([self testForInputFromChar:1 toChar:9] || [self testForInputFromChar:11 toChar:126])) {
       }else{
-        loop2168 = NO ;
+        loop2188 = NO ;
       }
-    }while (loop2168 && scanningOk) ;
+    }while (loop2188 && scanningOk) ;
     if (scanningOk && ([self testForInputChar:10])) {
     }else{
       scanningOk = NO ;
