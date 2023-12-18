@@ -1,4 +1,4 @@
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //  Generic Command Line Interface Option                                                        
 //
@@ -16,16 +16,16 @@
 //  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 //  more details.
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #pragma once
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include "utilities/M_SourceLocation.h"
-#include "strings/C_String.h"
+#include "strings/String-class.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class C_CommandLineOption {
 //--- Constructor
@@ -51,8 +51,8 @@ class C_CommandLineOption {
 
 //--- Accessing option parameters from GALGAS
   public: inline char readProperty_char (void) const { return mCommandChar ; }
-  public: inline C_String readProperty_string (void) const { return mCommandString ; }
-  public: inline C_String readProperty_comment (void) const { return mComment ; }
+  public: inline String readProperty_string (void) const { return mCommandString ; }
+  public: inline String readProperty_comment (void) const { return mComment ; }
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------

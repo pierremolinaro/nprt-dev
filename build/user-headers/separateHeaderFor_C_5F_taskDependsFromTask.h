@@ -2,11 +2,11 @@
 
 
 //--- END OF USER ZONE 1
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 // Phase 2: pointer class for @C_taskDependsFromTask class
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class cPtr_C_5F_taskDependsFromTask : public cPtr_AC_5F_task {
 
@@ -35,7 +35,7 @@ class cPtr_C_5F_taskDependsFromTask : public cPtr_AC_5F_task {
 
 //--- Attribute accessors
 //--- Description
-  public: virtual void description (C_String & ioString,
+  public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
   public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;

@@ -1,4 +1,4 @@
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //  C_DirectedGraph : algorithms on ordered graphs                                               
 //
@@ -16,24 +16,24 @@
 //  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 //  more details.
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #pragma once
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include "generic-arraies/TC_Array.h"
 #include "C_UIntSet.h"
-#include "strings/C_String.h"
+#include "strings/String-class.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 typedef struct {
   uint32_t mSource ;
   uint32_t mTarget ;
 } cEdge ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class C_DirectedGraph final {
 //--- Default constructor
@@ -57,7 +57,7 @@ class C_DirectedGraph final {
 //--- Accessors
   public: uint32_t unusedNodeIndex (void) const ;
 
-  public: C_String graphvizString (const TC_UniqueArray <C_String> & inNodeNameArray) const ;
+  public: String graphvizString (const TC_UniqueArray <String> & inNodeNameArray) const ;
   
   public: void getNodeBoolArray (TC_UniqueArray <bool> & outNodes) const ;
   
@@ -105,4 +105,4 @@ class C_DirectedGraph final {
   private: TC_Array <C_UIntSet> mReverseEdges ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------

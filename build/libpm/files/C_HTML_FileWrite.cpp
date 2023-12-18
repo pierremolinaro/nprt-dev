@@ -1,4 +1,4 @@
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //  'C_HTML_FileWrite' : a class for stream writing html text files                              
 //    (with facility for outputing C++ code)                                                     
@@ -17,73 +17,73 @@
 //  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 //  more details.
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include "files/C_HTML_FileWrite.h"
-#include "strings/C_String.h"
+#include "strings/String-class.h"
 #include "time/C_DateTime.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include <string.h>
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_HTML_FileWrite::C_HTML_FileWrite (const C_String & inFileName,
-                                    const C_String & inWindowTitle,
-                                    const C_String & inCSSFileName,
-                                    const C_String & inCSSContents) :
+C_HTML_FileWrite::C_HTML_FileWrite (const String & inFileName,
+                                    const String & inWindowTitle,
+                                    const String & inCSSFileName,
+                                    const String & inCSSContents) :
 C_TextFileWrite (inFileName) {
-  outputRawData ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
+  addRawData ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
                  "<html>"
                  "<head>\n"
                  "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n"
                  "<title>\n") ;
-  *this << inWindowTitle ;
-  outputRawData ("</title>") ;
+  addString (inWindowTitle) ;
+  addRawData ("</title>") ;
   if (inCSSFileName.length () > 0) {
-    outputRawData ("<link rel=stylesheet type=\"text/css\" href=\"") ;
-    outputRawData (inCSSFileName.cString (HERE)) ;
-    outputRawData ("\">") ;
+    addRawData ("<link rel=stylesheet type=\"text/css\" href=\"") ;
+    addRawData (inCSSFileName.cString (HERE)) ;
+    addRawData ("\">") ;
   }  
   if (inCSSContents.length () > 0) {
-    outputRawData ("<style type=\"text/css\">") ;
-    outputRawData (inCSSContents.cString (HERE)) ;
-    outputRawData ("</style>") ;
+    addRawData ("<style type=\"text/css\">") ;
+    addRawData (inCSSContents.cString (HERE)) ;
+    addRawData ("</style>") ;
   }
-  outputRawData ("</head>"
+  addRawData ("</head>"
                  "<body><div>\n") ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //                     Close                             
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 bool C_HTML_FileWrite::close (void) {
-  outputRawData ("</div></body></html>\n") ;
+  addRawData ("</div></body></html>\n") ;
   return inherited::close () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //  Destructor writes html ending code, the closes the file                    *
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_HTML_FileWrite::~C_HTML_FileWrite (void) {
-  outputRawData ("</div></body></html>\n") ;
+  addRawData ("</div></body></html>\n") ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //  Write a character string into the file WITHOUT any translation             *
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-void C_HTML_FileWrite::outputRawData (const char * in_Cstring) {
+void C_HTML_FileWrite::addRawData (const char * in_Cstring) {
   inherited::performActualCharArrayOutput (in_Cstring, (int32_t) (strlen (in_Cstring) & UINT32_MAX)) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //                  Write a character string into the file                     *
 //  Performs HTML character translation (i.e. '<' --> '&lt;', ...)             *
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_HTML_FileWrite::performActualCharArrayOutput (const char * inCharArray,
                                                      const int32_t inArrayCount) {
@@ -106,7 +106,7 @@ void C_HTML_FileWrite::performActualCharArrayOutput (const char * inCharArray,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_HTML_FileWrite::performActualUnicodeArrayOutput (const utf32 * inCharArray,
                                                         const int32_t inArrayCount) {
@@ -129,21 +129,21 @@ void C_HTML_FileWrite::performActualUnicodeArrayOutput (const utf32 * inCharArra
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //                 Comments as a table                   
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-void C_HTML_FileWrite::appendCppTitleComment (const C_String & inCommentString,
-                                              const C_String & inTableStyleClass) {
-  outputRawData ("<table") ;
+void C_HTML_FileWrite::addCppTitleComment (const String & inCommentString,
+                                              const String & inTableStyleClass) {
+  addRawData ("<table") ;
   if (inTableStyleClass.length () > 0) {
-    outputRawData (" class=\"") ;
-    outputRawData (inTableStyleClass.cString (HERE)) ;
-    outputRawData ("\"") ;
+    addRawData (" class=\"") ;
+    addRawData (inTableStyleClass.cString (HERE)) ;
+    addRawData ("\"") ;
   }
-  outputRawData ("><tr><td>\n") ;
-  *this << inCommentString ;
-  outputRawData ("\n</td></tr></table>\n") ;
+  addRawData ("><tr><td>\n") ;
+  addString (inCommentString) ;
+  addRawData ("\n</td></tr></table>\n") ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------

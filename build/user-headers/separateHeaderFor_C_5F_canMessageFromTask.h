@@ -2,11 +2,11 @@
 
 
 //--- END OF USER ZONE 1
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 // Phase 2: pointer class for @C_canMessageFromTask class
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class cPtr_C_5F_canMessageFromTask : public cPtr_AC_5F_canMessage {
 
@@ -32,7 +32,7 @@ class cPtr_C_5F_canMessageFromTask : public cPtr_AC_5F_canMessage {
 
 //--- Attribute accessors
 //--- Description
-  public: virtual void description (C_String & ioString,
+  public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
   public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;

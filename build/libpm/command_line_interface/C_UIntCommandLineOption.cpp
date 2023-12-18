@@ -1,4 +1,4 @@
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //  Generic Unsigned Command Line Interface Option
 //
@@ -16,21 +16,21 @@
 //  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 //  more details.
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include "command_line_interface/C_UIntCommandLineOption.h"
-#include "strings/C_String.h"
+#include "strings/String-class.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include <string.h>
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static C_UIntCommandLineOption * gFirstIntOption ;
 static C_UIntCommandLineOption * gLastIntOption ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_UIntCommandLineOption::C_UIntCommandLineOption (const char * inDomainName,
                                                   const char * inIdentifier,
@@ -50,7 +50,7 @@ mDefaultValue (inDefaultValue) {
   gLastIntOption = this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_UIntCommandLineOption::
 setUIntOptionForCommandChar (const char * inCommandCommandLineOptionString,
@@ -77,7 +77,7 @@ setUIntOptionForCommandChar (const char * inCommandCommandLineOptionString,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_UIntCommandLineOption::
 setUIntOptionForCommandString (const char * inCommandCommandLineOptionString,
@@ -119,7 +119,7 @@ setUIntOptionForCommandString (const char * inCommandCommandLineOptionString,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_UIntCommandLineOption::printUsageOfUIntOptions (void) {
   C_UIntCommandLineOption * p = gFirstIntOption ;
@@ -136,35 +136,41 @@ void C_UIntCommandLineOption::printUsageOfUIntOptions (void) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_UIntCommandLineOption::printUIntOptions (void) {
   C_UIntCommandLineOption * p = gFirstIntOption ;
   while (p != nullptr) {
     if (p->mCommandChar != '\0') {
-      co.setForeColor (kBlueForeColor) ;
-      co.setTextAttribute (kBoldTextAttribute) ;
-      co << "-" << cStringWithCharacter (p->mCommandChar) << "=number" ;
-      co.setTextAttribute (kAllAttributesOff) ;
-      co << "\n" ;
+      gCout.setForeColor (kBlueForeColor) ;
+      gCout.setTextAttribute (kBoldTextAttribute) ;
+      gCout.addString ("-") ;
+      gCout.addChar (p->mCommandChar) ;
+      gCout.addString ("=number") ;
+      gCout.setTextAttribute (kAllAttributesOff) ;
+      gCout.addNL () ; ;
     }
     if (p->mCommandString [0] != '\0') {
-      co.setForeColor (kBlueForeColor) ;
-      co.setTextAttribute (kBoldTextAttribute) ;
-      co << "--" << p->mCommandString << "=number" ;
-      co.setTextAttribute (kAllAttributesOff) ;
-      co << "\n" ;
+      gCout.setForeColor (kBlueForeColor) ;
+      gCout.setTextAttribute (kBoldTextAttribute) ;
+      gCout.addString ("--") ;
+      gCout.addString (p->mCommandString) ;
+      gCout.addString ("=number") ;
+      gCout.setTextAttribute (kAllAttributesOff) ;
+      gCout.addNL () ; ;
     }
-    co << "    " << p->mComment << " (default value: "
-       << cStringWithUnsigned (p->mDefaultValue)
-       << ")\n" ;
+    gCout.addString ("    ") ;
+    gCout.addString (p->mComment) ;
+    gCout.addString (" (default value: ") ;
+    gCout.addUnsigned (p->mDefaultValue) ;
+    gCout.addString (")\n") ;
     p = p->mNext ;
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-void C_UIntCommandLineOption::getUIntOptionNameList (TC_UniqueArray <C_String> & outArray) {
+void C_UIntCommandLineOption::getUIntOptionNameList (TC_UniqueArray <String> & outArray) {
   C_UIntCommandLineOption * p = gFirstIntOption ;
   while (p != nullptr) {
     outArray.appendObject (p->mDomainName) ;
@@ -173,10 +179,10 @@ void C_UIntCommandLineOption::getUIntOptionNameList (TC_UniqueArray <C_String> &
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-utf32 C_UIntCommandLineOption::getUIntOptionInvocationLetter (const C_String & inDomainName,
-                                                       const C_String & inIdentifier) {
+utf32 C_UIntCommandLineOption::getUIntOptionInvocationLetter (const String & inDomainName,
+                                                       const String & inIdentifier) {
   utf32 result = TO_UNICODE (0) ;
   C_UIntCommandLineOption * p = gFirstIntOption ;
   bool found = false ;
@@ -188,11 +194,11 @@ utf32 C_UIntCommandLineOption::getUIntOptionInvocationLetter (const C_String & i
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_String C_UIntCommandLineOption::getUIntOptionInvocationString (const C_String & inDomainName,
-                                                       const C_String & inIdentifier) {
-  C_String result ;
+String C_UIntCommandLineOption::getUIntOptionInvocationString (const String & inDomainName,
+                                                       const String & inIdentifier) {
+  String result ;
   C_UIntCommandLineOption * p = gFirstIntOption ;
   bool found = false ;
   while ((p != nullptr) && not found) {
@@ -203,11 +209,11 @@ C_String C_UIntCommandLineOption::getUIntOptionInvocationString (const C_String 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_String C_UIntCommandLineOption::getUIntOptionCommentString (const C_String & inDomainName,
-                                                       const C_String & inIdentifier) {
-  C_String result ;
+String C_UIntCommandLineOption::getUIntOptionCommentString (const String & inDomainName,
+                                                       const String & inIdentifier) {
+  String result ;
   C_UIntCommandLineOption * p = gFirstIntOption ;
   bool found = false ;
   while ((p != nullptr) && not found) {
@@ -218,10 +224,10 @@ C_String C_UIntCommandLineOption::getUIntOptionCommentString (const C_String & i
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-uint32_t C_UIntCommandLineOption::getUIntOptionValue (const C_String & inDomainName,
-                                                      const C_String & inIdentifier) {
+uint32_t C_UIntCommandLineOption::getUIntOptionValue (const String & inDomainName,
+                                                      const String & inIdentifier) {
   uint32_t result = 0 ;
   C_UIntCommandLineOption * p = gFirstIntOption ;
   bool found = false ;
@@ -233,10 +239,10 @@ uint32_t C_UIntCommandLineOption::getUIntOptionValue (const C_String & inDomainN
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-void C_UIntCommandLineOption::setUIntOptionValue (const C_String & inDomainName,
-                                                  const C_String & inIdentifier,
+void C_UIntCommandLineOption::setUIntOptionValue (const String & inDomainName,
+                                                  const String & inIdentifier,
                                                   const uint32_t inValue) {
   C_UIntCommandLineOption * p = gFirstIntOption ;
   bool found = false ;
@@ -249,4 +255,4 @@ void C_UIntCommandLineOption::setUIntOptionValue (const C_String & inDomainName,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------

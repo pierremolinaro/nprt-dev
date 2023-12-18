@@ -1,4 +1,4 @@
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //  'cIndexingDictionary': dictionary for indexing soures
 //
@@ -16,33 +16,33 @@
 //  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 //  more details.
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include "galgas2/cIndexingDictionary.h"
-#include "strings/C_String.h"
+#include "strings/String-class.h"
 #include "files/C_FileManager.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Entry Dictionary
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //  c I n d e x E n t r y N o d e
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class cIndexEntryNode {
   public: cIndexEntryNode * mInfPtr ;
   public: cIndexEntryNode * mSupPtr ;
   public: int32_t mBalance ;
-  public: const C_String mKey ;
-  public: TC_UniqueArray <C_String> mDescriptorArray ;
+  public: const String mKey ;
+  public: TC_UniqueArray <String> mDescriptorArray ;
 
 //--- Constructor
-  public: cIndexEntryNode (const C_String & inKey) ;
+  public: cIndexEntryNode (const String & inKey) ;
 
 //--- Destructor
   public: virtual ~ cIndexEntryNode (void) ;
@@ -52,9 +52,9 @@ class cIndexEntryNode {
   private: cIndexEntryNode & operator = (const cIndexEntryNode &) ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-cIndexEntryNode::cIndexEntryNode (const C_String & inKey) :
+cIndexEntryNode::cIndexEntryNode (const String & inKey) :
 mInfPtr (nullptr),
 mSupPtr (nullptr),
 mBalance (0),
@@ -62,14 +62,14 @@ mKey (inKey),
 mDescriptorArray () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 cIndexEntryNode::~ cIndexEntryNode (void) {
   macroMyDelete (mInfPtr) ;
   macroMyDelete (mSupPtr) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void rotateLeft (cIndexEntryNode * & ioRootPtr) {
   cIndexEntryNode * b = ioRootPtr->mSupPtr ;
@@ -110,10 +110,10 @@ static void rotateRight (cIndexEntryNode * & ioRootPtr) {
   ioRootPtr = b ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 cIndexEntryNode * cIndexingDictionary::findOrAddEntry (cIndexEntryNode * & ioRootPtr,
-                                                       const C_String & inKey,
+                                                       const String & inKey,
                                                        bool & ioExtension) {
   cIndexEntryNode * result = nullptr ;
   if (ioRootPtr == nullptr) {
@@ -159,33 +159,33 @@ cIndexEntryNode * cIndexingDictionary::findOrAddEntry (cIndexEntryNode * & ioRoo
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark cIndexingDictionary
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //                 cIndexingDictionary
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 cIndexingDictionary::cIndexingDictionary (void) :
 mEntryRoot (nullptr) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 cIndexingDictionary::~ cIndexingDictionary (void) {
   macroMyDelete (mEntryRoot) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void cIndexingDictionary::addIndexedKey (const uint32_t inIndexingKind,
-                                         const C_String & inIndexedKey,
-                                         const C_String & inSourceFilePath,
+                                         const String & inIndexedKey,
+                                         const String & inSourceFilePath,
                                          const uint32_t inTokenLineInSource,
                                          const uint32_t inTokenLocationInSource,
                                          const uint32_t inTokenLengthInSource) {
@@ -197,48 +197,52 @@ void cIndexingDictionary::addIndexedKey (const uint32_t inIndexingKind,
   bool extension = false ;
   cIndexEntryNode * entryNode = findOrAddEntry (mEntryRoot, inIndexedKey, extension) ;
 //--- Register index
-  C_String entryDescriptor ;
-  entryDescriptor << cStringWithUnsigned (inIndexingKind) ;
-  entryDescriptor << ":" ;
-  entryDescriptor << cStringWithUnsigned (inTokenLineInSource) ;
-  entryDescriptor << ":" ;
-  entryDescriptor << cStringWithUnsigned (inTokenLocationInSource) ;
-  entryDescriptor << ":" ;
-  entryDescriptor << cStringWithUnsigned (inTokenLengthInSource) ;
-  entryDescriptor << ":" ;
-  entryDescriptor << inSourceFilePath ;
+  String entryDescriptor ;
+  entryDescriptor.addUnsigned (inIndexingKind) ;
+  entryDescriptor.addString (":") ;
+  entryDescriptor.addUnsigned (inTokenLineInSource) ;
+  entryDescriptor.addString (":") ;
+  entryDescriptor.addUnsigned (inTokenLocationInSource) ;
+  entryDescriptor.addString (":") ;
+  entryDescriptor.addUnsigned (inTokenLengthInSource) ;
+  entryDescriptor.addString (":") ;
+  entryDescriptor.addString (inSourceFilePath) ;
   entryNode->mDescriptorArray.appendObject (entryDescriptor) ;
 }
 
 //---------------------------------------------------------------------
 
 static void enumerateEntries (const cIndexEntryNode * inNode,
-                              C_String & ioContents) {
+                              String & ioContents) {
   if (nullptr != inNode) {
     enumerateEntries (inNode->mInfPtr, ioContents) ;
-    ioContents << "<key>" << inNode->mKey.HTMLRepresentation () << "</key>" ;
-    ioContents << "<array>" ;
+    ioContents.addString ("<key>") ;
+    ioContents.addString (inNode->mKey.HTMLRepresentation ()) ;
+    ioContents.addString ("</key>") ;
+    ioContents.addString ("<array>") ;
     for (int32_t i=0 ; i<inNode->mDescriptorArray.count () ; i++) {
-      ioContents << "<string>" << inNode->mDescriptorArray (i COMMA_HERE).HTMLRepresentation () << "</string>" ;
+      ioContents.addString ("<string>") ;
+      ioContents.addString (inNode->mDescriptorArray (i COMMA_HERE).HTMLRepresentation ()) ;
+      ioContents.addString ("</string>") ;
     }
-    ioContents << "</array>" ;
+    ioContents.addString ("</array>") ;
     enumerateEntries (inNode->mSupPtr, ioContents) ;
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-void cIndexingDictionary::generateIndexFile (const C_String & inOutputIndexFilePath) const {
-  C_String contents = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+void cIndexingDictionary::generateIndexFile (const String & inOutputIndexFilePath) const {
+  String contents = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                       "<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">"
                       "<plist version=\"1.0\">" ;
 //--- Write entries as dictionary
-  contents << "<dict>" ;
+  contents.addString ("<dict>") ;
   enumerateEntries (mEntryRoot, contents) ;
-  contents << "</dict>" ;
+  contents.addString ("</dict>") ;
 //--- End of file
-  contents << "</plist>" ;
+  contents.addString ("</plist>") ;
   C_FileManager::writeStringToFile (contents, inOutputIndexFilePath) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------

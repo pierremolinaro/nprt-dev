@@ -1,4 +1,4 @@
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //  'C_HTML_FileWrite' : a class for stream writing html text files                              
 //    (with facility for outputing C++ code)                                                     
@@ -17,28 +17,28 @@
 //  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 //  more details.
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #pragma once
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include "files/C_TextFileWrite.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-class C_String ;
+class String ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class C_HTML_FileWrite final : public C_TextFileWrite {
 //--- Constructor : if inFileName is the empty string, no file is opened.
 //    Otherwise, it tries to open the file for writing;
 //    The destructor will close the file (is successfully opened)
-  public: C_HTML_FileWrite (const C_String & inFileName,
-                             const C_String & inWindowTitle,
-                             const C_String & inCSSFileName,
-                             const C_String & inCSSContents) ;
+  public: C_HTML_FileWrite (const String & inFileName,
+                            const String & inWindowTitle,
+                            const String & inCSSFileName,
+                            const String & inCSSContents) ;
 
 //--- Destructor
   public: virtual ~C_HTML_FileWrite (void) ;
@@ -48,18 +48,18 @@ class C_HTML_FileWrite final : public C_TextFileWrite {
   private: C_HTML_FileWrite (C_HTML_FileWrite &) ;
 
 //--- Output data, without HTML formatting
-  public: void outputRawData (const char * in_Cstring) ;
+  public: void addRawData (const char * inCString) ;
 
 //--- General stream methods
   protected: virtual void performActualCharArrayOutput (const char * inCharArray,
-                                                         const int32_t inArrayCount) ;
+                                                        const int32_t inArrayCount) ;
 
   protected: virtual void performActualUnicodeArrayOutput (const utf32 * inCharArray,
-                                                            const int32_t inArrayCount) ;
+                                                          const int32_t inArrayCount) ;
 
 //--- Method for writing a HTML table
-  public: void appendCppTitleComment (const C_String & inCommentString,
-                                       const C_String & inTableStyleClass) ;
+  public: void addCppTitleComment (const String & inCommentString,
+                                      const String & inTableStyleClass) ;
 
 //--- Close file (does nothing is file is not open)
   public: virtual bool close (void) ;
@@ -68,4 +68,4 @@ class C_HTML_FileWrite final : public C_TextFileWrite {
   private: typedef C_TextFileWrite inherited ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------

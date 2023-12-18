@@ -15,10 +15,10 @@ class cActivity {
   public : char mElementName[14]; //Name of the activivty
   public : int32_t mResourceId; //
   public : int32_t mPriority ;
-  public : int32_t mOffset ; 
+  public : int32_t mOffset ;
   public : int32_t mEvery ;
   public : int32_t mMinDuration ;
-  public : int32_t mMaxDuration ; 
+  public : int32_t mMaxDuration ;
   public : int32_t mDeadline ;
   public : int32_t mPredecessorId ; // -1 if independant
   public : int32_t mSuccessorId;  // -1 if no successor, or its index
@@ -55,7 +55,7 @@ class cElement {
   public : int32_t mOffset ;
   public : int32_t mEvery ;
   public : int32_t mMinDuration ;
-  public : int32_t mMaxDuration ; 
+  public : int32_t mMaxDuration ;
   public : int32_t mDeadline ;
   public : int32_t mPeriod ;
   public : bool mIsIndependant;
@@ -76,8 +76,8 @@ class cMTElement {
   public : int32_t mPriority;
   public : int32_t mOffset ;
   public : int32_t mBestResponseTime ;
-  public : int32_t mWorstResponseTime ; 
-  public : int32_t mPeriod ; 
+  public : int32_t mWorstResponseTime ;
+  public : int32_t mPeriod ;
   public : int32_t mDeadline ;
 } ;
 
@@ -94,8 +94,8 @@ BuildExtendedList (C_CompilerEx & inLexique,
                    const int32_t Nu_oftasks, const int32_t Nu_ofMessages,
                    bool CreateIntermediateFiles,
                    bool & ioUseBalgorithm,
-                   const C_String & activitiesHTMLFileName);
-                   
+                   const String & activitiesHTMLFileName);
+
 
 void
 ExtractWorstBestRT (C_CompilerEx & inLexique,
@@ -103,8 +103,8 @@ ExtractWorstBestRT (C_CompilerEx & inLexique,
                     const TC_UniqueArray <cResource> & Resource,
                     TC_UniqueArray <cMTElement> & MTElement,
                     const TC_UniqueArray <cResponseTime> & inResponseTimeArray,
-                    bool CreateIntermediateFiles, 
-                    const C_String & raw_outputHTMLFileName,
+                    bool CreateIntermediateFiles,
+                    const String & raw_outputHTMLFileName,
                     C_HTML_FileWrite & in_htmlFile);
 
 

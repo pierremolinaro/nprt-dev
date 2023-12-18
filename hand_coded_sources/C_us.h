@@ -23,7 +23,7 @@
 //---------------------------------------------------------------------------*
 
 #include "generic-arraies/TC_UniqueArray.h"
-#include "strings/C_String.h"
+#include "strings/String-class.h"
 
 //---------------------------------------------------------------------------*
 
@@ -48,15 +48,15 @@ class C_us {
   protected : C_us * mPtrToNextExisting ;
   protected : C_us * mPtrToPreviousExisting ;
   private : void initLinks (void) ;
-  
+
 //--- Internal nodes
   public : class C_us_nodeInfo {
     public : C_us_nodeInfo * mPtrToNext ;
     public : intptr_t mID ;
     public : int32_t mIndex ;
-    
+
     public : intptr_t compare (const C_us_nodeInfo & inOperand) const ;
-    
+
     public : inline bool isMarked (void) const {
       return (mID & MARK_VDL_NODE) != 0 ;
     }
@@ -68,7 +68,7 @@ class C_us {
     public : inline void unmark (void) {
       mID &= ~ MARK_VDL_NODE ;
     }
-    
+
     public : inline uint32_t getHashCodeForMap (void) const {
       return (uint32_t) ((mIndex << 11)
                     ^ ((mPtrToNext == NULL) ? -1 : mPtrToNext->mID)) ;
@@ -98,7 +98,7 @@ class C_us {
 
 //--- print a vector
   public : void printVector (AC_OutputStream & inStream,
-                             const TC_UniqueArray <C_String> & inNames,
+                             const TC_UniqueArray <String> & inNames,
                              const int32_t inFirst,
                              const int32_t inStep) const ;
 
@@ -143,7 +143,7 @@ class C_us {
   public : static uint64_t getCacheOverrideCount (void) ;
   public : static uint64_t getUnusedCacheEntriesCount (void) ;
   public : static uint64_t getCacheEntriesCount (void) ;
-  
+
   friend class C_us_nodeInfo ;
 } ;
 

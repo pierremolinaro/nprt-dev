@@ -24,7 +24,7 @@
 //---------------------------------------------------------------------------*
 
 #include "generic-arraies/TC_UniqueArray.h"
-#include "strings/C_String.h"
+#include "strings/String-class.h"
 #include "ExtendedList.h"
 
 //---------------------------------------------------------------------------*
@@ -53,7 +53,7 @@ class C_activitiesToSchedule {
 
 //--- List empty ?
   public : bool isListEmpty (void) const ;
-  
+
 //--- Set to empty list
   public : void setToEmptyList (void) ;
 
@@ -66,14 +66,14 @@ class C_activitiesToSchedule {
   public : int32_t getFirstToScheduleAndSuppress (const int32_t inCurrentInstant) ;
   public : int32_t getMinimumBusyPeriod4Activity  (const int32_t inCurrentActivity,
                                                     const TC_UniqueArray <cActivity> & inActivities) const ;
- 
+
   public : int32_t getMaximumBusyPeriod (const int32_t currentActivityIndex,
-                                          const TC_UniqueArray <cActivity> & inActivities) const ; 
- 
+                                          const TC_UniqueArray <cActivity> & inActivities) const ;
+
   public : int32_t getMinimumBusyPeriod (const int32_t currentActivityIndex,
-                                          const TC_UniqueArray <cActivity> & inActivities) const ; 
- 
-  public : int32_t getLowerPriority (const int32_t currentActivityIndex, 
+                                          const TC_UniqueArray <cActivity> & inActivities) const ;
+
+  public : int32_t getLowerPriority (const int32_t currentActivityIndex,
                                       const TC_UniqueArray <cActivity> & inActivities) const ;
 
   public : int32_t getFirstToSchedule (const int32_t inCurrentInstant) const ;
@@ -89,7 +89,7 @@ class C_activitiesToSchedule {
 
 //--- Print a list
   public : void printList (AC_OutputStream & inStream,
-                           const TC_UniqueArray <C_String> & inNames) const ;
+                           const TC_UniqueArray <String> & inNames) const ;
 
 //------------------------ INTERNAL STUFF ------------------------
 
@@ -97,7 +97,7 @@ class C_activitiesToSchedule {
   protected : C_activitiesToSchedule * mPtrToNextExisting ;
   protected : C_activitiesToSchedule * mPtrToPreviousExisting ;
   private : void initLinks (void) ;
-  
+
 //--- Internal nodes
   public : class cVDLnodeInfo {
     public : cVDLnodeInfo * mPtrToNext ;
@@ -105,9 +105,9 @@ class C_activitiesToSchedule {
     public : int32_t mActivityIndex ;
     public : int32_t mActivityPriority ;
     public : int32_t mScheduleInstant ;
-    
+
     public : intptr_t compare (const cVDLnodeInfo & inOperand) const ;
-    
+
     public : inline bool isMarked (void) const {
       return (mID & MARK_VDL_NODE) != 0 ;
     }
@@ -119,10 +119,10 @@ class C_activitiesToSchedule {
     public : inline void unmark (void) {
       mID &= ~ MARK_VDL_NODE ;
     }
-    
+
     public : inline uint32_t getHashCodeForMap (void) const {
       return (uint32_t) ((mActivityIndex << 17)
-                     ^ (mActivityPriority << 13) 
+                     ^ (mActivityPriority << 13)
                      ^ (mScheduleInstant << 7)
                      ^ ((mPtrToNext == NULL) ? -1 : mPtrToNext->mID)) ;
     }
@@ -167,29 +167,29 @@ class C_activitiesToSchedule {
   public : static int32_t getNodeComparesCount (void) { return smNodeCompare ; }
   protected : static int32_t smNodeCount ;
   public : static int32_t getVDLnodeCount (void) { return smNodeCount ; }
-  
+
   friend class cVDLnodeInfo ;
 } ;
 
 //--------------------------------------------------------------------------------
 
-void SuccessorsMaxBusyDuration (int32_t & ioBusyDuration, const int32_t activityIndex, 
+void SuccessorsMaxBusyDuration (int32_t & ioBusyDuration, const int32_t activityIndex,
                                 const int32_t ResourceIndex,
                                 const TC_UniqueArray <cActivity> & inActivities);
 
-void LowerPriorityOnResource (int32_t & lowerPriority, const int32_t activityIndex, 
+void LowerPriorityOnResource (int32_t & lowerPriority, const int32_t activityIndex,
                               const int32_t ResourceIndex,
                               const TC_UniqueArray <cActivity> & inActivities);
-                              
-void SuccessorsMinBusyDuration (int32_t & ioBusyDuration, const int32_t activityIndex, 
+
+void SuccessorsMinBusyDuration (int32_t & ioBusyDuration, const int32_t activityIndex,
                                 const int32_t ResourceIndex,
                                 const TC_UniqueArray <cActivity> & inActivities);
-                                
-void SuccessorsMinBusyDuration4Activity (int32_t & ioBusyDuration, const int32_t activityIndex, 
+
+void SuccessorsMinBusyDuration4Activity (int32_t & ioBusyDuration, const int32_t activityIndex,
                                 const int32_t ResourceIndex,
                                 const int32_t priorityOfCurrentActivity,
                                 const TC_UniqueArray <cActivity> & inActivities);
-    
+
 //---------------------------------------------------------------------------*
 
 #endif

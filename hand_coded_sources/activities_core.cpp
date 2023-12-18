@@ -68,9 +68,9 @@
   class cActivityList {
     protected : cActivitySchedule * mPtrToFirstActivity ;
     protected : cActivitySchedule * mPtrToLastActivity ;
-  
+
     public : cActivityList (void) ;
-  
+
     public : void push (const int32_t inActivity,
                         const int32_t inEndOfExecution,
                         const int32_t inExecutionCounter) ;
@@ -78,7 +78,7 @@
     public : void mergeList (cActivityList & inOtherList) ;
 
     public : void suppressFirst (void) ;
-  
+
     public : static void dumpSchedule (class cResourceSchedule * inPtr) ;
 
     public : static void computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & ioResponseTimeArray) ;
@@ -173,7 +173,7 @@ class cResource2 {
   public : inline bool operator == (const cResource2 & inOperand) const {
     return (mActivitiesToScheduleList == inOperand.mActivitiesToScheduleList)
       && (mCurrentActivity == inOperand.mCurrentActivity)
-      && (mExecutionCounter == inOperand.mExecutionCounter) ;  
+      && (mExecutionCounter == inOperand.mExecutionCounter) ;
   }
 
   public : inline intptr_t compare (const cResource2 & inOperand) const {
@@ -184,11 +184,11 @@ class cResource2 {
         result = mExecutionCounter - inOperand.mExecutionCounter ;
       }
     }
-    return result ;  
+    return result ;
   }
 
   public : inline uint32_t hash (void) const {
-    return (uint32_t) mActivitiesToScheduleList.getPtr () ;  
+    return (uint32_t) mActivitiesToScheduleList.getPtr () ;
   }
 } ;
 
@@ -204,20 +204,20 @@ class cResourceSchedule {
   public : cResourceSchedule * mPtrToSup ;
   public : int32_t mBalance ;
   public : uint32_t mHash ;
- 
+
   public : cResourceSchedule (const int32_t inResourceCount) ;
 
 //--- No copy
   private : cResourceSchedule (const cResourceSchedule &) ;
   private : cResourceSchedule & operator = (const cResourceSchedule &) ;
-  
+
   public : inline void hash (const int32_t inResourceCount) {
     uint32_t hashValue = mArray (0 COMMA_HERE).hash () ;
     for (int32_t i=1 ; i<inResourceCount ; i++) {
       hashValue <<= 3 ;
       hashValue ^= mArray (i COMMA_HERE).hash () ;
     }
-    mHash = hashValue ;  
+    mHash = hashValue ;
   }
 
 } ;
@@ -325,7 +325,7 @@ cScheduleMap::
 cScheduleMap (const int32_t /*inResourceCount */,
               const int32_t inLastIndependantActivityScheduleInstant,
               const TC_UniqueArray <cActivity> & /*inActivities*/) :
-  
+
 mResourceNodesAVLtree (),
 mResourceNodesList (NULL),
 mCurrentInstant (0),
@@ -364,10 +364,10 @@ AddToScheduleMap (cResourceSchedule * inPtr,
       const int32_t resourceIndex = inActivities (index COMMA_HERE).mResourceId ;
 		  const int32_t priority = inActivities (index COMMA_HERE).mPriority ;
 		  //--- Insert activity into activity list
-		  
-  	 inPtr->mArray (resourceIndex COMMA_HERE).mActivitiesToScheduleList.addEntry (index, 
+
+  	 inPtr->mArray (resourceIndex COMMA_HERE).mActivitiesToScheduleList.addEntry (index,
      								priority, readyAt);
-    		
+
 		 index = inActivities (index COMMA_HERE).mOtherReadyAtThisInst ;
 	 }while(index != -1 );
 }
@@ -411,12 +411,12 @@ void cScheduleMap::advanceToNextInstant (void) {
 
 static void
 rotationGauche (cResourceSchedule * & a) {
-// faire la rotation 
+// faire la rotation
   cResourceSchedule * b = a->mPtrToSup ;
   a->mPtrToSup = b->mPtrToInf ;
   b->mPtrToInf = a;
 
-// recalculer l'equilibrage 
+// recalculer l'equilibrage
   if (b->mBalance >= 0) {
     a->mBalance++ ;
   }else{
@@ -428,18 +428,18 @@ rotationGauche (cResourceSchedule * & a) {
     b->mBalance++ ;
   }
   a = b ;
-} 
+}
 
 //---------------------------------------------------------------------
 
 static void
 rotationDroite (cResourceSchedule * & a) {
-// faire la rotation 
+// faire la rotation
   cResourceSchedule * b = a->mPtrToInf ;
   a->mPtrToInf = b->mPtrToSup ;
   b->mPtrToSup = a ;
- 
-// recalculer l'equilibrage 
+
+// recalculer l'equilibrage
   if (b->mBalance > 0) {
     a->mBalance -= b->mBalance + 1 ;
   }else{
@@ -541,8 +541,8 @@ insert (const int32_t inResourceCount,
                                mResourceNodesList,
                                inResourceCount,
                                extension) ;
-  
-}     
+
+}
 
 //---------------------------------------------------------------------------*
 
@@ -705,18 +705,18 @@ WillRecieveHigherActivation(const cResourceSchedule * inPtr,
 			                       const int32_t inSuccessorIndex,
 			                       const int32_t inCurrentInstant,
 			                       const TC_UniqueArray <cActivity> & inActivities ) {
-  
+
   bool WillReceive= false ;
-   
+
   const int32_t SuccessorResourceIndex =  inActivities (inSuccessorIndex COMMA_HERE).mResourceId ;
   const int32_t SuccessorPriority = inActivities (inSuccessorIndex COMMA_HERE).mPriority ;
   const int32_t SuccessorOffset = inActivities (inSuccessorIndex COMMA_HERE).mOffset ;
-   
+
  //--- Test of any successor that has higher priority than the possible CA will be lunched!
-  const bool AnyReadyAt= 
+  const bool AnyReadyAt=
     	  inPtr->mArray (SuccessorResourceIndex COMMA_HERE).mActivitiesToScheduleList.AnyReadyToScheduleAt (inCurrentInstant) ;
      //--- If yes, if the ready one is not higher priority--> Add successor
-  if (AnyReadyAt){           
+  if (AnyReadyAt){
     const int32_t HighestReadyAt=
         inPtr->mArray (SuccessorResourceIndex COMMA_HERE).mActivitiesToScheduleList.getFirstToSchedule (inCurrentInstant) ;
 	  if ( inActivities (HighestReadyAt COMMA_HERE).mPriority < SuccessorPriority){
@@ -726,7 +726,7 @@ WillRecieveHigherActivation(const cResourceSchedule * inPtr,
   for(int32_t index =0; (index<inResourceCount) && ! WillReceive; index++){
     const int32_t currentActivity = inPtr->mArray (index COMMA_HERE).mCurrentActivity ;
     if (currentActivity >= 0){
-      if ( inPtr->mArray (index COMMA_HERE).mExecutionCounter >=  
+      if ( inPtr->mArray (index COMMA_HERE).mExecutionCounter >=
          (inActivities (currentActivity COMMA_HERE).mMaxDuration-SuccessorOffset)){
         const int32_t successorIndex = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
         if (successorIndex >= 0) {
@@ -734,7 +734,7 @@ WillRecieveHigherActivation(const cResourceSchedule * inPtr,
 	          const int32_t successorResource = inActivities (successorIndex COMMA_HERE).mResourceId ;
 		        const int32_t successorPriority = inActivities (successorIndex COMMA_HERE).mPriority;
 		        if ( (SuccessorResourceIndex == successorResource )
-		           && 
+		           &&
 		           (successorPriority < SuccessorPriority) ){
 		               WillReceive = true;
 		        }
@@ -752,14 +752,14 @@ WillRecieveHigherActivation(const cResourceSchedule * inPtr,
 		    	  }
 	    	    OtherHeirId = inActivities (OtherHeirId COMMA_HERE).mOtherHeirId ;
 		      }
-	      }   
+	      }
 	    }
-		}      
+		}
 	}
 	return  WillReceive;
-}   
+}
 //---------------------------------------------------------------------------*
-static int32_t 
+static int32_t
 LeastBusyDuration (const cResourceSchedule * inPtr,
                    const int32_t leastBusyDuration,
                    const int32_t inCurrentInstant,
@@ -768,14 +768,14 @@ LeastBusyDuration (const cResourceSchedule * inPtr,
                    const int32_t inResourceCount,
                    const TC_UniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
                    const TC_UniqueArray <cActivity> & inActivities){
- 
+
   int32_t leastBusy =leastBusyDuration;
   int32_t additionIndex = inAdditionIndex ;
-  const int32_t inActivityPriority = inActivities (inActivityIndex COMMA_HERE).mPriority; 
-  //--- Include all independent Partitions in the busy period 
+  const int32_t inActivityPriority = inActivities (inActivityIndex COMMA_HERE).mPriority;
+  //--- Include all independent Partitions in the busy period
   while ( ( additionIndex < inReadyAtThisInstant.count())
-         && 
-        ((leastBusy + inCurrentInstant) >= inReadyAtThisInstant (additionIndex COMMA_HERE).mThisInstant) ){ 
+         &&
+        ((leastBusy + inCurrentInstant) >= inReadyAtThisInstant (additionIndex COMMA_HERE).mThisInstant) ){
     int32_t nextActivityIndex = inReadyAtThisInstant (additionIndex COMMA_HERE). mActivityIndex;
     do{
        int32_t inActivityResource = inActivities (inActivityIndex COMMA_HERE).mResourceId ;
@@ -784,7 +784,7 @@ LeastBusyDuration (const cResourceSchedule * inPtr,
        if ( (inActivityResource == nextActivityResource)
           &&(priority < inActivityPriority) ){
   	      	leastBusy += inActivities (nextActivityIndex COMMA_HERE).mMinDuration ;
-	     }  
+	     }
 		   nextActivityIndex = inActivities (nextActivityIndex COMMA_HERE).mOtherReadyAtThisInst ;
 	  }while( nextActivityIndex != -1 );
 	  additionIndex ++;
@@ -798,7 +798,7 @@ LeastBusyDuration (const cResourceSchedule * inPtr,
         const int32_t successorIndex = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
         if ( successorIndex >= 0) {
           if ((inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0){
-            //--- If the CA on the other resource has successor 
+            //--- If the CA on the other resource has successor
 	          const int32_t successorResource = inActivities (successorIndex COMMA_HERE).mResourceId ;
 	          int32_t successorPriority = inActivities (successorIndex COMMA_HERE).mPriority;
 	          if ( inActivities (inActivityIndex COMMA_HERE).mResourceId == successorResource ){
@@ -811,12 +811,12 @@ LeastBusyDuration (const cResourceSchedule * inPtr,
 	        }
  //--- Test of the current activity on the other resource has other successors, on the resource where the activity has to be added
 	        int32_t OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
-	        while (OtherHeirId >= 0 ){ 
+	        while (OtherHeirId >= 0 ){
 	          if ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0){
 		          int32_t HeirPriority = inActivities (OtherHeirId COMMA_HERE).mPriority;
 			        int32_t HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
 			        int32_t inActivityResource = inActivities (inActivityIndex COMMA_HERE).mResourceId ;
-			        if ( (inActivityResource == HeirResource) 
+			        if ( (inActivityResource == HeirResource)
 			           &&
 		    	      (HeirPriority < inActivityPriority) ){
 	                leastBusy += inActivities (OtherHeirId COMMA_HERE).mMinDuration ;
@@ -824,11 +824,11 @@ LeastBusyDuration (const cResourceSchedule * inPtr,
 		    	  }
 	    	    OtherHeirId = inActivities (OtherHeirId COMMA_HERE).mOtherHeirId;
 		      }
-	      }   
+	      }
 	    }
-		}      
+		}
 	}
-  
+
  return leastBusy ;
 }
 //---------------------------------------------------------------------------*
@@ -840,46 +840,46 @@ HasToAddSuccessors (const cResourceSchedule * inPtr,
 			              const int32_t inActivityIndex,
 			              const int32_t inCurrentInstant,
                     const TC_UniqueArray <cActivity> & inActivities ) {
-  
-  bool HasToAdd= false ; 
-  int32_t LeastBusyPeriod = 0 ;  
+
+  bool HasToAdd= false ;
+  int32_t LeastBusyPeriod = 0 ;
   const int32_t SuccessorIndex = inActivities (inActivityIndex COMMA_HERE).mSuccessorId ;
   //--- Is any successor ?
-  if (SuccessorIndex >= 0){ 
-    if( (inActivities (SuccessorIndex COMMA_HERE).mOccurrence % inActivities (SuccessorIndex COMMA_HERE).mEvery) == 0 ){ 
+  if (SuccessorIndex >= 0){
+    if( (inActivities (SuccessorIndex COMMA_HERE).mOccurrence % inActivities (SuccessorIndex COMMA_HERE).mEvery) == 0 ){
       const int32_t SuccessorResource = inActivities (SuccessorIndex COMMA_HERE).mResourceId ;
 	    int32_t SuccessorOffset =  inActivities (SuccessorIndex COMMA_HERE).mOffset ;
 	    int32_t SuccessorPriority = inActivities (SuccessorIndex COMMA_HERE).mPriority ;
       const int32_t currentActivityOnSuccessurResource = inPtr->mArray (SuccessorResource COMMA_HERE).mCurrentActivity ;
       //--- Get the busy duration on the successor resource
-      LeastBusyPeriod = 
+      LeastBusyPeriod =
         inPtr->mArray (SuccessorResource COMMA_HERE).mActivitiesToScheduleList.getMinimumBusyPeriod4Activity (SuccessorIndex,
                      inActivities);
-                     
+
       LeastBusyPeriod = LeastBusyDuration (inPtr, LeastBusyPeriod, inCurrentInstant,
                                          inAdditionIndex, SuccessorIndex,
                                          inResourceCount,
-                                         inReadyAtThisInstant, inActivities);   
-                                         
+                                         inReadyAtThisInstant, inActivities);
+
       //--- The overall busy period is calculated
 
       if ( currentActivityOnSuccessurResource < 0 ){
-        //--- if the successor resource is free: Does it will receive hiegher priority      
-         
-        bool willReceiveHihgerPriorityOnSuccResAtThisInst = 
+        //--- if the successor resource is free: Does it will receive hiegher priority
+
+        bool willReceiveHihgerPriorityOnSuccResAtThisInst =
       	           WillRecieveHigherActivation(inPtr, inResourceCount,
 			                                         SuccessorIndex, inCurrentInstant,
-			                                         inActivities);     
+			                                         inActivities);
 	      if (! willReceiveHihgerPriorityOnSuccResAtThisInst){
 			    HasToAdd= true;
-		    } 	
+		    }
       }else if( (inPtr->mArray (SuccessorResource COMMA_HERE).mExecutionCounter + SuccessorOffset) >=
     			(inActivities (currentActivityOnSuccessurResource COMMA_HERE).mMinDuration + LeastBusyPeriod) ){
         //--- If it may be free, Test if any ready activity (at the addition instant) on that resource
-        const bool AnyReadyAt= 
+        const bool AnyReadyAt=
     	    inPtr->mArray (SuccessorResource COMMA_HERE).mActivitiesToScheduleList.AnyReadyToScheduleAt (inCurrentInstant) ;
        //--- If yes, if the ready one is not higher priority--> Add successor
-        if (AnyReadyAt){           
+        if (AnyReadyAt){
           const int32_t HighestReadyAt=
             inPtr->mArray (SuccessorResource COMMA_HERE).mActivitiesToScheduleList.getFirstToSchedule (inCurrentInstant) ;
 	        if ( (SuccessorPriority < inActivities (HighestReadyAt COMMA_HERE).mPriority )
@@ -896,33 +896,33 @@ HasToAddSuccessors (const cResourceSchedule * inPtr,
 //--- do the same for other heirs
 
 		int32_t OtherHeirId = inActivities (SuccessorIndex COMMA_HERE).mOtherHeirId ;
-	  while ( (OtherHeirId >= 0) && !HasToAdd){ 
+	  while ( (OtherHeirId >= 0) && !HasToAdd){
 	    if( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ) {
 			  int32_t HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
 			  int32_t HeirOffset = inActivities (OtherHeirId COMMA_HERE).mOffset ;
 			  int32_t HeirPriority = inActivities (OtherHeirId COMMA_HERE).mPriority ;
 				int32_t currentActivityOnHeirResource = inPtr->mArray (HeirResource COMMA_HERE).mCurrentActivity ;
-			
-			  int32_t 
+
+			  int32_t
 	        leastBusyPeriod = inPtr->mArray (HeirResource COMMA_HERE).mActivitiesToScheduleList.getMinimumBusyPeriod4Activity (OtherHeirId,
 	                          inActivities);
 	      leastBusyPeriod = LeastBusyDuration (inPtr, leastBusyPeriod, inCurrentInstant,
 		                                         inAdditionIndex, OtherHeirId,
 		                                         inResourceCount,
-		                                         inReadyAtThisInstant, inActivities);   
-				
+		                                         inReadyAtThisInstant, inActivities);
+
 			  if (currentActivityOnHeirResource < 0 ){
-			    bool willReceiveHihgerPriorityOnHeirResAtThisInst = 
+			    bool willReceiveHihgerPriorityOnHeirResAtThisInst =
 	      	               WillRecieveHigherActivation(inPtr, inResourceCount,
 				                                             OtherHeirId, inCurrentInstant,
-				                                             inActivities);      	
+				                                             inActivities);
 				  if (!willReceiveHihgerPriorityOnHeirResAtThisInst){
 				  	  HasToAdd= true;
 				  }
 			  }else if( (inPtr->mArray (HeirResource COMMA_HERE).mExecutionCounter + HeirOffset) >=
 		    			 (inActivities (currentActivityOnHeirResource COMMA_HERE).mMinDuration + leastBusyPeriod) ){
-		    			 
-			    const bool AnyReadyAt= 
+
+			    const bool AnyReadyAt=
 	    	    inPtr->mArray (HeirResource COMMA_HERE).mActivitiesToScheduleList.AnyReadyToScheduleAt (inCurrentInstant) ;
 
 	        if (AnyReadyAt){
@@ -936,13 +936,13 @@ HasToAddSuccessors (const cResourceSchedule * inPtr,
 		        }
 		      }else{
 		      	 HasToAdd= true;
-		      } 	
+		      }
 			 	}
 			}
 		  OtherHeirId = inActivities (OtherHeirId COMMA_HERE).mOtherHeirId;
 		}
 	}
-	
+
   return HasToAdd ;
 }
 /*--------------------------------------------------------------------------------------*/
@@ -951,46 +951,46 @@ addSuccessors (cResourceSchedule * inPtr,
 			         const int32_t inActivityIndex,
                const TC_UniqueArray <cActivity> & inActivities,
                const int32_t inCurrentInstant) {
-             
+
   const int32_t successorIndex = inActivities (inActivityIndex COMMA_HERE).mSuccessorId ;
-           
+
   if (successorIndex >= 0) {
-    if ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ){ 
+    if ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ){
 			const int32_t successorResource = inActivities (successorIndex COMMA_HERE).mResourceId ;
 			const int32_t successorOffset =  inActivities (successorIndex COMMA_HERE).mOffset ;
-			inPtr->mArray (successorResource COMMA_HERE).mActivitiesToScheduleList.addEntry (successorIndex, 
+			inPtr->mArray (successorResource COMMA_HERE).mActivitiesToScheduleList.addEntry (successorIndex,
 										inActivities (successorIndex COMMA_HERE).mPriority,
 						  			inCurrentInstant + successorOffset) ;
 	  }
 	  int32_t OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
     while (OtherHeirId >= 0) {
-      if ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ){ 
+      if ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ){
 		    const int32_t HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
 		    const int32_t heirOffset = inActivities (OtherHeirId COMMA_HERE).mOffset ;
-						 
-		    inPtr->mArray (HeirResource COMMA_HERE).mActivitiesToScheduleList.addEntry (OtherHeirId, 
+
+		    inPtr->mArray (HeirResource COMMA_HERE).mActivitiesToScheduleList.addEntry (OtherHeirId,
 			 	  					  inActivities (OtherHeirId COMMA_HERE).mPriority,
 			  						  inCurrentInstant + heirOffset) ;
 			}
 		  OtherHeirId = inActivities (OtherHeirId COMMA_HERE).mOtherHeirId;
     }
 	}
-	
+
 }
 //---------------------------------------------------------------------------*
-static bool 
-IsOffsetTimeGTNextMinDur (const cResourceSchedule * inPtr, 
+static bool
+IsOffsetTimeGTNextMinDur (const cResourceSchedule * inPtr,
                           const TC_UniqueArray <cActivity> & inActivities,
                           const int32_t inResourceIndex,
                           const int32_t inCurrentInstant){
-                          
+
 	const int32_t currentActivity = inPtr->mArray (inResourceIndex COMMA_HERE).mCurrentActivity ;
 	int32_t MaximumSuccessorOffset = 0 ;
   int32_t HigestSuccessorPriority = INT32_MAX ;
   bool WillReceiveNew = false;
   int32_t successorIndex = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
   if (successorIndex >= 0){
-    if ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ){   
+    if ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ){
 		  int32_t successorResource = inActivities (successorIndex COMMA_HERE).mResourceId ;
 		  if (successorResource == inResourceIndex){
 		  int32_t successorOffset =  inActivities (successorIndex COMMA_HERE).mOffset ;
@@ -1000,7 +1000,7 @@ IsOffsetTimeGTNextMinDur (const cResourceSchedule * inPtr,
 	  }
 	  int32_t OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
 	  while (OtherHeirId >= 0) {
-	    if ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ){   
+	    if ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ){
 		  	int32_t HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
 		  	if (HeirResource == inResourceIndex){
 		  		int32_t heirOffset = inActivities (OtherHeirId COMMA_HERE).mOffset ;
@@ -1010,35 +1010,35 @@ IsOffsetTimeGTNextMinDur (const cResourceSchedule * inPtr,
 		  }
 			OtherHeirId = inActivities (OtherHeirId COMMA_HERE).mOtherHeirId;
 		}
-	  int32_t HPA = 
+	  int32_t HPA =
 	    inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.getFirstToSchedule (inCurrentInstant) ;
 	  if ( ( (HPA == -1) && (MaximumSuccessorOffset != 0))
-	      || 
-	       ( (HPA != -1) && 
-	       (inActivities (HPA COMMA_HERE).mMinDuration < MaximumSuccessorOffset)) ){ 
-	     
+	      ||
+	       ( (HPA != -1) &&
+	       (inActivities (HPA COMMA_HERE).mMinDuration < MaximumSuccessorOffset)) ){
+
 			WillReceiveNew = true;
 		}
 	}
 	return WillReceiveNew ;
 }
 //---------------------------------------------------------------------------*
-static bool 
-NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr, 
+static bool
+NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
                                const TC_UniqueArray <cActivity> & inActivities,
                                const TC_UniqueArray <cReadyAtThisInstant> & inReadyAtThisInstant,
                                const int32_t inAdditionIndex,
                                const int32_t inResourceIndex,
                                const int32_t inResourceCount,
                                const int32_t inCurrentInstant){
-   
-  bool WillReceiveNew= false ; 
-  int32_t additionIndex = inAdditionIndex ; 
+
+  bool WillReceiveNew= false ;
+  int32_t additionIndex = inAdditionIndex ;
   bool AnyInsertedButNotReady = false;
   bool DirectSuccessor = false ;
   //--- If there is ready activity
   const int32_t currentActivity = inPtr->mArray (inResourceIndex COMMA_HERE).mCurrentActivity ;
-  const bool 
+  const bool
     AnyReadyAt= inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.AnyReadyToScheduleAt (inCurrentInstant) ;
   if (DependentActivitiesHasOffset){
     AnyInsertedButNotReady = inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.AnyNotReadyToScheduleAt (inCurrentInstant) ;
@@ -1053,9 +1053,9 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
   		}
   	}
   }
-  //--- If all inserted activities are ready:   
+  //--- If all inserted activities are ready:
   if ((AnyReadyAt || DirectSuccessor) && !AnyInsertedButNotReady){
-     int32_t HPAReadyAtInstant = 
+     int32_t HPAReadyAtInstant =
       inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.getFirstScheduledInstant (inCurrentInstant);
     if (inCurrentInstant==HPAReadyAtInstant){
     	WillReceiveNew = true;
@@ -1065,29 +1065,29 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
      //  int32_t PreviousPriority = INT32_MAX; // Unused var ; commented out 1/1/2005
 	    int32_t MaximumBusyPeriod = inActivities (currentActivity COMMA_HERE).mMaxDuration -
 	                               inPtr->mArray (inResourceIndex COMMA_HERE).mExecutionCounter;
-	    MaximumBusyPeriod += 
-	    	inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.getMaximumBusyPeriod (currentActivity, inActivities);    	
+	    MaximumBusyPeriod +=
+	    	inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.getMaximumBusyPeriod (currentActivity, inActivities);
 	 		int32_t LowerPriorityActivity = inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.getLowerPriority (currentActivity, inActivities);
-			
-		  while (!WillReceiveNew 
+
+		  while (!WillReceiveNew
 		         &&
 		         (additionIndex < inReadyAtThisInstant.count())
-	           && 
-	           ((MaximumBusyPeriod +inCurrentInstant) > inReadyAtThisInstant (additionIndex COMMA_HERE).mThisInstant) ){ 
+	           &&
+	           ((MaximumBusyPeriod +inCurrentInstant) > inReadyAtThisInstant (additionIndex COMMA_HERE).mThisInstant) ){
 	        int32_t nextActivityIndex = inReadyAtThisInstant (additionIndex COMMA_HERE). mActivityIndex;
 	        do{
 	          int32_t nextActivityResource = inActivities (nextActivityIndex COMMA_HERE).mResourceId ;
 	          int32_t activityPriority = inActivities (nextActivityIndex COMMA_HERE).mPriority;
 	          if ( inResourceIndex == nextActivityResource){
 	          	MinimumHPBusyPeriod = inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.getMinimumBusyPeriod4Activity (nextActivityIndex, inActivities);
-	 						SuccessorsMinBusyDuration4Activity (MinimumHPBusyPeriod, currentActivity, 
+	 						SuccessorsMinBusyDuration4Activity (MinimumHPBusyPeriod, currentActivity,
 	 						                                    inResourceIndex, activityPriority,
 	 						                                    inActivities);
 	 						if ( (MinimumHPBusyPeriod + inCurrentInstant) >= inReadyAtThisInstant (additionIndex COMMA_HERE).mThisInstant){
 				      	LowerPriorityActivity = MAX(LowerPriorityActivity, activityPriority);
-			         	LowerPriorityOnResource(LowerPriorityActivity, nextActivityIndex, inResourceIndex, inActivities); 
+			         	LowerPriorityOnResource(LowerPriorityActivity, nextActivityIndex, inResourceIndex, inActivities);
 				      	MaximumBusyPeriod += inActivities (nextActivityIndex COMMA_HERE).mMaxDuration;
-				      	SuccessorsMaxBusyDuration( MaximumBusyPeriod, nextActivityIndex, inResourceIndex, inActivities);  
+				      	SuccessorsMaxBusyDuration( MaximumBusyPeriod, nextActivityIndex, inResourceIndex, inActivities);
 				      	if (MinimumBusyPeriod ==0 ){
 				      		MinimumBusyPeriod = MinimumHPBusyPeriod + inActivities (nextActivityIndex COMMA_HERE).mMinDuration;
 				      	}else{
@@ -1098,34 +1098,34 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
 							         &&
 							         ((MinimumBusyPeriod + inCurrentInstant) >= inReadyAtThisInstant (additionIndex COMMA_HERE).mThisInstant) ){
 					  	  MaximumBusyPeriod += inActivities (nextActivityIndex COMMA_HERE).mMaxDuration;
-					  	  SuccessorsMaxBusyDuration( MaximumBusyPeriod, nextActivityIndex, inResourceIndex, inActivities); 
+					  	  SuccessorsMaxBusyDuration( MaximumBusyPeriod, nextActivityIndex, inResourceIndex, inActivities);
 					  	  MinimumBusyPeriod += inActivities (nextActivityIndex COMMA_HERE).mMinDuration;
 					  	  SuccessorsMinBusyDuration(MinimumBusyPeriod, nextActivityIndex, inResourceIndex, inActivities);
 							  LowerPriorityActivity = MAX(LowerPriorityActivity, activityPriority);
-							  LowerPriorityOnResource(LowerPriorityActivity, nextActivityIndex, inResourceIndex, inActivities); 
+							  LowerPriorityOnResource(LowerPriorityActivity, nextActivityIndex, inResourceIndex, inActivities);
 							}else{
-								WillReceiveNew= true; 
+								WillReceiveNew= true;
 							}
-	          } 
+	          }
 	          nextActivityIndex = inActivities (nextActivityIndex COMMA_HERE).mOtherReadyAtThisInst ;
 	        }while(! WillReceiveNew && (nextActivityIndex != -1) );
 	        additionIndex ++;
 	    }
-	  	  		  
+
 		  if (!WillReceiveNew){
 		  	if( !NoInterdependenceButUseB){
 			  	for (int32_t index = 0 ; (index < inResourceCount) && ! WillReceiveNew ; index++){
 			  	  if (index != inResourceIndex){
 			      	const int32_t resCurrentActivity = inPtr->mArray (index COMMA_HERE).mCurrentActivity ;
 			  			if (resCurrentActivity >= 0){
-			  		  	int32_t CertainFutureBusyDuration = 
+			  		  	int32_t CertainFutureBusyDuration =
 			  		    	inActivities (resCurrentActivity COMMA_HERE).mMinDuration-inPtr->mArray (index COMMA_HERE).mExecutionCounter;
-			  				
+
 			  				CertainFutureBusyDuration =MAX(0, CertainFutureBusyDuration);
 			  				if (CertainFutureBusyDuration < MaximumBusyPeriod ){
 			  				 	int32_t successorId = inActivities (resCurrentActivity COMMA_HERE).mSuccessorId;
 			  					if (successorId >= 0){
-			  					  if ( (inActivities (successorId COMMA_HERE).mOccurrence % inActivities (successorId COMMA_HERE).mEvery) == 0 ){   
+			  					  if ( (inActivities (successorId COMMA_HERE).mOccurrence % inActivities (successorId COMMA_HERE).mEvery) == 0 ){
 			  						  int32_t successorResource = inActivities (successorId COMMA_HERE).mResourceId;
 			  						  if (successorResource == inResourceIndex){
 			  							  WillReceiveNew = true;
@@ -1135,11 +1135,11 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
 			  						}else if ( !WillReceiveNew && (ResourceMinDuration[index]+ CertainFutureBusyDuration) < MaximumBusyPeriod ){
 			  				      WillReceiveNew = true;
 			  					  }
-			  						
+
 			  						int32_t OtherHeirId = inActivities (successorId COMMA_HERE).mOtherHeirId ;
     								while (OtherHeirId >= 0) {
 	    							  int32_t HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
-	                    if ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ){   
+	                    if ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ){
 			  			          if (HeirResource == inResourceIndex){
 			  							    WillReceiveNew = true;
 			  						    }else	if( (inActivities (OtherHeirId COMMA_HERE).mMinDuration + CertainFutureBusyDuration) < MaximumBusyPeriod  ){
@@ -1155,37 +1155,37 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
 			  					}
 			  				}
 			  			}else if (ResourceMinDuration[inResourceIndex] < MaximumBusyPeriod ){
-			  			  WillReceiveNew = true;  
+			  			  WillReceiveNew = true;
 			  			}
-			  		}else{ 
+			  		}else{
 			  		  /*if(index == inResourceIndex) { //If the resource will chgange context on others
-			  		  //--- 
+			  		  //---
 			  		  for (int32_t i = 0 ; (i < inResourceCount) && ! WillReceiveNew ; i++){
 			  		    int32_t CertainFutureDuration = 0 ;
 			  		    if (i != inResourceIndex){
 			      	    resCurrentActivity = inPtr->mArray (i COMMA_HERE).mCurrentActivity ;
 			  		      if (currentActivity >= 0){
-			  		  	    CertainFutureDuration = 
+			  		  	    CertainFutureDuration =
 			  		    	    inActivities (currentActivity COMMA_HERE).mMinDuration-inPtr->mArray (i COMMA_HERE).mExecutionCounter;
-			  				
+
 			  				    CertainFutureDuration =MAX(0, CertainFutureDuration);
 			  				  }
-			  				  CertainFutureDuration += ResourceMinDuration[i]; 
+			  				  CertainFutureDuration += ResourceMinDuration[i];
 			  				  if (CertainFutureDuration <= MaximumBusyPeriod ){
-			  					  WillReceiveNew = true; 
+			  					  WillReceiveNew = true;
 			  		      }
-			  		    } 
+			  		    }
 			  		  }*/
 			  		}
-			    }	    
+			    }
 			  }else if (DependentActivitiesHasOffset){ //NoInterdependenceButUseB
-					WillReceiveNew = 
+					WillReceiveNew =
 					 IsOffsetTimeGTNextMinDur( inPtr, inActivities, inResourceIndex, inCurrentInstant);
 			  }
 		  }
 	  }
 	}
-  return WillReceiveNew ; 
+  return WillReceiveNew ;
 }
 //---------------------------------------------------------------------------*
 static void
@@ -1200,7 +1200,7 @@ recursiveOP (cResourceSchedule * inPtr,
                TC_UniqueArray <cResponseTime> & ioResponseTimeArray,
              #endif
              const int32_t inResourceCount) {
-           
+
   if (inResourceIndex == inResourceCount) {
     bool terminated = true ;
     for (int32_t i=0 ; i<inResourceCount ; i++) {
@@ -1212,13 +1212,13 @@ recursiveOP (cResourceSchedule * inPtr,
         }
       }
       if (inPtr->mArray (i COMMA_HERE).mCurrentActivity >= 0) {
-         inPtr->mArray (i COMMA_HERE).mExecutionCounter ++ ;  
+         inPtr->mArray (i COMMA_HERE).mExecutionCounter ++ ;
         terminated = false ;
       }else if (terminated && ! inPtr->mArray (i COMMA_HERE).mActivitiesToScheduleList.isListEmpty ()) {
         terminated = false ;
       }
     }
-    
+
     if (terminated) {
       #ifndef FORGET_ACTIVITY_NODES
         gScheduleResults.mergeList (inPtr->mActivityList) ;
@@ -1242,7 +1242,7 @@ recursiveOP (cResourceSchedule * inPtr,
                    #endif
                    inResourceCount) ;
     }else if (inPtr->mArray (inResourceIndex COMMA_HERE).mExecutionCounter < inActivities (currentActivity COMMA_HERE).mMinDuration) {
-      
+
       recursiveOP (inPtr,
                    inResourceIndex + 1,
                    inAdditionIndex,
@@ -1265,7 +1265,7 @@ recursiveOP (cResourceSchedule * inPtr,
           ioResponseTimeArray (currentActivity COMMA_HERE).mWorstResponseTime = inCurrentInstant ;
         }
       #endif
-      
+
       if (inActivities (currentActivity COMMA_HERE).mSuccessorId >= 0) {
       	addSuccessors (inPtr, currentActivity, inActivities, inCurrentInstant) ;
       }
@@ -1276,14 +1276,14 @@ recursiveOP (cResourceSchedule * inPtr,
                     inResourceIndex + 1,
                     inAdditionIndex,
                     inActivities,
-                    inCurrentInstant, 
+                    inCurrentInstant,
                     inReadyAtThisInstant,
                     ioScheduleMap,
                     #ifdef FORGET_ACTIVITY_NODES
                       ioResponseTimeArray,
                     #endif
-                    inResourceCount) ;             
-    
+                    inResourceCount) ;
+
     }else if ((inPtr->mArray (inResourceIndex COMMA_HERE).mExecutionCounter % inPtr->mArray (inResourceIndex COMMA_HERE).mStep) != 0 ){
     	 recursiveOP (inPtr,
                    inResourceIndex + 1,
@@ -1297,7 +1297,7 @@ recursiveOP (cResourceSchedule * inPtr,
                    #endif
                    inResourceCount);
     }else{
-          
+
       #ifdef FORGET_ACTIVITY_NODES
         if (ioResponseTimeArray (currentActivity COMMA_HERE).mBestResponseTime > inCurrentInstant) {
           ioResponseTimeArray (currentActivity COMMA_HERE).mBestResponseTime = inCurrentInstant ;
@@ -1306,7 +1306,7 @@ recursiveOP (cResourceSchedule * inPtr,
           ioResponseTimeArray (currentActivity COMMA_HERE).mWorstResponseTime = inCurrentInstant ;
         }
       #endif
-  		
+
   		bool HasToAdd=false;
   		bool MarkLowerAndHigherBound=false;
       bool NewActivationDuringBusyPeriod =false ;
@@ -1314,19 +1314,19 @@ recursiveOP (cResourceSchedule * inPtr,
       //--- Test if the busy period (BP) is already tested & there is new activation during it
       int32_t SuccessorId = inActivities (currentActivity COMMA_HERE).mSuccessorId ;
       if (! inPtr->mArray (inResourceIndex COMMA_HERE).mHasNoNewActivities){
-         NewActivationDuringBusyPeriod = 
+         NewActivationDuringBusyPeriod =
             NewReadyInfluenceOnScheduling (inPtr, inActivities,
 	         	  													   inReadyAtThisInstant,
 	         																 inAdditionIndex,
-	                                         inResourceIndex, inResourceCount, 
+	                                         inResourceIndex, inResourceCount,
 	                                         inCurrentInstant);
-	        
+
 	      //--- If no activation during BP:
-	      ThereIsReady = 
+	      ThereIsReady =
 	        inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.AnyReadyToScheduleAt (inCurrentInstant) ;
 	      if (!ThereIsReady){
-  				if ( (SuccessorId >= 0) 
-  				    && 
+  				if ( (SuccessorId >= 0)
+  				    &&
   				    !DependentActivitiesHasOffset
   				    &&
   				    NoInterdependenceButUseB
@@ -1337,66 +1337,66 @@ recursiveOP (cResourceSchedule * inPtr,
   			}
         if(! NewActivationDuringBusyPeriod && ThereIsReady){
 	        inPtr->mArray (inResourceIndex COMMA_HERE).mHasNoNewActivities = true;
-	      } 
-	      
+	      }
+
 	      if (inPtr->mArray (inResourceIndex COMMA_HERE).mHasNoNewActivities
 	          &&
 	          (inPtr->mArray (inResourceIndex COMMA_HERE).mLHBound == 0) ){
 	        MarkLowerAndHigherBound = true;
 	      }
 	    }
-   	    
+
    	  if (! NewActivationDuringBusyPeriod){
         if( inPtr->mArray (inResourceIndex COMMA_HERE).mHasNoNewActivities
            &&
-		       (inPtr->mArray (inResourceIndex COMMA_HERE).mExecutionCounter == 
+		       (inPtr->mArray (inResourceIndex COMMA_HERE).mExecutionCounter ==
 		        inActivities (currentActivity COMMA_HERE).mMinDuration)) {
 		        NewActivationDuringBusyPeriod = true;
 	      }else if( ! inPtr->mArray (inResourceIndex COMMA_HERE).mHasNoNewActivities ){
-	        ThereIsReady = 
+	        ThereIsReady =
 		        inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.AnyReadyToScheduleAt (inCurrentInstant) ;
 	        if(ThereIsReady){
 	          NewActivationDuringBusyPeriod = true;
 	        }
 	      }
-	    } 
-   	   		   	   
+	    }
+
       if (! NewActivationDuringBusyPeriod && (SuccessorId >= 0)){
       	HasToAdd = HasToAddSuccessors (inPtr, inResourceCount, inAdditionIndex,
-                                       inReadyAtThisInstant, currentActivity, 
-                                       inCurrentInstant, inActivities);    
-                                       
+                                       inReadyAtThisInstant, currentActivity,
+                                       inCurrentInstant, inActivities);
+
       	bool NotZeroOffsetOnSameResource =false;
       	int32_t SuccessorResource = inActivities (SuccessorId COMMA_HERE).mResourceId ;
       	if ( DependentActivitiesHasOffset
       	    &&
       	    (SuccessorResource == inResourceIndex)
-      	    && 
+      	    &&
       	    (inActivities (SuccessorId COMMA_HERE).mOffset != 0) ){
 	  				NotZeroOffsetOnSameResource = IsOffsetTimeGTNextMinDur( inPtr, inActivities, inResourceIndex, inCurrentInstant);
-	  		}      	
+	  		}
       	//--- Test if there is a successor on the same resource with offset != 0
       	if ( DependentActivitiesHasOffset
       	     &&
       	     inPtr->mArray (inResourceIndex COMMA_HERE).mHasNoNewActivities
-      	     && 
-      	     NotZeroOffsetOnSameResource 
-      	     && 
-      	     (HasToAdd 
-      	      || 
+      	     &&
+      	     NotZeroOffsetOnSameResource
+      	     &&
+      	     (HasToAdd
+      	      ||
       	      (inPtr->mArray (inResourceIndex COMMA_HERE).mExecutionCounter == (inActivities (currentActivity COMMA_HERE).mMaxDuration -1 ) )
-       	      ) ){ 
+       	      ) ){
           //--- If the successor on the same resource will not inserted directlly: change the flag
       		inPtr->mArray (inResourceIndex COMMA_HERE).mHasNoNewActivities = false;
       		inPtr->mArray (inResourceIndex COMMA_HERE).mLHBound = 0 ;
-      	}		
+      	}
       }
-     	    
+
 	    if ( (SuccessorId < 0)
             &&
             (inPtr->mArray (inResourceIndex COMMA_HERE).mLHBound == 1)
             &&
-            (inPtr->mArray (inResourceIndex COMMA_HERE).mExecutionCounter == 
+            (inPtr->mArray (inResourceIndex COMMA_HERE).mExecutionCounter ==
               (inActivities (currentActivity COMMA_HERE).mMaxDuration -1 ) ) ){
         bool AnyReadyInAL = inPtr->mArray (inResourceIndex COMMA_HERE).mActivitiesToScheduleList.AnyReadyToScheduleAt (inCurrentInstant) ; ;
         //--- change the flag
@@ -1405,45 +1405,45 @@ recursiveOP (cResourceSchedule * inPtr,
       		inPtr->mArray (inResourceIndex COMMA_HERE).mLHBound = 0 ;
       	}
       }
-	    
-      if( HasToAdd || NewActivationDuringBusyPeriod ){ 
-               
+
+      if( HasToAdd || NewActivationDuringBusyPeriod ){
+
 	      if ( NoInterdependenceButUseB
 	           &&
 	           inPtr->mArray (inResourceIndex COMMA_HERE).mHasNoNewActivities
 	           &&
 	           (inPtr->mArray (inResourceIndex COMMA_HERE).mLHBound != 0) ){
-	       
+
 	          if ( inPtr->mArray (inResourceIndex COMMA_HERE).mLHBound ==-1){
 	            #ifndef FORGET_ACTIVITY_NODES
                 inPtr->mActivityList.push (currentActivity, inCurrentInstant, inPtr->mArray (inResourceIndex COMMA_HERE).mExecutionCounter) ;
-             	#endif 
-             	gAllocatedActivityNodesCount ++;       
+             	#endif
+             	gAllocatedActivityNodesCount ++;
 	        	  if (SuccessorId >= 0) {
 		            addSuccessors (inPtr, currentActivity, inActivities, inCurrentInstant) ;
 		          }
 	        	  inPtr->mArray (inResourceIndex COMMA_HERE).mCurrentActivity = -1 ;
-          	  inPtr->mArray (inResourceIndex COMMA_HERE).mExecutionCounter = 0 ; 
+          	  inPtr->mArray (inResourceIndex COMMA_HERE).mExecutionCounter = 0 ;
             }
-            
-            recursiveOP (inPtr, 
+
+            recursiveOP (inPtr,
                          inResourceIndex + 1,
                          inAdditionIndex,
                          inActivities,
-	                       inCurrentInstant, 
+	                       inCurrentInstant,
 	                       inReadyAtThisInstant,
 	                       ioScheduleMap,
 	                       #ifdef FORGET_ACTIVITY_NODES
 	                         ioResponseTimeArray,
 	                       #endif
 	                       inResourceCount) ;
-	      
+
 	      }else{
 	        if (MarkLowerAndHigherBound){
 		        inPtr->mArray (inResourceIndex COMMA_HERE).mLHBound = 1;
-		      } 
+		      }
 		  	  cResourceSchedule *  resourceSchedule = allocResourceNode (inResourceCount) ;
-		  	  
+
 	    		for (int32_t i=0 ; i<inResourceCount ; i++) {
 		  		  resourceSchedule->mArray (i COMMA_HERE) = inPtr->mArray (i COMMA_HERE);
 		  	  }
@@ -1455,53 +1455,53 @@ recursiveOP (cResourceSchedule * inPtr,
 	    		if (SuccessorId >= 0) {
 		         addSuccessors (resourceSchedule, currentActivity, inActivities, inCurrentInstant) ;
 		      }
-		        
+
 		      resourceSchedule->mArray (inResourceIndex COMMA_HERE).mCurrentActivity = -1 ;
           resourceSchedule->mArray (inResourceIndex COMMA_HERE).mExecutionCounter = 0 ;
-    			
+
     			if (MarkLowerAndHigherBound){
 	          resourceSchedule->mArray (inResourceIndex COMMA_HERE).mLHBound = -1;
 	        }
-	         
-	        recursiveOP (resourceSchedule, 
+
+	        recursiveOP (resourceSchedule,
 		                   inResourceIndex + 1,
 		                   inAdditionIndex,
-	                     inActivities, inCurrentInstant, 
+	                     inActivities, inCurrentInstant,
 	                     inReadyAtThisInstant,
 	                     ioScheduleMap,
 				               #ifdef FORGET_ACTIVITY_NODES
 				                 ioResponseTimeArray,
 				               #endif
 				               inResourceCount) ;
-	      
-	        recursiveOP (inPtr, 
+
+	        recursiveOP (inPtr,
 	                     inResourceIndex + 1,
 	                     inAdditionIndex,
 	                     inActivities,
-		                   inCurrentInstant, 
+		                   inCurrentInstant,
 		                   inReadyAtThisInstant,
 		                   ioScheduleMap,
 		                   #ifdef FORGET_ACTIVITY_NODES
 		                     ioResponseTimeArray,
 		                   #endif
 		                   inResourceCount) ;
-	      } 
-		  }else{      
-		  // No cloning               
+	      }
+		  }else{
+		  // No cloning
 	    //--- First op : continue
-	              
+
 		     recursiveOP (inPtr,
 				              inResourceIndex + 1,
 				              inAdditionIndex,
 				              inActivities,
-				              inCurrentInstant, 
+				              inCurrentInstant,
 				              inReadyAtThisInstant,
 				              ioScheduleMap,
 				              #ifdef FORGET_ACTIVITY_NODES
 				                ioResponseTimeArray,
 				              #endif
 				              inResourceCount) ;
-		  } 
+		  }
     }
   }
 }
@@ -1510,16 +1510,16 @@ recursiveOP (cResourceSchedule * inPtr,
 void
 scheduleActivities (const int32_t NoInterButUseB,
                     const bool DependentHasOffset,
-                    const TC_UniqueArray <cReadyAtThisInstant> & ReadyAtThisInstant, 
+                    const TC_UniqueArray <cReadyAtThisInstant> & ReadyAtThisInstant,
                     const TC_UniqueArray <cActivity> & inActivities,
                     const TC_UniqueArray <cResource> & inResource,
                     TC_UniqueArray <cResponseTime> & outResponseTimeArray) {
- 
+
   const int32_t inResourceCount = inResource.count ();
   const int32_t activitiesCount = inActivities.count () ;
   outResponseTimeArray.setCapacity (activitiesCount) ;
   outResponseTimeArray.appendObjects (activitiesCount, cResponseTime ()) ;
-  
+
   DependentActivitiesHasOffset = DependentHasOffset ;
   if (NoInterButUseB==1){
   	NoInterdependenceButUseB = true;
@@ -1529,18 +1529,18 @@ scheduleActivities (const int32_t NoInterButUseB,
   for (int32_t i = 0; i< inResourceCount ;i++){
   	ResourceMinDuration[i]= inResource(i COMMA_HERE).mMinDuration;
   }
-  
+
   const int32_t NumberOfIndependentInsertion =  ReadyAtThisInstant.count();
-  const int32_t lastActivityScheduleInstant = 
+  const int32_t lastActivityScheduleInstant =
   						 ReadyAtThisInstant ((NumberOfIndependentInsertion-1) COMMA_HERE).mThisInstant ;
   cScheduleMap scheduleMap (inResourceCount, lastActivityScheduleInstant, inActivities) ;
   int32_t AdditionIndex=0;
 //--- Perform activities scheduling
-  C_Timer Timer ;
+  C_Timer timer ;
   while (scheduleMap.moreWorkToDo ()) {
-    
+
     cResourceSchedule * list = scheduleMap.retrieveResourceList () ;
-    //--- Insert independent released activities    
+    //--- Insert independent released activities
     if ((AdditionIndex < NumberOfIndependentInsertion)
        &&
        (ReadyAtThisInstant (AdditionIndex COMMA_HERE).mThisInstant == scheduleMap.getCurrentInstant ())) {
@@ -1555,7 +1555,7 @@ scheduleActivities (const int32_t NoInterButUseB,
           list->mArray (i COMMA_HERE).mStep = inResource (i COMMA_HERE).mStep ;
         }
       }
-     
+
       const int32_t AddedActivityIndex = ReadyAtThisInstant (AdditionIndex COMMA_HERE).mActivityIndex ;
       cResourceSchedule * p = list ;
       while (p != NULL) {
@@ -1564,7 +1564,7 @@ scheduleActivities (const int32_t NoInterButUseB,
       }
       AdditionIndex ++;
     }
-    
+
      int32_t nodeCount = 0 ;
     { cResourceSchedule * p = list ;
       while (p != NULL) {
@@ -1573,25 +1573,25 @@ scheduleActivities (const int32_t NoInterButUseB,
       }
     }
 //    dumpSchedule (p) ;
-            
+
    {  cResourceSchedule * p = list ;
       while (p != NULL) {
     //--- Retrieve resource node from list
         cResourceSchedule * q = p->mPtrToOtherResource ;
         p->mPtrToOtherResource = NULL ;
-    //--- Check if the coning has to be done!   
-         recursiveOP (p, 0, AdditionIndex, 
+    //--- Check if the coning has to be done!
+         recursiveOP (p, 0, AdditionIndex,
         						 inActivities, scheduleMap.getCurrentInstant (),
         						 ReadyAtThisInstant,
-      	  					 scheduleMap, 
+      	  					 scheduleMap,
       		  				 #ifdef FORGET_ACTIVITY_NODES
-      			  			   outResponseTimeArray, 
+      			  			   outResponseTimeArray,
       				  		 #endif
       					  	 inResourceCount) ;
         p = q ;
       }
     }
-    
+
 	  int32_t devisor=100000;
 	  if(nodeCount >500000){
 	  	devisor = 1 ;
@@ -1606,16 +1606,18 @@ scheduleActivities (const int32_t NoInterButUseB,
 	  }
     const int32_t currentInstant = scheduleMap.getCurrentInstant () ;
     if ( (currentInstant != 0) && ((currentInstant % devisor) == 0)) {
-      co << "currentInstant " 
-         << cStringWithSigned (currentInstant)
-         << ", " << cStringWithSigned (nodeCount) << " resource nodes, "
-         << Timer
-         << "\n" ;
-      co.flush () ;
+      gCout.addString ("currentInstant ") ;
+      gCout.addSigned (currentInstant) ;
+      gCout.addString (", ") ;
+      gCout.addSigned (nodeCount) ;
+      gCout.addString (" resource nodes, ") ;
+      gCout.addString (timer.timeString ()) ;
+      gCout.addString ("\n") ;
+      gCout.flush () ;
     }
     scheduleMap.advanceToNextInstant () ;
   }
- 
+
 //--- Dump data structure
 #ifndef FORGET_ACTIVITY_NODES
  dumpStructure () ;
@@ -1624,10 +1626,14 @@ scheduleActivities (const int32_t NoInterButUseB,
   #ifndef FORGET_ACTIVITY_NODES
     scheduleMap.computeBestAndWorstResponseTime (outResponseTimeArray, activitiesCount) ;
   #endif
-    
-  co << cStringWithSigned (gUsedResourceNodesCount) << " resource nodes used, " << cStringWithSigned (gAllocatedResourceNodesCount) << " allocated.\n" ;
+
+  gCout.addSigned (gUsedResourceNodesCount) ;
+  gCout.addString (" resource nodes used, ") ;
+  gCout.addSigned (gAllocatedResourceNodesCount) ;
+  gCout.addString (" allocated.\n") ;
  // #ifndef FORGET_ACTIVITY_NODES
-    co << cStringWithSigned (gAllocatedActivityNodesCount) << " activity nodes allocated.\n" ;
+  gCout.addSigned (gAllocatedActivityNodesCount) ;
+  gCout.addString (" activity nodes allocated.\n") ;
  // #endif
 }
 

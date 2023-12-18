@@ -1,4 +1,4 @@
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //  Generic Boolean Command Line Interface Option                                                
 //
@@ -16,17 +16,17 @@
 //  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 //  more details.
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #pragma once
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include "C_CommandLineOption.h"
 #include "utilities/M_machine.h"
-#include "strings/C_String.h"
+#include "strings/String-class.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class C_BoolCommandLineOption final : public C_CommandLineOption {
 //--- Constructor
@@ -57,23 +57,23 @@ class C_BoolCommandLineOption final : public C_CommandLineOption {
   public: static void printBoolOptions (void) ;
 
 //--- Option introspection
-  public: static void getBoolOptionNameList (TC_UniqueArray <C_String> & outArray) ;
+  public: static void getBoolOptionNameList (TC_UniqueArray <String> & outArray) ;
 
-  public: static utf32 getBoolOptionInvocationLetter (const C_String & inDomainName,
-                                                       const C_String & inIdentifier) ;
+  public: static utf32 getBoolOptionInvocationLetter (const String & inDomainName,
+                                                       const String & inIdentifier) ;
 
-  public: static C_String getBoolOptionInvocationString (const C_String & inDomainName,
-                                                          const C_String & inIdentifier) ;
+  public: static String getBoolOptionInvocationString (const String & inDomainName,
+                                                          const String & inIdentifier) ;
 
-  public: static C_String getBoolOptionCommentString (const C_String & inDomainName,
-                                                       const C_String & inIdentifier) ;
+  public: static String getBoolOptionCommentString (const String & inDomainName,
+                                                       const String & inIdentifier) ;
 
-  public: static bool getBoolOptionValue (const C_String & inDomainName,
-                                           const C_String & inIdentifier) ;
+  public: static bool getBoolOptionValue (const String & inDomainName,
+                                           const String & inIdentifier) ;
 
-  public: static void setBoolOptionValue (const C_String & inDomainName,
-                                           const C_String & inIdentifier,
+  public: static void setBoolOptionValue (const String & inDomainName,
+                                           const String & inIdentifier,
                                            const bool inValue) ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------

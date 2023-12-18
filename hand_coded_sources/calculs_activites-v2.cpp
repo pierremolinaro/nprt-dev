@@ -1,10 +1,10 @@
 /*--------------------------------------------------------------------------*/
 
-#include <stdlib.h> 
-#include <string.h> 
+#include <stdlib.h>
+#include <string.h>
 #include "files/C_HTML_FileWrite.h"
 #include "utilities/MF_MemoryControl.h"
-#include "galgas2/C_Compiler.h"
+#include "galgas2/Compiler.h"
 
 #include "oa_semantics.h"
 #include "CANMessageBounds.h"
@@ -170,18 +170,20 @@ uint32_t cPtr_C_5F_taskDependsFromMessage::getTaskEveryParameter (void) const {
 //--------------------------------------------------------------------------*
 
 
-static void buildCSSfile (C_Compiler * inCompiler,
-                          const C_String & inDirectory) {
+static void buildCSSfile (Compiler * inCompiler,
+                          const String & inDirectory) {
 //--- Style file name
-  const C_String styleFileName = inDirectory + "/style.css" ;
+  const String styleFileName = inDirectory + "/style.css" ;
 //--- Build file
   C_TextFileWrite f (styleFileName) ;
   if (! f.isOpened ()) {
-    C_String message ;
-    message << "Cannot open '" << styleFileName << "' file in write mode." ;
+    String message ;
+    message.addString ("Cannot open '") ;
+    message.addString (styleFileName) ;
+    message.addString ("' file in write mode.") ;
     inCompiler->onTheFlySemanticError (message COMMA_HERE) ;
   }
-  f << "body {\n"
+  f.addString ("body {\n"
        "  font-family: Helvetica, sans-serif ;\n"
        "	font-size: small ;\n"
        "}\n"
@@ -249,7 +251,7 @@ static void buildCSSfile (C_Compiler * inCompiler,
        "  line-height: 100% ;\n"
        "}\n"
        "\n"
-       "\n" ;
+       "\n") ;
 }
 
 //--------------------------------------------------------------------------*
@@ -263,20 +265,20 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
                              GALGAS_M_5F_network & inNetworkMap,
                              GALGAS_M_5F_messages & inMessagesMap,
                              GALGAS_M_5F_tasks & inTasksMap,
-                             C_Compiler * inCompiler
-                             COMMA_UNUSED_LOCATION_ARGS) {  
+                             Compiler * inCompiler
+                             COMMA_UNUSED_LOCATION_ARGS) {
   TC_UniqueArray <cResource> Resource ;
   TC_UniqueArray <cElement> Element ;
 
   const bool CreateIntermediateFiles = gOption_oa_5F_cli_5F_options_createIntermediateFiles.mValue ;
   const bool useCANmaxLengthOnly = gOption_oa_5F_cli_5F_options_useCANmaxLegth.mValue ;
   bool forceBalgorithm = false ;
-  const C_String sourceFile = inCompiler->sourceFilePath () ;
-  
+  const String sourceFile = inCompiler->sourceFilePath () ;
 
-  const C_String htmlFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + ".html" ;
-  const C_String activitiesHTMLFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + "_activities.html" ;
-  const C_String raw_outputHTMLFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + "_raw_output.html" ;
+
+  const String htmlFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + ".html" ;
+  const String activitiesHTMLFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + "_activities.html" ;
+  const String raw_outputHTMLFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + "_raw_output.html" ;
 
   buildCSSfile (inCompiler, sourceFile.stringByDeletingLastPathComponent ()) ;
 
@@ -285,36 +287,38 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
                              "style.css",
                              "") ;
   if (! htmlFile.isOpened ()) {
-    C_String message ;
-    message << "Cannot open '" << htmlFileName << "' file in write mode." ;
+    String message ;
+    message.addString ("Cannot open '") ;
+    message.addString (htmlFileName) ;
+    message.addString ("' file in write mode.") ;
     inCompiler->onTheFlySemanticError (message COMMA_HERE) ;
   }
   if(useCANmaxLengthOnly){
-  	printf("Elements have their upper duration bounds.\n"); 
+  	printf("Elements have their upper duration bounds.\n");
   }
   char MessageType = '\0' ;
   bool DependentHasOffset = false ;
 	int32_t  index ;
 //--- Print processors map
-  htmlFile.appendCppTitleComment ("Processors map", "title") ;
-  htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
-	htmlFile.outputRawData ("#<th>Name<th>ScaFactor</tr>") ;
+  htmlFile.addCppTitleComment ("Processors map", "title") ;
+  htmlFile.addRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
+	htmlFile.addRawData ("#<th>Name<th>ScaFactor</tr>") ;
 	index = 1 ;
 	cEnumerator_M_5F_processor processor (inProcessorMap, kENUMERATION_UP) ;
 	while (processor.hasCurrentObject ()) {
-	  htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
-	  htmlFile << cStringWithSigned (index) ;
-	  htmlFile.outputRawData ("</td><td>") ;
-	  htmlFile << processor.current_lkey (HERE) ;
-	  htmlFile.outputRawData ("</td><td>") ;
-	  htmlFile << cStringWithUnsigned (processor.current_mStep (HERE).mProperty_uint.uintValue ()) ;
-	  htmlFile.outputRawData ("</td></tr>") ;
+	  htmlFile.addRawData ("<tr class=\"result_line\"><td>") ;
+	  htmlFile.addSigned (index) ;
+	  htmlFile.addRawData ("</td><td>") ;
+	  htmlFile.addString (processor.current_lkey (HERE).mProperty_string.stringValue()) ;
+	  htmlFile.addRawData ("</td><td>") ;
+	  htmlFile.addUnsigned (processor.current_mStep (HERE).mProperty_uint.uintValue ()) ;
+	  htmlFile.addRawData ("</td></tr>") ;
 	  processor.gotoNextObject () ;
 	  index ++ ;
 	}
-	htmlFile.outputRawData ("</table>") ;
-	htmlFile.outputRawData ("<br>");
-//--- Build processors map  
+	htmlFile.addRawData ("</table>") ;
+	htmlFile.addRawData ("<br>");
+//--- Build processors map
   index = 0 ;
   processor.rewind () ;
   while (processor.hasCurrentObject ()) {
@@ -322,36 +326,36 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     strcpy (resource.mResourceName, processor.current_lkey (HERE).mProperty_string.stringValue ().cString (HERE));
   	resource.mResourceType= 2; // Processor = 2
    	resource.mStep = (int32_t) processor.current_mStep (HERE).mProperty_uint.uintValue () ;
-    
+
     Resource.appendObject (resource) ;
     processor.gotoNextObject () ;
     index ++ ;
   }
   int32_t NumberOfProcessors = index ;
-	
+
   const char * kNetworkTypes [] = {"VAN","CAN"} ;
 	cEnumerator_M_5F_network network (inNetworkMap, kENUMERATION_UP) ;
 //--- Print network map
-  htmlFile.appendCppTitleComment ("Networks map", "title") ;
-  htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
-  htmlFile.outputRawData ("#<th>Name<th>Type<th>ScaFactor</tr>") ;
+  htmlFile.addCppTitleComment ("Networks map", "title") ;
+  htmlFile.addRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
+  htmlFile.addRawData ("#<th>Name<th>Type<th>ScaFactor</tr>") ;
   index = 1 ;
   while (network.hasCurrentObject ()) {
-    htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
-    htmlFile << cStringWithSigned (index) ;
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << network.current_lkey (HERE) ;
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << kNetworkTypes [network.current_mCANnetwork (HERE).boolValue ()] ;
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (network.current_mScalingFactor (HERE).mProperty_uint.uintValue ()) ;
-    htmlFile.outputRawData ("</td></tr>") ;
+    htmlFile.addRawData ("<tr class=\"result_line\"><td>") ;
+    htmlFile.addSigned (index) ;
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addString (network.current_lkey (HERE).mProperty_string.stringValue()) ;
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addString (kNetworkTypes [network.current_mCANnetwork (HERE).boolValue ()]) ;
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addUnsigned (network.current_mScalingFactor (HERE).mProperty_uint.uintValue ()) ;
+    htmlFile.addRawData ("</td></tr>") ;
     network.gotoNextObject () ;
     index ++ ;
   }
-  htmlFile.outputRawData ("</table>") ;
-  htmlFile.outputRawData ("<br>");
-//--- Build networks map  
+  htmlFile.addRawData ("</table>") ;
+  htmlFile.addRawData ("<br>");
+//--- Build networks map
   int32_t min_NetworkStep = INT32_MAX ;
   index = 0 ;
   network.rewind ();
@@ -359,21 +363,21 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     cResource resource ;
     strcpy(resource.mResourceName,network.current_lkey (HERE).mProperty_string.stringValue ().cString (HERE));
   	resource.mResourceType= network.current_mCANnetwork (HERE).boolValue ();
-    resource.mStep = (int32_t) network.current_mScalingFactor (HERE).mProperty_uint.uintValue () ;		
+    resource.mStep = (int32_t) network.current_mScalingFactor (HERE).mProperty_uint.uintValue () ;
  		min_NetworkStep = nprt_min_macro (min_NetworkStep, resource.mStep);
- 	 	
+
  	 	Resource.appendObject (resource) ;
     network.gotoNextObject () ;
     index ++ ;
   }
-  
-//--- Build tasks map  
+
+//--- Build tasks map
   cEnumerator_M_5F_tasks task (inTasksMap, kENUMERATION_UP) ;
   index = 0 ;
   while (task.hasCurrentObject ()) {
     cElement element ;
-    strcpy(element.mElementName,task.current_lkey (HERE).mProperty_string.stringValue ().cString (HERE));   
-    element.mElementType = 'T';    
+    strcpy(element.mElementName,task.current_lkey (HERE).mProperty_string.stringValue ().cString (HERE));
+    element.mElementType = 'T';
     element.mId_inList =index;
   	element.mResourceId = (int32_t) task.current_mProcessor (HERE).uintValue ();
     element.mPriority = (int32_t) task.current_mPriority (HERE).mProperty_uint.uintValue ();
@@ -382,15 +386,15 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
 //    printf (" Sca : %ld \n",Sca);
     auto p = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
     element.mEvery = (int32_t) p->getTaskEveryParameter () ;
-  	element.mOffset = Sca*(int32_t) task.current_mOffset (HERE).mProperty_uint.uintValue ();  
-    element.mMaxDuration = Sca*(int32_t) task.current_mDurationMax (HERE).mProperty_uint.uintValue (); 
+  	element.mOffset = Sca*(int32_t) task.current_mOffset (HERE).mProperty_uint.uintValue ();
+    element.mMaxDuration = Sca*(int32_t) task.current_mDurationMax (HERE).mProperty_uint.uintValue ();
     element.mMinDuration = useCANmaxLengthOnly
                           ? element.mMaxDuration :(Sca*(int32_t)  task.current_mDurationMin (HERE).mProperty_uint.uintValue ());
-        
+
     element.mDeadline = (int32_t) task.current_mDeadline (HERE).mProperty_uint.uintValue ();
     if ( element.mDeadline !=  INT32_MAX){ // PMUINT32_MAX -> INT32_MAX by PM, 17/1/2005
     	 element.mDeadline = Sca*element.mDeadline;
-    }  
+    }
  //................................................
     auto ptr = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
     if (ptr->taskDependsOnTask ()) {
@@ -400,7 +404,7 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     		 (int32_t) q->getTaskEveryParameter () * Element (elementIndex COMMA_HERE).mEveryMultiple;
    		element.mPeriod = Sca*(int32_t) task.current_mPeriod (HERE).mProperty_uint.uintValue ();
     } else if (ptr->taskDependsOnMessage ()){
-    
+
     }else{
       auto q = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
     	element.mEveryMultiple = (int32_t) q->getTaskEveryParameter () ;
@@ -409,15 +413,15 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
  //................................................
   	if (ptr->taskDependsOnTask ()) {
       element.mIsIndependant=false ;
-    	element.mPredecessorType = 'T'; 
-      element.mPredecessorId = 
+    	element.mPredecessorType = 'T';
+      element.mPredecessorId =
       int32_t (ptr->getTaskDependanceValue ());
     }else if (ptr->taskDependsOnMessage ()) {
       element.mIsIndependant=false ;
-    	element.mPredecessorType = 'M'; 
-      element.mPredecessorId = 
+    	element.mPredecessorType = 'M';
+      element.mPredecessorId =
       int32_t (ptr->getTaskDependanceValue ()) ;
-    }else{ 
+    }else{
     	element.mIsIndependant=true ;
     }
     if (!element.mIsIndependant && (element.mOffset != 0)){
@@ -428,7 +432,7 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     index ++ ;
   }
   int32_t NumberOfTasks = index;
-	
+
   const char * kMessageClasses [] = {"standard", "extended", "  VAN   "} ;
   cEnumerator_M_5F_messages message (inMessagesMap, kENUMERATION_UP) ;
 
@@ -440,75 +444,75 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     strcpy(element.mElementName,message.current_lkey (HERE).mProperty_string.stringValue ().cString (HERE));
   	element.mElementType = 'M';
     element.mId_inList = index;
-  	element.mResourceId = NumberOfProcessors + 
+  	element.mResourceId = NumberOfProcessors +
   		(int32_t) message.current_mNetworkIndex (HERE).uintValue ();
   	element.mPriority = (int32_t) message.current_mPriority (HERE).mProperty_uint.uintValue ();
   	element.mEvery = 1 ;
-  	int32_t ScalingFactor = 
+  	int32_t ScalingFactor =
 					 Resource (element.mResourceId COMMA_HERE).mStep;
 	//  printf (" Sca : %ld \n",ScalingFactor);
-	  element.mOffset = ScalingFactor*(int32_t) message.current_mOffset (HERE).mProperty_uint.uintValue (); 
+	  element.mOffset = ScalingFactor*(int32_t) message.current_mOffset (HERE).mProperty_uint.uintValue ();
   	if ( Resource (element.mResourceId COMMA_HERE).mResourceType == 1 ){ //CAN = 1
-    	if (strstr(kMessageClasses [message.current_mClass (HERE).mProperty_uint.uintValue ()],"standard") != NULL){ 
+    	if (strstr(kMessageClasses [message.current_mClass (HERE).mProperty_uint.uintValue ()],"standard") != NULL){
     		MessageType = 'S';
     	}else if (strstr(kMessageClasses [message.current_mClass (HERE).mProperty_uint.uintValue ()],
-      					"extended") != NULL){ 
+      					"extended") != NULL){
       	MessageType = 'X' ;
-      }else{ 
-      	co << "ERROR : message #"
-      	   << cStringWithSigned (index)
-      	   << " is neither standard (S) nor extended (X) message!\n" ;
+      }else{
+      	gCout.addString ("ERROR : message #") ;
+      	gCout.addSigned (index) ;
+      	gCout.addString (" is neither standard (S) nor extended (X) message!\n") ;
       }
-      
+
       element.mMaxDuration = ScalingFactor* maxCANMessageTime(MessageType,
       											 (uint32_t) element.mMinDuration,
       											 message.current_mBytesCount (HERE).mProperty_uint.uintValue ());
-  
+
       element.mMinDuration = useCANmaxLengthOnly
         ? element.mMaxDuration
         : (ScalingFactor * minCANMessageTime(MessageType,
                             message.current_mPriority (HERE).mProperty_uint.uintValue (),
                             message.current_mBytesCount (HERE).mProperty_uint.uintValue ()));
-                            
+
   	}else if (Resource (element.mResourceId COMMA_HERE).mResourceType == 0 ){ //VAN = 0
-    	
+
     	element.mMinDuration= ScalingFactor *(64+10* (int32_t) message.current_mBytesCount (HERE).mProperty_uint.uintValue ()) ;
 
     	element.mMaxDuration= ScalingFactor* element.mMinDuration;
-  	}else{ 
+  	}else{
        printf ("ERROR : bus is neither CAN nor VAN!\n") ;
-      fflush (stdout);  
+      fflush (stdout);
 		}
-		
+
     element.mDeadline =  (int32_t) message.current_mDeadline (HERE).mProperty_uint.uintValue ();
     if ( element.mDeadline !=  INT32_MAX){ // PMUINT32_MAX -> INT32_MAX by PM, 17/1/2005
     	 element.mDeadline = ScalingFactor *element.mDeadline;
-    }  
+    }
  //...........................................................................
     int32_t elementIndex ;
     auto ptr = (const cPtr_AC_5F_canMessage *) message.current_mMessageKind (HERE).ptr () ;
    if (ptr->messageDependsOnTask ()) {
    	 elementIndex = (int32_t) ptr->getMessageDependanceValue ();
-     element.mEveryMultiple = Element (elementIndex COMMA_HERE).mEveryMultiple ;  
-     element.mPeriod = Element (elementIndex COMMA_HERE).mPeriod ; 
+     element.mEveryMultiple = Element (elementIndex COMMA_HERE).mEveryMultiple ;
+     element.mPeriod = Element (elementIndex COMMA_HERE).mPeriod ;
    }else if (ptr->messageDependsOnMessage ()) {
      elementIndex = (int32_t) ptr->getMessageDependanceValue () + NumberOfTasks ;
-     element.mEveryMultiple = Element (elementIndex COMMA_HERE).mEveryMultiple; 
+     element.mEveryMultiple = Element (elementIndex COMMA_HERE).mEveryMultiple;
      element.mPeriod = Element (elementIndex COMMA_HERE).mPeriod ;
    }else{
    	 element.mEveryMultiple = 1;
      element.mPeriod = ScalingFactor * (int32_t) message.current_mPeriod (HERE).mProperty_uint.uintValue ();
    }
- //.................................................................................   
+ //.................................................................................
   	if (ptr->messageDependsOnTask ()) {
       element.mIsIndependant=false ;
-    	element.mPredecessorType = 'T'; 
+    	element.mPredecessorType = 'T';
       element.mPredecessorId = (int32_t) ptr->getMessageDependanceValue ();
     }else if (ptr->messageDependsOnMessage ()) {
     	element.mIsIndependant=false ;
-    	element.mPredecessorType = 'M'; 
+    	element.mPredecessorType = 'M';
       element.mPredecessorId = (int32_t) ptr->getMessageDependanceValue () ;
-    }else{ 
+    }else{
     	element.mIsIndependant=true ;
     }
     if (!element.mIsIndependant && (element.mOffset != 0)){
@@ -518,38 +522,38 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
 	  message.gotoNextObject () ;
     index ++ ;
   }
-  int32_t NumberOfMessages = index;  
-//*----------------------------------------------------------------------/  
+  int32_t NumberOfMessages = index;
+//*----------------------------------------------------------------------/
 	//--- Print task map
-  
-	htmlFile.appendCppTitleComment ("Tasks map", "title") ;
-  htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>") ;
-  htmlFile.outputRawData ("#<th>Name<th>Processor<th>Priority<th>");
-  htmlFile.outputRawData ("Offset<th>Min<th>Max<th>Period<th>") ;
-  htmlFile.outputRawData ("Deadline<th>Dependence<th>Every</tr>") ;
+
+	htmlFile.addCppTitleComment ("Tasks map", "title") ;
+  htmlFile.addRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>") ;
+  htmlFile.addRawData ("#<th>Name<th>Processor<th>Priority<th>");
+  htmlFile.addRawData ("Offset<th>Min<th>Max<th>Period<th>") ;
+  htmlFile.addRawData ("Deadline<th>Dependence<th>Every</tr>") ;
   index = 1 ;
   task.rewind () ;
   while (task.hasCurrentObject ()) {
-    htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
-    htmlFile << cStringWithSigned (index) ;
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << task.current_lkey (HERE).mProperty_string.stringValue ().cString (HERE) ;
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (task.current_mProcessor (HERE).uintValue ()+1) ;
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (task.current_mPriority (HERE).mProperty_uint.uintValue ()) ;
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (task.current_mOffset (HERE).mProperty_uint.uintValue ());
-    htmlFile.outputRawData ("</td><td>") ;
+    htmlFile.addRawData ("<tr class=\"result_line\"><td>") ;
+    htmlFile.addSigned (index) ;
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addString (task.current_lkey (HERE).mProperty_string.stringValue ()) ;
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addUnsigned (task.current_mProcessor (HERE).uintValue ()+1) ;
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addUnsigned (task.current_mPriority (HERE).mProperty_uint.uintValue ()) ;
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addUnsigned (task.current_mOffset (HERE).mProperty_uint.uintValue ());
+    htmlFile.addRawData ("</td><td>") ;
     if (useCANmaxLengthOnly){
-      htmlFile << cStringWithUnsigned (task.current_mDurationMax (HERE).mProperty_uint.uintValue ()) ;
+      htmlFile.addUnsigned (task.current_mDurationMax (HERE).mProperty_uint.uintValue ()) ;
     }else {
-      htmlFile << cStringWithUnsigned (task.current_mDurationMin (HERE).mProperty_uint.uintValue ()) ;
+      htmlFile.addUnsigned (task.current_mDurationMin (HERE).mProperty_uint.uintValue ()) ;
     }
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (task.current_mDurationMax (HERE).mProperty_uint.uintValue ()) ;
-    htmlFile.outputRawData ("</td><td>") ;
-//....................................................................   
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addUnsigned (task.current_mDurationMax (HERE).mProperty_uint.uintValue ()) ;
+    htmlFile.addRawData ("</td><td>") ;
+//....................................................................
     auto ptr = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
     if (ptr->taskDependsOnMessage ()) {
     	int32_t elementIndex = (int32_t) ptr->getTaskDependanceValue () + NumberOfTasks ;
@@ -562,129 +566,129 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     int32_t resourceId = (int32_t) task.current_mProcessor (HERE).uintValue ();
     int32_t Scal = Resource (resourceId COMMA_HERE).mStep ;
 
-    htmlFile << cStringWithSigned (Element (index-1 COMMA_HERE).mEveryMultiple * Element (index-1 COMMA_HERE).mPeriod /Scal) ;
-    htmlFile.outputRawData ("</td><td>") ;
+    htmlFile.addSigned (Element (index-1 COMMA_HERE).mEveryMultiple * Element (index-1 COMMA_HERE).mPeriod /Scal) ;
+    htmlFile.addRawData ("</td><td>") ;
     if (task.current_mDeadline (HERE).mProperty_uint.uintValue () == UINT32_MAX){
-    	htmlFile.outputRawData ("Unknown</td><td>") ;
+    	htmlFile.addRawData ("Unknown</td><td>") ;
     }else{
-     	htmlFile << cStringWithUnsigned (task.current_mDeadline (HERE).mProperty_uint.uintValue ()) ;
-    	htmlFile.outputRawData ("</td><td>") ;
+     	htmlFile.addUnsigned (task.current_mDeadline (HERE).mProperty_uint.uintValue ()) ;
+    	htmlFile.addRawData ("</td><td>") ;
     }
     ptr = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
     if (ptr->taskDependsOnTask ()) {
-      htmlFile.outputRawData ("task #") ;
-      htmlFile << cStringWithUnsigned (ptr->getTaskDependanceValue ()+1) ;
+      htmlFile.addRawData ("task #") ;
+      htmlFile.addUnsigned (ptr->getTaskDependanceValue ()+1) ;
     }else if (ptr->taskDependsOnMessage ()) {
-      htmlFile.outputRawData ("message #") ;
-      htmlFile << cStringWithUnsigned (ptr->getTaskDependanceValue ()+1) ;
+      htmlFile.addRawData ("message #") ;
+      htmlFile.addUnsigned (ptr->getTaskDependanceValue ()+1) ;
     }else{
-    	htmlFile.outputRawData (" ---") ;
+    	htmlFile.addRawData (" ---") ;
     }
-     htmlFile.outputRawData ("</td><td>") ;
-     htmlFile << cStringWithUnsigned (ptr->getTaskEveryParameter ()) ;
-      
-    htmlFile.outputRawData ("</td></tr>") ;
+     htmlFile.addRawData ("</td><td>") ;
+     htmlFile.addUnsigned (ptr->getTaskEveryParameter ()) ;
+
+    htmlFile.addRawData ("</td></tr>") ;
     task.gotoNextObject () ;
     index ++ ;
   }
-  htmlFile.outputRawData ("</table>") ;
-  htmlFile.outputRawData ("<br>");
+  htmlFile.addRawData ("</table>") ;
+  htmlFile.addRawData ("<br>");
 
 //--- Print messages map
-  htmlFile.appendCppTitleComment ("Messages map", "title") ;
-  htmlFile.outputRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>") ;
-  htmlFile.outputRawData ("#<th>Name<th>Network<th>Type<th>Priority<th>Byte");
-  htmlFile.outputRawData ("<th> min--max ") ;
-  htmlFile.outputRawData ("<th>Offset<th>Period<th>Deadline<th>Dependence</tr>") ;
+  htmlFile.addCppTitleComment ("Messages map", "title") ;
+  htmlFile.addRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>") ;
+  htmlFile.addRawData ("#<th>Name<th>Network<th>Type<th>Priority<th>Byte");
+  htmlFile.addRawData ("<th> min--max ") ;
+  htmlFile.addRawData ("<th>Offset<th>Period<th>Deadline<th>Dependence</tr>") ;
   index = 1 ;
   message.rewind () ;
   while (message.hasCurrentObject ()) {
-    htmlFile.outputRawData ("<tr class=\"result_line\"><td>") ;
-    htmlFile << cStringWithSigned (index) ;
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << message.current_lkey (HERE).mProperty_string.stringValue ().cString (HERE) ;
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (message.current_mNetworkIndex (HERE).uintValue () +1) ;
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << kMessageClasses [message.current_mClass (HERE).mProperty_uint.uintValue ()];
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (message.current_mPriority (HERE).mProperty_uint.uintValue ()) ;
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithUnsigned (message.current_mBytesCount (HERE).mProperty_uint.uintValue ()) ;
-    htmlFile.outputRawData ("</td><td>") ;
-    
+    htmlFile.addRawData ("<tr class=\"result_line\"><td>") ;
+    htmlFile.addSigned (index) ;
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addString (message.current_lkey (HERE).mProperty_string.stringValue ()) ;
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addUnsigned (message.current_mNetworkIndex (HERE).uintValue () +1) ;
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addString (kMessageClasses [message.current_mClass (HERE).mProperty_uint.uintValue ()]) ;
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addUnsigned (message.current_mPriority (HERE).mProperty_uint.uintValue ()) ;
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addUnsigned (message.current_mBytesCount (HERE).mProperty_uint.uintValue ()) ;
+    htmlFile.addRawData ("</td><td>") ;
+
     int32_t resourceId =  NumberOfProcessors + (int32_t) message.current_mNetworkIndex (HERE).uintValue ();
     int32_t Scal = Resource (resourceId COMMA_HERE).mStep ;
-    
+
     if ( (strstr(kMessageClasses [message.current_mClass (HERE).mProperty_uint.uintValue ()],"standard") != NULL)
-    		|| 
+    		||
     		(strstr(kMessageClasses [message.current_mClass (HERE).mProperty_uint.uintValue ()],"extended") != NULL)
-    		){ 
+    		){
       		if (useCANmaxLengthOnly){
-      		  htmlFile << cStringWithSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal) ;
+      		  htmlFile.addSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal) ;
       		}else{
-      			htmlFile << cStringWithSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMinDuration / Scal);
-      			htmlFile.outputRawData ("--");
-      			htmlFile << cStringWithSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal) ;
+      			htmlFile.addSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMinDuration / Scal);
+      			htmlFile.addRawData ("--");
+      			htmlFile.addSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal) ;
       		}
     }else{
-      htmlFile << cStringWithSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration /Scal) ;
+      htmlFile.addSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration /Scal) ;
     }
-    htmlFile.outputRawData ("</td><td>");    
-    htmlFile << cStringWithUnsigned (message.current_mOffset (HERE).mProperty_uint.uintValue ()) ;
-    htmlFile.outputRawData ("</td><td>") ;
-    htmlFile << cStringWithSigned (Element (index-1 + NumberOfTasks  COMMA_HERE).mEveryMultiple *  
+    htmlFile.addRawData ("</td><td>");
+    htmlFile.addUnsigned (message.current_mOffset (HERE).mProperty_uint.uintValue ()) ;
+    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.addSigned (Element (index-1 + NumberOfTasks  COMMA_HERE).mEveryMultiple *
                                    Element (index-1 + NumberOfTasks  COMMA_HERE).mPeriod /Scal);
-    htmlFile.outputRawData ("</td><td>") ; 
+    htmlFile.addRawData ("</td><td>") ;
     if (message.current_mDeadline (HERE).mProperty_uint.uintValue () == UINT32_MAX){
-    	htmlFile.outputRawData ("Unknown</td><td>") ;
+    	htmlFile.addRawData ("Unknown</td><td>") ;
     }else{
-     	htmlFile << cStringWithUnsigned (message.current_mDeadline (HERE).mProperty_uint.uintValue ()) ;
-    	htmlFile.outputRawData ("</td><td>") ;
+     	htmlFile.addUnsigned (message.current_mDeadline (HERE).mProperty_uint.uintValue ()) ;
+    	htmlFile.addRawData ("</td><td>") ;
     }
     auto ptr = (const cPtr_AC_5F_canMessage *) message.current_mMessageKind (HERE).ptr () ;
    	if (ptr->messageDependsOnTask ()) {
-    	htmlFile.outputRawData ("task #") ;
-     	htmlFile << cStringWithUnsigned (ptr->getMessageDependanceValue ()+1) ;
+    	htmlFile.addRawData ("task #") ;
+     	htmlFile.addUnsigned (ptr->getMessageDependanceValue ()+1) ;
     }else if (ptr->messageDependsOnMessage ()) {
-    	htmlFile.outputRawData ("message # ") ;
- 	   	htmlFile << cStringWithUnsigned (ptr->getMessageDependanceValue ()+1) ;
+    	htmlFile.addRawData ("message # ") ;
+ 	   	htmlFile.addUnsigned (ptr->getMessageDependanceValue ()+1) ;
     }else{
-    	htmlFile.outputRawData (" ---") ;
+    	htmlFile.addRawData (" ---") ;
     }
-    
-    htmlFile.outputRawData ("</td></tr>") ;
+
+    htmlFile.addRawData ("</td></tr>") ;
     message.gotoNextObject () ;
     index ++ ;
   }
-  htmlFile.outputRawData ("</table>") ;
-  htmlFile.outputRawData ("<br>");
+  htmlFile.addRawData ("</table>") ;
+  htmlFile.addRawData ("<br>");
   htmlFile.flush () ;
-//*----------------------------------------------------------------------/  
-  
-// Verification of  necessary scheduling conditions 
+//*----------------------------------------------------------------------/
+
+// Verification of  necessary scheduling conditions
 
   if (NecessaryConditions_OK (inCompiler, Element, Resource) ){
-  
+
   	TC_UniqueArray <cActivity> exElement ;
   	TC_UniqueArray <cResponseTime> responseTimeArray ;
   	TC_UniqueArray <cMTElement> MTElement ;
   	TC_UniqueArray <cReadyAtThisInstant>  ReadyAtThisInstant;
-   
-   int32_t NoInterButUseB = 
+
+   int32_t NoInterButUseB =
          BuildExtendedList (inCompiler,
-                            ReadyAtThisInstant, Element, 
-             Resource, exElement, 
+                            ReadyAtThisInstant, Element,
+             Resource, exElement,
              MTElement,NumberOfTasks,
              NumberOfMessages,CreateIntermediateFiles,
              forceBalgorithm,
              activitiesHTMLFileName);
- 	
- 		// ScheduleExtendedList (exElement, responseTimeArray) ;    
+
+ 		// ScheduleExtendedList (exElement, responseTimeArray) ;
     if (forceBalgorithm) {
   //    printf ("Algorithm \"B\" is used.\n") ; fflush (stdout) ;
-      scheduleActivities (NoInterButUseB, DependentHasOffset, 
-                          ReadyAtThisInstant, exElement, 
+      scheduleActivities (NoInterButUseB, DependentHasOffset,
+                          ReadyAtThisInstant, exElement,
                           Resource, responseTimeArray) ;
     }else{
       printf ("Algorithm \"A\" is used.\n") ; fflush (stdout) ;
@@ -692,11 +696,11 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     }
 		//Extract absolute bornes (min & max)
   	ExtractWorstBestRT (inCompiler,
-                        exElement, Resource, MTElement, 
-                        responseTimeArray, CreateIntermediateFiles, 
+                        exElement, Resource, MTElement,
+                        responseTimeArray, CreateIntermediateFiles,
                         raw_outputHTMLFileName, htmlFile);
     printf ("Results are stored in %s file.\n", htmlFileName.cString (HERE));
-    
+
  	}else{
     printf ("System map is stored in %s file.\n", htmlFileName.cString (HERE));
  	}

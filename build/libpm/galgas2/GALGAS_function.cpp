@@ -1,4 +1,4 @@
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //  GALGAS_function : this class implements introspection for GALGAS functions
 //
@@ -16,72 +16,75 @@
 //  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 //  more details.
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include "all-predefined-types.h"
 #include "galgas2/C_galgas_function_descriptor.h"
 #include "galgas2/C_galgas_type_descriptor.h"
-#include "galgas2/C_Compiler.h"
+#include "galgas2/Compiler.h"
 #include "galgas2/cObjectArray.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //                     'GALGAS_function' class
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_function::GALGAS_function (void) :
 AC_GALGAS_root (),
 mFunctionDescriptor (nullptr) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_function::GALGAS_function (const C_galgas_function_descriptor * inFunctionDescriptor) :
 AC_GALGAS_root (),
 mFunctionDescriptor (inFunctionDescriptor) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_function::GALGAS_function (const GALGAS_function & inSource) :
 AC_GALGAS_root (),
 mFunctionDescriptor (inSource.mFunctionDescriptor) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_function & GALGAS_function::operator = (const GALGAS_function & inSource) {
   mFunctionDescriptor = inSource.mFunctionDescriptor ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_function::~ GALGAS_function (void) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-void GALGAS_function::description (C_String & ioString,
+void GALGAS_function::description (String & ioString,
                                    const int32_t /* inIndentation */) const {
-  ioString << "<@function:" ;
+  ioString.addString ("<@function:") ;
   if (nullptr == mFunctionDescriptor) {
-    ioString << "not built" ;
+    ioString.addString ("not built") ;
   }else{
-    ioString << mFunctionDescriptor->mFunctionName << " [" ;
+    ioString.addString (mFunctionDescriptor->mFunctionName) ;
+    ioString.addString (" [") ;
     for (uint32_t i=0 ; i<mFunctionDescriptor->mParameterCount ; i++) {
       if (i > 0) {
-        ioString << " " ;
+        ioString.addString (" ") ;
       }
-      ioString << "?@" << mFunctionDescriptor->mFormalParameterTypeList [i]->mGalgasTypeName ;
+      ioString.addString ("?@") ;
+      ioString.addString (mFunctionDescriptor->mFormalParameterTypeList [i]->mGalgasTypeName) ;
     }
-    ioString << "] -> @" << mFunctionDescriptor->mResultType->mGalgasTypeName ;
+    ioString.addString ("] -> @") ;
+    ioString.addString (mFunctionDescriptor->mResultType->mGalgasTypeName) ;
   }
-  ioString << ">" ;
+  ioString.addString (">") ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_functionlist GALGAS_function::constructor_functionList (LOCATION_ARGS) {
   GALGAS_functionlist result = GALGAS_functionlist::constructor_emptyList (THERE) ;
@@ -93,14 +96,14 @@ GALGAS_functionlist GALGAS_function::constructor_functionList (LOCATION_ARGS) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_bool GALGAS_function::constructor_isFunctionDefined (const GALGAS_string & inFunctionName
                                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result ;
   if (inFunctionName.isValid ()) {
     bool resultValue = false ;
-    const C_String functionName = inFunctionName.stringValue () ;
+    const String functionName = inFunctionName.stringValue () ;
     const C_galgas_function_descriptor * p = C_galgas_function_descriptor::functionListRoot () ;
     while ((nullptr != p) && ! resultValue) {
       resultValue = functionName == p->mFunctionName ;
@@ -111,13 +114,13 @@ GALGAS_bool GALGAS_function::constructor_isFunctionDefined (const GALGAS_string 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_function GALGAS_function::constructor_functionWithName (const GALGAS_string & inFunctionName
                                                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_function result ;
   if (inFunctionName.isValid ()) {
-    const C_String functionName = inFunctionName.stringValue () ;
+    const String functionName = inFunctionName.stringValue () ;
     const C_galgas_function_descriptor * p = C_galgas_function_descriptor::functionListRoot () ;
     while ((nullptr != p) && ! result.isValid ()) {
       if (functionName == p->mFunctionName) {
@@ -129,7 +132,7 @@ GALGAS_function GALGAS_function::constructor_functionWithName (const GALGAS_stri
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_typelist GALGAS_function::getter_formalParameterTypeList (LOCATION_ARGS) const {
   GALGAS_typelist result = GALGAS_typelist::constructor_emptyList (THERE) ;
@@ -139,35 +142,37 @@ GALGAS_typelist GALGAS_function::getter_formalParameterTypeList (LOCATION_ARGS) 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_string GALGAS_function::getter_name (UNUSED_LOCATION_ARGS) const {
   return GALGAS_string (mFunctionDescriptor->mFunctionName) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_type GALGAS_function::getter_resultType (UNUSED_LOCATION_ARGS) const {
   return GALGAS_type (mFunctionDescriptor->mResultType) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_object GALGAS_function::getter_invoke (const GALGAS_objectlist & inObjectList,
                                               const GALGAS_location & inErrorLocation,
-                                              C_Compiler * inCompiler
+                                              Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const {
   const cObjectArray argumentsArray (inObjectList, inCompiler COMMA_THERE) ;
 //--- Check parameter count
   bool ok = mFunctionDescriptor->mParameterCount == argumentsArray.count () ;
   if (! ok) {
-    C_String errorMessage ;
-    errorMessage << "the '" << mFunctionDescriptor->mFunctionName << "' function is called with "
-                 << cStringWithUnsigned (argumentsArray.count ())
-                 << " actual parameter"
-                 << ((argumentsArray.count () > 1) ? "s" : "")
-                 << ", but its header requires "
-                 << cStringWithUnsigned (mFunctionDescriptor->mParameterCount) ;
+    String errorMessage ;
+    errorMessage.addString ("the '") ;
+    errorMessage.addString (mFunctionDescriptor->mFunctionName) ;
+    errorMessage.addString ("' function is called with ") ;
+    errorMessage.addUnsigned (argumentsArray.count ()) ;
+    errorMessage.addString (" actual parameter") ;
+    errorMessage.addString ((argumentsArray.count () > 1) ? "s" : "") ;
+    errorMessage.addString (", but its header requires ") ;
+    errorMessage.addUnsigned (mFunctionDescriptor->mParameterCount) ;
     inCompiler->semanticErrorAtLocation (inErrorLocation, errorMessage, TC_Array <C_FixItDescription> () COMMA_THERE) ;
   }
 //--- Check parameters
@@ -182,14 +187,16 @@ GALGAS_object GALGAS_function::getter_invoke (const GALGAS_objectlist & inObject
         ok = t == mFunctionDescriptor->mFormalParameterTypeList [i] ;
       }
       if (! ok) {
-        C_String errorMessage ;
-        errorMessage << "the actual parameter #"
-                     << cStringWithUnsigned (i)
-                     << " of the '" << mFunctionDescriptor->mFunctionName << "' function call has the '@"
-                     << parameter.staticTypeDescriptor ()->mGalgasTypeName
-                     << "', but the function header requires an instance of '@"
-                     << mFunctionDescriptor->mFormalParameterTypeList [i]->mGalgasTypeName
-                     << "'" ;
+        String errorMessage ;
+        errorMessage.addString ("the actual parameter #") ;
+        errorMessage.addUnsigned (i) ;
+        errorMessage.addString (" of the '") ;
+        errorMessage.addString (mFunctionDescriptor->mFunctionName) ;
+        errorMessage.addString ("' function call has the '@") ;
+        errorMessage.addString (parameter.staticTypeDescriptor ()->mGalgasTypeName) ;
+        errorMessage.addString ("', but the function header requires an instance of '@") ;
+        errorMessage.addString (mFunctionDescriptor->mFormalParameterTypeList [i]->mGalgasTypeName) ;
+        errorMessage.addString ("'") ;
         inCompiler->semanticErrorAtLocation (inErrorLocation, errorMessage, TC_Array <C_FixItDescription> () COMMA_THERE) ;
       }
     }
@@ -202,7 +209,7 @@ GALGAS_object GALGAS_function::getter_invoke (const GALGAS_objectlist & inObject
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 typeComparisonResult GALGAS_function::objectCompare (const GALGAS_function & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -219,4 +226,4 @@ typeComparisonResult GALGAS_function::objectCompare (const GALGAS_function & inO
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------

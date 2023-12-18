@@ -1,9 +1,9 @@
 #pragma once
 
 #include "generic-arraies/TC_UniqueArray.h"
-class C_Compiler ;
+class Compiler ;
 
-bool 
-NecessaryConditions_OK (C_Compiler * inCompiler,
+bool
+NecessaryConditions_OK (Compiler * inCompiler,
                         const TC_UniqueArray <cElement> & Element,
                         const TC_UniqueArray <cResource> & Resource);

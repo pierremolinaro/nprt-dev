@@ -1,4 +1,4 @@
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //  Routine 'main' (call user supplied 'mainForLIBPM' routine).                                  
 //
@@ -16,7 +16,7 @@
 //  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 //  more details.
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include "bdd/C_BDD.h"
 #include "command_line_interface/F_mainForLIBPM.h"
@@ -24,7 +24,7 @@
 #include "utilities/F_DisplayException.h"
 #include "streams/C_ConsoleOut.h"
 #include "time/C_DateTime.h"
-#include "utilities/C_SharedObject.h"
+#include "utilities/SharedObject.h"
 #include "utilities/cpp-allocation.h"
 #include "utilities/basic-allocation.h"
 #include "utilities/C_PrologueEpilogue.h"
@@ -32,24 +32,24 @@
 #include "strings/unicode_character_base.h"
 #include "galgas2/acStrongPtr_class.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include <stdio.h>
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static uint32_t gArgc = 0 ;
 static const char ** gArgv ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 uint32_t commandLineArgumentCount (void) {
   return gArgc ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_String commandLineArgumentAtIndex (const uint32_t inIndex) {
+String commandLineArgumentAtIndex (const uint32_t inIndex) {
   const char * result = "" ;
   if (inIndex < gArgc) {
     result = gArgv [inIndex] ;
@@ -57,7 +57,7 @@ C_String commandLineArgumentAtIndex (const uint32_t inIndex) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 int main (int argc, const char * argv []) {
   gArgc = (uint32_t) argc ;
@@ -73,7 +73,7 @@ int main (int argc, const char * argv []) {
       C_BDD::freeBDDStataStructures () ;
       #ifndef DO_NOT_GENERATE_CHECKINGS
         acStrongPtr_class::printExistingClassInstances () ;
-        C_SharedObject::checkAllObjectsHaveBeenReleased () ;
+        SharedObject::checkAllObjectsHaveBeenReleased () ;
         displayAllocationStats () ;
         displayAllocatedBlockSizeStats () ;
         displayAllocatedBlocksInfo () ;
@@ -82,21 +82,21 @@ int main (int argc, const char * argv []) {
       F_default_display_exception (e) ;
       #ifndef DO_NOT_GENERATE_CHECKINGS
         acStrongPtr_class::printExistingClassInstances () ;
-        C_SharedObject::checkAllObjectsHaveBeenReleased () ;
+        SharedObject::checkAllObjectsHaveBeenReleased () ;
       #endif
       returnCode = 1 ; // Error code
     }catch (char * inExceptionString) {
       printf ("*** Exception: '%s' ***\n", inExceptionString) ;
       #ifndef DO_NOT_GENERATE_CHECKINGS
         acStrongPtr_class::printExistingClassInstances () ;
-        C_SharedObject::checkAllObjectsHaveBeenReleased () ;
+        SharedObject::checkAllObjectsHaveBeenReleased () ;
       #endif
       returnCode = 1 ; // Error code
     }catch (...) {
       F_default_display_unknown_exception () ;
       #ifndef DO_NOT_GENERATE_CHECKINGS
         acStrongPtr_class::printExistingClassInstances () ;
-        C_SharedObject::checkAllObjectsHaveBeenReleased () ;
+        SharedObject::checkAllObjectsHaveBeenReleased () ;
       #endif
       returnCode = 2 ; // Error code
     }
@@ -104,4 +104,4 @@ int main (int argc, const char * argv []) {
   return returnCode ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------

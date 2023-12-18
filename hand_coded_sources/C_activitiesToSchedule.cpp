@@ -168,7 +168,7 @@ internalAddEntry (const int32_t inActivityIndex,
                   cVDLnodeInfo * const inPointerToNext) {
   cVDLnodeInfo * p ;
   if (inPointerToNext == NULL) {
-    p = find_or_add (inActivityIndex, 
+    p = find_or_add (inActivityIndex,
                      inActivityPriority,
                      inActivityScheduleInstant,
                      NULL) ;
@@ -181,19 +181,19 @@ internalAddEntry (const int32_t inActivityIndex,
       }
     }
     if (insertOnTop) {
-      p = find_or_add (inActivityIndex, 
+      p = find_or_add (inActivityIndex,
                        inActivityPriority,
                        inActivityScheduleInstant,
                        inPointerToNext) ;
     }else{
-      cVDLnodeInfo * temp = internalAddEntry (inActivityIndex, 
+      cVDLnodeInfo * temp = internalAddEntry (inActivityIndex,
                                               inActivityPriority,
                                               inActivityScheduleInstant,
                                               inPointerToNext->mPtrToNext) ;
      p = find_or_add (inPointerToNext->mActivityIndex,
                       inPointerToNext->mActivityPriority,
                       inPointerToNext->mScheduleInstant,
-                      temp) ;   
+                      temp) ;
     }
   }
   return p ;
@@ -217,7 +217,7 @@ addEntry (const int32_t inActivityIndex,
 //    bool cacheSuccess ;
 //    int32_t hashCode ;
 //    int32_t result ;
-//    gAddEntryCache.getCacheEntry (inActivityIndex, inActivityPriority, inActivityScheduleInstant, 
+//    gAddEntryCache.getCacheEntry (inActivityIndex, inActivityPriority, inActivityScheduleInstant,
 //                                  cacheSuccess, hashCode, result) ;
 //    if (cacheSuccess) {
 //      mRootPointer = (cVDLnodeInfo *) result ;
@@ -230,11 +230,11 @@ addEntry (const int32_t inActivityIndex,
 //                                      hashCode, (int32_t) mRootPointer) ;
 //    }
   }else{
-    co << "**** ERROR !!! Activity index "
-       << cStringWithSigned (inActivityIndex)
-       << " already exists in schedule activity list at schedule instant "
-       << cStringWithSigned (inActivityScheduleInstant)
-       << " ****\n" ;
+    gCout.addString ("**** ERROR !!! Activity index ") ;
+    gCout.addSigned (inActivityIndex) ;
+    gCout.addString (" already exists in schedule activity list at schedule instant ") ;
+    gCout.addSigned (inActivityScheduleInstant) ;
+    gCout.addString (" ****\n") ;
   }
 }
 
@@ -279,37 +279,37 @@ getFirstToScheduleAndSuppress (const int32_t inCurrentInstant) {
   return activityIndex ;
 }
 //---------------------------------------------------------------------------*
-//static 
-void LowerPriorityOnResource (int32_t & lowerPriority, const int32_t activityIndex, 
+//static
+void LowerPriorityOnResource (int32_t & lowerPriority, const int32_t activityIndex,
                               const int32_t ResourceIndex,
-                              const TC_UniqueArray <cActivity> & inActivities){                             
+                              const TC_UniqueArray <cActivity> & inActivities){
   if (activityIndex >= 0){
 	  int32_t successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
 	  if (successorIndex >= 0){
 	    if ( (ResourceIndex == inActivities (successorIndex COMMA_HERE).mResourceId)
 	       &&
-        ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ) ){   
+        ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ) ){
 	      lowerPriority = MAX(lowerPriority, inActivities (successorIndex COMMA_HERE).mPriority);
 	   	  LowerPriorityOnResource (lowerPriority, successorIndex, ResourceIndex, inActivities);
-   	  }	
+   	  }
 	  	int32_t OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
 		  while ( OtherHeirId >= 0 ) {
 		    if ( (ResourceIndex == inActivities (OtherHeirId COMMA_HERE).mResourceId)
 		       &&
-           ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ) ){ 
+           ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ) ){
 			    lowerPriority = MAX(lowerPriority, inActivities (OtherHeirId COMMA_HERE).mPriority);
 	        LowerPriorityOnResource (lowerPriority, OtherHeirId, ResourceIndex, inActivities);
 	      }
 			  OtherHeirId = inActivities (OtherHeirId COMMA_HERE).mOtherHeirId;
 	  	}
-	  }                                
-  }                                  
+	  }
+  }
 }
 //---------------------------------------------------------------------------*
 
 int32_t C_activitiesToSchedule::getLowerPriority (const int32_t currentActivityIndex,
                                                   const TC_UniqueArray <cActivity> & inActivities) const {
-  int32_t lowerPriority = 0 ; 
+  int32_t lowerPriority = 0 ;
   int32_t activityIndex = currentActivityIndex ;// Means none
   int32_t ResourceIndex = inActivities (activityIndex COMMA_HERE).mResourceId;
   LowerPriorityOnResource (lowerPriority, currentActivityIndex, ResourceIndex, inActivities);
@@ -317,12 +317,12 @@ int32_t C_activitiesToSchedule::getLowerPriority (const int32_t currentActivityI
   //--- Find min priority activity
     activityIndex = mRootPointer->mActivityIndex ;
     lowerPriority = MAX(lowerPriority, inActivities (activityIndex COMMA_HERE).mPriority);
-    LowerPriorityOnResource (lowerPriority, activityIndex, ResourceIndex, inActivities); 
+    LowerPriorityOnResource (lowerPriority, activityIndex, ResourceIndex, inActivities);
     cVDLnodeInfo * p = mRootPointer->mPtrToNext ;
     while (p != NULL) {
       activityIndex = p->mActivityIndex ;
       lowerPriority = MAX(lowerPriority, inActivities (activityIndex COMMA_HERE).mPriority);
-      LowerPriorityOnResource (lowerPriority, activityIndex, ResourceIndex, inActivities); 
+      LowerPriorityOnResource (lowerPriority, activityIndex, ResourceIndex, inActivities);
       p = p->mPtrToNext ;
     }
   }
@@ -334,55 +334,55 @@ int32_t C_activitiesToSchedule::getLowerPriority (const int32_t currentActivityI
 void SuccessorsMaxBusyDuration (int32_t & ioBusyDuration, const int32_t activityIndex,
                                 const int32_t ResourceIndex,
                                 const TC_UniqueArray <cActivity> & inActivities){
-                              
+
   if (activityIndex >= 0){
 	  int32_t successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
 	  if (successorIndex >= 0){
 	    if ( (ResourceIndex == inActivities (successorIndex COMMA_HERE).mResourceId)
 	        &&
-          ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ) ){   
-	   
+          ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ) ){
+
 	  		ioBusyDuration += inActivities (successorIndex COMMA_HERE).mOffset +
 	  		                  inActivities (successorIndex COMMA_HERE).mMaxDuration ;
 	  	  SuccessorsMaxBusyDuration(ioBusyDuration, successorIndex, ResourceIndex, inActivities);
-	  	}	
+	  	}
 	  	int32_t OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
 		  while ( OtherHeirId >= 0 ) {
 		    if ( (ResourceIndex == inActivities (OtherHeirId COMMA_HERE).mResourceId)
 		       &&
-           ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ) ){   
-	   
-			    ioBusyDuration += inActivities (OtherHeirId COMMA_HERE).mOffset + 
+           ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ) ){
+
+			    ioBusyDuration += inActivities (OtherHeirId COMMA_HERE).mOffset +
 			                      inActivities (OtherHeirId COMMA_HERE).mMaxDuration;
 	        SuccessorsMaxBusyDuration(ioBusyDuration, OtherHeirId, ResourceIndex, inActivities);
 	      }
 			  OtherHeirId = inActivities (OtherHeirId COMMA_HERE).mOtherHeirId;
 	  	}
-	  }                                
-  }                                  
+	  }
+  }
 }
 
 //---------------------------------------------------------------------------*
 
 int32_t C_activitiesToSchedule::getMaximumBusyPeriod (const int32_t currentActivityIndex,
                                                       const TC_UniqueArray <cActivity> & inActivities) const {
- 
+
   int32_t BusyDuration=0;
   const int32_t ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
   SuccessorsMaxBusyDuration (BusyDuration, currentActivityIndex, ResourceIndex, inActivities);
   if (mRootPointer != NULL){
     int32_t activityIndex = mRootPointer->mActivityIndex;
-    BusyDuration +=inActivities (activityIndex COMMA_HERE).mMaxDuration; 
+    BusyDuration +=inActivities (activityIndex COMMA_HERE).mMaxDuration;
   	SuccessorsMaxBusyDuration (BusyDuration, activityIndex, ResourceIndex, inActivities);
    	cVDLnodeInfo * p = mRootPointer->mPtrToNext ;
   	while (p != NULL){
   	  activityIndex = p->mActivityIndex;
   	  BusyDuration +=inActivities (activityIndex COMMA_HERE).mMaxDuration;
-  		SuccessorsMaxBusyDuration (BusyDuration, activityIndex, ResourceIndex, inActivities);	
+  		SuccessorsMaxBusyDuration (BusyDuration, activityIndex, ResourceIndex, inActivities);
   		p = p->mPtrToNext ;
-		}  
-  }	
-  return BusyDuration;   
+		}
+  }
+  return BusyDuration;
 }
 //---------------------------------------------------------------------------*
 
@@ -390,14 +390,14 @@ void SuccessorsMinBusyDuration4Activity (int32_t & ioBusyDuration, const int32_t
                                 const int32_t ResourceIndex,
                                 const int32_t priorityOfCurrentActivity,
                                 const TC_UniqueArray <cActivity> & inActivities){
-                              
+
   if (activityIndex >= 0){
 	  int32_t successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
 	  if (successorIndex >= 0){
 	    if ( (ResourceIndex == inActivities (successorIndex COMMA_HERE).mResourceId)
 	        &&
-          ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ) ){   
-	   
+          ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ) ){
+
 	      int32_t successorPriority = inActivities (successorIndex COMMA_HERE).mPriority;
 	  		if ( (inActivities (successorIndex COMMA_HERE).mOffset == 0)
 	  		    &&
@@ -405,13 +405,13 @@ void SuccessorsMinBusyDuration4Activity (int32_t & ioBusyDuration, const int32_t
 	  		  ioBusyDuration += inActivities (successorIndex COMMA_HERE).mMinDuration ;
 	  	    SuccessorsMinBusyDuration4Activity(ioBusyDuration, successorIndex, ResourceIndex, priorityOfCurrentActivity, inActivities);
 	  	  }
-	  	}	
+	  	}
 	  	int32_t OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
 		  while ( OtherHeirId >= 0 ) {
 		    if ( (ResourceIndex == inActivities (OtherHeirId COMMA_HERE).mResourceId)
 		     &&
-         ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ) ){   
-	   
+         ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ) ){
+
 	        int32_t HeirPriority = inActivities (OtherHeirId COMMA_HERE).mPriority;
 		      if ( (inActivities (OtherHeirId COMMA_HERE).mOffset == 0)
 		          &&
@@ -422,36 +422,36 @@ void SuccessorsMinBusyDuration4Activity (int32_t & ioBusyDuration, const int32_t
 	      }
 			  OtherHeirId = inActivities (OtherHeirId COMMA_HERE).mOtherHeirId;
 	  	}
-	  }                                
-  }                                  
+	  }
+  }
 }
 
 //---------------------------------------------------------------------------*
 
 int32_t C_activitiesToSchedule::getMinimumBusyPeriod4Activity (const int32_t currentActivityIndex,
                                                                const TC_UniqueArray <cActivity> & inActivities) const {
- 
+
   int32_t BusyDuration=0;
   const int32_t ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
   const int32_t priorityOfCurrentActivity = inActivities (currentActivityIndex COMMA_HERE).mPriority;
   SuccessorsMinBusyDuration4Activity (BusyDuration, currentActivityIndex, ResourceIndex, priorityOfCurrentActivity, inActivities);
   if (mRootPointer != NULL){
     int32_t activityIndex = mRootPointer->mActivityIndex;
-    if (priorityOfCurrentActivity >= inActivities (activityIndex COMMA_HERE).mPriority){ 
-    	BusyDuration +=inActivities (activityIndex COMMA_HERE).mMinDuration; 
+    if (priorityOfCurrentActivity >= inActivities (activityIndex COMMA_HERE).mPriority){
+    	BusyDuration +=inActivities (activityIndex COMMA_HERE).mMinDuration;
   		SuccessorsMinBusyDuration4Activity (BusyDuration, activityIndex, ResourceIndex, priorityOfCurrentActivity, inActivities);
   	}
    	cVDLnodeInfo * p = mRootPointer->mPtrToNext ;
   	while (p != NULL){
   	  activityIndex = p->mActivityIndex;
-      if (priorityOfCurrentActivity >= inActivities (activityIndex COMMA_HERE).mPriority){ 
+      if (priorityOfCurrentActivity >= inActivities (activityIndex COMMA_HERE).mPriority){
 	   	  BusyDuration +=inActivities (activityIndex COMMA_HERE).mMinDuration;
-	  		SuccessorsMinBusyDuration4Activity (BusyDuration, activityIndex, ResourceIndex, priorityOfCurrentActivity, inActivities);	
+	  		SuccessorsMinBusyDuration4Activity (BusyDuration, activityIndex, ResourceIndex, priorityOfCurrentActivity, inActivities);
 	  	}
 	  		p = p->mPtrToNext ;
-		}  
-  }	
-  return BusyDuration;   
+		}
+  }
+  return BusyDuration;
 }
 
 //--------------------------------------------------------------------------------
@@ -472,9 +472,9 @@ getLeastBusyPeriod (const int32_t inCurrentActivity,
   		 	LeastActiviyPeriod += inActivities (activityIndex COMMA_HERE).mMinDuration;
   		}
   		 p = p->mPtrToNext ;
-  	}	
-  }	
- return LeastActiviyPeriod;   
+  	}
+  }
+ return LeastActiviyPeriod;
 }*/
 
 //---------------------------------------------------------------------------*
@@ -482,55 +482,55 @@ getLeastBusyPeriod (const int32_t inCurrentActivity,
 void SuccessorsMinBusyDuration (int32_t & ioBusyDuration, const int32_t activityIndex,
                                 const int32_t ResourceIndex,
                                 const TC_UniqueArray <cActivity> & inActivities){
-                              
+
   if (activityIndex >= 0){
 	  int32_t successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
 	  if (successorIndex >= 0){
 	    if ( (ResourceIndex == inActivities (successorIndex COMMA_HERE).mResourceId)
 	        &&
-         ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ) ){   
-	   
+         ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ) ){
+
 	  		ioBusyDuration += inActivities (successorIndex COMMA_HERE).mOffset +
 	  		                  inActivities (successorIndex COMMA_HERE).mMinDuration ;
 	  	  SuccessorsMinBusyDuration(ioBusyDuration, successorIndex, ResourceIndex, inActivities);
-	  	}	
+	  	}
 	  	int32_t OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
 		  while ( OtherHeirId >= 0 ) {
 		    if ( (ResourceIndex == inActivities (OtherHeirId COMMA_HERE).mResourceId)
 		        &&
-            ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ) ){   
-	   
-			    ioBusyDuration += inActivities (OtherHeirId COMMA_HERE).mOffset + 
+            ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ) ){
+
+			    ioBusyDuration += inActivities (OtherHeirId COMMA_HERE).mOffset +
 			                      inActivities (OtherHeirId COMMA_HERE).mMinDuration;
 	        SuccessorsMinBusyDuration(ioBusyDuration, OtherHeirId, ResourceIndex, inActivities);
 	      }
 			  OtherHeirId = inActivities (OtherHeirId COMMA_HERE).mOtherHeirId;
 	  	}
-	  }                                
-  }                                  
+	  }
+  }
 }
 
 //---------------------------------------------------------------------------*
 
 int32_t C_activitiesToSchedule::getMinimumBusyPeriod (const int32_t currentActivityIndex,
                                                       const TC_UniqueArray <cActivity> & inActivities) const {
- 
+
   int32_t BusyDuration=0;
   const int32_t ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
   SuccessorsMinBusyDuration (BusyDuration, currentActivityIndex, ResourceIndex, inActivities);
   if (mRootPointer != NULL){
     int32_t activityIndex = mRootPointer->mActivityIndex;
-    BusyDuration +=inActivities (activityIndex COMMA_HERE).mMinDuration; 
+    BusyDuration +=inActivities (activityIndex COMMA_HERE).mMinDuration;
   	SuccessorsMinBusyDuration (BusyDuration, activityIndex, ResourceIndex, inActivities);
    	cVDLnodeInfo * p = mRootPointer->mPtrToNext ;
   	while (p != NULL){
   	  activityIndex = p->mActivityIndex;
   	  BusyDuration +=inActivities (activityIndex COMMA_HERE).mMinDuration;
-  		SuccessorsMinBusyDuration (BusyDuration, activityIndex, ResourceIndex, inActivities);	
+  		SuccessorsMinBusyDuration (BusyDuration, activityIndex, ResourceIndex, inActivities);
   		p = p->mPtrToNext ;
-		}  
-  }	
-  return BusyDuration;   
+		}
+  }
+  return BusyDuration;
 }
 
 //--------------------------------------------------------------------------*/
@@ -556,7 +556,7 @@ int32_t C_activitiesToSchedule::getFirstToSchedule (const int32_t inCurrentInsta
 //----------------------------------------------------------------------------*/
 
 int32_t C_activitiesToSchedule::getFirstScheduledInstant (const int32_t inCurrentInstant) const {
-  int32_t scheduledInstant=-1 ; // 
+  int32_t scheduledInstant=-1 ; //
   if ((mRootPointer != NULL) && (mRootPointer->mScheduleInstant <= inCurrentInstant)) {
   //--- Find min priority activity
     scheduledInstant=mRootPointer->mScheduleInstant;
@@ -612,16 +612,21 @@ bool C_activitiesToSchedule::AnyNotReadyToScheduleAt (const int32_t inCurrentIns
 //---------------------------------------------------------------------------*
 
  void C_activitiesToSchedule::printList (AC_OutputStream & inStream,
-                                         const TC_UniqueArray <C_String> & inNames) const {
+                                         const TC_UniqueArray <String> & inNames) const {
    cVDLnodeInfo * p = mRootPointer ;
    while (p != NULL) {
      const int32_t index = p->mActivityIndex ;
      if (index < inNames.count ()) {
-      inStream << inNames (index COMMA_HERE) << " " ;
+      inStream.addString (inNames (index COMMA_HERE)) ;
+      inStream.addString (" ") ;
      }
-     inStream << "#" << cStringWithSigned (index) << " at "
-              << cStringWithSigned (p->mScheduleInstant) << ", priority "
-              << cStringWithSigned (p->mActivityPriority) << "\n" ;
+     inStream.addString ("#") ;
+     inStream.addSigned (index) ;
+     inStream.addString (" at ") ;
+     inStream.addSigned (p->mScheduleInstant) ;
+     inStream.addString (", priority ") ;
+     inStream.addSigned (p->mActivityPriority) ;
+     inStream.addString ("\n") ;
      p = p->mPtrToNext ;
    }
  }

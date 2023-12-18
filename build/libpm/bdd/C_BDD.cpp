@@ -1,4 +1,4 @@
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //     BDD package (implementation of ROBDD)
 //
@@ -16,40 +16,40 @@
 //  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 //  more details.
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include "bdd/C_BDD.h"
 #include "bdd/C_BDD-node.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Display Information Messages
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static bool gDisplaysInformationMessages ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 bool C_BDD::displaysInformationMessages (void) {
   return gDisplaysInformationMessages ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::setDisplaysInformationMessages (const bool inFlag) {
   gDisplaysInformationMessages = inFlag ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark ITE operation
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 uint32_t internalITEoperation (const uint32_t opf,
                                const uint32_t opg,
@@ -58,104 +58,104 @@ uint32_t internalITEoperation (const uint32_t opf,
                                internalANDoperation (opf ^ 1, oph) ^ 1) ^ 1 ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark BDD operators
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::setToFalse (void) {
   mBDDvalue = 0  ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::setToTrue (void) {
   mBDDvalue = 1  ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::ite (const C_BDD & f, const C_BDD & g, const C_BDD & h) {
   return C_BDD (internalITEoperation (f.mBDDvalue, g.mBDDvalue, h.mBDDvalue)) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::implies (const C_BDD & inOperand) const {
 //--- f -> g est defini par (non f) ou g, c'est a dire non (f et (non g))
   return C_BDD (internalANDoperation (mBDDvalue, inOperand.mBDDvalue ^ 1) ^ 1) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::operator & (const C_BDD & inOperand) const {
   return C_BDD (internalANDoperation (mBDDvalue, inOperand.mBDDvalue)) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::operator &= (const C_BDD & inOperand) {
    mBDDvalue = internalANDoperation (mBDDvalue, inOperand.mBDDvalue) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::operator | (const C_BDD & inOperand) const {
   return C_BDD (internalANDoperation (mBDDvalue ^ 1, inOperand.mBDDvalue ^ 1) ^ 1) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::operator |= (const C_BDD & inOperand) {
   mBDDvalue = internalANDoperation (mBDDvalue ^ 1, inOperand.mBDDvalue ^ 1) ^ 1 ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::equalTo(const C_BDD & inOperand) const {
   return C_BDD (internalITEoperation (mBDDvalue, inOperand.mBDDvalue, inOperand.mBDDvalue ^ 1)) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::notEqualTo (const C_BDD & inOperand) const {
   return C_BDD (internalITEoperation (mBDDvalue, inOperand.mBDDvalue ^ 1, inOperand.mBDDvalue)) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::lowerOrEqual (const C_BDD & inOperand) const { // <=
   return C_BDD (internalANDoperation (mBDDvalue, inOperand.mBDDvalue ^ 1) ^ 1) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::greaterThan (const C_BDD & inOperand) const { // >
   return C_BDD (internalANDoperation (mBDDvalue, inOperand.mBDDvalue ^ 1)) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::lowerThan (const C_BDD & inOperand) const { // <
   return C_BDD (internalANDoperation (mBDDvalue ^ 1, inOperand.mBDDvalue)) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::greaterOrEqual (const C_BDD & inOperand) const { // >=
   return C_BDD (internalANDoperation (mBDDvalue ^ 1, inOperand.mBDDvalue) ^ 1) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Compare BDDs
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::compareWithBDD (const compareEnum inComparison, const C_BDD & inOperand) const {
   C_BDD result ;
@@ -184,43 +184,43 @@ C_BDD C_BDD::compareWithBDD (const compareEnum inComparison, const C_BDD & inOpe
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Complement BDD
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::negate (void) {
   mBDDvalue ^= 1 ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::operator ~ (void) const {
   return C_BDD (mBDDvalue ^ 1) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark BDD is complemented
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 bool C_BDD::isComplemented (void) const {
   return (mBDDvalue & 1) != 0 ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark BDD with constants
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::bddWithConstants (const uint32_t inValues [],
                                const uint32_t inBitCount [],
@@ -242,13 +242,13 @@ C_BDD C_BDD::bddWithConstants (const uint32_t inValues [],
   return C_BDD (result) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Build BDD from comparison between variables and constant
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static C_BDD construireInfEgal (const uint32_t inFirstIndex,
                                 const uint32_t indiceMax,
@@ -266,7 +266,7 @@ static C_BDD construireInfEgal (const uint32_t inFirstIndex,
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static C_BDD construireSupEgal (const uint32_t inFirstIndex,
                                 const uint32_t indiceMax,
@@ -284,7 +284,7 @@ static C_BDD construireSupEgal (const uint32_t inFirstIndex,
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::varCompareConst (const uint32_t inFirstIndex,
                               const uint32_t inDimension,
@@ -324,13 +324,13 @@ C_BDD C_BDD::varCompareConst (const uint32_t inFirstIndex,
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Build BDD from comparison between variables
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static C_BDD
 construireSupVariable (const uint32_t inLeftFirstIndex,
@@ -349,7 +349,7 @@ construireSupVariable (const uint32_t inLeftFirstIndex,
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::
 varCompareVar (const uint32_t inLeftFirstIndex,
@@ -383,13 +383,13 @@ varCompareVar (const uint32_t inLeftFirstIndex,
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Needed Variable Count
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 uint32_t C_BDD::significantVariableCount (void) const {
   uint32_t bitCount = 0 ;
@@ -400,17 +400,17 @@ uint32_t C_BDD::significantVariableCount (void) const {
   return bitCount ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Test if BDD does contain a value
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 //    #define DEBUG_CONTAINS_VALUE
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static bool recursiveContainsValue64 (const uint32_t inBDD,
                                       const uint64_t inValue,
@@ -463,7 +463,7 @@ static bool recursiveContainsValue64 (const uint32_t inBDD,
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 bool C_BDD::containsValue64 (const uint64_t inValue,
                              const uint32_t inFirstBit,
@@ -474,7 +474,7 @@ bool C_BDD::containsValue64 (const uint64_t inValue,
                                    (uint32_t) (inFirstBit + inBitCount)) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static bool recursiveContainsValue (const uint32_t inBDD,
                                     const TC_Array <bool> & inValue,
@@ -527,7 +527,7 @@ static bool recursiveContainsValue (const uint32_t inBDD,
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 bool C_BDD::containsValue (const TC_Array <bool> & inValue,
                            const uint32_t inFirstBit,
@@ -538,7 +538,7 @@ bool C_BDD::containsValue (const TC_Array <bool> & inValue,
                                  (uint32_t) (inFirstBit + inBitCount)) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void
 parcoursBDDinterneParValeur (const uint32_t inValue,
@@ -574,7 +574,7 @@ parcoursBDDinterneParValeur (const uint32_t inValue,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::traverseBDDvalues (C_bdd_value_traversing & inTraversing,
                                const uint32_t inVariableCount) const {
@@ -584,13 +584,13 @@ void C_BDD::traverseBDDvalues (C_bdd_value_traversing & inTraversing,
   macroMyDeleteArray (tableauDesValeurs) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Build an array of uint64_t values
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class C_build_values64_array : public C_bdd_value_traversing {
   private: TC_UniqueArray <uint64_t> * mPtr ;
@@ -608,7 +608,7 @@ class C_build_values64_array : public C_bdd_value_traversing {
                                 const uint32_t inVariableCount) ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_build_values64_array::action (const bool tableauDesValeurs [],
                                    const uint32_t inVariableCount) {
@@ -619,7 +619,7 @@ void C_build_values64_array::action (const bool tableauDesValeurs [],
   mPtr->appendObject (value) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::buildValue64Array (TC_UniqueArray <uint64_t> & outValuesArray,
                                const uint32_t inVariableCount) const {
@@ -632,13 +632,13 @@ void C_BDD::buildValue64Array (TC_UniqueArray <uint64_t> & outValuesArray,
   macroMyDeleteArray (tableauDesValeurs) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Build an array of bool array values
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class C_build_values_array : public C_bdd_value_traversing {
   private: TC_UniqueArray <TC_Array <bool> > * mPtr ;
@@ -656,7 +656,7 @@ class C_build_values_array : public C_bdd_value_traversing {
                                 const uint32_t inVariableCount) ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_build_values_array::action (const bool tableauDesValeurs [],
                                    const uint32_t inVariableCount) {
@@ -667,7 +667,7 @@ void C_build_values_array::action (const bool tableauDesValeurs [],
   mPtr->appendObject (value) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::buildValueArray (TC_UniqueArray <TC_Array <bool> > & outValuesArray,
                              const uint32_t inVariableCount) const {
@@ -679,18 +679,18 @@ void C_BDD::buildValueArray (TC_UniqueArray <TC_Array <bool> > & outValuesArray,
   macroMyDeleteArray (tableauDesValeurs) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Build an array of string values
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class cLittleEndianStringValueBuilder : public C_bdd_value_traversing {
-  private: TC_UniqueArray <C_String> * mPtr ;
+  private: TC_UniqueArray <String> * mPtr ;
 
-  public: cLittleEndianStringValueBuilder (TC_UniqueArray <C_String> * inPtr) :
+  public: cLittleEndianStringValueBuilder (TC_UniqueArray <String> * inPtr) :
   mPtr (inPtr) {
   }
 
@@ -703,22 +703,22 @@ class cLittleEndianStringValueBuilder : public C_bdd_value_traversing {
                                 const uint32_t inVariableCount) ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void cLittleEndianStringValueBuilder::
 action (const bool tableauDesValeurs [],
         const uint32_t inVariableCount) {
-  C_String value ;
+  String value ;
   for (uint32_t i=0 ; i<inVariableCount ; i++) {
-    value << cStringWithCharacter ((char) ('0' + tableauDesValeurs [i])) ;
+    value.addChar ((char) ('0' + tableauDesValeurs [i])) ;
   }
   mPtr->appendObject (value) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::
-buildLittleEndianStringValueArray (TC_UniqueArray <C_String> & outValuesArray,
+buildLittleEndianStringValueArray (TC_UniqueArray <String> & outValuesArray,
                                    const uint32_t inVariableCount) const {
   outValuesArray.removeAllKeepingCapacity () ;
   cLittleEndianStringValueBuilder builder (& outValuesArray) ;
@@ -728,12 +728,12 @@ buildLittleEndianStringValueArray (TC_UniqueArray <C_String> & outValuesArray,
   macroMyDeleteArray (tableauDesValeurs) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class cBuildBigEndianStringValueArray : public C_bdd_value_traversing {
-  private: TC_UniqueArray <C_String> * mPtr ;
+  private: TC_UniqueArray <String> * mPtr ;
 
-  public: cBuildBigEndianStringValueArray (TC_UniqueArray <C_String> * inPtr) :
+  public: cBuildBigEndianStringValueArray (TC_UniqueArray <String> * inPtr) :
   mPtr (inPtr) {
   }
 
@@ -746,22 +746,22 @@ class cBuildBigEndianStringValueArray : public C_bdd_value_traversing {
                                 const uint32_t inVariableCount) ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void cBuildBigEndianStringValueArray::
 action (const bool tableauDesValeurs [],
         const uint32_t inVariableCount) {
-  C_String value ;
+  String value ;
   for (uint32_t i=inVariableCount ; i>0 ; i--) {
-    value << cStringWithCharacter ((char) ('0' + tableauDesValeurs [i-1])) ;
+    value.addChar ((char) ('0' + tableauDesValeurs [i-1])) ;
   }
   mPtr->appendObject (value) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::
-buildBigEndianStringValueArray (TC_UniqueArray <C_String> & outValuesArray,
+buildBigEndianStringValueArray (TC_UniqueArray <String> & outValuesArray,
                                 const uint32_t inVariableCount) const {
   outValuesArray.removeAllKeepingCapacity () ;
   cBuildBigEndianStringValueArray builder (& outValuesArray) ;
@@ -771,12 +771,12 @@ buildBigEndianStringValueArray (TC_UniqueArray <C_String> & outValuesArray,
   macroMyDeleteArray (tableauDesValeurs) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class cBuildQueryString : public C_bdd_value_traversing {
-  private: C_String * mStringPtr ;
+  private: String * mStringPtr ;
 
-  public: cBuildQueryString (C_String * inStringPtr) :
+  public: cBuildQueryString (String * inStringPtr) :
   mStringPtr (inStringPtr) {
   }
 
@@ -790,49 +790,50 @@ class cBuildQueryString : public C_bdd_value_traversing {
                                 const uint32_t inVariableCount) ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void cBuildQueryString::
 action (const bool tableauDesValeurs [],
         const uint32_t inVariableCount) {
-  C_String value ;
+  String value ;
   if (mStringPtr->length () > 0) {
-    *mStringPtr << "|" ;
+    mStringPtr->addString ("|") ;
   }
   for (uint32_t i=inVariableCount ; i>0 ; i--) {
-    *mStringPtr << cStringWithCharacter ((char) ('0' + tableauDesValeurs [i-1])) ;
+    mStringPtr->addChar ((char) ('0' + tableauDesValeurs [i-1])) ;
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_String C_BDD::
+String C_BDD::
 queryStringValue (LOCATION_ARGS) const {
-  C_String s ;
+  String s ;
   if (isTrue ()) {
-    s << "X" ;
+    s.addString ("X") ;
   }else if (! isFalse ()) {
-    TC_UniqueArray <C_String> stringArray ;
+    TC_UniqueArray <String> stringArray ;
     buildCompressedBigEndianStringValueArray (stringArray COMMA_THERE) ;
     if (stringArray.count () > 0) {
-      s << stringArray (0 COMMA_HERE) ;
+      s.addString (stringArray (0 COMMA_HERE)) ;
       for (int32_t i=1 ; i<stringArray.count () ; i++) {
-        s << "|" << stringArray (i COMMA_HERE) ;
+        s.addString ("|") ;
+        s.addString (stringArray (i COMMA_HERE)) ;
       }
     }
   }
   return s ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Value Count
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::BDDWithPredicateString (const C_String & inPredicateStringValue
+C_BDD C_BDD::BDDWithPredicateString (const String & inPredicateStringValue
                                      COMMA_LOCATION_ARGS) {
   C_BDD result ;
   const int32_t stringLength = inPredicateStringValue.length () ;
@@ -840,9 +841,9 @@ C_BDD C_BDD::BDDWithPredicateString (const C_String & inPredicateStringValue
   bool ok = true ;
   while ((stringIndex < stringLength) && ok) {
     utf32 cc = inPredicateStringValue (stringIndex COMMA_HERE) ;
-    C_String s ;
+    String s ;
     while ((stringIndex < stringLength) && ((UNICODE_VALUE (cc) == '0') || (UNICODE_VALUE (cc) == '1') || (UNICODE_VALUE (cc) == 'X') || (UNICODE_VALUE (cc) == ' '))) {
-      s.appendUnicodeCharacter (cc COMMA_HERE) ;
+      s.addUnicodeChar (cc COMMA_HERE) ;
       stringIndex ++ ;
       if (stringIndex < stringLength) {
         cc = inPredicateStringValue (stringIndex COMMA_HERE) ;
@@ -877,13 +878,13 @@ C_BDD C_BDD::BDDWithPredicateString (const C_String & inPredicateStringValue
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Value Count (64)
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void internalValueCount64 (const uint32_t inValue,
                                   const uint32_t inVariableCount,
@@ -916,7 +917,7 @@ static void internalValueCount64 (const uint32_t inValue,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 uint64_t C_BDD::valueCount64 (const uint32_t inVariableCount) const {
   uint64_t nombreDirect = 0 ;
@@ -925,7 +926,7 @@ uint64_t C_BDD::valueCount64 (const uint32_t inVariableCount) const {
   return nombreDirect ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void internalValueCount64UsingCache (const uint32_t inValue,
                                             const uint32_t inVariableCount,
@@ -963,7 +964,7 @@ static void internalValueCount64UsingCache (const uint32_t inValue,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 uint64_t C_BDD::valueCount64UsingCache (const uint32_t inVariableCount,
                                         TC_UniqueArray <uint64_t> & ioDirectCacheArray,
@@ -974,13 +975,13 @@ uint64_t C_BDD::valueCount64UsingCache (const uint32_t inVariableCount,
   return nombreDirect ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Value Count (128)
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void internalValueCount128 (const uint32_t inValue,
                                    const uint32_t inVariableCount,
@@ -1013,7 +1014,7 @@ static void internalValueCount128 (const uint32_t inValue,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 PMUInt128 C_BDD::valueCount128 (const uint32_t inVariableCount) const {
   PMUInt128 nombreDirect = 0 ;
@@ -1022,7 +1023,7 @@ PMUInt128 C_BDD::valueCount128 (const uint32_t inVariableCount) const {
   return nombreDirect ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void internalValueCount128UsingCache (const uint32_t inValue,
                                              const uint32_t inVariableCount,
@@ -1060,7 +1061,7 @@ static void internalValueCount128UsingCache (const uint32_t inValue,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 PMUInt128 C_BDD::valueCount128UsingCache (const uint32_t inVariableCount,
                                           TC_UniqueArray <PMUInt128> & ioDirectCacheArray,
@@ -1071,27 +1072,27 @@ PMUInt128 C_BDD::valueCount128UsingCache (const uint32_t inVariableCount,
   return nombreDirect ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Value Count (Big ints)
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void internalValueCount (const uint32_t inValue,
                                 const uint32_t inVariableCount,
-                                C_BigInt & nombreDirect,
-                                C_BigInt & nombreComplement
+                                BigSigned & nombreDirect,
+                                BigSigned & nombreComplement
                                 COMMA_LOCATION_ARGS) {
   const uint32_t nodeIndex = nodeIndexForRoot (inValue COMMA_THERE) ;
   if (bothBranches (gNodeArray [nodeIndex]) == 0) {
-    nombreDirect.setToZero () ;
-    nombreComplement.setFromU32 (1) ;
+    nombreDirect = BigSigned () ; //.setToZero () ;
+    nombreComplement = BigSigned (true, 1) ;
     nombreComplement <<= inVariableCount ;
   }else{
     const uint32_t var = gNodeArray [nodeIndex].mVariableIndex ;
-    C_BigInt nd0, nc0, nd1, nc1 ;
+    BigSigned nd0, nc0, nd1, nc1 ;
     internalValueCount (gNodeArray [nodeIndex].mELSE, var, nd0, nc0 COMMA_THERE) ;
     internalValueCount (gNodeArray [nodeIndex].mTHEN, var, nd1, nc1 COMMA_THERE) ;
     nombreDirect = nd0 + nd1 ;
@@ -1107,35 +1108,36 @@ static void internalValueCount (const uint32_t inValue,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_BigInt C_BDD::valueCount (const uint32_t inVariableCount) const {
-  C_BigInt nombreDirect ;
-  C_BigInt nombreComplement ;
+BigSigned C_BDD::valueCount (const uint32_t inVariableCount) const {
+  BigSigned nombreDirect ;
+  BigSigned nombreComplement ;
   internalValueCount (mBDDvalue, inVariableCount, nombreDirect, nombreComplement COMMA_HERE) ;
   return nombreDirect ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void internalValueCountUsingCache (const uint32_t inValue,
                                           const uint32_t inVariableCount,
-                                          C_BigInt & nombreDirect,
-                                          C_BigInt & nombreComplement,
-                                          TC_UniqueArray <C_BigInt> & ioDirectCacheArray,
-                                          TC_UniqueArray <C_BigInt> & ioComplementCacheArray
+                                          BigSigned & nombreDirect,
+                                          BigSigned & nombreComplement,
+                                          TC_UniqueArray <BigSigned> & ioDirectCacheArray,
+                                          TC_UniqueArray <BigSigned> & ioComplementCacheArray
                                           COMMA_LOCATION_ARGS) {
   const uint32_t nodeIndex = nodeIndexForRoot (inValue COMMA_THERE) ;
   if (bothBranches (gNodeArray [nodeIndex]) == 0) {
-    nombreDirect.setToZero () ;
-    nombreComplement.setFromU32 (1) ; nombreComplement <<= inVariableCount ;
+    nombreDirect = BigSigned () ; // .setToZero () ;
+    nombreComplement = BigSigned (true, 1) ;
+    nombreComplement <<= inVariableCount ;
   }else if ((ioDirectCacheArray.count () > (int32_t) (inValue / 2))
     && (((!ioDirectCacheArray (inValue / 2 COMMA_HERE).isZero ()) || (!ioComplementCacheArray (inValue / 2 COMMA_HERE).isZero())))) {
     nombreDirect = ioDirectCacheArray (inValue / 2 COMMA_HERE) ;
     nombreComplement = ioComplementCacheArray (inValue / 2 COMMA_HERE) ;
   }else{
     const uint32_t var = gNodeArray [nodeIndex].mVariableIndex ;
-    C_BigInt nd0, nc0, nd1, nc1 ;
+    BigSigned nd0, nc0, nd1, nc1 ;
     internalValueCountUsingCache (gNodeArray [nodeIndex].mELSE, var, nd0, nc0, ioDirectCacheArray, ioComplementCacheArray COMMA_THERE) ;
     internalValueCountUsingCache (gNodeArray [nodeIndex].mTHEN, var, nd1, nc1, ioDirectCacheArray, ioComplementCacheArray COMMA_THERE) ;
     nombreDirect = nd0 + nd1 ;
@@ -1145,32 +1147,32 @@ static void internalValueCountUsingCache (const uint32_t inValue,
       nombreDirect <<= (uint32_t) shiftCount ;
       nombreComplement <<= (uint32_t) shiftCount ;
     }
-    ioDirectCacheArray.forceObjectAtIndex (inValue / 2, nombreDirect, C_BigInt () COMMA_HERE) ;
-    ioComplementCacheArray.forceObjectAtIndex (inValue / 2, nombreComplement, C_BigInt () COMMA_HERE) ;
+    ioDirectCacheArray.forceObjectAtIndex (inValue / 2, nombreDirect, BigSigned () COMMA_HERE) ;
+    ioComplementCacheArray.forceObjectAtIndex (inValue / 2, nombreComplement, BigSigned () COMMA_HERE) ;
   }
   if ((inValue & 1) != 0) {
     swap (nombreDirect, nombreComplement) ;
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_BigInt C_BDD::valueCountUsingCache (const uint32_t inVariableCount,
-                                      TC_UniqueArray <C_BigInt> & ioDirectCacheArray,
-                                      TC_UniqueArray <C_BigInt> & ioComplementCacheArray) const {
-  C_BigInt nombreDirect ;
-  C_BigInt nombreComplement ;
+BigSigned C_BDD::valueCountUsingCache (const uint32_t inVariableCount,
+                                      TC_UniqueArray <BigSigned> & ioDirectCacheArray,
+                                      TC_UniqueArray <BigSigned> & ioComplementCacheArray) const {
+  BigSigned nombreDirect ;
+  BigSigned nombreComplement ;
   internalValueCountUsingCache (mBDDvalue, inVariableCount, nombreDirect, nombreComplement, ioDirectCacheArray, ioComplementCacheArray COMMA_HERE) ;
   return nombreDirect ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Get i-th value as BDD
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static C_BDD
 obtenirIemeBDDinterne (const uint32_t inValue,
@@ -1220,7 +1222,7 @@ obtenirIemeBDDinterne (const uint32_t inValue,
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::getNthBDD (const uint64_t inNthBDDvalue,
                         const uint32_t inVariableCount) const {
@@ -1228,13 +1230,13 @@ C_BDD C_BDD::getNthBDD (const uint64_t inNthBDDvalue,
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Get i-th value as uint64_t
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static uint64_t
 obtenirValeurAbsolueBDDInterne (const uint32_t inValue) {
@@ -1255,7 +1257,7 @@ obtenirValeurAbsolueBDDInterne (const uint32_t inValue) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 uint64_t C_BDD::getBDDabsoluteValue (const uint32_t inVariableCount) const {
   uint64_t result = 0 ;
@@ -1265,13 +1267,13 @@ uint64_t C_BDD::getBDDabsoluteValue (const uint32_t inVariableCount) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark BDD range
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static uint64_t
 rangBDDinterne (const uint32_t inValue,
@@ -1307,7 +1309,7 @@ rangBDDinterne (const uint32_t inValue,
   return rang ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 uint64_t C_BDD::
 getBDDrange (const C_BDD & inOperand,
@@ -1319,13 +1321,13 @@ getBDDrange (const C_BDD & inOperand,
   return rang ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Node Count
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static uint32_t internalRecursiveNodeCount (const uint32_t inValue) {
   const uint32_t nodeIndex = nodeIndexForRoot (inValue COMMA_HERE) ;
@@ -1340,7 +1342,7 @@ static uint32_t internalRecursiveNodeCount (const uint32_t inValue) {
   return n ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 uint32_t C_BDD::getBDDnodesCount (void) const {
   const uint32_t nodeIndex = nodeIndexForRoot (mBDDvalue COMMA_HERE) ;
@@ -1352,13 +1354,13 @@ uint32_t C_BDD::getBDDnodesCount (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Boolean array
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class cBuildArrayForSet : public C_bdd_value_traversing {
 //--- Attributs
@@ -1372,14 +1374,14 @@ class cBuildArrayForSet : public C_bdd_value_traversing {
                                 const uint32_t inBDDbitsSize) ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 cBuildArrayForSet::
 cBuildArrayForSet (TC_UniqueArray <bool> & outArray) :
 mArray (outArray) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void cBuildArrayForSet::action (const bool inValuesArray [],
                                 const uint32_t inBDDbitsSize) {
@@ -1390,7 +1392,7 @@ void cBuildArrayForSet::action (const bool inValuesArray [],
   mArray.setObjectAtIndex (true, element COMMA_HERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::getBoolArray (TC_UniqueArray <bool> & outArray,
                           const uint32_t inMaxValues,
@@ -1402,17 +1404,17 @@ void C_BDD::getBoolArray (TC_UniqueArray <bool> & outArray,
   traverseBDDvalues (s, inBitSize) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark BDD as N-relation
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //   U P D A T E   R E L A T I O N
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static uint32_t
 internalRecursiveUpdateRelation (const uint32_t inValue,
@@ -1438,7 +1440,7 @@ internalRecursiveUpdateRelation (const uint32_t inValue,
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::
 updateRelation (const uint32_t inRelationBitNeededCount [],
@@ -1494,13 +1496,13 @@ updateRelation (const uint32_t inRelationBitNeededCount [],
   return C_BDD (result) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark BDD as 2-relation
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::
 swap10 (const uint32_t inBitSize1,
@@ -1519,7 +1521,7 @@ swap10 (const uint32_t inBitSize1,
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::
 accessibleStates (const C_BDD & inInitialStateSet,
@@ -1547,7 +1549,7 @@ accessibleStates (const C_BDD & inInitialStateSet,
   return accessible ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::
 transitiveClosure (const uint32_t inBitSize,
@@ -1573,7 +1575,7 @@ transitiveClosure (const uint32_t inBitSize,
   return closure ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class cBuildArrayForRelation2 : public C_bdd_value_traversing {
 //--- Attributes
@@ -1590,7 +1592,7 @@ class cBuildArrayForRelation2 : public C_bdd_value_traversing {
                                 const uint32_t inBDDbitsSize) ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 cBuildArrayForRelation2::
 cBuildArrayForRelation2 (TC_UniqueArray <TC_UniqueArray <uint64_t> > & outArray,
@@ -1599,7 +1601,7 @@ mArray (outArray),
 mBitsSize1 (inBitsSize1) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void cBuildArrayForRelation2::action (const bool inValuesArray [],
                                       const uint32_t inBDDbitsSize) {
@@ -1614,7 +1616,7 @@ void cBuildArrayForRelation2::action (const bool inValuesArray [],
   mArray (index1 COMMA_HERE).appendObject (index2) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::getArray2 (TC_UniqueArray <TC_UniqueArray <uint64_t> > & outArray,
                        const uint32_t inMaxValueCount,
@@ -1629,13 +1631,13 @@ void C_BDD::getArray2 (TC_UniqueArray <TC_UniqueArray <uint64_t> > & outArray,
   traverseBDDvalues (s, (uint32_t) (inBitSize1 + inBitSize2)) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark BDD as 3-relation
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::
 swap021 (const uint32_t inBitSize1,
@@ -1658,7 +1660,7 @@ swap021 (const uint32_t inBitSize1,
   return bdd ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::
 swap120 (const uint32_t inBitSize1,
@@ -1681,7 +1683,7 @@ swap120 (const uint32_t inBitSize1,
   return bdd ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::
 swap102 (const uint32_t inBitSize1,
@@ -1704,7 +1706,7 @@ swap102 (const uint32_t inBitSize1,
   return bdd ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::
 swap210 (const uint32_t inBitSize1,
@@ -1727,7 +1729,7 @@ swap210 (const uint32_t inBitSize1,
   return bdd ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 C_BDD C_BDD::
 swap201 (const uint32_t inBitSize1,
@@ -1750,26 +1752,26 @@ swap201 (const uint32_t inBitSize1,
   return bdd ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Print BDD
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void printLineWithSeparator (AC_OutputStream & outputStream,
                                     const TC_UniqueArray <char> & inValueArray) {
   for (int32_t i=inValueArray.count () - 1 ; i>=0 ; i--) {
     if ((i % 4) == 3) {
-      outputStream << " " ;
+      outputStream.addString (" ") ;
     }
-    outputStream << cStringWithCharacter (inValueArray (i COMMA_HERE)) ;
+    outputStream.addChar (inValueArray (i COMMA_HERE)) ;
   }
-  outputStream << "\n" ;
+  outputStream.addNL () ; ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void internalPrintWithSeparator (AC_OutputStream & outputStream,
                                         const uint32_t inValue,
@@ -1816,13 +1818,13 @@ static void internalPrintWithSeparator (AC_OutputStream & outputStream,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::print (AC_OutputStream & outputStream) const {
   if (mBDDvalue == 0) {
-    outputStream << "(false)\n" ;
+    outputStream.addString ("(false)\n") ;
   }else if (mBDDvalue == 1) {
-    outputStream << "(true)\n" ;
+    outputStream.addString ("(true)\n") ;
   }else{
     const uint32_t nodeIndex = nodeIndexForRoot (mBDDvalue COMMA_HERE) ;
     const uint32_t var = gNodeArray [nodeIndex].mVariableIndex ;
@@ -1834,7 +1836,7 @@ void C_BDD::print (AC_OutputStream & outputStream) const {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::printHeader (AC_OutputStream & outputStream) const {
   if (mBDDvalue > 1) {
@@ -1854,37 +1856,37 @@ void C_BDD::printHeader (AC_OutputStream & outputStream) const {
       divisor /= 10 ;
       for (int32_t i=var ; i>=0 ; i--) {
         if ((i % 4) == 3) {
-          outputStream << " " ;
+          outputStream.addString (" ") ;
         }
         const int32_t v = (i / divisor) % 10 ;
-        outputStream << cStringWithSigned (v) ;
+        outputStream.addSigned (v) ;
       }
-      outputStream << "\n" ;
+      outputStream.addNL () ; ;
     }
     for (int32_t i=var ; i>=0 ; i--) {
       if ((i % 4) == 3) {
-        outputStream << "-" ;
+        outputStream.addString ("-") ;
       }
-      outputStream << "-" ;
+      outputStream.addString ("-") ;
     }
-    outputStream << "\n" ;
+    outputStream.addNL () ; ;
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::printWithHeader (AC_OutputStream & outputStream) const {
   printHeader (outputStream) ;
   print (outputStream) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Print BDD with variables
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void printLineWithSeparator (AC_OutputStream & outputStream,
                                     const TC_UniqueArray <int32_t> & inValueSeparation,
@@ -1892,16 +1894,17 @@ static void printLineWithSeparator (AC_OutputStream & outputStream,
                                     const TC_UniqueArray <char> & inValueArray) {
   int32_t bitIndex = inValueArray.count () - 1 ;
   for (int32_t i=0 ; i<inBitCounts.count () ; i++) {
-    outputStream << " " << C_String::spaces (inValueSeparation (i COMMA_HERE)) ;
+    outputStream.addString (" ") ;
+    outputStream.addString (String::spaces (inValueSeparation (i COMMA_HERE))) ;
     for (int32_t j=0 ; j<inBitCounts (i COMMA_HERE) ; j++) {
-      outputStream << cStringWithCharacter (inValueArray (bitIndex COMMA_HERE)) ;
+      outputStream.addChar (inValueArray (bitIndex COMMA_HERE)) ;
       bitIndex -- ;
     }
   }
-  outputStream << "\n" ;
+  outputStream.addNL () ; ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void internalPrintWithSeparator (AC_OutputStream & outputStream,
                                         const TC_UniqueArray <int32_t> & inValueSeparation,
@@ -1950,10 +1953,10 @@ static void internalPrintWithSeparator (AC_OutputStream & outputStream,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::print (AC_OutputStream & outputStream,
-                   const TC_UniqueArray <C_String> & inVariablesNames,
+                   const TC_UniqueArray <String> & inVariablesNames,
                    const TC_UniqueArray <int32_t> & inBitCounts) const {
 //--- Build separators
   TC_UniqueArray <int32_t> variableNameSeparation ;
@@ -1967,23 +1970,27 @@ void C_BDD::print (AC_OutputStream & outputStream,
   }
 //--- Print header
   for (int32_t i=0 ; i<inVariablesNames.count () ; i++) {
-    outputStream << " " << C_String::spaces (variableNameSeparation (i COMMA_HERE)) << inVariablesNames (i COMMA_HERE) ;
+    outputStream.addString (" ") ;
+    outputStream.addString (String::spaces (variableNameSeparation (i COMMA_HERE))) ;
+    outputStream.addString (inVariablesNames (i COMMA_HERE)) ;
   }
-  outputStream << "\n" ;
+  outputStream.addNL () ; ;
 //--- Print value
   print (outputStream, valuesSeparation, inBitCounts, 1) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::print (AC_OutputStream & outputStream,
                    const TC_UniqueArray <int32_t> & inValueSeparation,
                    const TC_UniqueArray <int32_t> & inBitCounts,
                    const int32_t inPrefixedSpaceCount) const {
   if (mBDDvalue == 0) {
-    outputStream << C_String::spaces (inPrefixedSpaceCount) << "(false)\n" ;
+    outputStream.addString (String::spaces (inPrefixedSpaceCount)) ;
+    outputStream.addString ("(false)\n") ;
   }else if (mBDDvalue == 1) {
-    outputStream << C_String::spaces (inPrefixedSpaceCount) << "(true)\n" ;
+    outputStream.addString (String::spaces (inPrefixedSpaceCount)) ;
+    outputStream.addString ("(true)\n") ;
   }else{
     uint32_t totalBitCount = 0 ;
     for (int32_t i=0 ; i<inBitCounts.count () ; i++) {
@@ -1999,41 +2006,49 @@ void C_BDD::print (AC_OutputStream & outputStream,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Graphviz representation
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-static void buildGraphvizRepresentation (C_String & ioString,
-                                         const C_String & inSourceNode,
+static void buildGraphvizRepresentation (String & ioString,
+                                         const String & inSourceNode,
                                          const uint32_t inBDDValue,
-                                         const TC_UniqueArray <C_String> & inBitNames) {
+                                         const TC_UniqueArray <String> & inBitNames) {
   const uint32_t nodeIndex = nodeIndexForRoot (inBDDValue COMMA_HERE) ;
   const int32_t var = (int32_t) gNodeArray [nodeIndex].mVariableIndex ;
-  const C_String node = C_String ("N") + cStringWithUnsigned (nodeIndex) ;
+  const String node = String ("N") + stringWithUnsigned (nodeIndex) ;
   if (! isNodeMarkedThenMark (inBDDValue COMMA_HERE)) {
     const uint32_t THENbranch = gNodeArray [nodeIndex].mTHEN ;
-    C_String THENlabel ;
+    String THENlabel ;
     if (THENbranch == 0) {
-      THENlabel << "F" ;
+      THENlabel.addString ("F") ;
     }else if (THENbranch == 1) {
-      THENlabel << "T" ;
+      THENlabel.addString ("T") ;
     }else{
-      THENlabel << "<f1>" ;
+      THENlabel.addString ("<f1>") ;
     }
     const uint32_t ELSEbranch = gNodeArray [nodeIndex].mELSE ;
-    C_String ELSElabel ;
+    String ELSElabel ;
     if (ELSEbranch == 0) {
-      ELSElabel << "F" ;
+      ELSElabel.addString ("F") ;
     }else if (ELSEbranch == 1) {
-      ELSElabel << "T" ;
+      ELSElabel.addString ("T") ;
     }else{
-      ELSElabel << "<f0>" ;
+      ELSElabel.addString ("<f0>") ;
     }
-    ioString << "  " << node << " [label=\"{" << inBitNames (var COMMA_HERE) << "|{" << ELSElabel << "|" << THENlabel << "}}\"]\n" ;
+    ioString.addString ("  ") ;
+    ioString.addString (node) ;
+    ioString.addString (" [label=\"{") ;
+    ioString.addString (inBitNames (var COMMA_HERE)) ;
+    ioString.addString ("|{") ;
+    ioString.addString (ELSElabel) ;
+    ioString.addString ("|") ;
+    ioString.addString (THENlabel) ;
+    ioString.addString ("}}\"]\n") ;
     if (ELSEbranch > 1) {
       buildGraphvizRepresentation (ioString, node + ":f0:c", ELSEbranch, inBitNames) ;
     }
@@ -2041,61 +2056,65 @@ static void buildGraphvizRepresentation (C_String & ioString,
       buildGraphvizRepresentation (ioString, node + ":f1:c", THENbranch, inBitNames) ;
     }
   }
-  ioString << "  " << inSourceNode << " -> " << node << "" ;
+  ioString.addString ("  ") ;
+  ioString.addString (inSourceNode) ;
+  ioString.addString (" -> ") ;
+  ioString.addString (node) ;
+  ioString.addString ("") ;
   if ((inBDDValue & 1) != 0) {
-    ioString << " [dir=both, arrowtail=dot]" ;
+    ioString.addString (" [dir=both, arrowtail=dot]") ;
   }
-  ioString << " ;\n" ;
+  ioString.addString (" ;\n") ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_String C_BDD::graphvizRepresentation (void) const {
+String C_BDD::graphvizRepresentation (void) const {
   int32_t varCount = 0 ;
   if (mBDDvalue > 1) {
     const uint32_t nodeIndex = nodeIndexForRoot (mBDDvalue COMMA_HERE) ;
     varCount = ((int32_t) gNodeArray [nodeIndex].mVariableIndex) + 1 ;
   }
-  TC_UniqueArray <C_String> bitNames ;
+  TC_UniqueArray <String> bitNames ;
   for (int32_t i=0 ; i<varCount ; i++) {
-    bitNames.appendObject (cStringWithSigned (i)) ;
+    bitNames.appendObject (stringWithSigned (i)) ;
   }
   return graphvizRepresentationWithNames (bitNames) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_String C_BDD::graphvizRepresentationWithNames (const TC_UniqueArray <C_String> & inBitNames) const {
+String C_BDD::graphvizRepresentationWithNames (const TC_UniqueArray <String> & inBitNames) const {
   unmarkAllExistingBDDnodes () ;
-  C_String result ;
-  result << "digraph G {\n" ;
+  String result ;
+  result.addString ("digraph G {\n") ;
   if (mBDDvalue == 0) {
-    result << "  N [label=\"F\", shape=rectangle]\n" ;
+    result.addString ("  N [label=\"F\", shape=rectangle]\n") ;
   }else if (mBDDvalue == 1) {
-    result << "  N [label=\"T\", shape=rectangle]\n" ;
+    result.addString ("  N [label=\"T\", shape=rectangle]\n") ;
   }else{
-    result << "  edge [arrowhead=vee, tailclip=false]\n"
-           << "  node [fontname=courier, shape=record]\n"
-           << "  N [label=\"\", shape=rectangle]\n" ;
+    result.addString ("  edge [arrowhead=vee, tailclip=false]\n"
+                         "  node [fontname=courier, shape=record]\n"
+                         "  N [label=\"\", shape=rectangle]\n") ;
     buildGraphvizRepresentation (result, "N", mBDDvalue, inBitNames) ;
   }
-  result << "}\n" ;
+  result.addString ("}\n") ;
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark String array representation
 #endif
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void
 internalPrintBDDInLittleEndianStringArray (const uint32_t inValue,
-                               C_String & ioDisplayString,
+                               String & ioDisplayString,
                                uint32_t inVariableIndex,
-                               TC_UniqueArray <C_String> & outStringArray
+                               TC_UniqueArray <String> & outStringArray
                                COMMA_LOCATION_ARGS) {
   const uint32_t nodeIndex = nodeIndexForRoot (inValue COMMA_HERE) ;
   const uint32_t complement = inValue & 1 ;
@@ -2138,42 +2157,42 @@ internalPrintBDDInLittleEndianStringArray (const uint32_t inValue,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::
-buildCompressedLittleEndianStringValueArray (TC_UniqueArray <C_String> & outStringArray
+buildCompressedLittleEndianStringValueArray (TC_UniqueArray <String> & outStringArray
                                              COMMA_LOCATION_ARGS) const {
   const uint32_t nodeIndex = nodeIndexForRoot (mBDDvalue COMMA_HERE) ;
   if (bothBranches (gNodeArray [nodeIndex]) != 0) {
-    C_String displayString ;
+    String displayString ;
     for (int32_t i=0 ; i<=((int32_t) gNodeArray [nodeIndex].mVariableIndex) ; i++) {
-      displayString << "X" ;
+      displayString.addString ("X") ;
     }
     internalPrintBDDInLittleEndianStringArray (mBDDvalue, displayString, gNodeArray [nodeIndex].mVariableIndex, outStringArray COMMA_THERE) ;
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::
-buildCompressedLittleEndianStringValueArray (TC_UniqueArray <C_String> & outStringArray,
+buildCompressedLittleEndianStringValueArray (TC_UniqueArray <String> & outStringArray,
                                              const uint32_t inVariableCount
                                              COMMA_LOCATION_ARGS) const {
-  C_String displayString ;
+  String displayString ;
   for (int32_t i=0 ; i<((int32_t) inVariableCount) ; i++) {
-    displayString << "X" ;
+    displayString.addString ("X") ;
   }
   internalPrintBDDInLittleEndianStringArray (mBDDvalue, displayString, inVariableCount, outStringArray COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static void
 internalPrintBDDInBigEndianStringArray (const uint32_t inValue,
-                               C_String & ioDisplayString,
+                               String & ioDisplayString,
                                uint32_t inVariableIndex,
                                const uint32_t inTotalVariableCountMinusOne,
-                               TC_UniqueArray <C_String> & outStringArray
+                               TC_UniqueArray <String> & outStringArray
                                COMMA_LOCATION_ARGS) {
   const uint32_t nodeIndex = nodeIndexForRoot (inValue COMMA_HERE) ;
   const uint32_t complement = inValue & 1 ;
@@ -2216,30 +2235,30 @@ internalPrintBDDInBigEndianStringArray (const uint32_t inValue,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::
-buildCompressedBigEndianStringValueArray (TC_UniqueArray <C_String> & outStringArray
+buildCompressedBigEndianStringValueArray (TC_UniqueArray <String> & outStringArray
                                           COMMA_LOCATION_ARGS) const {
   const uint32_t nodeIndex = nodeIndexForRoot (mBDDvalue COMMA_HERE) ;
   if (bothBranches (gNodeArray [nodeIndex]) != 0) {
-    C_String displayString ;
+    String displayString ;
     for (int32_t i=0 ; i<=((int32_t) gNodeArray [nodeIndex].mVariableIndex) ; i++) {
-      displayString << "X" ;
+      displayString.addString ("X") ;
     }
     internalPrintBDDInBigEndianStringArray (mBDDvalue, displayString, gNodeArray [nodeIndex].mVariableIndex, gNodeArray [nodeIndex].mVariableIndex, outStringArray COMMA_THERE) ;
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_BDD::
-buildCompressedBigEndianStringValueArray (TC_UniqueArray <C_String> & outStringArray,
+buildCompressedBigEndianStringValueArray (TC_UniqueArray <String> & outStringArray,
                                  const uint32_t inVariableCount
                                  COMMA_LOCATION_ARGS) const {
-  C_String displayString ;
+  String displayString ;
   for (int32_t i=0 ; i<((int32_t) inVariableCount) ; i++) {
-    displayString << "X" ;
+    displayString.addString ("X") ;
   }
   internalPrintBDDInBigEndianStringArray (mBDDvalue,
                                           displayString,
@@ -2248,7 +2267,7 @@ buildCompressedBigEndianStringValueArray (TC_UniqueArray <C_String> & outStringA
                                           outStringArray COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Build BDD from value list
@@ -2349,4 +2368,4 @@ C_BDD C_BDD::buildBDDFromValueList (uint64_t ioValueList [],
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------

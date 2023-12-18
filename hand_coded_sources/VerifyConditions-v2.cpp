@@ -1,21 +1,21 @@
-#include <stdlib.h> 
+#include <stdlib.h>
 
 #include "ExtendedList-v2.h"
 #include "VerifyConditions-v2.h"
 #include "C_us.h"
 
-#include "galgas2/C_Compiler.h"
+#include "galgas2/Compiler.h"
 
 bool
-NecessaryConditions_OK (C_Compiler * inCompiler,
+NecessaryConditions_OK (Compiler * inCompiler,
                         const TC_UniqueArray <cElement> & Element,
             						const TC_UniqueArray <cResource> & Resource){
-                        
+
   const int32_t NumOfElements = Element.count ();
-  const int32_t NumOfResources = Resource.count ();            
-	
+  const int32_t NumOfResources = Resource.count ();
+
   bool NecessaryConditionOK = true ;
-  
+
   const char *ResType[3]={"Network","Network","Processor"};
 
 //Verify if the maximum load for each resource is not greater than 1
@@ -29,22 +29,22 @@ NecessaryConditions_OK (C_Compiler * inCompiler,
     }
     if(ResourceLoad > 1){
     	NecessaryConditionOK = false ;
-    	C_String errorMessage ;
-    	errorMessage << "Maximum load for "
-    	             <<  ResType[Resource (index COMMA_HERE).mResourceType]
-    	             << " ("
-    	             << Resource (index COMMA_HERE).mResourceName
-    	             << ") is: "
-    	             << cStringWithDouble (ResourceLoad)
-    	             << " (greater than 1.0) !\n" ;
+    	String errorMessage ;
+    	errorMessage.addString ("Maximum load for ") ;
+    	errorMessage.addString (ResType[Resource (index COMMA_HERE).mResourceType]) ;
+    	errorMessage.addString (" (") ;
+    	errorMessage.addString (Resource (index COMMA_HERE).mResourceName) ;
+    	errorMessage.addString (") is: ") ;
+    	errorMessage.addDouble (ResourceLoad) ;
+    	errorMessage.addString (" (greater than 1.0) !\n") ;
 
       inCompiler->onTheFlySemanticError (errorMessage COMMA_HERE) ;
-    }else{ 
+    }else{
      	NecessaryConditionOK = NecessaryConditionOK && true;
-    }   
+    }
   }
   return NecessaryConditionOK;
-} 
+}
 
 
 
