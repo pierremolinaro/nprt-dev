@@ -15,9 +15,9 @@ style integerStyle -> "Integer constants"
 # -------------------------- identifier or key word --------------------
 # keywords can be written in lower
 # for identifiers, case is significant
-$identifier$ ! identifierString  style identifier %errorMessage "an identifier"
+$identifier$ ! identifierString  style identifier error message "an identifier"
 
-list keyWordList style keyWords %errorMessage "the '%K' key word"{
+list keyWordList style keyWords error message "the '%K' key word"{
  "system", "end", "task", "standard", "extended", "message", "length",
  "priority", "period", "offset", "on", "deadline", "duration", "processor",
  "can", "van", "network", "scalingfactor", "every" }
@@ -27,19 +27,19 @@ rule 'a'->'z' | 'A'->'Z' {
     enterCharacterIntoString ( !?identifierString !* )
   while 'a'->'z' | 'A'->'Z' | '_' | '0'->'9' :
   end
-  send %codeFor identifierString in keyWordList default $identifier$
+  send search identifierString in keyWordList default $identifier$
 }
 
 #--- Delimitors
-  list delimitorsList style delimitors %errorMessage "the ''%K'' delimitor"{
+  list delimitorsList style delimitors error message "the ''%K'' delimitor"{
     ",", ";", ".." }
   rule list delimitorsList
 #------------------------------- Decimal positive number ------------------
-$literal_integer$ ! ulongValue  style integerStyle %errorMessage "a decimal number"
+$literal_integer$ ! ulongValue  style integerStyle error message "a decimal number"
 
-%errorMessage decimalNumberTooLarge : "decimal number too large"
+message decimalNumberTooLarge : "decimal number too large"
 
-%errorMessage internalError : "internal error"
+message internalError : "internal error"
 
 rule '0'->'9' {
   enterDigitIntoUInt ( !* !?ulongValue error decimalNumberTooLarge, internalError )
@@ -54,7 +54,7 @@ rule '0'->'9' {
   rule '\u0001' -> ' ' {
   }
 # ------------------------------------ Comment ----------------------------
-%errorMessage incorrectEndOfComment : "incorrect end of comment"
+message incorrectEndOfComment : "incorrect end of comment"
 
 rule '#' {
   repeat

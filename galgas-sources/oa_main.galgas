@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------*
 
 case . "nprt"
-%errorMessage "an '.nprt' source file"
+message "an '.nprt' source file"
 %useGrammar oa_grammar
 ?sourceFilePath:@lstring inSourceFile {
   grammar oa_grammar () in inSourceFile

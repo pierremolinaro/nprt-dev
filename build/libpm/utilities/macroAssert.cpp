@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  Definition of 'MF_Assert' and related routines                                               
+//  Definition of 'macroAssert' and related routines                                               
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 1997, ..., 2014 Pierre Molinaro.
+//  Copyright (C) 1997, ..., 2023 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,7 +18,7 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "utilities/MF_Assert.h"
+#include "utilities/macroAssert.h"
 #include "utilities/M_machine.h"
 
 //--------------------------------------------------------------------------------------------------

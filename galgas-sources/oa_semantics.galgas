@@ -9,16 +9,16 @@
   map @M_processor {
     public var @uint mIndex
     public var @luint mStep
-    %insertSetter insertKey %errorMessage "the processor '%K' has been already declared in %L"
-    %searchMethod searchKey %errorMessage "the processor '%K' is not declared"
+    insert insertKey error message "the processor '%K' has been already declared in %L"
+    search searchKey error message "the processor '%K' is not declared"
   }
 
   map @M_network {
     public var @uint mIndex
     public var @bool mCANnetwork
     public var @luint mScalingFactor
-    %insertSetter insertKey %errorMessage "the processor '%K' has been already declared in %L"
-    %searchMethod searchKey %errorMessage "the processor '%K' is not declared"
+    insert insertKey error message "the processor '%K' has been already declared in %L"
+    search searchKey error message "the processor '%K' is not declared"
   }
 
   abstract refclass @AC_canMessage %generatedInSeparateFile {
@@ -45,8 +45,8 @@
     public var @luint mDeadline
     public var @luint mPeriod
     public var @AC_canMessage mMessageKind
-    %insertSetter insertKey %errorMessage "the CAN message '%K' has been already declared in %L"
-    %searchMethod searchKey %errorMessage "the CAN message '%K' is not declared"
+    insert insertKey error message "the CAN message '%K' has been already declared in %L"
+    search searchKey error message "the CAN message '%K' is not declared"
   }
   
   abstract refclass @AC_task %generatedInSeparateFile {
@@ -75,8 +75,8 @@
     public var @uint mProcessor
     public var @luint mPeriod
     public var @AC_task mTaskKind
-    %insertSetter insertKey %errorMessage "the task '%K' has been already declared in %L"
-    %searchMethod searchKey %errorMessage "the task '%K' is not declared"
+    insert insertKey error message "the task '%K' has been already declared in %L"
+    search searchKey error message "the task '%K' is not declared"
   }
 
 extern proc performComputations

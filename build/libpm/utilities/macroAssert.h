@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  Definition of 'MF_Assert' and related routine prototypes                                     
+//  Definition of 'macroAssert' and related routine prototypes                                     
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 1997, ..., 2010 Pierre Molinaro.
+//  Copyright (C) 1997, ..., 2023 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -32,31 +32,26 @@
                               const int64_t inParameter1,
                               const int64_t inParameter2
                               COMMA_LOCATION_ARGS) __attribute__ ((__noreturn__)) ;
-  #define MF_RunTimeError(message,par1,par2) { runtime_error_routine (message, par1, par2 COMMA_HERE) ; }
-  #define MF_RunTimeErrorThere(message,par1,par2) { runtime_error_routine (message, par1, par2 COMMA_THERE) ; }
-#else
-  #define MF_RunTimeError(message,par1,par2) {}
-  #define MF_RunTimeErrorThere(message,par1,par2) {}
 #endif
 
 //--------------------------------------------------------------------------------------------------
 //
-//            Macro 'MF_Assert'  definition                                                      
+//            Macro 'macroAssert'  definition                                                      
 //
 //--------------------------------------------------------------------------------------------------
 
 #ifndef DO_NOT_GENERATE_CHECKINGS
-  #define MF_Assert(exp,message,par1,par2) \
+  #define macroAssert(exp,message,par1,par2) \
     if (! (exp)) { \
       runtime_error_routine (message, par1, par2 COMMA_HERE) ; \
     }
-  #define MF_AssertThere(exp,message,par1,par2) \
+  #define macroAssertThere(exp,message,par1,par2) \
     if (! (exp)) { \
       runtime_error_routine (message, par1, par2 COMMA_THERE) ; \
     }
 #else
-  #define MF_Assert(exp,message,par1,par2) {}
-  #define MF_AssertThere(exp,message,par1,par2) {}
+  #define macroAssert(exp,message,par1,par2) {}
+  #define macroAssertThere(exp,message,par1,par2) {}
 #endif
 
 //--------------------------------------------------------------------------------------------------
