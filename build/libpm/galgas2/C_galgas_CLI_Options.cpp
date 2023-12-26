@@ -20,7 +20,6 @@
 
 #include "galgas2/C_galgas_CLI_Options.h"
 #include "galgas2/C_galgas_CLI_Options.h"
-//#include "streams/C_TCPSocketOut.h"
 #include "utilities/C_PrologueEpilogue.h"
 
 //--------------------------------------------------------------------------------------------------
@@ -191,7 +190,7 @@ String indexingModeOutputFilePath (void) {
 //--------------------------------------------------------------------------------------------------
 
 static void epilogueAction (void) {
-  gModeLatexSuffixString.releaseString () ;
+  gModeLatexSuffixString.removeAll () ;
 }
 
 //--------------------------------------------------------------------------------------------------

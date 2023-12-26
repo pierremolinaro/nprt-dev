@@ -22,7 +22,7 @@
 #define ACTIVITIES_CORE_DEFINED
 
 #include "generic-arraies/TC_UniqueArray.h"
-#include "ExtendedList.h"
+#include "ExtendedList-v2.h"
 
 //---------------------------------------------------------------------------*
 

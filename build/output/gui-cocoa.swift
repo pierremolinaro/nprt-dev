@@ -30,7 +30,7 @@ NSDictionary * indexingDescriptorDictionary (void) {
 //
 //--------------------------------------------------------------------------------------------------
 
-// #import "option-oa-5F-cli-5F-options-cocoa.h"
+// #import "option-oa-5Fcli-5Foptions-cocoa.h"
 
 //--------------------------------------------------------------------------------------------------
 

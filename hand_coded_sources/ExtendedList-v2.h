@@ -1,3 +1,4 @@
+#pragma once
 #include "generic-arraies/TC_UniqueArray.h"
 
 class String ;
@@ -6,13 +7,8 @@ class String ;
 extern "C" {
 #endif
 
-#ifndef EXTENDEDLIST_H
-#define EXTENDEDLIST_H
+class HTMLFileWrite ;
 
-class C_HTML_FileWrite ;
-
-#define nprt_min_macro(x, y)   ((x) < (y) ? (x) : (y))
-#define nprt_max_macro(x, y)   ((x) > (y) ? (x) : (y))
 
 class cActivity {
   public : int32_t mOccurrence ; //Element occurrence during the hyper period
@@ -109,10 +105,8 @@ ExtractWorstBestRT (Compiler * inCompiler,
                     const TC_UniqueArray <cResponseTime> & inResponseTimeArray,
                     bool CreateIntermediateFiles,
                     const String & raw_outputHTMLFileName,
-                    C_HTML_FileWrite & in_htmlFile);
+                    HTMLFileWrite & in_htmlFile);
 
-
-#endif
 
 #ifdef _cplusplus
 }

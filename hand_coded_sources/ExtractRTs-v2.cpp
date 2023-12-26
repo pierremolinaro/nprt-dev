@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <algorithm>
+
 #include "generic-arraies/TC_UniqueArray.h"
-#include "files/C_HTML_FileWrite.h"
+#include "files/HTMLFileWrite.h"
 #include "galgas2/Compiler.h"
 
 #include "ExtendedList-v2.h"
@@ -21,7 +23,7 @@ ExtractWorstBestRT (Compiler * inCompiler,
           const TC_UniqueArray <cResponseTime> & inResponseTimeArray,
           bool CreateIntermediateFiles,
    				const String & raw_outputHTMLFileName,
-          C_HTML_FileWrite & in_htmlFile) {
+          HTMLFileWrite & in_htmlFile) {
 
 
  	const int32_t Num_ofResources = Resource.count () ;
@@ -29,12 +31,12 @@ ExtractWorstBestRT (Compiler * inCompiler,
 
   int32_t Smallest_bit_time = INT32_MAX ;
   for (int32_t i=0 ; i < Num_ofResources ; i++ ){
-  	Smallest_bit_time = nprt_min_macro(Smallest_bit_time, Resource (i COMMA_HERE).mStep);
+  	Smallest_bit_time = std::min(Smallest_bit_time, Resource (i COMMA_HERE).mStep);
   }
 
   if(CreateIntermediateFiles){
     printf ("Raw output results are stored in %s file.\n", raw_outputHTMLFileName.cString (HERE)) ;
-    C_HTML_FileWrite raw_file (raw_outputHTMLFileName,
+    HTMLFileWrite raw_file (raw_outputHTMLFileName,
                                "Activities Outputs",
                                "style.css",
                                "") ;
@@ -107,12 +109,12 @@ ExtractWorstBestRT (Compiler * inCompiler,
       } else if ( (exElement (i COMMA_HERE).mOccurrence % exElement (i COMMA_HERE).mEvery) == 0 ){
 
       	MTElement ( index COMMA_HERE).mBestResponseTime =
-      		nprt_min_macro(MTElement ( index COMMA_HERE).mBestResponseTime,
+      		std::min(MTElement ( index COMMA_HERE).mBestResponseTime,
         	 	inResponseTimeArray (i COMMA_HERE).mBestResponseTime -
             (i-DC-(exElement (i COMMA_HERE).mEvery-1))*MTElement ( index COMMA_HERE).mPeriod);
 
       	MTElement ( index COMMA_HERE).mWorstResponseTime =
-      		nprt_max_macro(MTElement ( index COMMA_HERE).mWorstResponseTime,
+      		std::max (MTElement ( index COMMA_HERE).mWorstResponseTime,
            	inResponseTimeArray (i COMMA_HERE).mWorstResponseTime -
            	(i-DC-(exElement (i COMMA_HERE).mEvery-1))*MTElement ( index COMMA_HERE).mPeriod);
 

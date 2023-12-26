@@ -25,6 +25,7 @@
 #include <stddef.h>
 #include <string.h>
 #include <limits.h>
+#include <algorithm>
 
 //---------------------------------------------------------------------------*
 //                                                                           *
@@ -289,7 +290,7 @@ void LowerPriorityOnResource (int32_t & lowerPriority, const int32_t activityInd
 	    if ( (ResourceIndex == inActivities (successorIndex COMMA_HERE).mResourceId)
 	       &&
         ( (inActivities (successorIndex COMMA_HERE).mOccurrence % inActivities (successorIndex COMMA_HERE).mEvery) == 0 ) ){
-	      lowerPriority = MAX(lowerPriority, inActivities (successorIndex COMMA_HERE).mPriority);
+	      lowerPriority = std::max(lowerPriority, inActivities (successorIndex COMMA_HERE).mPriority);
 	   	  LowerPriorityOnResource (lowerPriority, successorIndex, ResourceIndex, inActivities);
    	  }
 	  	int32_t OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
@@ -297,7 +298,7 @@ void LowerPriorityOnResource (int32_t & lowerPriority, const int32_t activityInd
 		    if ( (ResourceIndex == inActivities (OtherHeirId COMMA_HERE).mResourceId)
 		       &&
            ( (inActivities (OtherHeirId COMMA_HERE).mOccurrence % inActivities (OtherHeirId COMMA_HERE).mEvery) == 0 ) ){
-			    lowerPriority = MAX(lowerPriority, inActivities (OtherHeirId COMMA_HERE).mPriority);
+			    lowerPriority = std::max(lowerPriority, inActivities (OtherHeirId COMMA_HERE).mPriority);
 	        LowerPriorityOnResource (lowerPriority, OtherHeirId, ResourceIndex, inActivities);
 	      }
 			  OtherHeirId = inActivities (OtherHeirId COMMA_HERE).mOtherHeirId;
@@ -316,12 +317,12 @@ int32_t C_activitiesToSchedule::getLowerPriority (const int32_t currentActivityI
   if (mRootPointer != NULL) {
   //--- Find min priority activity
     activityIndex = mRootPointer->mActivityIndex ;
-    lowerPriority = MAX(lowerPriority, inActivities (activityIndex COMMA_HERE).mPriority);
+    lowerPriority = std::max(lowerPriority, inActivities (activityIndex COMMA_HERE).mPriority);
     LowerPriorityOnResource (lowerPriority, activityIndex, ResourceIndex, inActivities);
     cVDLnodeInfo * p = mRootPointer->mPtrToNext ;
     while (p != NULL) {
       activityIndex = p->mActivityIndex ;
-      lowerPriority = MAX(lowerPriority, inActivities (activityIndex COMMA_HERE).mPriority);
+      lowerPriority = std::max(lowerPriority, inActivities (activityIndex COMMA_HERE).mPriority);
       LowerPriorityOnResource (lowerPriority, activityIndex, ResourceIndex, inActivities);
       p = p->mPtrToNext ;
     }

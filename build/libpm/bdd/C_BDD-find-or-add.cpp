@@ -91,7 +91,11 @@ static void reallocHashMap (const uint32_t inNewSize) {
               inNewSize / 1000000, (inNewSize / 1000) % 1000, inNewSize % 1000,
               (inNewSize * (uint32_t) sizeof (uint32_t)) / 1000000) ;
     }
-    macroMyReallocPODArray (gCollisionMap, uint32_t, inNewSize) ;
+    if (gCollisionMap == nullptr) {
+      macroMyNewPODArray (gCollisionMap, uint32_t, inNewSize) ;
+    }else{
+      macroMyReallocPODArray (gCollisionMap, uint32_t, inNewSize) ;
+    }
     gCollisionMapSize = inNewSize ;
     for (uint32_t i=0 ; i<gCollisionMapSize ; i++) {
       gCollisionMap [i] = 0 ;
@@ -121,8 +125,16 @@ static uint32_t addNewNode (const cBDDnode inNode) {
               newSize / 1000000, (newSize / 1000) % 1000, newSize % 1000,
               (newSize * (uint32_t) sizeof (cBDDnode)) / 1000000) ;
     }
-    macroMyReallocPODArray (gNodeArray, cBDDnode, newSize) ;
-    macroMyReallocPODArray (gMarkTable, uint64_t, newSize >> 6) ;
+    if (gNodeArray == nullptr) {
+      macroMyNewPODArray (gNodeArray, cBDDnode, newSize) ;
+    }else{
+      macroMyReallocPODArray (gNodeArray, cBDDnode, newSize) ;
+    }
+    if (gMarkTable == nullptr) {
+      macroMyNewPODArray (gMarkTable, uint64_t, newSize >> 6) ;
+    }else{
+      macroMyReallocPODArray (gMarkTable, uint64_t, newSize >> 6) ;
+    }
     gNodeArraySize = newSize ;
     gNodeArray [0].mELSE = 0 ;
     gNodeArray [0].mTHEN = 0 ;
@@ -254,9 +266,7 @@ uint32_t find_or_add (const uint32_t inBoolVar,
     const uint32_t complement = inELSEbranch & 1 ;
     const uint32_t c1 = inTHENbranch ^ complement ;
     const uint32_t c0 = inELSEbranch ^ complement ;
-//     const cBDDnode candidateNode = cBDDnode (c1, c0, inBoolVar) ;
     const cBDDnode candidateNode = {c1, c0, inBoolVar, 0} ;
-    // printf ("candidateNode %llu gCollisionMapSize %u\n", candidateNode, gCollisionMapSize) ;
     const uint64_t hashCode = nodeHashCode (candidateNode) ;
     uint32_t nodeIndex = gCollisionMap [hashCode] ;
     while ((0 != nodeIndex)

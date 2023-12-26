@@ -24,7 +24,7 @@
 #include "command_line_interface/F_mainForLIBPM.h"
 #include "time/C_Timer.h"
 #include "utilities/F_GetPrime.h"
-#include "ExtendedList.h"
+#include "ExtendedList-v2.h"
 #include "C_activitiesToSchedule.h"
 #include "activities_core.h"
 
@@ -994,8 +994,8 @@ IsOffsetTimeGTNextMinDur (const cResourceSchedule * inPtr,
 		  int32_t successorResource = inActivities (successorIndex COMMA_HERE).mResourceId ;
 		  if (successorResource == inResourceIndex){
 		  int32_t successorOffset =  inActivities (successorIndex COMMA_HERE).mOffset ;
-		  	MaximumSuccessorOffset = MAX( MaximumSuccessorOffset, successorOffset);
-		  	HigestSuccessorPriority = min (HigestSuccessorPriority, inActivities (successorIndex COMMA_HERE).mPriority);
+		  	MaximumSuccessorOffset = std::max( MaximumSuccessorOffset, successorOffset);
+		  	HigestSuccessorPriority = std::min (HigestSuccessorPriority, inActivities (successorIndex COMMA_HERE).mPriority);
 			}
 	  }
 	  int32_t OtherHeirId = inActivities (successorIndex COMMA_HERE).mOtherHeirId ;
@@ -1004,8 +1004,8 @@ IsOffsetTimeGTNextMinDur (const cResourceSchedule * inPtr,
 		  	int32_t HeirResource = inActivities (OtherHeirId COMMA_HERE).mResourceId ;
 		  	if (HeirResource == inResourceIndex){
 		  		int32_t heirOffset = inActivities (OtherHeirId COMMA_HERE).mOffset ;
-		 			MaximumSuccessorOffset = MAX( MaximumSuccessorOffset, heirOffset);
-		     	HigestSuccessorPriority = min (HigestSuccessorPriority, inActivities (OtherHeirId COMMA_HERE).mPriority);
+		 			MaximumSuccessorOffset = std::max( MaximumSuccessorOffset, heirOffset);
+		     	HigestSuccessorPriority = std::min (HigestSuccessorPriority, inActivities (OtherHeirId COMMA_HERE).mPriority);
 		    }
 		  }
 			OtherHeirId = inActivities (OtherHeirId COMMA_HERE).mOtherHeirId;
@@ -1084,7 +1084,7 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
 	 						                                    inResourceIndex, activityPriority,
 	 						                                    inActivities);
 	 						if ( (MinimumHPBusyPeriod + inCurrentInstant) >= inReadyAtThisInstant (additionIndex COMMA_HERE).mThisInstant){
-				      	LowerPriorityActivity = MAX(LowerPriorityActivity, activityPriority);
+				      	LowerPriorityActivity = std::max(LowerPriorityActivity, activityPriority);
 			         	LowerPriorityOnResource(LowerPriorityActivity, nextActivityIndex, inResourceIndex, inActivities);
 				      	MaximumBusyPeriod += inActivities (nextActivityIndex COMMA_HERE).mMaxDuration;
 				      	SuccessorsMaxBusyDuration( MaximumBusyPeriod, nextActivityIndex, inResourceIndex, inActivities);
@@ -1101,7 +1101,7 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
 					  	  SuccessorsMaxBusyDuration( MaximumBusyPeriod, nextActivityIndex, inResourceIndex, inActivities);
 					  	  MinimumBusyPeriod += inActivities (nextActivityIndex COMMA_HERE).mMinDuration;
 					  	  SuccessorsMinBusyDuration(MinimumBusyPeriod, nextActivityIndex, inResourceIndex, inActivities);
-							  LowerPriorityActivity = MAX(LowerPriorityActivity, activityPriority);
+							  LowerPriorityActivity = std::max(LowerPriorityActivity, activityPriority);
 							  LowerPriorityOnResource(LowerPriorityActivity, nextActivityIndex, inResourceIndex, inActivities);
 							}else{
 								WillReceiveNew= true;
@@ -1121,7 +1121,7 @@ NewReadyInfluenceOnScheduling (const cResourceSchedule * inPtr,
 			  		  	int32_t CertainFutureBusyDuration =
 			  		    	inActivities (resCurrentActivity COMMA_HERE).mMinDuration-inPtr->mArray (index COMMA_HERE).mExecutionCounter;
 
-			  				CertainFutureBusyDuration =MAX(0, CertainFutureBusyDuration);
+			  				CertainFutureBusyDuration =std::max(0, CertainFutureBusyDuration);
 			  				if (CertainFutureBusyDuration < MaximumBusyPeriod ){
 			  				 	int32_t successorId = inActivities (resCurrentActivity COMMA_HERE).mSuccessorId;
 			  					if (successorId >= 0){

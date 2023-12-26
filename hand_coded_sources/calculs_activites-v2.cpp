@@ -2,7 +2,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "files/C_HTML_FileWrite.h"
+#include <algorithm>
+#include "files/HTMLFileWrite.h"
 #include "utilities/MF_MemoryControl.h"
 #include "galgas2/Compiler.h"
 
@@ -261,7 +262,7 @@ static void buildCSSfile (Compiler * inCompiler,
 //--------------------------------------------------------------------------*
 
 void
-routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
+routine_performComputations_26__26__26__26_ (GALGAS_M_5F_processor & inProcessorMap,
                              GALGAS_M_5F_network & inNetworkMap,
                              GALGAS_M_5F_messages & inMessagesMap,
                              GALGAS_M_5F_tasks & inTasksMap,
@@ -282,7 +283,7 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
 
   buildCSSfile (inCompiler, sourceFile.stringByDeletingLastPathComponent ()) ;
 
-  C_HTML_FileWrite htmlFile (htmlFileName,
+  HTMLFileWrite htmlFile (htmlFileName,
                              sourceFile.lastPathComponent () + " results",
                              "style.css",
                              "") ;
@@ -364,7 +365,7 @@ routine_performComputations (GALGAS_M_5F_processor & inProcessorMap,
     strcpy(resource.mResourceName,network.current_lkey (HERE).mProperty_string.stringValue ().cString (HERE));
   	resource.mResourceType= network.current_mCANnetwork (HERE).boolValue ();
     resource.mStep = (int32_t) network.current_mScalingFactor (HERE).mProperty_uint.uintValue () ;
- 		min_NetworkStep = nprt_min_macro (min_NetworkStep, resource.mStep);
+ 		min_NetworkStep = std::min (min_NetworkStep, resource.mStep);
 
  	 	Resource.appendObject (resource) ;
     network.gotoNextObject () ;

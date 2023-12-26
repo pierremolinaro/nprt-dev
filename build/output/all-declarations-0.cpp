@@ -1017,7 +1017,7 @@ String C_Lexique_oa_5F_scanner::getCurrentTokenString (const cToken * inTokenPtr
 
 void C_Lexique_oa_5F_scanner::internalParseLexicalToken (cTokenFor_oa_5F_scanner & token) {
   bool loop = true ;
-  token.mLexicalAttribute_identifierString.setLengthToZero () ;
+  token.mLexicalAttribute_identifierString.removeAllKeepingCapacity () ;
   token.mLexicalAttribute_ulongValue = 0 ;
   mTokenStartLocation = mCurrentLocation ;
   try{
@@ -1110,7 +1110,6 @@ void C_Lexique_oa_5F_scanner::enterToken (cTokenFor_oa_5F_scanner & ioToken) {
   cTokenFor_oa_5F_scanner * ptr = nullptr ;
   macroMyNew (ptr, cTokenFor_oa_5F_scanner ()) ;
   ptr->mTokenCode = ioToken.mTokenCode ;
-  // ptr->mIsOptional = ioToken.mIsOptional ;
   ptr->mStartLocation = mTokenStartLocation ;
   ptr->mEndLocation = mTokenEndLocation ;
   ptr->mTemplateStringBeforeToken = ioToken.mTemplateStringBeforeToken ;
@@ -5511,7 +5510,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (C_Lexique_oa_5F_scanner
   }
   inCompiler->acceptTerminal (C_Lexique_oa_5F_scanner::kToken_end COMMA_SOURCE_FILE ("oa_parser.galgas", 212)) ;
   {
-  routine_performComputations (var_outProcessorMap_474, var_outNetworkMap_532, var_outMessagesMap_587, var_outTaskMap_641, inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 213)) ;
+  routine_performComputations_26__26__26__26_ (var_outProcessorMap_474, var_outNetworkMap_532, var_outMessagesMap_587, var_outTaskMap_641, inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 213)) ;
   }
 }
 
@@ -6313,7 +6312,7 @@ GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage::extractOb
 #include "utilities/MF_MemoryControl.h"
 #include "galgas2/C_galgas_CLI_Options.h"
 
-#include "files/C_FileManager.h"
+#include "files/FileManager.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6730,7 +6729,7 @@ void cGrammar_oa_5F_grammar::nt_axiome_ (C_Lexique_oa_5F_scanner * inLexique) {
 
 void cGrammar_oa_5F_grammar::performIndexing (Compiler * inCompiler,
              const String & inSourceFilePath) {
-  C_Lexique_oa_5F_scanner * scanner = NULL ;
+  C_Lexique_oa_5F_scanner * scanner = nullptr ;
   macroMyNew (scanner, C_Lexique_oa_5F_scanner (inCompiler, inSourceFilePath COMMA_HERE)) ;
   scanner->enableIndexing () ;
   if (scanner->sourceText ().isValid ()) {
@@ -6747,7 +6746,7 @@ void cGrammar_oa_5F_grammar::performIndexing (Compiler * inCompiler,
 
 void cGrammar_oa_5F_grammar::performOnlyLexicalAnalysis (Compiler * inCompiler,
              const String & inSourceFilePath) {
-  C_Lexique_oa_5F_scanner * scanner = NULL ;
+  C_Lexique_oa_5F_scanner * scanner = nullptr ;
   macroMyNew (scanner, C_Lexique_oa_5F_scanner (inCompiler, inSourceFilePath COMMA_HERE)) ;
   if (scanner->sourceText ().isValid ()) {
     scanner->performLexicalAnalysis () ;
@@ -6757,7 +6756,7 @@ void cGrammar_oa_5F_grammar::performOnlyLexicalAnalysis (Compiler * inCompiler,
 
 void cGrammar_oa_5F_grammar::performOnlySyntaxAnalysis (Compiler * inCompiler,
              const String & inSourceFilePath) {
-  C_Lexique_oa_5F_scanner * scanner = NULL ;
+  C_Lexique_oa_5F_scanner * scanner = nullptr ;
   macroMyNew (scanner, C_Lexique_oa_5F_scanner (inCompiler, inSourceFilePath COMMA_HERE)) ;
   if (scanner->sourceText ().isValid ()) {
     scanner->performTopDownParsing (gProductions_oa_grammar, gProductionNames_oa_grammar, gProductionIndexes_oa_grammar,
@@ -6778,11 +6777,11 @@ void cGrammar_oa_5F_grammar::_performSourceFileParsing_ (Compiler * inCompiler,
   if (inFilePath.isValid ()) {
     const GALGAS_string filePathAsString = inFilePath.readProperty_string () ;
     String filePath = filePathAsString.stringValue () ;
-    if (! C_FileManager::isAbsolutePath (filePath)) {
+    if (! FileManager::isAbsolutePath (filePath)) {
       filePath = inCompiler->sourceFilePath ().stringByDeletingLastPathComponent ().stringByAppendingPathComponent (filePath) ;
     }
-    if (C_FileManager::fileExistsAtPath (filePath)) {
-    C_Lexique_oa_5F_scanner * scanner = NULL ;
+    if (FileManager::fileExistsAtPath (filePath)) {
+    C_Lexique_oa_5F_scanner * scanner = nullptr ;
     macroMyNew (scanner, C_Lexique_oa_5F_scanner (inCompiler, filePath COMMA_HERE)) ;
     if (scanner->sourceText ().isValid ()) {
       const bool ok = scanner->performTopDownParsing (gProductions_oa_grammar, gProductionNames_oa_grammar, gProductionIndexes_oa_grammar,
