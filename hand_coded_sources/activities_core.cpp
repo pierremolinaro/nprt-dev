@@ -22,7 +22,7 @@
 #include "streams/C_ConsoleOut.h"
 #include "command_line_interface/F_Analyze_CLI_Options.h"
 #include "command_line_interface/F_mainForLIBPM.h"
-#include "time/C_Timer.h"
+#include "time/Timer.h"
 #include "utilities/F_GetPrime.h"
 #include "ExtendedList-v2.h"
 #include "C_activitiesToSchedule.h"
@@ -1536,7 +1536,7 @@ scheduleActivities (const int32_t NoInterButUseB,
   cScheduleMap scheduleMap (inResourceCount, lastActivityScheduleInstant, inActivities) ;
   int32_t AdditionIndex=0;
 //--- Perform activities scheduling
-  C_Timer timer ;
+  Timer timer ;
   while (scheduleMap.moreWorkToDo ()) {
 
     cResourceSchedule * list = scheduleMap.retrieveResourceList () ;
