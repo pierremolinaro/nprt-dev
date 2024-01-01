@@ -22,8 +22,8 @@
 
 //---------------------------------------------------------------------------*
 
-#include "generic-arraies/TC_UniqueArray.h"
-#include "strings/String-class.h"
+#include "TC_UniqueArray.h"
+#include "String-class.h"
 
 //---------------------------------------------------------------------------*
 
@@ -97,18 +97,18 @@ class C_us {
   public : static void explore_vdl (C_us & ioVDL, int32_t & outIndex) ;
 
 //--- print a vector
-  public : void printVector (AC_OutputStream & inStream,
+  public : void printVector (AbstractOutputStream & inStream,
                              const TC_UniqueArray <String> & inNames,
                              const int32_t inFirst,
                              const int32_t inStep) const ;
 
-  public : void printVector (AC_OutputStream & inStream,
+  public : void printVector (AbstractOutputStream & inStream,
                              const char * inPrefix,
                              const int32_t inFirst,
                              const int32_t inStep) const ;
 
 //--- Print VDL summary
-  public : static void printVDLsummary (AC_OutputStream & inOutputStream) ;
+  public : static void printVDLsummary (AbstractOutputStream & inOutputStream) ;
 
 //--- Get value ID (as intptr_t integer)
   public : inline intptr_t getLongID (void) const {

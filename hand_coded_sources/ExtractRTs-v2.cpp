@@ -4,9 +4,9 @@
 #include <math.h>
 #include <algorithm>
 
-#include "generic-arraies/TC_UniqueArray.h"
-#include "files/HTMLFileWrite.h"
-#include "galgas2/Compiler.h"
+#include "TC_UniqueArray.h"
+#include "HTMLFileWrite.h"
+#include "Compiler.h"
 
 #include "ExtendedList-v2.h"
 

@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'C_ErrorOut' : a class for console output                                                    
+//  'AbstractFileHandle' : an abstract class for handling files handles                               
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2006, ..., 2009 Pierre Molinaro.
+//  Copyright (C) 2012, ..., 2023 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,56 +18,71 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "C_ErrorOut.h"
-#include "unicode_character_cpp.h"
+#include "AbstractFileHandle.h"
 
 //--------------------------------------------------------------------------------------------------
 
-C_ErrorOut::C_ErrorOut (void) {
+AbstractFileHandle::AbstractFileHandle (const String & inFilePath,
+                                        const char * inMode) :
+mFilePtr ((inFilePath.length () == 0)
+  ? nullptr :
+  ::fopen (FileManager::nativePathWithUnixPath (inFilePath).cString (HERE), inMode)
+),
+mFilePath (inFilePath) {
 }
 
 //--------------------------------------------------------------------------------------------------
-//
-//                  Flush output                                                                 
-//
-//--------------------------------------------------------------------------------------------------
 
-void C_ErrorOut::flush (void) {
-  ::fflush (stderr) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                  Write a character string on the console                                      
-//
-//--------------------------------------------------------------------------------------------------
-
-void C_ErrorOut::
-performActualCharArrayOutput (const char * inCharArray,
-                              const int32_t inArrayCount) {
-  if (inArrayCount > 0) {
-    ::fprintf (stderr, "%.*s", (int) inArrayCount, inCharArray) ;
+AbstractFileHandle::~AbstractFileHandle (void) {
+  if (nullptr != mFilePtr) {
+    fclose (mFilePtr) ;
+    mFilePtr = nullptr ;
   }
 }
 
 //--------------------------------------------------------------------------------------------------
+//                                Flush
+//--------------------------------------------------------------------------------------------------
 
-void C_ErrorOut::
-performActualUnicodeArrayOutput (const utf32 * inCharArray,
-                                 const int32_t inArrayCount) {
-  for (int32_t i=0 ; i<inArrayCount ; i++) {
-    char buffer [5] ;
-    UTF8StringFromUTF32Character (inCharArray [i], buffer) ;
-    fprintf (stderr, "%s", buffer) ;
+void AbstractFileHandle::flush (void) {
+  if (nullptr != mFilePtr) {
+    ::fflush (mFilePtr) ;
   }
 }
 
 //--------------------------------------------------------------------------------------------------
-//
-//  C O N S O L E    O U T    G L O B A L   V A R I A B L E                                      
-//
+//                                Close
 //--------------------------------------------------------------------------------------------------
 
-C_ErrorOut ce ;
+bool AbstractFileHandle::close (void) {
+  flush () ;
+  bool ok = true ;
+  if (mFilePtr != nullptr) {
+    ok = ::fclose (mFilePtr) == 0 ; // Flushes the file, then closes it
+    mFilePtr = nullptr ;
+  }
+  return ok ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//   appendBinaryData
+//--------------------------------------------------------------------------------------------------
+
+void AbstractFileHandle::appendBinaryData (const size_t inByteCount,
+                                           const uint8_t * inByteArray) {
+  if ((mFilePtr != nullptr) && (inByteCount > 0)) {
+    ::fwrite (inByteArray, sizeof (uint8_t), inByteCount, mFilePtr) ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+//   appendUTF8String
+//--------------------------------------------------------------------------------------------------
+
+void AbstractFileHandle::appendUTF8String (const size_t inByteCount, const char * inByteArray) {
+  if ((mFilePtr != nullptr) && (inByteCount > 0)) {
+    ::fprintf (mFilePtr, "%.*s", int (inByteCount), inByteArray) ;
+  }
+}
 
 //--------------------------------------------------------------------------------------------------

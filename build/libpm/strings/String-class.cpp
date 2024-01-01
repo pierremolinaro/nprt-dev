@@ -18,12 +18,12 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "utilities/MF_MemoryControl.h"
-#include "utilities/md5.h"
-#include "utilities/SharedObject.h"
-#include "strings/unicode_string_routines.h"
-#include "strings/unicode_character_cpp.h"
-#include "generic-arraies/TC_UniqueArray2.h"
+#include "MF_MemoryControl.h"
+#include "md5.h"
+#include "SharedObject.h"
+#include "unicode_string_routines.h"
+#include "unicode_character_cpp.h"
+#include "TC_UniqueArray2.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -208,7 +208,7 @@ mEmbeddedString (nullptr) {
 //--------------------------------------------------------------------------------------------------
 
 String::String (const String & inSource) : // Copy constructor
-AC_OutputStream (inSource),
+AbstractOutputStream (inSource),
 mEmbeddedString (nullptr) {
   macroAssignSharedObject (mEmbeddedString, inSource.mEmbeddedString) ;
 }
@@ -621,31 +621,31 @@ void String::setUnicodeCharacterAtIndex (const utf32 inCharacter,
 //
 //--------------------------------------------------------------------------------------------------
 
-void String::suppress (const int32_t inLocation,
-                       const int32_t inLength
-                       COMMA_LOCATION_ARGS) {
-  if (inLength > 0) {
+void String::removeCountFromIndex (const int32_t inCount,
+                                   const int32_t inIndex
+                                   COMMA_LOCATION_ARGS) {
+  if (inCount > 0) {
     insulateEmbeddedString (mEmbeddedString->mCapacity) ;
     #ifndef DO_NOT_GENERATE_CHECKINGS
       checkString (HERE) ;
     #endif
     macroValidPointerThere (mEmbeddedString) ;
-    macroAssertThere (inLocation >= 0, "inLocation (%ld) < 0", inLocation, 0) ;
-    macroAssertThere (uint32_t (inLocation) <= mEmbeddedString->mLength,
-                      "inLocation (%ld) > mLength (%ld)",
-                      inLocation, mEmbeddedString->mLength) ;
-    macroAssertThere (uint32_t (inLength) <= mEmbeddedString->mLength,
-                      "inLength (%ld) > string length (%ld)",
-                      inLength, mEmbeddedString->mLength) ;
-    const int32_t bytesToMove = 1 + int32_t (mEmbeddedString->mLength) - inLength - inLocation ;
-    if ((inLocation >= 0) && (bytesToMove > 0)) {
+    macroAssertThere (inIndex >= 0, "inIndex (%ld) < 0", inIndex, 0) ;
+    macroAssertThere (uint32_t (inIndex) <= mEmbeddedString->mLength,
+                      "inIndex (%ld) > mLength (%ld)",
+                      inIndex, mEmbeddedString->mLength) ;
+    macroAssertThere (uint32_t (inCount) <= mEmbeddedString->mLength,
+                      "inCount (%ld) > string length (%ld)",
+                      inCount, mEmbeddedString->mLength) ;
+    const int32_t bytesToMove = 1 + int32_t (mEmbeddedString->mLength) - inCount - inIndex ;
+    if ((inIndex >= 0) && (bytesToMove > 0)) {
       for (int32_t i=0 ; i<bytesToMove ; i++) {
-        mEmbeddedString->mUTF32String [inLocation + i] = mEmbeddedString->mUTF32String [inLocation + i + inLength] ;
+        mEmbeddedString->mUTF32String [inIndex + i] = mEmbeddedString->mUTF32String [inIndex + i + inCount] ;
       }
-      macroAssert (mEmbeddedString->mLength >= uint32_t (inLength),
-                   "mLength (%lld) < inLength (%lld)",
-                   mEmbeddedString->mLength, inLength) ;
-      mEmbeddedString->mLength -= uint32_t (inLength) ;
+      macroAssert (mEmbeddedString->mLength >= uint32_t (inCount),
+                   "mLength (%lld) < inCount (%lld)",
+                   mEmbeddedString->mLength, inCount) ;
+      mEmbeddedString->mLength -= uint32_t (inCount) ;
       #ifndef DO_NOT_GENERATE_CHECKINGS
         checkString (HERE) ;
       #endif
@@ -822,7 +822,7 @@ void String::setFromCstring (const char * inCstring) {
 
 //--------------------------------------------------------------------------------------------------
 
-bool String::parseUTF8 (const C_Data & inDataString,
+bool String::parseUTF8 (const U8Data & inDataString,
                         const int32_t inOffset,
                         String & outString) {
   bool ok = true ;

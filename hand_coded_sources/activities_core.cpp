@@ -18,12 +18,12 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#include "generic-arraies/TC_UniqueArray.h"
-#include "streams/C_ConsoleOut.h"
-#include "command_line_interface/F_Analyze_CLI_Options.h"
-#include "command_line_interface/F_mainForLIBPM.h"
-#include "time/Timer.h"
-#include "utilities/F_GetPrime.h"
+#include "TC_UniqueArray.h"
+#include "C_ConsoleOut.h"
+#include "F_Analyze_CLI_Options.h"
+#include "F_mainForLIBPM.h"
+#include "Timer.h"
+#include "F_GetPrime.h"
 #include "ExtendedList-v2.h"
 #include "C_activitiesToSchedule.h"
 #include "activities_core.h"

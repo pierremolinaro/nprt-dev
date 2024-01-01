@@ -612,7 +612,7 @@ bool C_activitiesToSchedule::AnyNotReadyToScheduleAt (const int32_t inCurrentIns
 //                                                                           *
 //---------------------------------------------------------------------------*
 
- void C_activitiesToSchedule::printList (AC_OutputStream & inStream,
+ void C_activitiesToSchedule::printList (AbstractOutputStream & inStream,
                                          const TC_UniqueArray <String> & inNames) const {
    cVDLnodeInfo * p = mRootPointer ;
    while (p != NULL) {

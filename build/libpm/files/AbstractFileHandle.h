@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  GALGAS prologue / epilogue handling class                                                    
+//  'AbstractFileHandle' : an abstract class for handling files handles
 //
-//  This file is part of libpm library                                                           
+//  This file is part of libpm library
 //
-//  Copyright (C) 2009, ..., 2010 Pierre Molinaro.
+//  Copyright (C) 2012, ..., 2023 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -21,27 +21,38 @@
 #pragma once
 
 //--------------------------------------------------------------------------------------------------
-//
-//                 Prologue / Epilogue Action class                                              
-//
+
+#include "FileManager.h"
+
 //--------------------------------------------------------------------------------------------------
 
-class C_PrologueEpilogue final {
-//--- Constructor
-  public: C_PrologueEpilogue (void (* inPrologueAction) (void),
-                              void (* inEpilogueAction) (void)) ;
+class AbstractFileHandle {
+//--- Private attribute
+  private: FILE * mFilePtr ;
+  private: String mFilePath ;
+
+//--- Protected constructor
+  protected: AbstractFileHandle (const String & inFilePath,
+                                 const char * inMode) ;
+
 //--- No copy
-  private: C_PrologueEpilogue (C_PrologueEpilogue &) ;
-  private: C_PrologueEpilogue & operator = (C_PrologueEpilogue &) ;
-//--- Attributes
-  public: const C_PrologueEpilogue * mNextObjectLink ;
-  public: void (* mPrologueAction) (void) ;
-  public: void (* mEpilogueAction) (void) ;
-//--- Running actions
-  private: static void runPrologueActions (void) ;
-  private: static void runEpilogueActions (void) ;
-//--- Friend routine (runs runPrologueActions, runEpilogueActions)
-  friend int main (int argc, const char * argv []) ;
+  private: AbstractFileHandle (const AbstractFileHandle &) = delete ;
+  private: AbstractFileHandle & operator = (const AbstractFileHandle &) = delete ;
+
+//--- Virtual destructor
+  public: virtual ~ AbstractFileHandle (void) ;
+
+  public: virtual bool close (void) ;
+  public: virtual void flush (void) ;
+
+//---
+  public: inline bool isOpened (void) const { return nullptr != mFilePtr ; }
+  public: inline String filePath (void) const { return mFilePath ; }
+
+//---
+  public: void appendBinaryData (const size_t inByteCount, const uint8_t * inByteArray) ;
+  public: void appendUTF8String (const size_t inByteCount, const char * inByteArray) ;
 } ;
+
 
 //--------------------------------------------------------------------------------------------------

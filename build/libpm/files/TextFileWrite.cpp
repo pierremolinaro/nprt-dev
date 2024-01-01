@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'C_BinaryFileWrite' : a class for stream writing text files
+//  'TextFileWrite' : a class for stream writing text files
 //
 //  This file is part of libpm library
 //
-//  Copyright (C) 1999, ..., 2023 Pierre Molinaro.
+//  Copyright (C) 1999, ..., 2011 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,52 +18,42 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "files/C_BinaryFileWrite.h"
-#include "time/DateTime.h"
-#include "files/FileManager.h"
+#include "TextFileWrite.h"
+#include "DateTime.h"
+#include "unicode_character_cpp.h"
+#include "FileManager.h"
 
 //--------------------------------------------------------------------------------------------------
 
-C_BinaryFileWrite::C_BinaryFileWrite (const String & inFileName) :
-AC_FileHandle (inFileName, "wb") {
+#include <string.h>
+
+//--------------------------------------------------------------------------------------------------
+
+TextFileWrite::TextFileWrite (const String & inFileName) :
+AbstractFileHandle (inFileName, "wt") {
 }
 
 //--------------------------------------------------------------------------------------------------
-//                                Close
+//                  Write a character string into the file
 //--------------------------------------------------------------------------------------------------
 
-bool C_BinaryFileWrite::close (void) {
-  bool ok = true ;
-  if (mFilePtr != nullptr) {
-    ok = ::fclose (mFilePtr) == 0 ; // Flushes the file, then closes it
-    mFilePtr = nullptr ;
-  }
-  return ok ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void C_BinaryFileWrite::flush (void) {
-  if (nullptr != mFilePtr) {
-    ::fflush (mFilePtr) ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-//    Destructor (cannot call the virtual 'close' method in destructor)
-//--------------------------------------------------------------------------------------------------
-
-C_BinaryFileWrite::~C_BinaryFileWrite (void) {
-  if (nullptr != mFilePtr) {
-    ::fflush (mFilePtr) ;
+void TextFileWrite::performActualCharArrayOutput (const char * inCharArray,
+                                                  const int32_t inArrayCount) {
+  if (isOpened () && (inArrayCount > 0)) {
+    appendUTF8String (size_t (inArrayCount), inCharArray) ;
   }
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BinaryFileWrite::appendData (const C_Data & inData) {
-  if (nullptr != mFilePtr) {
-    ::fwrite (inData.unsafeDataPointer (), 1, size_t (inData.count ()), mFilePtr) ;
+void TextFileWrite::performActualUnicodeArrayOutput (const utf32 * inCharArray,
+                                                     const int32_t inArrayCount) {
+  if (isOpened ()) {
+    for (int32_t i=0 ; i<inArrayCount ; i++) {
+      char buffer [8] ;
+      const int32_t length = UTF8StringFromUTF32Character (inCharArray [i], buffer) ;
+      appendUTF8String (size_t (length), buffer) ;
+    }
   }
 }
 

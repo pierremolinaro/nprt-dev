@@ -35,7 +35,7 @@ String BigUnsigned::decimalString (void) const {
     result.addUnsigned (decimalValueArray (n - 1 COMMA_HERE)) ;
     for (int32_t i = n - 2 ; i >= 0 ; i--) {
       char s [32] ;
-      snprintf (s, 31, ChunkUIntDecimalFormatSpecifierWithLeadingZeros, decimalValueArray (i COMMA_HERE)) ;
+      snprintf (s, 32, ChunkUIntDecimalFormatSpecifierWithLeadingZeros (), decimalValueArray (i COMMA_HERE)) ;
       result.addString (s) ;
     }
   }
@@ -117,7 +117,7 @@ String BigUnsigned::bitString (void) const {
       }
     }
     while ((result.length () > 0) && (result (0 COMMA_HERE) == '0')) {
-      result.suppress (0, 1 COMMA_HERE) ; // Remove first character
+      result.removeCountFromIndex (1, 0 COMMA_HERE) ; // Remove first character
     }
   }
   return result ;

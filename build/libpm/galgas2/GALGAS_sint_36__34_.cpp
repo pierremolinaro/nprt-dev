@@ -19,7 +19,7 @@
 //--------------------------------------------------------------------------------------------------
 
 #include "all-predefined-types.h"
-#include "galgas2/Compiler.h"
+#include "Compiler.h"
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -59,13 +59,13 @@ typeComparisonResult GALGAS_sint_36__34_::objectCompare (const GALGAS_sint_36__3
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_sint_36__34_ GALGAS_sint_36__34_::constructor_max (UNUSED_LOCATION_ARGS) {
+GALGAS_sint_36__34_ GALGAS_sint_36__34_::class_func_max (UNUSED_LOCATION_ARGS) {
   return GALGAS_sint_36__34_ (INT64_MAX) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_sint_36__34_ GALGAS_sint_36__34_::constructor_min (UNUSED_LOCATION_ARGS) {
+GALGAS_sint_36__34_ GALGAS_sint_36__34_::class_func_min (UNUSED_LOCATION_ARGS) {
   return GALGAS_sint_36__34_ (INT64_MIN) ;
 }
 

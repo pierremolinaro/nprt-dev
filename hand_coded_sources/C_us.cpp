@@ -335,7 +335,7 @@ find_or_add (const int32_t inIndex,
 //                                                                           *
 //---------------------------------------------------------------------------*
 
- void C_us::printVector (AC_OutputStream & inStream,
+ void C_us::printVector (AbstractOutputStream & inStream,
                            const char * inPrefix,
                            const int32_t inFirst,
                            const int32_t inStep) const {
@@ -357,7 +357,7 @@ find_or_add (const int32_t inIndex,
 
 //---------------------------------------------------------------------------*
 
- void C_us::printVector (AC_OutputStream & inStream,
+ void C_us::printVector (AbstractOutputStream & inStream,
                          const TC_UniqueArray <String> & inNames,
                          const int32_t inFirst,
                          const int32_t inStep) const {
@@ -405,7 +405,7 @@ void C_us::collectUnusedNodes (void) {
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-void C_us::printVDLsummary (AC_OutputStream & inOutputStream) {
+void C_us::printVDLsummary (AbstractOutputStream & inOutputStream) {
   const uint64_t n = getTrivialAddCount () + getCacheSuccessCount () + getCacheFailureCount () ;
   inOutputStream.addString ("Summary of VDL operations :\n"
                     "  ") ;

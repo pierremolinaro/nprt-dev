@@ -19,14 +19,14 @@
 //--------------------------------------------------------------------------------------------------
 
 #include "all-predefined-types.h"
-#include "galgas2/capCollectionElement.h"
-#include "galgas2/cCollectionElement.h"
-#include "galgas2/Compiler.h"
-#include "galgas2/C_galgas_io.h"
-#include "strings/unicode_character_cpp.h"
-#include "galgas2/C_galgas_CLI_Options.h"
-#include "files/C_BinaryFileWrite.h"
-#include "galgas2/F_verbose_output.h"
+#include "capCollectionElement.h"
+#include "cCollectionElement.h"
+#include "Compiler.h"
+#include "C_galgas_io.h"
+#include "unicode_character_cpp.h"
+#include "C_galgas_CLI_Options.h"
+#include "BinaryFileWrite.h"
+#include "F_verbose_output.h"
 
 //--------------------------------------------------------------------------------------------------
 //   GALGAS_data
@@ -40,7 +40,7 @@ mData () {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_data::GALGAS_data (const C_Data & inData) :
+GALGAS_data::GALGAS_data (const U8Data & inData) :
 AC_GALGAS_root (),
 mIsValid (true),
 mData (inData) {
@@ -48,18 +48,18 @@ mData (inData) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_data GALGAS_data::constructor_emptyData (UNUSED_LOCATION_ARGS) {
-  return GALGAS_data (C_Data ()) ;
+GALGAS_data GALGAS_data::class_func_emptyData (UNUSED_LOCATION_ARGS) {
+  return GALGAS_data (U8Data ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_data GALGAS_data::constructor_dataWithContentsOfFile (const GALGAS_string & inFilePath,
+GALGAS_data GALGAS_data::class_func_dataWithContentsOfFile (const GALGAS_string & inFilePath,
                                                              Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) {
   GALGAS_data result ;
   if (inFilePath.isValid()){
-    C_Data binaryData ;
+    U8Data binaryData ;
     const bool ok = FileManager::binaryDataWithContentOfFile (inFilePath.stringValue (), binaryData) ;
     if (ok) {
 
@@ -246,7 +246,7 @@ void GALGAS_data::method_writeToFileWhenDifferentContents (GALGAS_string inFileP
     const bool fileAlreadyExists = FileManager::fileExistsAtPath (inFilePath.stringValue ()) ;
     if (fileAlreadyExists) {
       inCompiler->logFileRead (inFilePath.stringValue ()) ;
-      C_Data binaryData ;
+      U8Data binaryData ;
       FileManager::binaryDataWithContentOfFile (inFilePath.stringValue (), binaryData) ;
       needToWrite = mData != binaryData ;
     }
@@ -299,7 +299,7 @@ void GALGAS_data::method_writeToFile (GALGAS_string inFilePath,
       const bool fileAlreadyExists = FileManager::fileExistsAtPath (filePath) ;
       const bool verboseOptionOn = verboseOutput () ;
       FileManager::makeDirectoryIfDoesNotExist (filePath.stringByDeletingLastPathComponent()) ;
-      C_BinaryFileWrite binaryFile (filePath) ;
+      BinaryFileWrite binaryFile (filePath) ;
       if (! binaryFile.isOpened ()) {
         String s ;
         s.addString ("'@data writeToFile': cannot open '") ;
@@ -340,7 +340,7 @@ void GALGAS_data::method_writeToExecutableFile (GALGAS_string inFilePath,
       const bool fileAlreadyExists = FileManager::fileExistsAtPath (filePath) ;
       const bool verboseOptionOn = verboseOutput () ;
       FileManager::makeDirectoryIfDoesNotExist (filePath.stringByDeletingLastPathComponent()) ;
-      C_BinaryFileWrite binaryFile (filePath) ;
+      BinaryFileWrite binaryFile (filePath) ;
       if (! binaryFile.isOpened ()) {
         String s ;
         s.addString ("'@data writeToExecutableFile': cannot open '") ;

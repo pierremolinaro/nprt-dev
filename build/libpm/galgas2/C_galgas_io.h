@@ -26,12 +26,12 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "strings/String-class.h"
-#include "generic-arraies/TC_UniqueArray.h"
-#include "galgas2/LocationInSource.h"
-#include "galgas2/SourceTextInString.h"
-#include "galgas2/C_IssueWithFixIt.h"
-#include "utilities/SharedObject.h"
+#include "String-class.h"
+#include "TC_UniqueArray.h"
+#include "LocationInSource.h"
+#include "SourceTextInString.h"
+#include "C_IssueWithFixIt.h"
+#include "SharedObject.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -123,7 +123,7 @@ class C_parsingContext {
   private: utf32 mPreviousChar ;
   private: String mTemplateString ;
 
-  friend class C_Lexique ;
+  friend class Lexique ;
   
   public: C_parsingContext (void) ;
 

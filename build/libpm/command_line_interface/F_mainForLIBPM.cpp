@@ -18,19 +18,19 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "bdd/C_BDD.h"
-#include "command_line_interface/F_mainForLIBPM.h"
-#include "utilities/MF_MemoryControl.h"
-#include "utilities/F_DisplayException.h"
-#include "streams/C_ConsoleOut.h"
-#include "time/DateTime.h"
-#include "utilities/SharedObject.h"
-#include "utilities/cpp-allocation.h"
-#include "utilities/basic-allocation.h"
-#include "utilities/C_PrologueEpilogue.h"
-#include "command_line_interface/F_Analyze_CLI_Options.h"
-#include "strings/unicode_character_base.h"
-#include "galgas2/acStrongPtr_class.h"
+#include "C_BDD.h"
+#include "F_mainForLIBPM.h"
+#include "MF_MemoryControl.h"
+#include "F_DisplayException.h"
+#include "C_ConsoleOut.h"
+#include "DateTime.h"
+#include "SharedObject.h"
+#include "cpp-allocation.h"
+#include "basic-allocation.h"
+#include "PrologueEpilogue.h"
+#include "F_Analyze_CLI_Options.h"
+#include "unicode_character_base.h"
+#include "acStrongPtr_class.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -67,9 +67,9 @@ int main (int argc, const char * argv []) {
 //---
   if (returnCode == 0) {
     try{
-      C_PrologueEpilogue::runPrologueActions () ;
+      PrologueEpilogue::runPrologueActions () ;
       returnCode = mainForLIBPM (argc, argv) ;
-      C_PrologueEpilogue::runEpilogueActions () ;
+      PrologueEpilogue::runEpilogueActions () ;
       C_BDD::freeBDDStataStructures () ;
       #ifndef DO_NOT_GENERATE_CHECKINGS
         acStrongPtr_class::printExistingClassInstances () ;

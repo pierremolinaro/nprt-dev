@@ -18,8 +18,8 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "utilities/M_machine.h"
-#include "utilities/basic-allocation.h"
+#include "M_machine.h"
+#include "basic-allocation.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -27,9 +27,9 @@
 
 //--------------------------------------------------------------------------------------------------
 
-//#define GENERATE_BLOCK_SIZE_STATS
-//#define USE_SMALL_BLOCK_FREE_LIST
-//#define USE_MALLOC_GOOD_SIZE
+// define GENERATE_BLOCK_SIZE_STATS
+// define USE_SMALL_BLOCK_FREE_LIST
+// define USE_MALLOC_GOOD_SIZE
 
 //--------------------------------------------------------------------------------------------------
 

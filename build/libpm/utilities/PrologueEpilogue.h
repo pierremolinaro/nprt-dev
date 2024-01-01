@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  GALGAS_enumerable : Base class for GALGAS enumerable object                                  
+//  GALGAS prologue / epilogue handling class                                                    
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2010, ..., 2010 Pierre Molinaro.
+//  Copyright (C) 2009, ..., 2010 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -21,35 +21,31 @@
 #pragma once
 
 //--------------------------------------------------------------------------------------------------
-
-#include "SharedObject.h"
-#include "typeComparisonResult.h"
-
+//
+//                 Prologue / Epilogue Action class                                              
+//
 //--------------------------------------------------------------------------------------------------
 
-class String ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cCollectionElement : public SharedObject {
-//--- Default constructor
-  public: cCollectionElement (LOCATION_ARGS) ;
+class PrologueEpilogue final {
+//--- Constructor
+  public: PrologueEpilogue (void (* inPrologueAction) (void),
+                            void (* inEpilogueAction) (void)) ;
 
 //--- No copy
-  private: cCollectionElement (const cCollectionElement &) ;
-  private: cCollectionElement & operator = (const cCollectionElement &) ;
+  private: PrologueEpilogue (PrologueEpilogue &) = delete ;
+  private: PrologueEpilogue & operator = (PrologueEpilogue &) = delete ;
 
-//--- Virtual method that checks that all attributes are valid
-  public: virtual bool isValid (void) const = 0 ;
+//--- Private properties
+  private: const PrologueEpilogue * mNextObject ;
+  private: void (* mPrologueAction) (void) ;
+  private: void (* mEpilogueAction) (void) ;
 
-//--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const = 0 ;
+//--- Running actions
+  private: static void runPrologueActions (void) ;
+  private: static void runEpilogueActions (void) ;
 
-//--- Virtual method that returns a copy of current object
-  public: virtual cCollectionElement * copy (void) = 0 ;
-
-//--- Description
-  public: virtual void description (String & ioString, const int32_t inIndentation) const = 0 ;
+//--- Friend routine (runs runPrologueActions, runEpilogueActions)
+  friend int main (int argc, const char * argv []) ;
 } ;
 
 //--------------------------------------------------------------------------------------------------

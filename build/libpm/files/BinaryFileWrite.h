@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'C_BinaryFileWrite' : a class for stream writing binary files                                
+//  'BinaryFileWrite' : a class for stream writing binary files                                
 //
 //  This file is part of libpm library                                                           
 //
@@ -22,8 +22,8 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "strings/String-class.h"
-#include "files/AC_FileHandle.h"
+#include "String-class.h"
+#include "AbstractFileHandle.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -31,29 +31,18 @@
 
 //--------------------------------------------------------------------------------------------------
 
-class C_BinaryFileWrite final : public AC_FileHandle {
+class BinaryFileWrite final : public AbstractFileHandle {
 //--- Constructor : if inFileName is the empty string, no file is opened.
 //    Otherwise, it tries to open the file for writing;
-//    outSuccessfullyOpened is returned true is inFileName is empty or if file is successfully opened
-//    outSuccessfullyOpened is returned false is inFileName is not empty and file cannot be successfully opened
 //    The destructor will close the file (is successfully opened)
-  public: C_BinaryFileWrite (const String & inFilePath) ;
-
-//--- Destructor closes the file
-  public: virtual ~ C_BinaryFileWrite (void) ;
+  public: BinaryFileWrite (const String & inFilePath) ;
 
 //--- No copy
-  private: C_BinaryFileWrite (C_BinaryFileWrite &) ;
-  private: C_BinaryFileWrite & operator = (C_BinaryFileWrite &) ;
+  private: BinaryFileWrite (BinaryFileWrite &) = delete ;
+  private: BinaryFileWrite & operator = (BinaryFileWrite &) = delete ;
   
 //--- 
-  public: void appendData (const C_Data & inData) ;
-
-//--- Flush print
-  public: virtual void flush (void) ;
-
-//--- Close file (does nothing is file is not open)
-  public: virtual bool close (void) ;
+  public: void appendData (const U8Data & inData) ;
 } ;
 
 //--------------------------------------------------------------------------------------------------

@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'AC_FileHandle' : an abstract class for handling files handles
+//  'BinaryFileWrite' : a class for stream writing text files
 //
 //  This file is part of libpm library
 //
-//  Copyright (C) 2012, ..., 2012 Pierre Molinaro.
+//  Copyright (C) 1999, ..., 2023 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,34 +18,20 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#pragma once
+#include "BinaryFileWrite.h"
+#include "DateTime.h"
+#include "FileManager.h"
 
 //--------------------------------------------------------------------------------------------------
 
-#include "files/FileManager.h"
+BinaryFileWrite::BinaryFileWrite (const String & inFileName) :
+AbstractFileHandle (inFileName, "wb") {
+}
 
 //--------------------------------------------------------------------------------------------------
 
-class AC_FileHandle {
-//---
-  protected: FILE * mFilePtr ;
-  protected: String mFilePath ;
-
-//--- Protected constructor
-  protected: AC_FileHandle (const String & inFilePath,
-                            const char * inMode) ;
-
-//--- No copy
-  private: AC_FileHandle (const AC_FileHandle &) ;
-  private: AC_FileHandle & operator = (const AC_FileHandle &) ;
-
-//--- Virtual destructor
-  public: virtual ~ AC_FileHandle (void) ;
-
-//---
-  public: inline bool isOpened (void) const { return nullptr != mFilePtr ; }
-  public: inline String filePath (void) const { return mFilePath ; }
-} ;
-
+void BinaryFileWrite::appendData (const U8Data & inData) {
+  appendBinaryData (size_t (inData.count ()), inData.unsafeDataPointer ()) ;
+}
 
 //--------------------------------------------------------------------------------------------------

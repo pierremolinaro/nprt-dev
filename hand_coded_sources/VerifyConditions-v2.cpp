@@ -4,7 +4,7 @@
 #include "VerifyConditions-v2.h"
 #include "C_us.h"
 
-#include "galgas2/Compiler.h"
+#include "Compiler.h"
 
 bool
 NecessaryConditions_OK (Compiler * inCompiler,

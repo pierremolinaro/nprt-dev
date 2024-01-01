@@ -23,8 +23,8 @@
 
 //---------------------------------------------------------------------------*
 
-#include "generic-arraies/TC_UniqueArray.h"
-#include "strings/String-class.h"
+#include "TC_UniqueArray.h"
+#include "String-class.h"
 #include "ExtendedList-v2.h"
 
 //---------------------------------------------------------------------------*
@@ -88,7 +88,7 @@ class C_activitiesToSchedule {
   public : bool operator != (const C_activitiesToSchedule & inOperand) const ;
 
 //--- Print a list
-  public : void printList (AC_OutputStream & inStream,
+  public : void printList (AbstractOutputStream & inStream,
                            const TC_UniqueArray <String> & inNames) const ;
 
 //------------------------ INTERNAL STUFF ------------------------

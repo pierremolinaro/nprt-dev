@@ -1,11 +1,11 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'C_Lexique' : an abstract lexique class ;                                                    
+//  'Lexique' : an abstract lexique class ;                                                    
 //  Galgas generated scanner classes inherit from this class.                                    
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 1996, ..., 2022 Pierre Molinaro.
+//  Copyright (C) 1996, ..., 2023 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -23,37 +23,57 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "galgas2/Compiler.h"
-#include "galgas2/cProductionNameDescriptor.h"
-#include "galgas2/cTemplateDelimiter.h"
-#include "galgas2/C_galgas_io.h"
+#include "Compiler.h"
+#include "cProductionNameDescriptor.h"
+#include "cTemplateDelimiter.h"
+#include "C_galgas_io.h"
 
 //--------------------------------------------------------------------------------------------------
 
 class cIndexingDictionary ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//                 Lexique class                                                                 
-//
+//                 Top Down parsing utilities
 //--------------------------------------------------------------------------------------------------
 
-class C_Lexique : public Compiler {
+inline int32_t TOP_DOWN_TERMINAL (const int32_t inSymbol) { return inSymbol + 1 ; }
+
+inline int32_t TOP_DOWN_NONTERMINAL (const int32_t inSymbol) { return - inSymbol - 1 ; }
+
+inline int32_t TOP_DOWN_END_PRODUCTION (void) { return 0 ; }
+
+//--------------------------------------------------------------------------------------------------
+//                 Bottom Up parsing utilities
+//--------------------------------------------------------------------------------------------------
+
+inline int32_t BOTTOM_UP_SHIFT (const int32_t inSymbol) { return inSymbol + 2 ; }
+
+inline int32_t BOTTOM_UP_REDUCE (const int32_t inSymbol) { return - inSymbol - 1 ; }
+
+inline int32_t BOTTOM_UP_ACCEPT (void) { return 1 ; }
+
+inline int32_t BOTTOM_UP_END (void) { return -1 ; }
+
+//--------------------------------------------------------------------------------------------------
+//                 Lexique class
+//--------------------------------------------------------------------------------------------------
+
+class Lexique : public Compiler {
 //--- Constructors and destructor
-  public: C_Lexique (Compiler * inCallerCompiler,
-                     const String & inSourceFileName
-                     COMMA_LOCATION_ARGS) ;
+  public: Lexique (Compiler * inCallerCompiler,
+                   const String & inSourceFileName
+                   COMMA_LOCATION_ARGS) ;
 
-  public: C_Lexique (Compiler * inCallerCompiler,
-                     const String & inSourceString,
-                     const String & inStringForError
-                     COMMA_LOCATION_ARGS) ;
+  public: Lexique (Compiler * inCallerCompiler,
+                   const String & inSourceString,
+                   const String & inStringForError
+                   COMMA_LOCATION_ARGS) ;
 
-  public: virtual ~C_Lexique (void) ;
+  public: virtual ~Lexique (void) ;
 
 //--- No copy
-  private: C_Lexique (const C_Lexique &) ;
-  private: C_Lexique & operator = (const C_Lexique &) ;
+  private: Lexique (const Lexique &) = delete ;
+  private: Lexique & operator = (const Lexique &) = delete ;
 
 //--- Indexing
   public: void enterIndexing (const uint32_t inIndexingKind,
@@ -63,7 +83,7 @@ class C_Lexique : public Compiler {
   protected: cIndexingDictionary * mIndexingDictionary ;
 
 //--- Template String
-  protected: int32_t findTemplateDelimiterIndex (const cTemplateDelimiter inTemplateDelimiterArray [],
+  protected: int32_t findTemplateDelimiterIndex (const cTemplateDelimiter * inTemplateDelimiterArray,
                                                  const int32_t inTemplateDelimiterArrayLength) ;
 
 //--- Token list
@@ -110,7 +130,7 @@ class C_Lexique : public Compiler {
                                 const char * inTag) ;
 
   public: void didParseTerminal (const char * inTerminalName,
-                                const String & inValue) ;
+                                 const String & inValue) ;
 
   public: void exitProduction (void) ;
 
@@ -146,7 +166,7 @@ class C_Lexique : public Compiler {
 //--- Static method for searching a string in an ordered list
 //    returns -1 if not found, and associated code if found
   protected: static int32_t searchInList (const String & inString,
-                                          const C_unicode_lexique_table_entry inTable [],
+                                          const C_unicode_lexique_table_entry * inTableArray,
                                           const int32_t inTableSize) ;
 
 //--- Get Token String
@@ -179,40 +199,40 @@ class C_Lexique : public Compiler {
   public: virtual int32_t terminalVocabularyCount (void) const = 0 ;
 
 //--- Perform top down parsing (called by LL (1) parser)
-  public: bool performTopDownParsing (const int32_t inProductions [],
-                                      const cProductionNameDescriptor inProductionNames [],
-                                      const int32_t inProductionIndexes [],
-                                      const int32_t inFirstProductionIndex [],
-                                      const int32_t inDecisionTable [],
-                                      const int32_t inDecisionTableIndexes [],
+  public: bool performTopDownParsing (const int32_t * inProductionArray,
+                                      const cProductionNameDescriptor * inProductionNameArray,
+                                      const int32_t * inProductionIndexnArray,
+                                      const int32_t * inFirstProductionIndexArray,
+                                      const int32_t * inDecisionTableArray,
+                                      const int32_t * inDecisionTableIndexArray,
                                       const int32_t inProgramCounterInitialValue) ;
 
   private: void buildExpectedTerminalsArrayOnSyntaxError (const int32_t inErrorProgramCounter,
                                                           const int32_t inErrorStackCount,
                                                           const TC_Array <int32_t> & inCurrentStack,
                                                           const TC_Array <int32_t> & inErrorStack,
-                                                          const int32_t inProductions [],
-                                                          const int32_t inProductionIndexes [],
-                                                          const int32_t inFirstProductionIndex [],
-                                                          const int32_t inDecisionTable [],
-                                                          const int32_t inDecisionTableIndexes [],
+                                                          const int32_t * inProductionArray,
+                                                          const int32_t * inProductionIndexArray,
+                                                          const int32_t * inFirstProductionIndexArray,
+                                                          const int32_t * inDecisionTableArray,
+                                                          const int32_t * inDecisionTableIndexArray,
                                                           TC_UniqueArray <int32_t> & outExpectedTerminalsArray) ;
 
   private: bool acceptTerminalForErrorSignaling (const int32_t inTerminal,
-                                                 const int32_t inProductions [],
-                                                 const int32_t inProductionIndexes [],
-                                                 const int32_t inFirstProductionIndex [],
-                                                 const int32_t inDecisionTable [],
-                                                 const int32_t inDecisionTableIndexes [],
+                                                 const int32_t * inProductionArray,
+                                                 const int32_t * inProductionIndexArray,
+                                                 const int32_t * inFirstProductionIndexArray,
+                                                 const int32_t * inDecisionTableArray,
+                                                 const int32_t * inDecisionTableIndexArray,
                                                  const TC_Array <int32_t> & inErrorStack,
                                                  const int32_t inErrorProgramCounter) ;
 
 //--- Perform bottom up parsing (called by SLR and LR(1) parsers)
-  public: bool performBottomUpParsing (const int32_t inActionTable [],
-                                       const char * inNonTerminalSymbolNames [],
-                                       const uint32_t inActionTableIndex [],
-                                       const int32_t * inSuccessorTable [],
-                                       const int32_t inProductionsTable []) ;
+  public: bool performBottomUpParsing (const int32_t * inActionTableArray,
+                                       const char * * inNonTerminalSymbolNameArray,
+                                       const uint32_t * inActionTableIndexArray,
+                                       const int32_t * * inSuccessorTableArray,
+                                       const int32_t * inProductionsTableArray) ;
 
 //--- Scanner pure virtual methods
   protected: virtual bool parseLexicalToken (void) = 0 ;

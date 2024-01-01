@@ -27,7 +27,7 @@ bool isUnicodeCharacterAssigned (const utf32 inUnicodeCharacterCode) ;
 
 //--- Returns character name, or empty string if not assigned
 #ifdef __cplusplus
-  #include "strings/String-class.h"
+  #include "String-class.h"
   String unicodeName (const utf32 inUnicodeCharacter) ;
 #endif
 #ifdef __OBJC__
@@ -109,7 +109,7 @@ int32_t UTF8StringFromUTF32Character (const utf32 inUnicodeChar, char outSequenc
 
 //--- inEndOfStringPtr points just beyond the last available byte
 #ifdef __cplusplus
-  class C_Data ;
+  class U8Data ;
   utf32 utf32CharacterForPointer (const uint8_t * inDataString,
                                   int32_t & ioIndex,
                                   const int32_t inLength,

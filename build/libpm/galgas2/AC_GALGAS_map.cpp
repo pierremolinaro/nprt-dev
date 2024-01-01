@@ -19,12 +19,12 @@
 //--------------------------------------------------------------------------------------------------
 
 #include "all-predefined-types.h"
-#include "galgas2/capCollectionElement.h"
-#include "galgas2/C_galgas_type_descriptor.h"
-#include "utilities/MF_MemoryControl.h"
-#include "galgas2/Compiler.h"
-#include "strings/unicode_string_routines.h"
-#include "galgas2/C_galgas_CLI_Options.h"
+#include "capCollectionElement.h"
+#include "C_galgas_type_descriptor.h"
+#include "MF_MemoryControl.h"
+#include "Compiler.h"
+#include "unicode_string_routines.h"
+#include "C_galgas_CLI_Options.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -911,7 +911,7 @@ static void enterKeyInStringSet (const cMapNode * inNode,
 //--------------------------------------------------------------------------------------------------
 
 GALGAS_stringset cSharedMapRoot::keySet (LOCATION_ARGS) const {
-  GALGAS_stringset result = GALGAS_stringset::constructor_emptySet (THERE) ;
+  GALGAS_stringset result = GALGAS_stringset::class_func_emptySet (THERE) ;
   enterKeyInStringSet (mRoot, result) ;
   return result ;
 }
@@ -950,7 +950,7 @@ static void enterKeyInLStringList (cMapNode * inNode,
 //--------------------------------------------------------------------------------------------------
 
 GALGAS_lstringlist cSharedMapRoot::keyList (LOCATION_ARGS) const {
-  GALGAS_lstringlist result = GALGAS_lstringlist::constructor_emptyList (THERE) ;
+  GALGAS_lstringlist result = GALGAS_lstringlist::class_func_emptyList (THERE) ;
   enterKeyInLStringList (mRoot, result) ;
   return result ;
 }

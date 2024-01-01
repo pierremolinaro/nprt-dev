@@ -24,7 +24,7 @@
 //---------------------------------------------------------------------------*
 
 #include "C_us_hashmap.h"
-#include "utilities/F_GetPrime.h"
+#include "F_GetPrime.h"
 
 //---------------------------------------------------------------------------*
 
@@ -146,11 +146,11 @@ uint32_t C_us_hashmap::getAllocatedSizeInBytes (void) {
 
 void C_us_hashmap::C_TreeForCollision::
 rotateLeft (MyBlockavltree_element_for_collision * & ioPtr) {
-//--- Rotate 
+//--- Rotate
   MyBlockavltree_element_for_collision * ptr = ioPtr->mPtrToSup ;
   ioPtr->mPtrToSup = ptr->mPtrToInf ;
   ptr->mPtrToInf = ioPtr ;
-//--- Update balance 
+//--- Update balance
   if (ptr->mBalance < 0) {
     ioPtr->mBalance -= ptr->mBalance ;
   }
@@ -160,7 +160,7 @@ rotateLeft (MyBlockavltree_element_for_collision * & ioPtr) {
   }
   ptr->mBalance ++ ;
   ioPtr = ptr ;
-} 
+}
 
 //---------------------------------------------------------------------------*
 //                                                                           *
@@ -170,11 +170,11 @@ rotateLeft (MyBlockavltree_element_for_collision * & ioPtr) {
 
 void C_us_hashmap::C_TreeForCollision::
 rotateRight (MyBlockavltree_element_for_collision * & ioPtr) {
-//--- Rotate 
+//--- Rotate
   MyBlockavltree_element_for_collision * ptr = ioPtr->mPtrToInf ;
   ioPtr->mPtrToInf = ptr->mPtrToSup ;
   ptr->mPtrToSup = ioPtr ;
- //--- Update balance 
+ //--- Update balance
   if (ptr->mBalance > 0) {
     ioPtr->mBalance -= ptr->mBalance ;
   }
@@ -185,7 +185,7 @@ rotateRight (MyBlockavltree_element_for_collision * & ioPtr) {
   ptr->mBalance-- ;
   ioPtr = ptr ;
 }
- 
+
 //---------------------------------------------------------------------------*
 //                                                                           *
 //       Recursive search and insert                                         *
@@ -210,7 +210,7 @@ avltree_search (MyBlockavltree_element_for_collision * ioRootPointer,
   }
   return result ;
 }
- 
+
 //---------------------------------------------------------------------------*
 //                                                                           *
 //       Recursive search and insert                                         *
@@ -280,7 +280,7 @@ recursiveSearchOrInsert (MyBlockavltree_element_for_collision * & ioRootPointer,
   }
   return result ;
 }
- 
+
 //---------------------------------------------------------------------------*
 //                                                                           *
 //       Search and insert if not found                                      *

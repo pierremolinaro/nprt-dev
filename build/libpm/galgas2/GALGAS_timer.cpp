@@ -19,7 +19,7 @@
 //--------------------------------------------------------------------------------------------------
 
 #include "all-predefined-types.h"
-#include "galgas2/Compiler.h"
+#include "Compiler.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -44,7 +44,7 @@ void GALGAS_timer::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_timer GALGAS_timer::constructor_start (UNUSED_LOCATION_ARGS) {
+GALGAS_timer GALGAS_timer::class_func_start (UNUSED_LOCATION_ARGS) {
   GALGAS_timer result ;
   result.mIsValid = true ;
   return result ;

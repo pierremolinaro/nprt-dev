@@ -1,6 +1,7 @@
-#include "generic-arraies/TC_UniqueArray.h"
-#include "files/HTMLFileWrite.h"
-#include "galgas2/Compiler.h"
+#include "TC_UniqueArray.h"
+#include "HTMLFileWrite.h"
+#include "Compiler.h"
+
 #include <stdio.h>
 #include <math.h>
 #include <limits.h>

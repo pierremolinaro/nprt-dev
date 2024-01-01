@@ -18,10 +18,10 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "utilities/M_machine.h"
-#include "utilities/MF_MemoryControl.h"
-#include "utilities/cpp-allocation.h"
-#include "utilities/basic-allocation.h"
+#include "M_machine.h"
+#include "MF_MemoryControl.h"
+#include "cpp-allocation.h"
+#include "basic-allocation.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -29,8 +29,8 @@
 
 //--------------------------------------------------------------------------------------------------
 
-//#define REGISTER_ALLOCATION_STATS
-//#define REDEFINE_NEW_DELETE_OPERATORS
+// define REGISTER_ALLOCATION_STATS
+// define REDEFINE_NEW_DELETE_OPERATORS
 
 //--------------------------------------------------------------------------------------------------
 // Include this header is required for safely compile allocation operators.

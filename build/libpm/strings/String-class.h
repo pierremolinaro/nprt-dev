@@ -22,13 +22,13 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "utilities/M_SourceLocation.h"
-#include "generic-arraies/TC_UniqueArray.h"
-#include "utilities/M_machine.h"
-#include "streams/C_ConsoleOut.h"
-#include "utilities/C_Data.h"
-#include "utilities/TF_Swap.h"
-#include "time/DateTime.h"
+#include "M_SourceLocation.h"
+#include "TC_UniqueArray.h"
+#include "M_machine.h"
+#include "C_ConsoleOut.h"
+#include "U8Data.h"
+#include "TF_Swap.h"
+#include "DateTime.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -83,7 +83,7 @@ typedef enum {
 //
 //--------------------------------------------------------------------------------------------------
 
-class String : public AC_OutputStream {
+class String : public AbstractOutputStream {
 //--- Constructors
   public: explicit String (void) ; // Empty string
   public: String (const char * inCString) ; // From a C string
@@ -91,7 +91,7 @@ class String : public AC_OutputStream {
   public: static String spaces (const int32_t inSpaceCount) ;
   
 //--- Virtual destructor
-  public: virtual ~String (void) ;
+  public: virtual ~ String (void) ;
 
 //--- Handling copy
   public: String (const String & inSource) ;
@@ -106,8 +106,8 @@ class String : public AC_OutputStream {
 //--- Set capacity (does nothing if length >= inCapacity)
   public: void setCapacity (const uint32_t inCapacity) ;
   
-//--- Suppress 'inLength' characters from 'inIndex' index
-  public: void suppress (const int32_t inIndex, const int32_t inLength COMMA_LOCATION_ARGS) ;
+//--- Remove 'inCount' characters from 'inIndex' index
+  public: void removeCountFromIndex (const int32_t inCount, const int32_t inIndex COMMA_LOCATION_ARGS) ;
 
 //--- Insert 'inChar' character at 'inIndex' index
   public: void insertCharacterAtIndex (const utf32 inChar, const int32_t inIndex COMMA_LOCATION_ARGS) ;
@@ -331,7 +331,7 @@ class String : public AC_OutputStream {
     private: void checkString (LOCATION_ARGS) const ;
   #endif
 
-  public: static bool parseUTF8 (const C_Data & inDataString,
+  public: static bool parseUTF8 (const U8Data & inDataString,
                                  const int32_t inOffset,
                                  String & outString) ;
 

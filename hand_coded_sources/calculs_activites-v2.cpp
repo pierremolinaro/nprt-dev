@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <algorithm>
-#include "files/HTMLFileWrite.h"
-#include "utilities/MF_MemoryControl.h"
-#include "galgas2/Compiler.h"
+#include "HTMLFileWrite.h"
+#include "MF_MemoryControl.h"
+#include "Compiler.h"
 
 #include "oa_semantics.h"
 #include "CANMessageBounds.h"
@@ -176,7 +176,7 @@ static void buildCSSfile (Compiler * inCompiler,
 //--- Style file name
   const String styleFileName = inDirectory + "/style.css" ;
 //--- Build file
-  C_TextFileWrite f (styleFileName) ;
+  TextFileWrite f (styleFileName) ;
   if (! f.isOpened ()) {
     String message ;
     message.addString ("Cannot open '") ;

@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  C_DirectedGraph : algorithms on ordered graphs                                               
+//  DirectedGraph : algorithms on ordered graphs                                               
 //
 //  This file is part of libpm library                                                           
 //
@@ -22,9 +22,9 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "generic-arraies/TC_Array.h"
-#include "C_UIntSet.h"
-#include "strings/String-class.h"
+#include "TC_Array.h"
+#include "UInt32Set.h"
+#include "String-class.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -35,9 +35,9 @@ typedef struct {
 
 //--------------------------------------------------------------------------------------------------
 
-class C_DirectedGraph final {
+class DirectedGraph final {
 //--- Default constructor
-  public: C_DirectedGraph (void) ;
+  public: DirectedGraph (void) ;
 
 //--- Example
   public: static void example (void) ;
@@ -45,7 +45,7 @@ class C_DirectedGraph final {
 //--- Methods
   public: void addNode (const uint32_t inNodeIndex) ;
 
-  public: void addNodes (const C_UIntSet inNodes) ;
+  public: void addNodes (const UInt32Set inNodes) ;
 
   public: void removeNode (const uint32_t inNodeIndex) ;
 
@@ -75,7 +75,7 @@ class C_DirectedGraph final {
   
   public: void getNodesInvolvedInCircularities (TC_UniqueArray <uint32_t> & outNodes) const ;
   
-  public: void getDominators (TC_UniqueArray <C_UIntSet> & outDominators
+  public: void getDominators (TC_UniqueArray <UInt32Set> & outDominators
                                COMMA_LOCATION_ARGS) const ;
   
   public: void removeEdgesToDominator (LOCATION_ARGS) ;
@@ -90,19 +90,19 @@ class C_DirectedGraph final {
   public: void depthFirstTopologicalSort (TC_UniqueArray <uint32_t> & outSortedNodes,
                                            TC_UniqueArray <uint32_t> & outUnsortedNodes) const ;
   
-  public: C_DirectedGraph reversedGraph (void) const ;
+  public: DirectedGraph reversedGraph (void) const ;
   
-  public: C_DirectedGraph subGraphFromNodes (const C_UIntSet & inStartNodes,
-                                              const C_UIntSet & inNodesToExclude) const ;
+  public: DirectedGraph subGraphFromNodes (const UInt32Set & inStartNodes,
+                                              const UInt32Set & inNodesToExclude) const ;
   
   #ifndef DO_NOT_GENERATE_CHECKINGS
     protected: void checkGraph (LOCATION_ARGS) const ;
   #endif
 
 //--- Attributes
-  private: C_UIntSet mNodes ;
-  private: TC_Array <C_UIntSet> mEdges ;
-  private: TC_Array <C_UIntSet> mReverseEdges ;
+  private: UInt32Set mNodes ;
+  private: TC_Array <UInt32Set> mEdges ;
+  private: TC_Array <UInt32Set> mReverseEdges ;
 } ;
 
 //--------------------------------------------------------------------------------------------------

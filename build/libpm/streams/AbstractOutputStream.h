@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  AC_OutputStream : an abstract output stream class                                            
+//  AbstractOutputStream : an abstract output stream class                                            
 //
 //  This file is part of libpm library                                                           
 //
@@ -22,9 +22,9 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "utilities/macroAssert.h"
-#include "utilities/M_machine.h"
-#include "strings/string_encodings.h"
+#include "macroAssert.h"
+#include "M_machine.h"
+#include "string_encodings.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -32,12 +32,12 @@ class String ;
 
 //--------------------------------------------------------------------------------------------------
 
-class AC_OutputStream {
+class AbstractOutputStream {
 //--- Default constructor
-  protected: AC_OutputStream (void) ;
+  protected: AbstractOutputStream (void) ;
 
 //--- Virtual destructor 
-  public: virtual ~ AC_OutputStream (void) ;
+  public: virtual ~ AbstractOutputStream (void) ;
 
 //--- Appending end od line
   public: void addNL (void) ;
@@ -80,9 +80,6 @@ class AC_OutputStream {
 
 //--- Appending Pointer value (in hex)
   public: void addPointer (const void * inValue) ;
-
-//--- Flush print (does nothing for this class)
-  public: virtual void flush (void) ;
 
 //--- Abstract method for output single byte characters
   public: void genericCharArrayOutput (const char * inCharArray,

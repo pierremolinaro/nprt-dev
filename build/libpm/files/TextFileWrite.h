@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'C_TextFileWrite' : a class for stream writing text files                                    
+//  'TextFileWrite' : a class for stream writing text files                                    
 //
 //  This file is part of libpm library                                                           
 //
@@ -22,9 +22,9 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "strings/String-class.h"
-#include "streams/AC_OutputStream.h"
-#include "files/AC_FileHandle.h"
+#include "String-class.h"
+#include "AbstractOutputStream.h"
+#include "AbstractFileHandle.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -32,39 +32,22 @@
 
 //--------------------------------------------------------------------------------------------------
 
-const int32_t kFileBufferSize = 10000 ;
-
-//--------------------------------------------------------------------------------------------------
-
-class C_TextFileWrite : public AC_OutputStream, public AC_FileHandle {
+class TextFileWrite : public AbstractOutputStream, public AbstractFileHandle {
 //--- Constructor : if inFileName is the empty string, no file is opened.
 //    Otherwise, it tries to open the file for writing;
 //    The destructor will close the file (is successfully opened)
-  public: C_TextFileWrite (const String & inFileName) ;
-
-//--- Destructor closes the file
-  public: virtual ~C_TextFileWrite (void) ;
+  public: TextFileWrite (const String & inFileName) ;
 
 //--- No copy
-  private: C_TextFileWrite (C_TextFileWrite &) ;
-  private: C_TextFileWrite & operator = (C_TextFileWrite &) ;
-  
+  private: TextFileWrite (TextFileWrite &) = delete ;
+  private: TextFileWrite & operator = (TextFileWrite &) = delete ;
+
 //--- General stream methods
   protected: virtual void performActualCharArrayOutput (const char * inCharArray,
-                                                         const int32_t inArrayCount) ;
+                                                        const int32_t inArrayCount) override ;
 
   protected: virtual void performActualUnicodeArrayOutput (const utf32 * inCharArray,
-                                                            const int32_t inArrayCount) ;
-
-//--- Flush print
-  public: virtual void flush (void) ;
-
-//--- Close file (does nothing is file is not open)
-  public: virtual bool close (void) ;
-
-//--- Private attributes
-  private: int32_t mBufferLength ;
-  private: char mBuffer [kFileBufferSize + 1] ;
+                                                           const int32_t inArrayCount) override ;
 } ;
 
 //--------------------------------------------------------------------------------------------------

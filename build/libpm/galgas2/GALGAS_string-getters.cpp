@@ -19,15 +19,15 @@
 //--------------------------------------------------------------------------------------------------
 
 #include "all-predefined-types.h"
-#include "galgas2/C_galgas_CLI_Options.h"
-#include "galgas2/Compiler.h"
-#include "command_line_interface/F_mainForLIBPM.h"
-#include "command_line_interface/F_Analyze_CLI_Options.h"
-#include "strings/unicode_character_cpp.h"
-#include "galgas2/C_galgas_io.h"
-#include "files/FileManager.h"
-#include "files/C_BinaryFileWrite.h"
-#include "galgas2/F_verbose_output.h"
+#include "C_galgas_CLI_Options.h"
+#include "Compiler.h"
+#include "F_mainForLIBPM.h"
+#include "F_Analyze_CLI_Options.h"
+#include "unicode_character_cpp.h"
+#include "C_galgas_io.h"
+#include "FileManager.h"
+#include "BinaryFileWrite.h"
+#include "F_verbose_output.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ GALGAS_lstring GALGAS_string::getter_nowhere (LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (isValid ()) {
     result.mProperty_string = * this ;
-    result.mProperty_location = GALGAS_location::constructor_nowhere (THERE) ;
+    result.mProperty_location = GALGAS_location::class_func_nowhere (THERE) ;
   }
   return result ;
 }
@@ -72,7 +72,7 @@ GALGAS_lstring GALGAS_string::getter_here (Compiler * inCompiler COMMA_LOCATION_
   GALGAS_lstring result ;
   if (isValid ()) {
     result.mProperty_string = * this ;
-    result.mProperty_location = GALGAS_location::constructor_here (inCompiler COMMA_THERE) ;
+    result.mProperty_location = GALGAS_location::class_func_here (inCompiler COMMA_THERE) ;
   }
   return result ;
 }
@@ -192,8 +192,8 @@ GALGAS_string GALGAS_string::getter_utf_38_RepresentationEnclosedWithin (const G
 GALGAS_uint GALGAS_string::getter_utf_38_Length (UNUSED_LOCATION_ARGS) const {
   GALGAS_uint result ;
   if (isValid ()) {
-    C_Data data ;
-    data.addString (mString) ;
+    U8Data data ;
+    data.appendString (mString) ;
     result = GALGAS_uint (uint32_t (data.count ())) ;
   }
   return result ;
@@ -550,7 +550,7 @@ GALGAS_string GALGAS_string::getter_stringByRemovingCharacterAtIndex (const GALG
   if (inIndex.isValid ()) {
     if (inIndex.uintValue () < (uint32_t) mString.length ()) {
       String s = mString ;
-      s.suppress ((int32_t) inIndex.uintValue (), 1 COMMA_THERE) ;
+      s.removeCountFromIndex (1, int32_t (inIndex.uintValue ()) COMMA_THERE) ;
       result = GALGAS_string (s) ;
     }else{
       inCompiler->onTheFlyRunTimeError (
@@ -626,7 +626,7 @@ GALGAS_stringlist GALGAS_string::getter_componentsSeparatedByString (const GALGA
                                                                     COMMA_LOCATION_ARGS) const {
   GALGAS_stringlist result ;
   if (inSeparator.isValid ()) {
-    result = GALGAS_stringlist::constructor_emptyList (THERE) ;
+    result = GALGAS_stringlist::class_func_emptyList (THERE) ;
     TC_UniqueArray <String> components ;
     mString.componentsSeparatedByString (inSeparator.mString, components) ;
     for (int32_t i=0 ; i<components.count () ; i++) {
@@ -721,7 +721,7 @@ GALGAS_stringlist GALGAS_string::getter_regularFiles (const GALGAS_bool & inRecu
                                                       COMMA_LOCATION_ARGS) const {
   GALGAS_stringlist result ;
   if (inRecursiveSearch.isValid ()) {
-    result = GALGAS_stringlist::constructor_emptyList (THERE) ;
+    result = GALGAS_stringlist::class_func_emptyList (THERE) ;
     recursiveSearchForRegularFiles (mString,
                                     inRecursiveSearch.boolValue (),
                                     "",
@@ -769,7 +769,7 @@ GALGAS_stringlist GALGAS_string::getter_hiddenFiles (const GALGAS_bool & inRecur
                                                      COMMA_LOCATION_ARGS) const {
   GALGAS_stringlist result ;
   if (inRecursiveSearch.isValid ()) {
-    result = GALGAS_stringlist::constructor_emptyList (THERE) ;
+    result = GALGAS_stringlist::class_func_emptyList (THERE) ;
     recursiveSearchForHiddenFiles (mString,
                                    inRecursiveSearch.boolValue (),
                                    "",
@@ -816,7 +816,7 @@ GALGAS_stringlist GALGAS_string::getter_directories (const GALGAS_bool & inRecur
                                                      COMMA_LOCATION_ARGS) const {
   GALGAS_stringlist result ;
   if (inRecursiveSearch.isValid ()) {
-    result = GALGAS_stringlist::constructor_emptyList (THERE) ;
+    result = GALGAS_stringlist::class_func_emptyList (THERE) ;
     if (FileManager::directoryExists (mString)) {
       recursiveSearchForDirectories (mString,
                                      inRecursiveSearch.boolValue (),
@@ -878,7 +878,7 @@ GALGAS_stringlist GALGAS_string::getter_regularFilesWithExtensions (const GALGAS
                                                                     COMMA_LOCATION_ARGS) const {
   GALGAS_stringlist result ;
   if ((inRecursiveSearch.isValid ()) && (inExtensionList.isValid ())) {
-    result = GALGAS_stringlist::constructor_emptyList (THERE) ;
+    result = GALGAS_stringlist::class_func_emptyList (THERE) ;
     if (FileManager::directoryExists (mString)) {
       recursiveSearchForRegularFiles (mString,
                                       inExtensionList,
@@ -942,7 +942,7 @@ GALGAS_stringlist GALGAS_string::getter_directoriesWithExtensions (const GALGAS_
                                                                    COMMA_LOCATION_ARGS) const {
   GALGAS_stringlist result ;
   if (isValid () && inRecursiveSearch.isValid () && inExtensionList.isValid ()) {
-    result = GALGAS_stringlist::constructor_emptyList (THERE) ;
+    result = GALGAS_stringlist::class_func_emptyList (THERE) ;
     if (FileManager::directoryExists (mString)) {
       recursiveSearchForDirectories (mString,
                                      inExtensionList,
@@ -1281,7 +1281,7 @@ GALGAS_bool GALGAS_string::getter_isSymbolicLink (UNUSED_LOCATION_ARGS) const {
       if (! ok) {
         inCompiler->onTheFlyRunTimeError (errorMessage COMMA_THERE) ;
       }else{
-        C_Data response ;
+        U8Data response ;
         bool loop = true ;
         while (loop) {
           const size_t kBufferSize = 1000 ;
@@ -1310,7 +1310,7 @@ GALGAS_bool GALGAS_string::getter_isSymbolicLink (UNUSED_LOCATION_ARGS) const {
     GALGAS_string result ;
     if (isValid ()) {
       FILE * f = popen (mString.cString (HERE), "r") ;
-      C_Data response ;
+      U8Data response ;
       bool loop = true ;
       while (loop) {
         const size_t kBufferSize = 1000 ;
