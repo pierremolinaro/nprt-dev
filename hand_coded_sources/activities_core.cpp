@@ -1606,13 +1606,13 @@ scheduleActivities (const int32_t NoInterButUseB,
 	  }
     const int32_t currentInstant = scheduleMap.getCurrentInstant () ;
     if ( (currentInstant != 0) && ((currentInstant % devisor) == 0)) {
-      gCout.addString ("currentInstant ") ;
-      gCout.addSigned (currentInstant) ;
-      gCout.addString (", ") ;
-      gCout.addSigned (nodeCount) ;
-      gCout.addString (" resource nodes, ") ;
-      gCout.addString (timer.timeString ()) ;
-      gCout.addString ("\n") ;
+      gCout.appendString ("currentInstant ") ;
+      gCout.appendSigned (currentInstant) ;
+      gCout.appendString (", ") ;
+      gCout.appendSigned (nodeCount) ;
+      gCout.appendString (" resource nodes, ") ;
+      gCout.appendString (timer.timeString ()) ;
+      gCout.appendString ("\n") ;
       gCout.flush () ;
     }
     scheduleMap.advanceToNextInstant () ;
@@ -1627,13 +1627,13 @@ scheduleActivities (const int32_t NoInterButUseB,
     scheduleMap.computeBestAndWorstResponseTime (outResponseTimeArray, activitiesCount) ;
   #endif
 
-  gCout.addSigned (gUsedResourceNodesCount) ;
-  gCout.addString (" resource nodes used, ") ;
-  gCout.addSigned (gAllocatedResourceNodesCount) ;
-  gCout.addString (" allocated.\n") ;
+  gCout.appendSigned (gUsedResourceNodesCount) ;
+  gCout.appendString (" resource nodes used, ") ;
+  gCout.appendSigned (gAllocatedResourceNodesCount) ;
+  gCout.appendString (" allocated.\n") ;
  // #ifndef FORGET_ACTIVITY_NODES
-  gCout.addSigned (gAllocatedActivityNodesCount) ;
-  gCout.addString (" activity nodes allocated.\n") ;
+  gCout.appendSigned (gAllocatedActivityNodesCount) ;
+  gCout.appendString (" activity nodes allocated.\n") ;
  // #endif
 }
 

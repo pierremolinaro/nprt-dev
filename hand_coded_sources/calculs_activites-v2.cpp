@@ -179,12 +179,12 @@ static void buildCSSfile (Compiler * inCompiler,
   TextFileWrite f (styleFileName) ;
   if (! f.isOpened ()) {
     String message ;
-    message.addString ("Cannot open '") ;
-    message.addString (styleFileName) ;
-    message.addString ("' file in write mode.") ;
+    message.appendString ("Cannot open '") ;
+    message.appendString (styleFileName) ;
+    message.appendString ("' file in write mode.") ;
     inCompiler->onTheFlySemanticError (message COMMA_HERE) ;
   }
-  f.addString ("body {\n"
+  f.appendString ("body {\n"
        "  font-family: Helvetica, sans-serif ;\n"
        "	font-size: small ;\n"
        "}\n"
@@ -289,9 +289,9 @@ routine_performComputations_26__26__26__26_ (GALGAS_M_5F_processor & inProcessor
                              "") ;
   if (! htmlFile.isOpened ()) {
     String message ;
-    message.addString ("Cannot open '") ;
-    message.addString (htmlFileName) ;
-    message.addString ("' file in write mode.") ;
+    message.appendString ("Cannot open '") ;
+    message.appendString (htmlFileName) ;
+    message.appendString ("' file in write mode.") ;
     inCompiler->onTheFlySemanticError (message COMMA_HERE) ;
   }
   if(useCANmaxLengthOnly){
@@ -301,30 +301,30 @@ routine_performComputations_26__26__26__26_ (GALGAS_M_5F_processor & inProcessor
   bool DependentHasOffset = false ;
 	int32_t  index ;
 //--- Print processors map
-  htmlFile.addCppTitleComment ("Processors map", "title") ;
-  htmlFile.addRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
-	htmlFile.addRawData ("#<th>Name<th>ScaFactor</tr>") ;
+  htmlFile.appendCppTitleComment ("Processors map", "title") ;
+  htmlFile.appendRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
+	htmlFile.appendRawData ("#<th>Name<th>ScaFactor</tr>") ;
 	index = 1 ;
 	cEnumerator_M_5F_processor processor (inProcessorMap, kENUMERATION_UP) ;
 	while (processor.hasCurrentObject ()) {
-	  htmlFile.addRawData ("<tr class=\"result_line\"><td>") ;
-	  htmlFile.addSigned (index) ;
-	  htmlFile.addRawData ("</td><td>") ;
-	  htmlFile.addString (processor.current_lkey (HERE).mProperty_string.stringValue()) ;
-	  htmlFile.addRawData ("</td><td>") ;
-	  htmlFile.addUnsigned (processor.current_mStep (HERE).mProperty_uint.uintValue ()) ;
-	  htmlFile.addRawData ("</td></tr>") ;
+	  htmlFile.appendRawData ("<tr class=\"result_line\"><td>") ;
+	  htmlFile.appendSigned (index) ;
+	  htmlFile.appendRawData ("</td><td>") ;
+	  htmlFile.appendString (processor.current_lkey (HERE).mProperty_string.stringValue()) ;
+	  htmlFile.appendRawData ("</td><td>") ;
+	  htmlFile.appendUnsigned (processor.current_mStep (HERE).mProperty_uint.uintValue ()) ;
+	  htmlFile.appendRawData ("</td></tr>") ;
 	  processor.gotoNextObject () ;
 	  index ++ ;
 	}
-	htmlFile.addRawData ("</table>") ;
-	htmlFile.addRawData ("<br>");
+	htmlFile.appendRawData ("</table>") ;
+	htmlFile.appendRawData ("<br>");
 //--- Build processors map
   index = 0 ;
   processor.rewind () ;
   while (processor.hasCurrentObject ()) {
     cResource resource ;
-    strcpy (resource.mResourceName, processor.current_lkey (HERE).mProperty_string.stringValue ().cString (HERE));
+    strcpy (resource.mResourceName, processor.current_lkey (HERE).mProperty_string.stringValue ().cString ());
   	resource.mResourceType= 2; // Processor = 2
    	resource.mStep = (int32_t) processor.current_mStep (HERE).mProperty_uint.uintValue () ;
 
@@ -337,32 +337,32 @@ routine_performComputations_26__26__26__26_ (GALGAS_M_5F_processor & inProcessor
   const char * kNetworkTypes [] = {"VAN","CAN"} ;
 	cEnumerator_M_5F_network network (inNetworkMap, kENUMERATION_UP) ;
 //--- Print network map
-  htmlFile.addCppTitleComment ("Networks map", "title") ;
-  htmlFile.addRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
-  htmlFile.addRawData ("#<th>Name<th>Type<th>ScaFactor</tr>") ;
+  htmlFile.appendCppTitleComment ("Networks map", "title") ;
+  htmlFile.appendRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
+  htmlFile.appendRawData ("#<th>Name<th>Type<th>ScaFactor</tr>") ;
   index = 1 ;
   while (network.hasCurrentObject ()) {
-    htmlFile.addRawData ("<tr class=\"result_line\"><td>") ;
-    htmlFile.addSigned (index) ;
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addString (network.current_lkey (HERE).mProperty_string.stringValue()) ;
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addString (kNetworkTypes [network.current_mCANnetwork (HERE).boolValue ()]) ;
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addUnsigned (network.current_mScalingFactor (HERE).mProperty_uint.uintValue ()) ;
-    htmlFile.addRawData ("</td></tr>") ;
+    htmlFile.appendRawData ("<tr class=\"result_line\"><td>") ;
+    htmlFile.appendSigned (index) ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendString (network.current_lkey (HERE).mProperty_string.stringValue()) ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendString (kNetworkTypes [network.current_mCANnetwork (HERE).boolValue ()]) ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendUnsigned (network.current_mScalingFactor (HERE).mProperty_uint.uintValue ()) ;
+    htmlFile.appendRawData ("</td></tr>") ;
     network.gotoNextObject () ;
     index ++ ;
   }
-  htmlFile.addRawData ("</table>") ;
-  htmlFile.addRawData ("<br>");
+  htmlFile.appendRawData ("</table>") ;
+  htmlFile.appendRawData ("<br>");
 //--- Build networks map
   int32_t min_NetworkStep = INT32_MAX ;
   index = 0 ;
   network.rewind ();
   while (network.hasCurrentObject ()) {
     cResource resource ;
-    strcpy(resource.mResourceName,network.current_lkey (HERE).mProperty_string.stringValue ().cString (HERE));
+    strcpy(resource.mResourceName,network.current_lkey (HERE).mProperty_string.stringValue ().cString ());
   	resource.mResourceType= network.current_mCANnetwork (HERE).boolValue ();
     resource.mStep = (int32_t) network.current_mScalingFactor (HERE).mProperty_uint.uintValue () ;
  		min_NetworkStep = std::min (min_NetworkStep, resource.mStep);
@@ -377,7 +377,7 @@ routine_performComputations_26__26__26__26_ (GALGAS_M_5F_processor & inProcessor
   index = 0 ;
   while (task.hasCurrentObject ()) {
     cElement element ;
-    strcpy(element.mElementName,task.current_lkey (HERE).mProperty_string.stringValue ().cString (HERE));
+    strcpy(element.mElementName,task.current_lkey (HERE).mProperty_string.stringValue ().cString ());
     element.mElementType = 'T';
     element.mId_inList =index;
   	element.mResourceId = (int32_t) task.current_mProcessor (HERE).uintValue ();
@@ -442,7 +442,7 @@ routine_performComputations_26__26__26__26_ (GALGAS_M_5F_processor & inProcessor
   message.rewind () ;
   while (message.hasCurrentObject ()) {
     cElement element ;
-    strcpy(element.mElementName,message.current_lkey (HERE).mProperty_string.stringValue ().cString (HERE));
+    strcpy(element.mElementName,message.current_lkey (HERE).mProperty_string.stringValue ().cString ());
   	element.mElementType = 'M';
     element.mId_inList = index;
   	element.mResourceId = NumberOfProcessors +
@@ -460,9 +460,9 @@ routine_performComputations_26__26__26__26_ (GALGAS_M_5F_processor & inProcessor
       					"extended") != NULL){
       	MessageType = 'X' ;
       }else{
-      	gCout.addString ("ERROR : message #") ;
-      	gCout.addSigned (index) ;
-      	gCout.addString (" is neither standard (S) nor extended (X) message!\n") ;
+      	gCout.appendString ("ERROR : message #") ;
+      	gCout.appendSigned (index) ;
+      	gCout.appendString (" is neither standard (S) nor extended (X) message!\n") ;
       }
 
       element.mMaxDuration = ScalingFactor* maxCANMessageTime(MessageType,
@@ -527,33 +527,33 @@ routine_performComputations_26__26__26__26_ (GALGAS_M_5F_processor & inProcessor
 //*----------------------------------------------------------------------/
 	//--- Print task map
 
-	htmlFile.addCppTitleComment ("Tasks map", "title") ;
-  htmlFile.addRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>") ;
-  htmlFile.addRawData ("#<th>Name<th>Processor<th>Priority<th>");
-  htmlFile.addRawData ("Offset<th>Min<th>Max<th>Period<th>") ;
-  htmlFile.addRawData ("Deadline<th>Dependence<th>Every</tr>") ;
+	htmlFile.appendCppTitleComment ("Tasks map", "title") ;
+  htmlFile.appendRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>") ;
+  htmlFile.appendRawData ("#<th>Name<th>Processor<th>Priority<th>");
+  htmlFile.appendRawData ("Offset<th>Min<th>Max<th>Period<th>") ;
+  htmlFile.appendRawData ("Deadline<th>Dependence<th>Every</tr>") ;
   index = 1 ;
   task.rewind () ;
   while (task.hasCurrentObject ()) {
-    htmlFile.addRawData ("<tr class=\"result_line\"><td>") ;
-    htmlFile.addSigned (index) ;
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addString (task.current_lkey (HERE).mProperty_string.stringValue ()) ;
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addUnsigned (task.current_mProcessor (HERE).uintValue ()+1) ;
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addUnsigned (task.current_mPriority (HERE).mProperty_uint.uintValue ()) ;
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addUnsigned (task.current_mOffset (HERE).mProperty_uint.uintValue ());
-    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.appendRawData ("<tr class=\"result_line\"><td>") ;
+    htmlFile.appendSigned (index) ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendString (task.current_lkey (HERE).mProperty_string.stringValue ()) ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendUnsigned (task.current_mProcessor (HERE).uintValue ()+1) ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendUnsigned (task.current_mPriority (HERE).mProperty_uint.uintValue ()) ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendUnsigned (task.current_mOffset (HERE).mProperty_uint.uintValue ());
+    htmlFile.appendRawData ("</td><td>") ;
     if (useCANmaxLengthOnly){
-      htmlFile.addUnsigned (task.current_mDurationMax (HERE).mProperty_uint.uintValue ()) ;
+      htmlFile.appendUnsigned (task.current_mDurationMax (HERE).mProperty_uint.uintValue ()) ;
     }else {
-      htmlFile.addUnsigned (task.current_mDurationMin (HERE).mProperty_uint.uintValue ()) ;
+      htmlFile.appendUnsigned (task.current_mDurationMin (HERE).mProperty_uint.uintValue ()) ;
     }
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addUnsigned (task.current_mDurationMax (HERE).mProperty_uint.uintValue ()) ;
-    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendUnsigned (task.current_mDurationMax (HERE).mProperty_uint.uintValue ()) ;
+    htmlFile.appendRawData ("</td><td>") ;
 //....................................................................
     auto ptr = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
     if (ptr->taskDependsOnMessage ()) {
@@ -567,56 +567,56 @@ routine_performComputations_26__26__26__26_ (GALGAS_M_5F_processor & inProcessor
     int32_t resourceId = (int32_t) task.current_mProcessor (HERE).uintValue ();
     int32_t Scal = Resource (resourceId COMMA_HERE).mStep ;
 
-    htmlFile.addSigned (Element (index-1 COMMA_HERE).mEveryMultiple * Element (index-1 COMMA_HERE).mPeriod /Scal) ;
-    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.appendSigned (Element (index-1 COMMA_HERE).mEveryMultiple * Element (index-1 COMMA_HERE).mPeriod /Scal) ;
+    htmlFile.appendRawData ("</td><td>") ;
     if (task.current_mDeadline (HERE).mProperty_uint.uintValue () == UINT32_MAX){
-    	htmlFile.addRawData ("Unknown</td><td>") ;
+    	htmlFile.appendRawData ("Unknown</td><td>") ;
     }else{
-     	htmlFile.addUnsigned (task.current_mDeadline (HERE).mProperty_uint.uintValue ()) ;
-    	htmlFile.addRawData ("</td><td>") ;
+     	htmlFile.appendUnsigned (task.current_mDeadline (HERE).mProperty_uint.uintValue ()) ;
+    	htmlFile.appendRawData ("</td><td>") ;
     }
     ptr = (const cPtr_AC_5F_task *) task.current_mTaskKind (HERE).ptr () ;
     if (ptr->taskDependsOnTask ()) {
-      htmlFile.addRawData ("task #") ;
-      htmlFile.addUnsigned (ptr->getTaskDependanceValue ()+1) ;
+      htmlFile.appendRawData ("task #") ;
+      htmlFile.appendUnsigned (ptr->getTaskDependanceValue ()+1) ;
     }else if (ptr->taskDependsOnMessage ()) {
-      htmlFile.addRawData ("message #") ;
-      htmlFile.addUnsigned (ptr->getTaskDependanceValue ()+1) ;
+      htmlFile.appendRawData ("message #") ;
+      htmlFile.appendUnsigned (ptr->getTaskDependanceValue ()+1) ;
     }else{
-    	htmlFile.addRawData (" ---") ;
+    	htmlFile.appendRawData (" ---") ;
     }
-     htmlFile.addRawData ("</td><td>") ;
-     htmlFile.addUnsigned (ptr->getTaskEveryParameter ()) ;
+     htmlFile.appendRawData ("</td><td>") ;
+     htmlFile.appendUnsigned (ptr->getTaskEveryParameter ()) ;
 
-    htmlFile.addRawData ("</td></tr>") ;
+    htmlFile.appendRawData ("</td></tr>") ;
     task.gotoNextObject () ;
     index ++ ;
   }
-  htmlFile.addRawData ("</table>") ;
-  htmlFile.addRawData ("<br>");
+  htmlFile.appendRawData ("</table>") ;
+  htmlFile.appendRawData ("<br>");
 
 //--- Print messages map
-  htmlFile.addCppTitleComment ("Messages map", "title") ;
-  htmlFile.addRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>") ;
-  htmlFile.addRawData ("#<th>Name<th>Network<th>Type<th>Priority<th>Byte");
-  htmlFile.addRawData ("<th> min--max ") ;
-  htmlFile.addRawData ("<th>Offset<th>Period<th>Deadline<th>Dependence</tr>") ;
+  htmlFile.appendCppTitleComment ("Messages map", "title") ;
+  htmlFile.appendRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>") ;
+  htmlFile.appendRawData ("#<th>Name<th>Network<th>Type<th>Priority<th>Byte");
+  htmlFile.appendRawData ("<th> min--max ") ;
+  htmlFile.appendRawData ("<th>Offset<th>Period<th>Deadline<th>Dependence</tr>") ;
   index = 1 ;
   message.rewind () ;
   while (message.hasCurrentObject ()) {
-    htmlFile.addRawData ("<tr class=\"result_line\"><td>") ;
-    htmlFile.addSigned (index) ;
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addString (message.current_lkey (HERE).mProperty_string.stringValue ()) ;
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addUnsigned (message.current_mNetworkIndex (HERE).uintValue () +1) ;
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addString (kMessageClasses [message.current_mClass (HERE).mProperty_uint.uintValue ()]) ;
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addUnsigned (message.current_mPriority (HERE).mProperty_uint.uintValue ()) ;
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addUnsigned (message.current_mBytesCount (HERE).mProperty_uint.uintValue ()) ;
-    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.appendRawData ("<tr class=\"result_line\"><td>") ;
+    htmlFile.appendSigned (index) ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendString (message.current_lkey (HERE).mProperty_string.stringValue ()) ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendUnsigned (message.current_mNetworkIndex (HERE).uintValue () +1) ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendString (kMessageClasses [message.current_mClass (HERE).mProperty_uint.uintValue ()]) ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendUnsigned (message.current_mPriority (HERE).mProperty_uint.uintValue ()) ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendUnsigned (message.current_mBytesCount (HERE).mProperty_uint.uintValue ()) ;
+    htmlFile.appendRawData ("</td><td>") ;
 
     int32_t resourceId =  NumberOfProcessors + (int32_t) message.current_mNetworkIndex (HERE).uintValue ();
     int32_t Scal = Resource (resourceId COMMA_HERE).mStep ;
@@ -626,44 +626,44 @@ routine_performComputations_26__26__26__26_ (GALGAS_M_5F_processor & inProcessor
     		(strstr(kMessageClasses [message.current_mClass (HERE).mProperty_uint.uintValue ()],"extended") != NULL)
     		){
       		if (useCANmaxLengthOnly){
-      		  htmlFile.addSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal) ;
+      		  htmlFile.appendSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal) ;
       		}else{
-      			htmlFile.addSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMinDuration / Scal);
-      			htmlFile.addRawData ("--");
-      			htmlFile.addSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal) ;
+      			htmlFile.appendSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMinDuration / Scal);
+      			htmlFile.appendRawData ("--");
+      			htmlFile.appendSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration / Scal) ;
       		}
     }else{
-      htmlFile.addSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration /Scal) ;
+      htmlFile.appendSigned (Element((index-1+NumberOfTasks) COMMA_HERE).mMaxDuration /Scal) ;
     }
-    htmlFile.addRawData ("</td><td>");
-    htmlFile.addUnsigned (message.current_mOffset (HERE).mProperty_uint.uintValue ()) ;
-    htmlFile.addRawData ("</td><td>") ;
-    htmlFile.addSigned (Element (index-1 + NumberOfTasks  COMMA_HERE).mEveryMultiple *
+    htmlFile.appendRawData ("</td><td>");
+    htmlFile.appendUnsigned (message.current_mOffset (HERE).mProperty_uint.uintValue ()) ;
+    htmlFile.appendRawData ("</td><td>") ;
+    htmlFile.appendSigned (Element (index-1 + NumberOfTasks  COMMA_HERE).mEveryMultiple *
                                    Element (index-1 + NumberOfTasks  COMMA_HERE).mPeriod /Scal);
-    htmlFile.addRawData ("</td><td>") ;
+    htmlFile.appendRawData ("</td><td>") ;
     if (message.current_mDeadline (HERE).mProperty_uint.uintValue () == UINT32_MAX){
-    	htmlFile.addRawData ("Unknown</td><td>") ;
+    	htmlFile.appendRawData ("Unknown</td><td>") ;
     }else{
-     	htmlFile.addUnsigned (message.current_mDeadline (HERE).mProperty_uint.uintValue ()) ;
-    	htmlFile.addRawData ("</td><td>") ;
+     	htmlFile.appendUnsigned (message.current_mDeadline (HERE).mProperty_uint.uintValue ()) ;
+    	htmlFile.appendRawData ("</td><td>") ;
     }
     auto ptr = (const cPtr_AC_5F_canMessage *) message.current_mMessageKind (HERE).ptr () ;
    	if (ptr->messageDependsOnTask ()) {
-    	htmlFile.addRawData ("task #") ;
-     	htmlFile.addUnsigned (ptr->getMessageDependanceValue ()+1) ;
+    	htmlFile.appendRawData ("task #") ;
+     	htmlFile.appendUnsigned (ptr->getMessageDependanceValue ()+1) ;
     }else if (ptr->messageDependsOnMessage ()) {
-    	htmlFile.addRawData ("message # ") ;
- 	   	htmlFile.addUnsigned (ptr->getMessageDependanceValue ()+1) ;
+    	htmlFile.appendRawData ("message # ") ;
+ 	   	htmlFile.appendUnsigned (ptr->getMessageDependanceValue ()+1) ;
     }else{
-    	htmlFile.addRawData (" ---") ;
+    	htmlFile.appendRawData (" ---") ;
     }
 
-    htmlFile.addRawData ("</td></tr>") ;
+    htmlFile.appendRawData ("</td></tr>") ;
     message.gotoNextObject () ;
     index ++ ;
   }
-  htmlFile.addRawData ("</table>") ;
-  htmlFile.addRawData ("<br>");
+  htmlFile.appendRawData ("</table>") ;
+  htmlFile.appendRawData ("<br>");
   htmlFile.flush () ;
 //*----------------------------------------------------------------------/
 
@@ -700,10 +700,10 @@ routine_performComputations_26__26__26__26_ (GALGAS_M_5F_processor & inProcessor
                         exElement, Resource, MTElement,
                         responseTimeArray, CreateIntermediateFiles,
                         raw_outputHTMLFileName, htmlFile);
-    printf ("Results are stored in %s file.\n", htmlFileName.cString (HERE));
+    printf ("Results are stored in %s file.\n", htmlFileName.cString ());
 
  	}else{
-    printf ("System map is stored in %s file.\n", htmlFileName.cString (HERE));
+    printf ("System map is stored in %s file.\n", htmlFileName.cString ());
  	}
  	fflush (stdout);
 }

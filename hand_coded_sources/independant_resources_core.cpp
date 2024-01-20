@@ -313,19 +313,19 @@ internalDumpStructure (cIndependantResourcesActivitySchedule * inPtr) {
     while (q != NULL) {
       if (! q->mMarked) {
         q->mMarked = true ;
-        gCout.addString ("at ") ;
-        gCout.addPointer (q);
-        gCout.addString (": activity ") ;
-        gCout.addSigned (q->mActivityIndex);
-        gCout.addString (", duration: ") ;
-        gCout.addSigned (q->mActivityDuration) ;
-        gCout.addString (", eoe:") ;
-        gCout.addSigned (q->mActivityEndOfExecution) ;
-        gCout.addString (", previous:") ;
-        gCout.addPointer (q->mPtrToPreviousActivity);
-        gCout.addString (", other: ") ;
-        gCout.addPointer (q->mPtrToOtherSchedule);
-        gCout.addString ("\n") ;
+        gCout.appendString ("at ") ;
+        gCout.appendPointer (q);
+        gCout.appendString (": activity ") ;
+        gCout.appendSigned (q->mActivityIndex);
+        gCout.appendString (", duration: ") ;
+        gCout.appendSigned (q->mActivityDuration) ;
+        gCout.appendString (", eoe:") ;
+        gCout.appendSigned (q->mActivityEndOfExecution) ;
+        gCout.appendString (", previous:") ;
+        gCout.appendPointer (q->mPtrToPreviousActivity);
+        gCout.appendString (", other: ") ;
+        gCout.appendPointer (q->mPtrToOtherSchedule);
+        gCout.appendString ("\n") ;
         gCout.flush ();
         internalDumpStructure (q->mPtrToOtherSchedule) ;
       }
@@ -342,15 +342,15 @@ dumpSchedule (cIndependantResourceSchedule  * inPtr) {
   unMark () ;
   cIndependantResourceSchedule  * p = inPtr ;
   while (p != NULL) {
-    gCout.addString ("at ") ;
-    gCout.addPointer (p);
-    gCout.addString (": resource:") ;
-    gCout.addSigned (p->mResourceIndex);
-    gCout.addString (", activities: 0x") ;
-    gCout.addPointer (p->mPtrToFirstActivity);
-    gCout.addString (" (last 0x") ;
-    gCout.addPointer (p->mPtrToLastActivity);
-    gCout.addString ("\n") ;
+    gCout.appendString ("at ") ;
+    gCout.appendPointer (p);
+    gCout.appendString (": resource:") ;
+    gCout.appendSigned (p->mResourceIndex);
+    gCout.appendString (", activities: 0x") ;
+    gCout.appendPointer (p->mPtrToFirstActivity);
+    gCout.appendString (" (last 0x") ;
+    gCout.appendPointer (p->mPtrToLastActivity);
+    gCout.appendString ("\n") ;
     gCout.flush ();
     internalDumpStructure (p->mPtrToFirstActivity) ;
     p = p->mPtrToOtherResource ;
@@ -361,10 +361,10 @@ dumpSchedule (cIndependantResourceSchedule  * inPtr) {
 
 void cIndependantResourcesScheduleMap::
 dumpStructure (void) {
-  gCout.addString ("********** DUMP **********\n"
+  gCout.appendString ("********** DUMP **********\n"
         "Latest instant: ") ;
-  gCout.addSigned (mLatestInstant) ;
-  gCout.addString ("\n") ;
+  gCout.appendSigned (mLatestInstant) ;
+  gCout.appendString ("\n") ;
   dumpSchedule (mResourceScheduleArray (mLatestInstant COMMA_HERE)) ;
 }
 
@@ -381,8 +381,8 @@ independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inAct
   cIndependantResourcesScheduleMap scheduleMap ;
 //--- Enter independant activities
   const int32_t activitiesCount = inActivities.count () ;
-  gCout.addSigned (activitiesCount) ;
-  gCout.addString (" activities\n") ;
+  gCout.appendSigned (activitiesCount) ;
+  gCout.appendString (" activities\n") ;
   fflush (stdout);
   for (int32_t i=0 ; i<activitiesCount ; i++) {
     if (inActivities (i COMMA_HERE).mPredecessorId < 0) {
@@ -474,12 +474,12 @@ independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inAct
   outResponseTimeArray.appendObjects (activitiesCount, cResponseTime ()) ;
   scheduleMap.computeBestAndWorstResponseTime (outResponseTimeArray) ;
 
-  gCout.addSigned (gUsedResourceNodesCount) ;
-  gCout.addString (" resource nodes used, ") ;
-  gCout.addSigned (gAllocatedResourceNodesCount) ;
-  gCout.addString (" allocated.\n") ;
-  gCout.addSigned (gAllocatedActivityNodesCount) ;
-  gCout.addString (" activity nodes allocated.\n") ;
+  gCout.appendSigned (gUsedResourceNodesCount) ;
+  gCout.appendString (" resource nodes used, ") ;
+  gCout.appendSigned (gAllocatedResourceNodesCount) ;
+  gCout.appendString (" allocated.\n") ;
+  gCout.appendSigned (gAllocatedActivityNodesCount) ;
+  gCout.appendString (" activity nodes allocated.\n") ;
 }
 
 /*------------------------------------------------------------------------*/

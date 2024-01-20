@@ -30,13 +30,13 @@ NecessaryConditions_OK (Compiler * inCompiler,
     if(ResourceLoad > 1){
     	NecessaryConditionOK = false ;
     	String errorMessage ;
-    	errorMessage.addString ("Maximum load for ") ;
-    	errorMessage.addString (ResType[Resource (index COMMA_HERE).mResourceType]) ;
-    	errorMessage.addString (" (") ;
-    	errorMessage.addString (Resource (index COMMA_HERE).mResourceName) ;
-    	errorMessage.addString (") is: ") ;
-    	errorMessage.addDouble (ResourceLoad) ;
-    	errorMessage.addString (" (greater than 1.0) !\n") ;
+    	errorMessage.appendString ("Maximum load for ") ;
+    	errorMessage.appendString (ResType[Resource (index COMMA_HERE).mResourceType]) ;
+    	errorMessage.appendString (" (") ;
+    	errorMessage.appendString (Resource (index COMMA_HERE).mResourceName) ;
+    	errorMessage.appendString (") is: ") ;
+    	errorMessage.appendDouble (ResourceLoad) ;
+    	errorMessage.appendString (" (greater than 1.0) !\n") ;
 
       inCompiler->onTheFlySemanticError (errorMessage COMMA_HERE) ;
     }else{

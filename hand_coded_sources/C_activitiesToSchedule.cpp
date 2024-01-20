@@ -231,11 +231,11 @@ addEntry (const int32_t inActivityIndex,
 //                                      hashCode, (int32_t) mRootPointer) ;
 //    }
   }else{
-    gCout.addString ("**** ERROR !!! Activity index ") ;
-    gCout.addSigned (inActivityIndex) ;
-    gCout.addString (" already exists in schedule activity list at schedule instant ") ;
-    gCout.addSigned (inActivityScheduleInstant) ;
-    gCout.addString (" ****\n") ;
+    gCout.appendString ("**** ERROR !!! Activity index ") ;
+    gCout.appendSigned (inActivityIndex) ;
+    gCout.appendString (" already exists in schedule activity list at schedule instant ") ;
+    gCout.appendSigned (inActivityScheduleInstant) ;
+    gCout.appendString (" ****\n") ;
   }
 }
 
@@ -618,16 +618,16 @@ bool C_activitiesToSchedule::AnyNotReadyToScheduleAt (const int32_t inCurrentIns
    while (p != NULL) {
      const int32_t index = p->mActivityIndex ;
      if (index < inNames.count ()) {
-      inStream.addString (inNames (index COMMA_HERE)) ;
-      inStream.addString (" ") ;
+      inStream.appendString (inNames (index COMMA_HERE)) ;
+      inStream.appendString (" ") ;
      }
-     inStream.addString ("#") ;
-     inStream.addSigned (index) ;
-     inStream.addString (" at ") ;
-     inStream.addSigned (p->mScheduleInstant) ;
-     inStream.addString (", priority ") ;
-     inStream.addSigned (p->mActivityPriority) ;
-     inStream.addString ("\n") ;
+     inStream.appendString ("#") ;
+     inStream.appendSigned (index) ;
+     inStream.appendString (" at ") ;
+     inStream.appendSigned (p->mScheduleInstant) ;
+     inStream.appendString (", priority ") ;
+     inStream.appendSigned (p->mActivityPriority) ;
+     inStream.appendString ("\n") ;
      p = p->mPtrToNext ;
    }
  }

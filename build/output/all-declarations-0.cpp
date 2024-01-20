@@ -68,13 +68,13 @@ cCollectionElement * cCollectionElement__32_lstringlist::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement__32_lstringlist::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mValue0" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mValue0" ":") ;
   mObject.mProperty_mValue_30_.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mValue1" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mValue1" ":") ;
   mObject.mProperty_mValue_31_.description (ioString, inIndentation) ;
 }
 
@@ -858,135 +858,135 @@ String Lexique_oa_5F_scanner::getCurrentTokenString (const cToken * inTokenPtr) 
   const cTokenFor_oa_5F_scanner * ptr = (const cTokenFor_oa_5F_scanner *) inTokenPtr ;
   String s ;
   if (ptr == nullptr) {
-    s.addString ("$$") ;
+    s.appendString ("$$") ;
   }else{
     switch (ptr->mTokenCode) {
     case kToken_:
-      s.addString ("$$") ;
+      s.appendString ("$$") ;
       break ;
     case kToken_identifier:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("identifier") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
-      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_identifierString) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("identifier") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_identifierString) ;
       break ;
     case kToken_literal_5F_integer:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("literal_integer") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
-      s.addUnsigned (ptr->mLexicalAttribute_ulongValue) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("literal_integer") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendUnsigned (ptr->mLexicalAttribute_ulongValue) ;
       break ;
     case kToken_system:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("system") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("system") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_end:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("end") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("end") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_task:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("task") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("task") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_standard:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("standard") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("standard") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_extended:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("extended") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("extended") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_message:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("message") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("message") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_length:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("length") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("length") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_priority:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("priority") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("priority") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_period:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("period") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("period") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_offset:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("offset") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("offset") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_on:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("on") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("on") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_deadline:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("deadline") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("deadline") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_duration:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("duration") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("duration") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_processor:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("processor") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("processor") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_can:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("can") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("can") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_van:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("van") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("van") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_network:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("network") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("network") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_scalingfactor:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("scalingfactor") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("scalingfactor") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_every:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("every") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("every") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2C_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString (",") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString (",") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3B_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString (";") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString (";") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2E__2E_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("..") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("..") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     default:
       break ;
@@ -1322,13 +1322,13 @@ cMapElement * cMapElement_M_5F_processor::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cMapElement_M_5F_processor::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mIndex" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mIndex" ":") ;
   mProperty_mIndex.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mStep" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mStep" ":") ;
   mProperty_mStep.description (ioString, inIndentation) ;
 }
 
@@ -1662,17 +1662,17 @@ cMapElement * cMapElement_M_5F_network::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cMapElement_M_5F_network::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mIndex" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mIndex" ":") ;
   mProperty_mIndex.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mCANnetwork" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mCANnetwork" ":") ;
   mProperty_mCANnetwork.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mScalingFactor" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mScalingFactor" ":") ;
   mProperty_mScalingFactor.description (ioString, inIndentation) ;
 }
 
@@ -2298,7 +2298,7 @@ const C_galgas_type_descriptor * cPtr_C_5F_canIndependantMessage::classDescripto
 
 void cPtr_C_5F_canIndependantMessage::description (String & ioString,
                                                    const int32_t /* inIndentation */) const {
-  ioString.addString ("[@C_canIndependantMessage]") ;
+  ioString.appendString ("[@C_canIndependantMessage]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2568,9 +2568,9 @@ const C_galgas_type_descriptor * cPtr_C_5F_canMessageFromMessage::classDescripto
 
 void cPtr_C_5F_canMessageFromMessage::description (String & ioString,
                                                    const int32_t inIndentation) const {
-  ioString.addString ("[@C_canMessageFromMessage:") ;
+  ioString.appendString ("[@C_canMessageFromMessage:") ;
   mProperty_mMessageIndex.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2840,9 +2840,9 @@ const C_galgas_type_descriptor * cPtr_C_5F_canMessageFromTask::classDescriptor (
 
 void cPtr_C_5F_canMessageFromTask::description (String & ioString,
                                                 const int32_t inIndentation) const {
-  ioString.addString ("[@C_canMessageFromTask:") ;
+  ioString.appendString ("[@C_canMessageFromTask:") ;
   mProperty_mTaskIndex.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -3048,41 +3048,41 @@ cMapElement * cMapElement_M_5F_messages::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cMapElement_M_5F_messages::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mIndex" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mIndex" ":") ;
   mProperty_mIndex.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mClass" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mClass" ":") ;
   mProperty_mClass.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mNetworkIndex" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mNetworkIndex" ":") ;
   mProperty_mNetworkIndex.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mBytesCount" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mBytesCount" ":") ;
   mProperty_mBytesCount.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mPriority" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mPriority" ":") ;
   mProperty_mPriority.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mOffset" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mOffset" ":") ;
   mProperty_mOffset.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mDeadline" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mDeadline" ":") ;
   mProperty_mDeadline.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mPeriod" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mPeriod" ":") ;
   mProperty_mPeriod.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mMessageKind" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mMessageKind" ":") ;
   mProperty_mMessageKind.description (ioString, inIndentation) ;
 }
 
@@ -3996,7 +3996,7 @@ const C_galgas_type_descriptor * cPtr_C_5F_independantTask::classDescriptor (voi
 
 void cPtr_C_5F_independantTask::description (String & ioString,
                                              const int32_t /* inIndentation */) const {
-  ioString.addString ("[@C_independantTask]") ;
+  ioString.appendString ("[@C_independantTask]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4422,41 +4422,41 @@ cMapElement * cMapElement_M_5F_tasks::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cMapElement_M_5F_tasks::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mIndex" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mIndex" ":") ;
   mProperty_mIndex.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mPriority" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mPriority" ":") ;
   mProperty_mPriority.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mOffset" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mOffset" ":") ;
   mProperty_mOffset.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mDeadline" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mDeadline" ":") ;
   mProperty_mDeadline.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mDurationMin" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mDurationMin" ":") ;
   mProperty_mDurationMin.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mDurationMax" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mDurationMax" ":") ;
   mProperty_mDurationMax.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mProcessor" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mProcessor" ":") ;
   mProperty_mProcessor.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mPeriod" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mPeriod" ":") ;
   mProperty_mPeriod.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mTaskKind" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mTaskKind" ":") ;
   mProperty_mTaskKind.description (ioString, inIndentation) ;
 }
 
@@ -6034,11 +6034,11 @@ const C_galgas_type_descriptor * cPtr_C_5F_taskDependsFromTask::classDescriptor 
 
 void cPtr_C_5F_taskDependsFromTask::description (String & ioString,
                                                  const int32_t inIndentation) const {
-  ioString.addString ("[@C_taskDependsFromTask:") ;
+  ioString.appendString ("[@C_taskDependsFromTask:") ;
   mProperty_mTask.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mEvery.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -6228,11 +6228,11 @@ const C_galgas_type_descriptor * cPtr_C_5F_taskDependsFromMessage::classDescript
 
 void cPtr_C_5F_taskDependsFromMessage::description (String & ioString,
                                                     const int32_t inIndentation) const {
-  ioString.addString ("[@C_taskDependsFromMessage:") ;
+  ioString.appendString ("[@C_taskDependsFromMessage:") ;
   mProperty_mMessage.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mEvery.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -6767,18 +6767,18 @@ void cGrammar_oa_5F_grammar::_performSourceFileParsing_ (Compiler * inCompiler,
         }
       }else{
         String message ;
-        message.addString ("the '") ;
-        message.addString (filePath) ;
-        message.addString ("' file exists, but cannot be read") ;
+        message.appendString ("the '") ;
+        message.appendString (filePath) ;
+        message.appendString ("' file exists, but cannot be read") ;
         const GALGAS_location errorLocation (inFilePath.readProperty_location ()) ;
         inCompiler->semanticErrorAtLocation (errorLocation, message, TC_Array <C_FixItDescription> () COMMA_THERE) ;
       }
       macroDetachSharedObject (scanner) ;
     }else{
       String message ;
-      message.addString ("the '") ;
-      message.addString (filePath) ;
-      message.addString ("' file does not exist") ;
+      message.appendString ("the '") ;
+      message.appendString (filePath) ;
+      message.appendString ("' file does not exist") ;
       const GALGAS_location errorLocation (inFilePath.readProperty_location ()) ;
       inCompiler->semanticErrorAtLocation (errorLocation, message, TC_Array <C_FixItDescription> () COMMA_THERE) ;
     }
@@ -7021,15 +7021,15 @@ void GALGAS__32_lstringlist_2D_element::drop (void) {
 
 void GALGAS__32_lstringlist_2D_element::description (String & ioString,
                                                      const int32_t inIndentation) const {
-  ioString.addString ("<struct @2lstringlist-element:") ;
+  ioString.appendString ("<struct @2lstringlist-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mValue_30_.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mValue_31_.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7145,17 +7145,17 @@ void GALGAS_M_5F_processor_2D_element::drop (void) {
 
 void GALGAS_M_5F_processor_2D_element::description (String & ioString,
                                                     const int32_t inIndentation) const {
-  ioString.addString ("<struct @M_processor-element:") ;
+  ioString.appendString ("<struct @M_processor-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mIndex.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mStep.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7279,19 +7279,19 @@ void GALGAS_M_5F_network_2D_element::drop (void) {
 
 void GALGAS_M_5F_network_2D_element::description (String & ioString,
                                                   const int32_t inIndentation) const {
-  ioString.addString ("<struct @M_network-element:") ;
+  ioString.appendString ("<struct @M_network-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mIndex.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mCANnetwork.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mScalingFactor.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7463,31 +7463,31 @@ void GALGAS_M_5F_messages_2D_element::drop (void) {
 
 void GALGAS_M_5F_messages_2D_element::description (String & ioString,
                                                    const int32_t inIndentation) const {
-  ioString.addString ("<struct @M_messages-element:") ;
+  ioString.appendString ("<struct @M_messages-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mIndex.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mClass.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mNetworkIndex.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mBytesCount.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mPriority.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mOffset.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mDeadline.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mPeriod.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mMessageKind.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7659,31 +7659,31 @@ void GALGAS_M_5F_tasks_2D_element::drop (void) {
 
 void GALGAS_M_5F_tasks_2D_element::description (String & ioString,
                                                 const int32_t inIndentation) const {
-  ioString.addString ("<struct @M_tasks-element:") ;
+  ioString.appendString ("<struct @M_tasks-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mIndex.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mPriority.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mOffset.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mDeadline.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mDurationMin.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mDurationMax.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mProcessor.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mPeriod.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mTaskKind.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7783,7 +7783,7 @@ C_BoolCommandLineOption gOption_oa_5F_cli_5F_options_useCANmaxLegth ("oa_cli_opt
 //--------------------------------------------------------------------------------------------------
 
 static void print_tool_help_message (void) {
-  gCout.addString ("Compiled with GALGAS revision NUMERO_REVISION_GALGAS\n") ;
+  gCout.appendString ("Compiled with GALGAS revision NUMERO_REVISION_GALGAS\n") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7861,7 +7861,7 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
   String executionModeOptionErrorMessage ;
   setExecutionMode (executionModeOptionErrorMessage) ;
   if (executionModeOptionErrorMessage.length () > 0) {
-    gCout.addString (executionModeOptionErrorMessage) ;
+    gCout.appendString (executionModeOptionErrorMessage) ;
     returnCode = 1 ;
   }else{
   //--- Common lexique object
@@ -7896,7 +7896,7 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
             break ;
           }
         }else{
-          printf ("*** Error: unhandled extension for file '%s' ***\n", sourceFilesArray (i COMMA_HERE).cString (HERE)) ;
+          printf ("*** Error: unhandled extension for file '%s' ***\n", sourceFilesArray (i COMMA_HERE).cString ()) ;
           r = 1 ;
         }
         if (r != 0) {
@@ -7924,23 +7924,23 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
       if (verboseOptionOn || (totalWarningCount () > 0) || (totalErrorCount () > 0)) {
         String message ;
         if (totalWarningCount () == 0) {
-          message.addString ("No warning") ;
+          message.appendString ("No warning") ;
         }else if (totalWarningCount () == 1) {
-          message.addString ("1 warning") ;
+          message.appendString ("1 warning") ;
         }else{
-          message.addSigned (totalWarningCount ()) ;
-          message.addString (" warnings") ;
+          message.appendSigned (totalWarningCount ()) ;
+          message.appendString (" warnings") ;
         }
-        message.addString (", ") ;
+        message.appendString (", ") ;
         if (totalErrorCount () == 0) {
-          message.addString ("no error") ;
+          message.appendString ("no error") ;
         }else if (totalErrorCount () == 1) {
-          message.addString ("1 error") ;
+          message.appendString ("1 error") ;
         }else{
-          message.addSigned (totalErrorCount ()) ;
-          message.addString (" errors") ;
+          message.appendSigned (totalErrorCount ()) ;
+          message.appendString (" errors") ;
         }
-        message.addString (".\n") ;
+        message.appendString (".\n") ;
         ggs_printMessage (message COMMA_HERE) ;
       }
     }catch (const ::std::exception & e) {

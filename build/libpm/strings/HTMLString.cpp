@@ -45,16 +45,16 @@ void HTMLString::writeStartCode (const String & inWindowTitle,
                  "<head>\n"
                  "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n"
                  "<title>\n") ;
-  addString (inWindowTitle) ;
+  appendString (inWindowTitle) ;
   addRawData ("</title>") ;
   if (inCSSFileName.length () > 0) {
     addRawData ("<link rel=stylesheet type=\"text/css\" href=\"") ;
-    addRawData (inCSSFileName.cString (HERE)) ;
+    addRawData (inCSSFileName.cString ()) ;
     addRawData ("\">") ;
   }  
   if (inCSSContents.length () > 0) {
     addRawData ("<style type=\"text/css\">") ;
-    addRawData (inCSSContents.cString (HERE)) ;
+    addRawData (inCSSContents.cString ()) ;
     addRawData ("</style>") ;
   }
   addRawData ("</head>"
@@ -126,16 +126,16 @@ void HTMLString::performActualUnicodeArrayOutput (const utf32 * inCharArray,
 //                 Comments as a table                                                           
 //--------------------------------------------------------------------------------------------------
 
-void HTMLString::addCppTitleComment (const String & inCommentString,
+void HTMLString::appendCppTitleComment (const String & inCommentString,
                                      const String & inTableStyleClass) {
   addRawData ("<table") ;
   if (inTableStyleClass.length () > 0) {
     addRawData (" class=\"") ;
-    addRawData (inTableStyleClass.cString (HERE)) ;
+    addRawData (inTableStyleClass.cString ()) ;
     addRawData ("\"") ;
   }
   addRawData ("><tr><td>\n") ;
-  addString (inCommentString) ;
+  appendString (inCommentString) ;
   addRawData ("\n</td></tr></table>\n") ;
 }
 

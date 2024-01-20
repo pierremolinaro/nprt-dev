@@ -35,57 +35,57 @@ ExtractWorstBestRT (Compiler * inCompiler,
   }
 
   if(CreateIntermediateFiles){
-    printf ("Raw output results are stored in %s file.\n", raw_outputHTMLFileName.cString (HERE)) ;
+    printf ("Raw output results are stored in %s file.\n", raw_outputHTMLFileName.cString ()) ;
     HTMLFileWrite raw_file (raw_outputHTMLFileName,
                                "Activities Outputs",
                                "style.css",
                                "") ;
     if (! raw_file.isOpened ()) {
       String message ;
-      message.addString ("Cannot open '") ;
-      message.addString (raw_outputHTMLFileName) ;
-      message.addString ("' file in write mode.") ;
+      message.appendString ("Cannot open '") ;
+      message.appendString (raw_outputHTMLFileName) ;
+      message.appendString ("' file in write mode.") ;
       inCompiler->onTheFlySemanticError (message COMMA_HERE) ;
     }
     fflush (stdout);
 
-		raw_file.addCppTitleComment ("raw Activities results map", "title") ;
-		raw_file.addRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
-		raw_file.addRawData ("#</td><td>Activity</td><td>Resource</td><td>Occurrence</td><td>");
-  	raw_file.addRawData ("Offset</td><td>BRT</td><td>WRT</td></tr>") ;
+		raw_file.appendCppTitleComment ("raw Activities results map", "title") ;
+		raw_file.appendRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
+		raw_file.appendRawData ("#</td><td>Activity</td><td>Resource</td><td>Occurrence</td><td>");
+  	raw_file.appendRawData ("Offset</td><td>BRT</td><td>WRT</td></tr>") ;
 
 
 		for (int32_t i=0 ; i<inResponseTimeArray.count () ; i++) {
 		  if ( (exElement (i COMMA_HERE).mOccurrence % exElement (i COMMA_HERE).mEvery) == 0 ){
-				raw_file.addRawData ("<tr class=\"result_line\"><td>") ;
-		    raw_file.addSigned (i) ;
-		    raw_file.addRawData ("</td><td>") ;
-		    raw_file.addString (exElement (i COMMA_HERE).mElementName) ;
-		    raw_file.addRawData ("</td><td>") ;
-		    raw_file.addString (Resource (exElement (i COMMA_HERE).mResourceId COMMA_HERE).mResourceName) ;
-	  		raw_file.addRawData ("</td><td>") ;
-		    raw_file.addSigned (exElement (i COMMA_HERE).mOccurrence/exElement (i COMMA_HERE).mEvery);
-		    raw_file.addRawData ("</td><td>") ;
-		    raw_file.addSigned (exElement (i COMMA_HERE).mOffset) ;
-		    raw_file.addRawData ("</td><td>") ;
+				raw_file.appendRawData ("<tr class=\"result_line\"><td>") ;
+		    raw_file.appendSigned (i) ;
+		    raw_file.appendRawData ("</td><td>") ;
+		    raw_file.appendString (exElement (i COMMA_HERE).mElementName) ;
+		    raw_file.appendRawData ("</td><td>") ;
+		    raw_file.appendString (Resource (exElement (i COMMA_HERE).mResourceId COMMA_HERE).mResourceName) ;
+	  		raw_file.appendRawData ("</td><td>") ;
+		    raw_file.appendSigned (exElement (i COMMA_HERE).mOccurrence/exElement (i COMMA_HERE).mEvery);
+		    raw_file.appendRawData ("</td><td>") ;
+		    raw_file.appendSigned (exElement (i COMMA_HERE).mOffset) ;
+		    raw_file.appendRawData ("</td><td>") ;
 
 		    if (inResponseTimeArray (i COMMA_HERE).mBestResponseTime == INT32_MAX) {
-	      		raw_file.addRawData ("Error</td><td>") ;
+	      		raw_file.appendRawData ("Error</td><td>") ;
 	      }else{
-	      		raw_file.addSigned (inResponseTimeArray ( i COMMA_HERE).mBestResponseTime) ;
-		  			raw_file.addRawData ("</td><td>") ;
+	      		raw_file.appendSigned (inResponseTimeArray ( i COMMA_HERE).mBestResponseTime) ;
+		  			raw_file.appendRawData ("</td><td>") ;
 	      }
 
 			  if (inResponseTimeArray ( i COMMA_HERE).mWorstResponseTime == 0){
-	      			raw_file.addRawData ("Error</td></tr>") ;
+	      			raw_file.appendRawData ("Error</td></tr>") ;
 	      }else{
-	      	raw_file.addSigned (inResponseTimeArray ( i COMMA_HERE).mWorstResponseTime) ;
-		  		raw_file.addRawData ("</td></tr>") ;
+	      	raw_file.appendSigned (inResponseTimeArray ( i COMMA_HERE).mWorstResponseTime) ;
+		  		raw_file.appendRawData ("</td></tr>") ;
 	      }
 	    }
 	  }
-		raw_file.addRawData ("</table>") ;
-	  raw_file.addRawData ("<br>");
+		raw_file.appendRawData ("</table>") ;
+	  raw_file.appendRawData ("<br>");
 	}
 	int32_t DC= 0;
   for( int32_t index =0; index< Num_ofElements; index++){
@@ -137,64 +137,64 @@ ExtractWorstBestRT (Compiler * inCompiler,
     DC=DC + int32_t (MTElement(index COMMA_HERE).mWidth) ;
   }
 
-	in_htmlFile.addCppTitleComment ("Final results map", "title") ;
-	in_htmlFile.addRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
-	in_htmlFile.addRawData ("#</td><td>Element</td><td>Resource</td><td>BRT</td><td>");
-  in_htmlFile.addRawData ("WRT</td><td>Period</td><td>Deadline</td><td>&nbsp;</td></tr>") ;
+	in_htmlFile.appendCppTitleComment ("Final results map", "title") ;
+	in_htmlFile.appendRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
+	in_htmlFile.appendRawData ("#</td><td>Element</td><td>Resource</td><td>BRT</td><td>");
+  in_htmlFile.appendRawData ("WRT</td><td>Period</td><td>Deadline</td><td>&nbsp;</td></tr>") ;
 
 	int32_t ElementIndex = 1;
 	for(int32_t index = 0; index <Num_ofResources ;index++) {
   	for(int32_t i = 0; i<Num_ofElements; i++){
   		if(index == MTElement ( i COMMA_HERE).mResourceId){
-				in_htmlFile.addRawData ("<tr class=\"result_line\"><td>") ;
-		    in_htmlFile.addSigned (ElementIndex) ;
-		    in_htmlFile.addRawData ("</td><td>") ;
-		    in_htmlFile.addString (MTElement ( i COMMA_HERE).mElementName) ;
-		    in_htmlFile.addRawData ("</td><td>") ;
-		    in_htmlFile.addString (Resource ( index COMMA_HERE).mResourceName) ;
-	  		in_htmlFile.addRawData ("</td><td>") ;
+				in_htmlFile.appendRawData ("<tr class=\"result_line\"><td>") ;
+		    in_htmlFile.appendSigned (ElementIndex) ;
+		    in_htmlFile.appendRawData ("</td><td>") ;
+		    in_htmlFile.appendString (MTElement ( i COMMA_HERE).mElementName) ;
+		    in_htmlFile.appendRawData ("</td><td>") ;
+		    in_htmlFile.appendString (Resource ( index COMMA_HERE).mResourceName) ;
+	  		in_htmlFile.appendRawData ("</td><td>") ;
 
 		    if (MTElement ( i COMMA_HERE).mBestResponseTime == INT32_MAX) {
-      		in_htmlFile.addRawData ("Error</td><td>") ;
+      		in_htmlFile.appendRawData ("Error</td><td>") ;
       	}else{
-      		in_htmlFile.addSigned (MTElement ( i COMMA_HERE).mBestResponseTime) ;
-	  			in_htmlFile.addRawData ("</td><td>") ;
+      		in_htmlFile.appendSigned (MTElement ( i COMMA_HERE).mBestResponseTime) ;
+	  			in_htmlFile.appendRawData ("</td><td>") ;
       	}
 
 		    if (MTElement ( i COMMA_HERE).mWorstResponseTime == 0){
-      			in_htmlFile.addRawData ("Error</td><td>") ;
+      			in_htmlFile.appendRawData ("Error</td><td>") ;
       	}else{
-      		in_htmlFile.addSigned (MTElement ( i COMMA_HERE).mWorstResponseTime) ;
-	  			in_htmlFile.addRawData ("</td><td>") ;
+      		in_htmlFile.appendSigned (MTElement ( i COMMA_HERE).mWorstResponseTime) ;
+	  			in_htmlFile.appendRawData ("</td><td>") ;
       	}
 
-		    in_htmlFile.addSigned (MTElement ( i COMMA_HERE).mPeriod * MTElement ( i COMMA_HERE).mEvery) ;
-		    in_htmlFile.addRawData ("</td><td>") ;
+		    in_htmlFile.appendSigned (MTElement ( i COMMA_HERE).mPeriod * MTElement ( i COMMA_HERE).mEvery) ;
+		    in_htmlFile.appendRawData ("</td><td>") ;
 
 		    if (MTElement ( i COMMA_HERE).mDeadline ==  INT32_MAX){// PMUINT32_MAX -> INT32_MAX by PM 17/1/2005
-  				in_htmlFile.addRawData ("Unkown</td><td>&nbsp;</td></tr>") ;
+  				in_htmlFile.appendRawData ("Unkown</td><td>&nbsp;</td></tr>") ;
   			}else{
-        	in_htmlFile.addSigned (MTElement ( i COMMA_HERE).mDeadline) ;
-	  			in_htmlFile.addRawData ("</td>") ;
+        	in_htmlFile.appendSigned (MTElement ( i COMMA_HERE).mDeadline) ;
+	  			in_htmlFile.appendRawData ("</td>") ;
 
       		if (MTElement (i COMMA_HERE).mWorstResponseTime >
       			MTElement ( i COMMA_HERE).mDeadline){
-      			in_htmlFile.addRawData ("<td><--- deadline Error!</td></tr>") ;
+      			in_htmlFile.appendRawData ("<td><--- deadline Error!</td></tr>") ;
       		}else{
-        		in_htmlFile.addRawData ("<td>&nbsp;</td></tr>");
+        		in_htmlFile.appendRawData ("<td>&nbsp;</td></tr>");
         	}
       	}
 		    ElementIndex ++;
 		  }
 		}
 		if (index <(Num_ofResources-1)){
-			in_htmlFile.addRawData ("</td><td></td><td></td><td></td><td>");
-  		in_htmlFile.addRawData ("</td><td></td><td></td></tr>") ;
+			in_htmlFile.appendRawData ("</td><td></td><td></td><td></td><td>");
+  		in_htmlFile.appendRawData ("</td><td></td><td></td></tr>") ;
   	}
 	}
-	in_htmlFile.addRawData ("</table>") ;
-	in_htmlFile.addRawData ("<br>");
-	in_htmlFile.addRawData("<tr>Response times are calculated with respect to offsets of independent tasks.</tr>");
+	in_htmlFile.appendRawData ("</table>") ;
+	in_htmlFile.appendRawData ("<br>");
+	in_htmlFile.appendRawData("<tr>Response times are calculated with respect to offsets of independent tasks.</tr>");
 }
 
 /*---------------------------------------------------------------------*/

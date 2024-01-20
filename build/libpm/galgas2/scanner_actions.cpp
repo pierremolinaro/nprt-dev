@@ -30,7 +30,7 @@
 //--------------------------------------------------------------------------------------------------
 
 #ifndef DO_NOT_GENERATE_CHECKINGS
-  #define LINE_AND_SOURCE_FILE_FOR_SCANNER_ACTIONS , inLexique.sourceText ().sourceFilePath ().cString (HERE), inLexique.lineNumber ()
+  #define LINE_AND_SOURCE_FILE_FOR_SCANNER_ACTIONS , inLexique.sourceText ().sourceFilePath ().cString (), inLexique.lineNumber ()
 #else
   #define LINE_AND_SOURCE_FILE_FOR_SCANNER_ACTIONS
 #endif
@@ -91,7 +91,7 @@ void scanner_routine_enterDigitIntoASCIIcharacter (Lexique & inLexique,
 void scanner_routine_enterCharacterIntoString (Lexique & /* inLexique */,
                                                String & ioString,
                                                const utf32 inChar) {
-  ioString.addUnicodeChar (inChar COMMA_HERE) ;
+  ioString.appendUnicodeChar (inChar COMMA_HERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -100,7 +100,7 @@ void scanner_routine_convertStringToDouble (Lexique & inLexique,
                                             const String & inString,
                                             double & outValue,
                                             const char * inConversionError) {
-  const double value = ::strtod (inString.cString (HERE), nullptr) ;
+  const double value = ::strtod (inString.cString (), nullptr) ;
   if (errno == ERANGE) {
     inLexique.lexicalError (inConversionError LINE_AND_SOURCE_FILE_FOR_SCANNER_ACTIONS) ;
   }else{
@@ -724,7 +724,7 @@ void scanner_routine_codePointToUnicode (Lexique & inLexique,
       }
     }
     if (isUnicodeCharacterAssigned (TO_UNICODE (code))) {
-      ioTemplateString.addUnicodeChar (TO_UNICODE (code) COMMA_HERE) ;
+      ioTemplateString.appendUnicodeChar (TO_UNICODE (code) COMMA_HERE) ;
     }else{
       inLexique.lexicalError ("the escape sequence '&#...;' is not an assigned unicode character" COMMA_HERE) ;
     }
@@ -742,7 +742,7 @@ void scanner_routine_codePointToUnicode (Lexique & inLexique,
       }
     }
     if (isUnicodeCharacterAssigned (TO_UNICODE (code))) {
-      ioTemplateString.addUnicodeChar (TO_UNICODE (code) COMMA_HERE) ;
+      ioTemplateString.appendUnicodeChar (TO_UNICODE (code) COMMA_HERE) ;
     }else{
       inLexique.lexicalError ("the escape sequence '&#...;' is not an assigned unicode character" COMMA_HERE) ;
     }
@@ -814,7 +814,7 @@ void scanner_routine_convertDecimalStringIntoBigInt (Lexique & inLexique,
                                                      BigSigned & outValue,
                                                      const char * inCharacterIsNotDecimalDigitError) {
   bool ok = true ;
-  outValue = BigSigned (inDecimalString.cString (HERE), BigUnsignedBase::ten, ok) ;
+  outValue = BigSigned (inDecimalString.cString (), BigUnsignedBase::ten, ok) ;
   if (! ok) {
     inLexique.lexicalError (inCharacterIsNotDecimalDigitError LINE_AND_SOURCE_FILE_FOR_SCANNER_ACTIONS) ;
   }
@@ -827,7 +827,7 @@ void scanner_routine_convertHexStringIntoBigInt (Lexique & inLexique,
                                                  BigSigned & outValue,
                                                  const char * inCharacterIsNotHexDigitError) {
   bool ok = true ;
-  outValue = BigSigned (inHexString.cString (HERE), BigUnsignedBase::sixteen, ok) ;
+  outValue = BigSigned (inHexString.cString (), BigUnsignedBase::sixteen, ok) ;
   if (! ok) {
     inLexique.lexicalError (inCharacterIsNotHexDigitError LINE_AND_SOURCE_FILE_FOR_SCANNER_ACTIONS) ;
   }
@@ -861,7 +861,7 @@ void scanner_routine_convertBinaryStringIntoBigInt (Lexique & inLexique,
                                                      BigSigned & outValue,
                                                      const char * inCharacterIsNotBinaryDigitError) {
   bool ok = true ;
-  outValue = BigSigned (inBinaryString.cString (HERE), BigUnsignedBase::two, ok) ;
+  outValue = BigSigned (inBinaryString.cString (), BigUnsignedBase::two, ok) ;
   if (! ok) {
     inLexique.lexicalError (inCharacterIsNotBinaryDigitError LINE_AND_SOURCE_FILE_FOR_SCANNER_ACTIONS) ;
   }

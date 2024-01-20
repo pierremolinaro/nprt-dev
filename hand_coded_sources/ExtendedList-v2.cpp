@@ -66,9 +66,9 @@ CalculateHyperPeriod (const TC_UniqueArray <cElement> & Element) {
   }else{
     HyperPeriod = LCM + LCM + (uint32_t) maximumOffset;
   }
-  gCout.addString ("HyperPeriod : ") ;
-  gCout.addUnsigned (HyperPeriod) ;
-  gCout.addString ("\n") ;
+  gCout.appendString ("HyperPeriod : ") ;
+  gCout.appendUnsigned (HyperPeriod) ;
+  gCout.appendString ("\n") ;
 
   return HyperPeriod ;
 }
@@ -493,50 +493,50 @@ CreateActivitiesFile (Compiler * inCompiler,
 							      	const String & activitiesHTMLFileName){
 
   const int32_t NumberOfElements = exElement.count () ;
-  printf ("Extended activities list is stored in %s file.\n", activitiesHTMLFileName.cString (HERE)) ;
+  printf ("Extended activities list is stored in %s file.\n", activitiesHTMLFileName.cString ()) ;
   HTMLFileWrite act_htmlFile (activitiesHTMLFileName,
                               "Extended List Activities",
                               "style.css",
                               "") ;
   if (! act_htmlFile.isOpened ()) {
     String message ;
-    message.addString ("Cannot open '") ;
-    message.addString (activitiesHTMLFileName) ;
-    message.addString ("' file in write mode.") ;
+    message.appendString ("Cannot open '") ;
+    message.appendString (activitiesHTMLFileName) ;
+    message.appendString ("' file in write mode.") ;
     inCompiler->onTheFlySemanticError (message COMMA_HERE) ;
   }
 
-	act_htmlFile.addCppTitleComment ("raw Activities map", "title") ;
-	act_htmlFile.addRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
-	act_htmlFile.addRawData ("#</td><td>Activity</td><td>Resource</td><td>Priority</td><td>");
-  act_htmlFile.addRawData ("Occurrence</td><td>Offset</td><td>minDur.</td><td>");
-  act_htmlFile.addRawData ("MaxDur.</td><td>Predecessor</td></tr>") ;
+	act_htmlFile.appendCppTitleComment ("raw Activities map", "title") ;
+	act_htmlFile.appendRawData ("<br><table class=\"result\"><tr class=\"result_title\"><td>");
+	act_htmlFile.appendRawData ("#</td><td>Activity</td><td>Resource</td><td>Priority</td><td>");
+  act_htmlFile.appendRawData ("Occurrence</td><td>Offset</td><td>minDur.</td><td>");
+  act_htmlFile.appendRawData ("MaxDur.</td><td>Predecessor</td></tr>") ;
 
  	for (int32_t index = 0; index < NumberOfElements ;index++) {
  	  if ( (exElement (index COMMA_HERE).mOccurrence % exElement (index COMMA_HERE).mEvery) == 0 ){
-			act_htmlFile.addRawData ("<tr class=\"result_line\"><td>") ;
-		  act_htmlFile.addSigned (index) ;
-		  act_htmlFile.addRawData ("</td><td>") ;
-		  act_htmlFile.addString (exElement (index COMMA_HERE).mElementName);
-	    act_htmlFile.addRawData ("</td><td>") ;
-		  act_htmlFile.addSigned (exElement (index COMMA_HERE).mResourceId) ;
-	    act_htmlFile.addRawData ("</td><td>") ;
-		  act_htmlFile.addSigned (exElement (index COMMA_HERE).mPriority) ;
-	    act_htmlFile.addRawData ("</td><td>") ;
-		  act_htmlFile.addSigned (exElement (index COMMA_HERE).mOccurrence/exElement (index COMMA_HERE).mEvery);
-	    act_htmlFile.addRawData ("</td><td>") ;
-		  act_htmlFile.addSigned (exElement (index COMMA_HERE).mOffset);
-	    act_htmlFile.addRawData ("</td><td>") ;
-		  act_htmlFile.addSigned (exElement (index COMMA_HERE).mMinDuration);
-	    act_htmlFile.addRawData ("</td><td>") ;
-		  act_htmlFile.addSigned (exElement (index COMMA_HERE).mMaxDuration);
-	    act_htmlFile.addRawData ("</td><td>") ;
-		  act_htmlFile.addSigned (exElement (index COMMA_HERE).mPredecessorId);
-	    act_htmlFile.addRawData ("</td><td>") ;
+			act_htmlFile.appendRawData ("<tr class=\"result_line\"><td>") ;
+		  act_htmlFile.appendSigned (index) ;
+		  act_htmlFile.appendRawData ("</td><td>") ;
+		  act_htmlFile.appendString (exElement (index COMMA_HERE).mElementName);
+	    act_htmlFile.appendRawData ("</td><td>") ;
+		  act_htmlFile.appendSigned (exElement (index COMMA_HERE).mResourceId) ;
+	    act_htmlFile.appendRawData ("</td><td>") ;
+		  act_htmlFile.appendSigned (exElement (index COMMA_HERE).mPriority) ;
+	    act_htmlFile.appendRawData ("</td><td>") ;
+		  act_htmlFile.appendSigned (exElement (index COMMA_HERE).mOccurrence/exElement (index COMMA_HERE).mEvery);
+	    act_htmlFile.appendRawData ("</td><td>") ;
+		  act_htmlFile.appendSigned (exElement (index COMMA_HERE).mOffset);
+	    act_htmlFile.appendRawData ("</td><td>") ;
+		  act_htmlFile.appendSigned (exElement (index COMMA_HERE).mMinDuration);
+	    act_htmlFile.appendRawData ("</td><td>") ;
+		  act_htmlFile.appendSigned (exElement (index COMMA_HERE).mMaxDuration);
+	    act_htmlFile.appendRawData ("</td><td>") ;
+		  act_htmlFile.appendSigned (exElement (index COMMA_HERE).mPredecessorId);
+	    act_htmlFile.appendRawData ("</td><td>") ;
 		}
 	}
-	act_htmlFile.addRawData ("</table>") ;
-	act_htmlFile.addRawData ("<br>");
+	act_htmlFile.appendRawData ("</table>") ;
+	act_htmlFile.appendRawData ("<br>");
 }
 
 /*----------------------------------------------------------------------------*/
@@ -567,8 +567,8 @@ BuildExtendedList (Compiler * inCompiler,
 	const int32_t Num_of_Activties =
 	      DeployElements (ArrangedElement, exElement, outMTElement, HyperPeriod);
 
- 	gCout.addSigned (Num_of_Activties) ;
-  gCout.addString (" activities\n") ;
+ 	gCout.appendSigned (Num_of_Activties) ;
+  gCout.appendString (" activities\n") ;
   gCout.flush ();
  	if (CreateIntermediateFiles){
 	 	CreateActivitiesFile (inCompiler, exElement, activitiesHTMLFileName);

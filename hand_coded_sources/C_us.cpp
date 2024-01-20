@@ -346,10 +346,10 @@ find_or_add (const int32_t inIndex,
        if (firstPrint) {
          firstPrint = false ;
        }else{
-         inStream.addString (" ") ;
+         inStream.appendString (" ") ;
        }
-       inStream.addString (inPrefix) ;
-       inStream.addSigned ((p->mIndex - inFirst) / inStep) ;
+       inStream.appendString (inPrefix) ;
+       inStream.appendSigned ((p->mIndex - inFirst) / inStep) ;
      }
      p = p->mPtrToNext ;
    }
@@ -368,9 +368,9 @@ find_or_add (const int32_t inIndex,
        if (firstPrint) {
          firstPrint = false ;
        }else{
-         inStream.addString (" ") ;
+         inStream.appendString (" ") ;
        }
-       inStream.addString (inNames ((p->mIndex - inFirst) / inStep COMMA_HERE)) ;
+       inStream.appendString (inNames ((p->mIndex - inFirst) / inStep COMMA_HERE)) ;
      }
      p = p->mPtrToNext ;
    }
@@ -407,46 +407,46 @@ void C_us::collectUnusedNodes (void) {
 
 void C_us::printVDLsummary (AbstractOutputStream & inOutputStream) {
   const uint64_t n = getTrivialAddCount () + getCacheSuccessCount () + getCacheFailureCount () ;
-  inOutputStream.addString ("Summary of VDL operations :\n"
+  inOutputStream.appendString ("Summary of VDL operations :\n"
                     "  ") ;
-  inOutputStream.addSigned (getVDLnodeCount ());
-  inOutputStream.addString (" VDL used nodes (size ") ;
-  inOutputStream.addUnsigned (getNodeSize ()) ;
-  inOutputStream.addString (" bytes) ;\n"
+  inOutputStream.appendSigned (getVDLnodeCount ());
+  inOutputStream.appendString (" VDL used nodes (size ") ;
+  inOutputStream.appendUnsigned (getNodeSize ()) ;
+  inOutputStream.appendString (" bytes) ;\n"
                     "  ") ;
-  inOutputStream.addUnsigned (C_us_hashmap::getCreatedObjectCount ());
-  inOutputStream.addString (" VDL created nodes (total size ") ;
-  inOutputStream.addUnsigned ((C_us_hashmap::getCreatedObjectCount () * getNodeSize ()) / 1024UL);
-  inOutputStream.addString (" kbytes) ;\n"
+  inOutputStream.appendUnsigned (C_us_hashmap::getCreatedObjectCount ());
+  inOutputStream.appendString (" VDL created nodes (total size ") ;
+  inOutputStream.appendUnsigned ((C_us_hashmap::getCreatedObjectCount () * getNodeSize ()) / 1024UL);
+  inOutputStream.appendString (" kbytes) ;\n"
                     "  ") ;
-  inOutputStream.addSigned (getNodeComparesCount ()) ;
-  inOutputStream.addString (" comparisons ;\n"
+  inOutputStream.appendSigned (getNodeComparesCount ()) ;
+  inOutputStream.appendString (" comparisons ;\n"
                     "  ") ;
-  inOutputStream.addUnsigned (getTrivialAddCount ());
-  inOutputStream.addString (" trivial additions (") ;
-  inOutputStream.addUnsigned ((100ULL * getTrivialAddCount ()) / n);
-  inOutputStream.addString ("%) ;\n"
+  inOutputStream.appendUnsigned (getTrivialAddCount ());
+  inOutputStream.appendString (" trivial additions (") ;
+  inOutputStream.appendUnsigned ((100ULL * getTrivialAddCount ()) / n);
+  inOutputStream.appendString ("%) ;\n"
                     "  ") ;
-  inOutputStream.addUnsigned (getCacheSuccessCount ());
-  inOutputStream.addString (" cache successes (") ;
-  inOutputStream.addUnsigned ((100ULL * getCacheSuccessCount ()) / n) ;
-  inOutputStream.addString ("%) ;\n"
+  inOutputStream.appendUnsigned (getCacheSuccessCount ());
+  inOutputStream.appendString (" cache successes (") ;
+  inOutputStream.appendUnsigned ((100ULL * getCacheSuccessCount ()) / n) ;
+  inOutputStream.appendString ("%) ;\n"
                     "  ") ;
-  inOutputStream.addUnsigned (getCacheFailureCount ()) ;
-  inOutputStream.addString (" cache failures (") ;
-  inOutputStream.addUnsigned ((100ULL * getCacheFailureCount ()) / n) ;
-  inOutputStream.addString ("%), including ") ;
-  inOutputStream.addUnsigned (getCacheOverrideCount ()) ;
-  inOutputStream.addString (" cache overrides (") ;
-  inOutputStream.addUnsigned ((100ULL * getCacheOverrideCount ()) / n) ;
-  inOutputStream.addString ("%) ;\n"
+  inOutputStream.appendUnsigned (getCacheFailureCount ()) ;
+  inOutputStream.appendString (" cache failures (") ;
+  inOutputStream.appendUnsigned ((100ULL * getCacheFailureCount ()) / n) ;
+  inOutputStream.appendString ("%), including ") ;
+  inOutputStream.appendUnsigned (getCacheOverrideCount ()) ;
+  inOutputStream.appendString (" cache overrides (") ;
+  inOutputStream.appendUnsigned ((100ULL * getCacheOverrideCount ()) / n) ;
+  inOutputStream.appendString ("%) ;\n"
                     "  ") ;
-  inOutputStream.addUnsigned (getUnusedCacheEntriesCount ()) ;
-  inOutputStream.addString (" unused cache entries (") ;
-  inOutputStream.addUnsigned ((100ULL * getUnusedCacheEntriesCount ()) / getCacheEntriesCount ()) ;
-  inOutputStream.addString ("%, total entries = ") ;
-  inOutputStream.addUnsigned (getCacheEntriesCount ()) ;
-  inOutputStream.addString (").\n") ;
+  inOutputStream.appendUnsigned (getUnusedCacheEntriesCount ()) ;
+  inOutputStream.appendString (" unused cache entries (") ;
+  inOutputStream.appendUnsigned ((100ULL * getUnusedCacheEntriesCount ()) / getCacheEntriesCount ()) ;
+  inOutputStream.appendString ("%, total entries = ") ;
+  inOutputStream.appendUnsigned (getCacheEntriesCount ()) ;
+  inOutputStream.appendString (").\n") ;
 }
 
 //---------------------------------------------------------------------------*
