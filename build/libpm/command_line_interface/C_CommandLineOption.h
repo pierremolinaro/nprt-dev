@@ -4,7 +4,7 @@
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2009, ..., 2021 Pierre Molinaro.
+//  Copyright (C) 2009, ..., 2024 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -29,25 +29,25 @@
 
 class C_CommandLineOption {
 //--- Constructor
-  public: C_CommandLineOption (const char * inDomainName,
-                                const char * inIdentifier,
-                                const char inChar,
-                                const char * inString,
-                                const char * inComment) ;
+  public: C_CommandLineOption (const String & inDomainName,
+                               const String & inIdentifier,
+                               const char inChar,
+                               const String & inString,
+                               const String & inComment) ;
 
 //--- Virtual destructor
   public: virtual ~ C_CommandLineOption (void) ;
 
 //--- No Copy
-  private: C_CommandLineOption (const C_CommandLineOption &) ;
-  private: C_CommandLineOption & operator = (const C_CommandLineOption &) ;
+  private: C_CommandLineOption (const C_CommandLineOption &) = delete ;
+  private: C_CommandLineOption & operator = (const C_CommandLineOption &) = delete ;
 
 //--- Attributes
-  public: const char * const mDomainName ;
-  public: const char * const mIdentifier ;
+  public: const String mDomainName ;
+  public: const String mIdentifier ;
   public: const char mCommandChar ;
-  public: const char * const mCommandString ;
-  public: const char * const mComment ;
+  public: const String mCommandString ;
+  public: const String mComment ;
 
 //--- Accessing option parameters from GALGAS
   public: inline char readProperty_char (void) const { return mCommandChar ; }

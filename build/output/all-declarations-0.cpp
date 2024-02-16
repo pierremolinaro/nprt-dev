@@ -70,11 +70,11 @@ cCollectionElement * cCollectionElement__32_lstringlist::copy (void) {
 void cCollectionElement__32_lstringlist::description (String & ioString, const int32_t inIndentation) const {
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mValue0" ":") ;
+  ioString.appendCString ("mValue0" ":") ;
   mObject.mProperty_mValue_30_.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mValue1" ":") ;
+  ioString.appendCString ("mValue1" ":") ;
   mObject.mProperty_mValue_31_.description (ioString, inIndentation) ;
 }
 
@@ -567,35 +567,31 @@ String Lexique_oa_5F_scanner::getMessageForTerminal (const int32_t inTerminalInd
 //                      U N I C O D E    S T R I N G S                                           
 //--------------------------------------------------------------------------------------------------
 
-//--- Unicode string for '$_2C_$'
-static const utf32 kUnicodeString_oa_5F_scanner__2C_ [] = {
+//--- Unicode string for '$,$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner__2C_ = {
   TO_UNICODE (','),
-  TO_UNICODE (0)
 } ;
 
-//--- Unicode string for '$_2E__2E_$'
-static const utf32 kUnicodeString_oa_5F_scanner__2E__2E_ [] = {
+//--- Unicode string for '$..$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner__2E__2E_ = {
   TO_UNICODE ('.'),
   TO_UNICODE ('.'),
-  TO_UNICODE (0)
 } ;
 
-//--- Unicode string for '$_3B_$'
-static const utf32 kUnicodeString_oa_5F_scanner__3B_ [] = {
+//--- Unicode string for '$;$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner__3B_ = {
   TO_UNICODE (';'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$can$'
-static const utf32 kUnicodeString_oa_5F_scanner_can [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_can = {
   TO_UNICODE ('c'),
   TO_UNICODE ('a'),
   TO_UNICODE ('n'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$deadline$'
-static const utf32 kUnicodeString_oa_5F_scanner_deadline [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_deadline = {
   TO_UNICODE ('d'),
   TO_UNICODE ('e'),
   TO_UNICODE ('a'),
@@ -604,11 +600,10 @@ static const utf32 kUnicodeString_oa_5F_scanner_deadline [] = {
   TO_UNICODE ('i'),
   TO_UNICODE ('n'),
   TO_UNICODE ('e'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$duration$'
-static const utf32 kUnicodeString_oa_5F_scanner_duration [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_duration = {
   TO_UNICODE ('d'),
   TO_UNICODE ('u'),
   TO_UNICODE ('r'),
@@ -617,29 +612,26 @@ static const utf32 kUnicodeString_oa_5F_scanner_duration [] = {
   TO_UNICODE ('i'),
   TO_UNICODE ('o'),
   TO_UNICODE ('n'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$end$'
-static const utf32 kUnicodeString_oa_5F_scanner_end [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_end = {
   TO_UNICODE ('e'),
   TO_UNICODE ('n'),
   TO_UNICODE ('d'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$every$'
-static const utf32 kUnicodeString_oa_5F_scanner_every [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_every = {
   TO_UNICODE ('e'),
   TO_UNICODE ('v'),
   TO_UNICODE ('e'),
   TO_UNICODE ('r'),
   TO_UNICODE ('y'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$extended$'
-static const utf32 kUnicodeString_oa_5F_scanner_extended [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_extended = {
   TO_UNICODE ('e'),
   TO_UNICODE ('x'),
   TO_UNICODE ('t'),
@@ -648,22 +640,20 @@ static const utf32 kUnicodeString_oa_5F_scanner_extended [] = {
   TO_UNICODE ('d'),
   TO_UNICODE ('e'),
   TO_UNICODE ('d'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$length$'
-static const utf32 kUnicodeString_oa_5F_scanner_length [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_length = {
   TO_UNICODE ('l'),
   TO_UNICODE ('e'),
   TO_UNICODE ('n'),
   TO_UNICODE ('g'),
   TO_UNICODE ('t'),
   TO_UNICODE ('h'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$message$'
-static const utf32 kUnicodeString_oa_5F_scanner_message [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_message = {
   TO_UNICODE ('m'),
   TO_UNICODE ('e'),
   TO_UNICODE ('s'),
@@ -671,11 +661,10 @@ static const utf32 kUnicodeString_oa_5F_scanner_message [] = {
   TO_UNICODE ('a'),
   TO_UNICODE ('g'),
   TO_UNICODE ('e'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$network$'
-static const utf32 kUnicodeString_oa_5F_scanner_network [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_network = {
   TO_UNICODE ('n'),
   TO_UNICODE ('e'),
   TO_UNICODE ('t'),
@@ -683,40 +672,36 @@ static const utf32 kUnicodeString_oa_5F_scanner_network [] = {
   TO_UNICODE ('o'),
   TO_UNICODE ('r'),
   TO_UNICODE ('k'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$offset$'
-static const utf32 kUnicodeString_oa_5F_scanner_offset [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_offset = {
   TO_UNICODE ('o'),
   TO_UNICODE ('f'),
   TO_UNICODE ('f'),
   TO_UNICODE ('s'),
   TO_UNICODE ('e'),
   TO_UNICODE ('t'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$on$'
-static const utf32 kUnicodeString_oa_5F_scanner_on [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_on = {
   TO_UNICODE ('o'),
   TO_UNICODE ('n'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$period$'
-static const utf32 kUnicodeString_oa_5F_scanner_period [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_period = {
   TO_UNICODE ('p'),
   TO_UNICODE ('e'),
   TO_UNICODE ('r'),
   TO_UNICODE ('i'),
   TO_UNICODE ('o'),
   TO_UNICODE ('d'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$priority$'
-static const utf32 kUnicodeString_oa_5F_scanner_priority [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_priority = {
   TO_UNICODE ('p'),
   TO_UNICODE ('r'),
   TO_UNICODE ('i'),
@@ -725,11 +710,10 @@ static const utf32 kUnicodeString_oa_5F_scanner_priority [] = {
   TO_UNICODE ('i'),
   TO_UNICODE ('t'),
   TO_UNICODE ('y'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$processor$'
-static const utf32 kUnicodeString_oa_5F_scanner_processor [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_processor = {
   TO_UNICODE ('p'),
   TO_UNICODE ('r'),
   TO_UNICODE ('o'),
@@ -739,11 +723,10 @@ static const utf32 kUnicodeString_oa_5F_scanner_processor [] = {
   TO_UNICODE ('s'),
   TO_UNICODE ('o'),
   TO_UNICODE ('r'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$scalingfactor$'
-static const utf32 kUnicodeString_oa_5F_scanner_scalingfactor [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_scalingfactor = {
   TO_UNICODE ('s'),
   TO_UNICODE ('c'),
   TO_UNICODE ('a'),
@@ -757,11 +740,10 @@ static const utf32 kUnicodeString_oa_5F_scanner_scalingfactor [] = {
   TO_UNICODE ('t'),
   TO_UNICODE ('o'),
   TO_UNICODE ('r'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$standard$'
-static const utf32 kUnicodeString_oa_5F_scanner_standard [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_standard = {
   TO_UNICODE ('s'),
   TO_UNICODE ('t'),
   TO_UNICODE ('a'),
@@ -770,35 +752,31 @@ static const utf32 kUnicodeString_oa_5F_scanner_standard [] = {
   TO_UNICODE ('a'),
   TO_UNICODE ('r'),
   TO_UNICODE ('d'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$system$'
-static const utf32 kUnicodeString_oa_5F_scanner_system [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_system = {
   TO_UNICODE ('s'),
   TO_UNICODE ('y'),
   TO_UNICODE ('s'),
   TO_UNICODE ('t'),
   TO_UNICODE ('e'),
   TO_UNICODE ('m'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$task$'
-static const utf32 kUnicodeString_oa_5F_scanner_task [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_task = {
   TO_UNICODE ('t'),
   TO_UNICODE ('a'),
   TO_UNICODE ('s'),
   TO_UNICODE ('k'),
-  TO_UNICODE (0)
 } ;
 
 //--- Unicode string for '$van$'
-static const utf32 kUnicodeString_oa_5F_scanner_van [] = {
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_van = {
   TO_UNICODE ('v'),
   TO_UNICODE ('a'),
   TO_UNICODE ('n'),
-  TO_UNICODE (0)
 } ;
 
 //--------------------------------------------------------------------------------------------------
@@ -808,9 +786,9 @@ static const utf32 kUnicodeString_oa_5F_scanner_van [] = {
 static const int32_t ktable_size_oa_5F_scanner_delimitorsList = 3 ;
 
 static const C_unicode_lexique_table_entry ktable_for_oa_5F_scanner_delimitorsList [ktable_size_oa_5F_scanner_delimitorsList] = {
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner__2C_, 1, Lexique_oa_5F_scanner::kToken__2C_),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner__3B_, 1, Lexique_oa_5F_scanner::kToken__3B_),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner__2E__2E_, 2, Lexique_oa_5F_scanner::kToken__2E__2E_)
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner__2C_, Lexique_oa_5F_scanner::kToken__2C_),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner__3B_, Lexique_oa_5F_scanner::kToken__3B_),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner__2E__2E_, Lexique_oa_5F_scanner::kToken__2E__2E_)
 } ;
 
 int32_t Lexique_oa_5F_scanner::search_into_delimitorsList (const String & inSearchedString) {
@@ -824,25 +802,25 @@ int32_t Lexique_oa_5F_scanner::search_into_delimitorsList (const String & inSear
 static const int32_t ktable_size_oa_5F_scanner_keyWordList = 19 ;
 
 static const C_unicode_lexique_table_entry ktable_for_oa_5F_scanner_keyWordList [ktable_size_oa_5F_scanner_keyWordList] = {
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_on, 2, Lexique_oa_5F_scanner::kToken_on),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_can, 3, Lexique_oa_5F_scanner::kToken_can),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_end, 3, Lexique_oa_5F_scanner::kToken_end),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_van, 3, Lexique_oa_5F_scanner::kToken_van),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_task, 4, Lexique_oa_5F_scanner::kToken_task),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_every, 5, Lexique_oa_5F_scanner::kToken_every),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_length, 6, Lexique_oa_5F_scanner::kToken_length),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_offset, 6, Lexique_oa_5F_scanner::kToken_offset),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_period, 6, Lexique_oa_5F_scanner::kToken_period),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_system, 6, Lexique_oa_5F_scanner::kToken_system),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_message, 7, Lexique_oa_5F_scanner::kToken_message),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_network, 7, Lexique_oa_5F_scanner::kToken_network),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_deadline, 8, Lexique_oa_5F_scanner::kToken_deadline),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_duration, 8, Lexique_oa_5F_scanner::kToken_duration),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_extended, 8, Lexique_oa_5F_scanner::kToken_extended),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_priority, 8, Lexique_oa_5F_scanner::kToken_priority),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_standard, 8, Lexique_oa_5F_scanner::kToken_standard),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_processor, 9, Lexique_oa_5F_scanner::kToken_processor),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_scalingfactor, 13, Lexique_oa_5F_scanner::kToken_scalingfactor)
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_on, Lexique_oa_5F_scanner::kToken_on),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_can, Lexique_oa_5F_scanner::kToken_can),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_end, Lexique_oa_5F_scanner::kToken_end),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_van, Lexique_oa_5F_scanner::kToken_van),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_task, Lexique_oa_5F_scanner::kToken_task),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_every, Lexique_oa_5F_scanner::kToken_every),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_length, Lexique_oa_5F_scanner::kToken_length),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_offset, Lexique_oa_5F_scanner::kToken_offset),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_period, Lexique_oa_5F_scanner::kToken_period),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_system, Lexique_oa_5F_scanner::kToken_system),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_message, Lexique_oa_5F_scanner::kToken_message),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_network, Lexique_oa_5F_scanner::kToken_network),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_deadline, Lexique_oa_5F_scanner::kToken_deadline),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_duration, Lexique_oa_5F_scanner::kToken_duration),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_extended, Lexique_oa_5F_scanner::kToken_extended),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_priority, Lexique_oa_5F_scanner::kToken_priority),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_standard, Lexique_oa_5F_scanner::kToken_standard),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_processor, Lexique_oa_5F_scanner::kToken_processor),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_scalingfactor, Lexique_oa_5F_scanner::kToken_scalingfactor)
 } ;
 
 int32_t Lexique_oa_5F_scanner::search_into_keyWordList (const String & inSearchedString) {
@@ -858,135 +836,135 @@ String Lexique_oa_5F_scanner::getCurrentTokenString (const cToken * inTokenPtr) 
   const cTokenFor_oa_5F_scanner * ptr = (const cTokenFor_oa_5F_scanner *) inTokenPtr ;
   String s ;
   if (ptr == nullptr) {
-    s.appendString ("$$") ;
+    s.appendCString ("$$") ;
   }else{
     switch (ptr->mTokenCode) {
     case kToken_:
-      s.appendString ("$$") ;
+      s.appendCString ("$$") ;
       break ;
     case kToken_identifier:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("identifier") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("identifier") ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (TO_UNICODE (' ')) ;
       s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_identifierString) ;
       break ;
     case kToken_literal_5F_integer:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("literal_integer") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("literal_integer") ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (TO_UNICODE (' ')) ;
       s.appendUnsigned (ptr->mLexicalAttribute_ulongValue) ;
       break ;
     case kToken_system:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("system") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("system") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_end:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("end") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("end") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_task:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("task") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("task") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_standard:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("standard") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("standard") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_extended:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("extended") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("extended") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_message:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("message") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("message") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_length:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("length") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("length") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_priority:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("priority") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("priority") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_period:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("period") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("period") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_offset:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("offset") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("offset") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_on:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("on") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("on") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_deadline:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("deadline") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("deadline") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_duration:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("duration") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("duration") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_processor:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("processor") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("processor") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_can:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("can") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("can") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_van:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("van") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("van") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_network:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("network") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("network") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_scalingfactor:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("scalingfactor") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("scalingfactor") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken_every:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("every") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("every") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken__2C_:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString (",") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString (",") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken__3B_:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString (";") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString (";") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     case kToken__2E__2E_:
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendString ("..") ;
-      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendCString ("..") ;
+      s.appendChar (TO_UNICODE ('$')) ;
       break ;
     default:
       break ;
@@ -1036,13 +1014,13 @@ void Lexique_oa_5F_scanner::internalParseLexicalToken (cTokenFor_oa_5F_scanner &
         token.mTokenCode = kToken_identifier ;
       }
       enterToken (token) ;
-    }else if (testForInputUTF32String (kUnicodeString_oa_5F_scanner__2E__2E_, 2, true)) {
+    }else if (testForInputUTF32String (kUnicodeString_oa_5F_scanner__2E__2E_, true)) {
       token.mTokenCode = kToken__2E__2E_ ;
       enterToken (token) ;
-    }else if (testForInputUTF32String (kUnicodeString_oa_5F_scanner__3B_, 1, true)) {
+    }else if (testForInputUTF32String (kUnicodeString_oa_5F_scanner__3B_, true)) {
       token.mTokenCode = kToken__3B_ ;
       enterToken (token) ;
-    }else if (testForInputUTF32String (kUnicodeString_oa_5F_scanner__2C_, 1, true)) {
+    }else if (testForInputUTF32String (kUnicodeString_oa_5F_scanner__2C_, true)) {
       token.mTokenCode = kToken__2C_ ;
       enterToken (token) ;
     }else if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
@@ -1324,11 +1302,11 @@ cMapElement * cMapElement_M_5F_processor::copy (void) {
 void cMapElement_M_5F_processor::description (String & ioString, const int32_t inIndentation) const {
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mIndex" ":") ;
+  ioString.appendCString ("mIndex" ":") ;
   mProperty_mIndex.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mStep" ":") ;
+  ioString.appendCString ("mStep" ":") ;
   mProperty_mStep.description (ioString, inIndentation) ;
 }
 
@@ -1664,15 +1642,15 @@ cMapElement * cMapElement_M_5F_network::copy (void) {
 void cMapElement_M_5F_network::description (String & ioString, const int32_t inIndentation) const {
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mIndex" ":") ;
+  ioString.appendCString ("mIndex" ":") ;
   mProperty_mIndex.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mCANnetwork" ":") ;
+  ioString.appendCString ("mCANnetwork" ":") ;
   mProperty_mCANnetwork.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mScalingFactor" ":") ;
+  ioString.appendCString ("mScalingFactor" ":") ;
   mProperty_mScalingFactor.description (ioString, inIndentation) ;
 }
 
@@ -2298,7 +2276,7 @@ const C_galgas_type_descriptor * cPtr_C_5F_canIndependantMessage::classDescripto
 
 void cPtr_C_5F_canIndependantMessage::description (String & ioString,
                                                    const int32_t /* inIndentation */) const {
-  ioString.appendString ("[@C_canIndependantMessage]") ;
+  ioString.appendCString ("[@C_canIndependantMessage]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2568,9 +2546,9 @@ const C_galgas_type_descriptor * cPtr_C_5F_canMessageFromMessage::classDescripto
 
 void cPtr_C_5F_canMessageFromMessage::description (String & ioString,
                                                    const int32_t inIndentation) const {
-  ioString.appendString ("[@C_canMessageFromMessage:") ;
+  ioString.appendCString ("[@C_canMessageFromMessage:") ;
   mProperty_mMessageIndex.description (ioString, inIndentation+1) ;
-  ioString.appendString ("]") ;
+  ioString.appendCString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2840,9 +2818,9 @@ const C_galgas_type_descriptor * cPtr_C_5F_canMessageFromTask::classDescriptor (
 
 void cPtr_C_5F_canMessageFromTask::description (String & ioString,
                                                 const int32_t inIndentation) const {
-  ioString.appendString ("[@C_canMessageFromTask:") ;
+  ioString.appendCString ("[@C_canMessageFromTask:") ;
   mProperty_mTaskIndex.description (ioString, inIndentation+1) ;
-  ioString.appendString ("]") ;
+  ioString.appendCString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -3050,39 +3028,39 @@ cMapElement * cMapElement_M_5F_messages::copy (void) {
 void cMapElement_M_5F_messages::description (String & ioString, const int32_t inIndentation) const {
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mIndex" ":") ;
+  ioString.appendCString ("mIndex" ":") ;
   mProperty_mIndex.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mClass" ":") ;
+  ioString.appendCString ("mClass" ":") ;
   mProperty_mClass.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mNetworkIndex" ":") ;
+  ioString.appendCString ("mNetworkIndex" ":") ;
   mProperty_mNetworkIndex.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mBytesCount" ":") ;
+  ioString.appendCString ("mBytesCount" ":") ;
   mProperty_mBytesCount.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mPriority" ":") ;
+  ioString.appendCString ("mPriority" ":") ;
   mProperty_mPriority.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mOffset" ":") ;
+  ioString.appendCString ("mOffset" ":") ;
   mProperty_mOffset.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mDeadline" ":") ;
+  ioString.appendCString ("mDeadline" ":") ;
   mProperty_mDeadline.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mPeriod" ":") ;
+  ioString.appendCString ("mPeriod" ":") ;
   mProperty_mPeriod.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mMessageKind" ":") ;
+  ioString.appendCString ("mMessageKind" ":") ;
   mProperty_mMessageKind.description (ioString, inIndentation) ;
 }
 
@@ -3996,7 +3974,7 @@ const C_galgas_type_descriptor * cPtr_C_5F_independantTask::classDescriptor (voi
 
 void cPtr_C_5F_independantTask::description (String & ioString,
                                              const int32_t /* inIndentation */) const {
-  ioString.appendString ("[@C_independantTask]") ;
+  ioString.appendCString ("[@C_independantTask]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4424,39 +4402,39 @@ cMapElement * cMapElement_M_5F_tasks::copy (void) {
 void cMapElement_M_5F_tasks::description (String & ioString, const int32_t inIndentation) const {
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mIndex" ":") ;
+  ioString.appendCString ("mIndex" ":") ;
   mProperty_mIndex.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mPriority" ":") ;
+  ioString.appendCString ("mPriority" ":") ;
   mProperty_mPriority.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mOffset" ":") ;
+  ioString.appendCString ("mOffset" ":") ;
   mProperty_mOffset.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mDeadline" ":") ;
+  ioString.appendCString ("mDeadline" ":") ;
   mProperty_mDeadline.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mDurationMin" ":") ;
+  ioString.appendCString ("mDurationMin" ":") ;
   mProperty_mDurationMin.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mDurationMax" ":") ;
+  ioString.appendCString ("mDurationMax" ":") ;
   mProperty_mDurationMax.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mProcessor" ":") ;
+  ioString.appendCString ("mProcessor" ":") ;
   mProperty_mProcessor.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mPeriod" ":") ;
+  ioString.appendCString ("mPeriod" ":") ;
   mProperty_mPeriod.description (ioString, inIndentation) ;
   ioString.appendNewLine () ;
   ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendString ("mTaskKind" ":") ;
+  ioString.appendCString ("mTaskKind" ":") ;
   mProperty_mTaskKind.description (ioString, inIndentation) ;
 }
 
@@ -6034,11 +6012,11 @@ const C_galgas_type_descriptor * cPtr_C_5F_taskDependsFromTask::classDescriptor 
 
 void cPtr_C_5F_taskDependsFromTask::description (String & ioString,
                                                  const int32_t inIndentation) const {
-  ioString.appendString ("[@C_taskDependsFromTask:") ;
+  ioString.appendCString ("[@C_taskDependsFromTask:") ;
   mProperty_mTask.description (ioString, inIndentation+1) ;
-  ioString.appendString (", ") ;
+  ioString.appendCString (", ") ;
   mProperty_mEvery.description (ioString, inIndentation+1) ;
-  ioString.appendString ("]") ;
+  ioString.appendCString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -6228,11 +6206,11 @@ const C_galgas_type_descriptor * cPtr_C_5F_taskDependsFromMessage::classDescript
 
 void cPtr_C_5F_taskDependsFromMessage::description (String & ioString,
                                                     const int32_t inIndentation) const {
-  ioString.appendString ("[@C_taskDependsFromMessage:") ;
+  ioString.appendCString ("[@C_taskDependsFromMessage:") ;
   mProperty_mMessage.description (ioString, inIndentation+1) ;
-  ioString.appendString (", ") ;
+  ioString.appendCString (", ") ;
   mProperty_mEvery.description (ioString, inIndentation+1) ;
-  ioString.appendString ("]") ;
+  ioString.appendCString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7021,15 +6999,15 @@ void GALGAS__32_lstringlist_2D_element::drop (void) {
 
 void GALGAS__32_lstringlist_2D_element::description (String & ioString,
                                                      const int32_t inIndentation) const {
-  ioString.appendString ("<struct @2lstringlist-element:") ;
+  ioString.appendCString ("<struct @2lstringlist-element:") ;
   if (! isValid ()) {
-    ioString.appendString (" not built") ;
+    ioString.appendCString (" not built") ;
   }else{
     mProperty_mValue_30_.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mValue_31_.description (ioString, inIndentation+1) ;
   }
-  ioString.appendString (">") ;
+  ioString.appendCString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7145,17 +7123,17 @@ void GALGAS_M_5F_processor_2D_element::drop (void) {
 
 void GALGAS_M_5F_processor_2D_element::description (String & ioString,
                                                     const int32_t inIndentation) const {
-  ioString.appendString ("<struct @M_processor-element:") ;
+  ioString.appendCString ("<struct @M_processor-element:") ;
   if (! isValid ()) {
-    ioString.appendString (" not built") ;
+    ioString.appendCString (" not built") ;
   }else{
     mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mIndex.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mStep.description (ioString, inIndentation+1) ;
   }
-  ioString.appendString (">") ;
+  ioString.appendCString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7279,19 +7257,19 @@ void GALGAS_M_5F_network_2D_element::drop (void) {
 
 void GALGAS_M_5F_network_2D_element::description (String & ioString,
                                                   const int32_t inIndentation) const {
-  ioString.appendString ("<struct @M_network-element:") ;
+  ioString.appendCString ("<struct @M_network-element:") ;
   if (! isValid ()) {
-    ioString.appendString (" not built") ;
+    ioString.appendCString (" not built") ;
   }else{
     mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mIndex.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mCANnetwork.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mScalingFactor.description (ioString, inIndentation+1) ;
   }
-  ioString.appendString (">") ;
+  ioString.appendCString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7463,31 +7441,31 @@ void GALGAS_M_5F_messages_2D_element::drop (void) {
 
 void GALGAS_M_5F_messages_2D_element::description (String & ioString,
                                                    const int32_t inIndentation) const {
-  ioString.appendString ("<struct @M_messages-element:") ;
+  ioString.appendCString ("<struct @M_messages-element:") ;
   if (! isValid ()) {
-    ioString.appendString (" not built") ;
+    ioString.appendCString (" not built") ;
   }else{
     mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mIndex.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mClass.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mNetworkIndex.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mBytesCount.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mPriority.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mOffset.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mDeadline.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mPeriod.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mMessageKind.description (ioString, inIndentation+1) ;
   }
-  ioString.appendString (">") ;
+  ioString.appendCString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7659,31 +7637,31 @@ void GALGAS_M_5F_tasks_2D_element::drop (void) {
 
 void GALGAS_M_5F_tasks_2D_element::description (String & ioString,
                                                 const int32_t inIndentation) const {
-  ioString.appendString ("<struct @M_tasks-element:") ;
+  ioString.appendCString ("<struct @M_tasks-element:") ;
   if (! isValid ()) {
-    ioString.appendString (" not built") ;
+    ioString.appendCString (" not built") ;
   }else{
     mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mIndex.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mPriority.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mOffset.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mDeadline.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mDurationMin.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mDurationMax.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mProcessor.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mPeriod.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mTaskKind.description (ioString, inIndentation+1) ;
   }
-  ioString.appendString (">") ;
+  ioString.appendCString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7783,7 +7761,7 @@ C_BoolCommandLineOption gOption_oa_5F_cli_5F_options_useCANmaxLegth ("oa_cli_opt
 //--------------------------------------------------------------------------------------------------
 
 static void print_tool_help_message (void) {
-  gCout.appendString ("Compiled with GALGAS revision NUMERO_REVISION_GALGAS\n") ;
+  gCout.appendCString ("Compiled with GALGAS revision NUMERO_REVISION_GALGAS\n") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7924,23 +7902,23 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
       if (verboseOptionOn || (totalWarningCount () > 0) || (totalErrorCount () > 0)) {
         String message ;
         if (totalWarningCount () == 0) {
-          message.appendString ("No warning") ;
+          message.appendCString ("No warning") ;
         }else if (totalWarningCount () == 1) {
-          message.appendString ("1 warning") ;
+          message.appendCString ("1 warning") ;
         }else{
           message.appendSigned (totalWarningCount ()) ;
-          message.appendString (" warnings") ;
+          message.appendCString (" warnings") ;
         }
-        message.appendString (", ") ;
+        message.appendCString (", ") ;
         if (totalErrorCount () == 0) {
-          message.appendString ("no error") ;
+          message.appendCString ("no error") ;
         }else if (totalErrorCount () == 1) {
-          message.appendString ("1 error") ;
+          message.appendCString ("1 error") ;
         }else{
           message.appendSigned (totalErrorCount ()) ;
-          message.appendString (" errors") ;
+          message.appendCString (" errors") ;
         }
-        message.appendString (".\n") ;
+        message.appendCString (".\n") ;
         ggs_printMessage (message COMMA_HERE) ;
       }
     }catch (const ::std::exception & e) {

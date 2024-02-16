@@ -117,7 +117,7 @@ void Compiler::writeIssueJSONFile (const String & inFile) {
       mIssueArray (i COMMA_HERE).appendToJSONstring (s, isFirst) ;
       isFirst = false ;
     }
-    s.appendString ("\n]\n") ;
+    s.appendCString ("\n]\n") ;
     const bool ok = FileManager::writeStringToFile (s, inFile) ;
     if (!ok) {
       const String message (String ("Cannot write to '") + inFile + "'") ;
@@ -272,7 +272,7 @@ void Compiler::castError (const String & inTargetTypeName,
                             COMMA_LOCATION_ARGS) {
   String m = "cannot cast an @" ;
   m.appendString (inObjectDynamicTypeDescriptor->mGalgasTypeName) ;
-  m.appendString (" to an @") ;
+  m.appendCString (" to an @") ;
   m.appendString (inTargetTypeName) ;
   onTheFlyRunTimeError (m COMMA_THERE) ;
 }
@@ -335,7 +335,7 @@ void Compiler::semanticErrorWith_K_message (const GALGAS_lstring & inKey,
   const String searchErrorMessage (in_K_ErrorMessage) ;
   const int32_t errorMessageLength = searchErrorMessage.length () ;
   for (int32_t i=0 ; i<errorMessageLength ; i++) {
-    const utf32 c = searchErrorMessage (i COMMA_HERE) ;
+    const utf32 c = searchErrorMessage.charAtIndex (i COMMA_HERE) ;
     if (perCentFound) {
       if (UNICODE_VALUE (c) == 'K') {
         message.appendString (key) ;
@@ -344,7 +344,7 @@ void Compiler::semanticErrorWith_K_message (const GALGAS_lstring & inKey,
     }else if (UNICODE_VALUE (c) == '%') {
       perCentFound = true ;
     }else{
-      message.appendUnicodeChar (c COMMA_HERE) ;
+      message.appendChar (c) ;
     }
   }
 //--- Add nearest keys, if any
@@ -370,15 +370,15 @@ void Compiler::semanticErrorWith_K_L_message (const GALGAS_lstring & inKey,
   const String searchErrorMessage (in_K_L_ErrorMessage) ;
   const int32_t errorMessageLength = searchErrorMessage.length () ;
   for (int32_t i=0 ; i<errorMessageLength ; i++) {
-    const utf32 c = searchErrorMessage (i COMMA_HERE) ;
+    const utf32 c = searchErrorMessage.charAtIndex (i COMMA_HERE) ;
     if (perCentFound) {
       if (UNICODE_VALUE (c) == 'K') {
         message.appendString (key) ;
       }else if (UNICODE_VALUE (c) == 'L') {
         if (!inExistingKeyLocation.isValid ()) {
-          message.appendString ("<<unknown>>") ;
+          message.appendCString ("<<unknown>>") ;
         }else if (inExistingKeyLocation.getter_isNowhere (HERE).boolEnum () == kBoolTrue) {
-          message.appendString ("<<unknown>>") ;
+          message.appendCString ("<<unknown>>") ;
         }else{
           message.appendString (inExistingKeyLocation.getter_startLocationString (this COMMA_THERE).stringValue ()) ;
         }
@@ -387,7 +387,7 @@ void Compiler::semanticErrorWith_K_L_message (const GALGAS_lstring & inKey,
     }else if (UNICODE_VALUE (c) == '%') {
       perCentFound = true ;
     }else{
-      message.appendUnicodeChar (c COMMA_HERE) ;
+      message.appendChar (c) ;
     }
   }
 //--- Emit error message
@@ -408,7 +408,7 @@ void Compiler::semanticWarningWith_K_L_message (const GALGAS_lstring & inKey,
   const String searchErrorMessage (in_K_L_ErrorMessage) ;
   const int32_t errorMessageLength = searchErrorMessage.length () ;
   for (int32_t i=0 ; i<errorMessageLength ; i++) {
-    const utf32 c = searchErrorMessage (i COMMA_HERE) ;
+    const utf32 c = searchErrorMessage.charAtIndex (i COMMA_HERE) ;
     if (perCentFound) {
       if (UNICODE_VALUE (c) == 'K') {
         message.appendString (key) ;
@@ -419,7 +419,7 @@ void Compiler::semanticWarningWith_K_L_message (const GALGAS_lstring & inKey,
     }else if (UNICODE_VALUE (c) == '%') {
       perCentFound = true ;
     }else{
-      message.appendUnicodeChar (c COMMA_HERE) ;
+      message.appendChar (c) ;
     }
   }
 //--- Emit error message
@@ -565,7 +565,7 @@ void Compiler::generateFileFromPathes (const String & inStartPath,
   if (fullPathName.length () == 0) {
   //--- File does not exist : create it
     String fileName = startPath ;
-    fileName.appendString ("/") ;
+    fileName.appendCString ("/") ;
     fileName.appendString (inFileName) ;
     const String directory = fileName.stringByDeletingLastPathComponent () ;
     FileManager::makeDirectoryIfDoesNotExist (directory) ;
@@ -575,7 +575,7 @@ void Compiler::generateFileFromPathes (const String & inStartPath,
       if (! ok) {
         String message = "Cannot open '" ;
         message.appendString (fileName) ;
-        message.appendString ("' file in write mode.") ;
+        message.appendCString ("' file in write mode.") ;
         onTheFlySemanticError (message COMMA_HERE) ;
       }
       f.appendString (inContents) ;
@@ -594,7 +594,7 @@ void Compiler::generateFileFromPathes (const String & inStartPath,
         if (! f.isOpened ()) {
           String message = "Cannot open '" ;
           message.appendString (fullPathName) ;
-          message.appendString ("' file in write mode.") ;
+          message.appendCString ("' file in write mode.") ;
           onTheFlySemanticError (message COMMA_HERE) ;
         }else{
           f.appendString (inContents) ;
@@ -640,7 +640,7 @@ void Compiler::generateFileWithPatternFromPathes (
   if (fullPathName.length () == 0) {
   //--- File does not exist : create it
     String fileName = startPath ;
-    fileName.appendString ("/") ;
+    fileName.appendCString ("/") ;
     fileName.appendString (inFileName) ;
     const String directory = fileName.stringByDeletingLastPathComponent () ;
     FileManager::makeDirectoryIfDoesNotExist (directory) ;
@@ -650,7 +650,7 @@ void Compiler::generateFileWithPatternFromPathes (
       if (! ok) {
         String message = "Cannot open '" ;
         message.appendString (fileName) ;
-        message.appendString ("' file in write mode.") ;
+        message.appendCString ("' file in write mode.") ;
         onTheFlySemanticError (message COMMA_HERE) ;
       }
       f.appendString (inHeader) ;
@@ -719,7 +719,7 @@ void Compiler::generateFileWithPatternFromPathes (
       if (! ok) {
         String message = "Cannot open '" ;
         message.appendString (fullPathName) ;
-        message.appendString ("' file in write mode.") ;
+        message.appendCString ("' file in write mode.") ;
         onTheFlySemanticError (message COMMA_HERE) ;
       }
       f.appendString (inHeader) ;
