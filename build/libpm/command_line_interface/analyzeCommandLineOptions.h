@@ -1,10 +1,11 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'C_ConsoleOut' : a class for console output                                                  
+//  Routine 'analyzeCommandLineOptions' : a way for automatic command                                
+//  line options analysis for MacOS, Win32 and Unix.                                             
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2002, ..., 2023 Pierre Molinaro.
+//  Copyright (C) 2001, ..., 2024 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,51 +19,37 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "C_ConsoleOut.h"
-#include "unicode_character_cpp.h"
+#pragma once
 
 //--------------------------------------------------------------------------------------------------
 
-C_ConsoleOut::C_ConsoleOut (void) {
-}
+#include "String-class.h"
 
 //--------------------------------------------------------------------------------------------------
-//
-//                  Flush output                                                                 
-//
+//     analyzeCommandLineOptions
 //--------------------------------------------------------------------------------------------------
 
-void C_ConsoleOut::flush (void) {
-  ::fflush (stdout) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                  Write a character string on the console                                      
-//
-//--------------------------------------------------------------------------------------------------
-
-void C_ConsoleOut::handleAppendUTF8Array (const char * inCharArray,
-                                                 const int32_t inArrayCount) {
-  if (inArrayCount > 0) {
-    printf ("%.*s", (int) inArrayCount, inCharArray) ;
-  }
-}
+void analyzeCommandLineOptions (const int argv,
+                                const char* * argc,
+                                TC_UniqueArray <String> & outSourceFileArray,
+                                const char* * inExtensions,
+                                const char* * inHelpMessages,
+                                void print_tool_help_message (void)) ;
 
 //--------------------------------------------------------------------------------------------------
 
-void C_ConsoleOut::handleAppendCharacter (const utf32 inCharacter) {
-  char buffer [8] ;
-  UTF8StringFromUTF32Character (inCharacter, buffer) ;
-  printf ("%s", buffer) ;
-}
+const char * projectVersionString (void) ;
+
+const char * galgasVersionString (void) ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//  C O N S O L E    O U T    G L O B A L   V A R I A B L E                                      
-//
+
+uint32_t commandLineArgumentCount (void) ;
+
+String commandLineArgumentAtIndex (const uint32_t inIndex) ;
+
 //--------------------------------------------------------------------------------------------------
 
-C_ConsoleOut gCout ;
+bool cocoaOutput (void) ;
 
 //--------------------------------------------------------------------------------------------------

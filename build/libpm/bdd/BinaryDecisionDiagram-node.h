@@ -4,7 +4,7 @@
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 1999, ..., 2014 Pierre Molinaro.
+//  Copyright (C) 1999, ..., 2024 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -22,7 +22,7 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "C_BDD.h"
+#include "BinaryDecisionDiagram.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ extern cBDDnode * gNodeArray ;
 
 inline uint32_t nodeIndexForRoot (const uint32_t inRoot
                                   COMMA_LOCATION_ARGS) {
-  macroAssertThere ((inRoot >> 1) <= C_BDD::getExistingNodesCount (), "nodeIndex (%lld) should be <= current node count (%lld)", inRoot >> 1, C_BDD::getExistingNodesCount ()) ;
+  macroAssertThere ((inRoot >> 1) <= BinaryDecisionDiagram::getExistingNodesCount (), "nodeIndex (%lld) should be <= current node count (%lld)", inRoot >> 1, BinaryDecisionDiagram::getExistingNodesCount ()) ;
   return inRoot >> 1 ;
 }
 

@@ -4,7 +4,7 @@
 //
 //  This file is part of libpm library
 //
-//  Copyright (C) 1999, ..., 2023 Pierre Molinaro.
+//  Copyright (C) 1999, ..., 2024 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,8 +18,8 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "C_BDD.h"
-#include "C_BDD-node.h"
+#include "BinaryDecisionDiagram.h"
+#include "BinaryDecisionDiagram-node.h"
 #include "F_GetPrime.h"
 #include "Timer.h"
 
@@ -37,18 +37,18 @@ static uint32_t gCurrentNodeCount = 0 ;
 //--------------------------------------------------------------------------------------------------
 
 uint32_t nodeMapMemoryUsage (void) {
-  return (gNodeArraySize * C_BDD::getBDDnodeSize ()) / 1000000 ;
+  return (gNodeArraySize * BinaryDecisionDiagram::getBDDnodeSize ()) / 1000000 ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_BDD::getCreatedNodesCount (void) {
+uint32_t BinaryDecisionDiagram::getCreatedNodesCount (void) {
   return gNodeArraySize ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_BDD::getExistingNodesCount (void) {
+uint32_t BinaryDecisionDiagram::getExistingNodesCount (void) {
   return gCurrentNodeCount ;
 }
 
@@ -64,13 +64,13 @@ static bool gDisplaysInformationMessages ;
 
 //--------------------------------------------------------------------------------------------------
 
-bool C_BDD::displaysInformationMessages (void) {
+bool BinaryDecisionDiagram::displaysInformationMessages (void) {
   return gDisplaysInformationMessages ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::setDisplaysInformationMessages (const bool inFlag) {
+void BinaryDecisionDiagram::setDisplaysInformationMessages (const bool inFlag) {
   gDisplaysInformationMessages = inFlag ;
 }
 
@@ -97,8 +97,8 @@ uint32_t internalITEoperation (const uint32_t opf,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::compareWithBDD (const compareEnum inComparison, const C_BDD & inOperand) const {
-  C_BDD result ;
+BinaryDecisionDiagram BinaryDecisionDiagram::compareWithBDD (const compareEnum inComparison, const BinaryDecisionDiagram & inOperand) const {
+  BinaryDecisionDiagram result ;
   switch (inComparison) {
   case kEqual :
     result = equalTo (inOperand) ;
@@ -132,14 +132,14 @@ C_BDD C_BDD::compareWithBDD (const compareEnum inComparison, const C_BDD & inOpe
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::negate (void) {
+void BinaryDecisionDiagram::negate (void) {
   mBDDvalue ^= 1 ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::operator ~ (void) const {
-  return C_BDD (mBDDvalue ^ 1) ;
+BinaryDecisionDiagram BinaryDecisionDiagram::operator ~ (void) const {
+  return BinaryDecisionDiagram (mBDDvalue ^ 1) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -150,7 +150,7 @@ C_BDD C_BDD::operator ~ (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-bool C_BDD::isComplemented (void) const {
+bool BinaryDecisionDiagram::isComplemented (void) const {
   return (mBDDvalue & 1) != 0 ;
 }
 
@@ -162,7 +162,7 @@ bool C_BDD::isComplemented (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::bddWithConstants (const uint32_t * inValues,
+BinaryDecisionDiagram BinaryDecisionDiagram::bddWithConstants (const uint32_t * inValues,
                                const uint32_t * inBitCount,
                                const int32_t inEntryCount) {
   uint32_t result = 1 ; // true
@@ -179,7 +179,7 @@ C_BDD C_BDD::bddWithConstants (const uint32_t * inValues,
       idx ++ ;
     }
   }
-  return C_BDD (result) ;
+  return BinaryDecisionDiagram (result) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -190,43 +190,43 @@ C_BDD C_BDD::bddWithConstants (const uint32_t * inValues,
 
 //--------------------------------------------------------------------------------------------------
 
-static C_BDD construireInfEgal (const uint32_t inFirstIndex,
+static BinaryDecisionDiagram construireInfEgal (const uint32_t inFirstIndex,
                                 const uint32_t indiceMax,
                                 const uint64_t inValue) {
-  C_BDD result ;
+  BinaryDecisionDiagram result ;
   if (inFirstIndex < indiceMax) {
     if (((1 << (indiceMax - inFirstIndex)) & inValue) != 0) {
-      result = C_BDD (indiceMax, false) | (C_BDD (indiceMax, true) & construireInfEgal (inFirstIndex, (uint32_t) (indiceMax - 1), inValue)) ;
+      result = BinaryDecisionDiagram (indiceMax, false) | (BinaryDecisionDiagram (indiceMax, true) & construireInfEgal (inFirstIndex, (uint32_t) (indiceMax - 1), inValue)) ;
     }else{
-      result = C_BDD (indiceMax, false) & construireInfEgal (inFirstIndex, (uint32_t) (indiceMax - 1), inValue) ;
+      result = BinaryDecisionDiagram (indiceMax, false) & construireInfEgal (inFirstIndex, (uint32_t) (indiceMax - 1), inValue) ;
     }
   }else{
-    result = ((inValue & 1) != 0) ? (~C_BDD ()) : C_BDD (indiceMax, false) ;
+    result = ((inValue & 1) != 0) ? (~BinaryDecisionDiagram ()) : BinaryDecisionDiagram (indiceMax, false) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-static C_BDD construireSupEgal (const uint32_t inFirstIndex,
+static BinaryDecisionDiagram construireSupEgal (const uint32_t inFirstIndex,
                                 const uint32_t indiceMax,
                                 const uint64_t inValue) {
-  C_BDD result ;
+  BinaryDecisionDiagram result ;
   if (inFirstIndex < indiceMax) {
     if (((1 << (indiceMax - inFirstIndex)) & inValue) == 0) {
-      result = C_BDD (indiceMax, true) | (C_BDD (indiceMax, false) & construireSupEgal (inFirstIndex, (uint32_t) (indiceMax - 1), inValue)) ;
+      result = BinaryDecisionDiagram (indiceMax, true) | (BinaryDecisionDiagram (indiceMax, false) & construireSupEgal (inFirstIndex, (uint32_t) (indiceMax - 1), inValue)) ;
     }else{
-      result = C_BDD (indiceMax, true) & construireSupEgal (inFirstIndex, (uint32_t) (indiceMax - 1), inValue) ;
+      result = BinaryDecisionDiagram (indiceMax, true) & construireSupEgal (inFirstIndex, (uint32_t) (indiceMax - 1), inValue) ;
     }
   }else{
-    result = ((inValue & 1) == 0) ? (~C_BDD ()) : C_BDD (indiceMax, true) ;
+    result = ((inValue & 1) == 0) ? (~BinaryDecisionDiagram ()) : BinaryDecisionDiagram (indiceMax, true) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::varCompareConst (const uint32_t inFirstIndex,
+BinaryDecisionDiagram BinaryDecisionDiagram::varCompareConst (const uint32_t inFirstIndex,
                               const uint32_t inDimension,
                               const compareEnum inComparison,
                               const uint64_t inComparisonConstant) {
@@ -234,14 +234,14 @@ C_BDD C_BDD::varCompareConst (const uint32_t inFirstIndex,
     printf ("*** BDD Error in %s:%d: inDimension should be > 0 ***\n", __FILE__, __LINE__) ;
     exit (1) ;
   }
-  C_BDD result ;
+  BinaryDecisionDiagram result ;
   uint64_t val = inComparisonConstant ;
   const uint32_t indiceMax = (uint32_t) (inFirstIndex + inDimension - 1) ;
   switch (inComparison) {
   case kEqual : case kNotEqual : // on construit l'egalite
     result.mBDDvalue = 1 ;
     for (uint32_t i = inFirstIndex ; i <= indiceMax ; i++) {
-      result = result & C_BDD (i, ((val & 1) == 0) ? false : true) ;
+      result = result & BinaryDecisionDiagram (i, ((val & 1) == 0) ? false : true) ;
       val >>= 1 ;
     }
     break ;
@@ -272,12 +272,12 @@ C_BDD C_BDD::varCompareConst (const uint32_t inFirstIndex,
 
 //--------------------------------------------------------------------------------------------------
 
-static C_BDD construireSupVariable (const uint32_t inLeftFirstIndex,
+static BinaryDecisionDiagram construireSupVariable (const uint32_t inLeftFirstIndex,
                                     const uint32_t inDimension,
                                     const uint32_t inRightFirstIndex) {
-  C_BDD result ;
-  const C_BDD gauche = C_BDD ((uint32_t) (inLeftFirstIndex + inDimension - 1), true) ;
-  const C_BDD droite = C_BDD ((uint32_t) (inRightFirstIndex + inDimension - 1), true) ;
+  BinaryDecisionDiagram result ;
+  const BinaryDecisionDiagram gauche = BinaryDecisionDiagram ((uint32_t) (inLeftFirstIndex + inDimension - 1), true) ;
+  const BinaryDecisionDiagram droite = BinaryDecisionDiagram ((uint32_t) (inRightFirstIndex + inDimension - 1), true) ;
   if (inDimension > 1) {
     result = (gauche.greaterThan (droite)) |
       ((gauche.equalTo (droite)) &
@@ -290,17 +290,17 @@ static C_BDD construireSupVariable (const uint32_t inLeftFirstIndex,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::
+BinaryDecisionDiagram BinaryDecisionDiagram::
 varCompareVar (const uint32_t inLeftFirstIndex,
                const uint32_t inDimension,
                const compareEnum inComparison,
                const uint32_t inRightFirstIndex) {
-  C_BDD result ;
+  BinaryDecisionDiagram result ;
   switch (inComparison) {
   case kEqual : case kNotEqual :
     result = ~ result ;
     for (uint32_t i=0 ; i<inDimension ; i++) {
-      result &= C_BDD ((uint32_t) (inLeftFirstIndex + i), false).equalTo (C_BDD ((uint32_t) (inRightFirstIndex + i), false)) ;
+      result &= BinaryDecisionDiagram ((uint32_t) (inLeftFirstIndex + i), false).equalTo (BinaryDecisionDiagram ((uint32_t) (inRightFirstIndex + i), false)) ;
     }
     break ;
   case kStrictLower : case kGreaterOrEqual :
@@ -330,7 +330,7 @@ varCompareVar (const uint32_t inLeftFirstIndex,
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_BDD::significantVariableCount (void) const {
+uint32_t BinaryDecisionDiagram::significantVariableCount (void) const {
   uint32_t bitCount = 0 ;
   const uint32_t nodeIndex = nodeIndexForRoot (mBDDvalue COMMA_HERE) ;
   if (bothBranches (gNodeArray [nodeIndex]) != 0) {
@@ -379,7 +379,7 @@ static bool recursiveContainsValue64 (const uint32_t inBDD,
 
 //--------------------------------------------------------------------------------------------------
 
-bool C_BDD::containsValue64 (const uint64_t inValue,
+bool BinaryDecisionDiagram::containsValue64 (const uint64_t inValue,
                              const uint32_t inFirstBit,
                              const uint32_t inBitCount) const {
   return recursiveContainsValue64 (mBDDvalue,
@@ -422,7 +422,7 @@ static bool recursiveContainsValue (const uint32_t inBDD,
 
 //--------------------------------------------------------------------------------------------------
 
-bool C_BDD::containsValue (const TC_Array <bool> & inValue,
+bool BinaryDecisionDiagram::containsValue (const TC_Array <bool> & inValue,
                            const uint32_t inFirstBit,
                            const uint32_t inBitCount) const {
   return recursiveContainsValue (mBDDvalue,
@@ -439,9 +439,9 @@ bool C_BDD::containsValue (const TC_Array <bool> & inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::BDDWithPredicateString (const String & inPredicateStringValue
+BinaryDecisionDiagram BinaryDecisionDiagram::BDDWithPredicateString (const String & inPredicateStringValue
                                      COMMA_LOCATION_ARGS) {
-  C_BDD result ;
+  BinaryDecisionDiagram result ;
   const int32_t stringLength = inPredicateStringValue.length () ;
   int32_t stringIndex = 0 ;
   bool ok = true ;
@@ -456,15 +456,15 @@ C_BDD C_BDD::BDDWithPredicateString (const String & inPredicateStringValue
       }
     }
     if (s.length () > 0) {
-      C_BDD v ; v.setToTrue () ;
+      BinaryDecisionDiagram v ; v.setToTrue () ;
       int32_t bitIndex = 0 ;
       for (int32_t i=s.length () - 1 ; i>=0 ; i--) {
         const utf32 c = s.charAtIndex (i COMMA_HERE) ;
         if (UNICODE_VALUE (c) == '0') {
-          v &= C_BDD ((uint32_t) (((uint32_t) bitIndex) & UINT16_MAX), false) ;
+          v &= BinaryDecisionDiagram ((uint32_t) (((uint32_t) bitIndex) & UINT16_MAX), false) ;
           bitIndex ++ ;
         }else if (UNICODE_VALUE (c) == '1') {
-          v &= C_BDD ((uint32_t) (((uint32_t) bitIndex) & UINT16_MAX), true) ;
+          v &= BinaryDecisionDiagram ((uint32_t) (((uint32_t) bitIndex) & UINT16_MAX), true) ;
           bitIndex ++ ;
         }else if (UNICODE_VALUE (c) == 'X') {
           bitIndex ++ ;
@@ -479,7 +479,7 @@ C_BDD C_BDD::BDDWithPredicateString (const String & inPredicateStringValue
     }
   }
   if (! ok) {
-    result = C_BDD () ;
+    result = BinaryDecisionDiagram () ;
   }
   return result ;
 }
@@ -512,7 +512,7 @@ static uint64_t obtenirValeurAbsolueBDDInterne (const uint32_t inValue) {
 
 //--------------------------------------------------------------------------------------------------
 
-uint64_t C_BDD::getBDDabsoluteValue (const uint32_t inVariableCount) const {
+uint64_t BinaryDecisionDiagram::getBDDabsoluteValue (const uint32_t inVariableCount) const {
   uint64_t result = 0 ;
   if (valueCount64 (inVariableCount) == 1) {
     result = obtenirValeurAbsolueBDDInterne (mBDDvalue) ;
@@ -543,7 +543,7 @@ static uint32_t internalRecursiveNodeCount (const uint32_t inValue) {
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_BDD::getBDDnodesCount (void) const {
+uint32_t BinaryDecisionDiagram::getBDDnodesCount (void) const {
   const uint32_t nodeIndex = nodeIndexForRoot (mBDDvalue COMMA_HERE) ;
   uint32_t result = 0 ;
   if (bothBranches (gNodeArray [nodeIndex]) != 0) {
@@ -592,7 +592,7 @@ void cBuildArrayForSet::action (const bool * inValuesArray,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::getBoolArray (TC_UniqueArray <bool> & outArray,
+void BinaryDecisionDiagram::getBoolArray (TC_UniqueArray <bool> & outArray,
                           const uint32_t inMaxValues,
                           const uint32_t inBitSize) const {
   outArray.removeAllKeepingCapacity () ;
@@ -639,7 +639,7 @@ static uint32_t internalRecursiveUpdateRelation (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::updateRelation (const uint32_t * inRelationBitNeededCount,
+BinaryDecisionDiagram BinaryDecisionDiagram::updateRelation (const uint32_t * inRelationBitNeededCount,
                              uint32_t* * inRelationBitCurrentCount,
                              const int32_t inRelationCardinality) const {
   uint32_t result = mBDDvalue ;
@@ -689,7 +689,7 @@ C_BDD C_BDD::updateRelation (const uint32_t * inRelationBitNeededCount,
     }
   }
 //---
-  return C_BDD (result) ;
+  return BinaryDecisionDiagram (result) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -700,7 +700,7 @@ C_BDD C_BDD::updateRelation (const uint32_t * inRelationBitNeededCount,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::
+BinaryDecisionDiagram BinaryDecisionDiagram::
 swap10 (const uint32_t inBitSize1,
         const uint32_t inBitSize2) const {
   const uint32_t totalSize = (uint32_t) (inBitSize1 + inBitSize2) ;
@@ -712,15 +712,15 @@ swap10 (const uint32_t inBitSize1,
   for (uint32_t j=0 ; j<inBitSize2 ; j++) {
     tab [j + inBitSize1] = j ;
   }
-  const C_BDD result = substitution (tab, totalSize COMMA_HERE) ;
+  const BinaryDecisionDiagram result = substitution (tab, totalSize COMMA_HERE) ;
   macroMyDeleteArray (tab) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::
-accessibleStates (const C_BDD & inInitialStateSet,
+BinaryDecisionDiagram BinaryDecisionDiagram::
+accessibleStates (const BinaryDecisionDiagram & inInitialStateSet,
                   const uint32_t inBitSize,
                   int32_t * outIterationCount) const {
 //--- Current object is edge [x, y].
@@ -728,10 +728,10 @@ accessibleStates (const C_BDD & inInitialStateSet,
 // accessible [x] += initial [x] | exists y (accessible [y] & edge [y, x]) ;
 //
 //--- Compute edge [y, x]
-  const C_BDD edgeYX = swap10 (inBitSize, inBitSize) ;
-  C_BDD accessible = inInitialStateSet ;
-  C_BDD v ;
-  C_BDD accessibleY ;
+  const BinaryDecisionDiagram edgeYX = swap10 (inBitSize, inBitSize) ;
+  BinaryDecisionDiagram accessible = inInitialStateSet ;
+  BinaryDecisionDiagram v ;
+  BinaryDecisionDiagram accessibleY ;
   int32_t iterationCount = 0 ;
   do{
     v = accessible ;
@@ -747,15 +747,15 @@ accessibleStates (const C_BDD & inInitialStateSet,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::
+BinaryDecisionDiagram BinaryDecisionDiagram::
 transitiveClosure (const uint32_t inBitSize,
                    int32_t * outIterationCount) const {
 //--- Transitive closure is computed by:
 // closure [x, y] += relation [x, y] | exists z (closure [x, z] & closure [z, y]) ;
-  C_BDD closure = *this ;
-  C_BDD XZclosure ;
-  C_BDD ZYclosure ;
-  C_BDD v ;
+  BinaryDecisionDiagram closure = *this ;
+  BinaryDecisionDiagram XZclosure ;
+  BinaryDecisionDiagram ZYclosure ;
+  BinaryDecisionDiagram v ;
   const uint32_t bitCount2 = (uint32_t) (inBitSize + inBitSize) ;
   int32_t iterationCount = 0 ;
   do{
@@ -813,7 +813,7 @@ void cBuildArrayForRelation2::action (const bool * inValuesArray,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::getArray2 (TC_UniqueArray <TC_UniqueArray <uint64_t> > & outArray,
+void BinaryDecisionDiagram::getArray2 (TC_UniqueArray <TC_UniqueArray <uint64_t> > & outArray,
                        const uint32_t inMaxValueCount,
                        const uint32_t inBitSize1,
                        const uint32_t inBitSize2) const {
@@ -834,7 +834,7 @@ void C_BDD::getArray2 (TC_UniqueArray <TC_UniqueArray <uint64_t> > & outArray,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::
+BinaryDecisionDiagram BinaryDecisionDiagram::
 swap021 (const uint32_t inBitSize1,
          const uint32_t inBitSize2,
          const uint32_t inBitSize3) const {
@@ -850,14 +850,14 @@ swap021 (const uint32_t inBitSize1,
   for (uint32_t k=0 ; k<inBitSize3 ; k++) {
     tab [k + inBitSize1 + inBitSize2] = (uint32_t) (k + inBitSize1) ;
   }
-  const C_BDD bdd = substitution (tab, totalSize COMMA_HERE) ;
+  const BinaryDecisionDiagram bdd = substitution (tab, totalSize COMMA_HERE) ;
   macroMyDeleteArray (tab) ;
   return bdd ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::
+BinaryDecisionDiagram BinaryDecisionDiagram::
 swap120 (const uint32_t inBitSize1,
          const uint32_t inBitSize2,
          const uint32_t inBitSize3) const {
@@ -873,14 +873,14 @@ swap120 (const uint32_t inBitSize1,
   for (uint32_t k=0 ; k<inBitSize3 ; k++) {
     tab [k + inBitSize1 + inBitSize2] = (uint32_t) (k + inBitSize2) ;
   }
-  const C_BDD bdd = substitution (tab, totalSize COMMA_HERE) ;
+  const BinaryDecisionDiagram bdd = substitution (tab, totalSize COMMA_HERE) ;
   macroMyDeleteArray (tab) ;
   return bdd ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::
+BinaryDecisionDiagram BinaryDecisionDiagram::
 swap102 (const uint32_t inBitSize1,
          const uint32_t inBitSize2,
          const uint32_t inBitSize3) const {
@@ -896,14 +896,14 @@ swap102 (const uint32_t inBitSize1,
   for (uint32_t k=0 ; k<inBitSize3 ; k++) {
     tab [k + inBitSize1 + inBitSize2] = (uint32_t) (k + inBitSize1 + inBitSize2) ;
   }
-  const C_BDD bdd = substitution (tab, totalSize COMMA_HERE) ;
+  const BinaryDecisionDiagram bdd = substitution (tab, totalSize COMMA_HERE) ;
   macroMyDeleteArray (tab) ;
   return bdd ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::
+BinaryDecisionDiagram BinaryDecisionDiagram::
 swap210 (const uint32_t inBitSize1,
          const uint32_t inBitSize2,
          const uint32_t inBitSize3) const {
@@ -919,14 +919,14 @@ swap210 (const uint32_t inBitSize1,
   for (uint32_t k=0 ; k<inBitSize3 ; k++) {
     tab [k + inBitSize1 + inBitSize2] = k ;
   }
-  const C_BDD bdd = substitution (tab, totalSize COMMA_HERE) ;
+  const BinaryDecisionDiagram bdd = substitution (tab, totalSize COMMA_HERE) ;
   macroMyDeleteArray (tab) ;
   return bdd ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::
+BinaryDecisionDiagram BinaryDecisionDiagram::
 swap201 (const uint32_t inBitSize1,
          const uint32_t inBitSize2,
          const uint32_t inBitSize3) const {
@@ -942,7 +942,7 @@ swap201 (const uint32_t inBitSize1,
   for (uint32_t k=0 ; k<inBitSize3 ; k++) {
     tab [k + inBitSize1 + inBitSize2] = k ;
   }
-  const C_BDD bdd = substitution (tab, totalSize COMMA_HERE) ;
+  const BinaryDecisionDiagram bdd = substitution (tab, totalSize COMMA_HERE) ;
   macroMyDeleteArray (tab) ;
   return bdd ;
 }
@@ -1015,7 +1015,7 @@ static void internalPrintWithSeparator (AbstractOutputStream & outputStream,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::print (AbstractOutputStream & outputStream) const {
+void BinaryDecisionDiagram::print (AbstractOutputStream & outputStream) const {
   if (mBDDvalue == 0) {
     outputStream.appendCString ("(false)\n") ;
   }else if (mBDDvalue == 1) {
@@ -1033,7 +1033,7 @@ void C_BDD::print (AbstractOutputStream & outputStream) const {
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::printHeader (AbstractOutputStream & outputStream) const {
+void BinaryDecisionDiagram::printHeader (AbstractOutputStream & outputStream) const {
   if (mBDDvalue > 1) {
     const uint32_t nodeIndex = nodeIndexForRoot (mBDDvalue COMMA_HERE) ;
     const int32_t var = (int32_t) gNodeArray [nodeIndex].mVariableIndex ;
@@ -1070,7 +1070,7 @@ void C_BDD::printHeader (AbstractOutputStream & outputStream) const {
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::printWithHeader (AbstractOutputStream & outputStream) const {
+void BinaryDecisionDiagram::printWithHeader (AbstractOutputStream & outputStream) const {
   printHeader (outputStream) ;
   print (outputStream) ;
 }
@@ -1150,7 +1150,7 @@ static void internalPrintWithSeparator (AbstractOutputStream & outputStream,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::print (AbstractOutputStream & outputStream,
+void BinaryDecisionDiagram::print (AbstractOutputStream & outputStream,
                    const TC_UniqueArray <String> & inVariablesNames,
                    const TC_UniqueArray <int32_t> & inBitCounts) const {
 //--- Build separators
@@ -1176,7 +1176,7 @@ void C_BDD::print (AbstractOutputStream & outputStream,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::print (AbstractOutputStream & outputStream,
+void BinaryDecisionDiagram::print (AbstractOutputStream & outputStream,
                    const TC_UniqueArray <int32_t> & inValueSeparation,
                    const TC_UniqueArray <int32_t> & inBitCounts,
                    const int32_t inPrefixedSpaceCount) const {
@@ -1264,7 +1264,7 @@ static void buildGraphvizRepresentation (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-String C_BDD::graphvizRepresentation (void) const {
+String BinaryDecisionDiagram::graphvizRepresentation (void) const {
   int32_t varCount = 0 ;
   if (mBDDvalue > 1) {
     const uint32_t nodeIndex = nodeIndexForRoot (mBDDvalue COMMA_HERE) ;
@@ -1279,7 +1279,7 @@ String C_BDD::graphvizRepresentation (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-String C_BDD::graphvizRepresentationWithNames (const TC_UniqueArray <String> & inBitNames) const {
+String BinaryDecisionDiagram::graphvizRepresentationWithNames (const TC_UniqueArray <String> & inBitNames) const {
   unmarkAllExistingBDDnodes () ;
   String result ;
   result.appendCString ("digraph G {\n") ;
@@ -1353,7 +1353,7 @@ static void internalPrintBDDInLittleEndianStringArray (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::
+void BinaryDecisionDiagram::
 buildCompressedLittleEndianStringValueArray (TC_UniqueArray <String> & outStringArray
                                              COMMA_LOCATION_ARGS) const {
   const uint32_t nodeIndex = nodeIndexForRoot (mBDDvalue COMMA_HERE) ;
@@ -1368,7 +1368,7 @@ buildCompressedLittleEndianStringValueArray (TC_UniqueArray <String> & outString
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::
+void BinaryDecisionDiagram::
 buildCompressedLittleEndianStringValueArray (TC_UniqueArray <String> & outStringArray,
                                              const uint32_t inVariableCount
                                              COMMA_LOCATION_ARGS) const {
@@ -1430,7 +1430,7 @@ static void internalPrintBDDInBigEndianStringArray (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::
+void BinaryDecisionDiagram::
 buildCompressedBigEndianStringValueArray (TC_UniqueArray <String> & outStringArray
                                           COMMA_LOCATION_ARGS) const {
   const uint32_t nodeIndex = nodeIndexForRoot (mBDDvalue COMMA_HERE) ;
@@ -1445,7 +1445,7 @@ buildCompressedBigEndianStringValueArray (TC_UniqueArray <String> & outStringArr
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::
+void BinaryDecisionDiagram::
 buildCompressedBigEndianStringValueArray (TC_UniqueArray <String> & outStringArray,
                                  const uint32_t inVariableCount
                                  COMMA_LOCATION_ARGS) const {
@@ -1501,7 +1501,7 @@ static void sortValueArray (uint64_t * ioValueArray,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::buildBDDFromValueList (uint64_t * ioValueList,
+BinaryDecisionDiagram BinaryDecisionDiagram::buildBDDFromValueList (uint64_t * ioValueList,
                                     const uint32_t inValueCount,
                                     const uint32_t inBitCount) {
 //---
@@ -1514,7 +1514,7 @@ C_BDD C_BDD::buildBDDFromValueList (uint64_t * ioValueList,
     exit (1) ;
   }
 //---
-  C_BDD result ;
+  BinaryDecisionDiagram result ;
   if (inValueCount > 0) {
   //--- Sort value list in ascending order
     sortValueArray (ioValueList, 0, (int32_t) (inValueCount - 1)) ;
@@ -1527,8 +1527,8 @@ C_BDD C_BDD::buildBDDFromValueList (uint64_t * ioValueList,
       printf ("Warning: %u duplicates\n", duplicates) ;
     }
   //--- Translate into BDD
-    C_BDD * accumulatorArray = nullptr ;
-    macroMyNewArray (accumulatorArray, C_BDD, inBitCount) ;
+    BinaryDecisionDiagram * accumulatorArray = nullptr ;
+    macroMyNewArray (accumulatorArray, BinaryDecisionDiagram, inBitCount) ;
     uint64_t referenceValue = ioValueList [0] ;
     for (uint32_t i=0 ; i<inValueCount ; i++) {
       const uint64_t currentTransition = ioValueList [i] ;
@@ -1539,10 +1539,10 @@ C_BDD C_BDD::buildBDDFromValueList (uint64_t * ioValueList,
         mask >>=1 ;
       }
       if (firstDifferentBit >= 0) {
-        C_BDD accumulatorBDD ; accumulatorBDD.setToTrue () ;
+        BinaryDecisionDiagram accumulatorBDD ; accumulatorBDD.setToTrue () ;
         mask = 1UL ;
         for (int32_t idx=0 ; idx<=firstDifferentBit ; idx++) {
-          accumulatorBDD = (C_BDD ((uint32_t) (((uint32_t) idx) & UINT16_MAX), (referenceValue & mask) != 0) & accumulatorBDD) | accumulatorArray [idx] ;
+          accumulatorBDD = (BinaryDecisionDiagram ((uint32_t) (((uint32_t) idx) & UINT16_MAX), (referenceValue & mask) != 0) & accumulatorBDD) | accumulatorArray [idx] ;
           accumulatorArray [idx].setToFalse () ;
           mask <<= 1 ;
         }
@@ -1553,7 +1553,7 @@ C_BDD C_BDD::buildBDDFromValueList (uint64_t * ioValueList,
     result.setToTrue () ;
     uint64_t mask = 1UL ;
     for (uint32_t idx=0 ; idx<inBitCount ; idx++) {
-      result = (C_BDD ((uint32_t) (((uint32_t) idx) & UINT16_MAX), (referenceValue & mask) != 0) & result) | accumulatorArray [idx] ;
+      result = (BinaryDecisionDiagram ((uint32_t) (((uint32_t) idx) & UINT16_MAX), (referenceValue & mask) != 0) & result) | accumulatorArray [idx] ;
       mask <<= 1 ;
     }
     macroMyDeleteArray (accumulatorArray) ;
@@ -1569,87 +1569,87 @@ C_BDD C_BDD::buildBDDFromValueList (uint64_t * ioValueList,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::setToFalse (void) {
+void BinaryDecisionDiagram::setToFalse (void) {
   mBDDvalue = 0  ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::setToTrue (void) {
+void BinaryDecisionDiagram::setToTrue (void) {
   mBDDvalue = 1  ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::ite (const C_BDD & f, const C_BDD & g, const C_BDD & h) {
-  return C_BDD (internalITEoperation (f.mBDDvalue, g.mBDDvalue, h.mBDDvalue)) ;
+BinaryDecisionDiagram BinaryDecisionDiagram::ite (const BinaryDecisionDiagram & f, const BinaryDecisionDiagram & g, const BinaryDecisionDiagram & h) {
+  return BinaryDecisionDiagram (internalITEoperation (f.mBDDvalue, g.mBDDvalue, h.mBDDvalue)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::implies (const C_BDD & inOperand) const {
+BinaryDecisionDiagram BinaryDecisionDiagram::implies (const BinaryDecisionDiagram & inOperand) const {
 //--- f -> g est defini par (non f) ou g, c'est a dire non (f et (non g))
-  return C_BDD (internalANDoperation (mBDDvalue, inOperand.mBDDvalue ^ 1) ^ 1) ;
+  return BinaryDecisionDiagram (internalANDoperation (mBDDvalue, inOperand.mBDDvalue ^ 1) ^ 1) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::operator & (const C_BDD & inOperand) const {
-  return C_BDD (internalANDoperation (mBDDvalue, inOperand.mBDDvalue)) ;
+BinaryDecisionDiagram BinaryDecisionDiagram::operator & (const BinaryDecisionDiagram & inOperand) const {
+  return BinaryDecisionDiagram (internalANDoperation (mBDDvalue, inOperand.mBDDvalue)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::operator &= (const C_BDD & inOperand) {
+void BinaryDecisionDiagram::operator &= (const BinaryDecisionDiagram & inOperand) {
    mBDDvalue = internalANDoperation (mBDDvalue, inOperand.mBDDvalue) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::operator | (const C_BDD & inOperand) const {
-  return C_BDD (internalANDoperation (mBDDvalue ^ 1, inOperand.mBDDvalue ^ 1) ^ 1) ;
+BinaryDecisionDiagram BinaryDecisionDiagram::operator | (const BinaryDecisionDiagram & inOperand) const {
+  return BinaryDecisionDiagram (internalANDoperation (mBDDvalue ^ 1, inOperand.mBDDvalue ^ 1) ^ 1) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::operator |= (const C_BDD & inOperand) {
+void BinaryDecisionDiagram::operator |= (const BinaryDecisionDiagram & inOperand) {
   mBDDvalue = internalANDoperation (mBDDvalue ^ 1, inOperand.mBDDvalue ^ 1) ^ 1 ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::equalTo(const C_BDD & inOperand) const {
-  return C_BDD (internalITEoperation (mBDDvalue, inOperand.mBDDvalue, inOperand.mBDDvalue ^ 1)) ;
+BinaryDecisionDiagram BinaryDecisionDiagram::equalTo(const BinaryDecisionDiagram & inOperand) const {
+  return BinaryDecisionDiagram (internalITEoperation (mBDDvalue, inOperand.mBDDvalue, inOperand.mBDDvalue ^ 1)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::notEqualTo (const C_BDD & inOperand) const {
-  return C_BDD (internalITEoperation (mBDDvalue, inOperand.mBDDvalue ^ 1, inOperand.mBDDvalue)) ;
+BinaryDecisionDiagram BinaryDecisionDiagram::notEqualTo (const BinaryDecisionDiagram & inOperand) const {
+  return BinaryDecisionDiagram (internalITEoperation (mBDDvalue, inOperand.mBDDvalue ^ 1, inOperand.mBDDvalue)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::lowerOrEqual (const C_BDD & inOperand) const { // <=
-  return C_BDD (internalANDoperation (mBDDvalue, inOperand.mBDDvalue ^ 1) ^ 1) ;
+BinaryDecisionDiagram BinaryDecisionDiagram::lowerOrEqual (const BinaryDecisionDiagram & inOperand) const { // <=
+  return BinaryDecisionDiagram (internalANDoperation (mBDDvalue, inOperand.mBDDvalue ^ 1) ^ 1) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::greaterThan (const C_BDD & inOperand) const { // >
-  return C_BDD (internalANDoperation (mBDDvalue, inOperand.mBDDvalue ^ 1)) ;
+BinaryDecisionDiagram BinaryDecisionDiagram::greaterThan (const BinaryDecisionDiagram & inOperand) const { // >
+  return BinaryDecisionDiagram (internalANDoperation (mBDDvalue, inOperand.mBDDvalue ^ 1)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::lowerThan (const C_BDD & inOperand) const { // <
-  return C_BDD (internalANDoperation (mBDDvalue ^ 1, inOperand.mBDDvalue)) ;
+BinaryDecisionDiagram BinaryDecisionDiagram::lowerThan (const BinaryDecisionDiagram & inOperand) const { // <
+  return BinaryDecisionDiagram (internalANDoperation (mBDDvalue ^ 1, inOperand.mBDDvalue)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::greaterOrEqual (const C_BDD & inOperand) const { // >=
-  return C_BDD (internalANDoperation (mBDDvalue ^ 1, inOperand.mBDDvalue) ^ 1) ;
+BinaryDecisionDiagram BinaryDecisionDiagram::greaterOrEqual (const BinaryDecisionDiagram & inOperand) const { // >=
+  return BinaryDecisionDiagram (internalANDoperation (mBDDvalue ^ 1, inOperand.mBDDvalue) ^ 1) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1693,7 +1693,7 @@ static void internalValueCount64 (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-uint64_t C_BDD::valueCount64 (const uint32_t inVariableCount) const {
+uint64_t BinaryDecisionDiagram::valueCount64 (const uint32_t inVariableCount) const {
   uint64_t nombreDirect = 0 ;
   uint64_t nombreComplement = 0 ;
   internalValueCount64 (mBDDvalue, inVariableCount, nombreDirect, nombreComplement COMMA_HERE) ;
@@ -1740,7 +1740,7 @@ static void internalValueCount64UsingCache (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-uint64_t C_BDD::valueCount64UsingCache (const uint32_t inVariableCount,
+uint64_t BinaryDecisionDiagram::valueCount64UsingCache (const uint32_t inVariableCount,
                                         TC_UniqueArray <uint64_t> & ioDirectCacheArray,
                                         TC_UniqueArray <uint64_t> & ioComplementCacheArray) const {
   uint64_t nombreDirect = 0 ;
@@ -1790,7 +1790,7 @@ static void internalValueCount128 (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-UInt128 C_BDD::valueCount128 (const uint32_t inVariableCount) const {
+UInt128 BinaryDecisionDiagram::valueCount128 (const uint32_t inVariableCount) const {
   UInt128 nombreDirect = 0 ;
   UInt128 nombreComplement = 0 ;
   internalValueCount128 (mBDDvalue, inVariableCount, nombreDirect, nombreComplement COMMA_HERE) ;
@@ -1837,7 +1837,7 @@ static void internalValueCount128UsingCache (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-UInt128 C_BDD::valueCount128UsingCache (const uint32_t inVariableCount,
+UInt128 BinaryDecisionDiagram::valueCount128UsingCache (const uint32_t inVariableCount,
                                           TC_UniqueArray <UInt128> & ioDirectCacheArray,
                                           TC_UniqueArray <UInt128> & ioComplementCacheArray) const {
   UInt128 nombreDirect = 0 ;
@@ -1884,7 +1884,7 @@ static void internalValueCount (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-BigSigned C_BDD::valueCount (const uint32_t inVariableCount) const {
+BigSigned BinaryDecisionDiagram::valueCount (const uint32_t inVariableCount) const {
   BigSigned nombreDirect ;
   BigSigned nombreComplement ;
   internalValueCount (mBDDvalue, inVariableCount, nombreDirect, nombreComplement COMMA_HERE) ;
@@ -1931,7 +1931,7 @@ static void internalValueCountUsingCache (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-BigSigned C_BDD::valueCountUsingCache (const uint32_t inVariableCount,
+BigSigned BinaryDecisionDiagram::valueCountUsingCache (const uint32_t inVariableCount,
                                       TC_UniqueArray <BigSigned> & ioDirectCacheArray,
                                       TC_UniqueArray <BigSigned> & ioComplementCacheArray) const {
   BigSigned nombreDirect ;
@@ -1948,19 +1948,19 @@ BigSigned C_BDD::valueCountUsingCache (const uint32_t inVariableCount,
 
 //--------------------------------------------------------------------------------------------------
 
-static C_BDD obtenirIemeBDDinterne (const uint32_t inValue,
+static BinaryDecisionDiagram obtenirIemeBDDinterne (const uint32_t inValue,
                                     const uint64_t inNthBDDvalue,
                                     const uint32_t inVariableCount) {
   const uint32_t nodeIndex = nodeIndexForRoot (inValue COMMA_HERE) ;
   const uint32_t complement = inValue & 1 ;
   uint64_t iEme ;
-  C_BDD result ;
+  BinaryDecisionDiagram result ;
   if (bothBranches (gNodeArray [nodeIndex]) == 0) {
     if (complement == 1) { // Decomposer inNthBDDvalue en binaire
       result = ~ result ;
       iEme = inNthBDDvalue ;
       for (uint32_t i=0 ; i<inVariableCount ; i++) {
-        result = result & C_BDD (i, ((iEme & 1) == 0) ? false : true) ;
+        result = result & BinaryDecisionDiagram (i, ((iEme & 1) == 0) ? false : true) ;
         iEme >>= 1 ;
       }
     }
@@ -1981,15 +1981,15 @@ static C_BDD obtenirIemeBDDinterne (const uint32_t inValue,
     iEme = inNthBDDvalue % total ;
     uint64_t quotient = inNthBDDvalue / total ;
     for (uint32_t j = (uint32_t) (var+1) ; j<inVariableCount ; j++) {
-      result = result & C_BDD (j, ((quotient & 1) == 0) ? false : true) ;
+      result = result & BinaryDecisionDiagram (j, ((quotient & 1) == 0) ? false : true) ;
       quotient >>= 1 ;
     }
     if (iEme < nd0) {
-      result = result & C_BDD (var, false) & obtenirIemeBDDinterne (gNodeArray [nodeIndex].mELSE ^ complement, iEme, var) ;
+      result = result & BinaryDecisionDiagram (var, false) & obtenirIemeBDDinterne (gNodeArray [nodeIndex].mELSE ^ complement, iEme, var) ;
     }else if (iEme < total) {
-      result = result & C_BDD (var, true) & obtenirIemeBDDinterne (gNodeArray [nodeIndex].mTHEN ^ complement, iEme - nd0, var) ;
+      result = result & BinaryDecisionDiagram (var, true) & obtenirIemeBDDinterne (gNodeArray [nodeIndex].mTHEN ^ complement, iEme - nd0, var) ;
     }else{
-      result = C_BDD () ; // Vide
+      result = BinaryDecisionDiagram () ; // Vide
     }
   }
   return result ;
@@ -1997,7 +1997,7 @@ static C_BDD obtenirIemeBDDinterne (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::getNthBDD (const uint64_t inNthBDDvalue,
+BinaryDecisionDiagram BinaryDecisionDiagram::getNthBDD (const uint64_t inNthBDDvalue,
                         const uint32_t inVariableCount) const {
   return obtenirIemeBDDinterne (mBDDvalue, inNthBDDvalue, inVariableCount) ;
 }
@@ -2046,7 +2046,7 @@ static uint64_t rangBDDinterne (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-uint64_t C_BDD::getBDDrange (const C_BDD & inOperand,
+uint64_t BinaryDecisionDiagram::getBDDrange (const BinaryDecisionDiagram & inOperand,
                              const uint32_t inVariableCount) const {
   uint64_t rang = 0 ;
   if (inOperand.valueCount64 (inVariableCount) == 1) {
@@ -2102,7 +2102,7 @@ static void clearSingleOperandOperationCache (void) {
   if (0 == gSingleOperandOperationMapSize) {
     gSingleOperandOperationMapSize = kSingleOperandOperationCacheInitialSize ;
     macroMyNewPODArray (gSingleOperandOperationCacheMap, tStructSingleOperandOperationCacheEntry, gSingleOperandOperationMapSize) ;
-    if (C_BDD::displaysInformationMessages ()) {
+    if (BinaryDecisionDiagram::displaysInformationMessages ()) {
       printf ("BDD package info: single operand operation cache allocated to %u %03u %03u (%u MB)\n",
               gSingleOperandOperationMapSize / 1000000,
               (gSingleOperandOperationMapSize / 1000) % 1000,
@@ -2121,10 +2121,10 @@ static void reallocSingleOperandOperationCache (const uint32_t inNewSize) {
   gSingleOperandOperationCacheMapUsedEntryCount = 0 ;
   tStructSingleOperandOperationCacheEntry * newCache = nullptr ;
   if (inNewSize << (1U << gSingleOperandOperationCacheMaxPowerOfTwoSize)) {
-    uint32_t newMemoryUsage = C_BDD::currentMemoryUsage () ;
+    uint32_t newMemoryUsage = BinaryDecisionDiagram::currentMemoryUsage () ;
     newMemoryUsage -= singleOperandOperationCacheMemoryUsage () ;
     newMemoryUsage += (uint32_t) ((inNewSize * sizeof (uint64_t)) / 1000000) ;
-    if (newMemoryUsage < C_BDD::maximumMemoryUsage ()) {
+    if (newMemoryUsage < BinaryDecisionDiagram::maximumMemoryUsage ()) {
       macroMyNewPODArray (newCache, tStructSingleOperandOperationCacheEntry, inNewSize) ;
       for (uint32_t i=0 ; i<gSingleOperandOperationMapSize ; i++) {
         if (gSingleOperandOperationCacheMap [i].mOperand != 0) {
@@ -2137,7 +2137,7 @@ static void reallocSingleOperandOperationCache (const uint32_t inNewSize) {
       macroMyDeletePODArray (gSingleOperandOperationCacheMap) ;
       gSingleOperandOperationCacheMap = newCache ;
       gSingleOperandOperationMapSize = inNewSize ;
-      if (C_BDD::displaysInformationMessages ()) {
+      if (BinaryDecisionDiagram::displaysInformationMessages ()) {
         printf ("BDD package info: single operand operation cache reallocated to %u %03u %03u (%u MB)\n",
                 gSingleOperandOperationMapSize / 1000000,
                 (gSingleOperandOperationMapSize / 1000) % 1000,
@@ -2146,7 +2146,7 @@ static void reallocSingleOperandOperationCache (const uint32_t inNewSize) {
       }
     }else{
       gSingleOperandOperationCacheExpandable = false ;
-      if (C_BDD::displaysInformationMessages ()) {
+      if (BinaryDecisionDiagram::displaysInformationMessages ()) {
         printf ("BDD package info: single operand operation cache reallocation to %u %03u %03u inhibited (max RAM usage reached)\n",
                 gSingleOperandOperationMapSize / 1000000,
                 (gSingleOperandOperationMapSize / 1000) % 1000,
@@ -2155,7 +2155,7 @@ static void reallocSingleOperandOperationCache (const uint32_t inNewSize) {
     }
   }else{
     gSingleOperandOperationCacheExpandable = false ;
-    if (C_BDD::displaysInformationMessages ()) {
+    if (BinaryDecisionDiagram::displaysInformationMessages ()) {
       printf ("BDD package info: single operand operation cache reallocation to %u %03u %03u inhibited (max size reached)\n",
               gSingleOperandOperationMapSize / 1000000,
               (gSingleOperandOperationMapSize / 1000) % 1000,
@@ -2198,9 +2198,9 @@ static void enterInSingleOperandOperationCache (const uint32_t inOperand,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::setSingleOperandOperationCacheMaxSize (const uint32_t inPowerOfTwo) {
+void BinaryDecisionDiagram::setSingleOperandOperationCacheMaxSize (const uint32_t inPowerOfTwo) {
   gSingleOperandOperationCacheMaxPowerOfTwoSize = inPowerOfTwo ;
-  if (C_BDD::displaysInformationMessages ()) {
+  if (BinaryDecisionDiagram::displaysInformationMessages ()) {
     printf ("BDD package info: single operand operation cache max size limited < 2 ** %u\n", gSingleOperandOperationCacheMaxPowerOfTwoSize) ;
   }
 }
@@ -2272,16 +2272,16 @@ static uint32_t operationQuelqueSoitSurBitSupNumeroInterne (const uint32_t inVal
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::forallOnBitNumber (const uint32_t numeroBit) const {
+BinaryDecisionDiagram BinaryDecisionDiagram::forallOnBitNumber (const uint32_t numeroBit) const {
   clearSingleOperandOperationCache () ;
-  return C_BDD (internalForAllOnBitRange (mBDDvalue, numeroBit, 1)) ;
+  return BinaryDecisionDiagram (internalForAllOnBitRange (mBDDvalue, numeroBit, 1)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::forallOnBitsAfterNumber (const uint32_t numeroBit) const {
+BinaryDecisionDiagram BinaryDecisionDiagram::forallOnBitsAfterNumber (const uint32_t numeroBit) const {
   clearSingleOperandOperationCache () ;
-  return C_BDD (operationQuelqueSoitSurBitSupNumeroInterne (mBDDvalue, numeroBit)) ;
+  return BinaryDecisionDiagram (operationQuelqueSoitSurBitSupNumeroInterne (mBDDvalue, numeroBit)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2292,26 +2292,26 @@ C_BDD C_BDD::forallOnBitsAfterNumber (const uint32_t numeroBit) const {
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::existsOnBitNumber (const uint32_t numeroBit) const {
+BinaryDecisionDiagram BinaryDecisionDiagram::existsOnBitNumber (const uint32_t numeroBit) const {
   clearSingleOperandOperationCache () ;
 //--- ilExiste x : F <=> non (quelquesoit x : non (F))
-  return C_BDD (internalForAllOnBitRange (mBDDvalue ^ 1, numeroBit, 1) ^ 1) ;
+  return BinaryDecisionDiagram (internalForAllOnBitRange (mBDDvalue ^ 1, numeroBit, 1) ^ 1) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::existsOnBitRange (const uint32_t inFirstBit,
+BinaryDecisionDiagram BinaryDecisionDiagram::existsOnBitRange (const uint32_t inFirstBit,
                                const uint32_t inBitCount) const {
   clearSingleOperandOperationCache () ;
-  return C_BDD (internalForAllOnBitRange (mBDDvalue ^ 1, inFirstBit, inBitCount) ^ 1) ;
+  return BinaryDecisionDiagram (internalForAllOnBitRange (mBDDvalue ^ 1, inFirstBit, inBitCount) ^ 1) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::existsOnBitsAfterNumber (const uint32_t numeroBit) const {
+BinaryDecisionDiagram BinaryDecisionDiagram::existsOnBitsAfterNumber (const uint32_t numeroBit) const {
 // ilExiste x : F <=> non (quelquesoit x : non (F))
   clearSingleOperandOperationCache () ;
-  return C_BDD (operationQuelqueSoitSurBitSupNumeroInterne (mBDDvalue ^ 1, numeroBit) ^ 1) ;
+  return BinaryDecisionDiagram (operationQuelqueSoitSurBitSupNumeroInterne (mBDDvalue ^ 1, numeroBit) ^ 1) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2352,7 +2352,7 @@ static uint32_t internalRecursiveSubstitution (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::substitution (const uint32_t * inSubstitutionArray,
+BinaryDecisionDiagram BinaryDecisionDiagram::substitution (const uint32_t * inSubstitutionArray,
                            const uint32_t inBDDvariablesCount
                            COMMA_LOCATION_ARGS) const {
   clearSingleOperandOperationCache () ;
@@ -2364,7 +2364,7 @@ C_BDD C_BDD::substitution (const uint32_t * inSubstitutionArray,
     noChangeIndex ++ ;
   }
   noChangeIndex -- ;
-  return C_BDD (estIdentite ? mBDDvalue : internalRecursiveSubstitution (mBDDvalue, inSubstitutionArray, noChangeIndex, inBDDvariablesCount COMMA_THERE)) ;
+  return BinaryDecisionDiagram (estIdentite ? mBDDvalue : internalRecursiveSubstitution (mBDDvalue, inSubstitutionArray, noChangeIndex, inBDDvariablesCount COMMA_THERE)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2375,7 +2375,7 @@ C_BDD C_BDD::substitution (const uint32_t * inSubstitutionArray,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::translate (const uint32_t inBDDvariablesCount,
+BinaryDecisionDiagram BinaryDecisionDiagram::translate (const uint32_t inBDDvariablesCount,
                         const uint32_t inTranslation) const {
   uint32_t * substitionVector = nullptr ;
   macroMyNewArray (substitionVector, uint32_t, inBDDvariablesCount) ;
@@ -2384,7 +2384,7 @@ C_BDD C_BDD::translate (const uint32_t inBDDvariablesCount,
   }
   const uint32_t result = internalRecursiveSubstitution (mBDDvalue, substitionVector, 0, inBDDvariablesCount COMMA_HERE) ;
   macroMyDeleteArray (substitionVector) ;
-  return C_BDD (result) ;
+  return BinaryDecisionDiagram (result) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2429,8 +2429,8 @@ static uint32_t internalExchangeVariables (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::exchangeVariables (const uint32_t var1, const uint32_t var2) const {
-  C_BDD result (mBDDvalue) ;
+BinaryDecisionDiagram BinaryDecisionDiagram::exchangeVariables (const uint32_t var1, const uint32_t var2) const {
+  BinaryDecisionDiagram result (mBDDvalue) ;
   if (var1 > var2) {
     result.mBDDvalue = internalExchangeVariables (mBDDvalue, var1, var2) ;
   }else if (var1 < var2) {
@@ -2476,8 +2476,8 @@ static uint32_t internalRollDown (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::rollDownVariables (const uint32_t var1, const uint32_t var2) const {
-  C_BDD result (mBDDvalue) ;
+BinaryDecisionDiagram BinaryDecisionDiagram::rollDownVariables (const uint32_t var1, const uint32_t var2) const {
+  BinaryDecisionDiagram result (mBDDvalue) ;
   if (var1 > var2) {
     result.mBDDvalue = internalRollDown (mBDDvalue, var1, var2) ;
   }
@@ -2521,9 +2521,9 @@ static uint32_t internalRollUp (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::
+BinaryDecisionDiagram BinaryDecisionDiagram::
 rollUpVariables (const uint32_t var1, const uint32_t var2) const {
-  C_BDD result (mBDDvalue) ;
+  BinaryDecisionDiagram result (mBDDvalue) ;
   if (var1 > var2) {
     result.mBDDvalue = internalRollUp (mBDDvalue, var1, var2) ;
   }
@@ -2557,9 +2557,9 @@ static uint32_t internalLeftShift (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::bddByLeftShifting (const uint32_t inLeftShiftCount) const {
+BinaryDecisionDiagram BinaryDecisionDiagram::bddByLeftShifting (const uint32_t inLeftShiftCount) const {
   clearSingleOperandOperationCache () ;
-  C_BDD result ;
+  BinaryDecisionDiagram result ;
   result.mBDDvalue = internalLeftShift (mBDDvalue, inLeftShiftCount) ;
   return result ;
 }
@@ -2594,16 +2594,16 @@ static uint32_t internalRightShift (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD C_BDD::bddByRightShifting (const uint32_t inRightShiftCount) const {
+BinaryDecisionDiagram BinaryDecisionDiagram::bddByRightShifting (const uint32_t inRightShiftCount) const {
   clearSingleOperandOperationCache () ;
-  C_BDD result ;
+  BinaryDecisionDiagram result ;
   result.mBDDvalue = internalRightShift (mBDDvalue, inRightShiftCount) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_BDD::getBDDnodeSize (void) {
+uint32_t BinaryDecisionDiagram::getBDDnodeSize (void) {
   return (uint32_t) sizeof (cBDDnode) ;
 }
 
@@ -2633,7 +2633,7 @@ inline uint64_t nodeHashCode (const cBDDnode inNode) {
 
 static void reallocHashMap (const uint32_t inNewSize) {
   if ((0 < inNewSize) && (inNewSize != gCollisionMapSize)) {
-    if (C_BDD::displaysInformationMessages ()) {
+    if (BinaryDecisionDiagram::displaysInformationMessages ()) {
       printf ("BDD package info: hash map reallocated to %u %03u %03u (%u MB)\n",
               inNewSize / 1000000, (inNewSize / 1000) % 1000, inNewSize % 1000,
               (inNewSize * (uint32_t) sizeof (uint32_t)) / 1000000) ;
@@ -2667,7 +2667,7 @@ static uint32_t addNewNode (const cBDDnode inNode) {
     if (newSize > (1U << 31)) {
       printf ("*** BDD package node map saturation: needs more than 2 ** 31 nodes\n") ;
       exit (1) ;
-    }else  if (C_BDD::displaysInformationMessages ()) {
+    }else  if (BinaryDecisionDiagram::displaysInformationMessages ()) {
       printf ("BDD package info: node map reallocated to %u %03u %03u (%u MB)\n",
               newSize / 1000000, (newSize / 1000) % 1000, newSize % 1000,
               (newSize * (uint32_t) sizeof (cBDDnode)) / 1000000) ;
@@ -2690,14 +2690,14 @@ static uint32_t addNewNode (const cBDDnode inNode) {
   if (gHashMapExpandable && (gCurrentNodeCount > (gCollisionMapSize / 2))) {
     const uint32_t newSize = getPrimeGreaterThan (gCollisionMapSize + 1) ;
     if (newSize < (1U << gHashMapPowerOfTwoMaxSize)) {
-      uint32_t newMemoryUsage = C_BDD::currentMemoryUsage () ;
+      uint32_t newMemoryUsage = BinaryDecisionDiagram::currentMemoryUsage () ;
       newMemoryUsage -= hashMapMemoryUsage () ;
       newMemoryUsage += (uint32_t) ((newSize * sizeof (uint32_t)) / 1000000) ;
-      if (newMemoryUsage < C_BDD::maximumMemoryUsage ()) {
+      if (newMemoryUsage < BinaryDecisionDiagram::maximumMemoryUsage ()) {
         reallocHashMap (newSize) ;
       }else{
         gHashMapExpandable = false ;
-        if (C_BDD::displaysInformationMessages ()) {
+        if (BinaryDecisionDiagram::displaysInformationMessages ()) {
           printf ("BDD package info: hash map reallocation to %u %03u %03u inhibited (max RAM usage reached)\n",
             newSize / 1000000,
             (newSize / 1000) % 1000,
@@ -2706,7 +2706,7 @@ static uint32_t addNewNode (const cBDDnode inNode) {
       }
     }else{
       gHashMapExpandable = false ;
-      if (C_BDD::displaysInformationMessages ()) {
+      if (BinaryDecisionDiagram::displaysInformationMessages ()) {
         printf ("BDD package info: hash map reallocation to %u %03u %03u inhibited (max size reached)\n",
           newSize / 1000000,
           (newSize / 1000) % 1000,
@@ -2727,7 +2727,7 @@ static uint32_t addNewNode (const cBDDnode inNode) {
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::unmarkAllExistingBDDnodes (void) {
+void BinaryDecisionDiagram::unmarkAllExistingBDDnodes (void) {
   macroAssert ((gNodeArraySize % 64) == 0, "gNodeArraySize (%lld) is not a multiple of 64", gNodeArraySize, 0) ;
   for (uint32_t i=0 ; i<(gNodeArraySize >> 6) ; i++) {
     gMarkTable [i] = 0 ;
@@ -2775,7 +2775,7 @@ void markNode (const uint32_t inValue) {
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_BDD::getMarkedNodesCount (void) {
+uint32_t BinaryDecisionDiagram::getMarkedNodesCount (void) {
   uint32_t count = 0 ;
   for (uint32_t i=0 ; i<(gNodeArraySize >> 6) ; i++) {
     uint64_t v = gMarkTable [i] ;
@@ -2831,23 +2831,23 @@ uint32_t find_or_add (const uint32_t inBoolVar,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::setHashMapMaxSize (const uint32_t inPowerOfTwoSize) {
+void BinaryDecisionDiagram::setHashMapMaxSize (const uint32_t inPowerOfTwoSize) {
   gHashMapPowerOfTwoMaxSize = inPowerOfTwoSize ;
-  if (C_BDD::displaysInformationMessages ()) {
+  if (BinaryDecisionDiagram::displaysInformationMessages ()) {
     printf ("BDD package info: hash map max size limited < 2 ** %u\n", gHashMapPowerOfTwoMaxSize) ;
   }
 }
 
 //--------------------------------------------------------------------------------------------------
 
-static C_BDD * gFirstBDD = nullptr ;
-static C_BDD * gLastBDD = nullptr ;
+static BinaryDecisionDiagram * gFirstBDD = nullptr ;
+static BinaryDecisionDiagram * gLastBDD = nullptr ;
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_BDD::getBDDinstancesCount (void) {
+uint32_t BinaryDecisionDiagram::getBDDinstancesCount (void) {
   uint32_t n = 0 ;
-  C_BDD * p = gFirstBDD ;
+  BinaryDecisionDiagram * p = gFirstBDD ;
   while (p != nullptr) {
     n ++ ;
     p = p->mPtrToNextBDD ;
@@ -2875,20 +2875,20 @@ static void recursiveMarkBDDNodes (const uint32_t inValue) {
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::markAllBDDnodes (void) {
+void BinaryDecisionDiagram::markAllBDDnodes (void) {
   recursiveMarkBDDNodes (mBDDvalue) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::markAndSweepUnusedNodes (void) {
+void BinaryDecisionDiagram::markAndSweepUnusedNodes (void) {
   Timer timer ;
 //--- Clear operation caches
   clearANDOperationCache () ;
 //--- Effacer tous les champs marquage des elements BDD existants
   unmarkAllExistingBDDnodes () ;
 //--- Marquer tous les elements utilises
-  C_BDD * p = gFirstBDD ;
+  BinaryDecisionDiagram * p = gFirstBDD ;
   while (p != nullptr) {
     recursiveMarkBDDNodes (p->mBDDvalue) ;
     p = p->mPtrToNextBDD ;
@@ -2946,7 +2946,7 @@ void C_BDD::markAndSweepUnusedNodes (void) {
       gCollisionMap [hashCode] = nodeIndex ;
     }
   }
-  if (C_BDD::displaysInformationMessages ()) {
+  if (BinaryDecisionDiagram::displaysInformationMessages ()) {
     gCout.appendCString ("BDD package info: mark and sweep done in ") ;
     gCout.appendString (timer.timeString ()) ;
     gCout.appendCString (" (nodes ") ;
@@ -2965,7 +2965,7 @@ void C_BDD::markAndSweepUnusedNodes (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD::C_BDD (void) :
+BinaryDecisionDiagram::BinaryDecisionDiagram (void) :
 mBDDvalue (0),
 mPtrToPreviousBDD (nullptr),
 mPtrToNextBDD (nullptr) {
@@ -2974,7 +2974,7 @@ mPtrToNextBDD (nullptr) {
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD::C_BDD (const uint32_t inValue) :
+BinaryDecisionDiagram::BinaryDecisionDiagram (const uint32_t inValue) :
 mBDDvalue (inValue),
 mPtrToPreviousBDD (nullptr),
 mPtrToNextBDD (nullptr) {
@@ -2983,7 +2983,7 @@ mPtrToNextBDD (nullptr) {
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD::C_BDD (const uint32_t variable,
+BinaryDecisionDiagram::BinaryDecisionDiagram (const uint32_t variable,
               const bool inSign) :
 mBDDvalue (0),
 mPtrToPreviousBDD (nullptr),
@@ -2995,7 +2995,7 @@ mPtrToNextBDD (nullptr) {
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD::C_BDD (const C_BDD & inSource) :
+BinaryDecisionDiagram::BinaryDecisionDiagram (const BinaryDecisionDiagram & inSource) :
 mBDDvalue (inSource.mBDDvalue),
 mPtrToPreviousBDD (nullptr),
 mPtrToNextBDD (nullptr) {
@@ -3004,7 +3004,7 @@ mPtrToNextBDD (nullptr) {
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::initLinks (void) {
+void BinaryDecisionDiagram::initLinks (void) {
   if (gFirstBDD == nullptr) {
     gLastBDD = this ;
   }else{
@@ -3016,7 +3016,7 @@ void C_BDD::initLinks (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD::~C_BDD (void) {
+BinaryDecisionDiagram::~BinaryDecisionDiagram (void) {
   mBDDvalue = 0 ;
   if (mPtrToPreviousBDD == nullptr) {
     gFirstBDD = gFirstBDD->mPtrToNextBDD ;
@@ -3032,7 +3032,7 @@ C_BDD::~C_BDD (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-C_BDD & C_BDD::operator = (const C_BDD & inSource) {
+BinaryDecisionDiagram & BinaryDecisionDiagram::operator = (const BinaryDecisionDiagram & inSource) {
   mBDDvalue = inSource.mBDDvalue ;
   return *this ;
 }
@@ -3068,11 +3068,11 @@ static void internalCheckBDDIsWellFormed (const uint32_t inBDD,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::checkAllBDDsAreWellFormed (LOCATION_ARGS) {
+void BinaryDecisionDiagram::checkAllBDDsAreWellFormed (LOCATION_ARGS) {
 //--- Unmark all nodes
   unmarkAllExistingBDDnodes () ;
 //--- Check BDDs
-  C_BDD * p = gFirstBDD ;
+  BinaryDecisionDiagram * p = gFirstBDD ;
   while (p != nullptr) {
     internalCheckBDDIsWellFormed (p->mBDDvalue, UINT16_MAX COMMA_THERE) ;
     p = p->mPtrToNextBDD ;
@@ -3081,7 +3081,7 @@ void C_BDD::checkAllBDDsAreWellFormed (LOCATION_ARGS) {
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::checkBDDIsWellFormed (LOCATION_ARGS) {
+void BinaryDecisionDiagram::checkBDDIsWellFormed (LOCATION_ARGS) {
 //--- Unmark all nodes
   unmarkAllExistingBDDnodes () ;
 //--- Check BDD
@@ -3096,7 +3096,7 @@ void C_BDD::checkBDDIsWellFormed (LOCATION_ARGS) {
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_BDD::currentMemoryUsage (void) {
+uint32_t BinaryDecisionDiagram::currentMemoryUsage (void) {
   uint32_t result = nodeMapMemoryUsage () ;
   result += hashMapMemoryUsage () ;
   result += ANDCacheMemoryUsage () ;
@@ -3110,13 +3110,13 @@ static uint32_t gMaximumMemoryUsage = UINT32_MAX ;
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_BDD::maximumMemoryUsage (void) { // In MB
+uint32_t BinaryDecisionDiagram::maximumMemoryUsage (void) { // In MB
   return gMaximumMemoryUsage ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::setMaximumMemoryUsage (const uint32_t inMaxMemoryUsage) { // In MB
+void BinaryDecisionDiagram::setMaximumMemoryUsage (const uint32_t inMaxMemoryUsage) { // In MB
   gMaximumMemoryUsage = inMaxMemoryUsage ;
 }
 
@@ -3128,7 +3128,7 @@ void C_BDD::setMaximumMemoryUsage (const uint32_t inMaxMemoryUsage) { // In MB
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::printBDDpackageOperationsSummary (AbstractOutputStream & inStream) {
+void BinaryDecisionDiagram::printBDDpackageOperationsSummary (AbstractOutputStream & inStream) {
   #ifdef __LP64__
     const uint32_t mode = 64 ;
   #else
@@ -3184,18 +3184,18 @@ void C_BDD::printBDDpackageOperationsSummary (AbstractOutputStream & inStream) {
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::freeBDDStataStructures (void) {
+void BinaryDecisionDiagram::freeBDDStataStructures (void) {
   releaseANDOperationCache () ;
   releaseSingleOperandOperationCache () ;
-  C_BDD::markAndSweepUnusedNodes () ;
+  BinaryDecisionDiagram::markAndSweepUnusedNodes () ;
   if (0 == gCurrentNodeCount) {
     macroMyDeletePODArray (gCollisionMap) ;
     macroMyDeletePODArray (gMarkTable) ;
     macroMyDeletePODArray (gNodeArray) ;
   }else{
     #ifndef DO_NOT_GENERATE_CHECKINGS
-      printf ("BDD package info: cannot free BDD structures, %u C_BDD instances, %u BDD nodes still alive\n",
-              C_BDD::getBDDinstancesCount (),
+      printf ("BDD package info: cannot free BDD structures, %u BinaryDecisionDiagram instances, %u BDD nodes still alive\n",
+              BinaryDecisionDiagram::getBDDinstancesCount (),
               gCurrentNodeCount) ;
     #endif
   }
@@ -3239,7 +3239,7 @@ parcoursBDDinterneParValeur (const uint32_t inValue,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::traverseBDDvalues (C_bdd_value_traversing & inTraversing,
+void BinaryDecisionDiagram::traverseBDDvalues (C_bdd_value_traversing & inTraversing,
                                const uint32_t inVariableCount) const {
   bool * tableauDesValeurs = nullptr ;
   macroMyNewArray (tableauDesValeurs, bool, inVariableCount) ;
@@ -3284,7 +3284,7 @@ void C_build_values64_array::action (const bool * tableauDesValeurs,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::buildValue64Array (TC_UniqueArray <uint64_t> & outValuesArray,
+void BinaryDecisionDiagram::buildValue64Array (TC_UniqueArray <uint64_t> & outValuesArray,
                                const uint32_t inVariableCount) const {
   macroAssert(inVariableCount < 64, "inVariableCount == %ld >= 64", (int64_t) inVariableCount, 0) ;
   outValuesArray.removeAllKeepingCapacity () ;
@@ -3332,7 +3332,7 @@ void C_build_values_array::action (const bool * tableauDesValeurs,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::buildValueArray (TC_UniqueArray <TC_Array <bool> > & outValuesArray,
+void BinaryDecisionDiagram::buildValueArray (TC_UniqueArray <TC_Array <bool> > & outValuesArray,
                              const uint32_t inVariableCount) const {
   outValuesArray.removeAllKeepingCapacity () ;
   C_build_values_array builder (& outValuesArray) ;
@@ -3380,7 +3380,7 @@ action (const bool * tableauDesValeurs,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::
+void BinaryDecisionDiagram::
 buildLittleEndianStringValueArray (TC_UniqueArray <String> & outValuesArray,
                                    const uint32_t inVariableCount) const {
   outValuesArray.removeAllKeepingCapacity () ;
@@ -3422,7 +3422,7 @@ void cBuildBigEndianStringValueArray::action (const bool * tableauDesValeurs,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::buildBigEndianStringValueArray (TC_UniqueArray <String> & outValuesArray,
+void BinaryDecisionDiagram::buildBigEndianStringValueArray (TC_UniqueArray <String> & outValuesArray,
                                             const uint32_t inVariableCount) const {
   outValuesArray.removeAllKeepingCapacity () ;
   cBuildBigEndianStringValueArray builder (& outValuesArray) ;
@@ -3466,7 +3466,7 @@ void cBuildQueryString::action (const bool * tableauDesValeurs,
 
 //--------------------------------------------------------------------------------------------------
 
-String C_BDD::
+String BinaryDecisionDiagram::
 queryStringValue (LOCATION_ARGS) const {
   String s ;
   if (isTrue ()) {
@@ -3561,7 +3561,7 @@ static bool searchInANDOperationCache (const uint32_t inOperand1,
     macroMyNewPODArray (gANDOperationCacheOperandMap, uint64_t, gANDOperationMapSize) ;
     macroMyNewPODArray (gANDOperationCacheResultMap, uint32_t, gANDOperationMapSize) ;
     clearANDOperationCache () ;
-    if (C_BDD::displaysInformationMessages ()) {
+    if (BinaryDecisionDiagram::displaysInformationMessages ()) {
       printf ("BDD package info: AND cache allocated to %u %03u %03u (%u MB)\n",
               gANDOperationMapSize / 1000000,
               (gANDOperationMapSize / 1000) % 1000,
@@ -3603,7 +3603,7 @@ static void reallocANDOperationCache (const uint32_t inNewSize) {
     gANDOperationCacheOperandMap = newCache ;
     gANDOperationCacheResultMap = newResult ;
     gANDOperationMapSize = inNewSize ;
-    if (C_BDD::displaysInformationMessages ()) {
+    if (BinaryDecisionDiagram::displaysInformationMessages ()) {
       printf ("BDD package info: AND cache reallocated to %u %03u %03u (%u MB)\n",
               gANDOperationMapSize / 1000000,
               (gANDOperationMapSize / 1000) % 1000,
@@ -3630,14 +3630,14 @@ static void enterInANDOperationCache (const uint32_t inOperand1,
         ((gANDOperationCacheMapUsedEntryCount + gANDOperationCacheMapUsedEntryCount / 4) > gANDOperationMapSize)) {
       const uint32_t newSize = getPrimeGreaterThan (gANDOperationMapSize + 1) ;
       if (newSize < (1U << gANDOperationCacheMaxPowerOfTwoSize)) {
-        uint32_t newMemoryUsage = C_BDD::currentMemoryUsage () ;
+        uint32_t newMemoryUsage = BinaryDecisionDiagram::currentMemoryUsage () ;
         newMemoryUsage -= ANDCacheMemoryUsage () ;
         newMemoryUsage += (uint32_t) ((newSize * (sizeof (uint64_t) + sizeof (uint32_t))) / 1000000) ;
-        if (newMemoryUsage < C_BDD::maximumMemoryUsage ()) {
+        if (newMemoryUsage < BinaryDecisionDiagram::maximumMemoryUsage ()) {
           reallocANDOperationCache (newSize) ;
         }else{
           gANDOperationCacheExpandable = false ;
-          if (C_BDD::displaysInformationMessages ()) {
+          if (BinaryDecisionDiagram::displaysInformationMessages ()) {
             printf ("BDD package info: AND cache reallocation to %u %03u %03u inhibited (max RAM usage reached)\n",
               newSize / 1000000,
               (newSize / 1000) % 1000,
@@ -3646,7 +3646,7 @@ static void enterInANDOperationCache (const uint32_t inOperand1,
         }
       }else{
         gANDOperationCacheExpandable = false ;
-        if (C_BDD::displaysInformationMessages ()) {
+        if (BinaryDecisionDiagram::displaysInformationMessages ()) {
           printf ("BDD package info: AND cache reallocation to %u %03u %03u inhibited (max size reached)\n",
             newSize / 1000000,
             (newSize / 1000) % 1000,
@@ -3659,9 +3659,9 @@ static void enterInANDOperationCache (const uint32_t inOperand1,
 
 //--------------------------------------------------------------------------------------------------
 
-void C_BDD::setANDOperationCacheMaxSize (const uint32_t inPowerOfTwo) {
+void BinaryDecisionDiagram::setANDOperationCacheMaxSize (const uint32_t inPowerOfTwo) {
   gANDOperationCacheMaxPowerOfTwoSize = inPowerOfTwo ;
-  if (C_BDD::displaysInformationMessages ()) {
+  if (BinaryDecisionDiagram::displaysInformationMessages ()) {
     printf ("BDD package info: AND cache max size limited < 2 ** %u\n", gANDOperationCacheMaxPowerOfTwoSize) ;
   }
 }

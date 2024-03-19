@@ -22,26 +22,26 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "C_CommandLineOption.h"
+#include "AbstractCommandLineOption.h"
 #include "M_machine.h"
 #include "String-class.h"
 
 //--------------------------------------------------------------------------------------------------
 
-class C_UIntCommandLineOption final : public C_CommandLineOption {
+class UIntCommandLineOption final : public AbstractCommandLineOption {
 //--- Constructor
-  public: C_UIntCommandLineOption (const char * inDomainName,
-                                   const char * inIdentifier,
-                                   const char inChar,
-                                   const char * inString,
-                                   const char * inComment,
-                                   const uint32_t inDefaultValue) ;
+  public: UIntCommandLineOption (const char * inDomainName,
+                                 const char * inIdentifier,
+                                 const char inChar,
+                                 const char * inString,
+                                 const char * inComment,
+                                 const uint32_t inDefaultValue) ;
 //--- No Copy
-  private: C_UIntCommandLineOption (const C_UIntCommandLineOption &) ;
-  private: C_UIntCommandLineOption & operator = (const C_UIntCommandLineOption &) ;
+  private: UIntCommandLineOption (const UIntCommandLineOption &) = delete ;
+  private: UIntCommandLineOption & operator = (const UIntCommandLineOption &) = delete ;
 
 //--- Attributes
-  private: C_UIntCommandLineOption * mNext ;
+  private: UIntCommandLineOption * mNext ;
   public: uint32_t mValue ;
   public: inline uint32_t readProperty_value (void) const { return mValue ; }
   public: const uint32_t mDefaultValue ;
@@ -60,20 +60,20 @@ class C_UIntCommandLineOption final : public C_CommandLineOption {
   public: static void getUIntOptionNameList (TC_UniqueArray <String> & outArray) ;
 
   public: static utf32 getUIntOptionInvocationLetter (const String & inDomainName,
-                                                       const String & inIdentifier) ;
+                                                      const String & inIdentifier) ;
 
   public: static String getUIntOptionInvocationString (const String & inDomainName,
-                                                          const String & inIdentifier) ;
-
-  public: static String getUIntOptionCommentString (const String & inDomainName,
                                                        const String & inIdentifier) ;
 
+  public: static String getUIntOptionCommentString (const String & inDomainName,
+                                                    const String & inIdentifier) ;
+
   public: static uint32_t getUIntOptionValue (const String & inDomainName,
-                                               const String & inIdentifier) ;
+                                              const String & inIdentifier) ;
 
   public: static void setUIntOptionValue (const String & inDomainName,
-                                           const String & inIdentifier,
-                                           const uint32_t inValue) ;
+                                          const String & inIdentifier,
+                                          const uint32_t inValue) ;
 } ;
 
 //--------------------------------------------------------------------------------------------------

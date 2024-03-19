@@ -1,32 +1,32 @@
 //
-//  C_Relation.cpp
+//  BinaryDecisionDiagramRelation.cpp
 //  galgas-developer
 //
 //  Created by Pierre Molinaro on 22/05/14.
 //--------------------------------------------------------------------------------------------------
 
-#include "C_Relation.h"
+#include "BinaryDecisionDiagramRelation.h"
 #include "SharedObject.h"
 
 //--------------------------------------------------------------------------------------------------
-//  cVariablesInRelationConfiguration
+//  PrivateVariablesInRelationConfiguration
 //--------------------------------------------------------------------------------------------------
 
-class cVariablesInRelationConfiguration : public SharedObject {
+class PrivateVariablesInRelationConfiguration : public SharedObject {
 //--- Constructor
-  public: cVariablesInRelationConfiguration (LOCATION_ARGS) ;
-  public: cVariablesInRelationConfiguration (cVariablesInRelationConfiguration * inPtr COMMA_LOCATION_ARGS) ;
+  public: PrivateVariablesInRelationConfiguration (LOCATION_ARGS) ;
+  public: PrivateVariablesInRelationConfiguration (PrivateVariablesInRelationConfiguration * inPtr COMMA_LOCATION_ARGS) ;
 
 
   public: void addVariable (const String & inVariableName,
-                             const C_RelationSingleType & inType) ;
+                             const BinaryDecisionDiagramRelationSingleType & inType) ;
 
 //--- Accessors
   public: uint32_t bitCount (void) const ;
 
   public: String nameForVariable (const int32_t inIndex COMMA_LOCATION_ARGS) const ;
 
-  public: C_RelationSingleType typeForVariable (const int32_t inIndex COMMA_LOCATION_ARGS) const ;
+  public: BinaryDecisionDiagramRelationSingleType typeForVariable (const int32_t inIndex COMMA_LOCATION_ARGS) const ;
 
   public: uint32_t constantCountForVariable (const int32_t inIndex COMMA_LOCATION_ARGS) const ;
 
@@ -53,7 +53,7 @@ class cVariablesInRelationConfiguration : public SharedObject {
                                                      COMMA_LOCATION_ARGS) const ;
 
 //---
-  public: void checkIdenticalTo (const cVariablesInRelationConfiguration * inVariables
+  public: void checkIdenticalTo (const PrivateVariablesInRelationConfiguration * inVariables
                                   COMMA_LOCATION_ARGS) const ;
 
 //--- Operations on 3 set configurations
@@ -74,13 +74,13 @@ class cVariablesInRelationConfiguration : public SharedObject {
 //--- Attributes
   private: TC_UniqueArray <uint32_t> mBDDStartIndexArray ;
   private: TC_UniqueArray <String> mVariableNameArray ;
-  private: TC_UniqueArray <C_RelationSingleType> mVariableTypeArray ;
+  private: TC_UniqueArray <BinaryDecisionDiagramRelationSingleType> mVariableTypeArray ;
 } ;
 
 //--------------------------------------------------------------------------------------------------
 
-cVariablesInRelationConfiguration::
-cVariablesInRelationConfiguration (LOCATION_ARGS) :
+PrivateVariablesInRelationConfiguration::
+PrivateVariablesInRelationConfiguration (LOCATION_ARGS) :
 SharedObject (THERE),
 mBDDStartIndexArray (),
 mVariableNameArray (),
@@ -89,14 +89,14 @@ mVariableTypeArray () {
 
 //--------------------------------------------------------------------------------------------------
 
-cVariablesInRelationConfiguration::
-cVariablesInRelationConfiguration (cVariablesInRelationConfiguration * inPtr
+PrivateVariablesInRelationConfiguration::
+PrivateVariablesInRelationConfiguration (PrivateVariablesInRelationConfiguration * inPtr
                                    COMMA_LOCATION_ARGS) :
 SharedObject (THERE),
 mBDDStartIndexArray (),
 mVariableNameArray (),
 mVariableTypeArray () {
-  macroValidSharedObjectThere (inPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (inPtr, PrivateVariablesInRelationConfiguration) ;
   mBDDStartIndexArray.appendObjectsFromArray (inPtr->mBDDStartIndexArray) ;
   mVariableNameArray.appendObjectsFromArray (inPtr->mVariableNameArray) ;
   mVariableTypeArray.appendObjectsFromArray (inPtr->mVariableTypeArray) ;
@@ -108,7 +108,7 @@ mVariableTypeArray () {
 //--------------------------------------------------------------------------------------------------
 
 #ifndef DO_NOT_GENERATE_CHECKINGS
-  void cVariablesInRelationConfiguration::checkConfiguration (LOCATION_ARGS) const {
+  void PrivateVariablesInRelationConfiguration::checkConfiguration (LOCATION_ARGS) const {
     macroAssertThere (mBDDStartIndexArray.count () == mVariableNameArray.count (),
                     "mBDDStartIndexArray.count () == %lld != mVariableNameArray.count () == %lld",
                     mBDDStartIndexArray.count (),
@@ -130,8 +130,8 @@ mVariableTypeArray () {
 
 //--------------------------------------------------------------------------------------------------
 
-void cVariablesInRelationConfiguration::addVariable (const String & inVariableName,
-                                                     const C_RelationSingleType & inType) {
+void PrivateVariablesInRelationConfiguration::addVariable (const String & inVariableName,
+                                                     const BinaryDecisionDiagramRelationSingleType & inType) {
   if (mBDDStartIndexArray.count () == 0) {
     mBDDStartIndexArray.appendObject (0) ;
   }else{
@@ -146,27 +146,27 @@ void cVariablesInRelationConfiguration::addVariable (const String & inVariableNa
 
 //--------------------------------------------------------------------------------------------------
 
-void cVariablesInRelationConfiguration::checkIdenticalTo (const cVariablesInRelationConfiguration * inVariables
+void PrivateVariablesInRelationConfiguration::checkIdenticalTo (const PrivateVariablesInRelationConfiguration * inVariables
                                                           COMMA_LOCATION_ARGS) const {
-  macroValidSharedObjectThere (inVariables, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (inVariables, PrivateVariablesInRelationConfiguration) ;
   bool same = mVariableTypeArray.count() == inVariables->mVariableTypeArray.count() ;
   for (int32_t i=0 ; (i<mVariableTypeArray.count()) && same ; i++) {
     same = mVariableTypeArray (i COMMA_HERE) == inVariables->mVariableTypeArray (i COMMA_HERE) ;
   }
   macroAssertThere (same,
-                  "cVariablesInRelationConfiguration::checkIdenticalTo failure",
+                  "PrivateVariablesInRelationConfiguration::checkIdenticalTo failure",
                   0,
                   0) ;
 
   if (! same) {
-    printf ("*** cVariablesInRelationConfiguration::checkIdenticalTo failure ***\n") ;
+    printf ("*** PrivateVariablesInRelationConfiguration::checkIdenticalTo failure ***\n") ;
     exit (1) ;
   }
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void cVariablesInRelationConfiguration::deleteVariableAtIndex (const int32_t inIndex COMMA_LOCATION_ARGS) {
+void PrivateVariablesInRelationConfiguration::deleteVariableAtIndex (const int32_t inIndex COMMA_LOCATION_ARGS) {
   macroUniqueSharedObject (this) ;
   uint32_t idx = mBDDStartIndexArray (inIndex COMMA_THERE) ;
   mBDDStartIndexArray.removeObjectAtIndex (inIndex COMMA_THERE) ;
@@ -183,7 +183,7 @@ void cVariablesInRelationConfiguration::deleteVariableAtIndex (const int32_t inI
 
 //--------------------------------------------------------------------------------------------------
 
-void cVariablesInRelationConfiguration::deleteLastVariable (LOCATION_ARGS) {
+void PrivateVariablesInRelationConfiguration::deleteLastVariable (LOCATION_ARGS) {
   macroUniqueSharedObject (this) ;
   mBDDStartIndexArray.removeLastObject (THERE) ;
   mVariableNameArray.removeLastObject (THERE) ;
@@ -195,19 +195,19 @@ void cVariablesInRelationConfiguration::deleteLastVariable (LOCATION_ARGS) {
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t cVariablesInRelationConfiguration::constantCountForVariable (const int32_t inIndex COMMA_LOCATION_ARGS) const {
+uint32_t PrivateVariablesInRelationConfiguration::constantCountForVariable (const int32_t inIndex COMMA_LOCATION_ARGS) const {
   return mVariableTypeArray (inIndex COMMA_THERE).constantCount () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t cVariablesInRelationConfiguration::bitCount (void) const {
+uint32_t PrivateVariablesInRelationConfiguration::bitCount (void) const {
   return mBDDStartIndexArray.lastObject (HERE) + mVariableTypeArray.lastObject (HERE).BDDBitCount() ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-String cVariablesInRelationConfiguration::constantNameForVariableAndValue (const int32_t inIndex,
+String PrivateVariablesInRelationConfiguration::constantNameForVariableAndValue (const int32_t inIndex,
                                                                              const uint32_t inValue
                                                                              COMMA_LOCATION_ARGS) const {
   return mVariableTypeArray (inIndex COMMA_THERE).nameForValue(inValue COMMA_THERE) ;
@@ -215,19 +215,19 @@ String cVariablesInRelationConfiguration::constantNameForVariableAndValue (const
 
 //--------------------------------------------------------------------------------------------------
 
-String cVariablesInRelationConfiguration::nameForVariable (const int32_t inIndex COMMA_LOCATION_ARGS) const {
+String PrivateVariablesInRelationConfiguration::nameForVariable (const int32_t inIndex COMMA_LOCATION_ARGS) const {
   return mVariableNameArray (inIndex COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationSingleType cVariablesInRelationConfiguration::typeForVariable (const int32_t inIndex COMMA_LOCATION_ARGS) const {
+BinaryDecisionDiagramRelationSingleType PrivateVariablesInRelationConfiguration::typeForVariable (const int32_t inIndex COMMA_LOCATION_ARGS) const {
   return mVariableTypeArray (inIndex COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void cVariablesInRelationConfiguration::swap021 (LOCATION_ARGS) {
+void PrivateVariablesInRelationConfiguration::swap021 (LOCATION_ARGS) {
   macroUniqueSharedObject (this) ;
   mVariableNameArray.exchangeObjectAtIndexes (1, 2 COMMA_THERE) ;
   mVariableTypeArray.exchangeObjectAtIndexes (1, 2 COMMA_THERE) ;
@@ -242,7 +242,7 @@ void cVariablesInRelationConfiguration::swap021 (LOCATION_ARGS) {
 
 //--------------------------------------------------------------------------------------------------
 
-void cVariablesInRelationConfiguration::swap102 (LOCATION_ARGS) {
+void PrivateVariablesInRelationConfiguration::swap102 (LOCATION_ARGS) {
   macroUniqueSharedObject (this) ;
   mVariableNameArray.exchangeObjectAtIndexes (0, 1 COMMA_THERE) ;
   mVariableTypeArray.exchangeObjectAtIndexes (0, 1 COMMA_THERE) ;
@@ -256,7 +256,7 @@ void cVariablesInRelationConfiguration::swap102 (LOCATION_ARGS) {
 
 //--------------------------------------------------------------------------------------------------
 
-void cVariablesInRelationConfiguration::swap120 (LOCATION_ARGS) {
+void PrivateVariablesInRelationConfiguration::swap120 (LOCATION_ARGS) {
   macroUniqueSharedObject (this) ;
   mVariableNameArray.exchangeObjectAtIndexes (0, 1 COMMA_THERE) ;
   mVariableTypeArray.exchangeObjectAtIndexes (0, 1 COMMA_THERE) ;
@@ -274,7 +274,7 @@ void cVariablesInRelationConfiguration::swap120 (LOCATION_ARGS) {
 
 //--------------------------------------------------------------------------------------------------
 
-void cVariablesInRelationConfiguration::swap201 (LOCATION_ARGS) {
+void PrivateVariablesInRelationConfiguration::swap201 (LOCATION_ARGS) {
   macroUniqueSharedObject (this) ;
   mVariableNameArray.exchangeObjectAtIndexes (1, 2 COMMA_THERE) ;
   mVariableTypeArray.exchangeObjectAtIndexes (1, 2 COMMA_THERE) ;
@@ -292,7 +292,7 @@ void cVariablesInRelationConfiguration::swap201 (LOCATION_ARGS) {
 
 //--------------------------------------------------------------------------------------------------
 
-void cVariablesInRelationConfiguration::swap210 (LOCATION_ARGS) {
+void PrivateVariablesInRelationConfiguration::swap210 (LOCATION_ARGS) {
   macroUniqueSharedObject (this) ;
   mVariableNameArray.exchangeObjectAtIndexes (0, 2 COMMA_THERE) ;
   mVariableTypeArray.exchangeObjectAtIndexes (0, 2 COMMA_THERE) ;
@@ -307,29 +307,29 @@ void cVariablesInRelationConfiguration::swap210 (LOCATION_ARGS) {
 }
 
 //--------------------------------------------------------------------------------------------------
-//  C_RelationConfiguration
+//  BinaryDecisionDiagramRelationConfiguration
 //--------------------------------------------------------------------------------------------------
 
-C_RelationConfiguration::C_RelationConfiguration (void) :
+BinaryDecisionDiagramRelationConfiguration::BinaryDecisionDiagramRelationConfiguration (void) :
 mVariablesPtr (nullptr) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationConfiguration::~C_RelationConfiguration (void) {
+BinaryDecisionDiagramRelationConfiguration::~BinaryDecisionDiagramRelationConfiguration (void) {
   macroDetachSharedObject (mVariablesPtr) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationConfiguration::C_RelationConfiguration (const C_RelationConfiguration & inSource) :
+BinaryDecisionDiagramRelationConfiguration::BinaryDecisionDiagramRelationConfiguration (const BinaryDecisionDiagramRelationConfiguration & inSource) :
 mVariablesPtr (nullptr) {
   macroAssignSharedObject (mVariablesPtr, inSource.mVariablesPtr) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationConfiguration & C_RelationConfiguration::operator = (const C_RelationConfiguration & inSource) {
+BinaryDecisionDiagramRelationConfiguration & BinaryDecisionDiagramRelationConfiguration::operator = (const BinaryDecisionDiagramRelationConfiguration & inSource) {
   if (this != & inSource) {
     macroAssignSharedObject (mVariablesPtr, inSource.mVariablesPtr) ;
   }
@@ -338,14 +338,14 @@ C_RelationConfiguration & C_RelationConfiguration::operator = (const C_RelationC
 
 //--------------------------------------------------------------------------------------------------
 
-void C_RelationConfiguration::insulate (LOCATION_ARGS) {
+void BinaryDecisionDiagramRelationConfiguration::insulate (LOCATION_ARGS) {
   if (nullptr == mVariablesPtr) {
-    macroMyNew (mVariablesPtr, cVariablesInRelationConfiguration (THERE)) ;
+    macroMyNew (mVariablesPtr, PrivateVariablesInRelationConfiguration (THERE)) ;
   }else{
-    macroValidSharedObjectThere (mVariablesPtr, cVariablesInRelationConfiguration) ;
+    macroValidSharedObjectThere (mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
     if (!mVariablesPtr->isUniquelyReferenced ()) {
-      cVariablesInRelationConfiguration * ptr = nullptr ;
-      macroMyNew (ptr, cVariablesInRelationConfiguration (mVariablesPtr COMMA_THERE)) ;
+      PrivateVariablesInRelationConfiguration * ptr = nullptr ;
+      macroMyNew (ptr, PrivateVariablesInRelationConfiguration (mVariablesPtr COMMA_THERE)) ;
       macroAssignSharedObject (mVariablesPtr, ptr) ;
       macroDetachSharedObject (ptr) ;
     }
@@ -354,46 +354,46 @@ void C_RelationConfiguration::insulate (LOCATION_ARGS) {
 
 //--------------------------------------------------------------------------------------------------
 
-void C_RelationConfiguration::addVariable (const String & inVariableName,
-                                           const C_RelationSingleType & inType) {
+void BinaryDecisionDiagramRelationConfiguration::addVariable (const String & inVariableName,
+                                           const BinaryDecisionDiagramRelationSingleType & inType) {
   insulate (HERE) ;
-  macroValidSharedObject (mVariablesPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObject (mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   mVariablesPtr->addVariable (inVariableName, inType) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void C_RelationConfiguration::appendConfiguration (const C_RelationConfiguration & inConfiguration) {
+void BinaryDecisionDiagramRelationConfiguration::appendConfiguration (const BinaryDecisionDiagramRelationConfiguration & inConfiguration) {
   insulate (HERE) ;
   for (int32_t i=0 ; i<inConfiguration.variableCount() ; i++) {
     const String variableName = inConfiguration.nameForVariable (i COMMA_HERE) ;
-    const C_RelationSingleType type = inConfiguration.typeForVariable (i COMMA_HERE) ;
+    const BinaryDecisionDiagramRelationSingleType type = inConfiguration.typeForVariable (i COMMA_HERE) ;
     mVariablesPtr->addVariable (variableName, type) ;
   }
 }
 
 //--------------------------------------------------------------------------------------------------
 
-String C_RelationConfiguration::nameForVariable (const int32_t inIndex
+String BinaryDecisionDiagramRelationConfiguration::nameForVariable (const int32_t inIndex
                                                    COMMA_LOCATION_ARGS) const {
-  macroValidSharedObjectThere (mVariablesPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   return mVariablesPtr->nameForVariable (inIndex COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationSingleType C_RelationConfiguration::typeForVariable (const int32_t inIndex
+BinaryDecisionDiagramRelationSingleType BinaryDecisionDiagramRelationConfiguration::typeForVariable (const int32_t inIndex
                                                                COMMA_LOCATION_ARGS) const {
-  macroValidSharedObjectThere (mVariablesPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   return mVariablesPtr->typeForVariable (inIndex COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_RelationConfiguration::bitCount (void) const {
+uint32_t BinaryDecisionDiagramRelationConfiguration::bitCount (void) const {
   uint32_t result = 0 ;
   if (nullptr != mVariablesPtr) {
-    macroValidSharedObject (mVariablesPtr, cVariablesInRelationConfiguration) ;
+    macroValidSharedObject (mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
     result = mVariablesPtr->bitCount () ;
   }
   return result ;
@@ -401,10 +401,10 @@ uint32_t C_RelationConfiguration::bitCount (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-int32_t C_RelationConfiguration::variableCount (void) const {
+int32_t BinaryDecisionDiagramRelationConfiguration::variableCount (void) const {
   int32_t result = 0 ;
   if (nullptr != mVariablesPtr) {
-    macroValidSharedObject (mVariablesPtr, cVariablesInRelationConfiguration) ;
+    macroValidSharedObject (mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
     result = mVariablesPtr->variableCount () ;
   }
   return result ;
@@ -412,112 +412,112 @@ int32_t C_RelationConfiguration::variableCount (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_RelationConfiguration::constantCountForVariable (const int32_t inIndex COMMA_LOCATION_ARGS) const {
-  macroValidSharedObjectThere (mVariablesPtr, cVariablesInRelationConfiguration) ;
+uint32_t BinaryDecisionDiagramRelationConfiguration::constantCountForVariable (const int32_t inIndex COMMA_LOCATION_ARGS) const {
+  macroValidSharedObjectThere (mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   return mVariablesPtr->constantCountForVariable (inIndex COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_RelationConfiguration::bddStartBitIndexForVariable (const int32_t inIndex
+uint32_t BinaryDecisionDiagramRelationConfiguration::bddStartBitIndexForVariable (const int32_t inIndex
                                                                COMMA_LOCATION_ARGS) const {
-  macroValidSharedObjectThere (mVariablesPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   return mVariablesPtr->bddStartBitIndexForVariable (inIndex COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_RelationConfiguration::bddBitCountForVariable (const int32_t inIndex
+uint32_t BinaryDecisionDiagramRelationConfiguration::bddBitCountForVariable (const int32_t inIndex
                                                           COMMA_LOCATION_ARGS) const {
-  macroValidSharedObjectThere (mVariablesPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   return mVariablesPtr->bddBitCountForVariable (inIndex COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-String C_RelationConfiguration::constantNameForVariableAndValue (const int32_t inIndex,
+String BinaryDecisionDiagramRelationConfiguration::constantNameForVariableAndValue (const int32_t inIndex,
                                                                    const uint32_t inValue
                                                                    COMMA_LOCATION_ARGS) const {
-  macroValidSharedObjectThere (mVariablesPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   return mVariablesPtr->constantNameForVariableAndValue (inIndex, inValue COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void C_RelationConfiguration::checkIdenticalTo (const C_RelationConfiguration & inConfiguration
+void BinaryDecisionDiagramRelationConfiguration::checkIdenticalTo (const BinaryDecisionDiagramRelationConfiguration & inConfiguration
                                                  COMMA_LOCATION_ARGS) const {
   bool same = mVariablesPtr == inConfiguration.mVariablesPtr ;
   if ((! same) && (nullptr != mVariablesPtr) && (nullptr != inConfiguration.mVariablesPtr)) {
-    macroValidSharedObjectThere (mVariablesPtr, cVariablesInRelationConfiguration) ;
+    macroValidSharedObjectThere (mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
     mVariablesPtr->checkIdenticalTo (inConfiguration.mVariablesPtr COMMA_THERE) ;
   }else if (! same) {
-    printf ("*** C_RelationConfiguration::checkIdenticalTo failure ***\n") ;
+    printf ("*** BinaryDecisionDiagramRelationConfiguration::checkIdenticalTo failure ***\n") ;
     exit (1) ;
   }
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void C_RelationConfiguration::deleteVariableAtIndex (const int32_t inIndex COMMA_LOCATION_ARGS) {
+void BinaryDecisionDiagramRelationConfiguration::deleteVariableAtIndex (const int32_t inIndex COMMA_LOCATION_ARGS) {
   insulate (THERE) ;
-  macroValidSharedObjectThere (mVariablesPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   return mVariablesPtr->deleteVariableAtIndex (inIndex COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void C_RelationConfiguration::deleteLastVariable (LOCATION_ARGS) {
+void BinaryDecisionDiagramRelationConfiguration::deleteLastVariable (LOCATION_ARGS) {
   insulate (THERE) ;
-  macroValidSharedObjectThere (mVariablesPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   return mVariablesPtr->deleteLastVariable (THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationConfiguration C_RelationConfiguration::swap021 (LOCATION_ARGS) const {
-  C_RelationConfiguration result = *this ;
+BinaryDecisionDiagramRelationConfiguration BinaryDecisionDiagramRelationConfiguration::swap021 (LOCATION_ARGS) const {
+  BinaryDecisionDiagramRelationConfiguration result = *this ;
   result.insulate (THERE) ;
-  macroValidSharedObjectThere (result.mVariablesPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (result.mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   result.mVariablesPtr->swap021 (THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationConfiguration C_RelationConfiguration::swap102 (LOCATION_ARGS) const {
-  C_RelationConfiguration result = *this ;
+BinaryDecisionDiagramRelationConfiguration BinaryDecisionDiagramRelationConfiguration::swap102 (LOCATION_ARGS) const {
+  BinaryDecisionDiagramRelationConfiguration result = *this ;
   result.insulate (THERE) ;
-  macroValidSharedObjectThere (result.mVariablesPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (result.mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   result.mVariablesPtr->swap102 (THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationConfiguration C_RelationConfiguration::swap120 (LOCATION_ARGS) const {
-  C_RelationConfiguration result = *this ;
+BinaryDecisionDiagramRelationConfiguration BinaryDecisionDiagramRelationConfiguration::swap120 (LOCATION_ARGS) const {
+  BinaryDecisionDiagramRelationConfiguration result = *this ;
   result.insulate (THERE) ;
-  macroValidSharedObjectThere (result.mVariablesPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (result.mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   result.mVariablesPtr->swap120 (THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationConfiguration C_RelationConfiguration::swap201 (LOCATION_ARGS) const {
-  C_RelationConfiguration result = *this ;
+BinaryDecisionDiagramRelationConfiguration BinaryDecisionDiagramRelationConfiguration::swap201 (LOCATION_ARGS) const {
+  BinaryDecisionDiagramRelationConfiguration result = *this ;
   result.insulate (THERE) ;
-  macroValidSharedObjectThere (result.mVariablesPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (result.mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   result.mVariablesPtr->swap201 (THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationConfiguration C_RelationConfiguration::swap210 (LOCATION_ARGS) const {
-  C_RelationConfiguration result = *this ;
+BinaryDecisionDiagramRelationConfiguration BinaryDecisionDiagramRelationConfiguration::swap210 (LOCATION_ARGS) const {
+  BinaryDecisionDiagramRelationConfiguration result = *this ;
   result.insulate (THERE) ;
-  macroValidSharedObjectThere (result.mVariablesPtr, cVariablesInRelationConfiguration) ;
+  macroValidSharedObjectThere (result.mVariablesPtr, PrivateVariablesInRelationConfiguration) ;
   result.mVariablesPtr->swap210 (THERE) ;
   return result ;
 }

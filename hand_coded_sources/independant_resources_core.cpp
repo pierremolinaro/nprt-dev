@@ -19,8 +19,7 @@
 //---------------------------------------------------------------------------*
 
 #include "TC_UniqueArray.h"
-#include "C_ConsoleOut.h"
-#include "F_Analyze_CLI_Options.h"
+#include "analyzeCommandLineOptions.h"
 #include "F_mainForLIBPM.h"
 
 #include "C_activitiesToSchedule.h"

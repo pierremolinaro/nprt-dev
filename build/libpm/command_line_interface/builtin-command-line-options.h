@@ -1,11 +1,13 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  Routine 'F_Analyze_CLI_Options' : a way for automatic command                                
-//  line options analysis for MacOS, Win32 and Unix.                                             
+//  Generic Command Line Interface Options                                                       
+//   --help : Display help information                                                           
+//   --version : Display software current version                                                
+//   --no-color: Do not issue colored messages                                                   
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2001, ..., 2015 Pierre Molinaro.
+//  Copyright (C) 2003, ..., 2024 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -23,35 +25,37 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "String-class.h"
-
-//--------------------------------------------------------------------------------------------------
-//
-//     F_Analyze_CLI_Options                                                                     
-//
-//--------------------------------------------------------------------------------------------------
-
-void F_Analyze_CLI_Options (const int argv,
-                            const char* * argc,
-                            TC_UniqueArray <String> & outSourceFileArray,
-                            const char* * inExtensions,
-                            const char* * inHelpMessages,
-                            void print_tool_help_message (void)) ;
+#include "BoolCommandLineOption.h"
+#include "StringCommandLineOption.h"
 
 //--------------------------------------------------------------------------------------------------
 
-const char * projectVersionString (void) ;
-
-const char * galgasVersionString (void) ;
-
-//--------------------------------------------------------------------------------------------------
-
-uint32_t commandLineArgumentCount (void) ;
-
-String commandLineArgumentAtIndex (const uint32_t inIndex) ;
+#ifndef COMPILE_FOR_WINDOWS
+  #error COMPILE_FOR_WINDOWS is undefined
+#endif
 
 //--------------------------------------------------------------------------------------------------
 
-bool cocoaOutput (void) ;
+extern BoolCommandLineOption gOption_generic_5F_cli_5F_options_display_5F_help ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern BoolCommandLineOption gOption_generic_5F_cli_5F_options_display_5F_version ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern StringCommandLineOption gOption_generic_5F_cli_5F_options_emit_5F_issue_5F_json_5F_file ;
+
+//--------------------------------------------------------------------------------------------------
+
+#if COMPILE_FOR_WINDOWS == 0
+  extern BoolCommandLineOption gOption_generic_5F_cli_5F_options_no_5F_color ;
+#endif
+
+//--------------------------------------------------------------------------------------------------
+
+  #if COMPILE_FOR_WINDOWS == 1
+  extern BoolCommandLineOption gOption_generic_5F_cli_5F_options_nodialog ;
+#endif
 
 //--------------------------------------------------------------------------------------------------

@@ -1,11 +1,11 @@
 //
-//  C_RelationSingleType.cpp
+//  BinaryDecisionDiagramRelationSingleType.cpp
 //  galgas-developer
 //
 //  Created by Pierre Molinaro on 22/05/14.
 //--------------------------------------------------------------------------------------------------
 
-#include "C_RelationSingleType.h"
+#include "BinaryDecisionDiagramRelationSingleType.h"
 #include "SharedObject.h"
 #include "String-class.h"
 
@@ -15,26 +15,26 @@ static uint32_t bitCountForCount (const uint32_t inCount) {
   uint32_t result = 0 ;
   uint32_t v = inCount - 1 ;
   while (v != 0) {
-    result ++ ;
+    result += 1 ;
     v >>= 1 ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
-//  C_RelationSingleType::cType
+//  BinaryDecisionDiagramRelationSingleType::InternalType
 //--------------------------------------------------------------------------------------------------
 
-static C_RelationSingleType::cType * gFirstRelation ;
-static C_RelationSingleType::cType * gLastRelation ;
+static BinaryDecisionDiagramRelationSingleType::InternalType * gFirstRelation ;
+static BinaryDecisionDiagramRelationSingleType::InternalType * gLastRelation ;
 
 //--------------------------------------------------------------------------------------------------
 
-class C_RelationSingleType::cType : public SharedObject {
+class BinaryDecisionDiagramRelationSingleType::InternalType : public SharedObject {
 //--- Constructor
-  public: inline cType (const String & inTypeName,
-                         const uint32_t inBDDBitCount
-                         COMMA_LOCATION_ARGS) :
+  public: inline InternalType (const String & inTypeName,
+                               const uint32_t inBDDBitCount
+                               COMMA_LOCATION_ARGS) :
   SharedObject (THERE),
   mTypeName (inTypeName),
   mBDDBitCount (inBDDBitCount),
@@ -47,7 +47,7 @@ class C_RelationSingleType::cType : public SharedObject {
   }
 
 //--- Desctructor
-  public: inline virtual ~cType (void) {
+  public: inline virtual ~InternalType (void) {
     if (nullptr == mNextPtr) {
       gLastRelation = mPreviousPtr ;
     }else{
@@ -61,28 +61,28 @@ class C_RelationSingleType::cType : public SharedObject {
   }
 
 //--- No copy
-  private: cType (const cType &) ;
-  private: cType & operator = (const cType &) ;
+  private: InternalType (const InternalType &) = delete ;
+  private: InternalType & operator = (const InternalType &) = delete ;
 
 //--- Accessors
   public: virtual uint32_t constantCount (void) const = 0 ;
   public: virtual String nameForValue (const uint32_t inIndex
                                           COMMA_LOCATION_ARGS) const = 0 ;
 
-//--- Attribute
+//--- Properties
   public: const String mTypeName ;
   public: const uint32_t mBDDBitCount ;
-  public: cType * mNextPtr ;
-  private: cType * mPreviousPtr ;
+  public: InternalType * mNextPtr ;
+  private: InternalType * mPreviousPtr ;
 } ;
 
 //--------------------------------------------------------------------------------------------------
-//  C_EnumeratedTypeInRelation
+//  PrivateEnumeratedTypeInRelation
 //--------------------------------------------------------------------------------------------------
 
-class C_EnumeratedTypeInRelation : public C_RelationSingleType::cType {
+class PrivateEnumeratedTypeInRelation final : public BinaryDecisionDiagramRelationSingleType::InternalType {
 //--- Constructor
-  public: C_EnumeratedTypeInRelation (const String & inTypeName,
+  public: PrivateEnumeratedTypeInRelation (const String & inTypeName,
                                        const TC_UniqueArray <String> & inConstantNameArray
                                        COMMA_LOCATION_ARGS) ;
 
@@ -106,27 +106,27 @@ class C_EnumeratedTypeInRelation : public C_RelationSingleType::cType {
 
 //--------------------------------------------------------------------------------------------------
 
-C_EnumeratedTypeInRelation::
-C_EnumeratedTypeInRelation (const String & inTypeName,
-                            const TC_UniqueArray <String> & inConstantNameArray
-                            COMMA_LOCATION_ARGS) :
-cType (inTypeName, bitCountForCount ((uint32_t) inConstantNameArray.count ()) COMMA_THERE),
+PrivateEnumeratedTypeInRelation::
+PrivateEnumeratedTypeInRelation (const String & inTypeName,
+                                 const TC_UniqueArray <String> & inConstantNameArray
+                                 COMMA_LOCATION_ARGS) :
+InternalType (inTypeName, bitCountForCount ((uint32_t) inConstantNameArray.count ()) COMMA_THERE),
 mConstantNameArray () {
   mConstantNameArray.appendObjectsFromArray (inConstantNameArray) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationSingleType::
-C_RelationSingleType (const String & inTypeName,
-                      const TC_UniqueArray <String> & inConstantNameArray
-                      COMMA_LOCATION_ARGS) :
+BinaryDecisionDiagramRelationSingleType::
+BinaryDecisionDiagramRelationSingleType (const String & inTypeName,
+                                         const TC_UniqueArray <String> & inConstantNameArray
+                                         COMMA_LOCATION_ARGS) :
 mTypePtr (nullptr) {
 //--- Check type is unique
-  cType * result = nullptr ;
-  cType * p = gFirstRelation ;
+  InternalType * result = nullptr ;
+  InternalType * p = gFirstRelation ;
   while ((nullptr == result) && (nullptr != p)) {
-    C_EnumeratedTypeInRelation * ptr = dynamic_cast <C_EnumeratedTypeInRelation *> (p) ;
+    PrivateEnumeratedTypeInRelation * ptr = dynamic_cast <PrivateEnumeratedTypeInRelation *> (p) ;
     if ((nullptr != ptr) && (ptr->mTypeName == inTypeName) && (ptr->isConstantArrayEqualTo (inConstantNameArray))) {
       result = ptr ;
     }
@@ -134,7 +134,7 @@ mTypePtr (nullptr) {
   }
 //---
   if (nullptr == result) {
-    macroMyNew (mTypePtr, C_EnumeratedTypeInRelation (inTypeName, inConstantNameArray COMMA_THERE)) ;
+    macroMyNew (mTypePtr, PrivateEnumeratedTypeInRelation (inTypeName, inConstantNameArray COMMA_THERE)) ;
   }else{
     macroAssignSharedObject (mTypePtr, result) ;
   }
@@ -144,7 +144,7 @@ mTypePtr (nullptr) {
 //  C_UnsignedTypeInRelation
 //--------------------------------------------------------------------------------------------------
 
-class C_UnsignedTypeInRelation : public C_RelationSingleType::cType {
+class C_UnsignedTypeInRelation : public BinaryDecisionDiagramRelationSingleType::InternalType {
 //--- Constructor
   public: C_UnsignedTypeInRelation (const String & inTypeName,
                                      const uint32_t inValueCount
@@ -170,20 +170,20 @@ C_UnsignedTypeInRelation::
 C_UnsignedTypeInRelation (const String & inTypeName,
                           const uint32_t inValueCount
                           COMMA_LOCATION_ARGS) :
-cType (inTypeName, bitCountForCount (inValueCount) COMMA_THERE),
+InternalType (inTypeName, bitCountForCount (inValueCount) COMMA_THERE),
 mValueCount (inValueCount) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationSingleType::
-C_RelationSingleType (const String & inTypeName,
+BinaryDecisionDiagramRelationSingleType::
+BinaryDecisionDiagramRelationSingleType (const String & inTypeName,
                       const uint32_t inValueCount
                       COMMA_LOCATION_ARGS) :
 mTypePtr (nullptr) {
 //--- Check type is unique
-  cType * result = nullptr ;
-  cType * p = gFirstRelation ;
+  InternalType * result = nullptr ;
+  InternalType * p = gFirstRelation ;
   while ((nullptr == result) && (nullptr != p)) {
     C_UnsignedTypeInRelation * ptr = dynamic_cast <C_UnsignedTypeInRelation *> (p) ;
     if ((nullptr != ptr) && (ptr->mTypeName == inTypeName) && (ptr->constantCount () == inValueCount)) {
@@ -203,28 +203,28 @@ mTypePtr (nullptr) {
 //  Accessors
 //--------------------------------------------------------------------------------------------------
 
-String C_RelationSingleType::typeName (void) const {
+String BinaryDecisionDiagramRelationSingleType::typeName (void) const {
   macroValidPointer (mTypePtr) ;
   return mTypePtr->mTypeName ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_RelationSingleType::BDDBitCount (void) const {
+uint32_t BinaryDecisionDiagramRelationSingleType::BDDBitCount (void) const {
   macroValidPointer (mTypePtr) ;
   return mTypePtr->mBDDBitCount ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t C_RelationSingleType::constantCount (void) const {
+uint32_t BinaryDecisionDiagramRelationSingleType::constantCount (void) const {
   macroValidPointer (mTypePtr) ;
   return mTypePtr->constantCount () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-String C_RelationSingleType::nameForValue (const uint32_t inIndex
+String BinaryDecisionDiagramRelationSingleType::nameForValue (const uint32_t inIndex
                                              COMMA_LOCATION_ARGS) const {
   macroValidPointer (mTypePtr) ;
   return mTypePtr->nameForValue (inIndex COMMA_THERE) ;
@@ -234,20 +234,20 @@ String C_RelationSingleType::nameForValue (const uint32_t inIndex
 //  Handling copy
 //--------------------------------------------------------------------------------------------------
 
-C_RelationSingleType::~C_RelationSingleType (void) {
+BinaryDecisionDiagramRelationSingleType::~BinaryDecisionDiagramRelationSingleType (void) {
   macroDetachSharedObject (mTypePtr) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationSingleType::C_RelationSingleType (const C_RelationSingleType & inSource) :
+BinaryDecisionDiagramRelationSingleType::BinaryDecisionDiagramRelationSingleType (const BinaryDecisionDiagramRelationSingleType & inSource) :
 mTypePtr (nullptr) {
   macroAssignSharedObject (mTypePtr, inSource.mTypePtr) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-C_RelationSingleType & C_RelationSingleType::operator = (const C_RelationSingleType & inSource) {
+BinaryDecisionDiagramRelationSingleType & BinaryDecisionDiagramRelationSingleType::operator = (const BinaryDecisionDiagramRelationSingleType & inSource) {
   macroAssignSharedObject (mTypePtr, inSource.mTypePtr) ;
   return * this ;
 }

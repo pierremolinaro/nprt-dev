@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  Generic Command Line Interface Option                                                        
+//  'ConsoleOut' : a class for console output                                                  
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2009, ..., 2024 Pierre Molinaro.
+//  Copyright (C) 2002, ..., 2023 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,25 +18,34 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "C_CommandLineOption.h"
+#pragma once
 
 //--------------------------------------------------------------------------------------------------
 
-C_CommandLineOption::C_CommandLineOption (const char * inDomainName,
-                                          const char * inIdentifier,
-                                          const char inChar,
-                                          const char * inString,
-                                          const char * inComment) :
-mDomainName (inDomainName),
-mIdentifier (inIdentifier),
-mCommandChar (inChar),
-mCommandString (inString),
-mComment (inComment) {
-}
+#include "ColoredConsole.h"
 
 //--------------------------------------------------------------------------------------------------
 
-C_CommandLineOption::~C_CommandLineOption (void) {
-}
+class ConsoleOut final : public ColoredConsole {
+//--- Constructor
+  public: ConsoleOut (void) ;
+
+//--- Flush output
+  public: virtual void flush (void) ;
+  
+//--- General stream method
+  protected: virtual void handleAppendUTF8Array (const char * inCharArray,
+                                                 const int32_t inArrayCount) ;
+
+  protected: virtual void handleAppendCharacter (const utf32 inCharacter) ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//  C O N S O L E    O U T    G L O B A L   V A R I A B L E                                      
+//
+//--------------------------------------------------------------------------------------------------
+
+extern ConsoleOut gCout ;
 
 //--------------------------------------------------------------------------------------------------

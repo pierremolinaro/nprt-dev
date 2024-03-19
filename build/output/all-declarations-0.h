@@ -2805,9 +2805,9 @@ void routine_print_3F_ (const class GALGAS_string constinArgument0,
 //
 //--------------------------------------------------------------------------------------------------
 
-extern C_BoolCommandLineOption gOption_oa_5F_cli_5F_options_createIntermediateFiles ;
+extern BoolCommandLineOption gOption_oa_5F_cli_5F_options_createIntermediateFiles ;
 
-extern C_BoolCommandLineOption gOption_oa_5F_cli_5F_options_useCANmaxLegth ;
+extern BoolCommandLineOption gOption_oa_5F_cli_5F_options_useCANmaxLegth ;
 
 //--------------------------------------------------------------------------------------------------
 //

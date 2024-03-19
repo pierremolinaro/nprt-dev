@@ -21,11 +21,11 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "C_builtin_CLI_Options.h"
+#include "builtin-command-line-options.h"
 
 //--------------------------------------------------------------------------------------------------
 
-C_BoolCommandLineOption
+BoolCommandLineOption
 gOption_generic_5F_cli_5F_options_display_5F_help ("generic_cli_options",
                                                    "display_help",
                                                    '\0',
@@ -34,7 +34,7 @@ gOption_generic_5F_cli_5F_options_display_5F_help ("generic_cli_options",
 
 //--------------------------------------------------------------------------------------------------
 
-C_BoolCommandLineOption
+BoolCommandLineOption
 gOption_generic_5F_cli_5F_options_display_5F_version ("generic_cli_options",
                                                       "display_version",
                                                       '\0',
@@ -43,7 +43,7 @@ gOption_generic_5F_cli_5F_options_display_5F_version ("generic_cli_options",
 
 //--------------------------------------------------------------------------------------------------
 
-C_StringCommandLineOption
+StringCommandLineOption
 gOption_generic_5F_cli_5F_options_emit_5F_issue_5F_json_5F_file ("generic_cli_options",
                                                       "emit_issue_json_file",
                                                       '\0',
@@ -54,7 +54,7 @@ gOption_generic_5F_cli_5F_options_emit_5F_issue_5F_json_5F_file ("generic_cli_op
 //--------------------------------------------------------------------------------------------------
 
 #if COMPILE_FOR_WINDOWS == 0
-  C_BoolCommandLineOption
+  BoolCommandLineOption
   gOption_generic_5F_cli_5F_options_no_5F_color ("generic_cli_options",
                                                  "no_color",
                                                  '\0',
@@ -65,7 +65,7 @@ gOption_generic_5F_cli_5F_options_emit_5F_issue_5F_json_5F_file ("generic_cli_op
 //--------------------------------------------------------------------------------------------------
 
   #if COMPILE_FOR_WINDOWS == 1
-  C_BoolCommandLineOption
+  BoolCommandLineOption
   gOption_generic_5F_cli_5F_options_nodialog ("generic_cli_options",
                                               "nodialog",
                                               '\0',

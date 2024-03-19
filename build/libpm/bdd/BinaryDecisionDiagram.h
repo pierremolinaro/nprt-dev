@@ -4,7 +4,7 @@
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 1999, ..., 2014 Pierre Molinaro.
+//  Copyright (C) 1999, ..., 2024 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -40,27 +40,27 @@ class AbstractOutputStream ;
 
 //--------------------------------------------------------------------------------------------------
 
-class C_BDD final {
+class BinaryDecisionDiagram final {
 //--- enum for comparison operators
   public: enum compareEnum {kEqual, kNotEqual, kLowerOrEqual,
                             kStrictLower, kGreaterOrEqual, kStrictGreater} ;
 
 //--- Constructors and destructor
-  public: C_BDD (void) ; // Get a false BDD
-  private: C_BDD (const uint32_t inInternalValue) ; // Internal, do not use
-  public: C_BDD (const uint32_t inVariable, const bool inSign) ;
-  public: ~C_BDD (void) ;
+  public: BinaryDecisionDiagram (void) ; // Get a false BDD
+  private: BinaryDecisionDiagram (const uint32_t inInternalValue) ; // Internal, do not use
+  public: BinaryDecisionDiagram (const uint32_t inVariable, const bool inSign) ;
+  public: ~BinaryDecisionDiagram (void) ;
 
 //--- Control copy
-  public: C_BDD (const C_BDD & inSource) ;
-  public: C_BDD & operator = (const C_BDD & inSource) ;
+  public: BinaryDecisionDiagram (const BinaryDecisionDiagram & inSource) ;
+  public: BinaryDecisionDiagram & operator = (const BinaryDecisionDiagram & inSource) ;
 
 //--- Decision diagram root
   private: uint32_t mBDDvalue ;
 
 //--- Link between existing instances
-  private: C_BDD * mPtrToPreviousBDD ;
-  private: C_BDD * mPtrToNextBDD ;
+  private: BinaryDecisionDiagram * mPtrToPreviousBDD ;
+  private: BinaryDecisionDiagram * mPtrToNextBDD ;
 
 //--- Set to false or true
   public: void setToFalse (void) ;
@@ -71,58 +71,58 @@ class C_BDD final {
   public: inline bool isTrue (void) const { return mBDDvalue == 1 ; }
   public: bool isComplemented (void) const ;
 
-  public: inline bool operator == (const C_BDD & inOperand) const { return mBDDvalue == inOperand.mBDDvalue ; }
-  public: inline bool operator != (const C_BDD & inOperand) const { return mBDDvalue != inOperand.mBDDvalue ; }
+  public: inline bool operator == (const BinaryDecisionDiagram & inOperand) const { return mBDDvalue == inOperand.mBDDvalue ; }
+  public: inline bool operator != (const BinaryDecisionDiagram & inOperand) const { return mBDDvalue != inOperand.mBDDvalue ; }
   public: inline uint32_t integerValue (void) const { return mBDDvalue ; }
 
 //--- Operations on a BDD
-  public: void operator &= (const C_BDD & inOperand) ; // And
-  public: void operator |= (const C_BDD & inOperand) ; // Or
+  public: void operator &= (const BinaryDecisionDiagram & inOperand) ; // And
+  public: void operator |= (const BinaryDecisionDiagram & inOperand) ; // Or
   public: void negate (void) ; 
 
 //--- Operations between BDDs
-  public: C_BDD operator & (const C_BDD & inOperand) const ; // And
-  public: C_BDD operator | (const C_BDD & inOperand) const ; // Or
-  public: C_BDD equalTo (const C_BDD & inOperand) const ; // Equivalent
-  public: C_BDD notEqualTo (const C_BDD & inOperand) const ; // Different
-  public: C_BDD lowerOrEqual (const C_BDD & inOperand) const ; 
-  public: C_BDD lowerThan (const C_BDD & inOperand) const ;
-  public: C_BDD greaterOrEqual (const C_BDD & inOperand) const ;
-  public: C_BDD greaterThan (const C_BDD & inOperand) const ;
-  public: C_BDD implies (const C_BDD & inOperand) const ; // ->
-  public: static C_BDD ite (const C_BDD & f, const C_BDD & g, const C_BDD & h) ; // ite (f, g, h)
-  public: C_BDD operator ~ (void) const ; // get complement
-  public: C_BDD bddByLeftShifting (const uint32_t inLeftShiftCount) const ;
-  public: C_BDD bddByRightShifting (const uint32_t inRightShiftCount) const ;
+  public: BinaryDecisionDiagram operator & (const BinaryDecisionDiagram & inOperand) const ; // And
+  public: BinaryDecisionDiagram operator | (const BinaryDecisionDiagram & inOperand) const ; // Or
+  public: BinaryDecisionDiagram equalTo (const BinaryDecisionDiagram & inOperand) const ; // Equivalent
+  public: BinaryDecisionDiagram notEqualTo (const BinaryDecisionDiagram & inOperand) const ; // Different
+  public: BinaryDecisionDiagram lowerOrEqual (const BinaryDecisionDiagram & inOperand) const ; 
+  public: BinaryDecisionDiagram lowerThan (const BinaryDecisionDiagram & inOperand) const ;
+  public: BinaryDecisionDiagram greaterOrEqual (const BinaryDecisionDiagram & inOperand) const ;
+  public: BinaryDecisionDiagram greaterThan (const BinaryDecisionDiagram & inOperand) const ;
+  public: BinaryDecisionDiagram implies (const BinaryDecisionDiagram & inOperand) const ; // ->
+  public: static BinaryDecisionDiagram ite (const BinaryDecisionDiagram & f, const BinaryDecisionDiagram & g, const BinaryDecisionDiagram & h) ; // ite (f, g, h)
+  public: BinaryDecisionDiagram operator ~ (void) const ; // get complement
+  public: BinaryDecisionDiagram bddByLeftShifting (const uint32_t inLeftShiftCount) const ;
+  public: BinaryDecisionDiagram bddByRightShifting (const uint32_t inRightShiftCount) const ;
 
 //--- for all and exists
-  public: C_BDD forallOnBitNumber (const uint32_t numeroBit) const ;
-  public: C_BDD forallOnBitsAfterNumber (const uint32_t numeroBit) const ;
+  public: BinaryDecisionDiagram forallOnBitNumber (const uint32_t numeroBit) const ;
+  public: BinaryDecisionDiagram forallOnBitsAfterNumber (const uint32_t numeroBit) const ;
 
-  public: C_BDD existsOnBitNumber (const uint32_t numeroBit) const ;
-  public: C_BDD existsOnBitRange (const uint32_t inFirstBit, const uint32_t inBitCount) const ;
-  public: C_BDD existsOnBitsAfterNumber (const uint32_t numeroBit) const ;
+  public: BinaryDecisionDiagram existsOnBitNumber (const uint32_t numeroBit) const ;
+  public: BinaryDecisionDiagram existsOnBitRange (const uint32_t inFirstBit, const uint32_t inBitCount) const ;
+  public: BinaryDecisionDiagram existsOnBitsAfterNumber (const uint32_t numeroBit) const ;
 
 //--- Comparison between BDDs
-  public: C_BDD compareWithBDD (const compareEnum inComparison, const C_BDD & inOperand) const ;
+  public: BinaryDecisionDiagram compareWithBDD (const compareEnum inComparison, const BinaryDecisionDiagram & inOperand) const ;
 
 //--- Build a BDD result of integer comparison
-  public: static C_BDD varCompareVar (const uint32_t inLeftFirstIndex,
+  public: static BinaryDecisionDiagram varCompareVar (const uint32_t inLeftFirstIndex,
                                        const uint32_t inDimension,
                                        const compareEnum inComparison,
                                        const uint32_t inRightFirstIndex) ;
 
-  public: static C_BDD varCompareConst (const uint32_t inFirstIndex,
+  public: static BinaryDecisionDiagram varCompareConst (const uint32_t inFirstIndex,
                                          const uint32_t inDimension,
                                          const compareEnum inComparison,
                                          const uint64_t inComparisonConstant) ;
 
-  public: static C_BDD bddWithConstants (const uint32_t * inValues,
+  public: static BinaryDecisionDiagram bddWithConstants (const uint32_t * inValues,
                                          const uint32_t * inBitCountArray,
                                          const int32_t inEntryCount) ;
 
 //--- Buil a BDD from a value list. This method sorts value list in ascending order
-  public: static C_BDD buildBDDFromValueList (uint64_t * ioValueArray,
+  public: static BinaryDecisionDiagram buildBDDFromValueList (uint64_t * ioValueArray,
                                               const uint32_t inValueCount,
                                               const uint32_t inBitCount) ;
 
@@ -149,11 +149,11 @@ class C_BDD final {
   public: uint32_t significantVariableCount (void) const ;
 
 //--- Get nth BDD value
-  public: C_BDD getNthBDD (const uint64_t inNthBDDvalue,
+  public: BinaryDecisionDiagram getNthBDD (const uint64_t inNthBDDvalue,
                             const uint32_t inVariableCount) const ;
 
 //--- Get BDD range in 'inOperand' BDD
-  public: uint64_t getBDDrange (const C_BDD & inOperand,
+  public: uint64_t getBDDrange (const BinaryDecisionDiagram & inOperand,
                                const uint32_t inVariableCount) const ;
 
 //--- Get BDD absolute value
@@ -172,12 +172,12 @@ class C_BDD final {
                               const uint32_t inBitCount) const ;
 
 //------------------------ Updating a relation
-  public: C_BDD updateRelation (const uint32_t * inRelationBitNeededCountArray,
+  public: BinaryDecisionDiagram updateRelation (const uint32_t * inRelationBitNeededCountArray,
                                 uint32_t* * inRelationBitCurrentCountArray,
                                 const int32_t inRelationCardinality) const ;
 
 //--- Translate BDD bits
-  public: C_BDD translate (const uint32_t inVariableCount,
+  public: BinaryDecisionDiagram translate (const uint32_t inVariableCount,
                            const uint32_t inTranslation) const ;
 
   public: void getBoolArray (TC_UniqueArray <bool> & outArray,
@@ -185,25 +185,25 @@ class C_BDD final {
                              const uint32_t inBitSize) const ;
 
 //---- Substituing variables
-  public: C_BDD substitution (const uint32_t * inSubstitutionArray,
+  public: BinaryDecisionDiagram substitution (const uint32_t * inSubstitutionArray,
                               const uint32_t inVariableCount
                               COMMA_LOCATION_ARGS) const ;
 
-  public: C_BDD exchangeVariables (const uint32_t var1, const uint32_t var2) const ;
+  public: BinaryDecisionDiagram exchangeVariables (const uint32_t var1, const uint32_t var2) const ;
 
-  public: C_BDD rollDownVariables (const uint32_t var1, const uint32_t var2) const ;
+  public: BinaryDecisionDiagram rollDownVariables (const uint32_t var1, const uint32_t var2) const ;
 
-  public: C_BDD rollUpVariables (const uint32_t var1, const uint32_t var2) const ;
+  public: BinaryDecisionDiagram rollUpVariables (const uint32_t var1, const uint32_t var2) const ;
 
 //--- BDD as 2-relations
-  public: C_BDD swap10 (const uint32_t inBitSize1,
+  public: BinaryDecisionDiagram swap10 (const uint32_t inBitSize1,
                         const uint32_t inBitSize2) const ;
 
-  public: C_BDD accessibleStates (const C_BDD & inInitialStateSet,
+  public: BinaryDecisionDiagram accessibleStates (const BinaryDecisionDiagram & inInitialStateSet,
                                   const uint32_t inBitSize,
                                   int32_t * outIterationCount) const ;
 
-  public: C_BDD transitiveClosure (const uint32_t inBitSize,
+  public: BinaryDecisionDiagram transitiveClosure (const uint32_t inBitSize,
                                    int32_t * outIterationCount) const ;
 
   public: void getArray2 (TC_UniqueArray <TC_UniqueArray <uint64_t> > & outArray,
@@ -212,23 +212,23 @@ class C_BDD final {
                           const uint32_t inBitSize2) const ;
 
 //--- BDD as 3-relations
-  public: C_BDD swap021 (const uint32_t inBitSize1,
+  public: BinaryDecisionDiagram swap021 (const uint32_t inBitSize1,
                          const uint32_t inBitSize2,
                          const uint32_t inBitSize3) const ;
 
-  public: C_BDD swap102 (const uint32_t inBitSize1,
+  public: BinaryDecisionDiagram swap102 (const uint32_t inBitSize1,
                          const uint32_t inBitSize2,
                          const uint32_t inBitSize3) const ;
 
-  public: C_BDD swap120 (const uint32_t inBitSize1,
+  public: BinaryDecisionDiagram swap120 (const uint32_t inBitSize1,
                          const uint32_t inBitSize2,
                          const uint32_t inBitSize3) const ;
 
-  public: C_BDD swap201 (const uint32_t inBitSize1,
+  public: BinaryDecisionDiagram swap201 (const uint32_t inBitSize1,
                          const uint32_t inBitSize2,
                          const uint32_t inBitSize3) const ;
 
-  public: C_BDD swap210 (const uint32_t inBitSize1,
+  public: BinaryDecisionDiagram swap210 (const uint32_t inBitSize1,
                          const uint32_t inBitSize2,
                          const uint32_t inBitSize3) const ;
 
@@ -293,7 +293,7 @@ class C_BDD final {
   public: String queryStringValue (LOCATION_ARGS) const ;
 
 //--- Build a BDD from the string returned by 'queryStringValue'
-  public: static C_BDD BDDWithPredicateString (const String & inPredicateStringValue
+  public: static BinaryDecisionDiagram BDDWithPredicateString (const String & inPredicateStringValue
                                                 COMMA_LOCATION_ARGS) ;
 
 //--- Traversing BBD (call C_bdd_value_traversing::action method for every value) 

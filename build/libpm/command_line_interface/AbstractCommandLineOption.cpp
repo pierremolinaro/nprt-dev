@@ -18,41 +18,25 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#pragma once
+#include "AbstractCommandLineOption.h"
 
 //--------------------------------------------------------------------------------------------------
 
-#include "M_SourceLocation.h"
-#include "String-class.h"
+AbstractCommandLineOption::AbstractCommandLineOption (const char * inDomainName,
+                                                      const char * inIdentifier,
+                                                      const char inChar,
+                                                      const char * inString,
+                                                      const char * inComment) :
+mDomainName (inDomainName),
+mIdentifier (inIdentifier),
+mCommandChar (inChar),
+mCommandString (inString),
+mComment (inComment) {
+}
 
 //--------------------------------------------------------------------------------------------------
 
-class C_CommandLineOption {
-//--- Constructor
-  public: C_CommandLineOption (const char * inDomainName,
-                               const char * inIdentifier,
-                               const char inChar,
-                               const char * inString,
-                               const char * inComment) ;
-
-//--- Virtual destructor
-  public: virtual ~ C_CommandLineOption (void) ;
-
-//--- No Copy
-  private: C_CommandLineOption (const C_CommandLineOption &) = delete ;
-  private: C_CommandLineOption & operator = (const C_CommandLineOption &) = delete ;
-
-//--- Properties
-  public: const char * mDomainName ;
-  public: const char * mIdentifier ;
-  public: const char mCommandChar ;
-  public: const char * mCommandString ;
-  public: const char * mComment ;
-
-//--- Accessing option parameters from GALGAS
-  public: inline char readProperty_char (void) const { return mCommandChar ; }
-  public: inline String readProperty_string (void) const { return mCommandString ; }
-  public: inline String readProperty_comment (void) const { return mComment ; }
-} ;
+AbstractCommandLineOption::~AbstractCommandLineOption (void) {
+}
 
 //--------------------------------------------------------------------------------------------------

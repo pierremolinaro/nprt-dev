@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  Routine 'F_Analyze_CLI_Options' : a way for automatic command line options analysis for MacOS, Win32 and Unix.     *
+//  Routine 'analyzeCommandLineOptions' : a way for automatic command line options analysis for MacOS, Win32 and Unix.     *
 //
 //  This file is part of libpm library
 //
@@ -18,13 +18,13 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "F_Analyze_CLI_Options.h"
-#include "C_BoolCommandLineOption.h"
-#include "C_UIntCommandLineOption.h"
-#include "C_StringCommandLineOption.h"
-#include "C_StringListCommandLineOption.h"
-#include "C_builtin_CLI_Options.h"
-#include "C_ConsoleOut.h"
+#include "analyzeCommandLineOptions.h"
+#include "BoolCommandLineOption.h"
+#include "UIntCommandLineOption.h"
+#include "StringCommandLineOption.h"
+#include "StringListCommandLineOption.h"
+#include "builtin-command-line-options.h"
+#include "ConsoleOut.h"
 #include "FileManager.h"
 
 //--------------------------------------------------------------------------------------------------
@@ -78,10 +78,10 @@ static void print_usage (int argv, const char * argc []) {
   if (argv > 0) {
     gCout.appendCString (argc [0]) ;
   }
-  C_BoolCommandLineOption::printUsageOfBoolOptions () ;
-  C_UIntCommandLineOption::printUsageOfUIntOptions () ;
-  C_StringCommandLineOption::printUsageOfStringOptions () ;
-  C_StringListCommandLineOption::printUsageOfStringOptions () ;
+  BoolCommandLineOption::printUsageOfBoolOptions () ;
+  UIntCommandLineOption::printUsageOfUIntOptions () ;
+  StringCommandLineOption::printUsageOfStringOptions () ;
+  StringListCommandLineOption::printUsageOfStringOptions () ;
   gCout.appendCString (" file...\n") ;
 }
 
@@ -93,10 +93,10 @@ static void print_usage (int argv, const char * argc []) {
 
 static void print_option_list (void) {
   printf ("*** Available command line options:\n") ;
-  C_BoolCommandLineOption::printBoolOptions () ;
-  C_UIntCommandLineOption::printUIntOptions () ;
-  C_StringCommandLineOption::printStringOptions () ;
-  C_StringListCommandLineOption::printStringOptions () ;
+  BoolCommandLineOption::printBoolOptions () ;
+  UIntCommandLineOption::printUIntOptions () ;
+  StringCommandLineOption::printStringOptions () ;
+  StringListCommandLineOption::printStringOptions () ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -126,10 +126,10 @@ static void print_help (const int argv,
   gCout.appendCString ("Options:\n") ;
   gCout.setTextAttribute (kAllAttributesOff) ;
   gCout.appendCString ("You can place options anywhere in the command line: they will be executed before the files are processed.\n") ;
-  C_BoolCommandLineOption::printBoolOptions () ;
-  C_UIntCommandLineOption::printUIntOptions () ;
-  C_StringCommandLineOption::printStringOptions () ;
-  C_StringListCommandLineOption::printStringOptions () ;
+  BoolCommandLineOption::printBoolOptions () ;
+  UIntCommandLineOption::printUIntOptions () ;
+  StringCommandLineOption::printStringOptions () ;
+  StringListCommandLineOption::printStringOptions () ;
 
   int32_t extensionIndex = 0 ;
   while (inExtensionArray [extensionIndex] != nullptr) {
@@ -176,7 +176,7 @@ static void option_beginning_with_single_minus_sign (const String & inCommand, /
   const int32_t optionLength = inCommand.length () ;
 //--- Search for boolean option (minus following by a character)
   if (optionLength == 1) {
-    C_BoolCommandLineOption::setBoolOptionForCommandChar (inCommand.charAtIndex (0 COMMA_HERE), outOk) ;
+    BoolCommandLineOption::setBoolOptionForCommandChar (inCommand.charAtIndex (0 COMMA_HERE), outOk) ;
     if (! outOk) {
       gCout.appendCString ("Error : unknown '") ;
       gCout.appendString (inCommand) ;
@@ -186,13 +186,13 @@ static void option_beginning_with_single_minus_sign (const String & inCommand, /
     const String command = inCommand.subStringFromIndex (1) ;
   //--- Search for an UInt option
     bool correctFormat = false ;
-    C_UIntCommandLineOption::setUIntOptionForCommandChar (command, outOk, correctFormat) ;
+    UIntCommandLineOption::setUIntOptionForCommandChar (command, outOk, correctFormat) ;
   //--- Not found : search for a string option
     if (! outOk) {
-      C_StringCommandLineOption::setStringOptionForCommandChar (command, outOk, correctFormat) ;
+      StringCommandLineOption::setStringOptionForCommandChar (command, outOk, correctFormat) ;
     }
     if (! outOk) {
-      C_StringListCommandLineOption::setStringListOptionForCommandChar (command, outOk, correctFormat) ;
+      StringListCommandLineOption::setStringListOptionForCommandChar (command, outOk, correctFormat) ;
     }
     if (! outOk) {
       gCout.appendCString ("Error : unknown '-") ;
@@ -224,17 +224,17 @@ static void option_beginning_with_double_minus_sign (const String & inCommand,
   outFound = false ;
   bool correctFormat = true ;
 //--- Look for a boolean argument
-  C_BoolCommandLineOption::setBoolOptionForCommandString (inCommand, outFound, gCocoaOutput) ;
+  BoolCommandLineOption::setBoolOptionForCommandString (inCommand, outFound, gCocoaOutput) ;
 //--- If not found, look for a Uint option
   if (! outFound) {
-    C_UIntCommandLineOption::setUIntOptionForCommandString (inCommand, outFound, correctFormat) ;
+    UIntCommandLineOption::setUIntOptionForCommandString (inCommand, outFound, correctFormat) ;
   }
 //--- If not found, look for a String option
   if (! outFound) {
-    C_StringCommandLineOption::setStringOptionForCommandString (inCommand, outFound, correctFormat) ;
+    StringCommandLineOption::setStringOptionForCommandString (inCommand, outFound, correctFormat) ;
   }
   if (! outFound) {
-    C_StringListCommandLineOption::setStringListOptionForCommandString (inCommand, outFound, correctFormat) ;
+    StringListCommandLineOption::setStringListOptionForCommandString (inCommand, outFound, correctFormat) ;
   }
   if (! outFound) {
     gCout.appendCString ("Error : unknown '--") ;
@@ -365,17 +365,15 @@ static void analyze_one_option (const String & inCommand,
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
-//     F_Analyze_CLI_Options
-//
+//     analyzeCommandLineOptions
 //--------------------------------------------------------------------------------------------------
 
-void F_Analyze_CLI_Options (const int argv,
-                            const char * * argc,
-                            TC_UniqueArray <String> & outSourceFileArray,
-                            const char* * inExtensionArray,
-                            const char* * inHelpMessageArray,
-                            void print_tool_help_message (void)) {
+void analyzeCommandLineOptions (const int argv,
+                                const char * * argc,
+                                TC_UniqueArray <String> & outSourceFileArray,
+                                const char* * inExtensionArray,
+                                const char* * inHelpMessageArray,
+                                void print_tool_help_message (void)) {
 //--- Analyze command
   bool errorFound = false ;
   for (int i = 1 ; i < argv ; i++) {
@@ -391,7 +389,7 @@ void F_Analyze_CLI_Options (const int argv,
 //--- No colored output ?
   #if COMPILE_FOR_WINDOWS == 0
     if (gOption_generic_5F_cli_5F_options_no_5F_color.mValue) {
-      C_ColoredConsole::setUseTextAttributes (false) ;
+      ColoredConsole::setUseTextAttributes (false) ;
     }
   #endif
 //--- Print version ?

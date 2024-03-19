@@ -4,7 +4,7 @@
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2009, ..., 2023 Pierre Molinaro.
+//  Copyright (C) 2009, ..., 2024 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -22,27 +22,27 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "C_CommandLineOption.h"
+#include "AbstractCommandLineOption.h"
 #include "M_machine.h"
 #include "String-class.h"
 
 //--------------------------------------------------------------------------------------------------
 
-class C_BoolCommandLineOption final : public C_CommandLineOption {
+class BoolCommandLineOption final : public AbstractCommandLineOption {
 //--- Constructor
-  public: C_BoolCommandLineOption (const char * inDomainName,
-                                   const char * inIdentifier,
-                                   const char inChar,
-                                   const char * inString,
-                                   const char * inComment,
-                                   const bool inVisibleInGalgas = true) ;
+  public: BoolCommandLineOption (const char * inDomainName,
+                                 const char * inIdentifier,
+                                 const char inChar,
+                                 const char * inString,
+                                 const char * inComment,
+                                 const bool inVisibleInGalgas = true) ;
 
 //--- No Copy
-  private: C_BoolCommandLineOption (const C_BoolCommandLineOption &) = delete ;
-  private: C_BoolCommandLineOption & operator = (const C_BoolCommandLineOption &) = delete ;
+  private: BoolCommandLineOption (const BoolCommandLineOption &) = delete ;
+  private: BoolCommandLineOption & operator = (const BoolCommandLineOption &) = delete ;
 
 //--- Attributes
-  private: C_BoolCommandLineOption * mNext ;
+  private: BoolCommandLineOption * mNext ;
   public: bool mValue ;
   public: inline bool readProperty_value (void) const { return mValue ; }
   public: const bool mVisibleInGalgas ;

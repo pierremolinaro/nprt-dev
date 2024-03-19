@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  Generic String Command Line Interface Option                                                 
+//  Generic String list Command Line Interface Option                                            
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2009, ..., 2024 Pierre Molinaro.
+//  Copyright (C) 2014, ..., 2024 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -22,38 +22,35 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "C_CommandLineOption.h"
+#include "AbstractCommandLineOption.h"
 #include "String-class.h"
 
 //--------------------------------------------------------------------------------------------------
 
-class C_StringCommandLineOption final : public C_CommandLineOption {
+class StringListCommandLineOption final : public AbstractCommandLineOption {
 //--- Constructor
-  public: C_StringCommandLineOption (const char * inDomainName,
-                                      const char * inIdentifier,
-                                      const char inChar,
-                                      const char * inString,
-                                      const char * inComment,
-                                      const char * inDefaultValue) ;
+  public: StringListCommandLineOption (const char * inDomainName,
+                                       const char * inIdentifier,
+                                       const char inChar,
+                                       const char * inString,
+                                       const char * inComment) ;
 //--- No Copy
-  private: C_StringCommandLineOption (const C_StringCommandLineOption &) = delete ;
-  private: C_StringCommandLineOption & operator = (const C_StringCommandLineOption &) = delete ;
+  private: StringListCommandLineOption (const StringListCommandLineOption &) = delete ;
+  private: StringListCommandLineOption & operator = (const StringListCommandLineOption &) = delete ;
 
 //--- Attributes
-  private: C_StringCommandLineOption * mNext ;
-  public: String mValue ;
-  public: inline String readProperty_value (void) const { return mValue ; }
-  public: const char * mDefaultValue ;
+  private: StringListCommandLineOption * mNext ;
+  public: TC_Array <String> mValue ;
+  public: inline TC_Array <String> readProperty_value (void) const { return mValue ; }
 
 //--- Static methods
-  public: static void setStringOptionForCommandChar (const String & inCommandCommandLineOptionString,
-                                                     bool & outFound,
-                                                     bool & outCommandLineOptionStringIsValid) ;
+  public: static void setStringListOptionForCommandChar (const String & inCommandCommandLineOptionString,
+                                                         bool & outFound,
+                                                         bool & outCommandLineOptionStringIsValid) ;
 
-  public: static void setStringOptionForCommandString (const String & inCommandCommandLineOptionString,
-                                                       bool & outFound,
-                                                       bool & outCommandLineOptionStringIsValid)  ;
-
+  public: static void setStringListOptionForCommandString (const String & inCommandCommandLineOptionString,
+                                                           bool & outFound,
+                                                           bool & outCommandLineOptionStringIsValid)  ;
   public: static void printUsageOfStringOptions (void) ;
   public: static void printStringOptions (void) ;
 
@@ -70,13 +67,6 @@ class C_StringCommandLineOption final : public C_CommandLineOption {
 
   public: static String getStringOptionCommentString (const String & inDomainName,
                                                        const String & inIdentifier) ;
-
-  public: static String getStringOptionValue (const String & inDomainName,
-                                                 const String & inIdentifier) ;
-
-  public: static void setStringOptionValue (const String & inDomainName,
-                                             const String & inIdentifier,
-                                             const String & inValue) ;
 } ;
 
 //--------------------------------------------------------------------------------------------------
