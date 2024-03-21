@@ -1,10 +1,11 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  GALGAS_enumerable : Base class for GALGAS enumerable object                                  
+//  'Lexique' : an abstract lexique class ;                                                    
+//  Galgas generated scanner classes inherit from this class.                                    
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2010, ..., 2016 Pierre Molinaro.
+//  Copyright (C) 1996, ..., 2023 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,21 +19,22 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "cGenericAbstractEnumerator.h"
+#pragma once
 
 //--------------------------------------------------------------------------------------------------
 
-cGenericAbstractEnumerator::~ cGenericAbstractEnumerator (void) {
-}
+#include "M_machine.h"
 
 //--------------------------------------------------------------------------------------------------
+//
+//  P R O D U C T I O N    N A M E    D E S C R I P T O R                                        
+//
+//--------------------------------------------------------------------------------------------------
 
-const cCollectionElement * cGenericAbstractEnumerator::currentObjectPtr (LOCATION_ARGS) const {
-  const uint32_t idx = (mOrder == EnumerationOrder::up)
-    ? mIndex
-    : mEnumerationArray.count () - 1 - mIndex
-  ;
-  return mEnumerationArray.pointerAtIndexForReadAccess (idx COMMA_THERE) ;
-}
+class ProductionNameDescriptor final {
+  public: const char * mName ;
+  public: const char * mFileName ;
+  public: const uint32_t mLineNumber ;
+} ;
 
 //--------------------------------------------------------------------------------------------------

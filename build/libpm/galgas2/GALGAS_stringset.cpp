@@ -44,7 +44,7 @@ class cCollectionElement_stringset : public cCollectionElement {
   public: virtual bool isValid (void) const ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that returns a copy of current object
   public: virtual cCollectionElement * copy (void) ;
@@ -69,7 +69,7 @@ bool cCollectionElement_stringset::isValid (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cCollectionElement_stringset::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cCollectionElement_stringset::compare (const cCollectionElement * inOperand) const {
   const cCollectionElement_stringset * operand = (const cCollectionElement_stringset *) inOperand ;
   macroValidSharedObject (operand, cCollectionElement_stringset) ;
   return mProperty_key.objectCompare (operand->mProperty_key) ;
@@ -967,7 +967,7 @@ void GALGAS_stringset::populateEnumerationArray (capCollectionElementArray & inE
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_stringset::cEnumerator_stringset (const GALGAS_stringset & inEnumeratedObject,
-                                              const typeEnumerationOrder inOrder) :
+                                              const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -994,8 +994,8 @@ GALGAS_string cEnumerator_stringset::current (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_stringset::objectCompare (const GALGAS_stringset & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_stringset::objectCompare (const GALGAS_stringset & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const int32_t count1 = (int32_t) mSharedRoot->count () ;
     const cStringsetNode * root1 = mSharedRoot->root () ;
@@ -1015,11 +1015,11 @@ typeComparisonResult GALGAS_stringset::objectCompare (const GALGAS_stringset & i
       }
     }
     if (r < 0) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (r > 0) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -1061,7 +1061,7 @@ GALGAS_stringset GALGAS_stringset::class_func_setWithStringList (const GALGAS_st
   GALGAS_stringset result ;
   if (inStringList.isValid ()) {
     result = class_func_emptySet (THERE) ;
-    cEnumerator_stringlist enumerator (inStringList, kENUMERATION_UP) ;
+    cEnumerator_stringlist enumerator (inStringList, EnumerationOrder::up) ;
     while (enumerator.hasCurrentObject ()) {
       result.addAssign_operation (enumerator.current_mValue (THERE) COMMA_THERE) ;
       enumerator.gotoNextObject () ;
@@ -1080,7 +1080,7 @@ GALGAS_stringset GALGAS_stringset::class_func_setWithLStringList (const GALGAS_l
   GALGAS_stringset result ;
   if (inStringList.isValid ()) {
     result = class_func_emptySet (THERE) ;
-    cEnumerator_lstringlist enumerator (inStringList, kENUMERATION_UP) ;
+    cEnumerator_lstringlist enumerator (inStringList, EnumerationOrder::up) ;
     while (enumerator.hasCurrentObject ()) {
       result.addAssign_operation (enumerator.current_mValue (THERE).mProperty_string COMMA_THERE) ;
       enumerator.gotoNextObject () ;

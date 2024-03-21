@@ -1,10 +1,8 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'C_ErrorOut' : a class for console output                                                    
-//
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2006, ..., 2011 Pierre Molinaro.
+//  Copyright (C) 2010, ..., 2024 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -21,31 +19,14 @@
 #pragma once
 
 //--------------------------------------------------------------------------------------------------
-
-#include "ColoredConsole.h"
-
+//   ComparisonResult
 //--------------------------------------------------------------------------------------------------
 
-class C_ErrorOut : public ColoredConsole {
-//--- Constructor
-  public: C_ErrorOut (void) ;
-
-//--- Flush output
-  public: virtual void flush (void) ;
-  
-//--- General stream method
-  protected: virtual void handleAppendUTF8Array (const char * inCharArray,
-                                                 const int32_t inArrayCount) ;
-
-  protected: virtual void handleAppendCharacter (const utf32 inCharacter) ;
+enum class ComparisonResult {
+  invalid,
+  firstOperandLowerThanSecond,
+  operandEqual,
+  firstOperandGreaterThanSecond
 } ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//  C O N S O L E    O U T    G L O B A L   V A R I A B L E                                      
-//
-//--------------------------------------------------------------------------------------------------
-
-extern C_ErrorOut ce ;
 
 //--------------------------------------------------------------------------------------------------

@@ -1,10 +1,8 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  GALGAS_enumerable : Base class for GALGAS enumerable object                                  
-//
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2010, ..., 2016 Pierre Molinaro.
+//  Copyright (C) 2010, ..., 2024 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,21 +16,19 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "cGenericAbstractEnumerator.h"
+#pragma once
 
 //--------------------------------------------------------------------------------------------------
-
-cGenericAbstractEnumerator::~ cGenericAbstractEnumerator (void) {
-}
-
+// ComparisonKind
 //--------------------------------------------------------------------------------------------------
 
-const cCollectionElement * cGenericAbstractEnumerator::currentObjectPtr (LOCATION_ARGS) const {
-  const uint32_t idx = (mOrder == EnumerationOrder::up)
-    ? mIndex
-    : mEnumerationArray.count () - 1 - mIndex
-  ;
-  return mEnumerationArray.pointerAtIndexForReadAccess (idx COMMA_THERE) ;
-}
+enum class ComparisonKind {
+  equal,
+  notEqual,
+  greaterOrEqual,
+  lowerOrEqual,
+  greaterThan,
+  lowerThan
+} ;
 
 //--------------------------------------------------------------------------------------------------

@@ -1,11 +1,8 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'Lexique' : an abstract lexique class ;                                                    
-//  Galgas generated scanner classes inherit from this class.                                    
-//
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 1996, ..., 2023 Pierre Molinaro.
+//  Copyright (C) 2010, ..., 2024 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -22,19 +19,9 @@
 #pragma once
 
 //--------------------------------------------------------------------------------------------------
-
-#include "M_machine.h"
-
-//--------------------------------------------------------------------------------------------------
-//
-//  P R O D U C T I O N    N A M E    D E S C R I P T O R                                        
-//
+//    EnumerationOrder                                                                       
 //--------------------------------------------------------------------------------------------------
 
-class cProductionNameDescriptor final {
-  public: const char * mName ;
-  public: const char * mFileName ;
-  public: const uint32_t mLineNumber ;
-} ;
+enum class EnumerationOrder { down, up } ;
 
 //--------------------------------------------------------------------------------------------------

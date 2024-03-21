@@ -148,7 +148,7 @@ class GALGAS__32_lstringlist : public AC_GALGAS_list {
 
 class cEnumerator__32_lstringlist : public cGenericAbstractEnumerator {
   public: cEnumerator__32_lstringlist (const GALGAS__32_lstringlist & inEnumeratedObject,
-                                       const typeEnumerationOrder inOrder) ;
+                                       const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mValue_30_ (LOCATION_ARGS) const ;
@@ -222,7 +222,7 @@ class GALGAS__32_lstringlist_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS__32_lstringlist_2D_element & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS__32_lstringlist_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -478,7 +478,7 @@ class GALGAS_M_5F_processor : public AC_GALGAS_map {
 
 class cEnumerator_M_5F_processor : public cGenericAbstractEnumerator {
   public: cEnumerator_M_5F_processor (const GALGAS_M_5F_processor & inEnumeratedObject,
-                                      const typeEnumerationOrder inOrder) ;
+                                      const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
@@ -510,7 +510,7 @@ class cMapElement_M_5F_processor : public cMapElement {
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -594,7 +594,7 @@ class GALGAS_M_5F_processor_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_M_5F_processor_2D_element & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_M_5F_processor_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -742,7 +742,7 @@ class GALGAS_M_5F_network : public AC_GALGAS_map {
 
 class cEnumerator_M_5F_network : public cGenericAbstractEnumerator {
   public: cEnumerator_M_5F_network (const GALGAS_M_5F_network & inEnumeratedObject,
-                                    const typeEnumerationOrder inOrder) ;
+                                    const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
@@ -777,7 +777,7 @@ class cMapElement_M_5F_network : public cMapElement {
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -872,7 +872,7 @@ class GALGAS_M_5F_network_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_M_5F_network_2D_element & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_M_5F_network_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -918,7 +918,7 @@ class GALGAS_AC_5F_canMessage : public AC_GALGAS_reference_class {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_AC_5F_canMessage & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_AC_5F_canMessage & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -973,7 +973,7 @@ class GALGAS_AC_5F_canMessage_2D_weak : public AC_GALGAS_weak_reference {
   public: static class GALGAS_AC_5F_canMessage_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_AC_5F_canMessage_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_AC_5F_canMessage_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1022,7 +1022,7 @@ class GALGAS_C_5F_canIndependantMessage : public GALGAS_AC_5F_canMessage {
   public: static class GALGAS_C_5F_canIndependantMessage class_func_new (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_C_5F_canIndependantMessage & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_C_5F_canIndependantMessage & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1077,7 +1077,7 @@ class GALGAS_C_5F_canIndependantMessage_2D_weak : public GALGAS_AC_5F_canMessage
   public: static class GALGAS_C_5F_canIndependantMessage_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_C_5F_canIndependantMessage_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_C_5F_canIndependantMessage_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1129,7 +1129,7 @@ class GALGAS_C_5F_canMessageFromMessage : public GALGAS_AC_5F_canMessage {
                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromMessage & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromMessage & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMMessageIndex (class GALGAS_uint inArgument0
@@ -1187,7 +1187,7 @@ class GALGAS_C_5F_canMessageFromMessage_2D_weak : public GALGAS_AC_5F_canMessage
   public: static class GALGAS_C_5F_canMessageFromMessage_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromMessage_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromMessage_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1239,7 +1239,7 @@ class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromTask & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromTask & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMTaskIndex (class GALGAS_uint inArgument0
@@ -1297,7 +1297,7 @@ class GALGAS_C_5F_canMessageFromTask_2D_weak : public GALGAS_AC_5F_canMessage_2D
   public: static class GALGAS_C_5F_canMessageFromTask_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromTask_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromTask_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1523,7 +1523,7 @@ class GALGAS_M_5F_messages : public AC_GALGAS_map {
 
 class cEnumerator_M_5F_messages : public cGenericAbstractEnumerator {
   public: cEnumerator_M_5F_messages (const GALGAS_M_5F_messages & inEnumeratedObject,
-                                     const typeEnumerationOrder inOrder) ;
+                                     const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
@@ -1576,7 +1576,7 @@ class cMapElement_M_5F_messages : public cMapElement {
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -1737,7 +1737,7 @@ class GALGAS_M_5F_messages_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_M_5F_messages_2D_element & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_M_5F_messages_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1783,7 +1783,7 @@ class GALGAS_AC_5F_task : public AC_GALGAS_reference_class {
                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_AC_5F_task & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_AC_5F_task & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1838,7 +1838,7 @@ class GALGAS_AC_5F_task_2D_weak : public AC_GALGAS_weak_reference {
   public: static class GALGAS_AC_5F_task_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_AC_5F_task_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_AC_5F_task_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1887,7 +1887,7 @@ class GALGAS_C_5F_independantTask : public GALGAS_AC_5F_task {
   public: static class GALGAS_C_5F_independantTask class_func_new (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_C_5F_independantTask & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_C_5F_independantTask & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1942,7 +1942,7 @@ class GALGAS_C_5F_independantTask_2D_weak : public GALGAS_AC_5F_task_2D_weak {
   public: static class GALGAS_C_5F_independantTask_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_C_5F_independantTask_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_C_5F_independantTask_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1997,7 +1997,7 @@ class GALGAS_C_5F_taskDependsFromTask : public GALGAS_AC_5F_task {
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromTask & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromTask & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMEvery (class GALGAS_luint inArgument0
@@ -2058,7 +2058,7 @@ class GALGAS_C_5F_taskDependsFromTask_2D_weak : public GALGAS_AC_5F_task_2D_weak
   public: static class GALGAS_C_5F_taskDependsFromTask_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromTask_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromTask_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2113,7 +2113,7 @@ class GALGAS_C_5F_taskDependsFromMessage : public GALGAS_AC_5F_task {
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromMessage & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromMessage & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMEvery (class GALGAS_luint inArgument0
@@ -2174,7 +2174,7 @@ class GALGAS_C_5F_taskDependsFromMessage_2D_weak : public GALGAS_AC_5F_task_2D_w
   public: static class GALGAS_C_5F_taskDependsFromMessage_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromMessage_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromMessage_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2400,7 +2400,7 @@ class GALGAS_M_5F_tasks : public AC_GALGAS_map {
 
 class cEnumerator_M_5F_tasks : public cGenericAbstractEnumerator {
   public: cEnumerator_M_5F_tasks (const GALGAS_M_5F_tasks & inEnumeratedObject,
-                                  const typeEnumerationOrder inOrder) ;
+                                  const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
@@ -2453,7 +2453,7 @@ class cMapElement_M_5F_tasks : public cMapElement {
                                   COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -2614,7 +2614,7 @@ class GALGAS_M_5F_tasks_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_M_5F_tasks_2D_element & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_M_5F_tasks_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 

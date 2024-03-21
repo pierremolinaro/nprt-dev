@@ -22,7 +22,7 @@
 #include "capCollectionElement.h"
 #include "cCollectionElement.h"
 #include "Compiler.h"
-#include "C_galgas_io.h"
+#include "galgas-input-output.h"
 #include "unicode_character_cpp.h"
 #include "C_galgas_CLI_Options.h"
 #include "BinaryFileWrite.h"
@@ -76,16 +76,16 @@ GALGAS_data GALGAS_data::class_func_dataWithContentsOfFile (const GALGAS_string 
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_data::objectCompare (const GALGAS_data & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_data::objectCompare (const GALGAS_data & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const int32_t r = mData.compareWithData (inOperand.mData) ;
     if (r < 0) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (r > 0) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -278,7 +278,7 @@ void GALGAS_data::method_writeToFileWhenDifferentContents (GALGAS_string inFileP
           }
         }
       }else{
-        ggs_printWarning (inCompiler, SourceTextInString (), C_IssueWithFixIt (), String ("Need to write '") + inFilePath.stringValue () + "'." COMMA_HERE) ;
+        ggs_printWarning (inCompiler, SourceTextInString (), IssueWithFixIt (), String ("Need to write '") + inFilePath.stringValue () + "'." COMMA_HERE) ;
       }
     }
   }
@@ -294,7 +294,7 @@ void GALGAS_data::method_writeToFile (GALGAS_string inFilePath,
     if (filePath.length () == 0) {
       inCompiler->onTheFlyRunTimeError ("'@data writeToFile' modifier invoked with empty file path argument" COMMA_THERE) ;
     }else if (! Compiler::performGeneration ()) {
-      ggs_printWarning (inCompiler, SourceTextInString (), C_IssueWithFixIt (), String ("Need to write '") + filePath + "'." COMMA_HERE) ;
+      ggs_printWarning (inCompiler, SourceTextInString (), IssueWithFixIt (), String ("Need to write '") + filePath + "'." COMMA_HERE) ;
     }else{
       const bool fileAlreadyExists = FileManager::fileExistsAtPath (filePath) ;
       const bool verboseOptionOn = verboseOutput () ;
@@ -335,7 +335,7 @@ void GALGAS_data::method_writeToExecutableFile (GALGAS_string inFilePath,
     if (filePath.length () == 0) {
       inCompiler->onTheFlyRunTimeError ("'@data writeToFile' modifier invoked with empty file path argument" COMMA_THERE) ;
     }else if (! Compiler::performGeneration ()) {
-      ggs_printWarning (inCompiler, SourceTextInString (), C_IssueWithFixIt (), String ("Need to write '") + filePath + "'." COMMA_HERE) ;
+      ggs_printWarning (inCompiler, SourceTextInString (), IssueWithFixIt (), String ("Need to write '") + filePath + "'." COMMA_HERE) ;
     }else{
       const bool fileAlreadyExists = FileManager::fileExistsAtPath (filePath) ;
       const bool verboseOptionOn = verboseOutput () ;
@@ -388,7 +388,7 @@ class cCollectionElement_data : public cCollectionElement {
   public: virtual bool isValid (void) const ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that returns a copy of current object
   public: virtual cCollectionElement * copy (void) ;
@@ -413,7 +413,7 @@ bool cCollectionElement_data::isValid (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cCollectionElement_data::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cCollectionElement_data::compare (const cCollectionElement * inOperand) const {
   const cCollectionElement_data * operand = (const cCollectionElement_data *) inOperand ;
   macroValidSharedObject (operand, cCollectionElement_data) ;
   return mProperty_data.objectCompare (operand->mProperty_data) ;
@@ -461,7 +461,7 @@ void GALGAS_data::populateEnumerationArray (capCollectionElementArray & inEnumer
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_data::cEnumerator_data (const GALGAS_data & inEnumeratedObject,
-                                    const typeEnumerationOrder inOrder) :
+                                    const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }

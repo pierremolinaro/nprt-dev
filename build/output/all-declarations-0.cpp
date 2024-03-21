@@ -1,5 +1,5 @@
 #include "Compiler.h"
-#include "C_galgas_io.h"
+#include "galgas-input-output.h"
 #include "C_galgas_CLI_Options.h"
 #include "PrologueEpilogue.h"
 
@@ -23,7 +23,7 @@ class cCollectionElement__32_lstringlist : public cCollectionElement {
   public: cCollectionElement__32_lstringlist (const GALGAS__32_lstringlist_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -80,7 +80,7 @@ void cCollectionElement__32_lstringlist::description (String & ioString, const i
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cCollectionElement__32_lstringlist::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cCollectionElement__32_lstringlist::compare (const cCollectionElement * inOperand) const {
   cCollectionElement__32_lstringlist * operand = (cCollectionElement__32_lstringlist *) inOperand ;
   macroValidSharedObject (operand, cCollectionElement__32_lstringlist) ;
   return mObject.objectCompare (operand->mObject) ;
@@ -406,7 +406,7 @@ GALGAS_lstring GALGAS__32_lstringlist::getter_mValue_31_AtIndex (const GALGAS_ui
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator__32_lstringlist::cEnumerator__32_lstringlist (const GALGAS__32_lstringlist & inEnumeratedObject,
-                                                          const typeEnumerationOrder inOrder) :
+                                                          const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -1312,13 +1312,13 @@ void cMapElement_M_5F_processor::description (String & ioString, const int32_t i
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cMapElement_M_5F_processor::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cMapElement_M_5F_processor::compare (const cCollectionElement * inOperand) const {
   cMapElement_M_5F_processor * operand = (cMapElement_M_5F_processor *) inOperand ;
-  typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (kOperandEqual == result) {
+  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mIndex.objectCompare (operand->mProperty_mIndex) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mStep.objectCompare (operand->mProperty_mStep) ;
   }
   return result ;
@@ -1392,7 +1392,7 @@ GALGAS_M_5F_processor GALGAS_M_5F_processor::add_operation (const GALGAS_M_5F_pr
                                                             Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) const {
   GALGAS_M_5F_processor result = *this ;
-  cEnumerator_M_5F_processor enumerator (inOperand, kENUMERATION_UP) ;
+  cEnumerator_M_5F_processor enumerator (inOperand, EnumerationOrder::up) ;
   while (enumerator.hasCurrentObject ()) {
     result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIndex (HERE), enumerator.current_mStep (HERE), inCompiler COMMA_THERE) ;
     enumerator.gotoNextObject () ;
@@ -1513,7 +1513,7 @@ cMapElement_M_5F_processor * GALGAS_M_5F_processor::readWriteAccessForWithInstru
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_M_5F_processor::cEnumerator_M_5F_processor (const GALGAS_M_5F_processor & inEnumeratedObject,
-                                                        const typeEnumerationOrder inOrder) :
+                                                        const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -1656,16 +1656,16 @@ void cMapElement_M_5F_network::description (String & ioString, const int32_t inI
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cMapElement_M_5F_network::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cMapElement_M_5F_network::compare (const cCollectionElement * inOperand) const {
   cMapElement_M_5F_network * operand = (cMapElement_M_5F_network *) inOperand ;
-  typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (kOperandEqual == result) {
+  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mIndex.objectCompare (operand->mProperty_mIndex) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mCANnetwork.objectCompare (operand->mProperty_mCANnetwork) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mScalingFactor.objectCompare (operand->mProperty_mScalingFactor) ;
   }
   return result ;
@@ -1740,7 +1740,7 @@ GALGAS_M_5F_network GALGAS_M_5F_network::add_operation (const GALGAS_M_5F_networ
                                                         Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const {
   GALGAS_M_5F_network result = *this ;
-  cEnumerator_M_5F_network enumerator (inOperand, kENUMERATION_UP) ;
+  cEnumerator_M_5F_network enumerator (inOperand, EnumerationOrder::up) ;
   while (enumerator.hasCurrentObject ()) {
     result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIndex (HERE), enumerator.current_mCANnetwork (HERE), enumerator.current_mScalingFactor (HERE), inCompiler COMMA_THERE) ;
     enumerator.gotoNextObject () ;
@@ -1894,7 +1894,7 @@ cMapElement_M_5F_network * GALGAS_M_5F_network::readWriteAccessForWithInstructio
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_M_5F_network::cEnumerator_M_5F_network (const GALGAS_M_5F_network & inEnumeratedObject,
-                                                    const typeEnumerationOrder inOrder) :
+                                                    const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -2016,17 +2016,17 @@ GALGAS_M_5F_network GALGAS_M_5F_network::extractObject (const GALGAS_object & in
 
 
 
-typeComparisonResult GALGAS_AC_5F_canMessage::objectCompare (const GALGAS_AC_5F_canMessage & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_AC_5F_canMessage::objectCompare (const GALGAS_AC_5F_canMessage & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -2097,19 +2097,19 @@ GALGAS_AC_5F_canMessage GALGAS_AC_5F_canMessage::extractObject (const GALGAS_obj
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_AC_5F_canMessage_2D_weak::objectCompare (const GALGAS_AC_5F_canMessage_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_AC_5F_canMessage_2D_weak::objectCompare (const GALGAS_AC_5F_canMessage_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -2217,24 +2217,24 @@ GALGAS_AC_5F_canMessage_2D_weak GALGAS_AC_5F_canMessage_2D_weak::extractObject (
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cPtr_C_5F_canIndependantMessage::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return kOperandEqual ;
+ComparisonResult cPtr_C_5F_canIndependantMessage::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
+  return ComparisonResult::operandEqual ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
 
-typeComparisonResult GALGAS_C_5F_canIndependantMessage::objectCompare (const GALGAS_C_5F_canIndependantMessage & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_C_5F_canIndependantMessage::objectCompare (const GALGAS_C_5F_canIndependantMessage & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -2332,19 +2332,19 @@ GALGAS_C_5F_canIndependantMessage GALGAS_C_5F_canIndependantMessage::extractObje
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_C_5F_canIndependantMessage_2D_weak::objectCompare (const GALGAS_C_5F_canIndependantMessage_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_C_5F_canIndependantMessage_2D_weak::objectCompare (const GALGAS_C_5F_canIndependantMessage_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -2453,11 +2453,11 @@ GALGAS_C_5F_canIndependantMessage_2D_weak GALGAS_C_5F_canIndependantMessage_2D_w
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cPtr_C_5F_canMessageFromMessage::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
+ComparisonResult cPtr_C_5F_canMessageFromMessage::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  ComparisonResult result = ComparisonResult::operandEqual ;
   const cPtr_C_5F_canMessageFromMessage * p = (const cPtr_C_5F_canMessageFromMessage *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_C_5F_canMessageFromMessage) ;
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mMessageIndex.objectCompare (p->mProperty_mMessageIndex) ;
   }
   return result ;
@@ -2466,17 +2466,17 @@ typeComparisonResult cPtr_C_5F_canMessageFromMessage::dynamicObjectCompare (cons
 //--------------------------------------------------------------------------------------------------
 
 
-typeComparisonResult GALGAS_C_5F_canMessageFromMessage::objectCompare (const GALGAS_C_5F_canMessageFromMessage & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_C_5F_canMessageFromMessage::objectCompare (const GALGAS_C_5F_canMessageFromMessage & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -2604,19 +2604,19 @@ GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage::extractObje
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_C_5F_canMessageFromMessage_2D_weak::objectCompare (const GALGAS_C_5F_canMessageFromMessage_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_C_5F_canMessageFromMessage_2D_weak::objectCompare (const GALGAS_C_5F_canMessageFromMessage_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -2725,11 +2725,11 @@ GALGAS_C_5F_canMessageFromMessage_2D_weak GALGAS_C_5F_canMessageFromMessage_2D_w
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cPtr_C_5F_canMessageFromTask::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
+ComparisonResult cPtr_C_5F_canMessageFromTask::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  ComparisonResult result = ComparisonResult::operandEqual ;
   const cPtr_C_5F_canMessageFromTask * p = (const cPtr_C_5F_canMessageFromTask *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_C_5F_canMessageFromTask) ;
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mTaskIndex.objectCompare (p->mProperty_mTaskIndex) ;
   }
   return result ;
@@ -2738,17 +2738,17 @@ typeComparisonResult cPtr_C_5F_canMessageFromTask::dynamicObjectCompare (const a
 //--------------------------------------------------------------------------------------------------
 
 
-typeComparisonResult GALGAS_C_5F_canMessageFromTask::objectCompare (const GALGAS_C_5F_canMessageFromTask & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_C_5F_canMessageFromTask::objectCompare (const GALGAS_C_5F_canMessageFromTask & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -2876,19 +2876,19 @@ GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask::extractObject (co
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_C_5F_canMessageFromTask_2D_weak::objectCompare (const GALGAS_C_5F_canMessageFromTask_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_C_5F_canMessageFromTask_2D_weak::objectCompare (const GALGAS_C_5F_canMessageFromTask_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -3066,34 +3066,34 @@ void cMapElement_M_5F_messages::description (String & ioString, const int32_t in
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cMapElement_M_5F_messages::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cMapElement_M_5F_messages::compare (const cCollectionElement * inOperand) const {
   cMapElement_M_5F_messages * operand = (cMapElement_M_5F_messages *) inOperand ;
-  typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (kOperandEqual == result) {
+  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mIndex.objectCompare (operand->mProperty_mIndex) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mClass.objectCompare (operand->mProperty_mClass) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mNetworkIndex.objectCompare (operand->mProperty_mNetworkIndex) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mBytesCount.objectCompare (operand->mProperty_mBytesCount) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mPriority.objectCompare (operand->mProperty_mPriority) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mOffset.objectCompare (operand->mProperty_mOffset) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mDeadline.objectCompare (operand->mProperty_mDeadline) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mPeriod.objectCompare (operand->mProperty_mPeriod) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mMessageKind.objectCompare (operand->mProperty_mMessageKind) ;
   }
   return result ;
@@ -3174,7 +3174,7 @@ GALGAS_M_5F_messages GALGAS_M_5F_messages::add_operation (const GALGAS_M_5F_mess
                                                           Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) const {
   GALGAS_M_5F_messages result = *this ;
-  cEnumerator_M_5F_messages enumerator (inOperand, kENUMERATION_UP) ;
+  cEnumerator_M_5F_messages enumerator (inOperand, EnumerationOrder::up) ;
   while (enumerator.hasCurrentObject ()) {
     result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIndex (HERE), enumerator.current_mClass (HERE), enumerator.current_mNetworkIndex (HERE), enumerator.current_mBytesCount (HERE), enumerator.current_mPriority (HERE), enumerator.current_mOffset (HERE), enumerator.current_mDeadline (HERE), enumerator.current_mPeriod (HERE), enumerator.current_mMessageKind (HERE), inCompiler COMMA_THERE) ;
     enumerator.gotoNextObject () ;
@@ -3526,7 +3526,7 @@ cMapElement_M_5F_messages * GALGAS_M_5F_messages::readWriteAccessForWithInstruct
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_M_5F_messages::cEnumerator_M_5F_messages (const GALGAS_M_5F_messages & inEnumeratedObject,
-                                                      const typeEnumerationOrder inOrder) :
+                                                      const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -3714,17 +3714,17 @@ GALGAS_M_5F_messages GALGAS_M_5F_messages::extractObject (const GALGAS_object & 
 
 
 
-typeComparisonResult GALGAS_AC_5F_task::objectCompare (const GALGAS_AC_5F_task & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_AC_5F_task::objectCompare (const GALGAS_AC_5F_task & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -3795,19 +3795,19 @@ GALGAS_AC_5F_task GALGAS_AC_5F_task::extractObject (const GALGAS_object & inObje
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_AC_5F_task_2D_weak::objectCompare (const GALGAS_AC_5F_task_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_AC_5F_task_2D_weak::objectCompare (const GALGAS_AC_5F_task_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -3915,24 +3915,24 @@ GALGAS_AC_5F_task_2D_weak GALGAS_AC_5F_task_2D_weak::extractObject (const GALGAS
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cPtr_C_5F_independantTask::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return kOperandEqual ;
+ComparisonResult cPtr_C_5F_independantTask::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
+  return ComparisonResult::operandEqual ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
 
-typeComparisonResult GALGAS_C_5F_independantTask::objectCompare (const GALGAS_C_5F_independantTask & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_C_5F_independantTask::objectCompare (const GALGAS_C_5F_independantTask & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -4030,19 +4030,19 @@ GALGAS_C_5F_independantTask GALGAS_C_5F_independantTask::extractObject (const GA
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_C_5F_independantTask_2D_weak::objectCompare (const GALGAS_C_5F_independantTask_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_C_5F_independantTask_2D_weak::objectCompare (const GALGAS_C_5F_independantTask_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -4140,19 +4140,19 @@ GALGAS_C_5F_independantTask_2D_weak GALGAS_C_5F_independantTask_2D_weak::extract
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_C_5F_taskDependsFromTask_2D_weak::objectCompare (const GALGAS_C_5F_taskDependsFromTask_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_C_5F_taskDependsFromTask_2D_weak::objectCompare (const GALGAS_C_5F_taskDependsFromTask_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -4250,19 +4250,19 @@ GALGAS_C_5F_taskDependsFromTask_2D_weak GALGAS_C_5F_taskDependsFromTask_2D_weak:
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_C_5F_taskDependsFromMessage_2D_weak::objectCompare (const GALGAS_C_5F_taskDependsFromMessage_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_C_5F_taskDependsFromMessage_2D_weak::objectCompare (const GALGAS_C_5F_taskDependsFromMessage_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -4440,34 +4440,34 @@ void cMapElement_M_5F_tasks::description (String & ioString, const int32_t inInd
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cMapElement_M_5F_tasks::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cMapElement_M_5F_tasks::compare (const cCollectionElement * inOperand) const {
   cMapElement_M_5F_tasks * operand = (cMapElement_M_5F_tasks *) inOperand ;
-  typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (kOperandEqual == result) {
+  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mIndex.objectCompare (operand->mProperty_mIndex) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mPriority.objectCompare (operand->mProperty_mPriority) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mOffset.objectCompare (operand->mProperty_mOffset) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mDeadline.objectCompare (operand->mProperty_mDeadline) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mDurationMin.objectCompare (operand->mProperty_mDurationMin) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mDurationMax.objectCompare (operand->mProperty_mDurationMax) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mProcessor.objectCompare (operand->mProperty_mProcessor) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mPeriod.objectCompare (operand->mProperty_mPeriod) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mTaskKind.objectCompare (operand->mProperty_mTaskKind) ;
   }
   return result ;
@@ -4548,7 +4548,7 @@ GALGAS_M_5F_tasks GALGAS_M_5F_tasks::add_operation (const GALGAS_M_5F_tasks & in
                                                     Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const {
   GALGAS_M_5F_tasks result = *this ;
-  cEnumerator_M_5F_tasks enumerator (inOperand, kENUMERATION_UP) ;
+  cEnumerator_M_5F_tasks enumerator (inOperand, EnumerationOrder::up) ;
   while (enumerator.hasCurrentObject ()) {
     result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIndex (HERE), enumerator.current_mPriority (HERE), enumerator.current_mOffset (HERE), enumerator.current_mDeadline (HERE), enumerator.current_mDurationMin (HERE), enumerator.current_mDurationMax (HERE), enumerator.current_mProcessor (HERE), enumerator.current_mPeriod (HERE), enumerator.current_mTaskKind (HERE), inCompiler COMMA_THERE) ;
     enumerator.gotoNextObject () ;
@@ -4900,7 +4900,7 @@ cMapElement_M_5F_tasks * GALGAS_M_5F_tasks::readWriteAccessForWithInstruction (C
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_M_5F_tasks::cEnumerator_M_5F_tasks (const GALGAS_M_5F_tasks & inEnumeratedObject,
-                                                const typeEnumerationOrder inOrder) :
+                                                const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -5102,9 +5102,9 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 26)) ;
         enumGalgasBool test_1 = kBoolTrue ;
         if (kBoolTrue == test_1) {
-          test_1 = GALGAS_bool (kIsEqual, var_step_768.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
+          test_1 = GALGAS_bool (ComparisonKind::equal, var_step_768.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
           if (kBoolTrue == test_1) {
-            TC_Array <C_FixItDescription> fixItArray2 ;
+            TC_Array <FixItDescription> fixItArray2 ;
             inCompiler->emitSemanticError (var_step_768.readProperty_location (), GALGAS_string ("the step value must be > 0"), fixItArray2  COMMA_SOURCE_FILE ("oa_parser.galgas", 28)) ;
           }
         }
@@ -5145,9 +5145,9 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 49)) ;
         enumGalgasBool test_3 = kBoolTrue ;
         if (kBoolTrue == test_3) {
-          test_3 = GALGAS_bool (kIsEqual, var_factor_1261.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
+          test_3 = GALGAS_bool (ComparisonKind::equal, var_factor_1261.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
           if (kBoolTrue == test_3) {
-            TC_Array <C_FixItDescription> fixItArray4 ;
+            TC_Array <FixItDescription> fixItArray4 ;
             inCompiler->emitSemanticError (var_factor_1261.readProperty_location (), GALGAS_string ("the factor value must be > 0"), fixItArray4  COMMA_SOURCE_FILE ("oa_parser.galgas", 51)) ;
           }
         }
@@ -5223,7 +5223,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         if (kBoolTrue == test_5) {
           test_5 = var_explicitOffset_1840.boolEnum () ;
           if (kBoolTrue == test_5) {
-            TC_Array <C_FixItDescription> fixItArray6 ;
+            TC_Array <FixItDescription> fixItArray6 ;
             inCompiler->emitSemanticError (GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray6  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)) ;
           }
         }
@@ -5331,18 +5331,18 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
       var_outNetworkMap_532.method_searchKey (var_networkName_4580, var_networkIndex_4639, var_CANnetwork_4657, joker_4668, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 153)) ;
       enumGalgasBool test_7 = kBoolTrue ;
       if (kBoolTrue == test_7) {
-        test_7 = var_CANnetwork_4657.operator_and (GALGAS_bool (kIsEqual, var_messageClass_4217.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 154)).boolEnum () ;
+        test_7 = var_CANnetwork_4657.operator_and (GALGAS_bool (ComparisonKind::equal, var_messageClass_4217.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 154)).boolEnum () ;
         if (kBoolTrue == test_7) {
-          TC_Array <C_FixItDescription> fixItArray8 ;
+          TC_Array <FixItDescription> fixItArray8 ;
           inCompiler->emitSemanticError (var_messageClass_4217.readProperty_location (), GALGAS_string ("a CAN message must be either standard either extended"), fixItArray8  COMMA_SOURCE_FILE ("oa_parser.galgas", 155)) ;
         }
       }
       if (kBoolFalse == test_7) {
         enumGalgasBool test_9 = kBoolTrue ;
         if (kBoolTrue == test_9) {
-          test_9 = var_CANnetwork_4657.operator_not (SOURCE_FILE ("oa_parser.galgas", 156)).operator_and (GALGAS_bool (kIsNotEqual, var_messageClass_4217.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 156)).boolEnum () ;
+          test_9 = var_CANnetwork_4657.operator_not (SOURCE_FILE ("oa_parser.galgas", 156)).operator_and (GALGAS_bool (ComparisonKind::notEqual, var_messageClass_4217.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 156)).boolEnum () ;
           if (kBoolTrue == test_9) {
-            TC_Array <C_FixItDescription> fixItArray10 ;
+            TC_Array <FixItDescription> fixItArray10 ;
             inCompiler->emitSemanticError (var_messageClass_4217.readProperty_location (), GALGAS_string ("a VAN message cannot be standard or extended"), fixItArray10  COMMA_SOURCE_FILE ("oa_parser.galgas", 157)) ;
           }
         }
@@ -5352,18 +5352,18 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 160)) ;
       enumGalgasBool test_11 = kBoolTrue ;
       if (kBoolTrue == test_11) {
-        test_11 = var_CANnetwork_4657.operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount_4986.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (8U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 161)).boolEnum () ;
+        test_11 = var_CANnetwork_4657.operator_and (GALGAS_bool (ComparisonKind::greaterThan, var_bytesCount_4986.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (8U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 161)).boolEnum () ;
         if (kBoolTrue == test_11) {
-          TC_Array <C_FixItDescription> fixItArray12 ;
+          TC_Array <FixItDescription> fixItArray12 ;
           inCompiler->emitSemanticError (var_bytesCount_4986.readProperty_location (), GALGAS_string ("CAN message length must be <= 8 bytes"), fixItArray12  COMMA_SOURCE_FILE ("oa_parser.galgas", 162)) ;
         }
       }
       if (kBoolFalse == test_11) {
         enumGalgasBool test_13 = kBoolTrue ;
         if (kBoolTrue == test_13) {
-          test_13 = var_CANnetwork_4657.operator_not (SOURCE_FILE ("oa_parser.galgas", 163)).operator_and (GALGAS_bool (kIsStrictSup, var_bytesCount_4986.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (28U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 163)).boolEnum () ;
+          test_13 = var_CANnetwork_4657.operator_not (SOURCE_FILE ("oa_parser.galgas", 163)).operator_and (GALGAS_bool (ComparisonKind::greaterThan, var_bytesCount_4986.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (28U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 163)).boolEnum () ;
           if (kBoolTrue == test_13) {
-            TC_Array <C_FixItDescription> fixItArray14 ;
+            TC_Array <FixItDescription> fixItArray14 ;
             inCompiler->emitSemanticError (var_bytesCount_4986.readProperty_location (), GALGAS_string ("VAN message must be <= 28 bytes"), fixItArray14  COMMA_SOURCE_FILE ("oa_parser.galgas", 164)) ;
           }
         }
@@ -5415,7 +5415,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         if (kBoolTrue == test_15) {
           test_15 = var_explicitOffset_5320.boolEnum () ;
           if (kBoolTrue == test_15) {
-            TC_Array <C_FixItDescription> fixItArray16 ;
+            TC_Array <FixItDescription> fixItArray16 ;
             inCompiler->emitSemanticError (GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray16  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)) ;
           }
         }
@@ -5890,14 +5890,14 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_indexing (Lexique_oa_5F_s
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cPtr_C_5F_taskDependsFromTask::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
+ComparisonResult cPtr_C_5F_taskDependsFromTask::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  ComparisonResult result = ComparisonResult::operandEqual ;
   const cPtr_C_5F_taskDependsFromTask * p = (const cPtr_C_5F_taskDependsFromTask *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mTask.objectCompare (p->mProperty_mTask) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mEvery.objectCompare (p->mProperty_mEvery) ;
   }
   return result ;
@@ -5906,17 +5906,17 @@ typeComparisonResult cPtr_C_5F_taskDependsFromTask::dynamicObjectCompare (const 
 //--------------------------------------------------------------------------------------------------
 
 
-typeComparisonResult GALGAS_C_5F_taskDependsFromTask::objectCompare (const GALGAS_C_5F_taskDependsFromTask & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_C_5F_taskDependsFromTask::objectCompare (const GALGAS_C_5F_taskDependsFromTask & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -6084,14 +6084,14 @@ GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::extractObject (
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cPtr_C_5F_taskDependsFromMessage::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
+ComparisonResult cPtr_C_5F_taskDependsFromMessage::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  ComparisonResult result = ComparisonResult::operandEqual ;
   const cPtr_C_5F_taskDependsFromMessage * p = (const cPtr_C_5F_taskDependsFromMessage *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mMessage.objectCompare (p->mProperty_mMessage) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mEvery.objectCompare (p->mProperty_mEvery) ;
   }
   return result ;
@@ -6100,17 +6100,17 @@ typeComparisonResult cPtr_C_5F_taskDependsFromMessage::dynamicObjectCompare (con
 //--------------------------------------------------------------------------------------------------
 
 
-typeComparisonResult GALGAS_C_5F_taskDependsFromMessage::objectCompare (const GALGAS_C_5F_taskDependsFromMessage & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_C_5F_taskDependsFromMessage::objectCompare (const GALGAS_C_5F_taskDependsFromMessage & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -6448,7 +6448,7 @@ static const int32_t gProductions_oa_grammar [] = {
 //
 //--------------------------------------------------------------------------------------------------
 
-static const cProductionNameDescriptor gProductionNames_oa_grammar [36] = {
+static const ProductionNameDescriptor gProductionNames_oa_grammar [36] = {
  {"<axiome>", "oa_parser", 0}, // at index 0
  {"<select_oa_5F_parser_0>", "oa_parser", 4}, // at index 1
  {"<select_oa_5F_parser_0>", "oa_parser", 5}, // at index 2
@@ -6749,7 +6749,7 @@ void cGrammar_oa_5F_grammar::_performSourceFileParsing_ (Compiler * inCompiler,
         message.appendString (filePath) ;
         message.appendString ("' file exists, but cannot be read") ;
         const GALGAS_location errorLocation (inFilePath.readProperty_location ()) ;
-        inCompiler->semanticErrorAtLocation (errorLocation, message, TC_Array <C_FixItDescription> () COMMA_THERE) ;
+        inCompiler->semanticErrorAtLocation (errorLocation, message, TC_Array <FixItDescription> () COMMA_THERE) ;
       }
       macroDetachSharedObject (scanner) ;
     }else{
@@ -6758,7 +6758,7 @@ void cGrammar_oa_5F_grammar::_performSourceFileParsing_ (Compiler * inCompiler,
       message.appendString (filePath) ;
       message.appendString ("' file does not exist") ;
       const GALGAS_location errorLocation (inFilePath.readProperty_location ()) ;
-      inCompiler->semanticErrorAtLocation (errorLocation, message, TC_Array <C_FixItDescription> () COMMA_THERE) ;
+      inCompiler->semanticErrorAtLocation (errorLocation, message, TC_Array <FixItDescription> () COMMA_THERE) ;
     }
   }
 }
@@ -6971,12 +6971,12 @@ GALGAS__32_lstringlist_2D_element GALGAS__32_lstringlist_2D_element::class_func_
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS__32_lstringlist_2D_element::objectCompare (const GALGAS__32_lstringlist_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
+ComparisonResult GALGAS__32_lstringlist_2D_element::objectCompare (const GALGAS__32_lstringlist_2D_element & inOperand) const {
+   ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mValue_30_.objectCompare (inOperand.mProperty_mValue_30_) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mValue_31_.objectCompare (inOperand.mProperty_mValue_31_) ;
   }
   return result ;
@@ -7091,15 +7091,15 @@ GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::class_func_ne
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_M_5F_processor_2D_element::objectCompare (const GALGAS_M_5F_processor_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
+ComparisonResult GALGAS_M_5F_processor_2D_element::objectCompare (const GALGAS_M_5F_processor_2D_element & inOperand) const {
+   ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mIndex.objectCompare (inOperand.mProperty_mIndex) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mStep.objectCompare (inOperand.mProperty_mStep) ;
   }
   return result ;
@@ -7221,18 +7221,18 @@ GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::class_func_new (c
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_M_5F_network_2D_element::objectCompare (const GALGAS_M_5F_network_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
+ComparisonResult GALGAS_M_5F_network_2D_element::objectCompare (const GALGAS_M_5F_network_2D_element & inOperand) const {
+   ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mIndex.objectCompare (inOperand.mProperty_mIndex) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mCANnetwork.objectCompare (inOperand.mProperty_mCANnetwork) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mScalingFactor.objectCompare (inOperand.mProperty_mScalingFactor) ;
   }
   return result ;
@@ -7381,36 +7381,36 @@ GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::class_func_new 
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_M_5F_messages_2D_element::objectCompare (const GALGAS_M_5F_messages_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
+ComparisonResult GALGAS_M_5F_messages_2D_element::objectCompare (const GALGAS_M_5F_messages_2D_element & inOperand) const {
+   ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mIndex.objectCompare (inOperand.mProperty_mIndex) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mClass.objectCompare (inOperand.mProperty_mClass) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mNetworkIndex.objectCompare (inOperand.mProperty_mNetworkIndex) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mBytesCount.objectCompare (inOperand.mProperty_mBytesCount) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mPriority.objectCompare (inOperand.mProperty_mPriority) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mOffset.objectCompare (inOperand.mProperty_mOffset) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mDeadline.objectCompare (inOperand.mProperty_mDeadline) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mPeriod.objectCompare (inOperand.mProperty_mPeriod) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mMessageKind.objectCompare (inOperand.mProperty_mMessageKind) ;
   }
   return result ;
@@ -7577,36 +7577,36 @@ GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::class_func_new (const
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_M_5F_tasks_2D_element::objectCompare (const GALGAS_M_5F_tasks_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
+ComparisonResult GALGAS_M_5F_tasks_2D_element::objectCompare (const GALGAS_M_5F_tasks_2D_element & inOperand) const {
+   ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mIndex.objectCompare (inOperand.mProperty_mIndex) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mPriority.objectCompare (inOperand.mProperty_mPriority) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mOffset.objectCompare (inOperand.mProperty_mOffset) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mDeadline.objectCompare (inOperand.mProperty_mDeadline) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mDurationMin.objectCompare (inOperand.mProperty_mDurationMin) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mDurationMax.objectCompare (inOperand.mProperty_mDurationMax) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mProcessor.objectCompare (inOperand.mProperty_mProcessor) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mPeriod.objectCompare (inOperand.mProperty_mPeriod) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mProperty_mTaskKind.objectCompare (inOperand.mProperty_mTaskKind) ;
   }
   return result ;
