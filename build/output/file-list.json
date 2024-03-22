@@ -5,7 +5,7 @@
                        "../build/libpm/big-integers",
                        "../build/libpm/command_line_interface",
                        "../build/libpm/files",
-                       "../build/libpm/galgas2",
+                       "../build/libpm/galgas",
                        "../build/libpm/generic-arraies",
                        "../build/libpm/streams",
                        "../build/libpm/strings",
