@@ -25,6 +25,10 @@ class cPtr_C_5F_taskDependsFromMessage : public cPtr_AC_5F_task {
   public: GALGAS_uint mProperty_mMessage ;
   public: GALGAS_luint mProperty_mEvery ;
 
+
+//--- Default constructor
+  public: cPtr_C_5F_taskDependsFromMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
+
 //--- Constructor
   public: cPtr_C_5F_taskDependsFromMessage (const GALGAS_uint & in_mMessage,
                                             const GALGAS_luint & in_mEvery

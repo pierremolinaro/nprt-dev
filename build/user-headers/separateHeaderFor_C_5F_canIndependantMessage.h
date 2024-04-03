@@ -22,6 +22,10 @@ class cPtr_C_5F_canIndependantMessage : public cPtr_AC_5F_canMessage {
 //--- END OF USER ZONE 2
 //--- Properties
 
+
+//--- Default constructor
+  public: cPtr_C_5F_canIndependantMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
+
 //--- Constructor
   public: cPtr_C_5F_canIndependantMessage (LOCATION_ARGS) ;
 

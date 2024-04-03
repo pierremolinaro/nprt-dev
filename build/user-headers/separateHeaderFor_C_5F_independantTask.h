@@ -23,6 +23,10 @@ class cPtr_C_5F_independantTask : public cPtr_AC_5F_task {
 //--- END OF USER ZONE 2
 //--- Properties
 
+
+//--- Default constructor
+  public: cPtr_C_5F_independantTask (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
+
 //--- Constructor
   public: cPtr_C_5F_independantTask (LOCATION_ARGS) ;
 

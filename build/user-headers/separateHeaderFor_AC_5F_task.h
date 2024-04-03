@@ -23,6 +23,10 @@ class cPtr_AC_5F_task : public acStrongPtr_class {
 //--- END OF USER ZONE 2
 //--- Properties
 
+
+//--- Default constructor
+  public: cPtr_AC_5F_task (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
+
 //--- Constructor
   public: cPtr_AC_5F_task (LOCATION_ARGS) ;
 

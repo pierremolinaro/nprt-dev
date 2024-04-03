@@ -22,6 +22,10 @@ class cPtr_AC_5F_canMessage : public acStrongPtr_class {
 //--- END OF USER ZONE 2
 //--- Properties
 
+
+//--- Default constructor
+  public: cPtr_AC_5F_canMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
+
 //--- Constructor
   public: cPtr_AC_5F_canMessage (LOCATION_ARGS) ;
 

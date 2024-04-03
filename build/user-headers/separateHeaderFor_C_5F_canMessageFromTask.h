@@ -23,6 +23,10 @@ class cPtr_C_5F_canMessageFromTask : public cPtr_AC_5F_canMessage {
 //--- Properties
   public: GALGAS_uint mProperty_mTaskIndex ;
 
+
+//--- Default constructor
+  public: cPtr_C_5F_canMessageFromTask (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
+
 //--- Constructor
   public: cPtr_C_5F_canMessageFromTask (const GALGAS_uint & in_mTaskIndex
                                         COMMA_LOCATION_ARGS) ;

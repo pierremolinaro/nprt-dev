@@ -2006,6 +2006,12 @@ GALGAS_M_5F_network GALGAS_M_5F_network::extractObject (const GALGAS_object & in
 // @AC_5F_canMessage reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_AC_5F_canMessage::cPtr_AC_5F_canMessage (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
+acStrongPtr_class (THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties (void) const {
     acStrongPtr_class::printNonNullClassInstanceProperties () ;
@@ -2037,6 +2043,17 @@ ComparisonResult GALGAS_AC_5F_canMessage::objectCompare (const GALGAS_AC_5F_canM
 GALGAS_AC_5F_canMessage::GALGAS_AC_5F_canMessage (void) :
 AC_GALGAS_reference_class () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_AC_5F_canMessage GALGAS_AC_5F_canMessage::init_28__29_ (Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  cPtr_AC_5F_canMessage * object = nullptr ;
+  macroMyNew (object, cPtr_AC_5F_canMessage (inCompiler COMMA_THERE)) ;
+  const GALGAS_AC_5F_canMessage result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2209,6 +2226,12 @@ GALGAS_AC_5F_canMessage_2D_weak GALGAS_AC_5F_canMessage_2D_weak::extractObject (
 // @C_5F_canIndependantMessage reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_C_5F_canIndependantMessage::cPtr_C_5F_canIndependantMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_AC_5F_canMessage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_C_5F_canIndependantMessage::printNonNullClassInstanceProperties (void) const {
     cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties () ;
@@ -2245,6 +2268,17 @@ ComparisonResult GALGAS_C_5F_canIndependantMessage::objectCompare (const GALGAS_
 GALGAS_C_5F_canIndependantMessage::GALGAS_C_5F_canIndependantMessage (void) :
 GALGAS_AC_5F_canMessage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_C_5F_canIndependantMessage GALGAS_C_5F_canIndependantMessage::init_28__29_ (Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  cPtr_C_5F_canIndependantMessage * object = nullptr ;
+  macroMyNew (object, cPtr_C_5F_canIndependantMessage (inCompiler COMMA_THERE)) ;
+  const GALGAS_C_5F_canIndependantMessage result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2444,6 +2478,13 @@ GALGAS_C_5F_canIndependantMessage_2D_weak GALGAS_C_5F_canIndependantMessage_2D_w
 // @C_5F_canMessageFromMessage reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_C_5F_canMessageFromMessage::cPtr_C_5F_canMessageFromMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_AC_5F_canMessage (inCompiler COMMA_THERE),
+mProperty_mMessageIndex () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_C_5F_canMessageFromMessage::printNonNullClassInstanceProperties (void) const {
     cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties () ;
@@ -2487,6 +2528,19 @@ ComparisonResult GALGAS_C_5F_canMessageFromMessage::objectCompare (const GALGAS_
 GALGAS_C_5F_canMessageFromMessage::GALGAS_C_5F_canMessageFromMessage (void) :
 GALGAS_AC_5F_canMessage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage::init_28__29_ (const GALGAS_uint & in_mMessageIndex,
+                                                                                      Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  cPtr_C_5F_canMessageFromMessage * object = nullptr ;
+  macroMyNew (object, cPtr_C_5F_canMessageFromMessage (inCompiler COMMA_THERE)) ;
+  object->mProperty_mMessageIndex = in_mMessageIndex ;
+  const GALGAS_C_5F_canMessageFromMessage result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2716,6 +2770,13 @@ GALGAS_C_5F_canMessageFromMessage_2D_weak GALGAS_C_5F_canMessageFromMessage_2D_w
 // @C_5F_canMessageFromTask reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_C_5F_canMessageFromTask::cPtr_C_5F_canMessageFromTask (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_AC_5F_canMessage (inCompiler COMMA_THERE),
+mProperty_mTaskIndex () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_C_5F_canMessageFromTask::printNonNullClassInstanceProperties (void) const {
     cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties () ;
@@ -2759,6 +2820,19 @@ ComparisonResult GALGAS_C_5F_canMessageFromTask::objectCompare (const GALGAS_C_5
 GALGAS_C_5F_canMessageFromTask::GALGAS_C_5F_canMessageFromTask (void) :
 GALGAS_AC_5F_canMessage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask::init_28__29_ (const GALGAS_uint & in_mTaskIndex,
+                                                                                Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  cPtr_C_5F_canMessageFromTask * object = nullptr ;
+  macroMyNew (object, cPtr_C_5F_canMessageFromTask (inCompiler COMMA_THERE)) ;
+  object->mProperty_mTaskIndex = in_mTaskIndex ;
+  const GALGAS_C_5F_canMessageFromTask result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3704,6 +3778,12 @@ GALGAS_M_5F_messages GALGAS_M_5F_messages::extractObject (const GALGAS_object & 
 // @AC_5F_task reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_AC_5F_task::cPtr_AC_5F_task (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
+acStrongPtr_class (THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_AC_5F_task::printNonNullClassInstanceProperties (void) const {
     acStrongPtr_class::printNonNullClassInstanceProperties () ;
@@ -3735,6 +3815,17 @@ ComparisonResult GALGAS_AC_5F_task::objectCompare (const GALGAS_AC_5F_task & inO
 GALGAS_AC_5F_task::GALGAS_AC_5F_task (void) :
 AC_GALGAS_reference_class () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_AC_5F_task GALGAS_AC_5F_task::init_28__29_ (Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  cPtr_AC_5F_task * object = nullptr ;
+  macroMyNew (object, cPtr_AC_5F_task (inCompiler COMMA_THERE)) ;
+  const GALGAS_AC_5F_task result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3907,6 +3998,12 @@ GALGAS_AC_5F_task_2D_weak GALGAS_AC_5F_task_2D_weak::extractObject (const GALGAS
 // @C_5F_independantTask reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_C_5F_independantTask::cPtr_C_5F_independantTask (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_AC_5F_task (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_C_5F_independantTask::printNonNullClassInstanceProperties (void) const {
     cPtr_AC_5F_task::printNonNullClassInstanceProperties () ;
@@ -3943,6 +4040,17 @@ ComparisonResult GALGAS_C_5F_independantTask::objectCompare (const GALGAS_C_5F_i
 GALGAS_C_5F_independantTask::GALGAS_C_5F_independantTask (void) :
 GALGAS_AC_5F_task () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_C_5F_independantTask GALGAS_C_5F_independantTask::init_28__29_ (Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) {
+  cPtr_C_5F_independantTask * object = nullptr ;
+  macroMyNew (object, cPtr_C_5F_independantTask (inCompiler COMMA_THERE)) ;
+  const GALGAS_C_5F_independantTask result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -5880,6 +5988,14 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_indexing (Lexique_oa_5F_s
 // @C_5F_taskDependsFromTask reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_C_5F_taskDependsFromTask::cPtr_C_5F_taskDependsFromTask (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_AC_5F_task (inCompiler COMMA_THERE),
+mProperty_mTask (),
+mProperty_mEvery () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_C_5F_taskDependsFromTask::printNonNullClassInstanceProperties (void) const {
     cPtr_AC_5F_task::printNonNullClassInstanceProperties () ;
@@ -5927,6 +6043,21 @@ ComparisonResult GALGAS_C_5F_taskDependsFromTask::objectCompare (const GALGAS_C_
 GALGAS_C_5F_taskDependsFromTask::GALGAS_C_5F_taskDependsFromTask (void) :
 GALGAS_AC_5F_task () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::init_28__2C__29_ (const GALGAS_uint & in_mTask,
+                                                                                      const GALGAS_luint & in_mEvery,
+                                                                                      Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  cPtr_C_5F_taskDependsFromTask * object = nullptr ;
+  macroMyNew (object, cPtr_C_5F_taskDependsFromTask (inCompiler COMMA_THERE)) ;
+  object->mProperty_mTask = in_mTask ;
+  object->mProperty_mEvery = in_mEvery ;
+  const GALGAS_C_5F_taskDependsFromTask result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6074,6 +6205,14 @@ GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::extractObject (
 // @C_5F_taskDependsFromMessage reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_C_5F_taskDependsFromMessage::cPtr_C_5F_taskDependsFromMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_AC_5F_task (inCompiler COMMA_THERE),
+mProperty_mMessage (),
+mProperty_mEvery () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_C_5F_taskDependsFromMessage::printNonNullClassInstanceProperties (void) const {
     cPtr_AC_5F_task::printNonNullClassInstanceProperties () ;
@@ -6121,6 +6260,21 @@ ComparisonResult GALGAS_C_5F_taskDependsFromMessage::objectCompare (const GALGAS
 GALGAS_C_5F_taskDependsFromMessage::GALGAS_C_5F_taskDependsFromMessage (void) :
 GALGAS_AC_5F_task () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage::init_28__2C__29_ (const GALGAS_uint & in_mMessage,
+                                                                                            const GALGAS_luint & in_mEvery,
+                                                                                            Compiler * inCompiler
+                                                                                            COMMA_LOCATION_ARGS) {
+  cPtr_C_5F_taskDependsFromMessage * object = nullptr ;
+  macroMyNew (object, cPtr_C_5F_taskDependsFromMessage (inCompiler COMMA_THERE)) ;
+  object->mProperty_mMessage = in_mMessage ;
+  object->mProperty_mEvery = in_mEvery ;
+  const GALGAS_C_5F_taskDependsFromMessage result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6948,6 +7102,24 @@ mProperty_mValue_31_ () {
 GALGAS__32_lstringlist_2D_element::~ GALGAS__32_lstringlist_2D_element (void) {
 }
 
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GALGAS__32_lstringlist_2D_element GALGAS__32_lstringlist_2D_element::init_28__2C__29_ (const GALGAS_lstring & in_mValue_30_,
+                                                                                       const GALGAS_lstring & in_mValue_31_,
+                                                                                       Compiler * inCompiler
+                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS__32_lstringlist_2D_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_mValue_30_ = in_mValue_30_ ;
+  result.mProperty_mValue_31_ = in_mValue_31_ ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS__32_lstringlist_2D_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
 //--------------------------------------------------------------------------------------------------
 
 GALGAS__32_lstringlist_2D_element::GALGAS__32_lstringlist_2D_element (const GALGAS_lstring & inOperand0,
@@ -6960,12 +7132,12 @@ mProperty_mValue_31_ (inOperand1) {
 
 GALGAS__32_lstringlist_2D_element GALGAS__32_lstringlist_2D_element::class_func_new (const GALGAS_lstring & in_mValue0,
                                                                                      const GALGAS_lstring & in_mValue1,
-                                                                                     Compiler * /* inCompiler */
+                                                                                     Compiler * inCompiler
                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS__32_lstringlist_2D_element result ;
-  if (in_mValue0.isValid () && in_mValue1.isValid ()) {
-    result = GALGAS__32_lstringlist_2D_element (in_mValue0, in_mValue1) ;
-  }
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_mValue_30_ = in_mValue0 ;
+  result.mProperty_mValue_31_ = in_mValue1 ;
   return result ;
 }
 
@@ -7065,6 +7237,26 @@ mProperty_mStep () {
 GALGAS_M_5F_processor_2D_element::~ GALGAS_M_5F_processor_2D_element (void) {
 }
 
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::init_28__2C__2C__29_ (const GALGAS_lstring & in_lkey,
+                                                                                         const GALGAS_uint & in_mIndex,
+                                                                                         const GALGAS_luint & in_mStep,
+                                                                                         Compiler * inCompiler
+                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_M_5F_processor_2D_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_lkey = in_lkey ;
+  result.mProperty_mIndex = in_mIndex ;
+  result.mProperty_mStep = in_mStep ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_M_5F_processor_2D_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
 //--------------------------------------------------------------------------------------------------
 
 GALGAS_M_5F_processor_2D_element::GALGAS_M_5F_processor_2D_element (const GALGAS_lstring & inOperand0,
@@ -7080,12 +7272,13 @@ mProperty_mStep (inOperand2) {
 GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::class_func_new (const GALGAS_lstring & in_lkey,
                                                                                    const GALGAS_uint & in_mIndex,
                                                                                    const GALGAS_luint & in_mStep,
-                                                                                   Compiler * /* inCompiler */
+                                                                                   Compiler * inCompiler
                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_M_5F_processor_2D_element result ;
-  if (in_lkey.isValid () && in_mIndex.isValid () && in_mStep.isValid ()) {
-    result = GALGAS_M_5F_processor_2D_element (in_lkey, in_mIndex, in_mStep) ;
-  }
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_lkey = in_lkey ;
+  result.mProperty_mIndex = in_mIndex ;
+  result.mProperty_mStep = in_mStep ;
   return result ;
 }
 
@@ -7192,6 +7385,28 @@ mProperty_mScalingFactor () {
 GALGAS_M_5F_network_2D_element::~ GALGAS_M_5F_network_2D_element (void) {
 }
 
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::init_28__2C__2C__2C__29_ (const GALGAS_lstring & in_lkey,
+                                                                                         const GALGAS_uint & in_mIndex,
+                                                                                         const GALGAS_bool & in_mCANnetwork,
+                                                                                         const GALGAS_luint & in_mScalingFactor,
+                                                                                         Compiler * inCompiler
+                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_M_5F_network_2D_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_lkey = in_lkey ;
+  result.mProperty_mIndex = in_mIndex ;
+  result.mProperty_mCANnetwork = in_mCANnetwork ;
+  result.mProperty_mScalingFactor = in_mScalingFactor ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_M_5F_network_2D_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
 //--------------------------------------------------------------------------------------------------
 
 GALGAS_M_5F_network_2D_element::GALGAS_M_5F_network_2D_element (const GALGAS_lstring & inOperand0,
@@ -7210,12 +7425,14 @@ GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::class_func_new (c
                                                                                const GALGAS_uint & in_mIndex,
                                                                                const GALGAS_bool & in_mCANnetwork,
                                                                                const GALGAS_luint & in_mScalingFactor,
-                                                                               Compiler * /* inCompiler */
+                                                                               Compiler * inCompiler
                                                                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_M_5F_network_2D_element result ;
-  if (in_lkey.isValid () && in_mIndex.isValid () && in_mCANnetwork.isValid () && in_mScalingFactor.isValid ()) {
-    result = GALGAS_M_5F_network_2D_element (in_lkey, in_mIndex, in_mCANnetwork, in_mScalingFactor) ;
-  }
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_lkey = in_lkey ;
+  result.mProperty_mIndex = in_mIndex ;
+  result.mProperty_mCANnetwork = in_mCANnetwork ;
+  result.mProperty_mScalingFactor = in_mScalingFactor ;
   return result ;
 }
 
@@ -7334,6 +7551,40 @@ mProperty_mMessageKind () {
 GALGAS_M_5F_messages_2D_element::~ GALGAS_M_5F_messages_2D_element (void) {
 }
 
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::init_28__2C__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const GALGAS_lstring & in_lkey,
+                                                                                                                   const GALGAS_uint & in_mIndex,
+                                                                                                                   const GALGAS_luint & in_mClass,
+                                                                                                                   const GALGAS_uint & in_mNetworkIndex,
+                                                                                                                   const GALGAS_luint & in_mBytesCount,
+                                                                                                                   const GALGAS_luint & in_mPriority,
+                                                                                                                   const GALGAS_luint & in_mOffset,
+                                                                                                                   const GALGAS_luint & in_mDeadline,
+                                                                                                                   const GALGAS_luint & in_mPeriod,
+                                                                                                                   const GALGAS_AC_5F_canMessage & in_mMessageKind,
+                                                                                                                   Compiler * inCompiler
+                                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_M_5F_messages_2D_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_lkey = in_lkey ;
+  result.mProperty_mIndex = in_mIndex ;
+  result.mProperty_mClass = in_mClass ;
+  result.mProperty_mNetworkIndex = in_mNetworkIndex ;
+  result.mProperty_mBytesCount = in_mBytesCount ;
+  result.mProperty_mPriority = in_mPriority ;
+  result.mProperty_mOffset = in_mOffset ;
+  result.mProperty_mDeadline = in_mDeadline ;
+  result.mProperty_mPeriod = in_mPeriod ;
+  result.mProperty_mMessageKind = in_mMessageKind ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_M_5F_messages_2D_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
 //--------------------------------------------------------------------------------------------------
 
 GALGAS_M_5F_messages_2D_element::GALGAS_M_5F_messages_2D_element (const GALGAS_lstring & inOperand0,
@@ -7370,12 +7621,20 @@ GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::class_func_new 
                                                                                  const GALGAS_luint & in_mDeadline,
                                                                                  const GALGAS_luint & in_mPeriod,
                                                                                  const GALGAS_AC_5F_canMessage & in_mMessageKind,
-                                                                                 Compiler * /* inCompiler */
+                                                                                 Compiler * inCompiler
                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_M_5F_messages_2D_element result ;
-  if (in_lkey.isValid () && in_mIndex.isValid () && in_mClass.isValid () && in_mNetworkIndex.isValid () && in_mBytesCount.isValid () && in_mPriority.isValid () && in_mOffset.isValid () && in_mDeadline.isValid () && in_mPeriod.isValid () && in_mMessageKind.isValid ()) {
-    result = GALGAS_M_5F_messages_2D_element (in_lkey, in_mIndex, in_mClass, in_mNetworkIndex, in_mBytesCount, in_mPriority, in_mOffset, in_mDeadline, in_mPeriod, in_mMessageKind) ;
-  }
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_lkey = in_lkey ;
+  result.mProperty_mIndex = in_mIndex ;
+  result.mProperty_mClass = in_mClass ;
+  result.mProperty_mNetworkIndex = in_mNetworkIndex ;
+  result.mProperty_mBytesCount = in_mBytesCount ;
+  result.mProperty_mPriority = in_mPriority ;
+  result.mProperty_mOffset = in_mOffset ;
+  result.mProperty_mDeadline = in_mDeadline ;
+  result.mProperty_mPeriod = in_mPeriod ;
+  result.mProperty_mMessageKind = in_mMessageKind ;
   return result ;
 }
 
@@ -7530,6 +7789,40 @@ mProperty_mTaskKind () {
 GALGAS_M_5F_tasks_2D_element::~ GALGAS_M_5F_tasks_2D_element (void) {
 }
 
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::init_28__2C__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const GALGAS_lstring & in_lkey,
+                                                                                                             const GALGAS_uint & in_mIndex,
+                                                                                                             const GALGAS_luint & in_mPriority,
+                                                                                                             const GALGAS_luint & in_mOffset,
+                                                                                                             const GALGAS_luint & in_mDeadline,
+                                                                                                             const GALGAS_luint & in_mDurationMin,
+                                                                                                             const GALGAS_luint & in_mDurationMax,
+                                                                                                             const GALGAS_uint & in_mProcessor,
+                                                                                                             const GALGAS_luint & in_mPeriod,
+                                                                                                             const GALGAS_AC_5F_task & in_mTaskKind,
+                                                                                                             Compiler * inCompiler
+                                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_M_5F_tasks_2D_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_lkey = in_lkey ;
+  result.mProperty_mIndex = in_mIndex ;
+  result.mProperty_mPriority = in_mPriority ;
+  result.mProperty_mOffset = in_mOffset ;
+  result.mProperty_mDeadline = in_mDeadline ;
+  result.mProperty_mDurationMin = in_mDurationMin ;
+  result.mProperty_mDurationMax = in_mDurationMax ;
+  result.mProperty_mProcessor = in_mProcessor ;
+  result.mProperty_mPeriod = in_mPeriod ;
+  result.mProperty_mTaskKind = in_mTaskKind ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_M_5F_tasks_2D_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
 //--------------------------------------------------------------------------------------------------
 
 GALGAS_M_5F_tasks_2D_element::GALGAS_M_5F_tasks_2D_element (const GALGAS_lstring & inOperand0,
@@ -7566,12 +7859,20 @@ GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::class_func_new (const
                                                                            const GALGAS_uint & in_mProcessor,
                                                                            const GALGAS_luint & in_mPeriod,
                                                                            const GALGAS_AC_5F_task & in_mTaskKind,
-                                                                           Compiler * /* inCompiler */
+                                                                           Compiler * inCompiler
                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_M_5F_tasks_2D_element result ;
-  if (in_lkey.isValid () && in_mIndex.isValid () && in_mPriority.isValid () && in_mOffset.isValid () && in_mDeadline.isValid () && in_mDurationMin.isValid () && in_mDurationMax.isValid () && in_mProcessor.isValid () && in_mPeriod.isValid () && in_mTaskKind.isValid ()) {
-    result = GALGAS_M_5F_tasks_2D_element (in_lkey, in_mIndex, in_mPriority, in_mOffset, in_mDeadline, in_mDurationMin, in_mDurationMax, in_mProcessor, in_mPeriod, in_mTaskKind) ;
-  }
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_lkey = in_lkey ;
+  result.mProperty_mIndex = in_mIndex ;
+  result.mProperty_mPriority = in_mPriority ;
+  result.mProperty_mOffset = in_mOffset ;
+  result.mProperty_mDeadline = in_mDeadline ;
+  result.mProperty_mDurationMin = in_mDurationMin ;
+  result.mProperty_mDurationMax = in_mDurationMax ;
+  result.mProperty_mProcessor = in_mProcessor ;
+  result.mProperty_mPeriod = in_mPeriod ;
+  result.mProperty_mTaskKind = in_mTaskKind ;
   return result ;
 }
 

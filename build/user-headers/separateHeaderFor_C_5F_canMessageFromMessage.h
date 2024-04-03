@@ -23,6 +23,10 @@ class cPtr_C_5F_canMessageFromMessage : public cPtr_AC_5F_canMessage {
 //--- Properties
   public: GALGAS_uint mProperty_mMessageIndex ;
 
+
+//--- Default constructor
+  public: cPtr_C_5F_canMessageFromMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
+
 //--- Constructor
   public: cPtr_C_5F_canMessageFromMessage (const GALGAS_uint & in_mMessageIndex
                                            COMMA_LOCATION_ARGS) ;
