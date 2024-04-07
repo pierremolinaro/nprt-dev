@@ -13,6 +13,13 @@ class cPtr_C_5F_taskDependsFromMessage : public cPtr_AC_5F_task {
   #ifndef DO_NOT_GENERATE_CHECKINGS
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
+
+//--------------------------------- Initializers
+  public: void C_5F_taskDependsFromMessage_init_21__21_ (const class GALGAS_uint & inOperand0,
+                                                         const class GALGAS_luint & inOperand1,
+                                                         Compiler * inCompiler) ;
+
+
 //--- START OF USER ZONE 2
 
   public : virtual bool taskDependsOnTask (void) const override ;

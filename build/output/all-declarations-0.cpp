@@ -2044,17 +2044,6 @@ GALGAS_AC_5F_canMessage::GALGAS_AC_5F_canMessage (void) :
 AC_GALGAS_reference_class () {
 }
 
-//--- Synthetized initializer ----------------------------------------------------------------------
-
-/* GALGAS_AC_5F_canMessage GALGAS_AC_5F_canMessage::init_28__29_ (Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) {
-  cPtr_AC_5F_canMessage * object = nullptr ;
-  macroMyNew (object, cPtr_AC_5F_canMessage (inCompiler COMMA_THERE)) ;
-  const GALGAS_AC_5F_canMessage result (object) ;
-  macroDetachSharedObject (object) ;
-  return result ;
-} */
-
 //--------------------------------------------------------------------------------------------------
 
 GALGAS_AC_5F_canMessage::GALGAS_AC_5F_canMessage (const cPtr_AC_5F_canMessage * inSourcePtr) :
@@ -2271,14 +2260,22 @@ GALGAS_AC_5F_canMessage () {
 
 //--- Synthetized initializer ----------------------------------------------------------------------
 
-/* GALGAS_C_5F_canIndependantMessage GALGAS_C_5F_canIndependantMessage::init_28__29_ (Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
+GALGAS_C_5F_canIndependantMessage GALGAS_C_5F_canIndependantMessage::
+init (Compiler * inCompiler
+          COMMA_LOCATION_ARGS) {
   cPtr_C_5F_canIndependantMessage * object = nullptr ;
   macroMyNew (object, cPtr_C_5F_canIndependantMessage (inCompiler COMMA_THERE)) ;
+  object->C_5F_canIndependantMessage_init (inCompiler) ;
   const GALGAS_C_5F_canIndependantMessage result (object) ;
   macroDetachSharedObject (object) ;
   return result ;
-} */
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_C_5F_canIndependantMessage::
+C_5F_canIndependantMessage_init (Compiler * /* inCompiler */) {
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2531,16 +2528,25 @@ GALGAS_AC_5F_canMessage () {
 
 //--- Synthetized initializer ----------------------------------------------------------------------
 
-/* GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage::init_28__29_ (const GALGAS_uint & in_mMessageIndex,
-                                                                                      Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
+GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage::
+init_21_ (const GALGAS_uint & in_mMessageIndex,
+          Compiler * inCompiler
+          COMMA_LOCATION_ARGS) {
   cPtr_C_5F_canMessageFromMessage * object = nullptr ;
   macroMyNew (object, cPtr_C_5F_canMessageFromMessage (inCompiler COMMA_THERE)) ;
-  object->mProperty_mMessageIndex = in_mMessageIndex ;
+  object->C_5F_canMessageFromMessage_init_21_ (in_mMessageIndex, inCompiler) ;
   const GALGAS_C_5F_canMessageFromMessage result (object) ;
   macroDetachSharedObject (object) ;
   return result ;
-} */
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_C_5F_canMessageFromMessage::
+C_5F_canMessageFromMessage_init_21_ (const GALGAS_uint & in_mMessageIndex,
+                                     Compiler * /* inCompiler */) {
+  mProperty_mMessageIndex = in_mMessageIndex ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2550,24 +2556,11 @@ GALGAS_AC_5F_canMessage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage::class_func_new (const GALGAS_uint & inAttribute_mMessageIndex
+GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage::class_func_new (const GALGAS_uint & in_mMessageIndex
                                                                                      COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_canMessageFromMessage result ;
-  if (inAttribute_mMessageIndex.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_C_5F_canMessageFromMessage (inAttribute_mMessageIndex COMMA_THERE)) ;
-  }
+  macroMyNew (result.mObjectPtr, cPtr_C_5F_canMessageFromMessage (in_mMessageIndex COMMA_THERE)) ;
   return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_C_5F_canMessageFromMessage::setter_setMMessageIndex (GALGAS_uint inValue
-                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  if (nullptr != mObjectPtr) {
-    cPtr_C_5F_canMessageFromMessage * p = (cPtr_C_5F_canMessageFromMessage *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_C_5F_canMessageFromMessage) ;
-    p->mProperty_mMessageIndex = inValue ;
-  }
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2583,13 +2576,24 @@ GALGAS_uint GALGAS_C_5F_canMessageFromMessage::readProperty_mMessageIndex (void)
 }
 
 //--------------------------------------------------------------------------------------------------
+
+void GALGAS_C_5F_canMessageFromMessage::setProperty_mMessageIndex (const GALGAS_uint & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_C_5F_canMessageFromMessage * p = (cPtr_C_5F_canMessageFromMessage *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_C_5F_canMessageFromMessage) ;
+    p->mProperty_mMessageIndex = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
 //Pointer class for @C_canMessageFromMessage class
 //--------------------------------------------------------------------------------------------------
 
 cPtr_C_5F_canMessageFromMessage::cPtr_C_5F_canMessageFromMessage (const GALGAS_uint & in_mMessageIndex
                                                                   COMMA_LOCATION_ARGS) :
 cPtr_AC_5F_canMessage (THERE),
-mProperty_mMessageIndex (in_mMessageIndex) {
+mProperty_mMessageIndex () {
+  mProperty_mMessageIndex = in_mMessageIndex ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2823,16 +2827,25 @@ GALGAS_AC_5F_canMessage () {
 
 //--- Synthetized initializer ----------------------------------------------------------------------
 
-/* GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask::init_28__29_ (const GALGAS_uint & in_mTaskIndex,
-                                                                                Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
+GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask::
+init_21_ (const GALGAS_uint & in_mTaskIndex,
+          Compiler * inCompiler
+          COMMA_LOCATION_ARGS) {
   cPtr_C_5F_canMessageFromTask * object = nullptr ;
   macroMyNew (object, cPtr_C_5F_canMessageFromTask (inCompiler COMMA_THERE)) ;
-  object->mProperty_mTaskIndex = in_mTaskIndex ;
+  object->C_5F_canMessageFromTask_init_21_ (in_mTaskIndex, inCompiler) ;
   const GALGAS_C_5F_canMessageFromTask result (object) ;
   macroDetachSharedObject (object) ;
   return result ;
-} */
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_C_5F_canMessageFromTask::
+C_5F_canMessageFromTask_init_21_ (const GALGAS_uint & in_mTaskIndex,
+                                  Compiler * /* inCompiler */) {
+  mProperty_mTaskIndex = in_mTaskIndex ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2842,24 +2855,11 @@ GALGAS_AC_5F_canMessage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask::class_func_new (const GALGAS_uint & inAttribute_mTaskIndex
+GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask::class_func_new (const GALGAS_uint & in_mTaskIndex
                                                                                COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_canMessageFromTask result ;
-  if (inAttribute_mTaskIndex.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_C_5F_canMessageFromTask (inAttribute_mTaskIndex COMMA_THERE)) ;
-  }
+  macroMyNew (result.mObjectPtr, cPtr_C_5F_canMessageFromTask (in_mTaskIndex COMMA_THERE)) ;
   return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_C_5F_canMessageFromTask::setter_setMTaskIndex (GALGAS_uint inValue
-                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  if (nullptr != mObjectPtr) {
-    cPtr_C_5F_canMessageFromTask * p = (cPtr_C_5F_canMessageFromTask *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_C_5F_canMessageFromTask) ;
-    p->mProperty_mTaskIndex = inValue ;
-  }
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2875,13 +2875,24 @@ GALGAS_uint GALGAS_C_5F_canMessageFromTask::readProperty_mTaskIndex (void) const
 }
 
 //--------------------------------------------------------------------------------------------------
+
+void GALGAS_C_5F_canMessageFromTask::setProperty_mTaskIndex (const GALGAS_uint & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_C_5F_canMessageFromTask * p = (cPtr_C_5F_canMessageFromTask *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_C_5F_canMessageFromTask) ;
+    p->mProperty_mTaskIndex = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
 //Pointer class for @C_canMessageFromTask class
 //--------------------------------------------------------------------------------------------------
 
 cPtr_C_5F_canMessageFromTask::cPtr_C_5F_canMessageFromTask (const GALGAS_uint & in_mTaskIndex
                                                             COMMA_LOCATION_ARGS) :
 cPtr_AC_5F_canMessage (THERE),
-mProperty_mTaskIndex (in_mTaskIndex) {
+mProperty_mTaskIndex () {
+  mProperty_mTaskIndex = in_mTaskIndex ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -3816,17 +3827,6 @@ GALGAS_AC_5F_task::GALGAS_AC_5F_task (void) :
 AC_GALGAS_reference_class () {
 }
 
-//--- Synthetized initializer ----------------------------------------------------------------------
-
-/* GALGAS_AC_5F_task GALGAS_AC_5F_task::init_28__29_ (Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-  cPtr_AC_5F_task * object = nullptr ;
-  macroMyNew (object, cPtr_AC_5F_task (inCompiler COMMA_THERE)) ;
-  const GALGAS_AC_5F_task result (object) ;
-  macroDetachSharedObject (object) ;
-  return result ;
-} */
-
 //--------------------------------------------------------------------------------------------------
 
 GALGAS_AC_5F_task::GALGAS_AC_5F_task (const cPtr_AC_5F_task * inSourcePtr) :
@@ -4043,14 +4043,22 @@ GALGAS_AC_5F_task () {
 
 //--- Synthetized initializer ----------------------------------------------------------------------
 
-/* GALGAS_C_5F_independantTask GALGAS_C_5F_independantTask::init_28__29_ (Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
+GALGAS_C_5F_independantTask GALGAS_C_5F_independantTask::
+init (Compiler * inCompiler
+          COMMA_LOCATION_ARGS) {
   cPtr_C_5F_independantTask * object = nullptr ;
   macroMyNew (object, cPtr_C_5F_independantTask (inCompiler COMMA_THERE)) ;
+  object->C_5F_independantTask_init (inCompiler) ;
   const GALGAS_C_5F_independantTask result (object) ;
   macroDetachSharedObject (object) ;
   return result ;
-} */
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_C_5F_independantTask::
+C_5F_independantTask_init (Compiler * /* inCompiler */) {
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -5184,36 +5192,36 @@ GALGAS_M_5F_tasks GALGAS_M_5F_tasks::extractObject (const GALGAS_object & inObje
 
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//------------------------------------------------------------------------------------------------
 
 void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner * inCompiler) {
   GALGAS_M_5F_processor var_outProcessorMap_474 = GALGAS_M_5F_processor::class_func_emptyMap (SOURCE_FILE ("oa_parser.galgas", 12)) ;
-  GALGAS_M_5F_network var_outNetworkMap_532 = GALGAS_M_5F_network::class_func_emptyMap (SOURCE_FILE ("oa_parser.galgas", 13)) ;
-  GALGAS_M_5F_messages var_outMessagesMap_587 = GALGAS_M_5F_messages::class_func_emptyMap (SOURCE_FILE ("oa_parser.galgas", 14)) ;
-  GALGAS_M_5F_tasks var_outTaskMap_641 = GALGAS_M_5F_tasks::class_func_emptyMap (SOURCE_FILE ("oa_parser.galgas", 15)) ;
+  GALGAS_M_5F_network var_outNetworkMap_526 = GALGAS_M_5F_network::class_func_emptyMap (SOURCE_FILE ("oa_parser.galgas", 13)) ;
+  GALGAS_M_5F_messages var_outMessagesMap_575 = GALGAS_M_5F_messages::class_func_emptyMap (SOURCE_FILE ("oa_parser.galgas", 14)) ;
+  GALGAS_M_5F_tasks var_outTaskMap_623 = GALGAS_M_5F_tasks::class_func_emptyMap (SOURCE_FILE ("oa_parser.galgas", 15)) ;
   inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_system COMMA_SOURCE_FILE ("oa_parser.galgas", 16)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_oa_5F_parser_0 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 19)) ;
-      GALGAS_lstring var_processorName_739 = inCompiler->synthetizedAttribute_identifierString () ;
+      GALGAS_lstring var_processorName_715 = inCompiler->synthetizedAttribute_identifierString () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 20)) ;
-      GALGAS_luint var_step_768 ;
+      GALGAS_luint var_step_744 ;
       switch (select_oa_5F_parser_1 (inCompiler)) {
       case 1: {
-        var_step_768 = GALGAS_luint::class_func_new (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 23)), inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 23)) ;
+        var_step_744 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 23)), inCompiler COMMA_HERE) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 25)) ;
-        var_step_768 = inCompiler->synthetizedAttribute_ulongValue () ;
+        var_step_744 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 26)) ;
         enumGalgasBool test_1 = kBoolTrue ;
         if (kBoolTrue == test_1) {
-          test_1 = GALGAS_bool (ComparisonKind::equal, var_step_768.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
+          test_1 = GALGAS_bool (ComparisonKind::equal, var_step_744.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
           if (kBoolTrue == test_1) {
             TC_Array <FixItDescription> fixItArray2 ;
-            inCompiler->emitSemanticError (var_step_768.readProperty_location (), GALGAS_string ("the step value must be > 0"), fixItArray2  COMMA_SOURCE_FILE ("oa_parser.galgas", 28)) ;
+            inCompiler->emitSemanticError (var_step_744.readProperty_location (), GALGAS_string ("the step value must be > 0"), fixItArray2  COMMA_SOURCE_FILE ("oa_parser.galgas", 28)) ;
           }
         }
       } break ;
@@ -5221,42 +5229,42 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         break ;
       }
       {
-      var_outProcessorMap_474.setter_insertKey (var_processorName_739, var_outProcessorMap_474.getter_count (SOURCE_FILE ("oa_parser.galgas", 31)), var_step_768, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 31)) ;
+      var_outProcessorMap_474.setter_insertKey (var_processorName_715, var_outProcessorMap_474.getter_count (SOURCE_FILE ("oa_parser.galgas", 31)), var_step_744, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 31)) ;
       }
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 32)) ;
     } break ;
     case 3: {
-      GALGAS_bool var_network_1097 ;
+      GALGAS_bool var_network_1073 ;
       switch (select_oa_5F_parser_2 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_can COMMA_SOURCE_FILE ("oa_parser.galgas", 36)) ;
-        var_network_1097 = GALGAS_bool (true) ;
+        var_network_1073 = GALGAS_bool (true) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_van COMMA_SOURCE_FILE ("oa_parser.galgas", 39)) ;
-        var_network_1097 = GALGAS_bool (false) ;
+        var_network_1073 = GALGAS_bool (false) ;
       } break ;
       default:
         break ;
       }
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas", 42)) ;
-      GALGAS_lstring var_networkName_1234 = inCompiler->synthetizedAttribute_identifierString () ;
+      GALGAS_lstring var_networkName_1210 = inCompiler->synthetizedAttribute_identifierString () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 43)) ;
-      GALGAS_luint var_factor_1261 ;
+      GALGAS_luint var_factor_1237 ;
       switch (select_oa_5F_parser_3 (inCompiler)) {
       case 1: {
-        var_factor_1261 = GALGAS_luint::class_func_new (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 46)), inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 46)) ;
+        var_factor_1237 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 46)), inCompiler COMMA_HERE) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 48)) ;
-        var_factor_1261 = inCompiler->synthetizedAttribute_ulongValue () ;
+        var_factor_1237 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 49)) ;
         enumGalgasBool test_3 = kBoolTrue ;
         if (kBoolTrue == test_3) {
-          test_3 = GALGAS_bool (ComparisonKind::equal, var_factor_1261.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
+          test_3 = GALGAS_bool (ComparisonKind::equal, var_factor_1237.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
           if (kBoolTrue == test_3) {
             TC_Array <FixItDescription> fixItArray4 ;
-            inCompiler->emitSemanticError (var_factor_1261.readProperty_location (), GALGAS_string ("the factor value must be > 0"), fixItArray4  COMMA_SOURCE_FILE ("oa_parser.galgas", 51)) ;
+            inCompiler->emitSemanticError (var_factor_1237.readProperty_location (), GALGAS_string ("the factor value must be > 0"), fixItArray4  COMMA_SOURCE_FILE ("oa_parser.galgas", 51)) ;
           }
         }
       } break ;
@@ -5264,72 +5272,72 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         break ;
       }
       {
-      var_outNetworkMap_532.setter_insertKey (var_networkName_1234, var_outNetworkMap_532.getter_count (SOURCE_FILE ("oa_parser.galgas", 54)), var_network_1097, var_factor_1261, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 54)) ;
+      var_outNetworkMap_526.setter_insertKey (var_networkName_1210, var_outNetworkMap_526.getter_count (SOURCE_FILE ("oa_parser.galgas", 54)), var_network_1073, var_factor_1237, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 54)) ;
       }
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 55)) ;
     } break ;
     case 4: {
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 57)) ;
-      GALGAS_lstring var_taskName_1626 = inCompiler->synthetizedAttribute_identifierString () ;
+      GALGAS_lstring var_taskName_1602 = inCompiler->synthetizedAttribute_identifierString () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 58)) ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas", 59)) ;
-      GALGAS_luint var_taskPriority_1677 = inCompiler->synthetizedAttribute_ulongValue () ;
+      GALGAS_luint var_taskPriority_1653 = inCompiler->synthetizedAttribute_ulongValue () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 60)) ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_duration COMMA_SOURCE_FILE ("oa_parser.galgas", 61)) ;
-      GALGAS_luint var_taskDurationMin_1732 = inCompiler->synthetizedAttribute_ulongValue () ;
+      GALGAS_luint var_taskDurationMin_1708 = inCompiler->synthetizedAttribute_ulongValue () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 62)) ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__2E__2E_ COMMA_SOURCE_FILE ("oa_parser.galgas", 63)) ;
-      GALGAS_luint var_taskDurationMax_1784 = inCompiler->synthetizedAttribute_ulongValue () ;
+      GALGAS_luint var_taskDurationMax_1760 = inCompiler->synthetizedAttribute_ulongValue () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 64)) ;
-      GALGAS_luint var_taskOffset_1815 ;
-      GALGAS_bool var_explicitOffset_1840 ;
+      GALGAS_luint var_taskOffset_1791 ;
+      GALGAS_bool var_explicitOffset_1816 ;
       switch (select_oa_5F_parser_4 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas", 68)) ;
-        var_taskOffset_1815 = inCompiler->synthetizedAttribute_ulongValue () ;
+        var_taskOffset_1791 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 69)) ;
-        var_explicitOffset_1840 = GALGAS_bool (true) ;
+        var_explicitOffset_1816 = GALGAS_bool (true) ;
       } break ;
       case 2: {
-        var_taskOffset_1815 = GALGAS_luint::class_func_new (GALGAS_uint (uint32_t (0U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 72)), inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 72)) ;
-        var_explicitOffset_1840 = GALGAS_bool (false) ;
+        var_taskOffset_1791 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (0U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 72)), inCompiler COMMA_HERE) ;
+        var_explicitOffset_1816 = GALGAS_bool (false) ;
       } break ;
       default:
         break ;
       }
-      GALGAS_luint var_taskDeadline_2059 ;
+      GALGAS_luint var_taskDeadline_2035 ;
       switch (select_oa_5F_parser_5 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas", 77)) ;
-        var_taskDeadline_2059 = inCompiler->synthetizedAttribute_ulongValue () ;
+        var_taskDeadline_2035 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 78)) ;
       } break ;
       case 2: {
-        var_taskDeadline_2059 = GALGAS_luint::class_func_new (GALGAS_uint (uint32_t (4294967295U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 80)), inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 80)) ;
+        var_taskDeadline_2035 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (4294967295U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 80)), inCompiler COMMA_HERE) ;
       } break ;
       default:
         break ;
       }
-      GALGAS_AC_5F_task var_taskKind_2235 ;
-      GALGAS_uint var_taskProcessorIndex_2258 ;
-      GALGAS_luint var_taskPeriod_2292 ;
+      GALGAS_AC_5F_task var_taskKind_2211 ;
+      GALGAS_uint var_taskProcessorIndex_2234 ;
+      GALGAS_luint var_taskPeriod_2268 ;
       switch (select_oa_5F_parser_6 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas", 86)) ;
-        var_taskPeriod_2292 = inCompiler->synthetizedAttribute_ulongValue () ;
+        var_taskPeriod_2268 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 87)) ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 88)) ;
-        GALGAS_lstring var_taskProcessorName_2408 = inCompiler->synthetizedAttribute_identifierString () ;
+        GALGAS_lstring var_taskProcessorName_2384 = inCompiler->synthetizedAttribute_identifierString () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 89)) ;
-        GALGAS_luint joker_2498 ; // Joker input parameter
-        var_outProcessorMap_474.method_searchKey (var_taskProcessorName_2408, var_taskProcessorIndex_2258, joker_2498, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 90)) ;
-        var_taskKind_2235 = GALGAS_C_5F_independantTask::class_func_new (SOURCE_FILE ("oa_parser.galgas", 91)) ;
+        GALGAS_luint joker_2474 ; // Joker input parameter
+        var_outProcessorMap_474.method_searchKey (var_taskProcessorName_2384, var_taskProcessorIndex_2234, joker_2474, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 90)) ;
+        var_taskKind_2211 = GALGAS_C_5F_independantTask::init (inCompiler COMMA_HERE) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 93)) ;
         enumGalgasBool test_5 = kBoolTrue ;
         if (kBoolTrue == test_5) {
-          test_5 = var_explicitOffset_1840.boolEnum () ;
+          test_5 = var_explicitOffset_1816.boolEnum () ;
           if (kBoolTrue == test_5) {
             TC_Array <FixItDescription> fixItArray6 ;
             inCompiler->emitSemanticError (GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray6  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)) ;
@@ -5338,63 +5346,63 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         switch (select_oa_5F_parser_7 (inCompiler)) {
         case 1: {
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 98)) ;
-          GALGAS_lstring var_masterTaskName_2726 = inCompiler->synthetizedAttribute_identifierString () ;
+          GALGAS_lstring var_masterTaskName_2702 = inCompiler->synthetizedAttribute_identifierString () ;
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 99)) ;
-          GALGAS_luint var_every_2760 ;
+          GALGAS_luint var_every_2736 ;
           switch (select_oa_5F_parser_8 (inCompiler)) {
           case 1: {
-            var_every_2760 = GALGAS_luint::class_func_new (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 102)), inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 102)) ;
+            var_every_2736 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 102)), inCompiler COMMA_HERE) ;
           } break ;
           case 2: {
             inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas", 104)) ;
-            var_every_2760 = inCompiler->synthetizedAttribute_ulongValue () ;
+            var_every_2736 = inCompiler->synthetizedAttribute_ulongValue () ;
             inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 105)) ;
           } break ;
           default:
             break ;
           }
-          GALGAS_uint var_masterTaskIndex_2961 ;
-          GALGAS_luint joker_2977 ; // Joker input parameter
-          GALGAS_luint joker_2980 ; // Joker input parameter
-          GALGAS_luint joker_2983 ; // Joker input parameter
-          GALGAS_luint joker_2986 ; // Joker input parameter
-          GALGAS_luint joker_2989 ; // Joker input parameter
-          GALGAS_AC_5F_task joker_3024 ; // Joker input parameter
-          var_outTaskMap_641.method_searchKey (var_masterTaskName_2726, var_masterTaskIndex_2961, joker_2977, joker_2980, joker_2983, joker_2986, joker_2989, var_taskProcessorIndex_2258, var_taskPeriod_2292, joker_3024, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 107)) ;
-          var_taskKind_2235 = GALGAS_C_5F_taskDependsFromTask::class_func_new (var_masterTaskIndex_2961, var_every_2760  COMMA_SOURCE_FILE ("oa_parser.galgas", 108)) ;
+          GALGAS_uint var_masterTaskIndex_2937 ;
+          GALGAS_luint joker_2953 ; // Joker input parameter
+          GALGAS_luint joker_2956 ; // Joker input parameter
+          GALGAS_luint joker_2959 ; // Joker input parameter
+          GALGAS_luint joker_2962 ; // Joker input parameter
+          GALGAS_luint joker_2965 ; // Joker input parameter
+          GALGAS_AC_5F_task joker_3000 ; // Joker input parameter
+          var_outTaskMap_623.method_searchKey (var_masterTaskName_2702, var_masterTaskIndex_2937, joker_2953, joker_2956, joker_2959, joker_2962, joker_2965, var_taskProcessorIndex_2234, var_taskPeriod_2268, joker_3000, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 107)) ;
+          var_taskKind_2211 = GALGAS_C_5F_taskDependsFromTask::init_21__21_ (var_masterTaskIndex_2937, var_every_2736, inCompiler COMMA_HERE) ;
         } break ;
         case 2: {
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 110)) ;
-          GALGAS_lstring var_masterMessageName_3155 = inCompiler->synthetizedAttribute_identifierString () ;
+          GALGAS_lstring var_masterMessageName_3131 = inCompiler->synthetizedAttribute_identifierString () ;
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 111)) ;
-          GALGAS_uint var_masterMessageIndex_3231 ;
-          GALGAS_luint joker_3250 ; // Joker input parameter
-          GALGAS_uint joker_3253 ; // Joker input parameter
-          GALGAS_luint joker_3256 ; // Joker input parameter
-          GALGAS_luint joker_3259 ; // Joker input parameter
-          GALGAS_luint joker_3262 ; // Joker input parameter
-          GALGAS_luint joker_3265 ; // Joker input parameter
-          GALGAS_AC_5F_canMessage joker_3280 ; // Joker input parameter
-          var_outMessagesMap_587.method_searchKey (var_masterMessageName_3155, var_masterMessageIndex_3231, joker_3250, joker_3253, joker_3256, joker_3259, joker_3262, joker_3265, var_taskPeriod_2292, joker_3280, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 112)) ;
+          GALGAS_uint var_masterMessageIndex_3207 ;
+          GALGAS_luint joker_3226 ; // Joker input parameter
+          GALGAS_uint joker_3229 ; // Joker input parameter
+          GALGAS_luint joker_3232 ; // Joker input parameter
+          GALGAS_luint joker_3235 ; // Joker input parameter
+          GALGAS_luint joker_3238 ; // Joker input parameter
+          GALGAS_luint joker_3241 ; // Joker input parameter
+          GALGAS_AC_5F_canMessage joker_3256 ; // Joker input parameter
+          var_outMessagesMap_575.method_searchKey (var_masterMessageName_3131, var_masterMessageIndex_3207, joker_3226, joker_3229, joker_3232, joker_3235, joker_3238, joker_3241, var_taskPeriod_2268, joker_3256, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 112)) ;
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 113)) ;
-          GALGAS_lstring var_taskProcessorName_3330 = inCompiler->synthetizedAttribute_identifierString () ;
+          GALGAS_lstring var_taskProcessorName_3306 = inCompiler->synthetizedAttribute_identifierString () ;
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 114)) ;
-          GALGAS_luint var_every_3367 ;
+          GALGAS_luint var_every_3343 ;
           switch (select_oa_5F_parser_9 (inCompiler)) {
           case 1: {
-            var_every_3367 = GALGAS_luint::class_func_new (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 117)), inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 117)) ;
+            var_every_3343 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 117)), inCompiler COMMA_HERE) ;
           } break ;
           case 2: {
             inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas", 119)) ;
-            var_every_3367 = inCompiler->synthetizedAttribute_ulongValue () ;
+            var_every_3343 = inCompiler->synthetizedAttribute_ulongValue () ;
             inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 120)) ;
           } break ;
           default:
             break ;
           }
-          GALGAS_luint joker_3591 ; // Joker input parameter
-          var_outProcessorMap_474.method_searchKey (var_taskProcessorName_3330, var_taskProcessorIndex_2258, joker_3591, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 122)) ;
-          var_taskKind_2235 = GALGAS_C_5F_taskDependsFromMessage::class_func_new (var_masterMessageIndex_3231, var_every_3367  COMMA_SOURCE_FILE ("oa_parser.galgas", 123)) ;
+          GALGAS_luint joker_3567 ; // Joker input parameter
+          var_outProcessorMap_474.method_searchKey (var_taskProcessorName_3306, var_taskProcessorIndex_2234, joker_3567, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 122)) ;
+          var_taskKind_2211 = GALGAS_C_5F_taskDependsFromMessage::init_21__21_ (var_masterMessageIndex_3207, var_every_3343, inCompiler COMMA_HERE) ;
         } break ;
         default:
           break ;
@@ -5404,124 +5412,124 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         break ;
       }
       {
-      var_outTaskMap_641.setter_insertKey (var_taskName_1626, var_outTaskMap_641.getter_count (SOURCE_FILE ("oa_parser.galgas", 126)), var_taskPriority_1677, var_taskOffset_1815, var_taskDeadline_2059, var_taskDurationMin_1732, var_taskDurationMax_1784, var_taskProcessorIndex_2258, var_taskPeriod_2292, var_taskKind_2235, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 126)) ;
+      var_outTaskMap_623.setter_insertKey (var_taskName_1602, var_outTaskMap_623.getter_count (SOURCE_FILE ("oa_parser.galgas", 126)), var_taskPriority_1653, var_taskOffset_1791, var_taskDeadline_2035, var_taskDurationMin_1708, var_taskDurationMax_1760, var_taskProcessorIndex_2234, var_taskPeriod_2268, var_taskKind_2211, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 126)) ;
       }
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 135)) ;
     } break ;
     case 5: {
-      GALGAS_luint var_messageClass_4217 ;
+      GALGAS_luint var_messageClass_4193 ;
       switch (select_oa_5F_parser_10 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_standard COMMA_SOURCE_FILE ("oa_parser.galgas", 139)) ;
-        var_messageClass_4217 = GALGAS_luint::class_func_new (GALGAS_uint (uint32_t (0U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 140)), inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 140)) ;
+        var_messageClass_4193 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (0U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 140)), inCompiler COMMA_HERE) ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 141)) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_extended COMMA_SOURCE_FILE ("oa_parser.galgas", 143)) ;
-        var_messageClass_4217 = GALGAS_luint::class_func_new (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 144)), inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 144)) ;
+        var_messageClass_4193 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 144)), inCompiler COMMA_HERE) ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 145)) ;
       } break ;
       case 3: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 147)) ;
-        var_messageClass_4217 = GALGAS_luint::class_func_new (GALGAS_uint (uint32_t (2U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 148)), inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 148)) ;
+        var_messageClass_4193 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (2U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 148)), inCompiler COMMA_HERE) ;
       } break ;
       default:
         break ;
       }
-      GALGAS_lstring var_messageName_4532 = inCompiler->synthetizedAttribute_identifierString () ;
+      GALGAS_lstring var_messageName_4508 = inCompiler->synthetizedAttribute_identifierString () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 150)) ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas", 151)) ;
-      GALGAS_lstring var_networkName_4580 = inCompiler->synthetizedAttribute_identifierString () ;
+      GALGAS_lstring var_networkName_4556 = inCompiler->synthetizedAttribute_identifierString () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 152)) ;
-      GALGAS_uint var_networkIndex_4639 ;
-      GALGAS_bool var_CANnetwork_4657 ;
-      GALGAS_luint joker_4668 ; // Joker input parameter
-      var_outNetworkMap_532.method_searchKey (var_networkName_4580, var_networkIndex_4639, var_CANnetwork_4657, joker_4668, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 153)) ;
+      GALGAS_uint var_networkIndex_4615 ;
+      GALGAS_bool var_CANnetwork_4633 ;
+      GALGAS_luint joker_4644 ; // Joker input parameter
+      var_outNetworkMap_526.method_searchKey (var_networkName_4556, var_networkIndex_4615, var_CANnetwork_4633, joker_4644, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 153)) ;
       enumGalgasBool test_7 = kBoolTrue ;
       if (kBoolTrue == test_7) {
-        test_7 = var_CANnetwork_4657.operator_and (GALGAS_bool (ComparisonKind::equal, var_messageClass_4217.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 154)).boolEnum () ;
+        test_7 = var_CANnetwork_4633.operator_and (GALGAS_bool (ComparisonKind::equal, var_messageClass_4193.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 154)).boolEnum () ;
         if (kBoolTrue == test_7) {
           TC_Array <FixItDescription> fixItArray8 ;
-          inCompiler->emitSemanticError (var_messageClass_4217.readProperty_location (), GALGAS_string ("a CAN message must be either standard either extended"), fixItArray8  COMMA_SOURCE_FILE ("oa_parser.galgas", 155)) ;
+          inCompiler->emitSemanticError (var_messageClass_4193.readProperty_location (), GALGAS_string ("a CAN message must be either standard either extended"), fixItArray8  COMMA_SOURCE_FILE ("oa_parser.galgas", 155)) ;
         }
       }
       if (kBoolFalse == test_7) {
         enumGalgasBool test_9 = kBoolTrue ;
         if (kBoolTrue == test_9) {
-          test_9 = var_CANnetwork_4657.operator_not (SOURCE_FILE ("oa_parser.galgas", 156)).operator_and (GALGAS_bool (ComparisonKind::notEqual, var_messageClass_4217.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 156)).boolEnum () ;
+          test_9 = var_CANnetwork_4633.operator_not (SOURCE_FILE ("oa_parser.galgas", 156)).operator_and (GALGAS_bool (ComparisonKind::notEqual, var_messageClass_4193.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 156)).boolEnum () ;
           if (kBoolTrue == test_9) {
             TC_Array <FixItDescription> fixItArray10 ;
-            inCompiler->emitSemanticError (var_messageClass_4217.readProperty_location (), GALGAS_string ("a VAN message cannot be standard or extended"), fixItArray10  COMMA_SOURCE_FILE ("oa_parser.galgas", 157)) ;
+            inCompiler->emitSemanticError (var_messageClass_4193.readProperty_location (), GALGAS_string ("a VAN message cannot be standard or extended"), fixItArray10  COMMA_SOURCE_FILE ("oa_parser.galgas", 157)) ;
           }
         }
       }
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_length COMMA_SOURCE_FILE ("oa_parser.galgas", 159)) ;
-      GALGAS_luint var_bytesCount_4986 = inCompiler->synthetizedAttribute_ulongValue () ;
+      GALGAS_luint var_bytesCount_4962 = inCompiler->synthetizedAttribute_ulongValue () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 160)) ;
       enumGalgasBool test_11 = kBoolTrue ;
       if (kBoolTrue == test_11) {
-        test_11 = var_CANnetwork_4657.operator_and (GALGAS_bool (ComparisonKind::greaterThan, var_bytesCount_4986.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (8U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 161)).boolEnum () ;
+        test_11 = var_CANnetwork_4633.operator_and (GALGAS_bool (ComparisonKind::greaterThan, var_bytesCount_4962.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (8U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 161)).boolEnum () ;
         if (kBoolTrue == test_11) {
           TC_Array <FixItDescription> fixItArray12 ;
-          inCompiler->emitSemanticError (var_bytesCount_4986.readProperty_location (), GALGAS_string ("CAN message length must be <= 8 bytes"), fixItArray12  COMMA_SOURCE_FILE ("oa_parser.galgas", 162)) ;
+          inCompiler->emitSemanticError (var_bytesCount_4962.readProperty_location (), GALGAS_string ("CAN message length must be <= 8 bytes"), fixItArray12  COMMA_SOURCE_FILE ("oa_parser.galgas", 162)) ;
         }
       }
       if (kBoolFalse == test_11) {
         enumGalgasBool test_13 = kBoolTrue ;
         if (kBoolTrue == test_13) {
-          test_13 = var_CANnetwork_4657.operator_not (SOURCE_FILE ("oa_parser.galgas", 163)).operator_and (GALGAS_bool (ComparisonKind::greaterThan, var_bytesCount_4986.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (28U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 163)).boolEnum () ;
+          test_13 = var_CANnetwork_4633.operator_not (SOURCE_FILE ("oa_parser.galgas", 163)).operator_and (GALGAS_bool (ComparisonKind::greaterThan, var_bytesCount_4962.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (28U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 163)).boolEnum () ;
           if (kBoolTrue == test_13) {
             TC_Array <FixItDescription> fixItArray14 ;
-            inCompiler->emitSemanticError (var_bytesCount_4986.readProperty_location (), GALGAS_string ("VAN message must be <= 28 bytes"), fixItArray14  COMMA_SOURCE_FILE ("oa_parser.galgas", 164)) ;
+            inCompiler->emitSemanticError (var_bytesCount_4962.readProperty_location (), GALGAS_string ("VAN message must be <= 28 bytes"), fixItArray14  COMMA_SOURCE_FILE ("oa_parser.galgas", 164)) ;
           }
         }
       }
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas", 166)) ;
-      GALGAS_luint var_priority_5275 = inCompiler->synthetizedAttribute_ulongValue () ;
+      GALGAS_luint var_priority_5251 = inCompiler->synthetizedAttribute_ulongValue () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 167)) ;
-      GALGAS_luint var_offset_5299 ;
-      GALGAS_bool var_explicitOffset_5320 ;
+      GALGAS_luint var_offset_5275 ;
+      GALGAS_bool var_explicitOffset_5296 ;
       switch (select_oa_5F_parser_11 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas", 171)) ;
-        var_offset_5299 = inCompiler->synthetizedAttribute_ulongValue () ;
+        var_offset_5275 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 172)) ;
-        var_explicitOffset_5320 = GALGAS_bool (true) ;
+        var_explicitOffset_5296 = GALGAS_bool (true) ;
       } break ;
       case 2: {
-        var_offset_5299 = GALGAS_luint::class_func_new (GALGAS_uint (uint32_t (0U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 175)), inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 175)) ;
-        var_explicitOffset_5320 = GALGAS_bool (false) ;
+        var_offset_5275 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (0U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 175)), inCompiler COMMA_HERE) ;
+        var_explicitOffset_5296 = GALGAS_bool (false) ;
       } break ;
       default:
         break ;
       }
-      GALGAS_luint var_deadline_5530 ;
+      GALGAS_luint var_deadline_5506 ;
       switch (select_oa_5F_parser_12 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas", 180)) ;
-        var_deadline_5530 = inCompiler->synthetizedAttribute_ulongValue () ;
+        var_deadline_5506 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 181)) ;
       } break ;
       case 2: {
-        var_deadline_5530 = GALGAS_luint::class_func_new (GALGAS_uint (uint32_t (4294967295U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 183)), inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 183)) ;
+        var_deadline_5506 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (4294967295U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 183)), inCompiler COMMA_HERE) ;
       } break ;
       default:
         break ;
       }
-      GALGAS_AC_5F_canMessage var_messageKind_5700 ;
-      GALGAS_luint var_period_5727 ;
+      GALGAS_AC_5F_canMessage var_messageKind_5676 ;
+      GALGAS_luint var_period_5703 ;
       switch (select_oa_5F_parser_13 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas", 188)) ;
-        var_period_5727 = inCompiler->synthetizedAttribute_ulongValue () ;
+        var_period_5703 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 189)) ;
-        var_messageKind_5700 = GALGAS_C_5F_canIndependantMessage::class_func_new (SOURCE_FILE ("oa_parser.galgas", 190)) ;
+        var_messageKind_5676 = GALGAS_C_5F_canIndependantMessage::init (inCompiler COMMA_HERE) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 192)) ;
         enumGalgasBool test_15 = kBoolTrue ;
         if (kBoolTrue == test_15) {
-          test_15 = var_explicitOffset_5320.boolEnum () ;
+          test_15 = var_explicitOffset_5296.boolEnum () ;
           if (kBoolTrue == test_15) {
             TC_Array <FixItDescription> fixItArray16 ;
             inCompiler->emitSemanticError (GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray16  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)) ;
@@ -5530,33 +5538,33 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         switch (select_oa_5F_parser_14 (inCompiler)) {
         case 1: {
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 197)) ;
-          GALGAS_lstring var_name_6029 = inCompiler->synthetizedAttribute_identifierString () ;
+          GALGAS_lstring var_name_6005 = inCompiler->synthetizedAttribute_identifierString () ;
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 198)) ;
-          GALGAS_uint var_messageIndex_6079 ;
-          GALGAS_luint joker_6092 ; // Joker input parameter
-          GALGAS_uint joker_6095 ; // Joker input parameter
-          GALGAS_luint joker_6098 ; // Joker input parameter
-          GALGAS_luint joker_6101 ; // Joker input parameter
-          GALGAS_luint joker_6104 ; // Joker input parameter
-          GALGAS_luint joker_6107 ; // Joker input parameter
-          GALGAS_AC_5F_canMessage joker_6118 ; // Joker input parameter
-          var_outMessagesMap_587.method_searchKey (var_name_6029, var_messageIndex_6079, joker_6092, joker_6095, joker_6098, joker_6101, joker_6104, joker_6107, var_period_5727, joker_6118, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 199)) ;
-          var_messageKind_5700 = GALGAS_C_5F_canMessageFromMessage::class_func_new (var_messageIndex_6079  COMMA_SOURCE_FILE ("oa_parser.galgas", 200)) ;
+          GALGAS_uint var_messageIndex_6055 ;
+          GALGAS_luint joker_6068 ; // Joker input parameter
+          GALGAS_uint joker_6071 ; // Joker input parameter
+          GALGAS_luint joker_6074 ; // Joker input parameter
+          GALGAS_luint joker_6077 ; // Joker input parameter
+          GALGAS_luint joker_6080 ; // Joker input parameter
+          GALGAS_luint joker_6083 ; // Joker input parameter
+          GALGAS_AC_5F_canMessage joker_6094 ; // Joker input parameter
+          var_outMessagesMap_575.method_searchKey (var_name_6005, var_messageIndex_6055, joker_6068, joker_6071, joker_6074, joker_6077, joker_6080, joker_6083, var_period_5703, joker_6094, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 199)) ;
+          var_messageKind_5676 = GALGAS_C_5F_canMessageFromMessage::init_21_ (var_messageIndex_6055, inCompiler COMMA_HERE) ;
         } break ;
         case 2: {
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 202)) ;
-          GALGAS_lstring var_taskName_6241 = inCompiler->synthetizedAttribute_identifierString () ;
+          GALGAS_lstring var_taskName_6217 = inCompiler->synthetizedAttribute_identifierString () ;
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 203)) ;
-          GALGAS_uint var_taskIndex_6295 ;
-          GALGAS_luint joker_6305 ; // Joker input parameter
-          GALGAS_luint joker_6308 ; // Joker input parameter
-          GALGAS_luint joker_6311 ; // Joker input parameter
-          GALGAS_luint joker_6314 ; // Joker input parameter
-          GALGAS_luint joker_6317 ; // Joker input parameter
-          GALGAS_uint joker_6320 ; // Joker input parameter
-          GALGAS_AC_5F_task joker_6331 ; // Joker input parameter
-          var_outTaskMap_641.method_searchKey (var_taskName_6241, var_taskIndex_6295, joker_6305, joker_6308, joker_6311, joker_6314, joker_6317, joker_6320, var_period_5727, joker_6331, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 204)) ;
-          var_messageKind_5700 = GALGAS_C_5F_canMessageFromTask::class_func_new (var_taskIndex_6295  COMMA_SOURCE_FILE ("oa_parser.galgas", 205)) ;
+          GALGAS_uint var_taskIndex_6271 ;
+          GALGAS_luint joker_6281 ; // Joker input parameter
+          GALGAS_luint joker_6284 ; // Joker input parameter
+          GALGAS_luint joker_6287 ; // Joker input parameter
+          GALGAS_luint joker_6290 ; // Joker input parameter
+          GALGAS_luint joker_6293 ; // Joker input parameter
+          GALGAS_uint joker_6296 ; // Joker input parameter
+          GALGAS_AC_5F_task joker_6307 ; // Joker input parameter
+          var_outTaskMap_623.method_searchKey (var_taskName_6217, var_taskIndex_6271, joker_6281, joker_6284, joker_6287, joker_6290, joker_6293, joker_6296, var_period_5703, joker_6307, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 204)) ;
+          var_messageKind_5676 = GALGAS_C_5F_canMessageFromTask::init_21_ (var_taskIndex_6271, inCompiler COMMA_HERE) ;
         } break ;
         default:
           break ;
@@ -5566,7 +5574,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         break ;
       }
       {
-      var_outMessagesMap_587.setter_insertKey (var_messageName_4532, var_outMessagesMap_587.getter_count (SOURCE_FILE ("oa_parser.galgas", 208)), var_messageClass_4217, var_networkIndex_4639, var_bytesCount_4986, var_priority_5275, var_offset_5299, var_deadline_5530, var_period_5727, var_messageKind_5700, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 208)) ;
+      var_outMessagesMap_575.setter_insertKey (var_messageName_4508, var_outMessagesMap_575.getter_count (SOURCE_FILE ("oa_parser.galgas", 208)), var_messageClass_4193, var_networkIndex_4615, var_bytesCount_4962, var_priority_5251, var_offset_5275, var_deadline_5506, var_period_5703, var_messageKind_5676, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 208)) ;
       }
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 210)) ;
     } break ;
@@ -5577,11 +5585,11 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
   }
   inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_end COMMA_SOURCE_FILE ("oa_parser.galgas", 212)) ;
   {
-  routine_performComputations_26__26__26__26_ (var_outProcessorMap_474, var_outNetworkMap_532, var_outMessagesMap_587, var_outTaskMap_641, inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 213)) ;
+  routine_performComputations_26__26__26__26_ (var_outProcessorMap_474, var_outNetworkMap_526, var_outMessagesMap_575, var_outTaskMap_623, inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 213)) ;
   }
 }
 
-//---------------------------------------------------------------------------------------------------------------------*
+//------------------------------------------------------------------------------------------------
 
 void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_parse (Lexique_oa_5F_scanner * inCompiler) {
   inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_system COMMA_SOURCE_FILE ("oa_parser.galgas", 16)) ;
@@ -5783,7 +5791,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_parse (Lexique_oa_5F_scan
   inCompiler->resetTemplateString () ;
 }
 
-//---------------------------------------------------------------------------------------------------------------------*
+//------------------------------------------------------------------------------------------------
 
 void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_indexing (Lexique_oa_5F_scanner * inCompiler) {
   inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_system COMMA_SOURCE_FILE ("oa_parser.galgas", 16)) ;
@@ -6046,18 +6054,28 @@ GALGAS_AC_5F_task () {
 
 //--- Synthetized initializer ----------------------------------------------------------------------
 
-/* GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::init_28__2C__29_ (const GALGAS_uint & in_mTask,
-                                                                                      const GALGAS_luint & in_mEvery,
-                                                                                      Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
+GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::
+init_21__21_ (const GALGAS_uint & in_mTask,
+              const GALGAS_luint & in_mEvery,
+              Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
   cPtr_C_5F_taskDependsFromTask * object = nullptr ;
   macroMyNew (object, cPtr_C_5F_taskDependsFromTask (inCompiler COMMA_THERE)) ;
-  object->mProperty_mTask = in_mTask ;
-  object->mProperty_mEvery = in_mEvery ;
+  object->C_5F_taskDependsFromTask_init_21__21_ (in_mTask, in_mEvery, inCompiler) ;
   const GALGAS_C_5F_taskDependsFromTask result (object) ;
   macroDetachSharedObject (object) ;
   return result ;
-} */
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_C_5F_taskDependsFromTask::
+C_5F_taskDependsFromTask_init_21__21_ (const GALGAS_uint & in_mTask,
+                                       const GALGAS_luint & in_mEvery,
+                                       Compiler * /* inCompiler */) {
+  mProperty_mTask = in_mTask ;
+  mProperty_mEvery = in_mEvery ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6067,36 +6085,12 @@ GALGAS_AC_5F_task (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::class_func_new (const GALGAS_uint & inAttribute_mTask,
-                                                                                 const GALGAS_luint & inAttribute_mEvery
+GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::class_func_new (const GALGAS_uint & in_mTask,
+                                                                                 const GALGAS_luint & in_mEvery
                                                                                  COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_taskDependsFromTask result ;
-  if (inAttribute_mTask.isValid () && inAttribute_mEvery.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_C_5F_taskDependsFromTask (inAttribute_mTask, inAttribute_mEvery COMMA_THERE)) ;
-  }
+  macroMyNew (result.mObjectPtr, cPtr_C_5F_taskDependsFromTask (in_mTask, in_mEvery COMMA_THERE)) ;
   return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_C_5F_taskDependsFromTask::setter_setMTask (GALGAS_uint inValue
-                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  if (nullptr != mObjectPtr) {
-    cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
-    p->mProperty_mTask = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_C_5F_taskDependsFromTask::setter_setMEvery (GALGAS_luint inValue
-                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  if (nullptr != mObjectPtr) {
-    cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
-    p->mProperty_mEvery = inValue ;
-  }
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -6113,6 +6107,16 @@ GALGAS_uint GALGAS_C_5F_taskDependsFromTask::readProperty_mTask (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
+void GALGAS_C_5F_taskDependsFromTask::setProperty_mTask (const GALGAS_uint & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
+    p->mProperty_mTask = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
 GALGAS_luint GALGAS_C_5F_taskDependsFromTask::readProperty_mEvery (void) const {
   if (nullptr == mObjectPtr) {
     return GALGAS_luint () ;
@@ -6124,6 +6128,16 @@ GALGAS_luint GALGAS_C_5F_taskDependsFromTask::readProperty_mEvery (void) const {
 }
 
 //--------------------------------------------------------------------------------------------------
+
+void GALGAS_C_5F_taskDependsFromTask::setProperty_mEvery (const GALGAS_luint & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
+    p->mProperty_mEvery = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
 //Pointer class for @C_taskDependsFromTask class
 //--------------------------------------------------------------------------------------------------
 
@@ -6131,8 +6145,10 @@ cPtr_C_5F_taskDependsFromTask::cPtr_C_5F_taskDependsFromTask (const GALGAS_uint 
                                                               const GALGAS_luint & in_mEvery
                                                               COMMA_LOCATION_ARGS) :
 cPtr_AC_5F_task (THERE),
-mProperty_mTask (in_mTask),
-mProperty_mEvery (in_mEvery) {
+mProperty_mTask (),
+mProperty_mEvery () {
+  mProperty_mTask = in_mTask ;
+  mProperty_mEvery = in_mEvery ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -6263,18 +6279,28 @@ GALGAS_AC_5F_task () {
 
 //--- Synthetized initializer ----------------------------------------------------------------------
 
-/* GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage::init_28__2C__29_ (const GALGAS_uint & in_mMessage,
-                                                                                            const GALGAS_luint & in_mEvery,
-                                                                                            Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) {
+GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage::
+init_21__21_ (const GALGAS_uint & in_mMessage,
+              const GALGAS_luint & in_mEvery,
+              Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
   cPtr_C_5F_taskDependsFromMessage * object = nullptr ;
   macroMyNew (object, cPtr_C_5F_taskDependsFromMessage (inCompiler COMMA_THERE)) ;
-  object->mProperty_mMessage = in_mMessage ;
-  object->mProperty_mEvery = in_mEvery ;
+  object->C_5F_taskDependsFromMessage_init_21__21_ (in_mMessage, in_mEvery, inCompiler) ;
   const GALGAS_C_5F_taskDependsFromMessage result (object) ;
   macroDetachSharedObject (object) ;
   return result ;
-} */
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_C_5F_taskDependsFromMessage::
+C_5F_taskDependsFromMessage_init_21__21_ (const GALGAS_uint & in_mMessage,
+                                          const GALGAS_luint & in_mEvery,
+                                          Compiler * /* inCompiler */) {
+  mProperty_mMessage = in_mMessage ;
+  mProperty_mEvery = in_mEvery ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6284,36 +6310,12 @@ GALGAS_AC_5F_task (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage::class_func_new (const GALGAS_uint & inAttribute_mMessage,
-                                                                                       const GALGAS_luint & inAttribute_mEvery
+GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage::class_func_new (const GALGAS_uint & in_mMessage,
+                                                                                       const GALGAS_luint & in_mEvery
                                                                                        COMMA_LOCATION_ARGS) {
   GALGAS_C_5F_taskDependsFromMessage result ;
-  if (inAttribute_mMessage.isValid () && inAttribute_mEvery.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_C_5F_taskDependsFromMessage (inAttribute_mMessage, inAttribute_mEvery COMMA_THERE)) ;
-  }
+  macroMyNew (result.mObjectPtr, cPtr_C_5F_taskDependsFromMessage (in_mMessage, in_mEvery COMMA_THERE)) ;
   return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_C_5F_taskDependsFromMessage::setter_setMMessage (GALGAS_uint inValue
-                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  if (nullptr != mObjectPtr) {
-    cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
-    p->mProperty_mMessage = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_C_5F_taskDependsFromMessage::setter_setMEvery (GALGAS_luint inValue
-                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  if (nullptr != mObjectPtr) {
-    cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
-    p->mProperty_mEvery = inValue ;
-  }
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -6330,6 +6332,16 @@ GALGAS_uint GALGAS_C_5F_taskDependsFromMessage::readProperty_mMessage (void) con
 
 //--------------------------------------------------------------------------------------------------
 
+void GALGAS_C_5F_taskDependsFromMessage::setProperty_mMessage (const GALGAS_uint & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
+    p->mProperty_mMessage = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
 GALGAS_luint GALGAS_C_5F_taskDependsFromMessage::readProperty_mEvery (void) const {
   if (nullptr == mObjectPtr) {
     return GALGAS_luint () ;
@@ -6341,6 +6353,16 @@ GALGAS_luint GALGAS_C_5F_taskDependsFromMessage::readProperty_mEvery (void) cons
 }
 
 //--------------------------------------------------------------------------------------------------
+
+void GALGAS_C_5F_taskDependsFromMessage::setProperty_mEvery (const GALGAS_luint & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
+    p->mProperty_mEvery = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
 //Pointer class for @C_taskDependsFromMessage class
 //--------------------------------------------------------------------------------------------------
 
@@ -6348,8 +6370,10 @@ cPtr_C_5F_taskDependsFromMessage::cPtr_C_5F_taskDependsFromMessage (const GALGAS
                                                                     const GALGAS_luint & in_mEvery
                                                                     COMMA_LOCATION_ARGS) :
 cPtr_AC_5F_task (THERE),
-mProperty_mMessage (in_mMessage),
-mProperty_mEvery (in_mEvery) {
+mProperty_mMessage (),
+mProperty_mEvery () {
+  mProperty_mMessage = in_mMessage ;
+  mProperty_mEvery = in_mEvery ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7104,10 +7128,10 @@ GALGAS__32_lstringlist_2D_element::~ GALGAS__32_lstringlist_2D_element (void) {
 
 //---Synthetized initializer -----------------------------------------------------------------------
 
-GALGAS__32_lstringlist_2D_element GALGAS__32_lstringlist_2D_element::init_28__2C__29_ (const GALGAS_lstring & in_mValue_30_,
-                                                                                       const GALGAS_lstring & in_mValue_31_,
-                                                                                       Compiler * inCompiler
-                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+GALGAS__32_lstringlist_2D_element GALGAS__32_lstringlist_2D_element::init_21__21_ (const GALGAS_lstring & in_mValue_30_,
+                                                                                   const GALGAS_lstring & in_mValue_31_,
+                                                                                   Compiler * inCompiler
+                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS__32_lstringlist_2D_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_mValue_30_ = in_mValue_30_ ;
@@ -7239,11 +7263,11 @@ GALGAS_M_5F_processor_2D_element::~ GALGAS_M_5F_processor_2D_element (void) {
 
 //---Synthetized initializer -----------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::init_28__2C__2C__29_ (const GALGAS_lstring & in_lkey,
-                                                                                         const GALGAS_uint & in_mIndex,
-                                                                                         const GALGAS_luint & in_mStep,
-                                                                                         Compiler * inCompiler
-                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
+GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::init_21__21__21_ (const GALGAS_lstring & in_lkey,
+                                                                                     const GALGAS_uint & in_mIndex,
+                                                                                     const GALGAS_luint & in_mStep,
+                                                                                     Compiler * inCompiler
+                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_M_5F_processor_2D_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_lkey = in_lkey ;
@@ -7387,12 +7411,12 @@ GALGAS_M_5F_network_2D_element::~ GALGAS_M_5F_network_2D_element (void) {
 
 //---Synthetized initializer -----------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::init_28__2C__2C__2C__29_ (const GALGAS_lstring & in_lkey,
-                                                                                         const GALGAS_uint & in_mIndex,
-                                                                                         const GALGAS_bool & in_mCANnetwork,
-                                                                                         const GALGAS_luint & in_mScalingFactor,
-                                                                                         Compiler * inCompiler
-                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
+GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::init_21__21__21__21_ (const GALGAS_lstring & in_lkey,
+                                                                                     const GALGAS_uint & in_mIndex,
+                                                                                     const GALGAS_bool & in_mCANnetwork,
+                                                                                     const GALGAS_luint & in_mScalingFactor,
+                                                                                     Compiler * inCompiler
+                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_M_5F_network_2D_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_lkey = in_lkey ;
@@ -7553,18 +7577,18 @@ GALGAS_M_5F_messages_2D_element::~ GALGAS_M_5F_messages_2D_element (void) {
 
 //---Synthetized initializer -----------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::init_28__2C__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const GALGAS_lstring & in_lkey,
-                                                                                                                   const GALGAS_uint & in_mIndex,
-                                                                                                                   const GALGAS_luint & in_mClass,
-                                                                                                                   const GALGAS_uint & in_mNetworkIndex,
-                                                                                                                   const GALGAS_luint & in_mBytesCount,
-                                                                                                                   const GALGAS_luint & in_mPriority,
-                                                                                                                   const GALGAS_luint & in_mOffset,
-                                                                                                                   const GALGAS_luint & in_mDeadline,
-                                                                                                                   const GALGAS_luint & in_mPeriod,
-                                                                                                                   const GALGAS_AC_5F_canMessage & in_mMessageKind,
-                                                                                                                   Compiler * inCompiler
-                                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::init_21__21__21__21__21__21__21__21__21__21_ (const GALGAS_lstring & in_lkey,
+                                                                                                               const GALGAS_uint & in_mIndex,
+                                                                                                               const GALGAS_luint & in_mClass,
+                                                                                                               const GALGAS_uint & in_mNetworkIndex,
+                                                                                                               const GALGAS_luint & in_mBytesCount,
+                                                                                                               const GALGAS_luint & in_mPriority,
+                                                                                                               const GALGAS_luint & in_mOffset,
+                                                                                                               const GALGAS_luint & in_mDeadline,
+                                                                                                               const GALGAS_luint & in_mPeriod,
+                                                                                                               const GALGAS_AC_5F_canMessage & in_mMessageKind,
+                                                                                                               Compiler * inCompiler
+                                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_M_5F_messages_2D_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_lkey = in_lkey ;
@@ -7791,18 +7815,18 @@ GALGAS_M_5F_tasks_2D_element::~ GALGAS_M_5F_tasks_2D_element (void) {
 
 //---Synthetized initializer -----------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::init_28__2C__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const GALGAS_lstring & in_lkey,
-                                                                                                             const GALGAS_uint & in_mIndex,
-                                                                                                             const GALGAS_luint & in_mPriority,
-                                                                                                             const GALGAS_luint & in_mOffset,
-                                                                                                             const GALGAS_luint & in_mDeadline,
-                                                                                                             const GALGAS_luint & in_mDurationMin,
-                                                                                                             const GALGAS_luint & in_mDurationMax,
-                                                                                                             const GALGAS_uint & in_mProcessor,
-                                                                                                             const GALGAS_luint & in_mPeriod,
-                                                                                                             const GALGAS_AC_5F_task & in_mTaskKind,
-                                                                                                             Compiler * inCompiler
-                                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::init_21__21__21__21__21__21__21__21__21__21_ (const GALGAS_lstring & in_lkey,
+                                                                                                         const GALGAS_uint & in_mIndex,
+                                                                                                         const GALGAS_luint & in_mPriority,
+                                                                                                         const GALGAS_luint & in_mOffset,
+                                                                                                         const GALGAS_luint & in_mDeadline,
+                                                                                                         const GALGAS_luint & in_mDurationMin,
+                                                                                                         const GALGAS_luint & in_mDurationMax,
+                                                                                                         const GALGAS_uint & in_mProcessor,
+                                                                                                         const GALGAS_luint & in_mPeriod,
+                                                                                                         const GALGAS_AC_5F_task & in_mTaskKind,
+                                                                                                         Compiler * inCompiler
+                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_M_5F_tasks_2D_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_lkey = in_lkey ;

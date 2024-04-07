@@ -210,10 +210,10 @@ class GALGAS__32_lstringlist_2D_element : public AC_GALGAS_root {
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS__32_lstringlist_2D_element init_28__2C__29_ (const class GALGAS_lstring & inOperand0,
-                                                                     const class GALGAS_lstring & inOperand1,
-                                                                     Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) ;
+  public: static GALGAS__32_lstringlist_2D_element init_21__21_ (const class GALGAS_lstring & inOperand0,
+                                                                 const class GALGAS_lstring & inOperand1,
+                                                                 Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -303,7 +303,7 @@ class Lexique_oa_5F_scanner : public Lexique {
 //    an error if a direct delete is performed; only the static method
 //    SharedObject::detachPointer may invoke delete.
   #ifndef DO_NOT_GENERATE_CHECKINGS
-    protected: virtual ~ Lexique_oa_5F_scanner (void) {}
+    protected: virtual ~ Lexique_oa_5F_scanner (void) { }
   #endif
 
 
@@ -592,11 +592,11 @@ class GALGAS_M_5F_processor_2D_element : public AC_GALGAS_root {
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS_M_5F_processor_2D_element init_28__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
-                                                                        const class GALGAS_uint & inOperand1,
-                                                                        const class GALGAS_luint & inOperand2,
-                                                                        Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_M_5F_processor_2D_element init_21__21__21_ (const class GALGAS_lstring & inOperand0,
+                                                                    const class GALGAS_uint & inOperand1,
+                                                                    const class GALGAS_luint & inOperand2,
+                                                                    Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -881,12 +881,12 @@ class GALGAS_M_5F_network_2D_element : public AC_GALGAS_root {
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS_M_5F_network_2D_element init_28__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
-                                                                          const class GALGAS_uint & inOperand1,
-                                                                          const class GALGAS_bool & inOperand2,
-                                                                          const class GALGAS_luint & inOperand3,
-                                                                          Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_M_5F_network_2D_element init_21__21__21__21_ (const class GALGAS_lstring & inOperand0,
+                                                                      const class GALGAS_uint & inOperand1,
+                                                                      const class GALGAS_bool & inOperand2,
+                                                                      const class GALGAS_luint & inOperand3,
+                                                                      Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -942,12 +942,12 @@ class GALGAS_AC_5F_canMessage : public AC_GALGAS_reference_class {
 //--------------------------------- Constructor from pointer
   public: GALGAS_AC_5F_canMessage (const class cPtr_AC_5F_canMessage * inSourcePtr) ;
 
-//--------------------------------- Property read access
+//--------------------------------- Property access
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS_AC_5F_canMessage init_28__29_ (Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_AC_5F_canMessage init (Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1049,12 +1049,12 @@ class GALGAS_C_5F_canIndependantMessage : public GALGAS_AC_5F_canMessage {
 //--------------------------------- Constructor from pointer
   public: GALGAS_C_5F_canIndependantMessage (const class cPtr_C_5F_canIndependantMessage * inSourcePtr) ;
 
-//--------------------------------- Property read access
+//--------------------------------- Property access
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS_C_5F_canIndependantMessage init_28__29_ (Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_C_5F_canIndependantMessage init (Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1159,15 +1159,16 @@ class GALGAS_C_5F_canMessageFromMessage : public GALGAS_AC_5F_canMessage {
 //--------------------------------- Constructor from pointer
   public: GALGAS_C_5F_canMessageFromMessage (const class cPtr_C_5F_canMessageFromMessage * inSourcePtr) ;
 
-//--------------------------------- Property read access
+//--------------------------------- Property access
   public: class GALGAS_uint readProperty_mMessageIndex (void) const ;
+  public: void setProperty_mMessageIndex (const GALGAS_uint & inValue) ;
 
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS_C_5F_canMessageFromMessage init_28__29_ (const class GALGAS_uint & inOperand0,
-                                                                 Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_C_5F_canMessageFromMessage init_21_ (const class GALGAS_uint & inOperand0,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1185,9 +1186,6 @@ class GALGAS_C_5F_canMessageFromMessage : public GALGAS_AC_5F_canMessage {
   public: ComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromMessage & inOperand) const ;
 
 //--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMMessageIndex (class GALGAS_uint inArgument0
-                                                         COMMA_LOCATION_ARGS) ;
-
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -1276,15 +1274,16 @@ class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
 //--------------------------------- Constructor from pointer
   public: GALGAS_C_5F_canMessageFromTask (const class cPtr_C_5F_canMessageFromTask * inSourcePtr) ;
 
-//--------------------------------- Property read access
+//--------------------------------- Property access
   public: class GALGAS_uint readProperty_mTaskIndex (void) const ;
+  public: void setProperty_mTaskIndex (const GALGAS_uint & inValue) ;
 
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS_C_5F_canMessageFromTask init_28__29_ (const class GALGAS_uint & inOperand0,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_C_5F_canMessageFromTask init_21_ (const class GALGAS_uint & inOperand0,
+                                                          Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1302,9 +1301,6 @@ class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
   public: ComparisonResult objectCompare (const GALGAS_C_5F_canMessageFromTask & inOperand) const ;
 
 //--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMTaskIndex (class GALGAS_uint inArgument0
-                                                      COMMA_LOCATION_ARGS) ;
-
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -1779,18 +1775,18 @@ class GALGAS_M_5F_messages_2D_element : public AC_GALGAS_root {
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS_M_5F_messages_2D_element init_28__2C__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
-                                                                                                   const class GALGAS_uint & inOperand1,
-                                                                                                   const class GALGAS_luint & inOperand2,
-                                                                                                   const class GALGAS_uint & inOperand3,
-                                                                                                   const class GALGAS_luint & inOperand4,
-                                                                                                   const class GALGAS_luint & inOperand5,
-                                                                                                   const class GALGAS_luint & inOperand6,
-                                                                                                   const class GALGAS_luint & inOperand7,
-                                                                                                   const class GALGAS_luint & inOperand8,
-                                                                                                   const class GALGAS_AC_5F_canMessage & inOperand9,
-                                                                                                   Compiler * inCompiler
-                                                                                                   COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_M_5F_messages_2D_element init_21__21__21__21__21__21__21__21__21__21_ (const class GALGAS_lstring & inOperand0,
+                                                                                               const class GALGAS_uint & inOperand1,
+                                                                                               const class GALGAS_luint & inOperand2,
+                                                                                               const class GALGAS_uint & inOperand3,
+                                                                                               const class GALGAS_luint & inOperand4,
+                                                                                               const class GALGAS_luint & inOperand5,
+                                                                                               const class GALGAS_luint & inOperand6,
+                                                                                               const class GALGAS_luint & inOperand7,
+                                                                                               const class GALGAS_luint & inOperand8,
+                                                                                               const class GALGAS_AC_5F_canMessage & inOperand9,
+                                                                                               Compiler * inCompiler
+                                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1852,12 +1848,12 @@ class GALGAS_AC_5F_task : public AC_GALGAS_reference_class {
 //--------------------------------- Constructor from pointer
   public: GALGAS_AC_5F_task (const class cPtr_AC_5F_task * inSourcePtr) ;
 
-//--------------------------------- Property read access
+//--------------------------------- Property access
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS_AC_5F_task init_28__29_ (Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_AC_5F_task init (Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1959,12 +1955,12 @@ class GALGAS_C_5F_independantTask : public GALGAS_AC_5F_task {
 //--------------------------------- Constructor from pointer
   public: GALGAS_C_5F_independantTask (const class cPtr_C_5F_independantTask * inSourcePtr) ;
 
-//--------------------------------- Property read access
+//--------------------------------- Property access
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS_C_5F_independantTask init_28__29_ (Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_C_5F_independantTask init (Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2069,18 +2065,20 @@ class GALGAS_C_5F_taskDependsFromTask : public GALGAS_AC_5F_task {
 //--------------------------------- Constructor from pointer
   public: GALGAS_C_5F_taskDependsFromTask (const class cPtr_C_5F_taskDependsFromTask * inSourcePtr) ;
 
-//--------------------------------- Property read access
+//--------------------------------- Property access
   public: class GALGAS_uint readProperty_mTask (void) const ;
+  public: void setProperty_mTask (const GALGAS_uint & inValue) ;
 
   public: class GALGAS_luint readProperty_mEvery (void) const ;
+  public: void setProperty_mEvery (const GALGAS_luint & inValue) ;
 
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS_C_5F_taskDependsFromTask init_28__2C__29_ (const class GALGAS_uint & inOperand0,
-                                                                   const class GALGAS_luint & inOperand1,
-                                                                   Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_C_5F_taskDependsFromTask init_21__21_ (const class GALGAS_uint & inOperand0,
+                                                               const class GALGAS_luint & inOperand1,
+                                                               Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2099,12 +2097,6 @@ class GALGAS_C_5F_taskDependsFromTask : public GALGAS_AC_5F_task {
   public: ComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromTask & inOperand) const ;
 
 //--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMEvery (class GALGAS_luint inArgument0
-                                                  COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMTask (class GALGAS_uint inArgument0
-                                                 COMMA_LOCATION_ARGS) ;
-
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -2193,18 +2185,20 @@ class GALGAS_C_5F_taskDependsFromMessage : public GALGAS_AC_5F_task {
 //--------------------------------- Constructor from pointer
   public: GALGAS_C_5F_taskDependsFromMessage (const class cPtr_C_5F_taskDependsFromMessage * inSourcePtr) ;
 
-//--------------------------------- Property read access
+//--------------------------------- Property access
   public: class GALGAS_uint readProperty_mMessage (void) const ;
+  public: void setProperty_mMessage (const GALGAS_uint & inValue) ;
 
   public: class GALGAS_luint readProperty_mEvery (void) const ;
+  public: void setProperty_mEvery (const GALGAS_luint & inValue) ;
 
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS_C_5F_taskDependsFromMessage init_28__2C__29_ (const class GALGAS_uint & inOperand0,
-                                                                      const class GALGAS_luint & inOperand1,
-                                                                      Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_C_5F_taskDependsFromMessage init_21__21_ (const class GALGAS_uint & inOperand0,
+                                                                  const class GALGAS_luint & inOperand1,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2223,12 +2217,6 @@ class GALGAS_C_5F_taskDependsFromMessage : public GALGAS_AC_5F_task {
   public: ComparisonResult objectCompare (const GALGAS_C_5F_taskDependsFromMessage & inOperand) const ;
 
 //--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMEvery (class GALGAS_luint inArgument0
-                                                  COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMMessage (class GALGAS_uint inArgument0
-                                                    COMMA_LOCATION_ARGS) ;
-
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -2703,18 +2691,18 @@ class GALGAS_M_5F_tasks_2D_element : public AC_GALGAS_root {
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS_M_5F_tasks_2D_element init_28__2C__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
-                                                                                                const class GALGAS_uint & inOperand1,
-                                                                                                const class GALGAS_luint & inOperand2,
-                                                                                                const class GALGAS_luint & inOperand3,
-                                                                                                const class GALGAS_luint & inOperand4,
-                                                                                                const class GALGAS_luint & inOperand5,
-                                                                                                const class GALGAS_luint & inOperand6,
-                                                                                                const class GALGAS_uint & inOperand7,
-                                                                                                const class GALGAS_luint & inOperand8,
-                                                                                                const class GALGAS_AC_5F_task & inOperand9,
-                                                                                                Compiler * inCompiler
-                                                                                                COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_M_5F_tasks_2D_element init_21__21__21__21__21__21__21__21__21__21_ (const class GALGAS_lstring & inOperand0,
+                                                                                            const class GALGAS_uint & inOperand1,
+                                                                                            const class GALGAS_luint & inOperand2,
+                                                                                            const class GALGAS_luint & inOperand3,
+                                                                                            const class GALGAS_luint & inOperand4,
+                                                                                            const class GALGAS_luint & inOperand5,
+                                                                                            const class GALGAS_luint & inOperand6,
+                                                                                            const class GALGAS_uint & inOperand7,
+                                                                                            const class GALGAS_luint & inOperand8,
+                                                                                            const class GALGAS_AC_5F_task & inOperand9,
+                                                                                            Compiler * inCompiler
+                                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2771,7 +2759,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_tasks_2D_eleme
 
 class cParser_oa_5F_parser {
 //--- Virtual destructor
-  public: virtual ~ cParser_oa_5F_parser (void) {}
+  public: virtual ~ cParser_oa_5F_parser (void) { }
 
 //--- Non terminal declarations
   protected: virtual void nt_axiome_ (class Lexique_oa_5F_scanner * inLexique) = 0 ;

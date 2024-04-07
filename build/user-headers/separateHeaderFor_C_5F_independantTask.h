@@ -13,6 +13,11 @@ class cPtr_C_5F_independantTask : public cPtr_AC_5F_task {
   #ifndef DO_NOT_GENERATE_CHECKINGS
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
+
+//--------------------------------- Initializers
+  public: void C_5F_independantTask_init (Compiler * inCompiler) ;
+
+
 //--- START OF USER ZONE 2
 
   public : virtual bool taskDependsOnTask (void) const override ;
