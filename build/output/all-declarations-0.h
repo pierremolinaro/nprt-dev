@@ -29,6 +29,8 @@ class GALGAS__32_lstringlist : public AC_GALGAS_list {
 //-- Start of type generic part
 
 //--------------------------------- Initializers
+  public: static GALGAS__32_lstringlist init (Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -138,8 +140,13 @@ class GALGAS__32_lstringlist : public AC_GALGAS_list {
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
-//--------------------------------- Friend
 
+//--- Append element
+  public: VIRTUAL_IN_DEBUG void enterElement (const class GALGAS__32_lstringlist_2D_element & inValue,
+                                              Compiler * /* inCompiler */
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Friend
   friend class cEnumerator__32_lstringlist ;
  
 } ; // End of GALGAS__32_lstringlist class
@@ -400,6 +407,8 @@ class GALGAS_M_5F_processor : public AC_GALGAS_map {
 //-- Start of type generic part
 
 //--------------------------------- Initializers
+  public: static GALGAS_M_5F_processor init (Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -479,8 +488,13 @@ class GALGAS_M_5F_processor : public AC_GALGAS_map {
                                                                                            const GALGAS_string & inKey
                                                                                            COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- Friend
 
+//--- Append element
+  public: VIRTUAL_IN_DEBUG void enterElement (const class GALGAS_M_5F_processor_2D_element & inValue,
+                                              Compiler * /* inCompiler */
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Friend
   friend class cEnumerator_M_5F_processor ;
  
 } ; // End of GALGAS_M_5F_processor class
@@ -516,7 +530,10 @@ class cMapElement_M_5F_processor : public cMapElement {
   public: GALGAS_uint mProperty_mIndex ;
   public: GALGAS_luint mProperty_mStep ;
 
-//--- Constructor
+//--- Constructors
+  public: cMapElement_M_5F_processor (const GALGAS_M_5F_processor_2D_element & inValue
+                                      COMMA_LOCATION_ARGS) ;
+ 
   public: cMapElement_M_5F_processor (const GALGAS_lstring & inKey,
                                       const GALGAS_uint & in_mIndex,
                                       const GALGAS_luint & in_mStep
@@ -663,6 +680,8 @@ class GALGAS_M_5F_network : public AC_GALGAS_map {
 //-- Start of type generic part
 
 //--------------------------------- Initializers
+  public: static GALGAS_M_5F_network init (Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -755,8 +774,13 @@ class GALGAS_M_5F_network : public AC_GALGAS_map {
                                                                                          const GALGAS_string & inKey
                                                                                          COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- Friend
 
+//--- Append element
+  public: VIRTUAL_IN_DEBUG void enterElement (const class GALGAS_M_5F_network_2D_element & inValue,
+                                              Compiler * /* inCompiler */
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Friend
   friend class cEnumerator_M_5F_network ;
  
 } ; // End of GALGAS_M_5F_network class
@@ -794,7 +818,10 @@ class cMapElement_M_5F_network : public cMapElement {
   public: GALGAS_bool mProperty_mCANnetwork ;
   public: GALGAS_luint mProperty_mScalingFactor ;
 
-//--- Constructor
+//--- Constructors
+  public: cMapElement_M_5F_network (const GALGAS_M_5F_network_2D_element & inValue
+                                    COMMA_LOCATION_ARGS) ;
+ 
   public: cMapElement_M_5F_network (const GALGAS_lstring & inKey,
                                     const GALGAS_uint & in_mIndex,
                                     const GALGAS_bool & in_mCANnetwork,
@@ -1401,6 +1428,8 @@ class GALGAS_M_5F_messages : public AC_GALGAS_map {
 //-- Start of type generic part
 
 //--------------------------------- Initializers
+  public: static GALGAS_M_5F_messages init (Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1571,8 +1600,13 @@ class GALGAS_M_5F_messages : public AC_GALGAS_map {
                                                                                           const GALGAS_string & inKey
                                                                                           COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- Friend
 
+//--- Append element
+  public: VIRTUAL_IN_DEBUG void enterElement (const class GALGAS_M_5F_messages_2D_element & inValue,
+                                              Compiler * /* inCompiler */
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Friend
   friend class cEnumerator_M_5F_messages ;
  
 } ; // End of GALGAS_M_5F_messages class
@@ -1622,7 +1656,10 @@ class cMapElement_M_5F_messages : public cMapElement {
   public: GALGAS_luint mProperty_mPeriod ;
   public: GALGAS_AC_5F_canMessage mProperty_mMessageKind ;
 
-//--- Constructor
+//--- Constructors
+  public: cMapElement_M_5F_messages (const GALGAS_M_5F_messages_2D_element & inValue
+                                     COMMA_LOCATION_ARGS) ;
+ 
   public: cMapElement_M_5F_messages (const GALGAS_lstring & inKey,
                                      const GALGAS_uint & in_mIndex,
                                      const GALGAS_luint & in_mClass,
@@ -2317,6 +2354,8 @@ class GALGAS_M_5F_tasks : public AC_GALGAS_map {
 //-- Start of type generic part
 
 //--------------------------------- Initializers
+  public: static GALGAS_M_5F_tasks init (Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2487,8 +2526,13 @@ class GALGAS_M_5F_tasks : public AC_GALGAS_map {
                                                                                        const GALGAS_string & inKey
                                                                                        COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- Friend
 
+//--- Append element
+  public: VIRTUAL_IN_DEBUG void enterElement (const class GALGAS_M_5F_tasks_2D_element & inValue,
+                                              Compiler * /* inCompiler */
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Friend
   friend class cEnumerator_M_5F_tasks ;
  
 } ; // End of GALGAS_M_5F_tasks class
@@ -2538,7 +2582,10 @@ class cMapElement_M_5F_tasks : public cMapElement {
   public: GALGAS_luint mProperty_mPeriod ;
   public: GALGAS_AC_5F_task mProperty_mTaskKind ;
 
-//--- Constructor
+//--- Constructors
+  public: cMapElement_M_5F_tasks (const GALGAS_M_5F_tasks_2D_element & inValue
+                                  COMMA_LOCATION_ARGS) ;
+ 
   public: cMapElement_M_5F_tasks (const GALGAS_lstring & inKey,
                                   const GALGAS_uint & in_mIndex,
                                   const GALGAS_luint & in_mPriority,

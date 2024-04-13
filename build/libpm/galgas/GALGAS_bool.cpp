@@ -4,7 +4,7 @@
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2009, ..., 2014 Pierre Molinaro.
+//  Copyright (C) 2009, ..., 2024 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -66,12 +66,6 @@ GALGAS_bool::GALGAS_bool (const bool inIsBuilt,
 AC_GALGAS_root (),
 mIsValid (inIsBuilt),
 mBoolValue (inValue) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_bool::class_func_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_bool (false) ;
 }
 
 //--------------------------------------------------------------------------------------------------

@@ -106,6 +106,25 @@ GALGAS__32_lstringlist GALGAS__32_lstringlist::class_func_emptyList (UNUSED_LOCA
 
 //--------------------------------------------------------------------------------------------------
 
+GALGAS__32_lstringlist GALGAS__32_lstringlist::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
+  return GALGAS__32_lstringlist (capCollectionElementArray ()) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS__32_lstringlist::enterElement (const GALGAS__32_lstringlist_2D_element & inValue,
+                                           Compiler * /* inCompiler */
+                                           COMMA_LOCATION_ARGS) {
+  cCollectionElement * p = nullptr ;
+  macroMyNew (p, cCollectionElement__32_lstringlist (inValue COMMA_THERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  appendObject (attributes) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
 GALGAS__32_lstringlist GALGAS__32_lstringlist::class_func_listWithValue (const GALGAS_lstring & inOperand0,
                                                                          const GALGAS_lstring & inOperand1
                                                                          COMMA_LOCATION_ARGS) {
@@ -1274,6 +1293,15 @@ String Lexique_oa_5F_scanner::styleNameForIndex (const uint32_t inStyleIndex) co
 
 //--------------------------------------------------------------------------------------------------
 
+cMapElement_M_5F_processor::cMapElement_M_5F_processor (const GALGAS_M_5F_processor_2D_element & inValue
+                                                        COMMA_LOCATION_ARGS) :
+cMapElement (inValue.mProperty_lkey COMMA_THERE),
+mProperty_mIndex (inValue.mProperty_mIndex),
+mProperty_mStep (inValue.mProperty_mStep) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 cMapElement_M_5F_processor::cMapElement_M_5F_processor (const GALGAS_lstring & inKey,
                                                         const GALGAS_uint & in_mIndex,
                                                         const GALGAS_luint & in_mStep
@@ -1345,6 +1373,14 @@ GALGAS_M_5F_processor & GALGAS_M_5F_processor::operator = (const GALGAS_M_5F_pro
 
 //--------------------------------------------------------------------------------------------------
 
+GALGAS_M_5F_processor GALGAS_M_5F_processor::init (Compiler * COMMA_LOCATION_ARGS) {
+  GALGAS_M_5F_processor result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
 GALGAS_M_5F_processor GALGAS_M_5F_processor::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_M_5F_processor result ;
   result.makeNewEmptyMap (THERE) ;
@@ -1367,6 +1403,21 @@ GALGAS_M_5F_processor GALGAS_M_5F_processor::getter_overriddenMap (Compiler * in
   GALGAS_M_5F_processor result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_M_5F_processor::enterElement (const GALGAS_M_5F_processor_2D_element & inValue,
+                                          Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
+  cMapElement_M_5F_processor * p = nullptr ;
+  macroMyNew (p, cMapElement_M_5F_processor (inValue COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@M_5F_processor insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1612,6 +1663,16 @@ GALGAS_M_5F_processor GALGAS_M_5F_processor::extractObject (const GALGAS_object 
 
 //--------------------------------------------------------------------------------------------------
 
+cMapElement_M_5F_network::cMapElement_M_5F_network (const GALGAS_M_5F_network_2D_element & inValue
+                                                    COMMA_LOCATION_ARGS) :
+cMapElement (inValue.mProperty_lkey COMMA_THERE),
+mProperty_mIndex (inValue.mProperty_mIndex),
+mProperty_mCANnetwork (inValue.mProperty_mCANnetwork),
+mProperty_mScalingFactor (inValue.mProperty_mScalingFactor) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 cMapElement_M_5F_network::cMapElement_M_5F_network (const GALGAS_lstring & inKey,
                                                     const GALGAS_uint & in_mIndex,
                                                     const GALGAS_bool & in_mCANnetwork,
@@ -1692,6 +1753,14 @@ GALGAS_M_5F_network & GALGAS_M_5F_network::operator = (const GALGAS_M_5F_network
 
 //--------------------------------------------------------------------------------------------------
 
+GALGAS_M_5F_network GALGAS_M_5F_network::init (Compiler * COMMA_LOCATION_ARGS) {
+  GALGAS_M_5F_network result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
 GALGAS_M_5F_network GALGAS_M_5F_network::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_M_5F_network result ;
   result.makeNewEmptyMap (THERE) ;
@@ -1714,6 +1783,21 @@ GALGAS_M_5F_network GALGAS_M_5F_network::getter_overriddenMap (Compiler * inComp
   GALGAS_M_5F_network result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_M_5F_network::enterElement (const GALGAS_M_5F_network_2D_element & inValue,
+                                        Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) {
+  cMapElement_M_5F_network * p = nullptr ;
+  macroMyNew (p, cMapElement_M_5F_network (inValue COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@M_5F_network insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -3071,6 +3155,22 @@ GALGAS_C_5F_canMessageFromTask_2D_weak GALGAS_C_5F_canMessageFromTask_2D_weak::e
 
 //--------------------------------------------------------------------------------------------------
 
+cMapElement_M_5F_messages::cMapElement_M_5F_messages (const GALGAS_M_5F_messages_2D_element & inValue
+                                                      COMMA_LOCATION_ARGS) :
+cMapElement (inValue.mProperty_lkey COMMA_THERE),
+mProperty_mIndex (inValue.mProperty_mIndex),
+mProperty_mClass (inValue.mProperty_mClass),
+mProperty_mNetworkIndex (inValue.mProperty_mNetworkIndex),
+mProperty_mBytesCount (inValue.mProperty_mBytesCount),
+mProperty_mPriority (inValue.mProperty_mPriority),
+mProperty_mOffset (inValue.mProperty_mOffset),
+mProperty_mDeadline (inValue.mProperty_mDeadline),
+mProperty_mPeriod (inValue.mProperty_mPeriod),
+mProperty_mMessageKind (inValue.mProperty_mMessageKind) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 cMapElement_M_5F_messages::cMapElement_M_5F_messages (const GALGAS_lstring & inKey,
                                                       const GALGAS_uint & in_mIndex,
                                                       const GALGAS_luint & in_mClass,
@@ -3205,6 +3305,14 @@ GALGAS_M_5F_messages & GALGAS_M_5F_messages::operator = (const GALGAS_M_5F_messa
 
 //--------------------------------------------------------------------------------------------------
 
+GALGAS_M_5F_messages GALGAS_M_5F_messages::init (Compiler * COMMA_LOCATION_ARGS) {
+  GALGAS_M_5F_messages result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
 GALGAS_M_5F_messages GALGAS_M_5F_messages::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_M_5F_messages result ;
   result.makeNewEmptyMap (THERE) ;
@@ -3227,6 +3335,21 @@ GALGAS_M_5F_messages GALGAS_M_5F_messages::getter_overriddenMap (Compiler * inCo
   GALGAS_M_5F_messages result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_M_5F_messages::enterElement (const GALGAS_M_5F_messages_2D_element & inValue,
+                                         Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) {
+  cMapElement_M_5F_messages * p = nullptr ;
+  macroMyNew (p, cMapElement_M_5F_messages (inValue COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@M_5F_messages insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4476,6 +4599,22 @@ GALGAS_C_5F_taskDependsFromMessage_2D_weak GALGAS_C_5F_taskDependsFromMessage_2D
 
 //--------------------------------------------------------------------------------------------------
 
+cMapElement_M_5F_tasks::cMapElement_M_5F_tasks (const GALGAS_M_5F_tasks_2D_element & inValue
+                                                COMMA_LOCATION_ARGS) :
+cMapElement (inValue.mProperty_lkey COMMA_THERE),
+mProperty_mIndex (inValue.mProperty_mIndex),
+mProperty_mPriority (inValue.mProperty_mPriority),
+mProperty_mOffset (inValue.mProperty_mOffset),
+mProperty_mDeadline (inValue.mProperty_mDeadline),
+mProperty_mDurationMin (inValue.mProperty_mDurationMin),
+mProperty_mDurationMax (inValue.mProperty_mDurationMax),
+mProperty_mProcessor (inValue.mProperty_mProcessor),
+mProperty_mPeriod (inValue.mProperty_mPeriod),
+mProperty_mTaskKind (inValue.mProperty_mTaskKind) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 cMapElement_M_5F_tasks::cMapElement_M_5F_tasks (const GALGAS_lstring & inKey,
                                                 const GALGAS_uint & in_mIndex,
                                                 const GALGAS_luint & in_mPriority,
@@ -4610,6 +4749,14 @@ GALGAS_M_5F_tasks & GALGAS_M_5F_tasks::operator = (const GALGAS_M_5F_tasks & inS
 
 //--------------------------------------------------------------------------------------------------
 
+GALGAS_M_5F_tasks GALGAS_M_5F_tasks::init (Compiler * COMMA_LOCATION_ARGS) {
+  GALGAS_M_5F_tasks result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
 GALGAS_M_5F_tasks GALGAS_M_5F_tasks::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_M_5F_tasks result ;
   result.makeNewEmptyMap (THERE) ;
@@ -4632,6 +4779,21 @@ GALGAS_M_5F_tasks GALGAS_M_5F_tasks::getter_overriddenMap (Compiler * inCompiler
   GALGAS_M_5F_tasks result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_M_5F_tasks::enterElement (const GALGAS_M_5F_tasks_2D_element & inValue,
+                                      Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) {
+  cMapElement_M_5F_tasks * p = nullptr ;
+  macroMyNew (p, cMapElement_M_5F_tasks (inValue COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@M_5F_tasks insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5195,13 +5357,17 @@ GALGAS_M_5F_tasks GALGAS_M_5F_tasks::extractObject (const GALGAS_object & inObje
 //------------------------------------------------------------------------------------------------
 
 void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner * inCompiler) {
-  GALGAS_M_5F_processor var_outProcessorMap_474 = GALGAS_M_5F_processor::class_func_emptyMap (SOURCE_FILE ("oa_parser.galgas", 12)) ;
-  GALGAS_M_5F_network var_outNetworkMap_526 = GALGAS_M_5F_network::class_func_emptyMap (SOURCE_FILE ("oa_parser.galgas", 13)) ;
-  GALGAS_M_5F_messages var_outMessagesMap_575 = GALGAS_M_5F_messages::class_func_emptyMap (SOURCE_FILE ("oa_parser.galgas", 14)) ;
-  GALGAS_M_5F_tasks var_outTaskMap_623 = GALGAS_M_5F_tasks::class_func_emptyMap (SOURCE_FILE ("oa_parser.galgas", 15)) ;
+  GALGAS_M_5F_processor temp_0 = GALGAS_M_5F_processor::init (inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 12)) ;
+  GALGAS_M_5F_processor var_outProcessorMap_474 = temp_0 ;
+  GALGAS_M_5F_network temp_1 = GALGAS_M_5F_network::init (inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 13)) ;
+  GALGAS_M_5F_network var_outNetworkMap_526 = temp_1 ;
+  GALGAS_M_5F_messages temp_2 = GALGAS_M_5F_messages::init (inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 14)) ;
+  GALGAS_M_5F_messages var_outMessagesMap_575 = temp_2 ;
+  GALGAS_M_5F_tasks temp_3 = GALGAS_M_5F_tasks::init (inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 15)) ;
+  GALGAS_M_5F_tasks var_outTaskMap_623 = temp_3 ;
   inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_system COMMA_SOURCE_FILE ("oa_parser.galgas", 16)) ;
-  bool repeatFlag_0 = true ;
-  while (repeatFlag_0) {
+  bool repeatFlag_4 = true ;
+  while (repeatFlag_4) {
     switch (select_oa_5F_parser_0 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 19)) ;
@@ -5216,12 +5382,12 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 25)) ;
         var_step_744 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 26)) ;
-        enumGalgasBool test_1 = kBoolTrue ;
-        if (kBoolTrue == test_1) {
-          test_1 = GALGAS_bool (ComparisonKind::equal, var_step_744.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
-          if (kBoolTrue == test_1) {
-            TC_Array <FixItDescription> fixItArray2 ;
-            inCompiler->emitSemanticError (var_step_744.readProperty_location (), GALGAS_string ("the step value must be > 0"), fixItArray2  COMMA_SOURCE_FILE ("oa_parser.galgas", 28)) ;
+        enumGalgasBool test_5 = kBoolTrue ;
+        if (kBoolTrue == test_5) {
+          test_5 = GALGAS_bool (ComparisonKind::equal, var_step_744.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
+          if (kBoolTrue == test_5) {
+            TC_Array <FixItDescription> fixItArray6 ;
+            inCompiler->emitSemanticError (var_step_744.readProperty_location (), GALGAS_string ("the step value must be > 0"), fixItArray6  COMMA_SOURCE_FILE ("oa_parser.galgas", 28)) ;
           }
         }
       } break ;
@@ -5259,12 +5425,12 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 48)) ;
         var_factor_1237 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 49)) ;
-        enumGalgasBool test_3 = kBoolTrue ;
-        if (kBoolTrue == test_3) {
-          test_3 = GALGAS_bool (ComparisonKind::equal, var_factor_1237.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
-          if (kBoolTrue == test_3) {
-            TC_Array <FixItDescription> fixItArray4 ;
-            inCompiler->emitSemanticError (var_factor_1237.readProperty_location (), GALGAS_string ("the factor value must be > 0"), fixItArray4  COMMA_SOURCE_FILE ("oa_parser.galgas", 51)) ;
+        enumGalgasBool test_7 = kBoolTrue ;
+        if (kBoolTrue == test_7) {
+          test_7 = GALGAS_bool (ComparisonKind::equal, var_factor_1237.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
+          if (kBoolTrue == test_7) {
+            TC_Array <FixItDescription> fixItArray8 ;
+            inCompiler->emitSemanticError (var_factor_1237.readProperty_location (), GALGAS_string ("the factor value must be > 0"), fixItArray8  COMMA_SOURCE_FILE ("oa_parser.galgas", 51)) ;
           }
         }
       } break ;
@@ -5335,12 +5501,12 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 93)) ;
-        enumGalgasBool test_5 = kBoolTrue ;
-        if (kBoolTrue == test_5) {
-          test_5 = var_explicitOffset_1816.boolEnum () ;
-          if (kBoolTrue == test_5) {
-            TC_Array <FixItDescription> fixItArray6 ;
-            inCompiler->emitSemanticError (GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray6  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)) ;
+        enumGalgasBool test_9 = kBoolTrue ;
+        if (kBoolTrue == test_9) {
+          test_9 = var_explicitOffset_1816.boolEnum () ;
+          if (kBoolTrue == test_9) {
+            TC_Array <FixItDescription> fixItArray10 ;
+            inCompiler->emitSemanticError (GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray10  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)) ;
           }
         }
         switch (select_oa_5F_parser_7 (inCompiler)) {
@@ -5445,42 +5611,42 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
       GALGAS_bool var_CANnetwork_4633 ;
       GALGAS_luint joker_4644 ; // Joker input parameter
       var_outNetworkMap_526.method_searchKey (var_networkName_4556, var_networkIndex_4615, var_CANnetwork_4633, joker_4644, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 153)) ;
-      enumGalgasBool test_7 = kBoolTrue ;
-      if (kBoolTrue == test_7) {
-        test_7 = var_CANnetwork_4633.operator_and (GALGAS_bool (ComparisonKind::equal, var_messageClass_4193.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 154)).boolEnum () ;
-        if (kBoolTrue == test_7) {
-          TC_Array <FixItDescription> fixItArray8 ;
-          inCompiler->emitSemanticError (var_messageClass_4193.readProperty_location (), GALGAS_string ("a CAN message must be either standard either extended"), fixItArray8  COMMA_SOURCE_FILE ("oa_parser.galgas", 155)) ;
+      enumGalgasBool test_11 = kBoolTrue ;
+      if (kBoolTrue == test_11) {
+        test_11 = var_CANnetwork_4633.operator_and (GALGAS_bool (ComparisonKind::equal, var_messageClass_4193.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 154)).boolEnum () ;
+        if (kBoolTrue == test_11) {
+          TC_Array <FixItDescription> fixItArray12 ;
+          inCompiler->emitSemanticError (var_messageClass_4193.readProperty_location (), GALGAS_string ("a CAN message must be either standard either extended"), fixItArray12  COMMA_SOURCE_FILE ("oa_parser.galgas", 155)) ;
         }
       }
-      if (kBoolFalse == test_7) {
-        enumGalgasBool test_9 = kBoolTrue ;
-        if (kBoolTrue == test_9) {
-          test_9 = var_CANnetwork_4633.operator_not (SOURCE_FILE ("oa_parser.galgas", 156)).operator_and (GALGAS_bool (ComparisonKind::notEqual, var_messageClass_4193.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 156)).boolEnum () ;
-          if (kBoolTrue == test_9) {
-            TC_Array <FixItDescription> fixItArray10 ;
-            inCompiler->emitSemanticError (var_messageClass_4193.readProperty_location (), GALGAS_string ("a VAN message cannot be standard or extended"), fixItArray10  COMMA_SOURCE_FILE ("oa_parser.galgas", 157)) ;
+      if (kBoolFalse == test_11) {
+        enumGalgasBool test_13 = kBoolTrue ;
+        if (kBoolTrue == test_13) {
+          test_13 = var_CANnetwork_4633.operator_not (SOURCE_FILE ("oa_parser.galgas", 156)).operator_and (GALGAS_bool (ComparisonKind::notEqual, var_messageClass_4193.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 156)).boolEnum () ;
+          if (kBoolTrue == test_13) {
+            TC_Array <FixItDescription> fixItArray14 ;
+            inCompiler->emitSemanticError (var_messageClass_4193.readProperty_location (), GALGAS_string ("a VAN message cannot be standard or extended"), fixItArray14  COMMA_SOURCE_FILE ("oa_parser.galgas", 157)) ;
           }
         }
       }
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_length COMMA_SOURCE_FILE ("oa_parser.galgas", 159)) ;
       GALGAS_luint var_bytesCount_4962 = inCompiler->synthetizedAttribute_ulongValue () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 160)) ;
-      enumGalgasBool test_11 = kBoolTrue ;
-      if (kBoolTrue == test_11) {
-        test_11 = var_CANnetwork_4633.operator_and (GALGAS_bool (ComparisonKind::greaterThan, var_bytesCount_4962.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (8U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 161)).boolEnum () ;
-        if (kBoolTrue == test_11) {
-          TC_Array <FixItDescription> fixItArray12 ;
-          inCompiler->emitSemanticError (var_bytesCount_4962.readProperty_location (), GALGAS_string ("CAN message length must be <= 8 bytes"), fixItArray12  COMMA_SOURCE_FILE ("oa_parser.galgas", 162)) ;
+      enumGalgasBool test_15 = kBoolTrue ;
+      if (kBoolTrue == test_15) {
+        test_15 = var_CANnetwork_4633.operator_and (GALGAS_bool (ComparisonKind::greaterThan, var_bytesCount_4962.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (8U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 161)).boolEnum () ;
+        if (kBoolTrue == test_15) {
+          TC_Array <FixItDescription> fixItArray16 ;
+          inCompiler->emitSemanticError (var_bytesCount_4962.readProperty_location (), GALGAS_string ("CAN message length must be <= 8 bytes"), fixItArray16  COMMA_SOURCE_FILE ("oa_parser.galgas", 162)) ;
         }
       }
-      if (kBoolFalse == test_11) {
-        enumGalgasBool test_13 = kBoolTrue ;
-        if (kBoolTrue == test_13) {
-          test_13 = var_CANnetwork_4633.operator_not (SOURCE_FILE ("oa_parser.galgas", 163)).operator_and (GALGAS_bool (ComparisonKind::greaterThan, var_bytesCount_4962.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (28U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 163)).boolEnum () ;
-          if (kBoolTrue == test_13) {
-            TC_Array <FixItDescription> fixItArray14 ;
-            inCompiler->emitSemanticError (var_bytesCount_4962.readProperty_location (), GALGAS_string ("VAN message must be <= 28 bytes"), fixItArray14  COMMA_SOURCE_FILE ("oa_parser.galgas", 164)) ;
+      if (kBoolFalse == test_15) {
+        enumGalgasBool test_17 = kBoolTrue ;
+        if (kBoolTrue == test_17) {
+          test_17 = var_CANnetwork_4633.operator_not (SOURCE_FILE ("oa_parser.galgas", 163)).operator_and (GALGAS_bool (ComparisonKind::greaterThan, var_bytesCount_4962.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (28U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 163)).boolEnum () ;
+          if (kBoolTrue == test_17) {
+            TC_Array <FixItDescription> fixItArray18 ;
+            inCompiler->emitSemanticError (var_bytesCount_4962.readProperty_location (), GALGAS_string ("VAN message must be <= 28 bytes"), fixItArray18  COMMA_SOURCE_FILE ("oa_parser.galgas", 164)) ;
           }
         }
       }
@@ -5527,12 +5693,12 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 192)) ;
-        enumGalgasBool test_15 = kBoolTrue ;
-        if (kBoolTrue == test_15) {
-          test_15 = var_explicitOffset_5296.boolEnum () ;
-          if (kBoolTrue == test_15) {
-            TC_Array <FixItDescription> fixItArray16 ;
-            inCompiler->emitSemanticError (GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray16  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)) ;
+        enumGalgasBool test_19 = kBoolTrue ;
+        if (kBoolTrue == test_19) {
+          test_19 = var_explicitOffset_5296.boolEnum () ;
+          if (kBoolTrue == test_19) {
+            TC_Array <FixItDescription> fixItArray20 ;
+            inCompiler->emitSemanticError (GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray20  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)) ;
           }
         }
         switch (select_oa_5F_parser_14 (inCompiler)) {
@@ -5579,7 +5745,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 210)) ;
     } break ;
     default:
-      repeatFlag_0 = false ;
+      repeatFlag_4 = false ;
       break ;
     }
   }
