@@ -23,7 +23,6 @@ class cCollectionElement__32_lstringlist : public cCollectionElement {
   public: cCollectionElement__32_lstringlist (const GALGAS__32_lstringlist_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -76,14 +75,6 @@ void cCollectionElement__32_lstringlist::description (String & ioString, const i
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mValue1" ":") ;
   mObject.mProperty_mValue_31_.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cCollectionElement__32_lstringlist::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement__32_lstringlist * operand = (cCollectionElement__32_lstringlist *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement__32_lstringlist) ;
-  return mObject.objectCompare (operand->mObject) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1340,20 +1331,6 @@ void cMapElement_M_5F_processor::description (String & ioString, const int32_t i
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cMapElement_M_5F_processor::compare (const cCollectionElement * inOperand) const {
-  cMapElement_M_5F_processor * operand = (cMapElement_M_5F_processor *) inOperand ;
-  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mIndex.objectCompare (operand->mProperty_mIndex) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mStep.objectCompare (operand->mProperty_mStep) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GALGAS_M_5F_processor::GALGAS_M_5F_processor (void) :
 AC_GALGAS_map () {
 }
@@ -1713,23 +1690,6 @@ void cMapElement_M_5F_network::description (String & ioString, const int32_t inI
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mScalingFactor" ":") ;
   mProperty_mScalingFactor.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cMapElement_M_5F_network::compare (const cCollectionElement * inOperand) const {
-  cMapElement_M_5F_network * operand = (cMapElement_M_5F_network *) inOperand ;
-  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mIndex.objectCompare (operand->mProperty_mIndex) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mCANnetwork.objectCompare (operand->mProperty_mCANnetwork) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mScalingFactor.objectCompare (operand->mProperty_mScalingFactor) ;
-  }
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2104,8 +2064,6 @@ acStrongPtr_class (THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-
-
 ComparisonResult GALGAS_AC_5F_canMessage::objectCompare (const GALGAS_AC_5F_canMessage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -2312,13 +2270,6 @@ cPtr_AC_5F_canMessage (inCompiler COMMA_THERE) {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_C_5F_canIndependantMessage::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 
 ComparisonResult GALGAS_C_5F_canIndependantMessage::objectCompare (const GALGAS_C_5F_canIndependantMessage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -2574,19 +2525,6 @@ mProperty_mMessageIndex () {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_C_5F_canMessageFromMessage::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  const cPtr_C_5F_canMessageFromMessage * p = (const cPtr_C_5F_canMessageFromMessage *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_C_5F_canMessageFromMessage) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mMessageIndex.objectCompare (p->mProperty_mMessageIndex) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 
 ComparisonResult GALGAS_C_5F_canMessageFromMessage::objectCompare (const GALGAS_C_5F_canMessageFromMessage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -2873,19 +2811,6 @@ mProperty_mTaskIndex () {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_C_5F_canMessageFromTask::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  const cPtr_C_5F_canMessageFromTask * p = (const cPtr_C_5F_canMessageFromTask *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_C_5F_canMessageFromTask) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mTaskIndex.objectCompare (p->mProperty_mTaskIndex) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 
 ComparisonResult GALGAS_C_5F_canMessageFromTask::objectCompare (const GALGAS_C_5F_canMessageFromTask & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -3247,41 +3172,6 @@ void cMapElement_M_5F_messages::description (String & ioString, const int32_t in
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mMessageKind" ":") ;
   mProperty_mMessageKind.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cMapElement_M_5F_messages::compare (const cCollectionElement * inOperand) const {
-  cMapElement_M_5F_messages * operand = (cMapElement_M_5F_messages *) inOperand ;
-  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mIndex.objectCompare (operand->mProperty_mIndex) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mClass.objectCompare (operand->mProperty_mClass) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mNetworkIndex.objectCompare (operand->mProperty_mNetworkIndex) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mBytesCount.objectCompare (operand->mProperty_mBytesCount) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mPriority.objectCompare (operand->mProperty_mPriority) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mOffset.objectCompare (operand->mProperty_mOffset) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mDeadline.objectCompare (operand->mProperty_mDeadline) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mPeriod.objectCompare (operand->mProperty_mPeriod) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mMessageKind.objectCompare (operand->mProperty_mMessageKind) ;
-  }
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -3926,8 +3816,6 @@ acStrongPtr_class (THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-
-
 ComparisonResult GALGAS_AC_5F_task::objectCompare (const GALGAS_AC_5F_task & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -4134,13 +4022,6 @@ cPtr_AC_5F_task (inCompiler COMMA_THERE) {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_C_5F_independantTask::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 
 ComparisonResult GALGAS_C_5F_independantTask::objectCompare (const GALGAS_C_5F_independantTask & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -4691,41 +4572,6 @@ void cMapElement_M_5F_tasks::description (String & ioString, const int32_t inInd
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mTaskKind" ":") ;
   mProperty_mTaskKind.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cMapElement_M_5F_tasks::compare (const cCollectionElement * inOperand) const {
-  cMapElement_M_5F_tasks * operand = (cMapElement_M_5F_tasks *) inOperand ;
-  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mIndex.objectCompare (operand->mProperty_mIndex) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mPriority.objectCompare (operand->mProperty_mPriority) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mOffset.objectCompare (operand->mProperty_mOffset) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mDeadline.objectCompare (operand->mProperty_mDeadline) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mDurationMin.objectCompare (operand->mProperty_mDurationMin) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mDurationMax.objectCompare (operand->mProperty_mDurationMax) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mProcessor.objectCompare (operand->mProperty_mProcessor) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mPeriod.objectCompare (operand->mProperty_mPeriod) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mTaskKind.objectCompare (operand->mProperty_mTaskKind) ;
-  }
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -6180,22 +6026,6 @@ mProperty_mEvery () {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cPtr_C_5F_taskDependsFromTask::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  const cPtr_C_5F_taskDependsFromTask * p = (const cPtr_C_5F_taskDependsFromTask *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mTask.objectCompare (p->mProperty_mTask) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mEvery.objectCompare (p->mProperty_mEvery) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
 ComparisonResult GALGAS_C_5F_taskDependsFromTask::objectCompare (const GALGAS_C_5F_taskDependsFromTask & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -6404,22 +6234,6 @@ mProperty_mEvery () {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_C_5F_taskDependsFromMessage::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  const cPtr_C_5F_taskDependsFromMessage * p = (const cPtr_C_5F_taskDependsFromMessage *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mMessage.objectCompare (p->mProperty_mMessage) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mEvery.objectCompare (p->mProperty_mEvery) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 
 ComparisonResult GALGAS_C_5F_taskDependsFromMessage::objectCompare (const GALGAS_C_5F_taskDependsFromMessage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -7333,19 +7147,6 @@ GALGAS__32_lstringlist_2D_element GALGAS__32_lstringlist_2D_element::class_func_
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS__32_lstringlist_2D_element::objectCompare (const GALGAS__32_lstringlist_2D_element & inOperand) const {
-   ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mValue_30_.objectCompare (inOperand.mProperty_mValue_30_) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mValue_31_.objectCompare (inOperand.mProperty_mValue_31_) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GALGAS__32_lstringlist_2D_element::isValid (void) const {
   return mProperty_mValue_30_.isValid () && mProperty_mValue_31_.isValid () ;
 }
@@ -7469,22 +7270,6 @@ GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::class_func_ne
   result.mProperty_lkey = in_lkey ;
   result.mProperty_mIndex = in_mIndex ;
   result.mProperty_mStep = in_mStep ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_M_5F_processor_2D_element::objectCompare (const GALGAS_M_5F_processor_2D_element & inOperand) const {
-   ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mIndex.objectCompare (inOperand.mProperty_mIndex) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mStep.objectCompare (inOperand.mProperty_mStep) ;
-  }
   return result ;
 }
 
@@ -7623,25 +7408,6 @@ GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::class_func_new (c
   result.mProperty_mIndex = in_mIndex ;
   result.mProperty_mCANnetwork = in_mCANnetwork ;
   result.mProperty_mScalingFactor = in_mScalingFactor ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_M_5F_network_2D_element::objectCompare (const GALGAS_M_5F_network_2D_element & inOperand) const {
-   ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mIndex.objectCompare (inOperand.mProperty_mIndex) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mCANnetwork.objectCompare (inOperand.mProperty_mCANnetwork) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mScalingFactor.objectCompare (inOperand.mProperty_mScalingFactor) ;
-  }
   return result ;
 }
 
@@ -7825,43 +7591,6 @@ GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::class_func_new 
   result.mProperty_mDeadline = in_mDeadline ;
   result.mProperty_mPeriod = in_mPeriod ;
   result.mProperty_mMessageKind = in_mMessageKind ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_M_5F_messages_2D_element::objectCompare (const GALGAS_M_5F_messages_2D_element & inOperand) const {
-   ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mIndex.objectCompare (inOperand.mProperty_mIndex) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mClass.objectCompare (inOperand.mProperty_mClass) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mNetworkIndex.objectCompare (inOperand.mProperty_mNetworkIndex) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mBytesCount.objectCompare (inOperand.mProperty_mBytesCount) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mPriority.objectCompare (inOperand.mProperty_mPriority) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mOffset.objectCompare (inOperand.mProperty_mOffset) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mDeadline.objectCompare (inOperand.mProperty_mDeadline) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mPeriod.objectCompare (inOperand.mProperty_mPeriod) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mMessageKind.objectCompare (inOperand.mProperty_mMessageKind) ;
-  }
   return result ;
 }
 
@@ -8063,43 +7792,6 @@ GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::class_func_new (const
   result.mProperty_mProcessor = in_mProcessor ;
   result.mProperty_mPeriod = in_mPeriod ;
   result.mProperty_mTaskKind = in_mTaskKind ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_M_5F_tasks_2D_element::objectCompare (const GALGAS_M_5F_tasks_2D_element & inOperand) const {
-   ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mIndex.objectCompare (inOperand.mProperty_mIndex) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mPriority.objectCompare (inOperand.mProperty_mPriority) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mOffset.objectCompare (inOperand.mProperty_mOffset) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mDeadline.objectCompare (inOperand.mProperty_mDeadline) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mDurationMin.objectCompare (inOperand.mProperty_mDurationMin) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mDurationMax.objectCompare (inOperand.mProperty_mDurationMax) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mProcessor.objectCompare (inOperand.mProperty_mProcessor) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mPeriod.objectCompare (inOperand.mProperty_mPeriod) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_mTaskKind.objectCompare (inOperand.mProperty_mTaskKind) ;
-  }
   return result ;
 }
 
