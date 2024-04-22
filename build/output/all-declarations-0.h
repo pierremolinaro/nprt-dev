@@ -136,6 +136,8 @@ class GALGAS__32_lstringlist : public AC_GALGAS_list {
                                                                                  COMMA_LOCATION_ARGS) const ;
 
 
+//--------------------------------- Read subscripts
+
 //--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
@@ -246,6 +248,8 @@ class GALGAS__32_lstringlist_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
 
@@ -474,6 +478,8 @@ class GALGAS_M_5F_processor : public AC_GALGAS_map {
                                                                              COMMA_LOCATION_ARGS) const ;
 
 
+//--------------------------------- Read subscripts
+
 //--------------------------------- Optional Methods
   public: VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0,
                                                     class GALGAS_uint & outOperand1,
@@ -638,6 +644,8 @@ class GALGAS_M_5F_processor_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Getters
 
+//--------------------------------- Read subscripts
+
 //--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
@@ -755,6 +763,8 @@ class GALGAS_M_5F_network : public AC_GALGAS_map {
   public: VIRTUAL_IN_DEBUG class GALGAS_M_5F_network getter_overriddenMap (Compiler * inCompiler
                                                                            COMMA_LOCATION_ARGS) const ;
 
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
   public: VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0,
@@ -936,6 +946,8 @@ class GALGAS_M_5F_network_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Getters
 
+//--------------------------------- Read subscripts
+
 //--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
@@ -985,6 +997,8 @@ class GALGAS_AC_5F_canMessage : public AC_GALGAS_reference_class {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
 
@@ -1043,6 +1057,8 @@ class GALGAS_AC_5F_canMessage_2D_weak : public AC_GALGAS_weak_reference {
 
 //--------------------------------- Getters
 
+//--------------------------------- Read subscripts
+
 //--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
@@ -1095,6 +1111,8 @@ class GALGAS_C_5F_canIndependantMessage : public GALGAS_AC_5F_canMessage {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
 
@@ -1152,6 +1170,8 @@ class GALGAS_C_5F_canIndependantMessage_2D_weak : public GALGAS_AC_5F_canMessage
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
 
@@ -1211,6 +1231,8 @@ class GALGAS_C_5F_canMessageFromMessage : public GALGAS_AC_5F_canMessage {
 
 //--------------------------------- Getters
 
+//--------------------------------- Read subscripts
+
 //--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
@@ -1267,6 +1289,8 @@ class GALGAS_C_5F_canMessageFromMessage_2D_weak : public GALGAS_AC_5F_canMessage
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
 
@@ -1326,6 +1350,8 @@ class GALGAS_C_5F_canMessageFromTask : public GALGAS_AC_5F_canMessage {
 
 //--------------------------------- Getters
 
+//--------------------------------- Read subscripts
+
 //--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
@@ -1382,6 +1408,8 @@ class GALGAS_C_5F_canMessageFromTask_2D_weak : public GALGAS_AC_5F_canMessage_2D
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
 
@@ -1572,6 +1600,8 @@ class GALGAS_M_5F_messages : public AC_GALGAS_map {
   public: VIRTUAL_IN_DEBUG class GALGAS_M_5F_messages getter_overriddenMap (Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) const ;
 
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
   public: VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0,
@@ -1849,6 +1879,8 @@ class GALGAS_M_5F_messages_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Getters
 
+//--------------------------------- Read subscripts
+
 //--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
@@ -1898,6 +1930,8 @@ class GALGAS_AC_5F_task : public AC_GALGAS_reference_class {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
 
@@ -1956,6 +1990,8 @@ class GALGAS_AC_5F_task_2D_weak : public AC_GALGAS_weak_reference {
 
 //--------------------------------- Getters
 
+//--------------------------------- Read subscripts
+
 //--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
@@ -2008,6 +2044,8 @@ class GALGAS_C_5F_independantTask : public GALGAS_AC_5F_task {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
 
@@ -2065,6 +2103,8 @@ class GALGAS_C_5F_independantTask_2D_weak : public GALGAS_AC_5F_task_2D_weak {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
 
@@ -2129,6 +2169,8 @@ class GALGAS_C_5F_taskDependsFromTask : public GALGAS_AC_5F_task {
 
 //--------------------------------- Getters
 
+//--------------------------------- Read subscripts
+
 //--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
@@ -2185,6 +2227,8 @@ class GALGAS_C_5F_taskDependsFromTask_2D_weak : public GALGAS_AC_5F_task_2D_weak
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
 
@@ -2249,6 +2293,8 @@ class GALGAS_C_5F_taskDependsFromMessage : public GALGAS_AC_5F_task {
 
 //--------------------------------- Getters
 
+//--------------------------------- Read subscripts
+
 //--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
@@ -2305,6 +2351,8 @@ class GALGAS_C_5F_taskDependsFromMessage_2D_weak : public GALGAS_AC_5F_task_2D_w
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
 
@@ -2495,6 +2543,8 @@ class GALGAS_M_5F_tasks : public AC_GALGAS_map {
   public: VIRTUAL_IN_DEBUG class GALGAS_M_5F_tasks getter_overriddenMap (Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) const ;
 
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
   public: VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0,
@@ -2771,6 +2821,8 @@ class GALGAS_M_5F_tasks_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
 
