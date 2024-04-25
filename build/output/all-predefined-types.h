@@ -275,8 +275,6 @@ class GALGAS_uint : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -377,8 +375,6 @@ class GALGAS_bool : public AC_GALGAS_root {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -712,8 +708,6 @@ class GALGAS_bigint : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1039,8 +1033,6 @@ class GALGAS_binaryset : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1151,8 +1143,6 @@ class GALGAS_char : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1261,8 +1251,6 @@ class GALGAS_data : public AC_GALGAS_root {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -1445,8 +1433,6 @@ class GALGAS_double : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1596,8 +1582,6 @@ class GALGAS_filewrapper : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1686,8 +1670,6 @@ class GALGAS_function : public AC_GALGAS_root {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -1809,8 +1791,6 @@ class GALGAS_location : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1886,8 +1866,6 @@ class GALGAS_object : public AC_GALGAS_root {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -2096,8 +2074,6 @@ class GALGAS_sint : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -2305,8 +2281,6 @@ class GALGAS_sint_36__34_ : public AC_GALGAS_root {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -2544,6 +2518,8 @@ class GALGAS_string : public AC_GALGAS_root {
 
   public: VIRTUAL_IN_DEBUG class GALGAS_string getter_assemblerRepresentation (LOCATION_ARGS) const ;
 
+  public: VIRTUAL_IN_DEBUG class GALGAS_bigint_3F_ getter_bigint (LOCATION_ARGS) const ;
+
   public: VIRTUAL_IN_DEBUG class GALGAS_string getter_cStringRepresentation (LOCATION_ARGS) const ;
 
   public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_capacity (LOCATION_ARGS) const ;
@@ -2739,10 +2715,6 @@ class GALGAS_string : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_extractBigInt (class GALGAS_bigint & outOperand0) const ;
-
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -2862,8 +2834,6 @@ class GALGAS_stringset : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 //--------------------------------- Enumeration helper methods
@@ -2956,8 +2926,6 @@ class GALGAS_timer : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -3032,8 +3000,6 @@ class GALGAS_type : public AC_GALGAS_root {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -3253,8 +3219,6 @@ class GALGAS_uint_36__34_ : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -3376,8 +3340,6 @@ class GALGAS_functionlist : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -3522,8 +3484,6 @@ class GALGAS_luintlist : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -3666,8 +3626,6 @@ class GALGAS_lstringlist : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -3812,8 +3770,6 @@ class GALGAS_objectlist : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -3956,8 +3912,6 @@ class GALGAS_stringlist : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -4102,8 +4056,6 @@ class GALGAS_typelist : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -4246,8 +4198,6 @@ class GALGAS_uintlist : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -4392,8 +4342,6 @@ class GALGAS_uint_36__34_list : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -4536,8 +4484,6 @@ class GALGAS_bigintlist : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -4682,8 +4628,6 @@ class GALGAS_lbigintlist : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -4796,8 +4740,6 @@ class GALGAS_lbigint : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -4888,8 +4830,6 @@ class GALGAS_lbool : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -4982,8 +4922,6 @@ class GALGAS_lchar : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -5074,8 +5012,6 @@ class GALGAS_ldouble : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -5168,8 +5104,6 @@ class GALGAS_lsint : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -5261,8 +5195,6 @@ class GALGAS_lsint_36__34_ : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -5353,8 +5285,6 @@ class GALGAS_luint_36__34_ : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -5497,8 +5427,6 @@ class GALGAS__32_stringlist : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -5612,8 +5540,6 @@ class GALGAS_range : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -5623,6 +5549,79 @@ class GALGAS_range : public AC_GALGAS_root {
 //--------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_range ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 1: bigint? optional
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_bigint_3F_ : public AC_GALGAS_root {
+//--------------------------------- Private property
+  private: GALGAS_bigint mValue ;
+  private: OptionalState mState ;
+
+//--------------------------------- Default constructor
+  public: GALGAS_bigint_3F_ (void) ;
+
+//--------------------------------- Dedicaced constructors
+  public: GALGAS_bigint_3F_ (const GALGAS_bigint & inValue) ;
+  public: static GALGAS_bigint_3F_ init_nil (void) ;
+
+  public: bool isValuated (void) const ;
+  public: inline GALGAS_bigint unwrappedValue (void) const {
+    return mValue ;
+  }
+
+//--------------------------------- GALGAS read only properties
+  public: inline GALGAS_bool readProperty_isNil (void) const {
+    return GALGAS_bool (mState != OptionalState::invalid, mState == OptionalState::isNil) ;
+  }
+
+  public: inline GALGAS_bool readProperty_isSome (void) const {
+    return GALGAS_bool (mState != OptionalState::invalid, mState == OptionalState::valuated) ;
+  }
+
+  
+//--- Methods that every type should implement
+  public: virtual bool isValid (void) const override ;
+  
+  public: virtual void drop (void) override ;
+
+  public: virtual void description (String & ioString,
+                                    const int32_t inIndentation) const override ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_bigint_3F_ extractObject (const GALGAS_object & inObject,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Read subscripts
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GALGAS_bigint_3F_ class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_bigint_3F_ ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -5692,8 +5691,6 @@ class GALGAS_functionlist_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -5774,8 +5771,6 @@ class GALGAS_objectlist_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -5854,8 +5849,6 @@ class GALGAS_stringlist_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -5936,8 +5929,6 @@ class GALGAS_typelist_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -6016,8 +6007,6 @@ class GALGAS_uintlist_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -6098,8 +6087,6 @@ class GALGAS_uint_36__34_list_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -6179,8 +6166,6 @@ class GALGAS_bigintlist_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -6259,8 +6244,6 @@ class GALGAS_lbigintlist_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -6353,8 +6336,6 @@ class GALGAS__32_stringlist_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -6445,8 +6426,6 @@ class GALGAS_lstring : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -6539,8 +6518,6 @@ class GALGAS_luint : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -6620,8 +6597,6 @@ class GALGAS_luintlist_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -6700,8 +6675,6 @@ class GALGAS_lstringlist_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;

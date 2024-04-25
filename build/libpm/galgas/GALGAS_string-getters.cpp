@@ -4,7 +4,7 @@
 //
 //  This file is part of libpm library
 //
-//  Copyright (C) 1996, ..., 2023 Pierre Molinaro.
+//  Copyright (C) 1996, ..., 2024 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -44,6 +44,22 @@
 #ifdef PRAGMA_MARK_ALLOWED
   #pragma mark Getters
 #endif
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bigint_3F_ GALGAS_string::getter_bigint (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bigint_3F_ result ;
+  if (isValid ()) {
+    bool extracted = true ;
+    const BigSigned bigint (mString.cString (), BigUnsignedBase::ten, extracted) ;
+    if (extracted) {
+      result = GALGAS_bigint (bigint) ;
+    }else{
+      result = GALGAS_bigint_3F_::init_nil () ;
+    }
+  }
+  return result ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
