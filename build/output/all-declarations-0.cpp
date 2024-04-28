@@ -14,13 +14,13 @@
 //--------------------------------------------------------------------------------------------------
 
 class cCollectionElement__32_lstringlist : public cCollectionElement {
-  public: GALGAS__32_lstringlist_2D_element mObject ;
+  public: GGS__32_lstringlist_2E_element mObject ;
 
 //--- Class functions
-  public: cCollectionElement__32_lstringlist (const GALGAS_lstring & in_mValue_30_,
-                                              const GALGAS_lstring & in_mValue_31_
+  public: cCollectionElement__32_lstringlist (const GGS_lstring & in_mValue_30_,
+                                              const GGS_lstring & in_mValue_31_
                                               COMMA_LOCATION_ARGS) ;
-  public: cCollectionElement__32_lstringlist (const GALGAS__32_lstringlist_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement__32_lstringlist (const GGS__32_lstringlist_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
 
@@ -36,8 +36,8 @@ class cCollectionElement__32_lstringlist : public cCollectionElement {
 
 //--------------------------------------------------------------------------------------------------
 
-cCollectionElement__32_lstringlist::cCollectionElement__32_lstringlist (const GALGAS_lstring & in_mValue_30_,
-                                                                        const GALGAS_lstring & in_mValue_31_
+cCollectionElement__32_lstringlist::cCollectionElement__32_lstringlist (const GGS_lstring & in_mValue_30_,
+                                                                        const GGS_lstring & in_mValue_31_
                                                                         COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (in_mValue_30_, in_mValue_31_) {
@@ -45,7 +45,7 @@ mObject (in_mValue_30_, in_mValue_31_) {
 
 //--------------------------------------------------------------------------------------------------
 
-cCollectionElement__32_lstringlist::cCollectionElement__32_lstringlist (const GALGAS__32_lstringlist_2D_element & inElement COMMA_LOCATION_ARGS) :
+cCollectionElement__32_lstringlist::cCollectionElement__32_lstringlist (const GGS__32_lstringlist_2E_element & inElement COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (inElement.mProperty_mValue_30_, inElement.mProperty_mValue_31_) {
 }
@@ -79,33 +79,33 @@ void cCollectionElement__32_lstringlist::description (String & ioString, const i
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist::GALGAS__32_lstringlist (void) :
+GGS__32_lstringlist::GGS__32_lstringlist (void) :
 AC_GALGAS_list () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist::GALGAS__32_lstringlist (const capCollectionElementArray & inSharedArray) :
+GGS__32_lstringlist::GGS__32_lstringlist (const capCollectionElementArray & inSharedArray) :
 AC_GALGAS_list (inSharedArray) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist GALGAS__32_lstringlist::class_func_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS__32_lstringlist (capCollectionElementArray ()) ;
+GGS__32_lstringlist GGS__32_lstringlist::class_func_emptyList (UNUSED_LOCATION_ARGS) {
+  return GGS__32_lstringlist (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist GALGAS__32_lstringlist::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
-  return GALGAS__32_lstringlist (capCollectionElementArray ()) ;
+GGS__32_lstringlist GGS__32_lstringlist::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
+  return GGS__32_lstringlist (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist::enterElement (const GALGAS__32_lstringlist_2D_element & inValue,
-                                           Compiler * /* inCompiler */
-                                           COMMA_LOCATION_ARGS) {
+void GGS__32_lstringlist::enterElement (const GGS__32_lstringlist_2E_element & inValue,
+                                        Compiler * /* inCompiler */
+                                        COMMA_LOCATION_ARGS) {
   cCollectionElement * p = nullptr ;
   macroMyNew (p, cCollectionElement__32_lstringlist (inValue COMMA_THERE)) ;
   capCollectionElement attributes ;
@@ -116,14 +116,14 @@ void GALGAS__32_lstringlist::enterElement (const GALGAS__32_lstringlist_2D_eleme
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist GALGAS__32_lstringlist::class_func_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                         const GALGAS_lstring & inOperand1
-                                                                         COMMA_LOCATION_ARGS) {
-  GALGAS__32_lstringlist result ;
+GGS__32_lstringlist GGS__32_lstringlist::class_func_listWithValue (const GGS_lstring & inOperand0,
+                                                                   const GGS_lstring & inOperand1
+                                                                   COMMA_LOCATION_ARGS) {
+  GGS__32_lstringlist result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS__32_lstringlist (capCollectionElementArray ()) ;
+    result = GGS__32_lstringlist (capCollectionElementArray ()) ;
     capCollectionElement attributes ;
-    GALGAS__32_lstringlist::makeAttributesFromObjects (attributes, inOperand0, inOperand1 COMMA_THERE) ;
+    GGS__32_lstringlist::makeAttributesFromObjects (attributes, inOperand0, inOperand1 COMMA_THERE) ;
     result.appendObject (attributes) ;
   }
   return result ;
@@ -131,10 +131,10 @@ GALGAS__32_lstringlist GALGAS__32_lstringlist::class_func_listWithValue (const G
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                        const GALGAS_lstring & in_mValue_30_,
-                                                        const GALGAS_lstring & in_mValue_31_
-                                                        COMMA_LOCATION_ARGS) {
+void GGS__32_lstringlist::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                     const GGS_lstring & in_mValue_30_,
+                                                     const GGS_lstring & in_mValue_31_
+                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement__32_lstringlist * p = nullptr ;
   macroMyNew (p, cCollectionElement__32_lstringlist (in_mValue_30_,
                                                      in_mValue_31_ COMMA_THERE)) ;
@@ -144,9 +144,9 @@ void GALGAS__32_lstringlist::makeAttributesFromObjects (capCollectionElement & o
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist::addAssign_operation (const GALGAS_lstring & inOperand0,
-                                                  const GALGAS_lstring & inOperand1
-                                                  COMMA_LOCATION_ARGS) {
+void GGS__32_lstringlist::addAssign_operation (const GGS_lstring & inOperand0,
+                                               const GGS_lstring & inOperand1
+                                               COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cCollectionElement * p = nullptr ;
     macroMyNew (p, cCollectionElement__32_lstringlist (inOperand0, inOperand1 COMMA_THERE)) ;
@@ -159,10 +159,10 @@ void GALGAS__32_lstringlist::addAssign_operation (const GALGAS_lstring & inOpera
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist::setter_append (const GALGAS_lstring inOperand0,
-                                            const GALGAS_lstring inOperand1,
-                                            Compiler * /* inCompiler */
-                                            COMMA_LOCATION_ARGS) {
+void GGS__32_lstringlist::setter_append (const GGS_lstring inOperand0,
+                                         const GGS_lstring inOperand1,
+                                         Compiler * /* inCompiler */
+                                         COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cCollectionElement * p = nullptr ;
     macroMyNew (p, cCollectionElement__32_lstringlist (inOperand0, inOperand1 COMMA_THERE)) ;
@@ -175,63 +175,52 @@ void GALGAS__32_lstringlist::setter_append (const GALGAS_lstring inOperand0,
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist::setter_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                   const GALGAS_lstring inOperand1,
-                                                   const GALGAS_uint inInsertionIndex,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
-  if (isValid ()) {
-    if (inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
-      cCollectionElement * p = nullptr ;
-      macroMyNew (p, cCollectionElement__32_lstringlist (inOperand0, inOperand1 COMMA_THERE)) ;
-      capCollectionElement attributes ;
-      attributes.setPointer (p) ;
-      macroDetachSharedObject (p) ;
-      insertObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
-    }else{
+void GGS__32_lstringlist::setter_insertAtIndex (const GGS_lstring inOperand0,
+                                                const GGS_lstring inOperand1,
+                                                const GGS_uint inInsertionIndex,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
+  if (isValid () && inInsertionIndex.isValid ()) {
+    cCollectionElement * p = nullptr ;
+    macroMyNew (p, cCollectionElement__32_lstringlist (inOperand0, inOperand1 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    insertObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS__32_lstringlist::setter_removeAtIndex (GGS_lstring & outOperand0,
+                                                GGS_lstring & outOperand1,
+                                                const GGS_uint inRemoveIndex,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
+  outOperand0.drop () ;
+  outOperand1.drop () ;
+  if (isValid () && inRemoveIndex.isValid ()) {
+    capCollectionElement attributes ;
+    removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
+    cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) attributes.ptr () ;
+    if (nullptr == p) {
       drop () ;
-    }
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS__32_lstringlist::setter_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                   GALGAS_lstring & outOperand1,
-                                                   const GALGAS_uint inRemoveIndex,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
-  if (isValid ()) {
-    if (inRemoveIndex.isValid ()) {
-      capCollectionElement attributes ;
-      removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-      cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) attributes.ptr () ;
-      if (nullptr == p) {
-        outOperand0.drop () ;
-        outOperand1.drop () ;
-        drop () ;
-      }else{
-        macroValidSharedObject (p, cCollectionElement__32_lstringlist) ;
-        outOperand0 = p->mObject.mProperty_mValue_30_ ;
-        outOperand1 = p->mObject.mProperty_mValue_31_ ;
-      }
     }else{
-      outOperand0.drop () ;
-      outOperand1.drop () ;
-      drop () ;    
+      macroValidSharedObject (p, cCollectionElement__32_lstringlist) ;
+      outOperand0 = p->mObject.mProperty_mValue_30_ ;
+      outOperand1 = p->mObject.mProperty_mValue_31_ ;
     }
   }else{
-    outOperand0.drop () ;
-    outOperand1.drop () ;
+    drop () ;    
   }
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist::setter_popFirst (GALGAS_lstring & outOperand0,
-                                              GALGAS_lstring & outOperand1,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
+void GGS__32_lstringlist::setter_popFirst (GGS_lstring & outOperand0,
+                                           GGS_lstring & outOperand1,
+                                           Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) attributes.ptr () ;
@@ -247,10 +236,10 @@ void GALGAS__32_lstringlist::setter_popFirst (GALGAS_lstring & outOperand0,
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist::setter_popLast (GALGAS_lstring & outOperand0,
-                                             GALGAS_lstring & outOperand1,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) {
+void GGS__32_lstringlist::setter_popLast (GGS_lstring & outOperand0,
+                                          GGS_lstring & outOperand1,
+                                          Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) attributes.ptr () ;
@@ -266,10 +255,10 @@ void GALGAS__32_lstringlist::setter_popLast (GALGAS_lstring & outOperand0,
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist::method_first (GALGAS_lstring & outOperand0,
-                                           GALGAS_lstring & outOperand1,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const {
+void GGS__32_lstringlist::method_first (GGS_lstring & outOperand0,
+                                        GGS_lstring & outOperand1,
+                                        Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) attributes.ptr () ;
@@ -285,10 +274,10 @@ void GALGAS__32_lstringlist::method_first (GALGAS_lstring & outOperand0,
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist::method_last (GALGAS_lstring & outOperand0,
-                                          GALGAS_lstring & outOperand1,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) const {
+void GGS__32_lstringlist::method_last (GGS_lstring & outOperand0,
+                                       GGS_lstring & outOperand1,
+                                       Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) attributes.ptr () ;
@@ -304,10 +293,10 @@ void GALGAS__32_lstringlist::method_last (GALGAS_lstring & outOperand0,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist GALGAS__32_lstringlist::add_operation (const GALGAS__32_lstringlist & inOperand,
-                                                              Compiler * /* inCompiler */
-                                                              COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS__32_lstringlist result ;
+GGS__32_lstringlist GGS__32_lstringlist::add_operation (const GGS__32_lstringlist & inOperand,
+                                                        Compiler * /* inCompiler */
+                                                        COMMA_UNUSED_LOCATION_ARGS) const {
+  GGS__32_lstringlist result ;
   if (isValid () && inOperand.isValid ()) {
     result = *this ;
     result.appendList (inOperand) ;
@@ -317,48 +306,48 @@ GALGAS__32_lstringlist GALGAS__32_lstringlist::add_operation (const GALGAS__32_l
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist GALGAS__32_lstringlist::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                        Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) const {
-  GALGAS__32_lstringlist result = GALGAS__32_lstringlist::class_func_emptyList (THERE) ;
+GGS__32_lstringlist GGS__32_lstringlist::getter_subListWithRange (const GGS_range & inRange,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const {
+  GGS__32_lstringlist result = GGS__32_lstringlist::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist GALGAS__32_lstringlist::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                        Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) const {
-  GALGAS__32_lstringlist result = GALGAS__32_lstringlist::class_func_emptyList (THERE) ;
+GGS__32_lstringlist GGS__32_lstringlist::getter_subListFromIndex (const GGS_uint & inIndex,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const {
+  GGS__32_lstringlist result = GGS__32_lstringlist::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist GALGAS__32_lstringlist::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                                      Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) const {
-  GALGAS__32_lstringlist result = GALGAS__32_lstringlist::class_func_emptyList (THERE) ;
+GGS__32_lstringlist GGS__32_lstringlist::getter_subListToIndex (const GGS_uint & inIndex,
+                                                                Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
+  GGS__32_lstringlist result = GGS__32_lstringlist::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist::plusAssign_operation (const GALGAS__32_lstringlist inOperand,
-                                                   Compiler * /* inCompiler */
-                                                   COMMA_UNUSED_LOCATION_ARGS) {
+void GGS__32_lstringlist::plusAssign_operation (const GGS__32_lstringlist inOperand,
+                                                Compiler * /* inCompiler */
+                                                COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist::setter_setMValue_30_AtIndex (GALGAS_lstring inOperand,
-                                                          GALGAS_uint inIndex,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GGS__32_lstringlist::setter_setMValue_30_AtIndex (GGS_lstring inOperand,
+                                                       GGS_uint inIndex,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
   if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement__32_lstringlist) ;
@@ -369,12 +358,12 @@ void GALGAS__32_lstringlist::setter_setMValue_30_AtIndex (GALGAS_lstring inOpera
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_lstring GALGAS__32_lstringlist::getter_mValue_30_AtIndex (const GALGAS_uint & inIndex,
-                                                                 Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const {
+GGS_lstring GGS__32_lstringlist::getter_mValue_30_AtIndex (const GGS_uint & inIndex,
+                                                           Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) attributes.ptr () ;
-  GALGAS_lstring result ;
+  GGS_lstring result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement__32_lstringlist) ;
     result = p->mObject.mProperty_mValue_30_ ;
@@ -384,10 +373,10 @@ GALGAS_lstring GALGAS__32_lstringlist::getter_mValue_30_AtIndex (const GALGAS_ui
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist::setter_setMValue_31_AtIndex (GALGAS_lstring inOperand,
-                                                          GALGAS_uint inIndex,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GGS__32_lstringlist::setter_setMValue_31_AtIndex (GGS_lstring inOperand,
+                                                       GGS_uint inIndex,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
   if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement__32_lstringlist) ;
@@ -398,12 +387,12 @@ void GALGAS__32_lstringlist::setter_setMValue_31_AtIndex (GALGAS_lstring inOpera
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_lstring GALGAS__32_lstringlist::getter_mValue_31_AtIndex (const GALGAS_uint & inIndex,
-                                                                 Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const {
+GGS_lstring GGS__32_lstringlist::getter_mValue_31_AtIndex (const GGS_uint & inIndex,
+                                                           Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) attributes.ptr () ;
-  GALGAS_lstring result ;
+  GGS_lstring result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement__32_lstringlist) ;
     result = p->mObject.mProperty_mValue_31_ ;
@@ -415,7 +404,7 @@ GALGAS_lstring GALGAS__32_lstringlist::getter_mValue_31_AtIndex (const GALGAS_ui
 
 //--------------------------------------------------------------------------------------------------
 
-cEnumerator__32_lstringlist::cEnumerator__32_lstringlist (const GALGAS__32_lstringlist & inEnumeratedObject,
+cEnumerator__32_lstringlist::cEnumerator__32_lstringlist (const GGS__32_lstringlist & inEnumeratedObject,
                                                           const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
@@ -423,7 +412,7 @@ cGenericAbstractEnumerator (inOrder) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist_2D_element cEnumerator__32_lstringlist::current (LOCATION_ARGS) const {
+GGS__32_lstringlist_2E_element cEnumerator__32_lstringlist::current (LOCATION_ARGS) const {
   const cCollectionElement__32_lstringlist * p = (const cCollectionElement__32_lstringlist *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement__32_lstringlist) ;
   return p->mObject ;
@@ -432,7 +421,7 @@ GALGAS__32_lstringlist_2D_element cEnumerator__32_lstringlist::current (LOCATION
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_lstring cEnumerator__32_lstringlist::current_mValue_30_ (LOCATION_ARGS) const {
+GGS_lstring cEnumerator__32_lstringlist::current_mValue_30_ (LOCATION_ARGS) const {
   const cCollectionElement__32_lstringlist * p = (const cCollectionElement__32_lstringlist *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement__32_lstringlist) ;
   return p->mObject.mProperty_mValue_30_ ;
@@ -440,7 +429,7 @@ GALGAS_lstring cEnumerator__32_lstringlist::current_mValue_30_ (LOCATION_ARGS) c
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_lstring cEnumerator__32_lstringlist::current_mValue_31_ (LOCATION_ARGS) const {
+GGS_lstring cEnumerator__32_lstringlist::current_mValue_31_ (LOCATION_ARGS) const {
   const cCollectionElement__32_lstringlist * p = (const cCollectionElement__32_lstringlist *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement__32_lstringlist) ;
   return p->mObject.mProperty_mValue_31_ ;
@@ -460,29 +449,29 @@ const C_galgas_type_descriptor kTypeDescriptor_GALGAS__32_lstringlist ("2lstring
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS__32_lstringlist::staticTypeDescriptor (void) const {
+const C_galgas_type_descriptor * GGS__32_lstringlist::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS__32_lstringlist ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS__32_lstringlist::clonedObject (void) const {
+AC_GALGAS_root * GGS__32_lstringlist::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS__32_lstringlist (*this)) ;
+    macroMyNew (result, GGS__32_lstringlist (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist GALGAS__32_lstringlist::extractObject (const GALGAS_object & inObject,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  GALGAS__32_lstringlist result ;
-  const GALGAS__32_lstringlist * p = (const GALGAS__32_lstringlist *) inObject.embeddedObject () ;
+GGS__32_lstringlist GGS__32_lstringlist::extractObject (const GGS_object & inObject,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
+  GGS__32_lstringlist result ;
+  const GGS__32_lstringlist * p = (const GGS__32_lstringlist *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS__32_lstringlist *> (p)) {
+    if (nullptr != dynamic_cast <const GGS__32_lstringlist *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("2lstringlist", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1126,23 +1115,23 @@ uint32_t Lexique_oa_5F_scanner::attributeValue_ulongValue (void) const {
 //         A S S I G N    F R O M    A T T R I B U T E                                           
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_lstring Lexique_oa_5F_scanner::synthetizedAttribute_identifierString (void) const {
+GGS_lstring Lexique_oa_5F_scanner::synthetizedAttribute_identifierString (void) const {
   cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) currentTokenPtr (HERE) ;
   macroValidSharedObject (ptr, cTokenFor_oa_5F_scanner) ;
-  GALGAS_location currentLocation (ptr->mStartLocation, ptr->mEndLocation, sourceText ()) ;
-  GALGAS_string value (ptr->mLexicalAttribute_identifierString) ;
-  GALGAS_lstring result (value, currentLocation) ;
+  GGS_location currentLocation (ptr->mStartLocation, ptr->mEndLocation, sourceText ()) ;
+  GGS_string value (ptr->mLexicalAttribute_identifierString) ;
+  GGS_lstring result (value, currentLocation) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint Lexique_oa_5F_scanner::synthetizedAttribute_ulongValue (void) const {
+GGS_luint Lexique_oa_5F_scanner::synthetizedAttribute_ulongValue (void) const {
   cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) currentTokenPtr (HERE) ;
   macroValidSharedObject (ptr, cTokenFor_oa_5F_scanner) ;
-  GALGAS_location currentLocation (ptr->mStartLocation, ptr->mEndLocation, sourceText ()) ;
-  GALGAS_uint value (ptr->mLexicalAttribute_ulongValue) ;
-  GALGAS_luint result (value, currentLocation) ;
+  GGS_location currentLocation (ptr->mStartLocation, ptr->mEndLocation, sourceText ()) ;
+  GGS_uint value (ptr->mLexicalAttribute_ulongValue) ;
+  GGS_luint result (value, currentLocation) ;
   return result ;
 }
 
@@ -1150,32 +1139,32 @@ GALGAS_luint Lexique_oa_5F_scanner::synthetizedAttribute_ulongValue (void) const
 //                         I N T R O S P E C T I O N                                             
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_stringlist Lexique_oa_5F_scanner::symbols (LOCATION_ARGS) {
-  GALGAS_stringlist result = GALGAS_stringlist::class_func_emptyList (THERE) ;
-  result.addAssign_operation (GALGAS_string ("identifier") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("literal_integer") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("system") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("end") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("task") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("standard") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("extended") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("message") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("length") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("priority") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("period") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("offset") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("on") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("deadline") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("duration") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("processor") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("can") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("van") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("network") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("scalingfactor") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("every") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string (",") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string (";") COMMA_HERE) ;
-  result.addAssign_operation (GALGAS_string ("..") COMMA_HERE) ;
+GGS_stringlist Lexique_oa_5F_scanner::symbols (LOCATION_ARGS) {
+  GGS_stringlist result = GGS_stringlist::class_func_emptyList (THERE) ;
+  result.addAssign_operation (GGS_string ("identifier") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("literal_integer") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("system") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("end") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("task") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("standard") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("extended") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("message") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("length") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("priority") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("period") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("offset") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("on") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("deadline") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("duration") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("processor") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("can") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("van") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("network") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("scalingfactor") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("every") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string (",") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string (";") COMMA_HERE) ;
+  result.addAssign_operation (GGS_string ("..") COMMA_HERE) ;
   return result ;
 }
 
@@ -1284,7 +1273,7 @@ String Lexique_oa_5F_scanner::styleNameForIndex (const uint32_t inStyleIndex) co
 
 //--------------------------------------------------------------------------------------------------
 
-cMapElement_M_5F_processor::cMapElement_M_5F_processor (const GALGAS_M_5F_processor_2D_element & inValue
+cMapElement_M_5F_processor::cMapElement_M_5F_processor (const GGS_M_5F_processor_2E_element & inValue
                                                         COMMA_LOCATION_ARGS) :
 cMapElement (inValue.mProperty_lkey COMMA_THERE),
 mProperty_mIndex (inValue.mProperty_mIndex),
@@ -1293,9 +1282,9 @@ mProperty_mStep (inValue.mProperty_mStep) {
 
 //--------------------------------------------------------------------------------------------------
 
-cMapElement_M_5F_processor::cMapElement_M_5F_processor (const GALGAS_lstring & inKey,
-                                                        const GALGAS_uint & in_mIndex,
-                                                        const GALGAS_luint & in_mStep
+cMapElement_M_5F_processor::cMapElement_M_5F_processor (const GGS_lstring & inKey,
+                                                        const GGS_uint & in_mIndex,
+                                                        const GGS_luint & in_mStep
                                                         COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_mIndex (in_mIndex),
@@ -1331,52 +1320,52 @@ void cMapElement_M_5F_processor::description (String & ioString, const int32_t i
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor::GALGAS_M_5F_processor (void) :
+GGS_M_5F_processor::GGS_M_5F_processor (void) :
 AC_GALGAS_map () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor::GALGAS_M_5F_processor (const GALGAS_M_5F_processor & inSource) :
+GGS_M_5F_processor::GGS_M_5F_processor (const GGS_M_5F_processor & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor & GALGAS_M_5F_processor::operator = (const GALGAS_M_5F_processor & inSource) {
+GGS_M_5F_processor & GGS_M_5F_processor::operator = (const GGS_M_5F_processor & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor GALGAS_M_5F_processor::init (Compiler * COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_processor result ;
+GGS_M_5F_processor GGS_M_5F_processor::init (Compiler * COMMA_LOCATION_ARGS) {
+  GGS_M_5F_processor result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor GALGAS_M_5F_processor::class_func_emptyMap (LOCATION_ARGS) {
-  GALGAS_M_5F_processor result ;
+GGS_M_5F_processor GGS_M_5F_processor::class_func_emptyMap (LOCATION_ARGS) {
+  GGS_M_5F_processor result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element_3F_ GALGAS_M_5F_processor
-::readSubscript__3F_ (const class GALGAS_string & inKey,
+GGS_M_5F_processor_2E_element_3F_ GGS_M_5F_processor
+::readSubscript__3F_ (const class GGS_string & inKey,
                             Compiler * /* inCompiler */
                             COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_M_5F_processor_2D_element_3F_ result ;
+  GGS_M_5F_processor_2E_element_3F_ result ;
   if (isValid () && inKey.isValid ()) {
     cMapElement_M_5F_processor * p = (cMapElement_M_5F_processor *) searchForKey (inKey) ;
     if (nullptr == p) {
-      result = GALGAS_M_5F_processor_2D_element_3F_::init_nil () ;
+      result = GGS_M_5F_processor_2E_element_3F_::init_nil () ;
     }else{
-      GALGAS_M_5F_processor_2D_element element ;
+      GGS_M_5F_processor_2E_element element ;
       element.mProperty_lkey = p->mProperty_lkey ;
       element.mProperty_mIndex = p->mProperty_mIndex ;
       element.mProperty_mStep = p->mProperty_mStep ;
@@ -1388,27 +1377,27 @@ GALGAS_M_5F_processor_2D_element_3F_ GALGAS_M_5F_processor
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor GALGAS_M_5F_processor::class_func_mapWithMapToOverride (const GALGAS_M_5F_processor & inMapToOverride
-                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_processor result ;
+GGS_M_5F_processor GGS_M_5F_processor::class_func_mapWithMapToOverride (const GGS_M_5F_processor & inMapToOverride
+                                                                        COMMA_LOCATION_ARGS) {
+  GGS_M_5F_processor result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor GALGAS_M_5F_processor::getter_overriddenMap (Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) const {
-  GALGAS_M_5F_processor result ;
+GGS_M_5F_processor GGS_M_5F_processor::getter_overriddenMap (Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
+  GGS_M_5F_processor result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_processor::enterElement (const GALGAS_M_5F_processor_2D_element & inValue,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
+void GGS_M_5F_processor::enterElement (const GGS_M_5F_processor_2E_element & inValue,
+                                       Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_processor * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_processor (inValue COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -1421,11 +1410,11 @@ void GALGAS_M_5F_processor::enterElement (const GALGAS_M_5F_processor_2D_element
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_processor::addAssign_operation (const GALGAS_lstring & inKey,
-                                                 const GALGAS_uint & inArgument0,
-                                                 const GALGAS_luint & inArgument1,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
+void GGS_M_5F_processor::addAssign_operation (const GGS_lstring & inKey,
+                                              const GGS_uint & inArgument0,
+                                              const GGS_luint & inArgument1,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_processor * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_processor (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -1438,10 +1427,10 @@ void GALGAS_M_5F_processor::addAssign_operation (const GALGAS_lstring & inKey,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor GALGAS_M_5F_processor::add_operation (const GALGAS_M_5F_processor & inOperand,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
-  GALGAS_M_5F_processor result = *this ;
+GGS_M_5F_processor GGS_M_5F_processor::add_operation (const GGS_M_5F_processor & inOperand,
+                                                      Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const {
+  GGS_M_5F_processor result = *this ;
   cEnumerator_M_5F_processor enumerator (inOperand, EnumerationOrder::up) ;
   while (enumerator.hasCurrentObject ()) {
     result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIndex (HERE), enumerator.current_mStep (HERE), inCompiler COMMA_THERE) ;
@@ -1452,11 +1441,11 @@ GALGAS_M_5F_processor GALGAS_M_5F_processor::add_operation (const GALGAS_M_5F_pr
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_processor::setter_insertKey (GALGAS_lstring inKey,
-                                              GALGAS_uint inArgument0,
-                                              GALGAS_luint inArgument1,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
+void GGS_M_5F_processor::setter_insertKey (GGS_lstring inKey,
+                                           GGS_uint inArgument0,
+                                           GGS_luint inArgument1,
+                                           Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_processor * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_processor (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -1473,11 +1462,11 @@ const char * kSearchErrorMessage_M_5F_processor_searchKey = "the processor '%K' 
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_processor::method_searchKey (GALGAS_lstring inKey,
-                                              GALGAS_uint & outArgument0,
-                                              GALGAS_luint & outArgument1,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const {
+void GGS_M_5F_processor::method_searchKey (GGS_lstring inKey,
+                                           GGS_uint & outArgument0,
+                                           GGS_luint & outArgument1,
+                                           Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const {
   const cMapElement_M_5F_processor * p = (const cMapElement_M_5F_processor *) performSearch (inKey,
                                                                                              inCompiler,
                                                                                              kSearchErrorMessage_M_5F_processor_searchKey
@@ -1494,12 +1483,12 @@ void GALGAS_M_5F_processor::method_searchKey (GALGAS_lstring inKey,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint GALGAS_M_5F_processor::getter_mIndexForKey (const GALGAS_string & inKey,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
+GGS_uint GGS_M_5F_processor::getter_mIndexForKey (const GGS_string & inKey,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_processor * p = (const cMapElement_M_5F_processor *) attributes ;
-  GALGAS_uint result ;
+  GGS_uint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_processor) ;
     result = p->mProperty_mIndex ;
@@ -1509,12 +1498,12 @@ GALGAS_uint GALGAS_M_5F_processor::getter_mIndexForKey (const GALGAS_string & in
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_processor::getter_mStepForKey (const GALGAS_string & inKey,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_processor::getter_mStepForKey (const GGS_string & inKey,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_processor * p = (const cMapElement_M_5F_processor *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_processor) ;
     result = p->mProperty_mStep ;
@@ -1524,10 +1513,10 @@ GALGAS_luint GALGAS_M_5F_processor::getter_mStepForKey (const GALGAS_string & in
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_processor::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
-                                                    GALGAS_string inKey,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
+void GGS_M_5F_processor::setter_setMIndexForKey (GGS_uint inAttributeValue,
+                                                 GGS_string inKey,
+                                                 Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_processor * p = (cMapElement_M_5F_processor *) attributes ;
   if (nullptr != p) {
@@ -1538,10 +1527,10 @@ void GALGAS_M_5F_processor::setter_setMIndexForKey (GALGAS_uint inAttributeValue
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_processor::setter_setMStepForKey (GALGAS_luint inAttributeValue,
-                                                   GALGAS_string inKey,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GGS_M_5F_processor::setter_setMStepForKey (GGS_luint inAttributeValue,
+                                                GGS_string inKey,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_processor * p = (cMapElement_M_5F_processor *) attributes ;
   if (nullptr != p) {
@@ -1552,9 +1541,9 @@ void GALGAS_M_5F_processor::setter_setMStepForKey (GALGAS_luint inAttributeValue
 
 //--------------------------------------------------------------------------------------------------
 
-cMapElement_M_5F_processor * GALGAS_M_5F_processor::readWriteAccessForWithInstruction (Compiler * inCompiler,
-                                                                                       const GALGAS_string & inKey
-                                                                                       COMMA_LOCATION_ARGS) {
+cMapElement_M_5F_processor * GGS_M_5F_processor::readWriteAccessForWithInstruction (Compiler * inCompiler,
+                                                                                    const GGS_string & inKey
+                                                                                    COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_processor * result = (cMapElement_M_5F_processor *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
   macroNullOrValidSharedObject (result, cMapElement_M_5F_processor) ;
   return result ;
@@ -1562,7 +1551,7 @@ cMapElement_M_5F_processor * GALGAS_M_5F_processor::readWriteAccessForWithInstru
 
 //--------------------------------------------------------------------------------------------------
 
-cEnumerator_M_5F_processor::cEnumerator_M_5F_processor (const GALGAS_M_5F_processor & inEnumeratedObject,
+cEnumerator_M_5F_processor::cEnumerator_M_5F_processor (const GGS_M_5F_processor & inEnumeratedObject,
                                                         const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
@@ -1570,15 +1559,15 @@ cGenericAbstractEnumerator (inOrder) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element cEnumerator_M_5F_processor::current (LOCATION_ARGS) const {
+GGS_M_5F_processor_2E_element cEnumerator_M_5F_processor::current (LOCATION_ARGS) const {
   const cMapElement_M_5F_processor * p = (const cMapElement_M_5F_processor *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_processor) ;
-  return GALGAS_M_5F_processor_2D_element (p->mProperty_lkey, p->mProperty_mIndex, p->mProperty_mStep) ;
+  return GGS_M_5F_processor_2E_element (p->mProperty_lkey, p->mProperty_mIndex, p->mProperty_mStep) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_lstring cEnumerator_M_5F_processor::current_lkey (LOCATION_ARGS) const {
+GGS_lstring cEnumerator_M_5F_processor::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mProperty_lkey ;
@@ -1586,7 +1575,7 @@ GALGAS_lstring cEnumerator_M_5F_processor::current_lkey (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint cEnumerator_M_5F_processor::current_mIndex (LOCATION_ARGS) const {
+GGS_uint cEnumerator_M_5F_processor::current_mIndex (LOCATION_ARGS) const {
   const cMapElement_M_5F_processor * p = (const cMapElement_M_5F_processor *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_processor) ;
   return p->mProperty_mIndex ;
@@ -1594,7 +1583,7 @@ GALGAS_uint cEnumerator_M_5F_processor::current_mIndex (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_processor::current_mStep (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_processor::current_mStep (LOCATION_ARGS) const {
   const cMapElement_M_5F_processor * p = (const cMapElement_M_5F_processor *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_processor) ;
   return p->mProperty_mStep ;
@@ -1611,29 +1600,29 @@ const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_processor ("M_process
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_M_5F_processor::staticTypeDescriptor (void) const {
+const C_galgas_type_descriptor * GGS_M_5F_processor::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_M_5F_processor ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_M_5F_processor::clonedObject (void) const {
+AC_GALGAS_root * GGS_M_5F_processor::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_M_5F_processor (*this)) ;
+    macroMyNew (result, GGS_M_5F_processor (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor GALGAS_M_5F_processor::extractObject (const GALGAS_object & inObject,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_processor result ;
-  const GALGAS_M_5F_processor * p = (const GALGAS_M_5F_processor *) inObject.embeddedObject () ;
+GGS_M_5F_processor GGS_M_5F_processor::extractObject (const GGS_object & inObject,
+                                                      Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  GGS_M_5F_processor result ;
+  const GGS_M_5F_processor * p = (const GGS_M_5F_processor *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_M_5F_processor *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_M_5F_processor *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("M_processor", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1644,7 +1633,7 @@ GALGAS_M_5F_processor GALGAS_M_5F_processor::extractObject (const GALGAS_object 
 
 //--------------------------------------------------------------------------------------------------
 
-cMapElement_M_5F_network::cMapElement_M_5F_network (const GALGAS_M_5F_network_2D_element & inValue
+cMapElement_M_5F_network::cMapElement_M_5F_network (const GGS_M_5F_network_2E_element & inValue
                                                     COMMA_LOCATION_ARGS) :
 cMapElement (inValue.mProperty_lkey COMMA_THERE),
 mProperty_mIndex (inValue.mProperty_mIndex),
@@ -1654,10 +1643,10 @@ mProperty_mScalingFactor (inValue.mProperty_mScalingFactor) {
 
 //--------------------------------------------------------------------------------------------------
 
-cMapElement_M_5F_network::cMapElement_M_5F_network (const GALGAS_lstring & inKey,
-                                                    const GALGAS_uint & in_mIndex,
-                                                    const GALGAS_bool & in_mCANnetwork,
-                                                    const GALGAS_luint & in_mScalingFactor
+cMapElement_M_5F_network::cMapElement_M_5F_network (const GGS_lstring & inKey,
+                                                    const GGS_uint & in_mIndex,
+                                                    const GGS_bool & in_mCANnetwork,
+                                                    const GGS_luint & in_mScalingFactor
                                                     COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_mIndex (in_mIndex),
@@ -1698,52 +1687,52 @@ void cMapElement_M_5F_network::description (String & ioString, const int32_t inI
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network::GALGAS_M_5F_network (void) :
+GGS_M_5F_network::GGS_M_5F_network (void) :
 AC_GALGAS_map () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network::GALGAS_M_5F_network (const GALGAS_M_5F_network & inSource) :
+GGS_M_5F_network::GGS_M_5F_network (const GGS_M_5F_network & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network & GALGAS_M_5F_network::operator = (const GALGAS_M_5F_network & inSource) {
+GGS_M_5F_network & GGS_M_5F_network::operator = (const GGS_M_5F_network & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network GALGAS_M_5F_network::init (Compiler * COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_network result ;
+GGS_M_5F_network GGS_M_5F_network::init (Compiler * COMMA_LOCATION_ARGS) {
+  GGS_M_5F_network result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network GALGAS_M_5F_network::class_func_emptyMap (LOCATION_ARGS) {
-  GALGAS_M_5F_network result ;
+GGS_M_5F_network GGS_M_5F_network::class_func_emptyMap (LOCATION_ARGS) {
+  GGS_M_5F_network result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element_3F_ GALGAS_M_5F_network
-::readSubscript__3F_ (const class GALGAS_string & inKey,
+GGS_M_5F_network_2E_element_3F_ GGS_M_5F_network
+::readSubscript__3F_ (const class GGS_string & inKey,
                             Compiler * /* inCompiler */
                             COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_M_5F_network_2D_element_3F_ result ;
+  GGS_M_5F_network_2E_element_3F_ result ;
   if (isValid () && inKey.isValid ()) {
     cMapElement_M_5F_network * p = (cMapElement_M_5F_network *) searchForKey (inKey) ;
     if (nullptr == p) {
-      result = GALGAS_M_5F_network_2D_element_3F_::init_nil () ;
+      result = GGS_M_5F_network_2E_element_3F_::init_nil () ;
     }else{
-      GALGAS_M_5F_network_2D_element element ;
+      GGS_M_5F_network_2E_element element ;
       element.mProperty_lkey = p->mProperty_lkey ;
       element.mProperty_mIndex = p->mProperty_mIndex ;
       element.mProperty_mCANnetwork = p->mProperty_mCANnetwork ;
@@ -1756,27 +1745,27 @@ GALGAS_M_5F_network_2D_element_3F_ GALGAS_M_5F_network
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network GALGAS_M_5F_network::class_func_mapWithMapToOverride (const GALGAS_M_5F_network & inMapToOverride
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_network result ;
+GGS_M_5F_network GGS_M_5F_network::class_func_mapWithMapToOverride (const GGS_M_5F_network & inMapToOverride
+                                                                    COMMA_LOCATION_ARGS) {
+  GGS_M_5F_network result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network GALGAS_M_5F_network::getter_overriddenMap (Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_M_5F_network result ;
+GGS_M_5F_network GGS_M_5F_network::getter_overriddenMap (Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
+  GGS_M_5F_network result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_network::enterElement (const GALGAS_M_5F_network_2D_element & inValue,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) {
+void GGS_M_5F_network::enterElement (const GGS_M_5F_network_2E_element & inValue,
+                                     Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_network * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_network (inValue COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -1789,12 +1778,12 @@ void GALGAS_M_5F_network::enterElement (const GALGAS_M_5F_network_2D_element & i
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_network::addAssign_operation (const GALGAS_lstring & inKey,
-                                               const GALGAS_uint & inArgument0,
-                                               const GALGAS_bool & inArgument1,
-                                               const GALGAS_luint & inArgument2,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
+void GGS_M_5F_network::addAssign_operation (const GGS_lstring & inKey,
+                                            const GGS_uint & inArgument0,
+                                            const GGS_bool & inArgument1,
+                                            const GGS_luint & inArgument2,
+                                            Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_network * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_network (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -1807,10 +1796,10 @@ void GALGAS_M_5F_network::addAssign_operation (const GALGAS_lstring & inKey,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network GALGAS_M_5F_network::add_operation (const GALGAS_M_5F_network & inOperand,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
-  GALGAS_M_5F_network result = *this ;
+GGS_M_5F_network GGS_M_5F_network::add_operation (const GGS_M_5F_network & inOperand,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
+  GGS_M_5F_network result = *this ;
   cEnumerator_M_5F_network enumerator (inOperand, EnumerationOrder::up) ;
   while (enumerator.hasCurrentObject ()) {
     result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIndex (HERE), enumerator.current_mCANnetwork (HERE), enumerator.current_mScalingFactor (HERE), inCompiler COMMA_THERE) ;
@@ -1821,12 +1810,12 @@ GALGAS_M_5F_network GALGAS_M_5F_network::add_operation (const GALGAS_M_5F_networ
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_network::setter_insertKey (GALGAS_lstring inKey,
-                                            GALGAS_uint inArgument0,
-                                            GALGAS_bool inArgument1,
-                                            GALGAS_luint inArgument2,
-                                            Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
+void GGS_M_5F_network::setter_insertKey (GGS_lstring inKey,
+                                         GGS_uint inArgument0,
+                                         GGS_bool inArgument1,
+                                         GGS_luint inArgument2,
+                                         Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_network * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_network (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -1843,12 +1832,12 @@ const char * kSearchErrorMessage_M_5F_network_searchKey = "the processor '%K' is
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_network::method_searchKey (GALGAS_lstring inKey,
-                                            GALGAS_uint & outArgument0,
-                                            GALGAS_bool & outArgument1,
-                                            GALGAS_luint & outArgument2,
-                                            Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) const {
+void GGS_M_5F_network::method_searchKey (GGS_lstring inKey,
+                                         GGS_uint & outArgument0,
+                                         GGS_bool & outArgument1,
+                                         GGS_luint & outArgument2,
+                                         Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) const {
   const cMapElement_M_5F_network * p = (const cMapElement_M_5F_network *) performSearch (inKey,
                                                                                          inCompiler,
                                                                                          kSearchErrorMessage_M_5F_network_searchKey
@@ -1867,12 +1856,12 @@ void GALGAS_M_5F_network::method_searchKey (GALGAS_lstring inKey,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint GALGAS_M_5F_network::getter_mIndexForKey (const GALGAS_string & inKey,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const {
+GGS_uint GGS_M_5F_network::getter_mIndexForKey (const GGS_string & inKey,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_network * p = (const cMapElement_M_5F_network *) attributes ;
-  GALGAS_uint result ;
+  GGS_uint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_network) ;
     result = p->mProperty_mIndex ;
@@ -1882,12 +1871,12 @@ GALGAS_uint GALGAS_M_5F_network::getter_mIndexForKey (const GALGAS_string & inKe
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_M_5F_network::getter_mCANnetworkForKey (const GALGAS_string & inKey,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const {
+GGS_bool GGS_M_5F_network::getter_mCANnetworkForKey (const GGS_string & inKey,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_network * p = (const cMapElement_M_5F_network *) attributes ;
-  GALGAS_bool result ;
+  GGS_bool result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_network) ;
     result = p->mProperty_mCANnetwork ;
@@ -1897,12 +1886,12 @@ GALGAS_bool GALGAS_M_5F_network::getter_mCANnetworkForKey (const GALGAS_string &
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_network::getter_mScalingFactorForKey (const GALGAS_string & inKey,
-                                                               Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_network::getter_mScalingFactorForKey (const GGS_string & inKey,
+                                                         Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_network * p = (const cMapElement_M_5F_network *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_network) ;
     result = p->mProperty_mScalingFactor ;
@@ -1912,10 +1901,10 @@ GALGAS_luint GALGAS_M_5F_network::getter_mScalingFactorForKey (const GALGAS_stri
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_network::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
-                                                  GALGAS_string inKey,
-                                                  Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GGS_M_5F_network::setter_setMIndexForKey (GGS_uint inAttributeValue,
+                                               GGS_string inKey,
+                                               Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_network * p = (cMapElement_M_5F_network *) attributes ;
   if (nullptr != p) {
@@ -1926,10 +1915,10 @@ void GALGAS_M_5F_network::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_network::setter_setMCANnetworkForKey (GALGAS_bool inAttributeValue,
-                                                       GALGAS_string inKey,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GGS_M_5F_network::setter_setMCANnetworkForKey (GGS_bool inAttributeValue,
+                                                    GGS_string inKey,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_network * p = (cMapElement_M_5F_network *) attributes ;
   if (nullptr != p) {
@@ -1940,10 +1929,10 @@ void GALGAS_M_5F_network::setter_setMCANnetworkForKey (GALGAS_bool inAttributeVa
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_network::setter_setMScalingFactorForKey (GALGAS_luint inAttributeValue,
-                                                          GALGAS_string inKey,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GGS_M_5F_network::setter_setMScalingFactorForKey (GGS_luint inAttributeValue,
+                                                       GGS_string inKey,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_network * p = (cMapElement_M_5F_network *) attributes ;
   if (nullptr != p) {
@@ -1954,9 +1943,9 @@ void GALGAS_M_5F_network::setter_setMScalingFactorForKey (GALGAS_luint inAttribu
 
 //--------------------------------------------------------------------------------------------------
 
-cMapElement_M_5F_network * GALGAS_M_5F_network::readWriteAccessForWithInstruction (Compiler * inCompiler,
-                                                                                   const GALGAS_string & inKey
-                                                                                   COMMA_LOCATION_ARGS) {
+cMapElement_M_5F_network * GGS_M_5F_network::readWriteAccessForWithInstruction (Compiler * inCompiler,
+                                                                                const GGS_string & inKey
+                                                                                COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_network * result = (cMapElement_M_5F_network *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
   macroNullOrValidSharedObject (result, cMapElement_M_5F_network) ;
   return result ;
@@ -1964,7 +1953,7 @@ cMapElement_M_5F_network * GALGAS_M_5F_network::readWriteAccessForWithInstructio
 
 //--------------------------------------------------------------------------------------------------
 
-cEnumerator_M_5F_network::cEnumerator_M_5F_network (const GALGAS_M_5F_network & inEnumeratedObject,
+cEnumerator_M_5F_network::cEnumerator_M_5F_network (const GGS_M_5F_network & inEnumeratedObject,
                                                     const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
@@ -1972,15 +1961,15 @@ cGenericAbstractEnumerator (inOrder) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element cEnumerator_M_5F_network::current (LOCATION_ARGS) const {
+GGS_M_5F_network_2E_element cEnumerator_M_5F_network::current (LOCATION_ARGS) const {
   const cMapElement_M_5F_network * p = (const cMapElement_M_5F_network *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_network) ;
-  return GALGAS_M_5F_network_2D_element (p->mProperty_lkey, p->mProperty_mIndex, p->mProperty_mCANnetwork, p->mProperty_mScalingFactor) ;
+  return GGS_M_5F_network_2E_element (p->mProperty_lkey, p->mProperty_mIndex, p->mProperty_mCANnetwork, p->mProperty_mScalingFactor) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_lstring cEnumerator_M_5F_network::current_lkey (LOCATION_ARGS) const {
+GGS_lstring cEnumerator_M_5F_network::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mProperty_lkey ;
@@ -1988,7 +1977,7 @@ GALGAS_lstring cEnumerator_M_5F_network::current_lkey (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint cEnumerator_M_5F_network::current_mIndex (LOCATION_ARGS) const {
+GGS_uint cEnumerator_M_5F_network::current_mIndex (LOCATION_ARGS) const {
   const cMapElement_M_5F_network * p = (const cMapElement_M_5F_network *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_network) ;
   return p->mProperty_mIndex ;
@@ -1996,7 +1985,7 @@ GALGAS_uint cEnumerator_M_5F_network::current_mIndex (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool cEnumerator_M_5F_network::current_mCANnetwork (LOCATION_ARGS) const {
+GGS_bool cEnumerator_M_5F_network::current_mCANnetwork (LOCATION_ARGS) const {
   const cMapElement_M_5F_network * p = (const cMapElement_M_5F_network *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_network) ;
   return p->mProperty_mCANnetwork ;
@@ -2004,7 +1993,7 @@ GALGAS_bool cEnumerator_M_5F_network::current_mCANnetwork (LOCATION_ARGS) const 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_network::current_mScalingFactor (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_network::current_mScalingFactor (LOCATION_ARGS) const {
   const cMapElement_M_5F_network * p = (const cMapElement_M_5F_network *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_network) ;
   return p->mProperty_mScalingFactor ;
@@ -2021,29 +2010,29 @@ const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_network ("M_network",
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_M_5F_network::staticTypeDescriptor (void) const {
+const C_galgas_type_descriptor * GGS_M_5F_network::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_M_5F_network ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_M_5F_network::clonedObject (void) const {
+AC_GALGAS_root * GGS_M_5F_network::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_M_5F_network (*this)) ;
+    macroMyNew (result, GGS_M_5F_network (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network GALGAS_M_5F_network::extractObject (const GALGAS_object & inObject,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_network result ;
-  const GALGAS_M_5F_network * p = (const GALGAS_M_5F_network *) inObject.embeddedObject () ;
+GGS_M_5F_network GGS_M_5F_network::extractObject (const GGS_object & inObject,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  GGS_M_5F_network result ;
+  const GGS_M_5F_network * p = (const GGS_M_5F_network *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_M_5F_network *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_M_5F_network *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("M_network", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2070,7 +2059,7 @@ acStrongPtr_class (THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_AC_5F_canMessage::objectCompare (const GALGAS_AC_5F_canMessage & inOperand) const {
+ComparisonResult GGS_AC_5F_canMessage::objectCompare (const GGS_AC_5F_canMessage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
@@ -2088,13 +2077,13 @@ ComparisonResult GALGAS_AC_5F_canMessage::objectCompare (const GALGAS_AC_5F_canM
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_canMessage::GALGAS_AC_5F_canMessage (void) :
+GGS_AC_5F_canMessage::GGS_AC_5F_canMessage (void) :
 AC_GALGAS_reference_class () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_canMessage::GALGAS_AC_5F_canMessage (const cPtr_AC_5F_canMessage * inSourcePtr) :
+GGS_AC_5F_canMessage::GGS_AC_5F_canMessage (const cPtr_AC_5F_canMessage * inSourcePtr) :
 AC_GALGAS_reference_class (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_AC_5F_canMessage) ;
 }
@@ -2118,29 +2107,29 @@ const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_canMessage ("AC_canM
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_AC_5F_canMessage::staticTypeDescriptor (void) const {
+const C_galgas_type_descriptor * GGS_AC_5F_canMessage::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_AC_5F_canMessage ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_AC_5F_canMessage::clonedObject (void) const {
+AC_GALGAS_root * GGS_AC_5F_canMessage::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_AC_5F_canMessage (*this)) ;
+    macroMyNew (result, GGS_AC_5F_canMessage (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_canMessage GALGAS_AC_5F_canMessage::extractObject (const GALGAS_object & inObject,
-                                                                Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_AC_5F_canMessage result ;
-  const GALGAS_AC_5F_canMessage * p = (const GALGAS_AC_5F_canMessage *) inObject.embeddedObject () ;
+GGS_AC_5F_canMessage GGS_AC_5F_canMessage::extractObject (const GGS_object & inObject,
+                                                          Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  GGS_AC_5F_canMessage result ;
+  const GGS_AC_5F_canMessage * p = (const GGS_AC_5F_canMessage *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_AC_5F_canMessage *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_AC_5F_canMessage *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("AC_canMessage", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2151,7 +2140,7 @@ GALGAS_AC_5F_canMessage GALGAS_AC_5F_canMessage::extractObject (const GALGAS_obj
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_AC_5F_canMessage_2D_weak::objectCompare (const GALGAS_AC_5F_canMessage_2D_weak & inOperand) const {
+ComparisonResult GGS_AC_5F_canMessage_2E_weak::objectCompare (const GGS_AC_5F_canMessage_2E_weak & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
@@ -2171,13 +2160,13 @@ ComparisonResult GALGAS_AC_5F_canMessage_2D_weak::objectCompare (const GALGAS_AC
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_canMessage_2D_weak::GALGAS_AC_5F_canMessage_2D_weak (void) :
+GGS_AC_5F_canMessage_2E_weak::GGS_AC_5F_canMessage_2E_weak (void) :
 AC_GALGAS_weak_reference () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_canMessage_2D_weak & GALGAS_AC_5F_canMessage_2D_weak::operator = (const GALGAS_AC_5F_canMessage & inSource) {
+GGS_AC_5F_canMessage_2E_weak & GGS_AC_5F_canMessage_2E_weak::operator = (const GGS_AC_5F_canMessage & inSource) {
   cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
   if (p != nullptr) {
@@ -2189,29 +2178,29 @@ GALGAS_AC_5F_canMessage_2D_weak & GALGAS_AC_5F_canMessage_2D_weak::operator = (c
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_canMessage_2D_weak::GALGAS_AC_5F_canMessage_2D_weak (const GALGAS_AC_5F_canMessage & inSource) :
+GGS_AC_5F_canMessage_2E_weak::GGS_AC_5F_canMessage_2E_weak (const GGS_AC_5F_canMessage & inSource) :
 AC_GALGAS_weak_reference (inSource) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_canMessage_2D_weak GALGAS_AC_5F_canMessage_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_AC_5F_canMessage_2D_weak result ;
+GGS_AC_5F_canMessage_2E_weak GGS_AC_5F_canMessage_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_AC_5F_canMessage_2E_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_canMessage GALGAS_AC_5F_canMessage_2D_weak::bang_AC_5F_canMessage_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_AC_5F_canMessage result ;
+GGS_AC_5F_canMessage GGS_AC_5F_canMessage_2E_weak::bang_AC_5F_canMessage_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_AC_5F_canMessage result ;
   if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
     if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_AC_5F_canMessage) ;
-      result = GALGAS_AC_5F_canMessage ((cPtr_AC_5F_canMessage *) strongPtr) ;
+      result = GGS_AC_5F_canMessage ((cPtr_AC_5F_canMessage *) strongPtr) ;
     }
   }
   return result ;
@@ -2219,41 +2208,41 @@ GALGAS_AC_5F_canMessage GALGAS_AC_5F_canMessage_2D_weak::bang_AC_5F_canMessage_2
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @AC_canMessage-weak generic code implementation
+//     @AC_canMessage.weak generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_canMessage_2D_weak ("AC_canMessage-weak",
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_canMessage_2E_weak ("AC_canMessage.weak",
                                                                                 nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_AC_5F_canMessage_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_AC_5F_canMessage_2D_weak ;
+const C_galgas_type_descriptor * GGS_AC_5F_canMessage_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_AC_5F_canMessage_2E_weak ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_AC_5F_canMessage_2D_weak::clonedObject (void) const {
+AC_GALGAS_root * GGS_AC_5F_canMessage_2E_weak::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_AC_5F_canMessage_2D_weak (*this)) ;
+    macroMyNew (result, GGS_AC_5F_canMessage_2E_weak (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_canMessage_2D_weak GALGAS_AC_5F_canMessage_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_AC_5F_canMessage_2D_weak result ;
-  const GALGAS_AC_5F_canMessage_2D_weak * p = (const GALGAS_AC_5F_canMessage_2D_weak *) inObject.embeddedObject () ;
+GGS_AC_5F_canMessage_2E_weak GGS_AC_5F_canMessage_2E_weak::extractObject (const GGS_object & inObject,
+                                                                          Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) {
+  GGS_AC_5F_canMessage_2E_weak result ;
+  const GGS_AC_5F_canMessage_2E_weak * p = (const GGS_AC_5F_canMessage_2E_weak *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_AC_5F_canMessage_2D_weak *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_AC_5F_canMessage_2E_weak *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("AC_canMessage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("AC_canMessage.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -2277,7 +2266,7 @@ cPtr_AC_5F_canMessage (inCompiler COMMA_THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_C_5F_canIndependantMessage::objectCompare (const GALGAS_C_5F_canIndependantMessage & inOperand) const {
+ComparisonResult GGS_C_5F_canIndependantMessage::objectCompare (const GGS_C_5F_canIndependantMessage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
@@ -2295,19 +2284,19 @@ ComparisonResult GALGAS_C_5F_canIndependantMessage::objectCompare (const GALGAS_
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canIndependantMessage::GALGAS_C_5F_canIndependantMessage (void) :
-GALGAS_AC_5F_canMessage () {
+GGS_C_5F_canIndependantMessage::GGS_C_5F_canIndependantMessage (void) :
+GGS_AC_5F_canMessage () {
 }
 
 //--- Synthetized initializer ----------------------------------------------------------------------
 
-GALGAS_C_5F_canIndependantMessage GALGAS_C_5F_canIndependantMessage::
+GGS_C_5F_canIndependantMessage GGS_C_5F_canIndependantMessage::
 init (Compiler * inCompiler
           COMMA_LOCATION_ARGS) {
   cPtr_C_5F_canIndependantMessage * object = nullptr ;
   macroMyNew (object, cPtr_C_5F_canIndependantMessage (inCompiler COMMA_THERE)) ;
   object->C_5F_canIndependantMessage_init (inCompiler) ;
-  const GALGAS_C_5F_canIndependantMessage result (object) ;
+  const GGS_C_5F_canIndependantMessage result (object) ;
   macroDetachSharedObject (object) ;
   return result ;
 }
@@ -2320,14 +2309,14 @@ C_5F_canIndependantMessage_init (Compiler * /* inCompiler */) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canIndependantMessage::GALGAS_C_5F_canIndependantMessage (const cPtr_C_5F_canIndependantMessage * inSourcePtr) :
-GALGAS_AC_5F_canMessage (inSourcePtr) {
+GGS_C_5F_canIndependantMessage::GGS_C_5F_canIndependantMessage (const cPtr_C_5F_canIndependantMessage * inSourcePtr) :
+GGS_AC_5F_canMessage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_C_5F_canIndependantMessage) ;
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canIndependantMessage GALGAS_C_5F_canIndependantMessage::class_func_new (LOCATION_ARGS) {
-  GALGAS_C_5F_canIndependantMessage result ;
+GGS_C_5F_canIndependantMessage GGS_C_5F_canIndependantMessage::class_func_new (LOCATION_ARGS) {
+  GGS_C_5F_canIndependantMessage result ;
   macroMyNew (result.mObjectPtr, cPtr_C_5F_canIndependantMessage (THERE)) ;
   return result ;
 }
@@ -2371,29 +2360,29 @@ const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canIndependantMessage
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_C_5F_canIndependantMessage::staticTypeDescriptor (void) const {
+const C_galgas_type_descriptor * GGS_C_5F_canIndependantMessage::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_C_5F_canIndependantMessage ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_C_5F_canIndependantMessage::clonedObject (void) const {
+AC_GALGAS_root * GGS_C_5F_canIndependantMessage::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_C_5F_canIndependantMessage (*this)) ;
+    macroMyNew (result, GGS_C_5F_canIndependantMessage (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canIndependantMessage GALGAS_C_5F_canIndependantMessage::extractObject (const GALGAS_object & inObject,
-                                                                                    Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_canIndependantMessage result ;
-  const GALGAS_C_5F_canIndependantMessage * p = (const GALGAS_C_5F_canIndependantMessage *) inObject.embeddedObject () ;
+GGS_C_5F_canIndependantMessage GGS_C_5F_canIndependantMessage::extractObject (const GGS_object & inObject,
+                                                                              Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) {
+  GGS_C_5F_canIndependantMessage result ;
+  const GGS_C_5F_canIndependantMessage * p = (const GGS_C_5F_canIndependantMessage *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_C_5F_canIndependantMessage *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_C_5F_canIndependantMessage *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_canIndependantMessage", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2404,7 +2393,7 @@ GALGAS_C_5F_canIndependantMessage GALGAS_C_5F_canIndependantMessage::extractObje
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_C_5F_canIndependantMessage_2D_weak::objectCompare (const GALGAS_C_5F_canIndependantMessage_2D_weak & inOperand) const {
+ComparisonResult GGS_C_5F_canIndependantMessage_2E_weak::objectCompare (const GGS_C_5F_canIndependantMessage_2E_weak & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
@@ -2424,13 +2413,13 @@ ComparisonResult GALGAS_C_5F_canIndependantMessage_2D_weak::objectCompare (const
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canIndependantMessage_2D_weak::GALGAS_C_5F_canIndependantMessage_2D_weak (void) :
-GALGAS_AC_5F_canMessage_2D_weak () {
+GGS_C_5F_canIndependantMessage_2E_weak::GGS_C_5F_canIndependantMessage_2E_weak (void) :
+GGS_AC_5F_canMessage_2E_weak () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canIndependantMessage_2D_weak & GALGAS_C_5F_canIndependantMessage_2D_weak::operator = (const GALGAS_C_5F_canIndependantMessage & inSource) {
+GGS_C_5F_canIndependantMessage_2E_weak & GGS_C_5F_canIndependantMessage_2E_weak::operator = (const GGS_C_5F_canIndependantMessage & inSource) {
   cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
   if (p != nullptr) {
@@ -2442,29 +2431,29 @@ GALGAS_C_5F_canIndependantMessage_2D_weak & GALGAS_C_5F_canIndependantMessage_2D
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canIndependantMessage_2D_weak::GALGAS_C_5F_canIndependantMessage_2D_weak (const GALGAS_C_5F_canIndependantMessage & inSource) :
-GALGAS_AC_5F_canMessage_2D_weak (inSource) {
+GGS_C_5F_canIndependantMessage_2E_weak::GGS_C_5F_canIndependantMessage_2E_weak (const GGS_C_5F_canIndependantMessage & inSource) :
+GGS_AC_5F_canMessage_2E_weak (inSource) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canIndependantMessage_2D_weak GALGAS_C_5F_canIndependantMessage_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_C_5F_canIndependantMessage_2D_weak result ;
+GGS_C_5F_canIndependantMessage_2E_weak GGS_C_5F_canIndependantMessage_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_C_5F_canIndependantMessage_2E_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canIndependantMessage GALGAS_C_5F_canIndependantMessage_2D_weak::bang_C_5F_canIndependantMessage_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_C_5F_canIndependantMessage result ;
+GGS_C_5F_canIndependantMessage GGS_C_5F_canIndependantMessage_2E_weak::bang_C_5F_canIndependantMessage_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_C_5F_canIndependantMessage result ;
   if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
     if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_C_5F_canIndependantMessage) ;
-      result = GALGAS_C_5F_canIndependantMessage ((cPtr_C_5F_canIndependantMessage *) strongPtr) ;
+      result = GGS_C_5F_canIndependantMessage ((cPtr_C_5F_canIndependantMessage *) strongPtr) ;
     }
   }
   return result ;
@@ -2472,41 +2461,41 @@ GALGAS_C_5F_canIndependantMessage GALGAS_C_5F_canIndependantMessage_2D_weak::ban
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @C_canIndependantMessage-weak generic code implementation
+//     @C_canIndependantMessage.weak generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canIndependantMessage_2D_weak ("C_canIndependantMessage-weak",
-                                                                                          & kTypeDescriptor_GALGAS_AC_5F_canMessage_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canIndependantMessage_2E_weak ("C_canIndependantMessage.weak",
+                                                                                          & kTypeDescriptor_GALGAS_AC_5F_canMessage_2E_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_C_5F_canIndependantMessage_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_C_5F_canIndependantMessage_2D_weak ;
+const C_galgas_type_descriptor * GGS_C_5F_canIndependantMessage_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_C_5F_canIndependantMessage_2E_weak ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_C_5F_canIndependantMessage_2D_weak::clonedObject (void) const {
+AC_GALGAS_root * GGS_C_5F_canIndependantMessage_2E_weak::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_C_5F_canIndependantMessage_2D_weak (*this)) ;
+    macroMyNew (result, GGS_C_5F_canIndependantMessage_2E_weak (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canIndependantMessage_2D_weak GALGAS_C_5F_canIndependantMessage_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                                    Compiler * inCompiler
-                                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_canIndependantMessage_2D_weak result ;
-  const GALGAS_C_5F_canIndependantMessage_2D_weak * p = (const GALGAS_C_5F_canIndependantMessage_2D_weak *) inObject.embeddedObject () ;
+GGS_C_5F_canIndependantMessage_2E_weak GGS_C_5F_canIndependantMessage_2E_weak::extractObject (const GGS_object & inObject,
+                                                                                              Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  GGS_C_5F_canIndependantMessage_2E_weak result ;
+  const GGS_C_5F_canIndependantMessage_2E_weak * p = (const GGS_C_5F_canIndependantMessage_2E_weak *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_C_5F_canIndependantMessage_2D_weak *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_C_5F_canIndependantMessage_2E_weak *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("C_canIndependantMessage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("C_canIndependantMessage.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -2532,7 +2521,7 @@ mProperty_mMessageIndex () {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_C_5F_canMessageFromMessage::objectCompare (const GALGAS_C_5F_canMessageFromMessage & inOperand) const {
+ComparisonResult GGS_C_5F_canMessageFromMessage::objectCompare (const GGS_C_5F_canMessageFromMessage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
@@ -2550,20 +2539,20 @@ ComparisonResult GALGAS_C_5F_canMessageFromMessage::objectCompare (const GALGAS_
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromMessage::GALGAS_C_5F_canMessageFromMessage (void) :
-GALGAS_AC_5F_canMessage () {
+GGS_C_5F_canMessageFromMessage::GGS_C_5F_canMessageFromMessage (void) :
+GGS_AC_5F_canMessage () {
 }
 
 //--- Synthetized initializer ----------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage::
-init_21_ (const GALGAS_uint & in_mMessageIndex,
+GGS_C_5F_canMessageFromMessage GGS_C_5F_canMessageFromMessage::
+init_21_ (const GGS_uint & in_mMessageIndex,
           Compiler * inCompiler
           COMMA_LOCATION_ARGS) {
   cPtr_C_5F_canMessageFromMessage * object = nullptr ;
   macroMyNew (object, cPtr_C_5F_canMessageFromMessage (inCompiler COMMA_THERE)) ;
   object->C_5F_canMessageFromMessage_init_21_ (in_mMessageIndex, inCompiler) ;
-  const GALGAS_C_5F_canMessageFromMessage result (object) ;
+  const GGS_C_5F_canMessageFromMessage result (object) ;
   macroDetachSharedObject (object) ;
   return result ;
 }
@@ -2571,31 +2560,31 @@ init_21_ (const GALGAS_uint & in_mMessageIndex,
 //--------------------------------------------------------------------------------------------------
 
 void cPtr_C_5F_canMessageFromMessage::
-C_5F_canMessageFromMessage_init_21_ (const GALGAS_uint & in_mMessageIndex,
+C_5F_canMessageFromMessage_init_21_ (const GGS_uint & in_mMessageIndex,
                                      Compiler * /* inCompiler */) {
   mProperty_mMessageIndex = in_mMessageIndex ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromMessage::GALGAS_C_5F_canMessageFromMessage (const cPtr_C_5F_canMessageFromMessage * inSourcePtr) :
-GALGAS_AC_5F_canMessage (inSourcePtr) {
+GGS_C_5F_canMessageFromMessage::GGS_C_5F_canMessageFromMessage (const cPtr_C_5F_canMessageFromMessage * inSourcePtr) :
+GGS_AC_5F_canMessage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_C_5F_canMessageFromMessage) ;
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage::class_func_new (const GALGAS_uint & in_mMessageIndex
-                                                                                     COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_canMessageFromMessage result ;
+GGS_C_5F_canMessageFromMessage GGS_C_5F_canMessageFromMessage::class_func_new (const GGS_uint & in_mMessageIndex
+                                                                               COMMA_LOCATION_ARGS) {
+  GGS_C_5F_canMessageFromMessage result ;
   macroMyNew (result.mObjectPtr, cPtr_C_5F_canMessageFromMessage (in_mMessageIndex COMMA_THERE)) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint GALGAS_C_5F_canMessageFromMessage::readProperty_mMessageIndex (void) const {
+GGS_uint GGS_C_5F_canMessageFromMessage::readProperty_mMessageIndex (void) const {
   if (nullptr == mObjectPtr) {
-    return GALGAS_uint () ;
+    return GGS_uint () ;
   }else{
     cPtr_C_5F_canMessageFromMessage * p = (cPtr_C_5F_canMessageFromMessage *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_canMessageFromMessage) ;
@@ -2605,7 +2594,7 @@ GALGAS_uint GALGAS_C_5F_canMessageFromMessage::readProperty_mMessageIndex (void)
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_C_5F_canMessageFromMessage::setProperty_mMessageIndex (const GALGAS_uint & inValue) {
+void GGS_C_5F_canMessageFromMessage::setProperty_mMessageIndex (const GGS_uint & inValue) {
   if (nullptr != mObjectPtr) {
     cPtr_C_5F_canMessageFromMessage * p = (cPtr_C_5F_canMessageFromMessage *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_canMessageFromMessage) ;
@@ -2617,7 +2606,7 @@ void GALGAS_C_5F_canMessageFromMessage::setProperty_mMessageIndex (const GALGAS_
 //Pointer class for @C_canMessageFromMessage class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_C_5F_canMessageFromMessage::cPtr_C_5F_canMessageFromMessage (const GALGAS_uint & in_mMessageIndex
+cPtr_C_5F_canMessageFromMessage::cPtr_C_5F_canMessageFromMessage (const GGS_uint & in_mMessageIndex
                                                                   COMMA_LOCATION_ARGS) :
 cPtr_AC_5F_canMessage (THERE),
 mProperty_mMessageIndex () {
@@ -2657,29 +2646,29 @@ const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromMessage
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_C_5F_canMessageFromMessage::staticTypeDescriptor (void) const {
+const C_galgas_type_descriptor * GGS_C_5F_canMessageFromMessage::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_C_5F_canMessageFromMessage ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_C_5F_canMessageFromMessage::clonedObject (void) const {
+AC_GALGAS_root * GGS_C_5F_canMessageFromMessage::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_C_5F_canMessageFromMessage (*this)) ;
+    macroMyNew (result, GGS_C_5F_canMessageFromMessage (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage::extractObject (const GALGAS_object & inObject,
-                                                                                    Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_canMessageFromMessage result ;
-  const GALGAS_C_5F_canMessageFromMessage * p = (const GALGAS_C_5F_canMessageFromMessage *) inObject.embeddedObject () ;
+GGS_C_5F_canMessageFromMessage GGS_C_5F_canMessageFromMessage::extractObject (const GGS_object & inObject,
+                                                                              Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) {
+  GGS_C_5F_canMessageFromMessage result ;
+  const GGS_C_5F_canMessageFromMessage * p = (const GGS_C_5F_canMessageFromMessage *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_C_5F_canMessageFromMessage *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_C_5F_canMessageFromMessage *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_canMessageFromMessage", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2690,7 +2679,7 @@ GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage::extractObje
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_C_5F_canMessageFromMessage_2D_weak::objectCompare (const GALGAS_C_5F_canMessageFromMessage_2D_weak & inOperand) const {
+ComparisonResult GGS_C_5F_canMessageFromMessage_2E_weak::objectCompare (const GGS_C_5F_canMessageFromMessage_2E_weak & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
@@ -2710,13 +2699,13 @@ ComparisonResult GALGAS_C_5F_canMessageFromMessage_2D_weak::objectCompare (const
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromMessage_2D_weak::GALGAS_C_5F_canMessageFromMessage_2D_weak (void) :
-GALGAS_AC_5F_canMessage_2D_weak () {
+GGS_C_5F_canMessageFromMessage_2E_weak::GGS_C_5F_canMessageFromMessage_2E_weak (void) :
+GGS_AC_5F_canMessage_2E_weak () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromMessage_2D_weak & GALGAS_C_5F_canMessageFromMessage_2D_weak::operator = (const GALGAS_C_5F_canMessageFromMessage & inSource) {
+GGS_C_5F_canMessageFromMessage_2E_weak & GGS_C_5F_canMessageFromMessage_2E_weak::operator = (const GGS_C_5F_canMessageFromMessage & inSource) {
   cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
   if (p != nullptr) {
@@ -2728,29 +2717,29 @@ GALGAS_C_5F_canMessageFromMessage_2D_weak & GALGAS_C_5F_canMessageFromMessage_2D
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromMessage_2D_weak::GALGAS_C_5F_canMessageFromMessage_2D_weak (const GALGAS_C_5F_canMessageFromMessage & inSource) :
-GALGAS_AC_5F_canMessage_2D_weak (inSource) {
+GGS_C_5F_canMessageFromMessage_2E_weak::GGS_C_5F_canMessageFromMessage_2E_weak (const GGS_C_5F_canMessageFromMessage & inSource) :
+GGS_AC_5F_canMessage_2E_weak (inSource) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromMessage_2D_weak GALGAS_C_5F_canMessageFromMessage_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_C_5F_canMessageFromMessage_2D_weak result ;
+GGS_C_5F_canMessageFromMessage_2E_weak GGS_C_5F_canMessageFromMessage_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_C_5F_canMessageFromMessage_2E_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage_2D_weak::bang_C_5F_canMessageFromMessage_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_C_5F_canMessageFromMessage result ;
+GGS_C_5F_canMessageFromMessage GGS_C_5F_canMessageFromMessage_2E_weak::bang_C_5F_canMessageFromMessage_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_C_5F_canMessageFromMessage result ;
   if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
     if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_C_5F_canMessageFromMessage) ;
-      result = GALGAS_C_5F_canMessageFromMessage ((cPtr_C_5F_canMessageFromMessage *) strongPtr) ;
+      result = GGS_C_5F_canMessageFromMessage ((cPtr_C_5F_canMessageFromMessage *) strongPtr) ;
     }
   }
   return result ;
@@ -2758,41 +2747,41 @@ GALGAS_C_5F_canMessageFromMessage GALGAS_C_5F_canMessageFromMessage_2D_weak::ban
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @C_canMessageFromMessage-weak generic code implementation
+//     @C_canMessageFromMessage.weak generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromMessage_2D_weak ("C_canMessageFromMessage-weak",
-                                                                                          & kTypeDescriptor_GALGAS_AC_5F_canMessage_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromMessage_2E_weak ("C_canMessageFromMessage.weak",
+                                                                                          & kTypeDescriptor_GALGAS_AC_5F_canMessage_2E_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_C_5F_canMessageFromMessage_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_C_5F_canMessageFromMessage_2D_weak ;
+const C_galgas_type_descriptor * GGS_C_5F_canMessageFromMessage_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_C_5F_canMessageFromMessage_2E_weak ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_C_5F_canMessageFromMessage_2D_weak::clonedObject (void) const {
+AC_GALGAS_root * GGS_C_5F_canMessageFromMessage_2E_weak::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_C_5F_canMessageFromMessage_2D_weak (*this)) ;
+    macroMyNew (result, GGS_C_5F_canMessageFromMessage_2E_weak (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromMessage_2D_weak GALGAS_C_5F_canMessageFromMessage_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                                    Compiler * inCompiler
-                                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_canMessageFromMessage_2D_weak result ;
-  const GALGAS_C_5F_canMessageFromMessage_2D_weak * p = (const GALGAS_C_5F_canMessageFromMessage_2D_weak *) inObject.embeddedObject () ;
+GGS_C_5F_canMessageFromMessage_2E_weak GGS_C_5F_canMessageFromMessage_2E_weak::extractObject (const GGS_object & inObject,
+                                                                                              Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  GGS_C_5F_canMessageFromMessage_2E_weak result ;
+  const GGS_C_5F_canMessageFromMessage_2E_weak * p = (const GGS_C_5F_canMessageFromMessage_2E_weak *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_C_5F_canMessageFromMessage_2D_weak *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_C_5F_canMessageFromMessage_2E_weak *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("C_canMessageFromMessage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("C_canMessageFromMessage.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -2818,7 +2807,7 @@ mProperty_mTaskIndex () {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_C_5F_canMessageFromTask::objectCompare (const GALGAS_C_5F_canMessageFromTask & inOperand) const {
+ComparisonResult GGS_C_5F_canMessageFromTask::objectCompare (const GGS_C_5F_canMessageFromTask & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
@@ -2836,20 +2825,20 @@ ComparisonResult GALGAS_C_5F_canMessageFromTask::objectCompare (const GALGAS_C_5
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromTask::GALGAS_C_5F_canMessageFromTask (void) :
-GALGAS_AC_5F_canMessage () {
+GGS_C_5F_canMessageFromTask::GGS_C_5F_canMessageFromTask (void) :
+GGS_AC_5F_canMessage () {
 }
 
 //--- Synthetized initializer ----------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask::
-init_21_ (const GALGAS_uint & in_mTaskIndex,
+GGS_C_5F_canMessageFromTask GGS_C_5F_canMessageFromTask::
+init_21_ (const GGS_uint & in_mTaskIndex,
           Compiler * inCompiler
           COMMA_LOCATION_ARGS) {
   cPtr_C_5F_canMessageFromTask * object = nullptr ;
   macroMyNew (object, cPtr_C_5F_canMessageFromTask (inCompiler COMMA_THERE)) ;
   object->C_5F_canMessageFromTask_init_21_ (in_mTaskIndex, inCompiler) ;
-  const GALGAS_C_5F_canMessageFromTask result (object) ;
+  const GGS_C_5F_canMessageFromTask result (object) ;
   macroDetachSharedObject (object) ;
   return result ;
 }
@@ -2857,31 +2846,31 @@ init_21_ (const GALGAS_uint & in_mTaskIndex,
 //--------------------------------------------------------------------------------------------------
 
 void cPtr_C_5F_canMessageFromTask::
-C_5F_canMessageFromTask_init_21_ (const GALGAS_uint & in_mTaskIndex,
+C_5F_canMessageFromTask_init_21_ (const GGS_uint & in_mTaskIndex,
                                   Compiler * /* inCompiler */) {
   mProperty_mTaskIndex = in_mTaskIndex ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromTask::GALGAS_C_5F_canMessageFromTask (const cPtr_C_5F_canMessageFromTask * inSourcePtr) :
-GALGAS_AC_5F_canMessage (inSourcePtr) {
+GGS_C_5F_canMessageFromTask::GGS_C_5F_canMessageFromTask (const cPtr_C_5F_canMessageFromTask * inSourcePtr) :
+GGS_AC_5F_canMessage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_C_5F_canMessageFromTask) ;
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask::class_func_new (const GALGAS_uint & in_mTaskIndex
-                                                                               COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_canMessageFromTask result ;
+GGS_C_5F_canMessageFromTask GGS_C_5F_canMessageFromTask::class_func_new (const GGS_uint & in_mTaskIndex
+                                                                         COMMA_LOCATION_ARGS) {
+  GGS_C_5F_canMessageFromTask result ;
   macroMyNew (result.mObjectPtr, cPtr_C_5F_canMessageFromTask (in_mTaskIndex COMMA_THERE)) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint GALGAS_C_5F_canMessageFromTask::readProperty_mTaskIndex (void) const {
+GGS_uint GGS_C_5F_canMessageFromTask::readProperty_mTaskIndex (void) const {
   if (nullptr == mObjectPtr) {
-    return GALGAS_uint () ;
+    return GGS_uint () ;
   }else{
     cPtr_C_5F_canMessageFromTask * p = (cPtr_C_5F_canMessageFromTask *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_canMessageFromTask) ;
@@ -2891,7 +2880,7 @@ GALGAS_uint GALGAS_C_5F_canMessageFromTask::readProperty_mTaskIndex (void) const
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_C_5F_canMessageFromTask::setProperty_mTaskIndex (const GALGAS_uint & inValue) {
+void GGS_C_5F_canMessageFromTask::setProperty_mTaskIndex (const GGS_uint & inValue) {
   if (nullptr != mObjectPtr) {
     cPtr_C_5F_canMessageFromTask * p = (cPtr_C_5F_canMessageFromTask *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_canMessageFromTask) ;
@@ -2903,7 +2892,7 @@ void GALGAS_C_5F_canMessageFromTask::setProperty_mTaskIndex (const GALGAS_uint &
 //Pointer class for @C_canMessageFromTask class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_C_5F_canMessageFromTask::cPtr_C_5F_canMessageFromTask (const GALGAS_uint & in_mTaskIndex
+cPtr_C_5F_canMessageFromTask::cPtr_C_5F_canMessageFromTask (const GGS_uint & in_mTaskIndex
                                                             COMMA_LOCATION_ARGS) :
 cPtr_AC_5F_canMessage (THERE),
 mProperty_mTaskIndex () {
@@ -2943,29 +2932,29 @@ const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromTask ("
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_C_5F_canMessageFromTask::staticTypeDescriptor (void) const {
+const C_galgas_type_descriptor * GGS_C_5F_canMessageFromTask::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_C_5F_canMessageFromTask ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_C_5F_canMessageFromTask::clonedObject (void) const {
+AC_GALGAS_root * GGS_C_5F_canMessageFromTask::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_C_5F_canMessageFromTask (*this)) ;
+    macroMyNew (result, GGS_C_5F_canMessageFromTask (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask::extractObject (const GALGAS_object & inObject,
-                                                                              Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_canMessageFromTask result ;
-  const GALGAS_C_5F_canMessageFromTask * p = (const GALGAS_C_5F_canMessageFromTask *) inObject.embeddedObject () ;
+GGS_C_5F_canMessageFromTask GGS_C_5F_canMessageFromTask::extractObject (const GGS_object & inObject,
+                                                                        Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
+  GGS_C_5F_canMessageFromTask result ;
+  const GGS_C_5F_canMessageFromTask * p = (const GGS_C_5F_canMessageFromTask *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_C_5F_canMessageFromTask *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_C_5F_canMessageFromTask *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_canMessageFromTask", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2976,7 +2965,7 @@ GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask::extractObject (co
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_C_5F_canMessageFromTask_2D_weak::objectCompare (const GALGAS_C_5F_canMessageFromTask_2D_weak & inOperand) const {
+ComparisonResult GGS_C_5F_canMessageFromTask_2E_weak::objectCompare (const GGS_C_5F_canMessageFromTask_2E_weak & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
@@ -2996,13 +2985,13 @@ ComparisonResult GALGAS_C_5F_canMessageFromTask_2D_weak::objectCompare (const GA
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromTask_2D_weak::GALGAS_C_5F_canMessageFromTask_2D_weak (void) :
-GALGAS_AC_5F_canMessage_2D_weak () {
+GGS_C_5F_canMessageFromTask_2E_weak::GGS_C_5F_canMessageFromTask_2E_weak (void) :
+GGS_AC_5F_canMessage_2E_weak () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromTask_2D_weak & GALGAS_C_5F_canMessageFromTask_2D_weak::operator = (const GALGAS_C_5F_canMessageFromTask & inSource) {
+GGS_C_5F_canMessageFromTask_2E_weak & GGS_C_5F_canMessageFromTask_2E_weak::operator = (const GGS_C_5F_canMessageFromTask & inSource) {
   cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
   if (p != nullptr) {
@@ -3014,29 +3003,29 @@ GALGAS_C_5F_canMessageFromTask_2D_weak & GALGAS_C_5F_canMessageFromTask_2D_weak:
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromTask_2D_weak::GALGAS_C_5F_canMessageFromTask_2D_weak (const GALGAS_C_5F_canMessageFromTask & inSource) :
-GALGAS_AC_5F_canMessage_2D_weak (inSource) {
+GGS_C_5F_canMessageFromTask_2E_weak::GGS_C_5F_canMessageFromTask_2E_weak (const GGS_C_5F_canMessageFromTask & inSource) :
+GGS_AC_5F_canMessage_2E_weak (inSource) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromTask_2D_weak GALGAS_C_5F_canMessageFromTask_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_C_5F_canMessageFromTask_2D_weak result ;
+GGS_C_5F_canMessageFromTask_2E_weak GGS_C_5F_canMessageFromTask_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_C_5F_canMessageFromTask_2E_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask_2D_weak::bang_C_5F_canMessageFromTask_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_C_5F_canMessageFromTask result ;
+GGS_C_5F_canMessageFromTask GGS_C_5F_canMessageFromTask_2E_weak::bang_C_5F_canMessageFromTask_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_C_5F_canMessageFromTask result ;
   if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
     if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_C_5F_canMessageFromTask) ;
-      result = GALGAS_C_5F_canMessageFromTask ((cPtr_C_5F_canMessageFromTask *) strongPtr) ;
+      result = GGS_C_5F_canMessageFromTask ((cPtr_C_5F_canMessageFromTask *) strongPtr) ;
     }
   }
   return result ;
@@ -3044,41 +3033,41 @@ GALGAS_C_5F_canMessageFromTask GALGAS_C_5F_canMessageFromTask_2D_weak::bang_C_5F
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @C_canMessageFromTask-weak generic code implementation
+//     @C_canMessageFromTask.weak generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromTask_2D_weak ("C_canMessageFromTask-weak",
-                                                                                       & kTypeDescriptor_GALGAS_AC_5F_canMessage_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromTask_2E_weak ("C_canMessageFromTask.weak",
+                                                                                       & kTypeDescriptor_GALGAS_AC_5F_canMessage_2E_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_C_5F_canMessageFromTask_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_C_5F_canMessageFromTask_2D_weak ;
+const C_galgas_type_descriptor * GGS_C_5F_canMessageFromTask_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_C_5F_canMessageFromTask_2E_weak ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_C_5F_canMessageFromTask_2D_weak::clonedObject (void) const {
+AC_GALGAS_root * GGS_C_5F_canMessageFromTask_2E_weak::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_C_5F_canMessageFromTask_2D_weak (*this)) ;
+    macroMyNew (result, GGS_C_5F_canMessageFromTask_2E_weak (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_canMessageFromTask_2D_weak GALGAS_C_5F_canMessageFromTask_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                              Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_canMessageFromTask_2D_weak result ;
-  const GALGAS_C_5F_canMessageFromTask_2D_weak * p = (const GALGAS_C_5F_canMessageFromTask_2D_weak *) inObject.embeddedObject () ;
+GGS_C_5F_canMessageFromTask_2E_weak GGS_C_5F_canMessageFromTask_2E_weak::extractObject (const GGS_object & inObject,
+                                                                                        Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) {
+  GGS_C_5F_canMessageFromTask_2E_weak result ;
+  const GGS_C_5F_canMessageFromTask_2E_weak * p = (const GGS_C_5F_canMessageFromTask_2E_weak *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_C_5F_canMessageFromTask_2D_weak *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_C_5F_canMessageFromTask_2E_weak *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("C_canMessageFromTask-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("C_canMessageFromTask.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -3086,7 +3075,7 @@ GALGAS_C_5F_canMessageFromTask_2D_weak GALGAS_C_5F_canMessageFromTask_2D_weak::e
 
 //--------------------------------------------------------------------------------------------------
 
-cMapElement_M_5F_messages::cMapElement_M_5F_messages (const GALGAS_M_5F_messages_2D_element & inValue
+cMapElement_M_5F_messages::cMapElement_M_5F_messages (const GGS_M_5F_messages_2E_element & inValue
                                                       COMMA_LOCATION_ARGS) :
 cMapElement (inValue.mProperty_lkey COMMA_THERE),
 mProperty_mIndex (inValue.mProperty_mIndex),
@@ -3102,16 +3091,16 @@ mProperty_mMessageKind (inValue.mProperty_mMessageKind) {
 
 //--------------------------------------------------------------------------------------------------
 
-cMapElement_M_5F_messages::cMapElement_M_5F_messages (const GALGAS_lstring & inKey,
-                                                      const GALGAS_uint & in_mIndex,
-                                                      const GALGAS_luint & in_mClass,
-                                                      const GALGAS_uint & in_mNetworkIndex,
-                                                      const GALGAS_luint & in_mBytesCount,
-                                                      const GALGAS_luint & in_mPriority,
-                                                      const GALGAS_luint & in_mOffset,
-                                                      const GALGAS_luint & in_mDeadline,
-                                                      const GALGAS_luint & in_mPeriod,
-                                                      const GALGAS_AC_5F_canMessage & in_mMessageKind
+cMapElement_M_5F_messages::cMapElement_M_5F_messages (const GGS_lstring & inKey,
+                                                      const GGS_uint & in_mIndex,
+                                                      const GGS_luint & in_mClass,
+                                                      const GGS_uint & in_mNetworkIndex,
+                                                      const GGS_luint & in_mBytesCount,
+                                                      const GGS_luint & in_mPriority,
+                                                      const GGS_luint & in_mOffset,
+                                                      const GGS_luint & in_mDeadline,
+                                                      const GGS_luint & in_mPeriod,
+                                                      const GGS_AC_5F_canMessage & in_mMessageKind
                                                       COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_mIndex (in_mIndex),
@@ -3182,52 +3171,52 @@ void cMapElement_M_5F_messages::description (String & ioString, const int32_t in
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages::GALGAS_M_5F_messages (void) :
+GGS_M_5F_messages::GGS_M_5F_messages (void) :
 AC_GALGAS_map () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages::GALGAS_M_5F_messages (const GALGAS_M_5F_messages & inSource) :
+GGS_M_5F_messages::GGS_M_5F_messages (const GGS_M_5F_messages & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages & GALGAS_M_5F_messages::operator = (const GALGAS_M_5F_messages & inSource) {
+GGS_M_5F_messages & GGS_M_5F_messages::operator = (const GGS_M_5F_messages & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages GALGAS_M_5F_messages::init (Compiler * COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_messages result ;
+GGS_M_5F_messages GGS_M_5F_messages::init (Compiler * COMMA_LOCATION_ARGS) {
+  GGS_M_5F_messages result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages GALGAS_M_5F_messages::class_func_emptyMap (LOCATION_ARGS) {
-  GALGAS_M_5F_messages result ;
+GGS_M_5F_messages GGS_M_5F_messages::class_func_emptyMap (LOCATION_ARGS) {
+  GGS_M_5F_messages result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element_3F_ GALGAS_M_5F_messages
-::readSubscript__3F_ (const class GALGAS_string & inKey,
+GGS_M_5F_messages_2E_element_3F_ GGS_M_5F_messages
+::readSubscript__3F_ (const class GGS_string & inKey,
                             Compiler * /* inCompiler */
                             COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_M_5F_messages_2D_element_3F_ result ;
+  GGS_M_5F_messages_2E_element_3F_ result ;
   if (isValid () && inKey.isValid ()) {
     cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) searchForKey (inKey) ;
     if (nullptr == p) {
-      result = GALGAS_M_5F_messages_2D_element_3F_::init_nil () ;
+      result = GGS_M_5F_messages_2E_element_3F_::init_nil () ;
     }else{
-      GALGAS_M_5F_messages_2D_element element ;
+      GGS_M_5F_messages_2E_element element ;
       element.mProperty_lkey = p->mProperty_lkey ;
       element.mProperty_mIndex = p->mProperty_mIndex ;
       element.mProperty_mClass = p->mProperty_mClass ;
@@ -3246,27 +3235,27 @@ GALGAS_M_5F_messages_2D_element_3F_ GALGAS_M_5F_messages
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages GALGAS_M_5F_messages::class_func_mapWithMapToOverride (const GALGAS_M_5F_messages & inMapToOverride
-                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_messages result ;
+GGS_M_5F_messages GGS_M_5F_messages::class_func_mapWithMapToOverride (const GGS_M_5F_messages & inMapToOverride
+                                                                      COMMA_LOCATION_ARGS) {
+  GGS_M_5F_messages result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages GALGAS_M_5F_messages::getter_overriddenMap (Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const {
-  GALGAS_M_5F_messages result ;
+GGS_M_5F_messages GGS_M_5F_messages::getter_overriddenMap (Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const {
+  GGS_M_5F_messages result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages::enterElement (const GALGAS_M_5F_messages_2D_element & inValue,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) {
+void GGS_M_5F_messages::enterElement (const GGS_M_5F_messages_2E_element & inValue,
+                                      Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_messages * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_messages (inValue COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -3279,18 +3268,18 @@ void GALGAS_M_5F_messages::enterElement (const GALGAS_M_5F_messages_2D_element &
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages::addAssign_operation (const GALGAS_lstring & inKey,
-                                                const GALGAS_uint & inArgument0,
-                                                const GALGAS_luint & inArgument1,
-                                                const GALGAS_uint & inArgument2,
-                                                const GALGAS_luint & inArgument3,
-                                                const GALGAS_luint & inArgument4,
-                                                const GALGAS_luint & inArgument5,
-                                                const GALGAS_luint & inArgument6,
-                                                const GALGAS_luint & inArgument7,
-                                                const GALGAS_AC_5F_canMessage & inArgument8,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
+void GGS_M_5F_messages::addAssign_operation (const GGS_lstring & inKey,
+                                             const GGS_uint & inArgument0,
+                                             const GGS_luint & inArgument1,
+                                             const GGS_uint & inArgument2,
+                                             const GGS_luint & inArgument3,
+                                             const GGS_luint & inArgument4,
+                                             const GGS_luint & inArgument5,
+                                             const GGS_luint & inArgument6,
+                                             const GGS_luint & inArgument7,
+                                             const GGS_AC_5F_canMessage & inArgument8,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_messages * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_messages (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -3303,10 +3292,10 @@ void GALGAS_M_5F_messages::addAssign_operation (const GALGAS_lstring & inKey,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages GALGAS_M_5F_messages::add_operation (const GALGAS_M_5F_messages & inOperand,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
-  GALGAS_M_5F_messages result = *this ;
+GGS_M_5F_messages GGS_M_5F_messages::add_operation (const GGS_M_5F_messages & inOperand,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const {
+  GGS_M_5F_messages result = *this ;
   cEnumerator_M_5F_messages enumerator (inOperand, EnumerationOrder::up) ;
   while (enumerator.hasCurrentObject ()) {
     result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIndex (HERE), enumerator.current_mClass (HERE), enumerator.current_mNetworkIndex (HERE), enumerator.current_mBytesCount (HERE), enumerator.current_mPriority (HERE), enumerator.current_mOffset (HERE), enumerator.current_mDeadline (HERE), enumerator.current_mPeriod (HERE), enumerator.current_mMessageKind (HERE), inCompiler COMMA_THERE) ;
@@ -3317,18 +3306,18 @@ GALGAS_M_5F_messages GALGAS_M_5F_messages::add_operation (const GALGAS_M_5F_mess
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages::setter_insertKey (GALGAS_lstring inKey,
-                                             GALGAS_uint inArgument0,
-                                             GALGAS_luint inArgument1,
-                                             GALGAS_uint inArgument2,
-                                             GALGAS_luint inArgument3,
-                                             GALGAS_luint inArgument4,
-                                             GALGAS_luint inArgument5,
-                                             GALGAS_luint inArgument6,
-                                             GALGAS_luint inArgument7,
-                                             GALGAS_AC_5F_canMessage inArgument8,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) {
+void GGS_M_5F_messages::setter_insertKey (GGS_lstring inKey,
+                                          GGS_uint inArgument0,
+                                          GGS_luint inArgument1,
+                                          GGS_uint inArgument2,
+                                          GGS_luint inArgument3,
+                                          GGS_luint inArgument4,
+                                          GGS_luint inArgument5,
+                                          GGS_luint inArgument6,
+                                          GGS_luint inArgument7,
+                                          GGS_AC_5F_canMessage inArgument8,
+                                          Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_messages * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_messages (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -3345,18 +3334,18 @@ const char * kSearchErrorMessage_M_5F_messages_searchKey = "the CAN message '%K'
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages::method_searchKey (GALGAS_lstring inKey,
-                                             GALGAS_uint & outArgument0,
-                                             GALGAS_luint & outArgument1,
-                                             GALGAS_uint & outArgument2,
-                                             GALGAS_luint & outArgument3,
-                                             GALGAS_luint & outArgument4,
-                                             GALGAS_luint & outArgument5,
-                                             GALGAS_luint & outArgument6,
-                                             GALGAS_luint & outArgument7,
-                                             GALGAS_AC_5F_canMessage & outArgument8,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const {
+void GGS_M_5F_messages::method_searchKey (GGS_lstring inKey,
+                                          GGS_uint & outArgument0,
+                                          GGS_luint & outArgument1,
+                                          GGS_uint & outArgument2,
+                                          GGS_luint & outArgument3,
+                                          GGS_luint & outArgument4,
+                                          GGS_luint & outArgument5,
+                                          GGS_luint & outArgument6,
+                                          GGS_luint & outArgument7,
+                                          GGS_AC_5F_canMessage & outArgument8,
+                                          Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const {
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) performSearch (inKey,
                                                                                            inCompiler,
                                                                                            kSearchErrorMessage_M_5F_messages_searchKey
@@ -3387,12 +3376,12 @@ void GALGAS_M_5F_messages::method_searchKey (GALGAS_lstring inKey,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint GALGAS_M_5F_messages::getter_mIndexForKey (const GALGAS_string & inKey,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const {
+GGS_uint GGS_M_5F_messages::getter_mIndexForKey (const GGS_string & inKey,
+                                                 Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
-  GALGAS_uint result ;
+  GGS_uint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mIndex ;
@@ -3402,12 +3391,12 @@ GALGAS_uint GALGAS_M_5F_messages::getter_mIndexForKey (const GALGAS_string & inK
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_messages::getter_mClassForKey (const GALGAS_string & inKey,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_messages::getter_mClassForKey (const GGS_string & inKey,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mClass ;
@@ -3417,12 +3406,12 @@ GALGAS_luint GALGAS_M_5F_messages::getter_mClassForKey (const GALGAS_string & in
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint GALGAS_M_5F_messages::getter_mNetworkIndexForKey (const GALGAS_string & inKey,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const {
+GGS_uint GGS_M_5F_messages::getter_mNetworkIndexForKey (const GGS_string & inKey,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
-  GALGAS_uint result ;
+  GGS_uint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mNetworkIndex ;
@@ -3432,12 +3421,12 @@ GALGAS_uint GALGAS_M_5F_messages::getter_mNetworkIndexForKey (const GALGAS_strin
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_messages::getter_mBytesCountForKey (const GALGAS_string & inKey,
-                                                             Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_messages::getter_mBytesCountForKey (const GGS_string & inKey,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mBytesCount ;
@@ -3447,12 +3436,12 @@ GALGAS_luint GALGAS_M_5F_messages::getter_mBytesCountForKey (const GALGAS_string
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_messages::getter_mPriorityForKey (const GALGAS_string & inKey,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_messages::getter_mPriorityForKey (const GGS_string & inKey,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mPriority ;
@@ -3462,12 +3451,12 @@ GALGAS_luint GALGAS_M_5F_messages::getter_mPriorityForKey (const GALGAS_string &
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_messages::getter_mOffsetForKey (const GALGAS_string & inKey,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_messages::getter_mOffsetForKey (const GGS_string & inKey,
+                                                   Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mOffset ;
@@ -3477,12 +3466,12 @@ GALGAS_luint GALGAS_M_5F_messages::getter_mOffsetForKey (const GALGAS_string & i
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_messages::getter_mDeadlineForKey (const GALGAS_string & inKey,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_messages::getter_mDeadlineForKey (const GGS_string & inKey,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mDeadline ;
@@ -3492,12 +3481,12 @@ GALGAS_luint GALGAS_M_5F_messages::getter_mDeadlineForKey (const GALGAS_string &
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_messages::getter_mPeriodForKey (const GALGAS_string & inKey,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_messages::getter_mPeriodForKey (const GGS_string & inKey,
+                                                   Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mPeriod ;
@@ -3507,12 +3496,12 @@ GALGAS_luint GALGAS_M_5F_messages::getter_mPeriodForKey (const GALGAS_string & i
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_canMessage GALGAS_M_5F_messages::getter_mMessageKindForKey (const GALGAS_string & inKey,
-                                                                         Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) const {
+GGS_AC_5F_canMessage GGS_M_5F_messages::getter_mMessageKindForKey (const GGS_string & inKey,
+                                                                   Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) attributes ;
-  GALGAS_AC_5F_canMessage result ;
+  GGS_AC_5F_canMessage result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_messages) ;
     result = p->mProperty_mMessageKind ;
@@ -3522,10 +3511,10 @@ GALGAS_AC_5F_canMessage GALGAS_M_5F_messages::getter_mMessageKindForKey (const G
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
-                                                   GALGAS_string inKey,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GGS_M_5F_messages::setter_setMIndexForKey (GGS_uint inAttributeValue,
+                                                GGS_string inKey,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (nullptr != p) {
@@ -3536,10 +3525,10 @@ void GALGAS_M_5F_messages::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages::setter_setMClassForKey (GALGAS_luint inAttributeValue,
-                                                   GALGAS_string inKey,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GGS_M_5F_messages::setter_setMClassForKey (GGS_luint inAttributeValue,
+                                                GGS_string inKey,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (nullptr != p) {
@@ -3550,10 +3539,10 @@ void GALGAS_M_5F_messages::setter_setMClassForKey (GALGAS_luint inAttributeValue
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages::setter_setMNetworkIndexForKey (GALGAS_uint inAttributeValue,
-                                                          GALGAS_string inKey,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GGS_M_5F_messages::setter_setMNetworkIndexForKey (GGS_uint inAttributeValue,
+                                                       GGS_string inKey,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (nullptr != p) {
@@ -3564,10 +3553,10 @@ void GALGAS_M_5F_messages::setter_setMNetworkIndexForKey (GALGAS_uint inAttribut
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages::setter_setMBytesCountForKey (GALGAS_luint inAttributeValue,
-                                                        GALGAS_string inKey,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GGS_M_5F_messages::setter_setMBytesCountForKey (GGS_luint inAttributeValue,
+                                                     GGS_string inKey,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (nullptr != p) {
@@ -3578,10 +3567,10 @@ void GALGAS_M_5F_messages::setter_setMBytesCountForKey (GALGAS_luint inAttribute
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages::setter_setMPriorityForKey (GALGAS_luint inAttributeValue,
-                                                      GALGAS_string inKey,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GGS_M_5F_messages::setter_setMPriorityForKey (GGS_luint inAttributeValue,
+                                                   GGS_string inKey,
+                                                   Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (nullptr != p) {
@@ -3592,10 +3581,10 @@ void GALGAS_M_5F_messages::setter_setMPriorityForKey (GALGAS_luint inAttributeVa
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages::setter_setMOffsetForKey (GALGAS_luint inAttributeValue,
-                                                    GALGAS_string inKey,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
+void GGS_M_5F_messages::setter_setMOffsetForKey (GGS_luint inAttributeValue,
+                                                 GGS_string inKey,
+                                                 Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (nullptr != p) {
@@ -3606,10 +3595,10 @@ void GALGAS_M_5F_messages::setter_setMOffsetForKey (GALGAS_luint inAttributeValu
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages::setter_setMDeadlineForKey (GALGAS_luint inAttributeValue,
-                                                      GALGAS_string inKey,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GGS_M_5F_messages::setter_setMDeadlineForKey (GGS_luint inAttributeValue,
+                                                   GGS_string inKey,
+                                                   Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (nullptr != p) {
@@ -3620,10 +3609,10 @@ void GALGAS_M_5F_messages::setter_setMDeadlineForKey (GALGAS_luint inAttributeVa
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages::setter_setMPeriodForKey (GALGAS_luint inAttributeValue,
-                                                    GALGAS_string inKey,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
+void GGS_M_5F_messages::setter_setMPeriodForKey (GGS_luint inAttributeValue,
+                                                 GGS_string inKey,
+                                                 Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (nullptr != p) {
@@ -3634,10 +3623,10 @@ void GALGAS_M_5F_messages::setter_setMPeriodForKey (GALGAS_luint inAttributeValu
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages::setter_setMMessageKindForKey (GALGAS_AC_5F_canMessage inAttributeValue,
-                                                         GALGAS_string inKey,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) {
+void GGS_M_5F_messages::setter_setMMessageKindForKey (GGS_AC_5F_canMessage inAttributeValue,
+                                                      GGS_string inKey,
+                                                      Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_messages * p = (cMapElement_M_5F_messages *) attributes ;
   if (nullptr != p) {
@@ -3648,9 +3637,9 @@ void GALGAS_M_5F_messages::setter_setMMessageKindForKey (GALGAS_AC_5F_canMessage
 
 //--------------------------------------------------------------------------------------------------
 
-cMapElement_M_5F_messages * GALGAS_M_5F_messages::readWriteAccessForWithInstruction (Compiler * inCompiler,
-                                                                                     const GALGAS_string & inKey
-                                                                                     COMMA_LOCATION_ARGS) {
+cMapElement_M_5F_messages * GGS_M_5F_messages::readWriteAccessForWithInstruction (Compiler * inCompiler,
+                                                                                  const GGS_string & inKey
+                                                                                  COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_messages * result = (cMapElement_M_5F_messages *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
   macroNullOrValidSharedObject (result, cMapElement_M_5F_messages) ;
   return result ;
@@ -3658,7 +3647,7 @@ cMapElement_M_5F_messages * GALGAS_M_5F_messages::readWriteAccessForWithInstruct
 
 //--------------------------------------------------------------------------------------------------
 
-cEnumerator_M_5F_messages::cEnumerator_M_5F_messages (const GALGAS_M_5F_messages & inEnumeratedObject,
+cEnumerator_M_5F_messages::cEnumerator_M_5F_messages (const GGS_M_5F_messages & inEnumeratedObject,
                                                       const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
@@ -3666,15 +3655,15 @@ cGenericAbstractEnumerator (inOrder) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element cEnumerator_M_5F_messages::current (LOCATION_ARGS) const {
+GGS_M_5F_messages_2E_element cEnumerator_M_5F_messages::current (LOCATION_ARGS) const {
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_messages) ;
-  return GALGAS_M_5F_messages_2D_element (p->mProperty_lkey, p->mProperty_mIndex, p->mProperty_mClass, p->mProperty_mNetworkIndex, p->mProperty_mBytesCount, p->mProperty_mPriority, p->mProperty_mOffset, p->mProperty_mDeadline, p->mProperty_mPeriod, p->mProperty_mMessageKind) ;
+  return GGS_M_5F_messages_2E_element (p->mProperty_lkey, p->mProperty_mIndex, p->mProperty_mClass, p->mProperty_mNetworkIndex, p->mProperty_mBytesCount, p->mProperty_mPriority, p->mProperty_mOffset, p->mProperty_mDeadline, p->mProperty_mPeriod, p->mProperty_mMessageKind) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_lstring cEnumerator_M_5F_messages::current_lkey (LOCATION_ARGS) const {
+GGS_lstring cEnumerator_M_5F_messages::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mProperty_lkey ;
@@ -3682,7 +3671,7 @@ GALGAS_lstring cEnumerator_M_5F_messages::current_lkey (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint cEnumerator_M_5F_messages::current_mIndex (LOCATION_ARGS) const {
+GGS_uint cEnumerator_M_5F_messages::current_mIndex (LOCATION_ARGS) const {
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_messages) ;
   return p->mProperty_mIndex ;
@@ -3690,7 +3679,7 @@ GALGAS_uint cEnumerator_M_5F_messages::current_mIndex (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_messages::current_mClass (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_messages::current_mClass (LOCATION_ARGS) const {
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_messages) ;
   return p->mProperty_mClass ;
@@ -3698,7 +3687,7 @@ GALGAS_luint cEnumerator_M_5F_messages::current_mClass (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint cEnumerator_M_5F_messages::current_mNetworkIndex (LOCATION_ARGS) const {
+GGS_uint cEnumerator_M_5F_messages::current_mNetworkIndex (LOCATION_ARGS) const {
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_messages) ;
   return p->mProperty_mNetworkIndex ;
@@ -3706,7 +3695,7 @@ GALGAS_uint cEnumerator_M_5F_messages::current_mNetworkIndex (LOCATION_ARGS) con
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_messages::current_mBytesCount (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_messages::current_mBytesCount (LOCATION_ARGS) const {
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_messages) ;
   return p->mProperty_mBytesCount ;
@@ -3714,7 +3703,7 @@ GALGAS_luint cEnumerator_M_5F_messages::current_mBytesCount (LOCATION_ARGS) cons
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_messages::current_mPriority (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_messages::current_mPriority (LOCATION_ARGS) const {
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_messages) ;
   return p->mProperty_mPriority ;
@@ -3722,7 +3711,7 @@ GALGAS_luint cEnumerator_M_5F_messages::current_mPriority (LOCATION_ARGS) const 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_messages::current_mOffset (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_messages::current_mOffset (LOCATION_ARGS) const {
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_messages) ;
   return p->mProperty_mOffset ;
@@ -3730,7 +3719,7 @@ GALGAS_luint cEnumerator_M_5F_messages::current_mOffset (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_messages::current_mDeadline (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_messages::current_mDeadline (LOCATION_ARGS) const {
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_messages) ;
   return p->mProperty_mDeadline ;
@@ -3738,7 +3727,7 @@ GALGAS_luint cEnumerator_M_5F_messages::current_mDeadline (LOCATION_ARGS) const 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_messages::current_mPeriod (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_messages::current_mPeriod (LOCATION_ARGS) const {
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_messages) ;
   return p->mProperty_mPeriod ;
@@ -3746,7 +3735,7 @@ GALGAS_luint cEnumerator_M_5F_messages::current_mPeriod (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_canMessage cEnumerator_M_5F_messages::current_mMessageKind (LOCATION_ARGS) const {
+GGS_AC_5F_canMessage cEnumerator_M_5F_messages::current_mMessageKind (LOCATION_ARGS) const {
   const cMapElement_M_5F_messages * p = (const cMapElement_M_5F_messages *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_messages) ;
   return p->mProperty_mMessageKind ;
@@ -3763,29 +3752,29 @@ const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages ("M_messages
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_M_5F_messages::staticTypeDescriptor (void) const {
+const C_galgas_type_descriptor * GGS_M_5F_messages::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_M_5F_messages ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_M_5F_messages::clonedObject (void) const {
+AC_GALGAS_root * GGS_M_5F_messages::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_M_5F_messages (*this)) ;
+    macroMyNew (result, GGS_M_5F_messages (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages GALGAS_M_5F_messages::extractObject (const GALGAS_object & inObject,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_messages result ;
-  const GALGAS_M_5F_messages * p = (const GALGAS_M_5F_messages *) inObject.embeddedObject () ;
+GGS_M_5F_messages GGS_M_5F_messages::extractObject (const GGS_object & inObject,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  GGS_M_5F_messages result ;
+  const GGS_M_5F_messages * p = (const GGS_M_5F_messages *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_M_5F_messages *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_M_5F_messages *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("M_messages", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3812,7 +3801,7 @@ acStrongPtr_class (THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_AC_5F_task::objectCompare (const GALGAS_AC_5F_task & inOperand) const {
+ComparisonResult GGS_AC_5F_task::objectCompare (const GGS_AC_5F_task & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
@@ -3830,13 +3819,13 @@ ComparisonResult GALGAS_AC_5F_task::objectCompare (const GALGAS_AC_5F_task & inO
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_task::GALGAS_AC_5F_task (void) :
+GGS_AC_5F_task::GGS_AC_5F_task (void) :
 AC_GALGAS_reference_class () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_task::GALGAS_AC_5F_task (const cPtr_AC_5F_task * inSourcePtr) :
+GGS_AC_5F_task::GGS_AC_5F_task (const cPtr_AC_5F_task * inSourcePtr) :
 AC_GALGAS_reference_class (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_AC_5F_task) ;
 }
@@ -3860,29 +3849,29 @@ const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_task ("AC_task",
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_AC_5F_task::staticTypeDescriptor (void) const {
+const C_galgas_type_descriptor * GGS_AC_5F_task::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_AC_5F_task ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_AC_5F_task::clonedObject (void) const {
+AC_GALGAS_root * GGS_AC_5F_task::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_AC_5F_task (*this)) ;
+    macroMyNew (result, GGS_AC_5F_task (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_task GALGAS_AC_5F_task::extractObject (const GALGAS_object & inObject,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_AC_5F_task result ;
-  const GALGAS_AC_5F_task * p = (const GALGAS_AC_5F_task *) inObject.embeddedObject () ;
+GGS_AC_5F_task GGS_AC_5F_task::extractObject (const GGS_object & inObject,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  GGS_AC_5F_task result ;
+  const GGS_AC_5F_task * p = (const GGS_AC_5F_task *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_AC_5F_task *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_AC_5F_task *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("AC_task", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3893,7 +3882,7 @@ GALGAS_AC_5F_task GALGAS_AC_5F_task::extractObject (const GALGAS_object & inObje
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_AC_5F_task_2D_weak::objectCompare (const GALGAS_AC_5F_task_2D_weak & inOperand) const {
+ComparisonResult GGS_AC_5F_task_2E_weak::objectCompare (const GGS_AC_5F_task_2E_weak & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
@@ -3913,13 +3902,13 @@ ComparisonResult GALGAS_AC_5F_task_2D_weak::objectCompare (const GALGAS_AC_5F_ta
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_task_2D_weak::GALGAS_AC_5F_task_2D_weak (void) :
+GGS_AC_5F_task_2E_weak::GGS_AC_5F_task_2E_weak (void) :
 AC_GALGAS_weak_reference () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_task_2D_weak & GALGAS_AC_5F_task_2D_weak::operator = (const GALGAS_AC_5F_task & inSource) {
+GGS_AC_5F_task_2E_weak & GGS_AC_5F_task_2E_weak::operator = (const GGS_AC_5F_task & inSource) {
   cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
   if (p != nullptr) {
@@ -3931,29 +3920,29 @@ GALGAS_AC_5F_task_2D_weak & GALGAS_AC_5F_task_2D_weak::operator = (const GALGAS_
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_task_2D_weak::GALGAS_AC_5F_task_2D_weak (const GALGAS_AC_5F_task & inSource) :
+GGS_AC_5F_task_2E_weak::GGS_AC_5F_task_2E_weak (const GGS_AC_5F_task & inSource) :
 AC_GALGAS_weak_reference (inSource) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_task_2D_weak GALGAS_AC_5F_task_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_AC_5F_task_2D_weak result ;
+GGS_AC_5F_task_2E_weak GGS_AC_5F_task_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_AC_5F_task_2E_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_task GALGAS_AC_5F_task_2D_weak::bang_AC_5F_task_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_AC_5F_task result ;
+GGS_AC_5F_task GGS_AC_5F_task_2E_weak::bang_AC_5F_task_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_AC_5F_task result ;
   if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
     if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_AC_5F_task) ;
-      result = GALGAS_AC_5F_task ((cPtr_AC_5F_task *) strongPtr) ;
+      result = GGS_AC_5F_task ((cPtr_AC_5F_task *) strongPtr) ;
     }
   }
   return result ;
@@ -3961,41 +3950,41 @@ GALGAS_AC_5F_task GALGAS_AC_5F_task_2D_weak::bang_AC_5F_task_2D_weak (Compiler *
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @AC_task-weak generic code implementation
+//     @AC_task.weak generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_task_2D_weak ("AC_task-weak",
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_task_2E_weak ("AC_task.weak",
                                                                           nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_AC_5F_task_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_AC_5F_task_2D_weak ;
+const C_galgas_type_descriptor * GGS_AC_5F_task_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_AC_5F_task_2E_weak ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_AC_5F_task_2D_weak::clonedObject (void) const {
+AC_GALGAS_root * GGS_AC_5F_task_2E_weak::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_AC_5F_task_2D_weak (*this)) ;
+    macroMyNew (result, GGS_AC_5F_task_2E_weak (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_task_2D_weak GALGAS_AC_5F_task_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                    Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_AC_5F_task_2D_weak result ;
-  const GALGAS_AC_5F_task_2D_weak * p = (const GALGAS_AC_5F_task_2D_weak *) inObject.embeddedObject () ;
+GGS_AC_5F_task_2E_weak GGS_AC_5F_task_2E_weak::extractObject (const GGS_object & inObject,
+                                                              Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  GGS_AC_5F_task_2E_weak result ;
+  const GGS_AC_5F_task_2E_weak * p = (const GGS_AC_5F_task_2E_weak *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_AC_5F_task_2D_weak *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_AC_5F_task_2E_weak *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("AC_task-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("AC_task.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -4019,7 +4008,7 @@ cPtr_AC_5F_task (inCompiler COMMA_THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_C_5F_independantTask::objectCompare (const GALGAS_C_5F_independantTask & inOperand) const {
+ComparisonResult GGS_C_5F_independantTask::objectCompare (const GGS_C_5F_independantTask & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
@@ -4037,19 +4026,19 @@ ComparisonResult GALGAS_C_5F_independantTask::objectCompare (const GALGAS_C_5F_i
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_independantTask::GALGAS_C_5F_independantTask (void) :
-GALGAS_AC_5F_task () {
+GGS_C_5F_independantTask::GGS_C_5F_independantTask (void) :
+GGS_AC_5F_task () {
 }
 
 //--- Synthetized initializer ----------------------------------------------------------------------
 
-GALGAS_C_5F_independantTask GALGAS_C_5F_independantTask::
+GGS_C_5F_independantTask GGS_C_5F_independantTask::
 init (Compiler * inCompiler
           COMMA_LOCATION_ARGS) {
   cPtr_C_5F_independantTask * object = nullptr ;
   macroMyNew (object, cPtr_C_5F_independantTask (inCompiler COMMA_THERE)) ;
   object->C_5F_independantTask_init (inCompiler) ;
-  const GALGAS_C_5F_independantTask result (object) ;
+  const GGS_C_5F_independantTask result (object) ;
   macroDetachSharedObject (object) ;
   return result ;
 }
@@ -4062,14 +4051,14 @@ C_5F_independantTask_init (Compiler * /* inCompiler */) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_independantTask::GALGAS_C_5F_independantTask (const cPtr_C_5F_independantTask * inSourcePtr) :
-GALGAS_AC_5F_task (inSourcePtr) {
+GGS_C_5F_independantTask::GGS_C_5F_independantTask (const cPtr_C_5F_independantTask * inSourcePtr) :
+GGS_AC_5F_task (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_C_5F_independantTask) ;
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_independantTask GALGAS_C_5F_independantTask::class_func_new (LOCATION_ARGS) {
-  GALGAS_C_5F_independantTask result ;
+GGS_C_5F_independantTask GGS_C_5F_independantTask::class_func_new (LOCATION_ARGS) {
+  GGS_C_5F_independantTask result ;
   macroMyNew (result.mObjectPtr, cPtr_C_5F_independantTask (THERE)) ;
   return result ;
 }
@@ -4113,29 +4102,29 @@ const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_independantTask ("C_i
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_C_5F_independantTask::staticTypeDescriptor (void) const {
+const C_galgas_type_descriptor * GGS_C_5F_independantTask::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_C_5F_independantTask ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_C_5F_independantTask::clonedObject (void) const {
+AC_GALGAS_root * GGS_C_5F_independantTask::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_C_5F_independantTask (*this)) ;
+    macroMyNew (result, GGS_C_5F_independantTask (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_independantTask GALGAS_C_5F_independantTask::extractObject (const GALGAS_object & inObject,
-                                                                        Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_independantTask result ;
-  const GALGAS_C_5F_independantTask * p = (const GALGAS_C_5F_independantTask *) inObject.embeddedObject () ;
+GGS_C_5F_independantTask GGS_C_5F_independantTask::extractObject (const GGS_object & inObject,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  GGS_C_5F_independantTask result ;
+  const GGS_C_5F_independantTask * p = (const GGS_C_5F_independantTask *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_C_5F_independantTask *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_C_5F_independantTask *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_independantTask", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -4146,7 +4135,7 @@ GALGAS_C_5F_independantTask GALGAS_C_5F_independantTask::extractObject (const GA
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_C_5F_independantTask_2D_weak::objectCompare (const GALGAS_C_5F_independantTask_2D_weak & inOperand) const {
+ComparisonResult GGS_C_5F_independantTask_2E_weak::objectCompare (const GGS_C_5F_independantTask_2E_weak & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
@@ -4166,13 +4155,13 @@ ComparisonResult GALGAS_C_5F_independantTask_2D_weak::objectCompare (const GALGA
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_independantTask_2D_weak::GALGAS_C_5F_independantTask_2D_weak (void) :
-GALGAS_AC_5F_task_2D_weak () {
+GGS_C_5F_independantTask_2E_weak::GGS_C_5F_independantTask_2E_weak (void) :
+GGS_AC_5F_task_2E_weak () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_independantTask_2D_weak & GALGAS_C_5F_independantTask_2D_weak::operator = (const GALGAS_C_5F_independantTask & inSource) {
+GGS_C_5F_independantTask_2E_weak & GGS_C_5F_independantTask_2E_weak::operator = (const GGS_C_5F_independantTask & inSource) {
   cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
   if (p != nullptr) {
@@ -4184,29 +4173,29 @@ GALGAS_C_5F_independantTask_2D_weak & GALGAS_C_5F_independantTask_2D_weak::opera
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_independantTask_2D_weak::GALGAS_C_5F_independantTask_2D_weak (const GALGAS_C_5F_independantTask & inSource) :
-GALGAS_AC_5F_task_2D_weak (inSource) {
+GGS_C_5F_independantTask_2E_weak::GGS_C_5F_independantTask_2E_weak (const GGS_C_5F_independantTask & inSource) :
+GGS_AC_5F_task_2E_weak (inSource) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_independantTask_2D_weak GALGAS_C_5F_independantTask_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_C_5F_independantTask_2D_weak result ;
+GGS_C_5F_independantTask_2E_weak GGS_C_5F_independantTask_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_C_5F_independantTask_2E_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_independantTask GALGAS_C_5F_independantTask_2D_weak::bang_C_5F_independantTask_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_C_5F_independantTask result ;
+GGS_C_5F_independantTask GGS_C_5F_independantTask_2E_weak::bang_C_5F_independantTask_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_C_5F_independantTask result ;
   if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
     if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_C_5F_independantTask) ;
-      result = GALGAS_C_5F_independantTask ((cPtr_C_5F_independantTask *) strongPtr) ;
+      result = GGS_C_5F_independantTask ((cPtr_C_5F_independantTask *) strongPtr) ;
     }
   }
   return result ;
@@ -4214,41 +4203,41 @@ GALGAS_C_5F_independantTask GALGAS_C_5F_independantTask_2D_weak::bang_C_5F_indep
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @C_independantTask-weak generic code implementation
+//     @C_independantTask.weak generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_independantTask_2D_weak ("C_independantTask-weak",
-                                                                                    & kTypeDescriptor_GALGAS_AC_5F_task_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_independantTask_2E_weak ("C_independantTask.weak",
+                                                                                    & kTypeDescriptor_GALGAS_AC_5F_task_2E_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_C_5F_independantTask_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_C_5F_independantTask_2D_weak ;
+const C_galgas_type_descriptor * GGS_C_5F_independantTask_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_C_5F_independantTask_2E_weak ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_C_5F_independantTask_2D_weak::clonedObject (void) const {
+AC_GALGAS_root * GGS_C_5F_independantTask_2E_weak::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_C_5F_independantTask_2D_weak (*this)) ;
+    macroMyNew (result, GGS_C_5F_independantTask_2E_weak (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_independantTask_2D_weak GALGAS_C_5F_independantTask_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                        Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_independantTask_2D_weak result ;
-  const GALGAS_C_5F_independantTask_2D_weak * p = (const GALGAS_C_5F_independantTask_2D_weak *) inObject.embeddedObject () ;
+GGS_C_5F_independantTask_2E_weak GGS_C_5F_independantTask_2E_weak::extractObject (const GGS_object & inObject,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GGS_C_5F_independantTask_2E_weak result ;
+  const GGS_C_5F_independantTask_2E_weak * p = (const GGS_C_5F_independantTask_2E_weak *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_C_5F_independantTask_2D_weak *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_C_5F_independantTask_2E_weak *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("C_independantTask-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("C_independantTask.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -4256,7 +4245,7 @@ GALGAS_C_5F_independantTask_2D_weak GALGAS_C_5F_independantTask_2D_weak::extract
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_C_5F_taskDependsFromTask_2D_weak::objectCompare (const GALGAS_C_5F_taskDependsFromTask_2D_weak & inOperand) const {
+ComparisonResult GGS_C_5F_taskDependsFromTask_2E_weak::objectCompare (const GGS_C_5F_taskDependsFromTask_2E_weak & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
@@ -4276,13 +4265,13 @@ ComparisonResult GALGAS_C_5F_taskDependsFromTask_2D_weak::objectCompare (const G
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromTask_2D_weak::GALGAS_C_5F_taskDependsFromTask_2D_weak (void) :
-GALGAS_AC_5F_task_2D_weak () {
+GGS_C_5F_taskDependsFromTask_2E_weak::GGS_C_5F_taskDependsFromTask_2E_weak (void) :
+GGS_AC_5F_task_2E_weak () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromTask_2D_weak & GALGAS_C_5F_taskDependsFromTask_2D_weak::operator = (const GALGAS_C_5F_taskDependsFromTask & inSource) {
+GGS_C_5F_taskDependsFromTask_2E_weak & GGS_C_5F_taskDependsFromTask_2E_weak::operator = (const GGS_C_5F_taskDependsFromTask & inSource) {
   cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
   if (p != nullptr) {
@@ -4294,29 +4283,29 @@ GALGAS_C_5F_taskDependsFromTask_2D_weak & GALGAS_C_5F_taskDependsFromTask_2D_wea
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromTask_2D_weak::GALGAS_C_5F_taskDependsFromTask_2D_weak (const GALGAS_C_5F_taskDependsFromTask & inSource) :
-GALGAS_AC_5F_task_2D_weak (inSource) {
+GGS_C_5F_taskDependsFromTask_2E_weak::GGS_C_5F_taskDependsFromTask_2E_weak (const GGS_C_5F_taskDependsFromTask & inSource) :
+GGS_AC_5F_task_2E_weak (inSource) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromTask_2D_weak GALGAS_C_5F_taskDependsFromTask_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_C_5F_taskDependsFromTask_2D_weak result ;
+GGS_C_5F_taskDependsFromTask_2E_weak GGS_C_5F_taskDependsFromTask_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_C_5F_taskDependsFromTask_2E_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask_2D_weak::bang_C_5F_taskDependsFromTask_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_C_5F_taskDependsFromTask result ;
+GGS_C_5F_taskDependsFromTask GGS_C_5F_taskDependsFromTask_2E_weak::bang_C_5F_taskDependsFromTask_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_C_5F_taskDependsFromTask result ;
   if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
     if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_C_5F_taskDependsFromTask) ;
-      result = GALGAS_C_5F_taskDependsFromTask ((cPtr_C_5F_taskDependsFromTask *) strongPtr) ;
+      result = GGS_C_5F_taskDependsFromTask ((cPtr_C_5F_taskDependsFromTask *) strongPtr) ;
     }
   }
   return result ;
@@ -4324,41 +4313,41 @@ GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask_2D_weak::bang_C_
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @C_taskDependsFromTask-weak generic code implementation
+//     @C_taskDependsFromTask.weak generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFromTask_2D_weak ("C_taskDependsFromTask-weak",
-                                                                                        & kTypeDescriptor_GALGAS_AC_5F_task_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFromTask_2E_weak ("C_taskDependsFromTask.weak",
+                                                                                        & kTypeDescriptor_GALGAS_AC_5F_task_2E_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_C_5F_taskDependsFromTask_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_C_5F_taskDependsFromTask_2D_weak ;
+const C_galgas_type_descriptor * GGS_C_5F_taskDependsFromTask_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_C_5F_taskDependsFromTask_2E_weak ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_C_5F_taskDependsFromTask_2D_weak::clonedObject (void) const {
+AC_GALGAS_root * GGS_C_5F_taskDependsFromTask_2E_weak::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_C_5F_taskDependsFromTask_2D_weak (*this)) ;
+    macroMyNew (result, GGS_C_5F_taskDependsFromTask_2E_weak (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromTask_2D_weak GALGAS_C_5F_taskDependsFromTask_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                                Compiler * inCompiler
-                                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_taskDependsFromTask_2D_weak result ;
-  const GALGAS_C_5F_taskDependsFromTask_2D_weak * p = (const GALGAS_C_5F_taskDependsFromTask_2D_weak *) inObject.embeddedObject () ;
+GGS_C_5F_taskDependsFromTask_2E_weak GGS_C_5F_taskDependsFromTask_2E_weak::extractObject (const GGS_object & inObject,
+                                                                                          Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GGS_C_5F_taskDependsFromTask_2E_weak result ;
+  const GGS_C_5F_taskDependsFromTask_2E_weak * p = (const GGS_C_5F_taskDependsFromTask_2E_weak *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_C_5F_taskDependsFromTask_2D_weak *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_C_5F_taskDependsFromTask_2E_weak *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("C_taskDependsFromTask-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("C_taskDependsFromTask.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -4366,7 +4355,7 @@ GALGAS_C_5F_taskDependsFromTask_2D_weak GALGAS_C_5F_taskDependsFromTask_2D_weak:
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_C_5F_taskDependsFromMessage_2D_weak::objectCompare (const GALGAS_C_5F_taskDependsFromMessage_2D_weak & inOperand) const {
+ComparisonResult GGS_C_5F_taskDependsFromMessage_2E_weak::objectCompare (const GGS_C_5F_taskDependsFromMessage_2E_weak & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
@@ -4386,13 +4375,13 @@ ComparisonResult GALGAS_C_5F_taskDependsFromMessage_2D_weak::objectCompare (cons
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromMessage_2D_weak::GALGAS_C_5F_taskDependsFromMessage_2D_weak (void) :
-GALGAS_AC_5F_task_2D_weak () {
+GGS_C_5F_taskDependsFromMessage_2E_weak::GGS_C_5F_taskDependsFromMessage_2E_weak (void) :
+GGS_AC_5F_task_2E_weak () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromMessage_2D_weak & GALGAS_C_5F_taskDependsFromMessage_2D_weak::operator = (const GALGAS_C_5F_taskDependsFromMessage & inSource) {
+GGS_C_5F_taskDependsFromMessage_2E_weak & GGS_C_5F_taskDependsFromMessage_2E_weak::operator = (const GGS_C_5F_taskDependsFromMessage & inSource) {
   cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
   if (p != nullptr) {
@@ -4404,29 +4393,29 @@ GALGAS_C_5F_taskDependsFromMessage_2D_weak & GALGAS_C_5F_taskDependsFromMessage_
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromMessage_2D_weak::GALGAS_C_5F_taskDependsFromMessage_2D_weak (const GALGAS_C_5F_taskDependsFromMessage & inSource) :
-GALGAS_AC_5F_task_2D_weak (inSource) {
+GGS_C_5F_taskDependsFromMessage_2E_weak::GGS_C_5F_taskDependsFromMessage_2E_weak (const GGS_C_5F_taskDependsFromMessage & inSource) :
+GGS_AC_5F_task_2E_weak (inSource) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromMessage_2D_weak GALGAS_C_5F_taskDependsFromMessage_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_C_5F_taskDependsFromMessage_2D_weak result ;
+GGS_C_5F_taskDependsFromMessage_2E_weak GGS_C_5F_taskDependsFromMessage_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_C_5F_taskDependsFromMessage_2E_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage_2D_weak::bang_C_5F_taskDependsFromMessage_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_C_5F_taskDependsFromMessage result ;
+GGS_C_5F_taskDependsFromMessage GGS_C_5F_taskDependsFromMessage_2E_weak::bang_C_5F_taskDependsFromMessage_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_C_5F_taskDependsFromMessage result ;
   if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
     if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_C_5F_taskDependsFromMessage) ;
-      result = GALGAS_C_5F_taskDependsFromMessage ((cPtr_C_5F_taskDependsFromMessage *) strongPtr) ;
+      result = GGS_C_5F_taskDependsFromMessage ((cPtr_C_5F_taskDependsFromMessage *) strongPtr) ;
     }
   }
   return result ;
@@ -4434,41 +4423,41 @@ GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage_2D_weak::b
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @C_taskDependsFromMessage-weak generic code implementation
+//     @C_taskDependsFromMessage.weak generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFromMessage_2D_weak ("C_taskDependsFromMessage-weak",
-                                                                                           & kTypeDescriptor_GALGAS_AC_5F_task_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFromMessage_2E_weak ("C_taskDependsFromMessage.weak",
+                                                                                           & kTypeDescriptor_GALGAS_AC_5F_task_2E_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_C_5F_taskDependsFromMessage_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_C_5F_taskDependsFromMessage_2D_weak ;
+const C_galgas_type_descriptor * GGS_C_5F_taskDependsFromMessage_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_C_5F_taskDependsFromMessage_2E_weak ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_C_5F_taskDependsFromMessage_2D_weak::clonedObject (void) const {
+AC_GALGAS_root * GGS_C_5F_taskDependsFromMessage_2E_weak::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_C_5F_taskDependsFromMessage_2D_weak (*this)) ;
+    macroMyNew (result, GGS_C_5F_taskDependsFromMessage_2E_weak (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromMessage_2D_weak GALGAS_C_5F_taskDependsFromMessage_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                                      Compiler * inCompiler
-                                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_taskDependsFromMessage_2D_weak result ;
-  const GALGAS_C_5F_taskDependsFromMessage_2D_weak * p = (const GALGAS_C_5F_taskDependsFromMessage_2D_weak *) inObject.embeddedObject () ;
+GGS_C_5F_taskDependsFromMessage_2E_weak GGS_C_5F_taskDependsFromMessage_2E_weak::extractObject (const GGS_object & inObject,
+                                                                                                Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  GGS_C_5F_taskDependsFromMessage_2E_weak result ;
+  const GGS_C_5F_taskDependsFromMessage_2E_weak * p = (const GGS_C_5F_taskDependsFromMessage_2E_weak *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_C_5F_taskDependsFromMessage_2D_weak *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_C_5F_taskDependsFromMessage_2E_weak *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("C_taskDependsFromMessage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("C_taskDependsFromMessage.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -4476,7 +4465,7 @@ GALGAS_C_5F_taskDependsFromMessage_2D_weak GALGAS_C_5F_taskDependsFromMessage_2D
 
 //--------------------------------------------------------------------------------------------------
 
-cMapElement_M_5F_tasks::cMapElement_M_5F_tasks (const GALGAS_M_5F_tasks_2D_element & inValue
+cMapElement_M_5F_tasks::cMapElement_M_5F_tasks (const GGS_M_5F_tasks_2E_element & inValue
                                                 COMMA_LOCATION_ARGS) :
 cMapElement (inValue.mProperty_lkey COMMA_THERE),
 mProperty_mIndex (inValue.mProperty_mIndex),
@@ -4492,16 +4481,16 @@ mProperty_mTaskKind (inValue.mProperty_mTaskKind) {
 
 //--------------------------------------------------------------------------------------------------
 
-cMapElement_M_5F_tasks::cMapElement_M_5F_tasks (const GALGAS_lstring & inKey,
-                                                const GALGAS_uint & in_mIndex,
-                                                const GALGAS_luint & in_mPriority,
-                                                const GALGAS_luint & in_mOffset,
-                                                const GALGAS_luint & in_mDeadline,
-                                                const GALGAS_luint & in_mDurationMin,
-                                                const GALGAS_luint & in_mDurationMax,
-                                                const GALGAS_uint & in_mProcessor,
-                                                const GALGAS_luint & in_mPeriod,
-                                                const GALGAS_AC_5F_task & in_mTaskKind
+cMapElement_M_5F_tasks::cMapElement_M_5F_tasks (const GGS_lstring & inKey,
+                                                const GGS_uint & in_mIndex,
+                                                const GGS_luint & in_mPriority,
+                                                const GGS_luint & in_mOffset,
+                                                const GGS_luint & in_mDeadline,
+                                                const GGS_luint & in_mDurationMin,
+                                                const GGS_luint & in_mDurationMax,
+                                                const GGS_uint & in_mProcessor,
+                                                const GGS_luint & in_mPeriod,
+                                                const GGS_AC_5F_task & in_mTaskKind
                                                 COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_mIndex (in_mIndex),
@@ -4572,52 +4561,52 @@ void cMapElement_M_5F_tasks::description (String & ioString, const int32_t inInd
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks::GALGAS_M_5F_tasks (void) :
+GGS_M_5F_tasks::GGS_M_5F_tasks (void) :
 AC_GALGAS_map () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks::GALGAS_M_5F_tasks (const GALGAS_M_5F_tasks & inSource) :
+GGS_M_5F_tasks::GGS_M_5F_tasks (const GGS_M_5F_tasks & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks & GALGAS_M_5F_tasks::operator = (const GALGAS_M_5F_tasks & inSource) {
+GGS_M_5F_tasks & GGS_M_5F_tasks::operator = (const GGS_M_5F_tasks & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks GALGAS_M_5F_tasks::init (Compiler * COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_tasks result ;
+GGS_M_5F_tasks GGS_M_5F_tasks::init (Compiler * COMMA_LOCATION_ARGS) {
+  GGS_M_5F_tasks result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks GALGAS_M_5F_tasks::class_func_emptyMap (LOCATION_ARGS) {
-  GALGAS_M_5F_tasks result ;
+GGS_M_5F_tasks GGS_M_5F_tasks::class_func_emptyMap (LOCATION_ARGS) {
+  GGS_M_5F_tasks result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element_3F_ GALGAS_M_5F_tasks
-::readSubscript__3F_ (const class GALGAS_string & inKey,
+GGS_M_5F_tasks_2E_element_3F_ GGS_M_5F_tasks
+::readSubscript__3F_ (const class GGS_string & inKey,
                             Compiler * /* inCompiler */
                             COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_M_5F_tasks_2D_element_3F_ result ;
+  GGS_M_5F_tasks_2E_element_3F_ result ;
   if (isValid () && inKey.isValid ()) {
     cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) searchForKey (inKey) ;
     if (nullptr == p) {
-      result = GALGAS_M_5F_tasks_2D_element_3F_::init_nil () ;
+      result = GGS_M_5F_tasks_2E_element_3F_::init_nil () ;
     }else{
-      GALGAS_M_5F_tasks_2D_element element ;
+      GGS_M_5F_tasks_2E_element element ;
       element.mProperty_lkey = p->mProperty_lkey ;
       element.mProperty_mIndex = p->mProperty_mIndex ;
       element.mProperty_mPriority = p->mProperty_mPriority ;
@@ -4636,27 +4625,27 @@ GALGAS_M_5F_tasks_2D_element_3F_ GALGAS_M_5F_tasks
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks GALGAS_M_5F_tasks::class_func_mapWithMapToOverride (const GALGAS_M_5F_tasks & inMapToOverride
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_tasks result ;
+GGS_M_5F_tasks GGS_M_5F_tasks::class_func_mapWithMapToOverride (const GGS_M_5F_tasks & inMapToOverride
+                                                                COMMA_LOCATION_ARGS) {
+  GGS_M_5F_tasks result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks GALGAS_M_5F_tasks::getter_overriddenMap (Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const {
-  GALGAS_M_5F_tasks result ;
+GGS_M_5F_tasks GGS_M_5F_tasks::getter_overriddenMap (Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const {
+  GGS_M_5F_tasks result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks::enterElement (const GALGAS_M_5F_tasks_2D_element & inValue,
-                                      Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) {
+void GGS_M_5F_tasks::enterElement (const GGS_M_5F_tasks_2E_element & inValue,
+                                   Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_tasks * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_tasks (inValue COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -4669,18 +4658,18 @@ void GALGAS_M_5F_tasks::enterElement (const GALGAS_M_5F_tasks_2D_element & inVal
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks::addAssign_operation (const GALGAS_lstring & inKey,
-                                             const GALGAS_uint & inArgument0,
-                                             const GALGAS_luint & inArgument1,
-                                             const GALGAS_luint & inArgument2,
-                                             const GALGAS_luint & inArgument3,
-                                             const GALGAS_luint & inArgument4,
-                                             const GALGAS_luint & inArgument5,
-                                             const GALGAS_uint & inArgument6,
-                                             const GALGAS_luint & inArgument7,
-                                             const GALGAS_AC_5F_task & inArgument8,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) {
+void GGS_M_5F_tasks::addAssign_operation (const GGS_lstring & inKey,
+                                          const GGS_uint & inArgument0,
+                                          const GGS_luint & inArgument1,
+                                          const GGS_luint & inArgument2,
+                                          const GGS_luint & inArgument3,
+                                          const GGS_luint & inArgument4,
+                                          const GGS_luint & inArgument5,
+                                          const GGS_uint & inArgument6,
+                                          const GGS_luint & inArgument7,
+                                          const GGS_AC_5F_task & inArgument8,
+                                          Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_tasks * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_tasks (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -4693,10 +4682,10 @@ void GALGAS_M_5F_tasks::addAssign_operation (const GALGAS_lstring & inKey,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks GALGAS_M_5F_tasks::add_operation (const GALGAS_M_5F_tasks & inOperand,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const {
-  GALGAS_M_5F_tasks result = *this ;
+GGS_M_5F_tasks GGS_M_5F_tasks::add_operation (const GGS_M_5F_tasks & inOperand,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
+  GGS_M_5F_tasks result = *this ;
   cEnumerator_M_5F_tasks enumerator (inOperand, EnumerationOrder::up) ;
   while (enumerator.hasCurrentObject ()) {
     result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIndex (HERE), enumerator.current_mPriority (HERE), enumerator.current_mOffset (HERE), enumerator.current_mDeadline (HERE), enumerator.current_mDurationMin (HERE), enumerator.current_mDurationMax (HERE), enumerator.current_mProcessor (HERE), enumerator.current_mPeriod (HERE), enumerator.current_mTaskKind (HERE), inCompiler COMMA_THERE) ;
@@ -4707,18 +4696,18 @@ GALGAS_M_5F_tasks GALGAS_M_5F_tasks::add_operation (const GALGAS_M_5F_tasks & in
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks::setter_insertKey (GALGAS_lstring inKey,
-                                          GALGAS_uint inArgument0,
-                                          GALGAS_luint inArgument1,
-                                          GALGAS_luint inArgument2,
-                                          GALGAS_luint inArgument3,
-                                          GALGAS_luint inArgument4,
-                                          GALGAS_luint inArgument5,
-                                          GALGAS_uint inArgument6,
-                                          GALGAS_luint inArgument7,
-                                          GALGAS_AC_5F_task inArgument8,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
+void GGS_M_5F_tasks::setter_insertKey (GGS_lstring inKey,
+                                       GGS_uint inArgument0,
+                                       GGS_luint inArgument1,
+                                       GGS_luint inArgument2,
+                                       GGS_luint inArgument3,
+                                       GGS_luint inArgument4,
+                                       GGS_luint inArgument5,
+                                       GGS_uint inArgument6,
+                                       GGS_luint inArgument7,
+                                       GGS_AC_5F_task inArgument8,
+                                       Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_tasks * p = nullptr ;
   macroMyNew (p, cMapElement_M_5F_tasks (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -4735,18 +4724,18 @@ const char * kSearchErrorMessage_M_5F_tasks_searchKey = "the task '%K' is not de
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks::method_searchKey (GALGAS_lstring inKey,
-                                          GALGAS_uint & outArgument0,
-                                          GALGAS_luint & outArgument1,
-                                          GALGAS_luint & outArgument2,
-                                          GALGAS_luint & outArgument3,
-                                          GALGAS_luint & outArgument4,
-                                          GALGAS_luint & outArgument5,
-                                          GALGAS_uint & outArgument6,
-                                          GALGAS_luint & outArgument7,
-                                          GALGAS_AC_5F_task & outArgument8,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) const {
+void GGS_M_5F_tasks::method_searchKey (GGS_lstring inKey,
+                                       GGS_uint & outArgument0,
+                                       GGS_luint & outArgument1,
+                                       GGS_luint & outArgument2,
+                                       GGS_luint & outArgument3,
+                                       GGS_luint & outArgument4,
+                                       GGS_luint & outArgument5,
+                                       GGS_uint & outArgument6,
+                                       GGS_luint & outArgument7,
+                                       GGS_AC_5F_task & outArgument8,
+                                       Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) const {
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) performSearch (inKey,
                                                                                      inCompiler,
                                                                                      kSearchErrorMessage_M_5F_tasks_searchKey
@@ -4777,12 +4766,12 @@ void GALGAS_M_5F_tasks::method_searchKey (GALGAS_lstring inKey,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint GALGAS_M_5F_tasks::getter_mIndexForKey (const GALGAS_string & inKey,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const {
+GGS_uint GGS_M_5F_tasks::getter_mIndexForKey (const GGS_string & inKey,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
-  GALGAS_uint result ;
+  GGS_uint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mIndex ;
@@ -4792,12 +4781,12 @@ GALGAS_uint GALGAS_M_5F_tasks::getter_mIndexForKey (const GALGAS_string & inKey,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_tasks::getter_mPriorityForKey (const GALGAS_string & inKey,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_tasks::getter_mPriorityForKey (const GGS_string & inKey,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mPriority ;
@@ -4807,12 +4796,12 @@ GALGAS_luint GALGAS_M_5F_tasks::getter_mPriorityForKey (const GALGAS_string & in
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_tasks::getter_mOffsetForKey (const GALGAS_string & inKey,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_tasks::getter_mOffsetForKey (const GGS_string & inKey,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mOffset ;
@@ -4822,12 +4811,12 @@ GALGAS_luint GALGAS_M_5F_tasks::getter_mOffsetForKey (const GALGAS_string & inKe
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_tasks::getter_mDeadlineForKey (const GALGAS_string & inKey,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_tasks::getter_mDeadlineForKey (const GGS_string & inKey,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mDeadline ;
@@ -4837,12 +4826,12 @@ GALGAS_luint GALGAS_M_5F_tasks::getter_mDeadlineForKey (const GALGAS_string & in
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_tasks::getter_mDurationMinForKey (const GALGAS_string & inKey,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_tasks::getter_mDurationMinForKey (const GGS_string & inKey,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mDurationMin ;
@@ -4852,12 +4841,12 @@ GALGAS_luint GALGAS_M_5F_tasks::getter_mDurationMinForKey (const GALGAS_string &
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_tasks::getter_mDurationMaxForKey (const GALGAS_string & inKey,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_tasks::getter_mDurationMaxForKey (const GGS_string & inKey,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mDurationMax ;
@@ -4867,12 +4856,12 @@ GALGAS_luint GALGAS_M_5F_tasks::getter_mDurationMaxForKey (const GALGAS_string &
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint GALGAS_M_5F_tasks::getter_mProcessorForKey (const GALGAS_string & inKey,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
+GGS_uint GGS_M_5F_tasks::getter_mProcessorForKey (const GGS_string & inKey,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
-  GALGAS_uint result ;
+  GGS_uint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mProcessor ;
@@ -4882,12 +4871,12 @@ GALGAS_uint GALGAS_M_5F_tasks::getter_mProcessorForKey (const GALGAS_string & in
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_M_5F_tasks::getter_mPeriodForKey (const GALGAS_string & inKey,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const {
+GGS_luint GGS_M_5F_tasks::getter_mPeriodForKey (const GGS_string & inKey,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
-  GALGAS_luint result ;
+  GGS_luint result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mPeriod ;
@@ -4897,12 +4886,12 @@ GALGAS_luint GALGAS_M_5F_tasks::getter_mPeriodForKey (const GALGAS_string & inKe
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_task GALGAS_M_5F_tasks::getter_mTaskKindForKey (const GALGAS_string & inKey,
-                                                             Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) const {
+GGS_AC_5F_task GGS_M_5F_tasks::getter_mTaskKindForKey (const GGS_string & inKey,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) attributes ;
-  GALGAS_AC_5F_task result ;
+  GGS_AC_5F_task result ;
   if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
     result = p->mProperty_mTaskKind ;
@@ -4912,10 +4901,10 @@ GALGAS_AC_5F_task GALGAS_M_5F_tasks::getter_mTaskKindForKey (const GALGAS_string
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
-                                                GALGAS_string inKey,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
+void GGS_M_5F_tasks::setter_setMIndexForKey (GGS_uint inAttributeValue,
+                                             GGS_string inKey,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (nullptr != p) {
@@ -4926,10 +4915,10 @@ void GALGAS_M_5F_tasks::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks::setter_setMPriorityForKey (GALGAS_luint inAttributeValue,
-                                                   GALGAS_string inKey,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GGS_M_5F_tasks::setter_setMPriorityForKey (GGS_luint inAttributeValue,
+                                                GGS_string inKey,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (nullptr != p) {
@@ -4940,10 +4929,10 @@ void GALGAS_M_5F_tasks::setter_setMPriorityForKey (GALGAS_luint inAttributeValue
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks::setter_setMOffsetForKey (GALGAS_luint inAttributeValue,
-                                                 GALGAS_string inKey,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
+void GGS_M_5F_tasks::setter_setMOffsetForKey (GGS_luint inAttributeValue,
+                                              GGS_string inKey,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (nullptr != p) {
@@ -4954,10 +4943,10 @@ void GALGAS_M_5F_tasks::setter_setMOffsetForKey (GALGAS_luint inAttributeValue,
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks::setter_setMDeadlineForKey (GALGAS_luint inAttributeValue,
-                                                   GALGAS_string inKey,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GGS_M_5F_tasks::setter_setMDeadlineForKey (GGS_luint inAttributeValue,
+                                                GGS_string inKey,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (nullptr != p) {
@@ -4968,10 +4957,10 @@ void GALGAS_M_5F_tasks::setter_setMDeadlineForKey (GALGAS_luint inAttributeValue
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks::setter_setMDurationMinForKey (GALGAS_luint inAttributeValue,
-                                                      GALGAS_string inKey,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GGS_M_5F_tasks::setter_setMDurationMinForKey (GGS_luint inAttributeValue,
+                                                   GGS_string inKey,
+                                                   Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (nullptr != p) {
@@ -4982,10 +4971,10 @@ void GALGAS_M_5F_tasks::setter_setMDurationMinForKey (GALGAS_luint inAttributeVa
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks::setter_setMDurationMaxForKey (GALGAS_luint inAttributeValue,
-                                                      GALGAS_string inKey,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GGS_M_5F_tasks::setter_setMDurationMaxForKey (GGS_luint inAttributeValue,
+                                                   GGS_string inKey,
+                                                   Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (nullptr != p) {
@@ -4996,10 +4985,10 @@ void GALGAS_M_5F_tasks::setter_setMDurationMaxForKey (GALGAS_luint inAttributeVa
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks::setter_setMProcessorForKey (GALGAS_uint inAttributeValue,
-                                                    GALGAS_string inKey,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
+void GGS_M_5F_tasks::setter_setMProcessorForKey (GGS_uint inAttributeValue,
+                                                 GGS_string inKey,
+                                                 Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (nullptr != p) {
@@ -5010,10 +4999,10 @@ void GALGAS_M_5F_tasks::setter_setMProcessorForKey (GALGAS_uint inAttributeValue
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks::setter_setMPeriodForKey (GALGAS_luint inAttributeValue,
-                                                 GALGAS_string inKey,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
+void GGS_M_5F_tasks::setter_setMPeriodForKey (GGS_luint inAttributeValue,
+                                              GGS_string inKey,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (nullptr != p) {
@@ -5024,10 +5013,10 @@ void GALGAS_M_5F_tasks::setter_setMPeriodForKey (GALGAS_luint inAttributeValue,
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks::setter_setMTaskKindForKey (GALGAS_AC_5F_task inAttributeValue,
-                                                   GALGAS_string inKey,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GGS_M_5F_tasks::setter_setMTaskKindForKey (GGS_AC_5F_task inAttributeValue,
+                                                GGS_string inKey,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_M_5F_tasks * p = (cMapElement_M_5F_tasks *) attributes ;
   if (nullptr != p) {
@@ -5038,9 +5027,9 @@ void GALGAS_M_5F_tasks::setter_setMTaskKindForKey (GALGAS_AC_5F_task inAttribute
 
 //--------------------------------------------------------------------------------------------------
 
-cMapElement_M_5F_tasks * GALGAS_M_5F_tasks::readWriteAccessForWithInstruction (Compiler * inCompiler,
-                                                                               const GALGAS_string & inKey
-                                                                               COMMA_LOCATION_ARGS) {
+cMapElement_M_5F_tasks * GGS_M_5F_tasks::readWriteAccessForWithInstruction (Compiler * inCompiler,
+                                                                            const GGS_string & inKey
+                                                                            COMMA_LOCATION_ARGS) {
   cMapElement_M_5F_tasks * result = (cMapElement_M_5F_tasks *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
   macroNullOrValidSharedObject (result, cMapElement_M_5F_tasks) ;
   return result ;
@@ -5048,7 +5037,7 @@ cMapElement_M_5F_tasks * GALGAS_M_5F_tasks::readWriteAccessForWithInstruction (C
 
 //--------------------------------------------------------------------------------------------------
 
-cEnumerator_M_5F_tasks::cEnumerator_M_5F_tasks (const GALGAS_M_5F_tasks & inEnumeratedObject,
+cEnumerator_M_5F_tasks::cEnumerator_M_5F_tasks (const GGS_M_5F_tasks & inEnumeratedObject,
                                                 const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
@@ -5056,15 +5045,15 @@ cGenericAbstractEnumerator (inOrder) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element cEnumerator_M_5F_tasks::current (LOCATION_ARGS) const {
+GGS_M_5F_tasks_2E_element cEnumerator_M_5F_tasks::current (LOCATION_ARGS) const {
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
-  return GALGAS_M_5F_tasks_2D_element (p->mProperty_lkey, p->mProperty_mIndex, p->mProperty_mPriority, p->mProperty_mOffset, p->mProperty_mDeadline, p->mProperty_mDurationMin, p->mProperty_mDurationMax, p->mProperty_mProcessor, p->mProperty_mPeriod, p->mProperty_mTaskKind) ;
+  return GGS_M_5F_tasks_2E_element (p->mProperty_lkey, p->mProperty_mIndex, p->mProperty_mPriority, p->mProperty_mOffset, p->mProperty_mDeadline, p->mProperty_mDurationMin, p->mProperty_mDurationMax, p->mProperty_mProcessor, p->mProperty_mPeriod, p->mProperty_mTaskKind) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_lstring cEnumerator_M_5F_tasks::current_lkey (LOCATION_ARGS) const {
+GGS_lstring cEnumerator_M_5F_tasks::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mProperty_lkey ;
@@ -5072,7 +5061,7 @@ GALGAS_lstring cEnumerator_M_5F_tasks::current_lkey (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint cEnumerator_M_5F_tasks::current_mIndex (LOCATION_ARGS) const {
+GGS_uint cEnumerator_M_5F_tasks::current_mIndex (LOCATION_ARGS) const {
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
   return p->mProperty_mIndex ;
@@ -5080,7 +5069,7 @@ GALGAS_uint cEnumerator_M_5F_tasks::current_mIndex (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_tasks::current_mPriority (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_tasks::current_mPriority (LOCATION_ARGS) const {
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
   return p->mProperty_mPriority ;
@@ -5088,7 +5077,7 @@ GALGAS_luint cEnumerator_M_5F_tasks::current_mPriority (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_tasks::current_mOffset (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_tasks::current_mOffset (LOCATION_ARGS) const {
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
   return p->mProperty_mOffset ;
@@ -5096,7 +5085,7 @@ GALGAS_luint cEnumerator_M_5F_tasks::current_mOffset (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_tasks::current_mDeadline (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_tasks::current_mDeadline (LOCATION_ARGS) const {
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
   return p->mProperty_mDeadline ;
@@ -5104,7 +5093,7 @@ GALGAS_luint cEnumerator_M_5F_tasks::current_mDeadline (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_tasks::current_mDurationMin (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_tasks::current_mDurationMin (LOCATION_ARGS) const {
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
   return p->mProperty_mDurationMin ;
@@ -5112,7 +5101,7 @@ GALGAS_luint cEnumerator_M_5F_tasks::current_mDurationMin (LOCATION_ARGS) const 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_tasks::current_mDurationMax (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_tasks::current_mDurationMax (LOCATION_ARGS) const {
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
   return p->mProperty_mDurationMax ;
@@ -5120,7 +5109,7 @@ GALGAS_luint cEnumerator_M_5F_tasks::current_mDurationMax (LOCATION_ARGS) const 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint cEnumerator_M_5F_tasks::current_mProcessor (LOCATION_ARGS) const {
+GGS_uint cEnumerator_M_5F_tasks::current_mProcessor (LOCATION_ARGS) const {
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
   return p->mProperty_mProcessor ;
@@ -5128,7 +5117,7 @@ GALGAS_uint cEnumerator_M_5F_tasks::current_mProcessor (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint cEnumerator_M_5F_tasks::current_mPeriod (LOCATION_ARGS) const {
+GGS_luint cEnumerator_M_5F_tasks::current_mPeriod (LOCATION_ARGS) const {
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
   return p->mProperty_mPeriod ;
@@ -5136,7 +5125,7 @@ GALGAS_luint cEnumerator_M_5F_tasks::current_mPeriod (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_AC_5F_task cEnumerator_M_5F_tasks::current_mTaskKind (LOCATION_ARGS) const {
+GGS_AC_5F_task cEnumerator_M_5F_tasks::current_mTaskKind (LOCATION_ARGS) const {
   const cMapElement_M_5F_tasks * p = (const cMapElement_M_5F_tasks *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_M_5F_tasks) ;
   return p->mProperty_mTaskKind ;
@@ -5153,29 +5142,29 @@ const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_tasks ("M_tasks",
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_M_5F_tasks::staticTypeDescriptor (void) const {
+const C_galgas_type_descriptor * GGS_M_5F_tasks::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_M_5F_tasks ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_M_5F_tasks::clonedObject (void) const {
+AC_GALGAS_root * GGS_M_5F_tasks::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_M_5F_tasks (*this)) ;
+    macroMyNew (result, GGS_M_5F_tasks (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks GALGAS_M_5F_tasks::extractObject (const GALGAS_object & inObject,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_tasks result ;
-  const GALGAS_M_5F_tasks * p = (const GALGAS_M_5F_tasks *) inObject.embeddedObject () ;
+GGS_M_5F_tasks GGS_M_5F_tasks::extractObject (const GGS_object & inObject,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  GGS_M_5F_tasks result ;
+  const GGS_M_5F_tasks * p = (const GGS_M_5F_tasks *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_M_5F_tasks *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_M_5F_tasks *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("M_tasks", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -5189,26 +5178,26 @@ GALGAS_M_5F_tasks GALGAS_M_5F_tasks::extractObject (const GALGAS_object & inObje
 //------------------------------------------------------------------------------------------------
 
 void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner * inCompiler) {
-  GALGAS_M_5F_processor temp_0 = GALGAS_M_5F_processor::init (inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 12)) ;
-  GALGAS_M_5F_processor var_outProcessorMap_474 = temp_0 ;
-  GALGAS_M_5F_network temp_1 = GALGAS_M_5F_network::init (inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 13)) ;
-  GALGAS_M_5F_network var_outNetworkMap_526 = temp_1 ;
-  GALGAS_M_5F_messages temp_2 = GALGAS_M_5F_messages::init (inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 14)) ;
-  GALGAS_M_5F_messages var_outMessagesMap_575 = temp_2 ;
-  GALGAS_M_5F_tasks temp_3 = GALGAS_M_5F_tasks::init (inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 15)) ;
-  GALGAS_M_5F_tasks var_outTaskMap_623 = temp_3 ;
+  GGS_M_5F_processor temp_0 = GGS_M_5F_processor::init (inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 12)) ;
+  GGS_M_5F_processor var_outProcessorMap_474 = temp_0 ;
+  GGS_M_5F_network temp_1 = GGS_M_5F_network::init (inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 13)) ;
+  GGS_M_5F_network var_outNetworkMap_526 = temp_1 ;
+  GGS_M_5F_messages temp_2 = GGS_M_5F_messages::init (inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 14)) ;
+  GGS_M_5F_messages var_outMessagesMap_575 = temp_2 ;
+  GGS_M_5F_tasks temp_3 = GGS_M_5F_tasks::init (inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 15)) ;
+  GGS_M_5F_tasks var_outTaskMap_623 = temp_3 ;
   inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_system COMMA_SOURCE_FILE ("oa_parser.galgas", 16)) ;
   bool repeatFlag_4 = true ;
   while (repeatFlag_4) {
     switch (select_oa_5F_parser_0 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 19)) ;
-      GALGAS_lstring var_processorName_715 = inCompiler->synthetizedAttribute_identifierString () ;
+      GGS_lstring var_processorName_715 = inCompiler->synthetizedAttribute_identifierString () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 20)) ;
-      GALGAS_luint var_step_744 ;
+      GGS_luint var_step_744 ;
       switch (select_oa_5F_parser_1 (inCompiler)) {
       case 1: {
-        var_step_744 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 23)), inCompiler COMMA_HERE) ;
+        var_step_744 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 23)), inCompiler COMMA_HERE) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 25)) ;
@@ -5216,10 +5205,10 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 26)) ;
         enumGalgasBool test_5 = kBoolTrue ;
         if (kBoolTrue == test_5) {
-          test_5 = GALGAS_bool (ComparisonKind::equal, var_step_744.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
+          test_5 = GGS_bool (ComparisonKind::equal, var_step_744.readProperty_uint ().objectCompare (GGS_uint (uint32_t (0U)))).boolEnum () ;
           if (kBoolTrue == test_5) {
             TC_Array <FixItDescription> fixItArray6 ;
-            inCompiler->emitSemanticError (var_step_744.readProperty_location (), GALGAS_string ("the step value must be > 0"), fixItArray6  COMMA_SOURCE_FILE ("oa_parser.galgas", 28)) ;
+            inCompiler->emitSemanticError (var_step_744.readProperty_location (), GGS_string ("the step value must be > 0"), fixItArray6  COMMA_SOURCE_FILE ("oa_parser.galgas", 28)) ;
           }
         }
       } break ;
@@ -5232,26 +5221,26 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 32)) ;
     } break ;
     case 3: {
-      GALGAS_bool var_network_1073 ;
+      GGS_bool var_network_1073 ;
       switch (select_oa_5F_parser_2 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_can COMMA_SOURCE_FILE ("oa_parser.galgas", 36)) ;
-        var_network_1073 = GALGAS_bool (true) ;
+        var_network_1073 = GGS_bool (true) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_van COMMA_SOURCE_FILE ("oa_parser.galgas", 39)) ;
-        var_network_1073 = GALGAS_bool (false) ;
+        var_network_1073 = GGS_bool (false) ;
       } break ;
       default:
         break ;
       }
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas", 42)) ;
-      GALGAS_lstring var_networkName_1210 = inCompiler->synthetizedAttribute_identifierString () ;
+      GGS_lstring var_networkName_1210 = inCompiler->synthetizedAttribute_identifierString () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 43)) ;
-      GALGAS_luint var_factor_1237 ;
+      GGS_luint var_factor_1237 ;
       switch (select_oa_5F_parser_3 (inCompiler)) {
       case 1: {
-        var_factor_1237 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 46)), inCompiler COMMA_HERE) ;
+        var_factor_1237 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 46)), inCompiler COMMA_HERE) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 48)) ;
@@ -5259,10 +5248,10 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 49)) ;
         enumGalgasBool test_7 = kBoolTrue ;
         if (kBoolTrue == test_7) {
-          test_7 = GALGAS_bool (ComparisonKind::equal, var_factor_1237.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
+          test_7 = GGS_bool (ComparisonKind::equal, var_factor_1237.readProperty_uint ().objectCompare (GGS_uint (uint32_t (0U)))).boolEnum () ;
           if (kBoolTrue == test_7) {
             TC_Array <FixItDescription> fixItArray8 ;
-            inCompiler->emitSemanticError (var_factor_1237.readProperty_location (), GALGAS_string ("the factor value must be > 0"), fixItArray8  COMMA_SOURCE_FILE ("oa_parser.galgas", 51)) ;
+            inCompiler->emitSemanticError (var_factor_1237.readProperty_location (), GGS_string ("the factor value must be > 0"), fixItArray8  COMMA_SOURCE_FILE ("oa_parser.galgas", 51)) ;
           }
         }
       } break ;
@@ -5276,34 +5265,34 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
     } break ;
     case 4: {
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 57)) ;
-      GALGAS_lstring var_taskName_1602 = inCompiler->synthetizedAttribute_identifierString () ;
+      GGS_lstring var_taskName_1602 = inCompiler->synthetizedAttribute_identifierString () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 58)) ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas", 59)) ;
-      GALGAS_luint var_taskPriority_1653 = inCompiler->synthetizedAttribute_ulongValue () ;
+      GGS_luint var_taskPriority_1653 = inCompiler->synthetizedAttribute_ulongValue () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 60)) ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_duration COMMA_SOURCE_FILE ("oa_parser.galgas", 61)) ;
-      GALGAS_luint var_taskDurationMin_1708 = inCompiler->synthetizedAttribute_ulongValue () ;
+      GGS_luint var_taskDurationMin_1708 = inCompiler->synthetizedAttribute_ulongValue () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 62)) ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__2E__2E_ COMMA_SOURCE_FILE ("oa_parser.galgas", 63)) ;
-      GALGAS_luint var_taskDurationMax_1760 = inCompiler->synthetizedAttribute_ulongValue () ;
+      GGS_luint var_taskDurationMax_1760 = inCompiler->synthetizedAttribute_ulongValue () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 64)) ;
-      GALGAS_luint var_taskOffset_1791 ;
-      GALGAS_bool var_explicitOffset_1816 ;
+      GGS_luint var_taskOffset_1791 ;
+      GGS_bool var_explicitOffset_1816 ;
       switch (select_oa_5F_parser_4 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas", 68)) ;
         var_taskOffset_1791 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 69)) ;
-        var_explicitOffset_1816 = GALGAS_bool (true) ;
+        var_explicitOffset_1816 = GGS_bool (true) ;
       } break ;
       case 2: {
-        var_taskOffset_1791 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (0U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 72)), inCompiler COMMA_HERE) ;
-        var_explicitOffset_1816 = GALGAS_bool (false) ;
+        var_taskOffset_1791 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (0U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 72)), inCompiler COMMA_HERE) ;
+        var_explicitOffset_1816 = GGS_bool (false) ;
       } break ;
       default:
         break ;
       }
-      GALGAS_luint var_taskDeadline_2035 ;
+      GGS_luint var_taskDeadline_2035 ;
       switch (select_oa_5F_parser_5 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas", 77)) ;
@@ -5311,25 +5300,25 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 78)) ;
       } break ;
       case 2: {
-        var_taskDeadline_2035 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (4294967295U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 80)), inCompiler COMMA_HERE) ;
+        var_taskDeadline_2035 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (4294967295U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 80)), inCompiler COMMA_HERE) ;
       } break ;
       default:
         break ;
       }
-      GALGAS_AC_5F_task var_taskKind_2211 ;
-      GALGAS_uint var_taskProcessorIndex_2234 ;
-      GALGAS_luint var_taskPeriod_2268 ;
+      GGS_AC_5F_task var_taskKind_2211 ;
+      GGS_uint var_taskProcessorIndex_2234 ;
+      GGS_luint var_taskPeriod_2268 ;
       switch (select_oa_5F_parser_6 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas", 86)) ;
         var_taskPeriod_2268 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 87)) ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 88)) ;
-        GALGAS_lstring var_taskProcessorName_2384 = inCompiler->synthetizedAttribute_identifierString () ;
+        GGS_lstring var_taskProcessorName_2384 = inCompiler->synthetizedAttribute_identifierString () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 89)) ;
-        GALGAS_luint joker_2474 ; // Joker input parameter
+        GGS_luint joker_2474 ; // Joker input parameter
         var_outProcessorMap_474.method_searchKey (var_taskProcessorName_2384, var_taskProcessorIndex_2234, joker_2474, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 90)) ;
-        var_taskKind_2211 = GALGAS_C_5F_independantTask::init (inCompiler COMMA_HERE) ;
+        var_taskKind_2211 = GGS_C_5F_independantTask::init (inCompiler COMMA_HERE) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 93)) ;
@@ -5338,18 +5327,18 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
           test_9 = var_explicitOffset_1816.boolEnum () ;
           if (kBoolTrue == test_9) {
             TC_Array <FixItDescription> fixItArray10 ;
-            inCompiler->emitSemanticError (GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray10  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)) ;
+            inCompiler->emitSemanticError (GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)), GGS_string ("A dependant task cannot have an offset"), fixItArray10  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)) ;
           }
         }
         switch (select_oa_5F_parser_7 (inCompiler)) {
         case 1: {
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 98)) ;
-          GALGAS_lstring var_masterTaskName_2702 = inCompiler->synthetizedAttribute_identifierString () ;
+          GGS_lstring var_masterTaskName_2702 = inCompiler->synthetizedAttribute_identifierString () ;
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 99)) ;
-          GALGAS_luint var_every_2736 ;
+          GGS_luint var_every_2736 ;
           switch (select_oa_5F_parser_8 (inCompiler)) {
           case 1: {
-            var_every_2736 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 102)), inCompiler COMMA_HERE) ;
+            var_every_2736 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 102)), inCompiler COMMA_HERE) ;
           } break ;
           case 2: {
             inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas", 104)) ;
@@ -5359,36 +5348,36 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
           default:
             break ;
           }
-          GALGAS_uint var_masterTaskIndex_2937 ;
-          GALGAS_luint joker_2953 ; // Joker input parameter
-          GALGAS_luint joker_2956 ; // Joker input parameter
-          GALGAS_luint joker_2959 ; // Joker input parameter
-          GALGAS_luint joker_2962 ; // Joker input parameter
-          GALGAS_luint joker_2965 ; // Joker input parameter
-          GALGAS_AC_5F_task joker_3000 ; // Joker input parameter
+          GGS_uint var_masterTaskIndex_2937 ;
+          GGS_luint joker_2953 ; // Joker input parameter
+          GGS_luint joker_2956 ; // Joker input parameter
+          GGS_luint joker_2959 ; // Joker input parameter
+          GGS_luint joker_2962 ; // Joker input parameter
+          GGS_luint joker_2965 ; // Joker input parameter
+          GGS_AC_5F_task joker_3000 ; // Joker input parameter
           var_outTaskMap_623.method_searchKey (var_masterTaskName_2702, var_masterTaskIndex_2937, joker_2953, joker_2956, joker_2959, joker_2962, joker_2965, var_taskProcessorIndex_2234, var_taskPeriod_2268, joker_3000, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 107)) ;
-          var_taskKind_2211 = GALGAS_C_5F_taskDependsFromTask::init_21__21_ (var_masterTaskIndex_2937, var_every_2736, inCompiler COMMA_HERE) ;
+          var_taskKind_2211 = GGS_C_5F_taskDependsFromTask::init_21__21_ (var_masterTaskIndex_2937, var_every_2736, inCompiler COMMA_HERE) ;
         } break ;
         case 2: {
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 110)) ;
-          GALGAS_lstring var_masterMessageName_3131 = inCompiler->synthetizedAttribute_identifierString () ;
+          GGS_lstring var_masterMessageName_3131 = inCompiler->synthetizedAttribute_identifierString () ;
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 111)) ;
-          GALGAS_uint var_masterMessageIndex_3207 ;
-          GALGAS_luint joker_3226 ; // Joker input parameter
-          GALGAS_uint joker_3229 ; // Joker input parameter
-          GALGAS_luint joker_3232 ; // Joker input parameter
-          GALGAS_luint joker_3235 ; // Joker input parameter
-          GALGAS_luint joker_3238 ; // Joker input parameter
-          GALGAS_luint joker_3241 ; // Joker input parameter
-          GALGAS_AC_5F_canMessage joker_3256 ; // Joker input parameter
+          GGS_uint var_masterMessageIndex_3207 ;
+          GGS_luint joker_3226 ; // Joker input parameter
+          GGS_uint joker_3229 ; // Joker input parameter
+          GGS_luint joker_3232 ; // Joker input parameter
+          GGS_luint joker_3235 ; // Joker input parameter
+          GGS_luint joker_3238 ; // Joker input parameter
+          GGS_luint joker_3241 ; // Joker input parameter
+          GGS_AC_5F_canMessage joker_3256 ; // Joker input parameter
           var_outMessagesMap_575.method_searchKey (var_masterMessageName_3131, var_masterMessageIndex_3207, joker_3226, joker_3229, joker_3232, joker_3235, joker_3238, joker_3241, var_taskPeriod_2268, joker_3256, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 112)) ;
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 113)) ;
-          GALGAS_lstring var_taskProcessorName_3306 = inCompiler->synthetizedAttribute_identifierString () ;
+          GGS_lstring var_taskProcessorName_3306 = inCompiler->synthetizedAttribute_identifierString () ;
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 114)) ;
-          GALGAS_luint var_every_3343 ;
+          GGS_luint var_every_3343 ;
           switch (select_oa_5F_parser_9 (inCompiler)) {
           case 1: {
-            var_every_3343 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 117)), inCompiler COMMA_HERE) ;
+            var_every_3343 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 117)), inCompiler COMMA_HERE) ;
           } break ;
           case 2: {
             inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas", 119)) ;
@@ -5398,9 +5387,9 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
           default:
             break ;
           }
-          GALGAS_luint joker_3567 ; // Joker input parameter
+          GGS_luint joker_3567 ; // Joker input parameter
           var_outProcessorMap_474.method_searchKey (var_taskProcessorName_3306, var_taskProcessorIndex_2234, joker_3567, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 122)) ;
-          var_taskKind_2211 = GALGAS_C_5F_taskDependsFromMessage::init_21__21_ (var_masterMessageIndex_3207, var_every_3343, inCompiler COMMA_HERE) ;
+          var_taskKind_2211 = GGS_C_5F_taskDependsFromMessage::init_21__21_ (var_masterMessageIndex_3207, var_every_3343, inCompiler COMMA_HERE) ;
         } break ;
         default:
           break ;
@@ -5415,93 +5404,93 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 135)) ;
     } break ;
     case 5: {
-      GALGAS_luint var_messageClass_4193 ;
+      GGS_luint var_messageClass_4193 ;
       switch (select_oa_5F_parser_10 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_standard COMMA_SOURCE_FILE ("oa_parser.galgas", 139)) ;
-        var_messageClass_4193 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (0U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 140)), inCompiler COMMA_HERE) ;
+        var_messageClass_4193 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (0U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 140)), inCompiler COMMA_HERE) ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 141)) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_extended COMMA_SOURCE_FILE ("oa_parser.galgas", 143)) ;
-        var_messageClass_4193 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (1U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 144)), inCompiler COMMA_HERE) ;
+        var_messageClass_4193 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 144)), inCompiler COMMA_HERE) ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 145)) ;
       } break ;
       case 3: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 147)) ;
-        var_messageClass_4193 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (2U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 148)), inCompiler COMMA_HERE) ;
+        var_messageClass_4193 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (2U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 148)), inCompiler COMMA_HERE) ;
       } break ;
       default:
         break ;
       }
-      GALGAS_lstring var_messageName_4508 = inCompiler->synthetizedAttribute_identifierString () ;
+      GGS_lstring var_messageName_4508 = inCompiler->synthetizedAttribute_identifierString () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 150)) ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas", 151)) ;
-      GALGAS_lstring var_networkName_4556 = inCompiler->synthetizedAttribute_identifierString () ;
+      GGS_lstring var_networkName_4556 = inCompiler->synthetizedAttribute_identifierString () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 152)) ;
-      GALGAS_uint var_networkIndex_4615 ;
-      GALGAS_bool var_CANnetwork_4633 ;
-      GALGAS_luint joker_4644 ; // Joker input parameter
+      GGS_uint var_networkIndex_4615 ;
+      GGS_bool var_CANnetwork_4633 ;
+      GGS_luint joker_4644 ; // Joker input parameter
       var_outNetworkMap_526.method_searchKey (var_networkName_4556, var_networkIndex_4615, var_CANnetwork_4633, joker_4644, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 153)) ;
       enumGalgasBool test_11 = kBoolTrue ;
       if (kBoolTrue == test_11) {
-        test_11 = var_CANnetwork_4633.operator_and (GALGAS_bool (ComparisonKind::equal, var_messageClass_4193.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 154)).boolEnum () ;
+        test_11 = var_CANnetwork_4633.operator_and (GGS_bool (ComparisonKind::equal, var_messageClass_4193.readProperty_uint ().objectCompare (GGS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 154)).boolEnum () ;
         if (kBoolTrue == test_11) {
           TC_Array <FixItDescription> fixItArray12 ;
-          inCompiler->emitSemanticError (var_messageClass_4193.readProperty_location (), GALGAS_string ("a CAN message must be either standard either extended"), fixItArray12  COMMA_SOURCE_FILE ("oa_parser.galgas", 155)) ;
+          inCompiler->emitSemanticError (var_messageClass_4193.readProperty_location (), GGS_string ("a CAN message must be either standard either extended"), fixItArray12  COMMA_SOURCE_FILE ("oa_parser.galgas", 155)) ;
         }
       }
       if (kBoolFalse == test_11) {
         enumGalgasBool test_13 = kBoolTrue ;
         if (kBoolTrue == test_13) {
-          test_13 = var_CANnetwork_4633.operator_not (SOURCE_FILE ("oa_parser.galgas", 156)).operator_and (GALGAS_bool (ComparisonKind::notEqual, var_messageClass_4193.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 156)).boolEnum () ;
+          test_13 = var_CANnetwork_4633.operator_not (SOURCE_FILE ("oa_parser.galgas", 156)).operator_and (GGS_bool (ComparisonKind::notEqual, var_messageClass_4193.readProperty_uint ().objectCompare (GGS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 156)).boolEnum () ;
           if (kBoolTrue == test_13) {
             TC_Array <FixItDescription> fixItArray14 ;
-            inCompiler->emitSemanticError (var_messageClass_4193.readProperty_location (), GALGAS_string ("a VAN message cannot be standard or extended"), fixItArray14  COMMA_SOURCE_FILE ("oa_parser.galgas", 157)) ;
+            inCompiler->emitSemanticError (var_messageClass_4193.readProperty_location (), GGS_string ("a VAN message cannot be standard or extended"), fixItArray14  COMMA_SOURCE_FILE ("oa_parser.galgas", 157)) ;
           }
         }
       }
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_length COMMA_SOURCE_FILE ("oa_parser.galgas", 159)) ;
-      GALGAS_luint var_bytesCount_4962 = inCompiler->synthetizedAttribute_ulongValue () ;
+      GGS_luint var_bytesCount_4962 = inCompiler->synthetizedAttribute_ulongValue () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 160)) ;
       enumGalgasBool test_15 = kBoolTrue ;
       if (kBoolTrue == test_15) {
-        test_15 = var_CANnetwork_4633.operator_and (GALGAS_bool (ComparisonKind::greaterThan, var_bytesCount_4962.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (8U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 161)).boolEnum () ;
+        test_15 = var_CANnetwork_4633.operator_and (GGS_bool (ComparisonKind::greaterThan, var_bytesCount_4962.readProperty_uint ().objectCompare (GGS_uint (uint32_t (8U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 161)).boolEnum () ;
         if (kBoolTrue == test_15) {
           TC_Array <FixItDescription> fixItArray16 ;
-          inCompiler->emitSemanticError (var_bytesCount_4962.readProperty_location (), GALGAS_string ("CAN message length must be <= 8 bytes"), fixItArray16  COMMA_SOURCE_FILE ("oa_parser.galgas", 162)) ;
+          inCompiler->emitSemanticError (var_bytesCount_4962.readProperty_location (), GGS_string ("CAN message length must be <= 8 bytes"), fixItArray16  COMMA_SOURCE_FILE ("oa_parser.galgas", 162)) ;
         }
       }
       if (kBoolFalse == test_15) {
         enumGalgasBool test_17 = kBoolTrue ;
         if (kBoolTrue == test_17) {
-          test_17 = var_CANnetwork_4633.operator_not (SOURCE_FILE ("oa_parser.galgas", 163)).operator_and (GALGAS_bool (ComparisonKind::greaterThan, var_bytesCount_4962.readProperty_uint ().objectCompare (GALGAS_uint (uint32_t (28U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 163)).boolEnum () ;
+          test_17 = var_CANnetwork_4633.operator_not (SOURCE_FILE ("oa_parser.galgas", 163)).operator_and (GGS_bool (ComparisonKind::greaterThan, var_bytesCount_4962.readProperty_uint ().objectCompare (GGS_uint (uint32_t (28U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 163)).boolEnum () ;
           if (kBoolTrue == test_17) {
             TC_Array <FixItDescription> fixItArray18 ;
-            inCompiler->emitSemanticError (var_bytesCount_4962.readProperty_location (), GALGAS_string ("VAN message must be <= 28 bytes"), fixItArray18  COMMA_SOURCE_FILE ("oa_parser.galgas", 164)) ;
+            inCompiler->emitSemanticError (var_bytesCount_4962.readProperty_location (), GGS_string ("VAN message must be <= 28 bytes"), fixItArray18  COMMA_SOURCE_FILE ("oa_parser.galgas", 164)) ;
           }
         }
       }
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas", 166)) ;
-      GALGAS_luint var_priority_5251 = inCompiler->synthetizedAttribute_ulongValue () ;
+      GGS_luint var_priority_5251 = inCompiler->synthetizedAttribute_ulongValue () ;
       inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 167)) ;
-      GALGAS_luint var_offset_5275 ;
-      GALGAS_bool var_explicitOffset_5296 ;
+      GGS_luint var_offset_5275 ;
+      GGS_bool var_explicitOffset_5296 ;
       switch (select_oa_5F_parser_11 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas", 171)) ;
         var_offset_5275 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 172)) ;
-        var_explicitOffset_5296 = GALGAS_bool (true) ;
+        var_explicitOffset_5296 = GGS_bool (true) ;
       } break ;
       case 2: {
-        var_offset_5275 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (0U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 175)), inCompiler COMMA_HERE) ;
-        var_explicitOffset_5296 = GALGAS_bool (false) ;
+        var_offset_5275 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (0U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 175)), inCompiler COMMA_HERE) ;
+        var_explicitOffset_5296 = GGS_bool (false) ;
       } break ;
       default:
         break ;
       }
-      GALGAS_luint var_deadline_5506 ;
+      GGS_luint var_deadline_5506 ;
       switch (select_oa_5F_parser_12 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas", 180)) ;
@@ -5509,19 +5498,19 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 181)) ;
       } break ;
       case 2: {
-        var_deadline_5506 = GALGAS_luint::init_21__21_ (GALGAS_uint (uint32_t (4294967295U)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 183)), inCompiler COMMA_HERE) ;
+        var_deadline_5506 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (4294967295U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 183)), inCompiler COMMA_HERE) ;
       } break ;
       default:
         break ;
       }
-      GALGAS_AC_5F_canMessage var_messageKind_5676 ;
-      GALGAS_luint var_period_5703 ;
+      GGS_AC_5F_canMessage var_messageKind_5676 ;
+      GGS_luint var_period_5703 ;
       switch (select_oa_5F_parser_13 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas", 188)) ;
         var_period_5703 = inCompiler->synthetizedAttribute_ulongValue () ;
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 189)) ;
-        var_messageKind_5676 = GALGAS_C_5F_canIndependantMessage::init (inCompiler COMMA_HERE) ;
+        var_messageKind_5676 = GGS_C_5F_canIndependantMessage::init (inCompiler COMMA_HERE) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 192)) ;
@@ -5530,39 +5519,39 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
           test_19 = var_explicitOffset_5296.boolEnum () ;
           if (kBoolTrue == test_19) {
             TC_Array <FixItDescription> fixItArray20 ;
-            inCompiler->emitSemanticError (GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)), GALGAS_string ("A dependant task cannot have an offset"), fixItArray20  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)) ;
+            inCompiler->emitSemanticError (GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)), GGS_string ("A dependant task cannot have an offset"), fixItArray20  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)) ;
           }
         }
         switch (select_oa_5F_parser_14 (inCompiler)) {
         case 1: {
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 197)) ;
-          GALGAS_lstring var_name_6005 = inCompiler->synthetizedAttribute_identifierString () ;
+          GGS_lstring var_name_6005 = inCompiler->synthetizedAttribute_identifierString () ;
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 198)) ;
-          GALGAS_uint var_messageIndex_6055 ;
-          GALGAS_luint joker_6068 ; // Joker input parameter
-          GALGAS_uint joker_6071 ; // Joker input parameter
-          GALGAS_luint joker_6074 ; // Joker input parameter
-          GALGAS_luint joker_6077 ; // Joker input parameter
-          GALGAS_luint joker_6080 ; // Joker input parameter
-          GALGAS_luint joker_6083 ; // Joker input parameter
-          GALGAS_AC_5F_canMessage joker_6094 ; // Joker input parameter
+          GGS_uint var_messageIndex_6055 ;
+          GGS_luint joker_6068 ; // Joker input parameter
+          GGS_uint joker_6071 ; // Joker input parameter
+          GGS_luint joker_6074 ; // Joker input parameter
+          GGS_luint joker_6077 ; // Joker input parameter
+          GGS_luint joker_6080 ; // Joker input parameter
+          GGS_luint joker_6083 ; // Joker input parameter
+          GGS_AC_5F_canMessage joker_6094 ; // Joker input parameter
           var_outMessagesMap_575.method_searchKey (var_name_6005, var_messageIndex_6055, joker_6068, joker_6071, joker_6074, joker_6077, joker_6080, joker_6083, var_period_5703, joker_6094, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 199)) ;
-          var_messageKind_5676 = GALGAS_C_5F_canMessageFromMessage::init_21_ (var_messageIndex_6055, inCompiler COMMA_HERE) ;
+          var_messageKind_5676 = GGS_C_5F_canMessageFromMessage::init_21_ (var_messageIndex_6055, inCompiler COMMA_HERE) ;
         } break ;
         case 2: {
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 202)) ;
-          GALGAS_lstring var_taskName_6217 = inCompiler->synthetizedAttribute_identifierString () ;
+          GGS_lstring var_taskName_6217 = inCompiler->synthetizedAttribute_identifierString () ;
           inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 203)) ;
-          GALGAS_uint var_taskIndex_6271 ;
-          GALGAS_luint joker_6281 ; // Joker input parameter
-          GALGAS_luint joker_6284 ; // Joker input parameter
-          GALGAS_luint joker_6287 ; // Joker input parameter
-          GALGAS_luint joker_6290 ; // Joker input parameter
-          GALGAS_luint joker_6293 ; // Joker input parameter
-          GALGAS_uint joker_6296 ; // Joker input parameter
-          GALGAS_AC_5F_task joker_6307 ; // Joker input parameter
+          GGS_uint var_taskIndex_6271 ;
+          GGS_luint joker_6281 ; // Joker input parameter
+          GGS_luint joker_6284 ; // Joker input parameter
+          GGS_luint joker_6287 ; // Joker input parameter
+          GGS_luint joker_6290 ; // Joker input parameter
+          GGS_luint joker_6293 ; // Joker input parameter
+          GGS_uint joker_6296 ; // Joker input parameter
+          GGS_AC_5F_task joker_6307 ; // Joker input parameter
           var_outTaskMap_623.method_searchKey (var_taskName_6217, var_taskIndex_6271, joker_6281, joker_6284, joker_6287, joker_6290, joker_6293, joker_6296, var_period_5703, joker_6307, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 204)) ;
-          var_messageKind_5676 = GALGAS_C_5F_canMessageFromTask::init_21_ (var_taskIndex_6271, inCompiler COMMA_HERE) ;
+          var_messageKind_5676 = GGS_C_5F_canMessageFromTask::init_21_ (var_taskIndex_6271, inCompiler COMMA_HERE) ;
         } break ;
         default:
           break ;
@@ -6012,7 +6001,7 @@ mProperty_mEvery () {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_C_5F_taskDependsFromTask::objectCompare (const GALGAS_C_5F_taskDependsFromTask & inOperand) const {
+ComparisonResult GGS_C_5F_taskDependsFromTask::objectCompare (const GGS_C_5F_taskDependsFromTask & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
@@ -6030,21 +6019,21 @@ ComparisonResult GALGAS_C_5F_taskDependsFromTask::objectCompare (const GALGAS_C_
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromTask::GALGAS_C_5F_taskDependsFromTask (void) :
-GALGAS_AC_5F_task () {
+GGS_C_5F_taskDependsFromTask::GGS_C_5F_taskDependsFromTask (void) :
+GGS_AC_5F_task () {
 }
 
 //--- Synthetized initializer ----------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::
-init_21__21_ (const GALGAS_uint & in_mTask,
-              const GALGAS_luint & in_mEvery,
+GGS_C_5F_taskDependsFromTask GGS_C_5F_taskDependsFromTask::
+init_21__21_ (const GGS_uint & in_mTask,
+              const GGS_luint & in_mEvery,
               Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
   cPtr_C_5F_taskDependsFromTask * object = nullptr ;
   macroMyNew (object, cPtr_C_5F_taskDependsFromTask (inCompiler COMMA_THERE)) ;
   object->C_5F_taskDependsFromTask_init_21__21_ (in_mTask, in_mEvery, inCompiler) ;
-  const GALGAS_C_5F_taskDependsFromTask result (object) ;
+  const GGS_C_5F_taskDependsFromTask result (object) ;
   macroDetachSharedObject (object) ;
   return result ;
 }
@@ -6052,8 +6041,8 @@ init_21__21_ (const GALGAS_uint & in_mTask,
 //--------------------------------------------------------------------------------------------------
 
 void cPtr_C_5F_taskDependsFromTask::
-C_5F_taskDependsFromTask_init_21__21_ (const GALGAS_uint & in_mTask,
-                                       const GALGAS_luint & in_mEvery,
+C_5F_taskDependsFromTask_init_21__21_ (const GGS_uint & in_mTask,
+                                       const GGS_luint & in_mEvery,
                                        Compiler * /* inCompiler */) {
   mProperty_mTask = in_mTask ;
   mProperty_mEvery = in_mEvery ;
@@ -6061,25 +6050,25 @@ C_5F_taskDependsFromTask_init_21__21_ (const GALGAS_uint & in_mTask,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromTask::GALGAS_C_5F_taskDependsFromTask (const cPtr_C_5F_taskDependsFromTask * inSourcePtr) :
-GALGAS_AC_5F_task (inSourcePtr) {
+GGS_C_5F_taskDependsFromTask::GGS_C_5F_taskDependsFromTask (const cPtr_C_5F_taskDependsFromTask * inSourcePtr) :
+GGS_AC_5F_task (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_C_5F_taskDependsFromTask) ;
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::class_func_new (const GALGAS_uint & in_mTask,
-                                                                                 const GALGAS_luint & in_mEvery
-                                                                                 COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_taskDependsFromTask result ;
+GGS_C_5F_taskDependsFromTask GGS_C_5F_taskDependsFromTask::class_func_new (const GGS_uint & in_mTask,
+                                                                           const GGS_luint & in_mEvery
+                                                                           COMMA_LOCATION_ARGS) {
+  GGS_C_5F_taskDependsFromTask result ;
   macroMyNew (result.mObjectPtr, cPtr_C_5F_taskDependsFromTask (in_mTask, in_mEvery COMMA_THERE)) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint GALGAS_C_5F_taskDependsFromTask::readProperty_mTask (void) const {
+GGS_uint GGS_C_5F_taskDependsFromTask::readProperty_mTask (void) const {
   if (nullptr == mObjectPtr) {
-    return GALGAS_uint () ;
+    return GGS_uint () ;
   }else{
     cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
@@ -6089,7 +6078,7 @@ GALGAS_uint GALGAS_C_5F_taskDependsFromTask::readProperty_mTask (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_C_5F_taskDependsFromTask::setProperty_mTask (const GALGAS_uint & inValue) {
+void GGS_C_5F_taskDependsFromTask::setProperty_mTask (const GGS_uint & inValue) {
   if (nullptr != mObjectPtr) {
     cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
@@ -6099,9 +6088,9 @@ void GALGAS_C_5F_taskDependsFromTask::setProperty_mTask (const GALGAS_uint & inV
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_C_5F_taskDependsFromTask::readProperty_mEvery (void) const {
+GGS_luint GGS_C_5F_taskDependsFromTask::readProperty_mEvery (void) const {
   if (nullptr == mObjectPtr) {
-    return GALGAS_luint () ;
+    return GGS_luint () ;
   }else{
     cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
@@ -6111,7 +6100,7 @@ GALGAS_luint GALGAS_C_5F_taskDependsFromTask::readProperty_mEvery (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_C_5F_taskDependsFromTask::setProperty_mEvery (const GALGAS_luint & inValue) {
+void GGS_C_5F_taskDependsFromTask::setProperty_mEvery (const GGS_luint & inValue) {
   if (nullptr != mObjectPtr) {
     cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_taskDependsFromTask) ;
@@ -6123,8 +6112,8 @@ void GALGAS_C_5F_taskDependsFromTask::setProperty_mEvery (const GALGAS_luint & i
 //Pointer class for @C_taskDependsFromTask class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_C_5F_taskDependsFromTask::cPtr_C_5F_taskDependsFromTask (const GALGAS_uint & in_mTask,
-                                                              const GALGAS_luint & in_mEvery
+cPtr_C_5F_taskDependsFromTask::cPtr_C_5F_taskDependsFromTask (const GGS_uint & in_mTask,
+                                                              const GGS_luint & in_mEvery
                                                               COMMA_LOCATION_ARGS) :
 cPtr_AC_5F_task (THERE),
 mProperty_mTask (),
@@ -6168,29 +6157,29 @@ const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFromTask (
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_C_5F_taskDependsFromTask::staticTypeDescriptor (void) const {
+const C_galgas_type_descriptor * GGS_C_5F_taskDependsFromTask::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_C_5F_taskDependsFromTask ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_C_5F_taskDependsFromTask::clonedObject (void) const {
+AC_GALGAS_root * GGS_C_5F_taskDependsFromTask::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_C_5F_taskDependsFromTask (*this)) ;
+    macroMyNew (result, GGS_C_5F_taskDependsFromTask (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromTask GALGAS_C_5F_taskDependsFromTask::extractObject (const GALGAS_object & inObject,
-                                                                                Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_taskDependsFromTask result ;
-  const GALGAS_C_5F_taskDependsFromTask * p = (const GALGAS_C_5F_taskDependsFromTask *) inObject.embeddedObject () ;
+GGS_C_5F_taskDependsFromTask GGS_C_5F_taskDependsFromTask::extractObject (const GGS_object & inObject,
+                                                                          Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) {
+  GGS_C_5F_taskDependsFromTask result ;
+  const GGS_C_5F_taskDependsFromTask * p = (const GGS_C_5F_taskDependsFromTask *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_C_5F_taskDependsFromTask *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_C_5F_taskDependsFromTask *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_taskDependsFromTask", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -6221,7 +6210,7 @@ mProperty_mEvery () {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_C_5F_taskDependsFromMessage::objectCompare (const GALGAS_C_5F_taskDependsFromMessage & inOperand) const {
+ComparisonResult GGS_C_5F_taskDependsFromMessage::objectCompare (const GGS_C_5F_taskDependsFromMessage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
@@ -6239,21 +6228,21 @@ ComparisonResult GALGAS_C_5F_taskDependsFromMessage::objectCompare (const GALGAS
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromMessage::GALGAS_C_5F_taskDependsFromMessage (void) :
-GALGAS_AC_5F_task () {
+GGS_C_5F_taskDependsFromMessage::GGS_C_5F_taskDependsFromMessage (void) :
+GGS_AC_5F_task () {
 }
 
 //--- Synthetized initializer ----------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage::
-init_21__21_ (const GALGAS_uint & in_mMessage,
-              const GALGAS_luint & in_mEvery,
+GGS_C_5F_taskDependsFromMessage GGS_C_5F_taskDependsFromMessage::
+init_21__21_ (const GGS_uint & in_mMessage,
+              const GGS_luint & in_mEvery,
               Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
   cPtr_C_5F_taskDependsFromMessage * object = nullptr ;
   macroMyNew (object, cPtr_C_5F_taskDependsFromMessage (inCompiler COMMA_THERE)) ;
   object->C_5F_taskDependsFromMessage_init_21__21_ (in_mMessage, in_mEvery, inCompiler) ;
-  const GALGAS_C_5F_taskDependsFromMessage result (object) ;
+  const GGS_C_5F_taskDependsFromMessage result (object) ;
   macroDetachSharedObject (object) ;
   return result ;
 }
@@ -6261,8 +6250,8 @@ init_21__21_ (const GALGAS_uint & in_mMessage,
 //--------------------------------------------------------------------------------------------------
 
 void cPtr_C_5F_taskDependsFromMessage::
-C_5F_taskDependsFromMessage_init_21__21_ (const GALGAS_uint & in_mMessage,
-                                          const GALGAS_luint & in_mEvery,
+C_5F_taskDependsFromMessage_init_21__21_ (const GGS_uint & in_mMessage,
+                                          const GGS_luint & in_mEvery,
                                           Compiler * /* inCompiler */) {
   mProperty_mMessage = in_mMessage ;
   mProperty_mEvery = in_mEvery ;
@@ -6270,25 +6259,25 @@ C_5F_taskDependsFromMessage_init_21__21_ (const GALGAS_uint & in_mMessage,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromMessage::GALGAS_C_5F_taskDependsFromMessage (const cPtr_C_5F_taskDependsFromMessage * inSourcePtr) :
-GALGAS_AC_5F_task (inSourcePtr) {
+GGS_C_5F_taskDependsFromMessage::GGS_C_5F_taskDependsFromMessage (const cPtr_C_5F_taskDependsFromMessage * inSourcePtr) :
+GGS_AC_5F_task (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_C_5F_taskDependsFromMessage) ;
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage::class_func_new (const GALGAS_uint & in_mMessage,
-                                                                                       const GALGAS_luint & in_mEvery
-                                                                                       COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_taskDependsFromMessage result ;
+GGS_C_5F_taskDependsFromMessage GGS_C_5F_taskDependsFromMessage::class_func_new (const GGS_uint & in_mMessage,
+                                                                                 const GGS_luint & in_mEvery
+                                                                                 COMMA_LOCATION_ARGS) {
+  GGS_C_5F_taskDependsFromMessage result ;
   macroMyNew (result.mObjectPtr, cPtr_C_5F_taskDependsFromMessage (in_mMessage, in_mEvery COMMA_THERE)) ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_uint GALGAS_C_5F_taskDependsFromMessage::readProperty_mMessage (void) const {
+GGS_uint GGS_C_5F_taskDependsFromMessage::readProperty_mMessage (void) const {
   if (nullptr == mObjectPtr) {
-    return GALGAS_uint () ;
+    return GGS_uint () ;
   }else{
     cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
@@ -6298,7 +6287,7 @@ GALGAS_uint GALGAS_C_5F_taskDependsFromMessage::readProperty_mMessage (void) con
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_C_5F_taskDependsFromMessage::setProperty_mMessage (const GALGAS_uint & inValue) {
+void GGS_C_5F_taskDependsFromMessage::setProperty_mMessage (const GGS_uint & inValue) {
   if (nullptr != mObjectPtr) {
     cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
@@ -6308,9 +6297,9 @@ void GALGAS_C_5F_taskDependsFromMessage::setProperty_mMessage (const GALGAS_uint
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_luint GALGAS_C_5F_taskDependsFromMessage::readProperty_mEvery (void) const {
+GGS_luint GGS_C_5F_taskDependsFromMessage::readProperty_mEvery (void) const {
   if (nullptr == mObjectPtr) {
-    return GALGAS_luint () ;
+    return GGS_luint () ;
   }else{
     cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
@@ -6320,7 +6309,7 @@ GALGAS_luint GALGAS_C_5F_taskDependsFromMessage::readProperty_mEvery (void) cons
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_C_5F_taskDependsFromMessage::setProperty_mEvery (const GALGAS_luint & inValue) {
+void GGS_C_5F_taskDependsFromMessage::setProperty_mEvery (const GGS_luint & inValue) {
   if (nullptr != mObjectPtr) {
     cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_C_5F_taskDependsFromMessage) ;
@@ -6332,8 +6321,8 @@ void GALGAS_C_5F_taskDependsFromMessage::setProperty_mEvery (const GALGAS_luint 
 //Pointer class for @C_taskDependsFromMessage class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_C_5F_taskDependsFromMessage::cPtr_C_5F_taskDependsFromMessage (const GALGAS_uint & in_mMessage,
-                                                                    const GALGAS_luint & in_mEvery
+cPtr_C_5F_taskDependsFromMessage::cPtr_C_5F_taskDependsFromMessage (const GGS_uint & in_mMessage,
+                                                                    const GGS_luint & in_mEvery
                                                                     COMMA_LOCATION_ARGS) :
 cPtr_AC_5F_task (THERE),
 mProperty_mMessage (),
@@ -6377,29 +6366,29 @@ const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFromMessag
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_C_5F_taskDependsFromMessage::staticTypeDescriptor (void) const {
+const C_galgas_type_descriptor * GGS_C_5F_taskDependsFromMessage::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_C_5F_taskDependsFromMessage ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_C_5F_taskDependsFromMessage::clonedObject (void) const {
+AC_GALGAS_root * GGS_C_5F_taskDependsFromMessage::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_C_5F_taskDependsFromMessage (*this)) ;
+    macroMyNew (result, GGS_C_5F_taskDependsFromMessage (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_C_5F_taskDependsFromMessage GALGAS_C_5F_taskDependsFromMessage::extractObject (const GALGAS_object & inObject,
-                                                                                      Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_C_5F_taskDependsFromMessage result ;
-  const GALGAS_C_5F_taskDependsFromMessage * p = (const GALGAS_C_5F_taskDependsFromMessage *) inObject.embeddedObject () ;
+GGS_C_5F_taskDependsFromMessage GGS_C_5F_taskDependsFromMessage::extractObject (const GGS_object & inObject,
+                                                                                Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  GGS_C_5F_taskDependsFromMessage result ;
+  const GGS_C_5F_taskDependsFromMessage * p = (const GGS_C_5F_taskDependsFromMessage *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_C_5F_taskDependsFromMessage *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_C_5F_taskDependsFromMessage *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("C_taskDependsFromMessage", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -6869,10 +6858,10 @@ void cGrammar_oa_5F_grammar::performOnlySyntaxAnalysis (Compiler * inCompiler,
 //--------------------------------------------------------------------------------------------------
 
 void cGrammar_oa_5F_grammar::_performSourceFileParsing_ (Compiler * inCompiler,
-                                GALGAS_lstring inFilePath
+                                GGS_lstring inFilePath
                                 COMMA_LOCATION_ARGS) {
   if (inFilePath.isValid ()) {
-    const GALGAS_string filePathAsString = inFilePath.readProperty_string () ;
+    const GGS_string filePathAsString = inFilePath.readProperty_string () ;
     String filePath = filePathAsString.stringValue () ;
     if (! FileManager::isAbsolutePath (filePath)) {
       filePath = inCompiler->sourceFilePath ().stringByDeletingLastPathComponent ().stringByAppendingPathComponent (filePath) ;
@@ -6892,7 +6881,7 @@ void cGrammar_oa_5F_grammar::_performSourceFileParsing_ (Compiler * inCompiler,
         message.appendString ("the '") ;
         message.appendString (filePath) ;
         message.appendString ("' file exists, but cannot be read") ;
-        const GALGAS_location errorLocation (inFilePath.readProperty_location ()) ;
+        const GGS_location errorLocation (inFilePath.readProperty_location ()) ;
         inCompiler->semanticErrorAtLocation (errorLocation, message, TC_Array <FixItDescription> () COMMA_THERE) ;
       }
       macroDetachSharedObject (scanner) ;
@@ -6901,7 +6890,7 @@ void cGrammar_oa_5F_grammar::_performSourceFileParsing_ (Compiler * inCompiler,
       message.appendString ("the '") ;
       message.appendString (filePath) ;
       message.appendString ("' file does not exist") ;
-      const GALGAS_location errorLocation (inFilePath.readProperty_location ()) ;
+      const GGS_location errorLocation (inFilePath.readProperty_location ()) ;
       inCompiler->semanticErrorAtLocation (errorLocation, message, TC_Array <FixItDescription> () COMMA_THERE) ;
     }
   }
@@ -6910,8 +6899,8 @@ void cGrammar_oa_5F_grammar::_performSourceFileParsing_ (Compiler * inCompiler,
 //--------------------------------------------------------------------------------------------------
 
 void cGrammar_oa_5F_grammar::_performSourceStringParsing_ (Compiler * inCompiler,
-                                GALGAS_string inSourceString,
-                                GALGAS_string inNameString
+                                GGS_string inSourceString,
+                                GGS_string inNameString
                                 COMMA_UNUSED_LOCATION_ARGS) {
   if (inSourceString.isValid () && inNameString.isValid ()) {
     const String sourceString = inSourceString.stringValue () ;
@@ -7082,23 +7071,23 @@ int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_14 (Lexique_oa_5F_scanner * 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist_2D_element::GALGAS__32_lstringlist_2D_element (void) :
+GGS__32_lstringlist_2E_element::GGS__32_lstringlist_2E_element (void) :
 mProperty_mValue_30_ (),
 mProperty_mValue_31_ () {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist_2D_element::~ GALGAS__32_lstringlist_2D_element (void) {
+GGS__32_lstringlist_2E_element::~ GGS__32_lstringlist_2E_element (void) {
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
 
-GALGAS__32_lstringlist_2D_element GALGAS__32_lstringlist_2D_element::init_21__21_ (const GALGAS_lstring & in_mValue_30_,
-                                                                                   const GALGAS_lstring & in_mValue_31_,
-                                                                                   Compiler * inCompiler
-                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS__32_lstringlist_2D_element result ;
+GGS__32_lstringlist_2E_element GGS__32_lstringlist_2E_element::init_21__21_ (const GGS_lstring & in_mValue_30_,
+                                                                             const GGS_lstring & in_mValue_31_,
+                                                                             Compiler * inCompiler
+                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  GGS__32_lstringlist_2E_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_mValue_30_ = in_mValue_30_ ;
   result.mProperty_mValue_31_ = in_mValue_31_ ;
@@ -7107,24 +7096,24 @@ GALGAS__32_lstringlist_2D_element GALGAS__32_lstringlist_2D_element::init_21__21
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist_2D_element::setInitializedProperties (Compiler * /* inCompiler */) {
+void GGS__32_lstringlist_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist_2D_element::GALGAS__32_lstringlist_2D_element (const GALGAS_lstring & inOperand0,
-                                                                      const GALGAS_lstring & inOperand1) :
+GGS__32_lstringlist_2E_element::GGS__32_lstringlist_2E_element (const GGS_lstring & inOperand0,
+                                                                const GGS_lstring & inOperand1) :
 mProperty_mValue_30_ (inOperand0),
 mProperty_mValue_31_ (inOperand1) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist_2D_element GALGAS__32_lstringlist_2D_element::class_func_new (const GALGAS_lstring & in_mValue0,
-                                                                                     const GALGAS_lstring & in_mValue1,
-                                                                                     Compiler * inCompiler
-                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS__32_lstringlist_2D_element result ;
+GGS__32_lstringlist_2E_element GGS__32_lstringlist_2E_element::class_func_new (const GGS_lstring & in_mValue0,
+                                                                               const GGS_lstring & in_mValue1,
+                                                                               Compiler * inCompiler
+                                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GGS__32_lstringlist_2E_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_mValue_30_ = in_mValue0 ;
   result.mProperty_mValue_31_ = in_mValue1 ;
@@ -7133,22 +7122,22 @@ GALGAS__32_lstringlist_2D_element GALGAS__32_lstringlist_2D_element::class_func_
 
 //--------------------------------------------------------------------------------------------------
 
-bool GALGAS__32_lstringlist_2D_element::isValid (void) const {
+bool GGS__32_lstringlist_2E_element::isValid (void) const {
   return mProperty_mValue_30_.isValid () && mProperty_mValue_31_.isValid () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist_2D_element::drop (void) {
+void GGS__32_lstringlist_2E_element::drop (void) {
   mProperty_mValue_30_.drop () ;
   mProperty_mValue_31_.drop () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS__32_lstringlist_2D_element::description (String & ioString,
-                                                     const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @2lstringlist-element:") ;
+void GGS__32_lstringlist_2E_element::description (String & ioString,
+                                                  const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @2lstringlist.element:") ;
   if (! isValid ()) {
     ioString.appendCString (" not built") ;
   }else{
@@ -7161,41 +7150,41 @@ void GALGAS__32_lstringlist_2D_element::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @2lstringlist-element generic code implementation
+//     @2lstringlist.element generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS__32_lstringlist_2D_element ("2lstringlist-element",
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS__32_lstringlist_2E_element ("2lstringlist.element",
                                                                                   nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS__32_lstringlist_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS__32_lstringlist_2D_element ;
+const C_galgas_type_descriptor * GGS__32_lstringlist_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS__32_lstringlist_2E_element ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS__32_lstringlist_2D_element::clonedObject (void) const {
+AC_GALGAS_root * GGS__32_lstringlist_2E_element::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS__32_lstringlist_2D_element (*this)) ;
+    macroMyNew (result, GGS__32_lstringlist_2E_element (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS__32_lstringlist_2D_element GALGAS__32_lstringlist_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                    Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS__32_lstringlist_2D_element result ;
-  const GALGAS__32_lstringlist_2D_element * p = (const GALGAS__32_lstringlist_2D_element *) inObject.embeddedObject () ;
+GGS__32_lstringlist_2E_element GGS__32_lstringlist_2E_element::extractObject (const GGS_object & inObject,
+                                                                              Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) {
+  GGS__32_lstringlist_2E_element result ;
+  const GGS__32_lstringlist_2E_element * p = (const GGS__32_lstringlist_2E_element *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS__32_lstringlist_2D_element *> (p)) {
+    if (nullptr != dynamic_cast <const GGS__32_lstringlist_2E_element *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("2lstringlist-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("2lstringlist.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -7203,7 +7192,7 @@ GALGAS__32_lstringlist_2D_element GALGAS__32_lstringlist_2D_element::extractObje
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element::GALGAS_M_5F_processor_2D_element (void) :
+GGS_M_5F_processor_2E_element::GGS_M_5F_processor_2E_element (void) :
 mProperty_lkey (),
 mProperty_mIndex (),
 mProperty_mStep () {
@@ -7211,17 +7200,17 @@ mProperty_mStep () {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element::~ GALGAS_M_5F_processor_2D_element (void) {
+GGS_M_5F_processor_2E_element::~ GGS_M_5F_processor_2E_element (void) {
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::init_21__21__21_ (const GALGAS_lstring & in_lkey,
-                                                                                     const GALGAS_uint & in_mIndex,
-                                                                                     const GALGAS_luint & in_mStep,
-                                                                                     Compiler * inCompiler
-                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_M_5F_processor_2D_element result ;
+GGS_M_5F_processor_2E_element GGS_M_5F_processor_2E_element::init_21__21__21_ (const GGS_lstring & in_lkey,
+                                                                               const GGS_uint & in_mIndex,
+                                                                               const GGS_luint & in_mStep,
+                                                                               Compiler * inCompiler
+                                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_M_5F_processor_2E_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_lkey = in_lkey ;
   result.mProperty_mIndex = in_mIndex ;
@@ -7231,14 +7220,14 @@ GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::init_21__21__
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_processor_2D_element::setInitializedProperties (Compiler * /* inCompiler */) {
+void GGS_M_5F_processor_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element::GALGAS_M_5F_processor_2D_element (const GALGAS_lstring & inOperand0,
-                                                                    const GALGAS_uint & inOperand1,
-                                                                    const GALGAS_luint & inOperand2) :
+GGS_M_5F_processor_2E_element::GGS_M_5F_processor_2E_element (const GGS_lstring & inOperand0,
+                                                              const GGS_uint & inOperand1,
+                                                              const GGS_luint & inOperand2) :
 mProperty_lkey (inOperand0),
 mProperty_mIndex (inOperand1),
 mProperty_mStep (inOperand2) {
@@ -7246,12 +7235,12 @@ mProperty_mStep (inOperand2) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::class_func_new (const GALGAS_lstring & in_lkey,
-                                                                                   const GALGAS_uint & in_mIndex,
-                                                                                   const GALGAS_luint & in_mStep,
-                                                                                   Compiler * inCompiler
-                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_M_5F_processor_2D_element result ;
+GGS_M_5F_processor_2E_element GGS_M_5F_processor_2E_element::class_func_new (const GGS_lstring & in_lkey,
+                                                                             const GGS_uint & in_mIndex,
+                                                                             const GGS_luint & in_mStep,
+                                                                             Compiler * inCompiler
+                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_M_5F_processor_2E_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_lkey = in_lkey ;
   result.mProperty_mIndex = in_mIndex ;
@@ -7261,13 +7250,13 @@ GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::class_func_ne
 
 //--------------------------------------------------------------------------------------------------
 
-bool GALGAS_M_5F_processor_2D_element::isValid (void) const {
+bool GGS_M_5F_processor_2E_element::isValid (void) const {
   return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mStep.isValid () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_processor_2D_element::drop (void) {
+void GGS_M_5F_processor_2E_element::drop (void) {
   mProperty_lkey.drop () ;
   mProperty_mIndex.drop () ;
   mProperty_mStep.drop () ;
@@ -7275,9 +7264,9 @@ void GALGAS_M_5F_processor_2D_element::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_processor_2D_element::description (String & ioString,
-                                                    const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @M_processor-element:") ;
+void GGS_M_5F_processor_2E_element::description (String & ioString,
+                                                 const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @M_processor.element:") ;
   if (! isValid ()) {
     ioString.appendCString (" not built") ;
   }else{
@@ -7292,41 +7281,41 @@ void GALGAS_M_5F_processor_2D_element::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @M_processor-element generic code implementation
+//     @M_processor.element generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_processor_2D_element ("M_processor-element",
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_processor_2E_element ("M_processor.element",
                                                                                  nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_M_5F_processor_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_M_5F_processor_2D_element ;
+const C_galgas_type_descriptor * GGS_M_5F_processor_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_M_5F_processor_2E_element ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_M_5F_processor_2D_element::clonedObject (void) const {
+AC_GALGAS_root * GGS_M_5F_processor_2E_element::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_M_5F_processor_2D_element (*this)) ;
+    macroMyNew (result, GGS_M_5F_processor_2E_element (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                  Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_processor_2D_element result ;
-  const GALGAS_M_5F_processor_2D_element * p = (const GALGAS_M_5F_processor_2D_element *) inObject.embeddedObject () ;
+GGS_M_5F_processor_2E_element GGS_M_5F_processor_2E_element::extractObject (const GGS_object & inObject,
+                                                                            Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) {
+  GGS_M_5F_processor_2E_element result ;
+  const GGS_M_5F_processor_2E_element * p = (const GGS_M_5F_processor_2E_element *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_M_5F_processor_2D_element *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_M_5F_processor_2E_element *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("M_processor-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("M_processor.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -7334,11 +7323,11 @@ GALGAS_M_5F_processor_2D_element GALGAS_M_5F_processor_2D_element::extractObject
 
 //--------------------------------------------------------------------------------------------------
 //
-//Optional @M_5F_processor_2D_element_3F_
+//Optional @M_5F_processor_2E_element_3F_
 //
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element_3F_::GALGAS_M_5F_processor_2D_element_3F_ (void) :
+GGS_M_5F_processor_2E_element_3F_::GGS_M_5F_processor_2E_element_3F_ (void) :
 AC_GALGAS_root (),
 mValue (),
 mState (OptionalState::invalid) {
@@ -7346,7 +7335,7 @@ mState (OptionalState::invalid) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element_3F_::GALGAS_M_5F_processor_2D_element_3F_ (const GALGAS_M_5F_processor_2D_element & inSource) :
+GGS_M_5F_processor_2E_element_3F_::GGS_M_5F_processor_2E_element_3F_ (const GGS_M_5F_processor_2E_element & inSource) :
 AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
@@ -7354,15 +7343,15 @@ mState (OptionalState::valuated) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element_3F_ GALGAS_M_5F_processor_2D_element_3F_::init_nil (void) {
-  GALGAS_M_5F_processor_2D_element_3F_ result ;
+GGS_M_5F_processor_2E_element_3F_ GGS_M_5F_processor_2E_element_3F_::init_nil (void) {
+  GGS_M_5F_processor_2E_element_3F_ result ;
   result.mState = OptionalState::isNil ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-bool GALGAS_M_5F_processor_2D_element_3F_::isValid (void) const {
+bool GGS_M_5F_processor_2E_element_3F_::isValid (void) const {
   bool result = false ;
   switch (mState) {
   case OptionalState::invalid :
@@ -7379,21 +7368,21 @@ bool GALGAS_M_5F_processor_2D_element_3F_::isValid (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-bool GALGAS_M_5F_processor_2D_element_3F_::isValuated (void) const {
+bool GGS_M_5F_processor_2E_element_3F_::isValuated (void) const {
   return (mState == OptionalState::valuated) && mValue.isValid () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_processor_2D_element_3F_::drop (void) {
+void GGS_M_5F_processor_2E_element_3F_::drop (void) {
   mState = OptionalState::invalid ;
-  mValue = GALGAS_M_5F_processor_2D_element () ;
+  mValue = GGS_M_5F_processor_2E_element () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_processor_2D_element_3F_::description (String & ioString,
-                                                        const int32_t inIndentation) const {
+void GGS_M_5F_processor_2E_element_3F_::description (String & ioString,
+                                                     const int32_t inIndentation) const {
   ioString.appendCString ("<optional @") ;
   ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
   ioString.appendCString (": ") ;
@@ -7413,41 +7402,41 @@ void GALGAS_M_5F_processor_2D_element_3F_::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @M_processor-element? generic code implementation
+//     @M_processor.element? generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_processor_2D_element_3F_ ("M_processor-element?",
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_processor_2E_element_3F_ ("M_processor.element?",
                                                                                      nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_M_5F_processor_2D_element_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_M_5F_processor_2D_element_3F_ ;
+const C_galgas_type_descriptor * GGS_M_5F_processor_2E_element_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_M_5F_processor_2E_element_3F_ ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_M_5F_processor_2D_element_3F_::clonedObject (void) const {
+AC_GALGAS_root * GGS_M_5F_processor_2E_element_3F_::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_M_5F_processor_2D_element_3F_ (*this)) ;
+    macroMyNew (result, GGS_M_5F_processor_2E_element_3F_ (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_processor_2D_element_3F_ GALGAS_M_5F_processor_2D_element_3F_::extractObject (const GALGAS_object & inObject,
-                                                                                          Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_processor_2D_element_3F_ result ;
-  const GALGAS_M_5F_processor_2D_element_3F_ * p = (const GALGAS_M_5F_processor_2D_element_3F_ *) inObject.embeddedObject () ;
+GGS_M_5F_processor_2E_element_3F_ GGS_M_5F_processor_2E_element_3F_::extractObject (const GGS_object & inObject,
+                                                                                    Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) {
+  GGS_M_5F_processor_2E_element_3F_ result ;
+  const GGS_M_5F_processor_2E_element_3F_ * p = (const GGS_M_5F_processor_2E_element_3F_ *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_M_5F_processor_2D_element_3F_ *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_M_5F_processor_2E_element_3F_ *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("M_processor-element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("M_processor.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -7455,7 +7444,7 @@ GALGAS_M_5F_processor_2D_element_3F_ GALGAS_M_5F_processor_2D_element_3F_::extra
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element::GALGAS_M_5F_network_2D_element (void) :
+GGS_M_5F_network_2E_element::GGS_M_5F_network_2E_element (void) :
 mProperty_lkey (),
 mProperty_mIndex (),
 mProperty_mCANnetwork (),
@@ -7464,18 +7453,18 @@ mProperty_mScalingFactor () {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element::~ GALGAS_M_5F_network_2D_element (void) {
+GGS_M_5F_network_2E_element::~ GGS_M_5F_network_2E_element (void) {
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::init_21__21__21__21_ (const GALGAS_lstring & in_lkey,
-                                                                                     const GALGAS_uint & in_mIndex,
-                                                                                     const GALGAS_bool & in_mCANnetwork,
-                                                                                     const GALGAS_luint & in_mScalingFactor,
-                                                                                     Compiler * inCompiler
-                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_M_5F_network_2D_element result ;
+GGS_M_5F_network_2E_element GGS_M_5F_network_2E_element::init_21__21__21__21_ (const GGS_lstring & in_lkey,
+                                                                               const GGS_uint & in_mIndex,
+                                                                               const GGS_bool & in_mCANnetwork,
+                                                                               const GGS_luint & in_mScalingFactor,
+                                                                               Compiler * inCompiler
+                                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_M_5F_network_2E_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_lkey = in_lkey ;
   result.mProperty_mIndex = in_mIndex ;
@@ -7486,15 +7475,15 @@ GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::init_21__21__21__
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_network_2D_element::setInitializedProperties (Compiler * /* inCompiler */) {
+void GGS_M_5F_network_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element::GALGAS_M_5F_network_2D_element (const GALGAS_lstring & inOperand0,
-                                                                const GALGAS_uint & inOperand1,
-                                                                const GALGAS_bool & inOperand2,
-                                                                const GALGAS_luint & inOperand3) :
+GGS_M_5F_network_2E_element::GGS_M_5F_network_2E_element (const GGS_lstring & inOperand0,
+                                                          const GGS_uint & inOperand1,
+                                                          const GGS_bool & inOperand2,
+                                                          const GGS_luint & inOperand3) :
 mProperty_lkey (inOperand0),
 mProperty_mIndex (inOperand1),
 mProperty_mCANnetwork (inOperand2),
@@ -7503,13 +7492,13 @@ mProperty_mScalingFactor (inOperand3) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::class_func_new (const GALGAS_lstring & in_lkey,
-                                                                               const GALGAS_uint & in_mIndex,
-                                                                               const GALGAS_bool & in_mCANnetwork,
-                                                                               const GALGAS_luint & in_mScalingFactor,
-                                                                               Compiler * inCompiler
-                                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_M_5F_network_2D_element result ;
+GGS_M_5F_network_2E_element GGS_M_5F_network_2E_element::class_func_new (const GGS_lstring & in_lkey,
+                                                                         const GGS_uint & in_mIndex,
+                                                                         const GGS_bool & in_mCANnetwork,
+                                                                         const GGS_luint & in_mScalingFactor,
+                                                                         Compiler * inCompiler
+                                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_M_5F_network_2E_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_lkey = in_lkey ;
   result.mProperty_mIndex = in_mIndex ;
@@ -7520,13 +7509,13 @@ GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::class_func_new (c
 
 //--------------------------------------------------------------------------------------------------
 
-bool GALGAS_M_5F_network_2D_element::isValid (void) const {
+bool GGS_M_5F_network_2E_element::isValid (void) const {
   return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mCANnetwork.isValid () && mProperty_mScalingFactor.isValid () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_network_2D_element::drop (void) {
+void GGS_M_5F_network_2E_element::drop (void) {
   mProperty_lkey.drop () ;
   mProperty_mIndex.drop () ;
   mProperty_mCANnetwork.drop () ;
@@ -7535,9 +7524,9 @@ void GALGAS_M_5F_network_2D_element::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_network_2D_element::description (String & ioString,
-                                                  const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @M_network-element:") ;
+void GGS_M_5F_network_2E_element::description (String & ioString,
+                                               const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @M_network.element:") ;
   if (! isValid ()) {
     ioString.appendCString (" not built") ;
   }else{
@@ -7554,41 +7543,41 @@ void GALGAS_M_5F_network_2D_element::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @M_network-element generic code implementation
+//     @M_network.element generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_network_2D_element ("M_network-element",
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_network_2E_element ("M_network.element",
                                                                                nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_M_5F_network_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_M_5F_network_2D_element ;
+const C_galgas_type_descriptor * GGS_M_5F_network_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_M_5F_network_2E_element ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_M_5F_network_2D_element::clonedObject (void) const {
+AC_GALGAS_root * GGS_M_5F_network_2E_element::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_M_5F_network_2D_element (*this)) ;
+    macroMyNew (result, GGS_M_5F_network_2E_element (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                              Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_network_2D_element result ;
-  const GALGAS_M_5F_network_2D_element * p = (const GALGAS_M_5F_network_2D_element *) inObject.embeddedObject () ;
+GGS_M_5F_network_2E_element GGS_M_5F_network_2E_element::extractObject (const GGS_object & inObject,
+                                                                        Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
+  GGS_M_5F_network_2E_element result ;
+  const GGS_M_5F_network_2E_element * p = (const GGS_M_5F_network_2E_element *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_M_5F_network_2D_element *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_M_5F_network_2E_element *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("M_network-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("M_network.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -7596,11 +7585,11 @@ GALGAS_M_5F_network_2D_element GALGAS_M_5F_network_2D_element::extractObject (co
 
 //--------------------------------------------------------------------------------------------------
 //
-//Optional @M_5F_network_2D_element_3F_
+//Optional @M_5F_network_2E_element_3F_
 //
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element_3F_::GALGAS_M_5F_network_2D_element_3F_ (void) :
+GGS_M_5F_network_2E_element_3F_::GGS_M_5F_network_2E_element_3F_ (void) :
 AC_GALGAS_root (),
 mValue (),
 mState (OptionalState::invalid) {
@@ -7608,7 +7597,7 @@ mState (OptionalState::invalid) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element_3F_::GALGAS_M_5F_network_2D_element_3F_ (const GALGAS_M_5F_network_2D_element & inSource) :
+GGS_M_5F_network_2E_element_3F_::GGS_M_5F_network_2E_element_3F_ (const GGS_M_5F_network_2E_element & inSource) :
 AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
@@ -7616,15 +7605,15 @@ mState (OptionalState::valuated) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element_3F_ GALGAS_M_5F_network_2D_element_3F_::init_nil (void) {
-  GALGAS_M_5F_network_2D_element_3F_ result ;
+GGS_M_5F_network_2E_element_3F_ GGS_M_5F_network_2E_element_3F_::init_nil (void) {
+  GGS_M_5F_network_2E_element_3F_ result ;
   result.mState = OptionalState::isNil ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-bool GALGAS_M_5F_network_2D_element_3F_::isValid (void) const {
+bool GGS_M_5F_network_2E_element_3F_::isValid (void) const {
   bool result = false ;
   switch (mState) {
   case OptionalState::invalid :
@@ -7641,21 +7630,21 @@ bool GALGAS_M_5F_network_2D_element_3F_::isValid (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-bool GALGAS_M_5F_network_2D_element_3F_::isValuated (void) const {
+bool GGS_M_5F_network_2E_element_3F_::isValuated (void) const {
   return (mState == OptionalState::valuated) && mValue.isValid () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_network_2D_element_3F_::drop (void) {
+void GGS_M_5F_network_2E_element_3F_::drop (void) {
   mState = OptionalState::invalid ;
-  mValue = GALGAS_M_5F_network_2D_element () ;
+  mValue = GGS_M_5F_network_2E_element () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_network_2D_element_3F_::description (String & ioString,
-                                                      const int32_t inIndentation) const {
+void GGS_M_5F_network_2E_element_3F_::description (String & ioString,
+                                                   const int32_t inIndentation) const {
   ioString.appendCString ("<optional @") ;
   ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
   ioString.appendCString (": ") ;
@@ -7675,41 +7664,41 @@ void GALGAS_M_5F_network_2D_element_3F_::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @M_network-element? generic code implementation
+//     @M_network.element? generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_network_2D_element_3F_ ("M_network-element?",
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_network_2E_element_3F_ ("M_network.element?",
                                                                                    nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_M_5F_network_2D_element_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_M_5F_network_2D_element_3F_ ;
+const C_galgas_type_descriptor * GGS_M_5F_network_2E_element_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_M_5F_network_2E_element_3F_ ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_M_5F_network_2D_element_3F_::clonedObject (void) const {
+AC_GALGAS_root * GGS_M_5F_network_2E_element_3F_::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_M_5F_network_2D_element_3F_ (*this)) ;
+    macroMyNew (result, GGS_M_5F_network_2E_element_3F_ (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_network_2D_element_3F_ GALGAS_M_5F_network_2D_element_3F_::extractObject (const GALGAS_object & inObject,
-                                                                                      Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_network_2D_element_3F_ result ;
-  const GALGAS_M_5F_network_2D_element_3F_ * p = (const GALGAS_M_5F_network_2D_element_3F_ *) inObject.embeddedObject () ;
+GGS_M_5F_network_2E_element_3F_ GGS_M_5F_network_2E_element_3F_::extractObject (const GGS_object & inObject,
+                                                                                Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  GGS_M_5F_network_2E_element_3F_ result ;
+  const GGS_M_5F_network_2E_element_3F_ * p = (const GGS_M_5F_network_2E_element_3F_ *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_M_5F_network_2D_element_3F_ *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_M_5F_network_2E_element_3F_ *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("M_network-element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("M_network.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -7717,7 +7706,7 @@ GALGAS_M_5F_network_2D_element_3F_ GALGAS_M_5F_network_2D_element_3F_::extractOb
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element::GALGAS_M_5F_messages_2D_element (void) :
+GGS_M_5F_messages_2E_element::GGS_M_5F_messages_2E_element (void) :
 mProperty_lkey (),
 mProperty_mIndex (),
 mProperty_mClass (),
@@ -7732,24 +7721,24 @@ mProperty_mMessageKind () {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element::~ GALGAS_M_5F_messages_2D_element (void) {
+GGS_M_5F_messages_2E_element::~ GGS_M_5F_messages_2E_element (void) {
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::init_21__21__21__21__21__21__21__21__21__21_ (const GALGAS_lstring & in_lkey,
-                                                                                                               const GALGAS_uint & in_mIndex,
-                                                                                                               const GALGAS_luint & in_mClass,
-                                                                                                               const GALGAS_uint & in_mNetworkIndex,
-                                                                                                               const GALGAS_luint & in_mBytesCount,
-                                                                                                               const GALGAS_luint & in_mPriority,
-                                                                                                               const GALGAS_luint & in_mOffset,
-                                                                                                               const GALGAS_luint & in_mDeadline,
-                                                                                                               const GALGAS_luint & in_mPeriod,
-                                                                                                               const GALGAS_AC_5F_canMessage & in_mMessageKind,
-                                                                                                               Compiler * inCompiler
-                                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_M_5F_messages_2D_element result ;
+GGS_M_5F_messages_2E_element GGS_M_5F_messages_2E_element::init_21__21__21__21__21__21__21__21__21__21_ (const GGS_lstring & in_lkey,
+                                                                                                         const GGS_uint & in_mIndex,
+                                                                                                         const GGS_luint & in_mClass,
+                                                                                                         const GGS_uint & in_mNetworkIndex,
+                                                                                                         const GGS_luint & in_mBytesCount,
+                                                                                                         const GGS_luint & in_mPriority,
+                                                                                                         const GGS_luint & in_mOffset,
+                                                                                                         const GGS_luint & in_mDeadline,
+                                                                                                         const GGS_luint & in_mPeriod,
+                                                                                                         const GGS_AC_5F_canMessage & in_mMessageKind,
+                                                                                                         Compiler * inCompiler
+                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_M_5F_messages_2E_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_lkey = in_lkey ;
   result.mProperty_mIndex = in_mIndex ;
@@ -7766,21 +7755,21 @@ GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::init_21__21__21
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages_2D_element::setInitializedProperties (Compiler * /* inCompiler */) {
+void GGS_M_5F_messages_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element::GALGAS_M_5F_messages_2D_element (const GALGAS_lstring & inOperand0,
-                                                                  const GALGAS_uint & inOperand1,
-                                                                  const GALGAS_luint & inOperand2,
-                                                                  const GALGAS_uint & inOperand3,
-                                                                  const GALGAS_luint & inOperand4,
-                                                                  const GALGAS_luint & inOperand5,
-                                                                  const GALGAS_luint & inOperand6,
-                                                                  const GALGAS_luint & inOperand7,
-                                                                  const GALGAS_luint & inOperand8,
-                                                                  const GALGAS_AC_5F_canMessage & inOperand9) :
+GGS_M_5F_messages_2E_element::GGS_M_5F_messages_2E_element (const GGS_lstring & inOperand0,
+                                                            const GGS_uint & inOperand1,
+                                                            const GGS_luint & inOperand2,
+                                                            const GGS_uint & inOperand3,
+                                                            const GGS_luint & inOperand4,
+                                                            const GGS_luint & inOperand5,
+                                                            const GGS_luint & inOperand6,
+                                                            const GGS_luint & inOperand7,
+                                                            const GGS_luint & inOperand8,
+                                                            const GGS_AC_5F_canMessage & inOperand9) :
 mProperty_lkey (inOperand0),
 mProperty_mIndex (inOperand1),
 mProperty_mClass (inOperand2),
@@ -7795,19 +7784,19 @@ mProperty_mMessageKind (inOperand9) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::class_func_new (const GALGAS_lstring & in_lkey,
-                                                                                 const GALGAS_uint & in_mIndex,
-                                                                                 const GALGAS_luint & in_mClass,
-                                                                                 const GALGAS_uint & in_mNetworkIndex,
-                                                                                 const GALGAS_luint & in_mBytesCount,
-                                                                                 const GALGAS_luint & in_mPriority,
-                                                                                 const GALGAS_luint & in_mOffset,
-                                                                                 const GALGAS_luint & in_mDeadline,
-                                                                                 const GALGAS_luint & in_mPeriod,
-                                                                                 const GALGAS_AC_5F_canMessage & in_mMessageKind,
-                                                                                 Compiler * inCompiler
-                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_M_5F_messages_2D_element result ;
+GGS_M_5F_messages_2E_element GGS_M_5F_messages_2E_element::class_func_new (const GGS_lstring & in_lkey,
+                                                                           const GGS_uint & in_mIndex,
+                                                                           const GGS_luint & in_mClass,
+                                                                           const GGS_uint & in_mNetworkIndex,
+                                                                           const GGS_luint & in_mBytesCount,
+                                                                           const GGS_luint & in_mPriority,
+                                                                           const GGS_luint & in_mOffset,
+                                                                           const GGS_luint & in_mDeadline,
+                                                                           const GGS_luint & in_mPeriod,
+                                                                           const GGS_AC_5F_canMessage & in_mMessageKind,
+                                                                           Compiler * inCompiler
+                                                                           COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_M_5F_messages_2E_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_lkey = in_lkey ;
   result.mProperty_mIndex = in_mIndex ;
@@ -7824,13 +7813,13 @@ GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::class_func_new 
 
 //--------------------------------------------------------------------------------------------------
 
-bool GALGAS_M_5F_messages_2D_element::isValid (void) const {
+bool GGS_M_5F_messages_2E_element::isValid (void) const {
   return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mClass.isValid () && mProperty_mNetworkIndex.isValid () && mProperty_mBytesCount.isValid () && mProperty_mPriority.isValid () && mProperty_mOffset.isValid () && mProperty_mDeadline.isValid () && mProperty_mPeriod.isValid () && mProperty_mMessageKind.isValid () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages_2D_element::drop (void) {
+void GGS_M_5F_messages_2E_element::drop (void) {
   mProperty_lkey.drop () ;
   mProperty_mIndex.drop () ;
   mProperty_mClass.drop () ;
@@ -7845,9 +7834,9 @@ void GALGAS_M_5F_messages_2D_element::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages_2D_element::description (String & ioString,
-                                                   const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @M_messages-element:") ;
+void GGS_M_5F_messages_2E_element::description (String & ioString,
+                                                const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @M_messages.element:") ;
   if (! isValid ()) {
     ioString.appendCString (" not built") ;
   }else{
@@ -7876,41 +7865,41 @@ void GALGAS_M_5F_messages_2D_element::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @M_messages-element generic code implementation
+//     @M_messages.element generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages_2D_element ("M_messages-element",
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages_2E_element ("M_messages.element",
                                                                                 nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_M_5F_messages_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_M_5F_messages_2D_element ;
+const C_galgas_type_descriptor * GGS_M_5F_messages_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_M_5F_messages_2E_element ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_M_5F_messages_2D_element::clonedObject (void) const {
+AC_GALGAS_root * GGS_M_5F_messages_2E_element::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_M_5F_messages_2D_element (*this)) ;
+    macroMyNew (result, GGS_M_5F_messages_2E_element (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_messages_2D_element result ;
-  const GALGAS_M_5F_messages_2D_element * p = (const GALGAS_M_5F_messages_2D_element *) inObject.embeddedObject () ;
+GGS_M_5F_messages_2E_element GGS_M_5F_messages_2E_element::extractObject (const GGS_object & inObject,
+                                                                          Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) {
+  GGS_M_5F_messages_2E_element result ;
+  const GGS_M_5F_messages_2E_element * p = (const GGS_M_5F_messages_2E_element *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_M_5F_messages_2D_element *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_M_5F_messages_2E_element *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("M_messages-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("M_messages.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -7918,11 +7907,11 @@ GALGAS_M_5F_messages_2D_element GALGAS_M_5F_messages_2D_element::extractObject (
 
 //--------------------------------------------------------------------------------------------------
 //
-//Optional @M_5F_messages_2D_element_3F_
+//Optional @M_5F_messages_2E_element_3F_
 //
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element_3F_::GALGAS_M_5F_messages_2D_element_3F_ (void) :
+GGS_M_5F_messages_2E_element_3F_::GGS_M_5F_messages_2E_element_3F_ (void) :
 AC_GALGAS_root (),
 mValue (),
 mState (OptionalState::invalid) {
@@ -7930,7 +7919,7 @@ mState (OptionalState::invalid) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element_3F_::GALGAS_M_5F_messages_2D_element_3F_ (const GALGAS_M_5F_messages_2D_element & inSource) :
+GGS_M_5F_messages_2E_element_3F_::GGS_M_5F_messages_2E_element_3F_ (const GGS_M_5F_messages_2E_element & inSource) :
 AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
@@ -7938,15 +7927,15 @@ mState (OptionalState::valuated) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element_3F_ GALGAS_M_5F_messages_2D_element_3F_::init_nil (void) {
-  GALGAS_M_5F_messages_2D_element_3F_ result ;
+GGS_M_5F_messages_2E_element_3F_ GGS_M_5F_messages_2E_element_3F_::init_nil (void) {
+  GGS_M_5F_messages_2E_element_3F_ result ;
   result.mState = OptionalState::isNil ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-bool GALGAS_M_5F_messages_2D_element_3F_::isValid (void) const {
+bool GGS_M_5F_messages_2E_element_3F_::isValid (void) const {
   bool result = false ;
   switch (mState) {
   case OptionalState::invalid :
@@ -7963,21 +7952,21 @@ bool GALGAS_M_5F_messages_2D_element_3F_::isValid (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-bool GALGAS_M_5F_messages_2D_element_3F_::isValuated (void) const {
+bool GGS_M_5F_messages_2E_element_3F_::isValuated (void) const {
   return (mState == OptionalState::valuated) && mValue.isValid () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages_2D_element_3F_::drop (void) {
+void GGS_M_5F_messages_2E_element_3F_::drop (void) {
   mState = OptionalState::invalid ;
-  mValue = GALGAS_M_5F_messages_2D_element () ;
+  mValue = GGS_M_5F_messages_2E_element () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_messages_2D_element_3F_::description (String & ioString,
-                                                       const int32_t inIndentation) const {
+void GGS_M_5F_messages_2E_element_3F_::description (String & ioString,
+                                                    const int32_t inIndentation) const {
   ioString.appendCString ("<optional @") ;
   ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
   ioString.appendCString (": ") ;
@@ -7997,41 +7986,41 @@ void GALGAS_M_5F_messages_2D_element_3F_::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @M_messages-element? generic code implementation
+//     @M_messages.element? generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages_2D_element_3F_ ("M_messages-element?",
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages_2E_element_3F_ ("M_messages.element?",
                                                                                     nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_M_5F_messages_2D_element_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_M_5F_messages_2D_element_3F_ ;
+const C_galgas_type_descriptor * GGS_M_5F_messages_2E_element_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_M_5F_messages_2E_element_3F_ ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_M_5F_messages_2D_element_3F_::clonedObject (void) const {
+AC_GALGAS_root * GGS_M_5F_messages_2E_element_3F_::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_M_5F_messages_2D_element_3F_ (*this)) ;
+    macroMyNew (result, GGS_M_5F_messages_2E_element_3F_ (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_messages_2D_element_3F_ GALGAS_M_5F_messages_2D_element_3F_::extractObject (const GALGAS_object & inObject,
-                                                                                        Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_messages_2D_element_3F_ result ;
-  const GALGAS_M_5F_messages_2D_element_3F_ * p = (const GALGAS_M_5F_messages_2D_element_3F_ *) inObject.embeddedObject () ;
+GGS_M_5F_messages_2E_element_3F_ GGS_M_5F_messages_2E_element_3F_::extractObject (const GGS_object & inObject,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GGS_M_5F_messages_2E_element_3F_ result ;
+  const GGS_M_5F_messages_2E_element_3F_ * p = (const GGS_M_5F_messages_2E_element_3F_ *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_M_5F_messages_2D_element_3F_ *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_M_5F_messages_2E_element_3F_ *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("M_messages-element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("M_messages.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -8039,7 +8028,7 @@ GALGAS_M_5F_messages_2D_element_3F_ GALGAS_M_5F_messages_2D_element_3F_::extract
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element::GALGAS_M_5F_tasks_2D_element (void) :
+GGS_M_5F_tasks_2E_element::GGS_M_5F_tasks_2E_element (void) :
 mProperty_lkey (),
 mProperty_mIndex (),
 mProperty_mPriority (),
@@ -8054,24 +8043,24 @@ mProperty_mTaskKind () {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element::~ GALGAS_M_5F_tasks_2D_element (void) {
+GGS_M_5F_tasks_2E_element::~ GGS_M_5F_tasks_2E_element (void) {
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::init_21__21__21__21__21__21__21__21__21__21_ (const GALGAS_lstring & in_lkey,
-                                                                                                         const GALGAS_uint & in_mIndex,
-                                                                                                         const GALGAS_luint & in_mPriority,
-                                                                                                         const GALGAS_luint & in_mOffset,
-                                                                                                         const GALGAS_luint & in_mDeadline,
-                                                                                                         const GALGAS_luint & in_mDurationMin,
-                                                                                                         const GALGAS_luint & in_mDurationMax,
-                                                                                                         const GALGAS_uint & in_mProcessor,
-                                                                                                         const GALGAS_luint & in_mPeriod,
-                                                                                                         const GALGAS_AC_5F_task & in_mTaskKind,
-                                                                                                         Compiler * inCompiler
-                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_M_5F_tasks_2D_element result ;
+GGS_M_5F_tasks_2E_element GGS_M_5F_tasks_2E_element::init_21__21__21__21__21__21__21__21__21__21_ (const GGS_lstring & in_lkey,
+                                                                                                   const GGS_uint & in_mIndex,
+                                                                                                   const GGS_luint & in_mPriority,
+                                                                                                   const GGS_luint & in_mOffset,
+                                                                                                   const GGS_luint & in_mDeadline,
+                                                                                                   const GGS_luint & in_mDurationMin,
+                                                                                                   const GGS_luint & in_mDurationMax,
+                                                                                                   const GGS_uint & in_mProcessor,
+                                                                                                   const GGS_luint & in_mPeriod,
+                                                                                                   const GGS_AC_5F_task & in_mTaskKind,
+                                                                                                   Compiler * inCompiler
+                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_M_5F_tasks_2E_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_lkey = in_lkey ;
   result.mProperty_mIndex = in_mIndex ;
@@ -8088,21 +8077,21 @@ GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::init_21__21__21__21__
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks_2D_element::setInitializedProperties (Compiler * /* inCompiler */) {
+void GGS_M_5F_tasks_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element::GALGAS_M_5F_tasks_2D_element (const GALGAS_lstring & inOperand0,
-                                                            const GALGAS_uint & inOperand1,
-                                                            const GALGAS_luint & inOperand2,
-                                                            const GALGAS_luint & inOperand3,
-                                                            const GALGAS_luint & inOperand4,
-                                                            const GALGAS_luint & inOperand5,
-                                                            const GALGAS_luint & inOperand6,
-                                                            const GALGAS_uint & inOperand7,
-                                                            const GALGAS_luint & inOperand8,
-                                                            const GALGAS_AC_5F_task & inOperand9) :
+GGS_M_5F_tasks_2E_element::GGS_M_5F_tasks_2E_element (const GGS_lstring & inOperand0,
+                                                      const GGS_uint & inOperand1,
+                                                      const GGS_luint & inOperand2,
+                                                      const GGS_luint & inOperand3,
+                                                      const GGS_luint & inOperand4,
+                                                      const GGS_luint & inOperand5,
+                                                      const GGS_luint & inOperand6,
+                                                      const GGS_uint & inOperand7,
+                                                      const GGS_luint & inOperand8,
+                                                      const GGS_AC_5F_task & inOperand9) :
 mProperty_lkey (inOperand0),
 mProperty_mIndex (inOperand1),
 mProperty_mPriority (inOperand2),
@@ -8117,19 +8106,19 @@ mProperty_mTaskKind (inOperand9) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::class_func_new (const GALGAS_lstring & in_lkey,
-                                                                           const GALGAS_uint & in_mIndex,
-                                                                           const GALGAS_luint & in_mPriority,
-                                                                           const GALGAS_luint & in_mOffset,
-                                                                           const GALGAS_luint & in_mDeadline,
-                                                                           const GALGAS_luint & in_mDurationMin,
-                                                                           const GALGAS_luint & in_mDurationMax,
-                                                                           const GALGAS_uint & in_mProcessor,
-                                                                           const GALGAS_luint & in_mPeriod,
-                                                                           const GALGAS_AC_5F_task & in_mTaskKind,
-                                                                           Compiler * inCompiler
-                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_M_5F_tasks_2D_element result ;
+GGS_M_5F_tasks_2E_element GGS_M_5F_tasks_2E_element::class_func_new (const GGS_lstring & in_lkey,
+                                                                     const GGS_uint & in_mIndex,
+                                                                     const GGS_luint & in_mPriority,
+                                                                     const GGS_luint & in_mOffset,
+                                                                     const GGS_luint & in_mDeadline,
+                                                                     const GGS_luint & in_mDurationMin,
+                                                                     const GGS_luint & in_mDurationMax,
+                                                                     const GGS_uint & in_mProcessor,
+                                                                     const GGS_luint & in_mPeriod,
+                                                                     const GGS_AC_5F_task & in_mTaskKind,
+                                                                     Compiler * inCompiler
+                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_M_5F_tasks_2E_element result ;
   result.setInitializedProperties (inCompiler) ;
   result.mProperty_lkey = in_lkey ;
   result.mProperty_mIndex = in_mIndex ;
@@ -8146,13 +8135,13 @@ GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::class_func_new (const
 
 //--------------------------------------------------------------------------------------------------
 
-bool GALGAS_M_5F_tasks_2D_element::isValid (void) const {
+bool GGS_M_5F_tasks_2E_element::isValid (void) const {
   return mProperty_lkey.isValid () && mProperty_mIndex.isValid () && mProperty_mPriority.isValid () && mProperty_mOffset.isValid () && mProperty_mDeadline.isValid () && mProperty_mDurationMin.isValid () && mProperty_mDurationMax.isValid () && mProperty_mProcessor.isValid () && mProperty_mPeriod.isValid () && mProperty_mTaskKind.isValid () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks_2D_element::drop (void) {
+void GGS_M_5F_tasks_2E_element::drop (void) {
   mProperty_lkey.drop () ;
   mProperty_mIndex.drop () ;
   mProperty_mPriority.drop () ;
@@ -8167,9 +8156,9 @@ void GALGAS_M_5F_tasks_2D_element::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks_2D_element::description (String & ioString,
-                                                const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @M_tasks-element:") ;
+void GGS_M_5F_tasks_2E_element::description (String & ioString,
+                                             const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @M_tasks.element:") ;
   if (! isValid ()) {
     ioString.appendCString (" not built") ;
   }else{
@@ -8198,41 +8187,41 @@ void GALGAS_M_5F_tasks_2D_element::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @M_tasks-element generic code implementation
+//     @M_tasks.element generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_tasks_2D_element ("M_tasks-element",
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_tasks_2E_element ("M_tasks.element",
                                                                              nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_M_5F_tasks_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_M_5F_tasks_2D_element ;
+const C_galgas_type_descriptor * GGS_M_5F_tasks_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_M_5F_tasks_2E_element ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_M_5F_tasks_2D_element::clonedObject (void) const {
+AC_GALGAS_root * GGS_M_5F_tasks_2E_element::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_M_5F_tasks_2D_element (*this)) ;
+    macroMyNew (result, GGS_M_5F_tasks_2E_element (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                          Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_tasks_2D_element result ;
-  const GALGAS_M_5F_tasks_2D_element * p = (const GALGAS_M_5F_tasks_2D_element *) inObject.embeddedObject () ;
+GGS_M_5F_tasks_2E_element GGS_M_5F_tasks_2E_element::extractObject (const GGS_object & inObject,
+                                                                    Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
+  GGS_M_5F_tasks_2E_element result ;
+  const GGS_M_5F_tasks_2E_element * p = (const GGS_M_5F_tasks_2E_element *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_M_5F_tasks_2D_element *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_M_5F_tasks_2E_element *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("M_tasks-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("M_tasks.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -8240,11 +8229,11 @@ GALGAS_M_5F_tasks_2D_element GALGAS_M_5F_tasks_2D_element::extractObject (const 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Optional @M_5F_tasks_2D_element_3F_
+//Optional @M_5F_tasks_2E_element_3F_
 //
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element_3F_::GALGAS_M_5F_tasks_2D_element_3F_ (void) :
+GGS_M_5F_tasks_2E_element_3F_::GGS_M_5F_tasks_2E_element_3F_ (void) :
 AC_GALGAS_root (),
 mValue (),
 mState (OptionalState::invalid) {
@@ -8252,7 +8241,7 @@ mState (OptionalState::invalid) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element_3F_::GALGAS_M_5F_tasks_2D_element_3F_ (const GALGAS_M_5F_tasks_2D_element & inSource) :
+GGS_M_5F_tasks_2E_element_3F_::GGS_M_5F_tasks_2E_element_3F_ (const GGS_M_5F_tasks_2E_element & inSource) :
 AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
@@ -8260,15 +8249,15 @@ mState (OptionalState::valuated) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element_3F_ GALGAS_M_5F_tasks_2D_element_3F_::init_nil (void) {
-  GALGAS_M_5F_tasks_2D_element_3F_ result ;
+GGS_M_5F_tasks_2E_element_3F_ GGS_M_5F_tasks_2E_element_3F_::init_nil (void) {
+  GGS_M_5F_tasks_2E_element_3F_ result ;
   result.mState = OptionalState::isNil ;
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-bool GALGAS_M_5F_tasks_2D_element_3F_::isValid (void) const {
+bool GGS_M_5F_tasks_2E_element_3F_::isValid (void) const {
   bool result = false ;
   switch (mState) {
   case OptionalState::invalid :
@@ -8285,21 +8274,21 @@ bool GALGAS_M_5F_tasks_2D_element_3F_::isValid (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-bool GALGAS_M_5F_tasks_2D_element_3F_::isValuated (void) const {
+bool GGS_M_5F_tasks_2E_element_3F_::isValuated (void) const {
   return (mState == OptionalState::valuated) && mValue.isValid () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks_2D_element_3F_::drop (void) {
+void GGS_M_5F_tasks_2E_element_3F_::drop (void) {
   mState = OptionalState::invalid ;
-  mValue = GALGAS_M_5F_tasks_2D_element () ;
+  mValue = GGS_M_5F_tasks_2E_element () ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_M_5F_tasks_2D_element_3F_::description (String & ioString,
-                                                    const int32_t inIndentation) const {
+void GGS_M_5F_tasks_2E_element_3F_::description (String & ioString,
+                                                 const int32_t inIndentation) const {
   ioString.appendCString ("<optional @") ;
   ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
   ioString.appendCString (": ") ;
@@ -8319,41 +8308,41 @@ void GALGAS_M_5F_tasks_2D_element_3F_::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 //
-//     @M_tasks-element? generic code implementation
+//     @M_tasks.element? generic code implementation
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_tasks_2D_element_3F_ ("M_tasks-element?",
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_tasks_2E_element_3F_ ("M_tasks.element?",
                                                                                  nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_M_5F_tasks_2D_element_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_M_5F_tasks_2D_element_3F_ ;
+const C_galgas_type_descriptor * GGS_M_5F_tasks_2E_element_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_M_5F_tasks_2E_element_3F_ ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_M_5F_tasks_2D_element_3F_::clonedObject (void) const {
+AC_GALGAS_root * GGS_M_5F_tasks_2E_element_3F_::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_M_5F_tasks_2D_element_3F_ (*this)) ;
+    macroMyNew (result, GGS_M_5F_tasks_2E_element_3F_ (*this)) ;
   }
   return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_M_5F_tasks_2D_element_3F_ GALGAS_M_5F_tasks_2D_element_3F_::extractObject (const GALGAS_object & inObject,
-                                                                                  Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_M_5F_tasks_2D_element_3F_ result ;
-  const GALGAS_M_5F_tasks_2D_element_3F_ * p = (const GALGAS_M_5F_tasks_2D_element_3F_ *) inObject.embeddedObject () ;
+GGS_M_5F_tasks_2E_element_3F_ GGS_M_5F_tasks_2E_element_3F_::extractObject (const GGS_object & inObject,
+                                                                            Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) {
+  GGS_M_5F_tasks_2E_element_3F_ result ;
+  const GGS_M_5F_tasks_2E_element_3F_ * p = (const GGS_M_5F_tasks_2E_element_3F_ *) inObject.embeddedObject () ;
   if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_M_5F_tasks_2D_element_3F_ *> (p)) {
+    if (nullptr != dynamic_cast <const GGS_M_5F_tasks_2E_element_3F_ *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("M_tasks-element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("M_tasks.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -8463,7 +8452,7 @@ static void routine_after (Compiler * /* inCompiler */
 //
 //--------------------------------------------------------------------------------------------------
 
-static void routine_programRule_5F__30_ (const GALGAS_lstring constinArgument_inSourceFile,
+static void routine_programRule_5F__30_ (const GGS_lstring constinArgument_inSourceFile,
                                          Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   cGrammar_oa_5F_grammar::_performSourceFileParsing_ (inCompiler, constinArgument_inSourceFile  COMMA_SOURCE_FILE ("oa_main.galgas", 11)) ;
@@ -8502,9 +8491,9 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
       const bool verboseOptionOn = verboseOutput () ;
       for (int32_t i=0 ; i<sourceFilesArray.count () ; i++) {
         const String fileExtension = sourceFilesArray (i COMMA_HERE).pathExtension () ;
-        const GALGAS_string sfp = GALGAS_string (sourceFilesArray (i COMMA_HERE)) ;
-        const GALGAS_location location = commonCompiler->here () ;
-        const GALGAS_lstring sourceFilePath (sfp, location) ;
+        const GGS_string sfp = GGS_string (sourceFilesArray (i COMMA_HERE)) ;
+        const GGS_location location = commonCompiler->here () ;
+        const GGS_lstring sourceFilePath (sfp, location) ;
         int r = 0 ;
         if (fileExtension == "nprt") {
           switch (executionMode ()) {

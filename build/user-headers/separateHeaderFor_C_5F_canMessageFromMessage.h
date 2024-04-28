@@ -15,7 +15,7 @@ class cPtr_C_5F_canMessageFromMessage : public cPtr_AC_5F_canMessage {
   #endif
 
 //--------------------------------- Initializers
-  public: void C_5F_canMessageFromMessage_init_21_ (const class GALGAS_uint & inOperand0,
+  public: void C_5F_canMessageFromMessage_init_21_ (const class GGS_uint & inOperand0,
                                                     Compiler * inCompiler) ;
 
 
@@ -27,14 +27,14 @@ class cPtr_C_5F_canMessageFromMessage : public cPtr_AC_5F_canMessage {
 
 //--- END OF USER ZONE 2
 //--- Properties
-  public: GALGAS_uint mProperty_mMessageIndex ;
+  public: GGS_uint mProperty_mMessageIndex ;
 
 
 //--- Default constructor
   public: cPtr_C_5F_canMessageFromMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
-  public: cPtr_C_5F_canMessageFromMessage (const GALGAS_uint & in_mMessageIndex
+  public: cPtr_C_5F_canMessageFromMessage (const GGS_uint & in_mMessageIndex
                                            COMMA_LOCATION_ARGS) ;
 
 //--- Duplication

@@ -15,8 +15,8 @@ class cPtr_C_5F_taskDependsFromMessage : public cPtr_AC_5F_task {
   #endif
 
 //--------------------------------- Initializers
-  public: void C_5F_taskDependsFromMessage_init_21__21_ (const class GALGAS_uint & inOperand0,
-                                                         const class GALGAS_luint & inOperand1,
+  public: void C_5F_taskDependsFromMessage_init_21__21_ (const class GGS_uint & inOperand0,
+                                                         const class GGS_luint & inOperand1,
                                                          Compiler * inCompiler) ;
 
 
@@ -29,16 +29,16 @@ class cPtr_C_5F_taskDependsFromMessage : public cPtr_AC_5F_task {
 
 //--- END OF USER ZONE 2
 //--- Properties
-  public: GALGAS_uint mProperty_mMessage ;
-  public: GALGAS_luint mProperty_mEvery ;
+  public: GGS_uint mProperty_mMessage ;
+  public: GGS_luint mProperty_mEvery ;
 
 
 //--- Default constructor
   public: cPtr_C_5F_taskDependsFromMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
-  public: cPtr_C_5F_taskDependsFromMessage (const GALGAS_uint & in_mMessage,
-                                            const GALGAS_luint & in_mEvery
+  public: cPtr_C_5F_taskDependsFromMessage (const GGS_uint & in_mMessage,
+                                            const GGS_luint & in_mEvery
                                             COMMA_LOCATION_ARGS) ;
 
 //--- Duplication

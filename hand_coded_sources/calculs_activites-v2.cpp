@@ -262,10 +262,10 @@ static void buildCSSfile (Compiler * inCompiler,
 //--------------------------------------------------------------------------*
 
 void
-routine_performComputations_26__26__26__26_ (GALGAS_M_5F_processor & inProcessorMap,
-                             GALGAS_M_5F_network & inNetworkMap,
-                             GALGAS_M_5F_messages & inMessagesMap,
-                             GALGAS_M_5F_tasks & inTasksMap,
+routine_performComputations_26__26__26__26_ (GGS_M_5F_processor & inProcessorMap,
+                             GGS_M_5F_network & inNetworkMap,
+                             GGS_M_5F_messages & inMessagesMap,
+                             GGS_M_5F_tasks & inTasksMap,
                              Compiler * inCompiler
                              COMMA_UNUSED_LOCATION_ARGS) {
   TC_UniqueArray <cResource> Resource ;
