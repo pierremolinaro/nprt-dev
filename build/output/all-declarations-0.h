@@ -664,9 +664,15 @@ class GGS_M_5F_processor_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_M_5F_processor_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_M_5F_processor_2E_element_3F_ (const GGS_M_5F_processor_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_M_5F_processor_2E_element_3F_ (const GGS_M_5F_processor_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_M_5F_processor_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_M_5F_processor_2E_element unwrappedValue (void) const {
@@ -1034,9 +1040,15 @@ class GGS_M_5F_network_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_M_5F_network_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_M_5F_network_2E_element_3F_ (const GGS_M_5F_network_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_M_5F_network_2E_element_3F_ (const GGS_M_5F_network_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_M_5F_network_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_M_5F_network_2E_element unwrappedValue (void) const {
@@ -1160,8 +1172,43 @@ class GGS_AC_5F_canMessage_2E_weak : public AC_GALGAS_weak_reference {
 
   public: GGS_AC_5F_canMessage_2E_weak & operator = (const class GGS_AC_5F_canMessage & inSource) ;
 
+//--------------------------------- Constructor and assignment from optional reference
+
+//--------------------------------- nil initializer
+  public: inline static GGS_AC_5F_canMessage_2E_weak init_nil (void) {
+    GGS_AC_5F_canMessage_2E_weak result ;
+    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    return result ;
+  }
+
 //--------------------------------- Bang operator
   public: GGS_AC_5F_canMessage bang_AC_5F_canMessage_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- isValuated
+  public: inline bool isValuated (void) const {
+    return isValid () && (ptr () != nullptr) ;
+  }
+
+//--------------------------------- Unwrapped value
+  public: inline GGS_AC_5F_canMessage unwrappedValue (void) const {
+    GGS_AC_5F_canMessage result ;
+    if (isValid ()) {
+      const cPtr_AC_5F_canMessage * p = (cPtr_AC_5F_canMessage *) ptr () ;
+      if (nullptr != p) {
+        result = GGS_AC_5F_canMessage (p) ;
+      }
+    }
+    return result ;
+  }
+
+//--------------------------------- GALGAS read only properties
+  public: inline GGS_bool readProperty_isNil (void) const {
+    return GGS_bool (isValid (), ptr () == nullptr) ;
+  }
+
+  public: inline GGS_bool readProperty_isSome (void) const {
+    return GGS_bool (isValid (), ptr () != nullptr) ;
+  }
 
 //-- Start of type generic part
 
@@ -1270,8 +1317,43 @@ class GGS_C_5F_canIndependantMessage_2E_weak : public GGS_AC_5F_canMessage_2E_we
 
   public: GGS_C_5F_canIndependantMessage_2E_weak & operator = (const class GGS_C_5F_canIndependantMessage & inSource) ;
 
+//--------------------------------- Constructor and assignment from optional reference
+
+//--------------------------------- nil initializer
+  public: inline static GGS_C_5F_canIndependantMessage_2E_weak init_nil (void) {
+    GGS_C_5F_canIndependantMessage_2E_weak result ;
+    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    return result ;
+  }
+
 //--------------------------------- Bang operator
   public: GGS_C_5F_canIndependantMessage bang_C_5F_canIndependantMessage_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- isValuated
+  public: inline bool isValuated (void) const {
+    return isValid () && (ptr () != nullptr) ;
+  }
+
+//--------------------------------- Unwrapped value
+  public: inline GGS_C_5F_canIndependantMessage unwrappedValue (void) const {
+    GGS_C_5F_canIndependantMessage result ;
+    if (isValid ()) {
+      const cPtr_C_5F_canIndependantMessage * p = (cPtr_C_5F_canIndependantMessage *) ptr () ;
+      if (nullptr != p) {
+        result = GGS_C_5F_canIndependantMessage (p) ;
+      }
+    }
+    return result ;
+  }
+
+//--------------------------------- GALGAS read only properties
+  public: inline GGS_bool readProperty_isNil (void) const {
+    return GGS_bool (isValid (), ptr () == nullptr) ;
+  }
+
+  public: inline GGS_bool readProperty_isSome (void) const {
+    return GGS_bool (isValid (), ptr () != nullptr) ;
+  }
 
 //-- Start of type generic part
 
@@ -1385,8 +1467,43 @@ class GGS_C_5F_canMessageFromMessage_2E_weak : public GGS_AC_5F_canMessage_2E_we
 
   public: GGS_C_5F_canMessageFromMessage_2E_weak & operator = (const class GGS_C_5F_canMessageFromMessage & inSource) ;
 
+//--------------------------------- Constructor and assignment from optional reference
+
+//--------------------------------- nil initializer
+  public: inline static GGS_C_5F_canMessageFromMessage_2E_weak init_nil (void) {
+    GGS_C_5F_canMessageFromMessage_2E_weak result ;
+    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    return result ;
+  }
+
 //--------------------------------- Bang operator
   public: GGS_C_5F_canMessageFromMessage bang_C_5F_canMessageFromMessage_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- isValuated
+  public: inline bool isValuated (void) const {
+    return isValid () && (ptr () != nullptr) ;
+  }
+
+//--------------------------------- Unwrapped value
+  public: inline GGS_C_5F_canMessageFromMessage unwrappedValue (void) const {
+    GGS_C_5F_canMessageFromMessage result ;
+    if (isValid ()) {
+      const cPtr_C_5F_canMessageFromMessage * p = (cPtr_C_5F_canMessageFromMessage *) ptr () ;
+      if (nullptr != p) {
+        result = GGS_C_5F_canMessageFromMessage (p) ;
+      }
+    }
+    return result ;
+  }
+
+//--------------------------------- GALGAS read only properties
+  public: inline GGS_bool readProperty_isNil (void) const {
+    return GGS_bool (isValid (), ptr () == nullptr) ;
+  }
+
+  public: inline GGS_bool readProperty_isSome (void) const {
+    return GGS_bool (isValid (), ptr () != nullptr) ;
+  }
 
 //-- Start of type generic part
 
@@ -1500,8 +1617,43 @@ class GGS_C_5F_canMessageFromTask_2E_weak : public GGS_AC_5F_canMessage_2E_weak 
 
   public: GGS_C_5F_canMessageFromTask_2E_weak & operator = (const class GGS_C_5F_canMessageFromTask & inSource) ;
 
+//--------------------------------- Constructor and assignment from optional reference
+
+//--------------------------------- nil initializer
+  public: inline static GGS_C_5F_canMessageFromTask_2E_weak init_nil (void) {
+    GGS_C_5F_canMessageFromTask_2E_weak result ;
+    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    return result ;
+  }
+
 //--------------------------------- Bang operator
   public: GGS_C_5F_canMessageFromTask bang_C_5F_canMessageFromTask_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- isValuated
+  public: inline bool isValuated (void) const {
+    return isValid () && (ptr () != nullptr) ;
+  }
+
+//--------------------------------- Unwrapped value
+  public: inline GGS_C_5F_canMessageFromTask unwrappedValue (void) const {
+    GGS_C_5F_canMessageFromTask result ;
+    if (isValid ()) {
+      const cPtr_C_5F_canMessageFromTask * p = (cPtr_C_5F_canMessageFromTask *) ptr () ;
+      if (nullptr != p) {
+        result = GGS_C_5F_canMessageFromTask (p) ;
+      }
+    }
+    return result ;
+  }
+
+//--------------------------------- GALGAS read only properties
+  public: inline GGS_bool readProperty_isNil (void) const {
+    return GGS_bool (isValid (), ptr () == nullptr) ;
+  }
+
+  public: inline GGS_bool readProperty_isSome (void) const {
+    return GGS_bool (isValid (), ptr () != nullptr) ;
+  }
 
 //-- Start of type generic part
 
@@ -2013,9 +2165,15 @@ class GGS_M_5F_messages_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_M_5F_messages_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_M_5F_messages_2E_element_3F_ (const GGS_M_5F_messages_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_M_5F_messages_2E_element_3F_ (const GGS_M_5F_messages_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_M_5F_messages_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_M_5F_messages_2E_element unwrappedValue (void) const {
@@ -2139,8 +2297,43 @@ class GGS_AC_5F_task_2E_weak : public AC_GALGAS_weak_reference {
 
   public: GGS_AC_5F_task_2E_weak & operator = (const class GGS_AC_5F_task & inSource) ;
 
+//--------------------------------- Constructor and assignment from optional reference
+
+//--------------------------------- nil initializer
+  public: inline static GGS_AC_5F_task_2E_weak init_nil (void) {
+    GGS_AC_5F_task_2E_weak result ;
+    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    return result ;
+  }
+
 //--------------------------------- Bang operator
   public: GGS_AC_5F_task bang_AC_5F_task_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- isValuated
+  public: inline bool isValuated (void) const {
+    return isValid () && (ptr () != nullptr) ;
+  }
+
+//--------------------------------- Unwrapped value
+  public: inline GGS_AC_5F_task unwrappedValue (void) const {
+    GGS_AC_5F_task result ;
+    if (isValid ()) {
+      const cPtr_AC_5F_task * p = (cPtr_AC_5F_task *) ptr () ;
+      if (nullptr != p) {
+        result = GGS_AC_5F_task (p) ;
+      }
+    }
+    return result ;
+  }
+
+//--------------------------------- GALGAS read only properties
+  public: inline GGS_bool readProperty_isNil (void) const {
+    return GGS_bool (isValid (), ptr () == nullptr) ;
+  }
+
+  public: inline GGS_bool readProperty_isSome (void) const {
+    return GGS_bool (isValid (), ptr () != nullptr) ;
+  }
 
 //-- Start of type generic part
 
@@ -2249,8 +2442,43 @@ class GGS_C_5F_independantTask_2E_weak : public GGS_AC_5F_task_2E_weak {
 
   public: GGS_C_5F_independantTask_2E_weak & operator = (const class GGS_C_5F_independantTask & inSource) ;
 
+//--------------------------------- Constructor and assignment from optional reference
+
+//--------------------------------- nil initializer
+  public: inline static GGS_C_5F_independantTask_2E_weak init_nil (void) {
+    GGS_C_5F_independantTask_2E_weak result ;
+    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    return result ;
+  }
+
 //--------------------------------- Bang operator
   public: GGS_C_5F_independantTask bang_C_5F_independantTask_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- isValuated
+  public: inline bool isValuated (void) const {
+    return isValid () && (ptr () != nullptr) ;
+  }
+
+//--------------------------------- Unwrapped value
+  public: inline GGS_C_5F_independantTask unwrappedValue (void) const {
+    GGS_C_5F_independantTask result ;
+    if (isValid ()) {
+      const cPtr_C_5F_independantTask * p = (cPtr_C_5F_independantTask *) ptr () ;
+      if (nullptr != p) {
+        result = GGS_C_5F_independantTask (p) ;
+      }
+    }
+    return result ;
+  }
+
+//--------------------------------- GALGAS read only properties
+  public: inline GGS_bool readProperty_isNil (void) const {
+    return GGS_bool (isValid (), ptr () == nullptr) ;
+  }
+
+  public: inline GGS_bool readProperty_isSome (void) const {
+    return GGS_bool (isValid (), ptr () != nullptr) ;
+  }
 
 //-- Start of type generic part
 
@@ -2369,8 +2597,43 @@ class GGS_C_5F_taskDependsFromTask_2E_weak : public GGS_AC_5F_task_2E_weak {
 
   public: GGS_C_5F_taskDependsFromTask_2E_weak & operator = (const class GGS_C_5F_taskDependsFromTask & inSource) ;
 
+//--------------------------------- Constructor and assignment from optional reference
+
+//--------------------------------- nil initializer
+  public: inline static GGS_C_5F_taskDependsFromTask_2E_weak init_nil (void) {
+    GGS_C_5F_taskDependsFromTask_2E_weak result ;
+    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    return result ;
+  }
+
 //--------------------------------- Bang operator
   public: GGS_C_5F_taskDependsFromTask bang_C_5F_taskDependsFromTask_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- isValuated
+  public: inline bool isValuated (void) const {
+    return isValid () && (ptr () != nullptr) ;
+  }
+
+//--------------------------------- Unwrapped value
+  public: inline GGS_C_5F_taskDependsFromTask unwrappedValue (void) const {
+    GGS_C_5F_taskDependsFromTask result ;
+    if (isValid ()) {
+      const cPtr_C_5F_taskDependsFromTask * p = (cPtr_C_5F_taskDependsFromTask *) ptr () ;
+      if (nullptr != p) {
+        result = GGS_C_5F_taskDependsFromTask (p) ;
+      }
+    }
+    return result ;
+  }
+
+//--------------------------------- GALGAS read only properties
+  public: inline GGS_bool readProperty_isNil (void) const {
+    return GGS_bool (isValid (), ptr () == nullptr) ;
+  }
+
+  public: inline GGS_bool readProperty_isSome (void) const {
+    return GGS_bool (isValid (), ptr () != nullptr) ;
+  }
 
 //-- Start of type generic part
 
@@ -2489,8 +2752,43 @@ class GGS_C_5F_taskDependsFromMessage_2E_weak : public GGS_AC_5F_task_2E_weak {
 
   public: GGS_C_5F_taskDependsFromMessage_2E_weak & operator = (const class GGS_C_5F_taskDependsFromMessage & inSource) ;
 
+//--------------------------------- Constructor and assignment from optional reference
+
+//--------------------------------- nil initializer
+  public: inline static GGS_C_5F_taskDependsFromMessage_2E_weak init_nil (void) {
+    GGS_C_5F_taskDependsFromMessage_2E_weak result ;
+    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    return result ;
+  }
+
 //--------------------------------- Bang operator
   public: GGS_C_5F_taskDependsFromMessage bang_C_5F_taskDependsFromMessage_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- isValuated
+  public: inline bool isValuated (void) const {
+    return isValid () && (ptr () != nullptr) ;
+  }
+
+//--------------------------------- Unwrapped value
+  public: inline GGS_C_5F_taskDependsFromMessage unwrappedValue (void) const {
+    GGS_C_5F_taskDependsFromMessage result ;
+    if (isValid ()) {
+      const cPtr_C_5F_taskDependsFromMessage * p = (cPtr_C_5F_taskDependsFromMessage *) ptr () ;
+      if (nullptr != p) {
+        result = GGS_C_5F_taskDependsFromMessage (p) ;
+      }
+    }
+    return result ;
+  }
+
+//--------------------------------- GALGAS read only properties
+  public: inline GGS_bool readProperty_isNil (void) const {
+    return GGS_bool (isValid (), ptr () == nullptr) ;
+  }
+
+  public: inline GGS_bool readProperty_isSome (void) const {
+    return GGS_bool (isValid (), ptr () != nullptr) ;
+  }
 
 //-- Start of type generic part
 
@@ -3002,9 +3300,15 @@ class GGS_M_5F_tasks_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_M_5F_tasks_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_M_5F_tasks_2E_element_3F_ (const GGS_M_5F_tasks_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_M_5F_tasks_2E_element_3F_ (const GGS_M_5F_tasks_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_M_5F_tasks_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_M_5F_tasks_2E_element unwrappedValue (void) const {

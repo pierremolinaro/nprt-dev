@@ -2182,6 +2182,7 @@ GGS_AC_5F_canMessage_2E_weak::GGS_AC_5F_canMessage_2E_weak (const GGS_AC_5F_canM
 AC_GALGAS_weak_reference (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_AC_5F_canMessage_2E_weak GGS_AC_5F_canMessage_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -2434,6 +2435,7 @@ GGS_C_5F_canIndependantMessage_2E_weak & GGS_C_5F_canIndependantMessage_2E_weak:
 GGS_C_5F_canIndependantMessage_2E_weak::GGS_C_5F_canIndependantMessage_2E_weak (const GGS_C_5F_canIndependantMessage & inSource) :
 GGS_AC_5F_canMessage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2721,6 +2723,7 @@ GGS_C_5F_canMessageFromMessage_2E_weak::GGS_C_5F_canMessageFromMessage_2E_weak (
 GGS_AC_5F_canMessage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_C_5F_canMessageFromMessage_2E_weak GGS_C_5F_canMessageFromMessage_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -3006,6 +3009,7 @@ GGS_C_5F_canMessageFromTask_2E_weak & GGS_C_5F_canMessageFromTask_2E_weak::opera
 GGS_C_5F_canMessageFromTask_2E_weak::GGS_C_5F_canMessageFromTask_2E_weak (const GGS_C_5F_canMessageFromTask & inSource) :
 GGS_AC_5F_canMessage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3924,6 +3928,7 @@ GGS_AC_5F_task_2E_weak::GGS_AC_5F_task_2E_weak (const GGS_AC_5F_task & inSource)
 AC_GALGAS_weak_reference (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_AC_5F_task_2E_weak GGS_AC_5F_task_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -4177,6 +4182,7 @@ GGS_C_5F_independantTask_2E_weak::GGS_C_5F_independantTask_2E_weak (const GGS_C_
 GGS_AC_5F_task_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_C_5F_independantTask_2E_weak GGS_C_5F_independantTask_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -4287,6 +4293,7 @@ GGS_C_5F_taskDependsFromTask_2E_weak::GGS_C_5F_taskDependsFromTask_2E_weak (cons
 GGS_AC_5F_task_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_C_5F_taskDependsFromTask_2E_weak GGS_C_5F_taskDependsFromTask_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -4396,6 +4403,7 @@ GGS_C_5F_taskDependsFromMessage_2E_weak & GGS_C_5F_taskDependsFromMessage_2E_wea
 GGS_C_5F_taskDependsFromMessage_2E_weak::GGS_C_5F_taskDependsFromMessage_2E_weak (const GGS_C_5F_taskDependsFromMessage & inSource) :
 GGS_AC_5F_task_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7341,6 +7349,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_M_5F_processor_2E_element_3F_ GGS_M_5F_processor_2E_element_3F_::init_nil (void) {
@@ -7602,6 +7611,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7925,6 +7935,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_M_5F_messages_2E_element_3F_ GGS_M_5F_messages_2E_element_3F_::init_nil (void) {
@@ -8246,6 +8257,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
