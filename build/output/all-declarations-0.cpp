@@ -2045,20 +2045,6 @@ GGS_M_5F_network GGS_M_5F_network::extractObject (const GGS_object & inObject,
 // @AC_5F_canMessage reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_AC_5F_canMessage::cPtr_AC_5F_canMessage (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties (void) const {
-    acStrongPtr_class::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_AC_5F_canMessage::objectCompare (const GGS_AC_5F_canMessage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -2091,10 +2077,22 @@ AC_GALGAS_reference_class (inSourcePtr) {
 //Pointer class for @AC_canMessage class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_AC_5F_canMessage::cPtr_AC_5F_canMessage (LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_AC_5F_canMessage::cPtr_AC_5F_canMessage (Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) :
+acStrongPtr_class (inCompiler COMMA_THERE) {
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -2253,20 +2251,6 @@ GGS_AC_5F_canMessage_2E_weak GGS_AC_5F_canMessage_2E_weak::extractObject (const 
 // @C_5F_canIndependantMessage reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_C_5F_canIndependantMessage::cPtr_C_5F_canIndependantMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_AC_5F_canMessage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_C_5F_canIndependantMessage::printNonNullClassInstanceProperties (void) const {
-    cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_C_5F_canIndependantMessage::objectCompare (const GGS_C_5F_canIndependantMessage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -2316,9 +2300,9 @@ GGS_AC_5F_canMessage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_C_5F_canIndependantMessage GGS_C_5F_canIndependantMessage::class_func_new (LOCATION_ARGS) {
+GGS_C_5F_canIndependantMessage GGS_C_5F_canIndependantMessage::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_C_5F_canIndependantMessage result ;
-  macroMyNew (result.mObjectPtr, cPtr_C_5F_canIndependantMessage (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_C_5F_canIndependantMessage (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -2326,8 +2310,12 @@ GGS_C_5F_canIndependantMessage GGS_C_5F_canIndependantMessage::class_func_new (L
 //Pointer class for @C_canIndependantMessage class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_C_5F_canIndependantMessage::cPtr_C_5F_canIndependantMessage (LOCATION_ARGS) :
-cPtr_AC_5F_canMessage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_C_5F_canIndependantMessage::cPtr_C_5F_canIndependantMessage (Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) :
+cPtr_AC_5F_canMessage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2343,12 +2331,20 @@ void cPtr_C_5F_canIndependantMessage::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_C_5F_canIndependantMessage::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_C_5F_canIndependantMessage::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_C_5F_canIndependantMessage (THERE)) ;
+  macroMyNew (ptr, cPtr_C_5F_canIndependantMessage (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_C_5F_canIndependantMessage::printNonNullClassInstanceProperties (void) const {
+    cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -2507,22 +2503,6 @@ GGS_C_5F_canIndependantMessage_2E_weak GGS_C_5F_canIndependantMessage_2E_weak::e
 // @C_5F_canMessageFromMessage reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_C_5F_canMessageFromMessage::cPtr_C_5F_canMessageFromMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_AC_5F_canMessage (inCompiler COMMA_THERE),
-mProperty_mMessageIndex () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_C_5F_canMessageFromMessage::printNonNullClassInstanceProperties (void) const {
-    cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties () ;
-    mProperty_mMessageIndex.printNonNullClassInstanceProperties ("mMessageIndex") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_C_5F_canMessageFromMessage::objectCompare (const GGS_C_5F_canMessageFromMessage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -2575,10 +2555,11 @@ GGS_AC_5F_canMessage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_C_5F_canMessageFromMessage GGS_C_5F_canMessageFromMessage::class_func_new (const GGS_uint & in_mMessageIndex
+GGS_C_5F_canMessageFromMessage GGS_C_5F_canMessageFromMessage::class_func_new (const GGS_uint & in_mMessageIndex,
+                                                                               Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) {
   GGS_C_5F_canMessageFromMessage result ;
-  macroMyNew (result.mObjectPtr, cPtr_C_5F_canMessageFromMessage (in_mMessageIndex COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_C_5F_canMessageFromMessage (in_mMessageIndex,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -2608,9 +2589,17 @@ void GGS_C_5F_canMessageFromMessage::setProperty_mMessageIndex (const GGS_uint &
 //Pointer class for @C_canMessageFromMessage class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_C_5F_canMessageFromMessage::cPtr_C_5F_canMessageFromMessage (const GGS_uint & in_mMessageIndex
+cPtr_C_5F_canMessageFromMessage::cPtr_C_5F_canMessageFromMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_AC_5F_canMessage (inCompiler COMMA_THERE),
+mProperty_mMessageIndex () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_C_5F_canMessageFromMessage::cPtr_C_5F_canMessageFromMessage (const GGS_uint & in_mMessageIndex,
+                                                                  Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) :
-cPtr_AC_5F_canMessage (THERE),
+cPtr_AC_5F_canMessage (inCompiler COMMA_THERE),
 mProperty_mMessageIndex () {
   mProperty_mMessageIndex = in_mMessageIndex ;
 }
@@ -2630,12 +2619,21 @@ void cPtr_C_5F_canMessageFromMessage::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_C_5F_canMessageFromMessage::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_C_5F_canMessageFromMessage::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_C_5F_canMessageFromMessage (mProperty_mMessageIndex COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_C_5F_canMessageFromMessage (mProperty_mMessageIndex, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_C_5F_canMessageFromMessage::printNonNullClassInstanceProperties (void) const {
+    cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties () ;
+    mProperty_mMessageIndex.printNonNullClassInstanceProperties ("mMessageIndex") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -2794,22 +2792,6 @@ GGS_C_5F_canMessageFromMessage_2E_weak GGS_C_5F_canMessageFromMessage_2E_weak::e
 // @C_5F_canMessageFromTask reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_C_5F_canMessageFromTask::cPtr_C_5F_canMessageFromTask (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_AC_5F_canMessage (inCompiler COMMA_THERE),
-mProperty_mTaskIndex () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_C_5F_canMessageFromTask::printNonNullClassInstanceProperties (void) const {
-    cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties () ;
-    mProperty_mTaskIndex.printNonNullClassInstanceProperties ("mTaskIndex") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_C_5F_canMessageFromTask::objectCompare (const GGS_C_5F_canMessageFromTask & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -2862,10 +2844,11 @@ GGS_AC_5F_canMessage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_C_5F_canMessageFromTask GGS_C_5F_canMessageFromTask::class_func_new (const GGS_uint & in_mTaskIndex
+GGS_C_5F_canMessageFromTask GGS_C_5F_canMessageFromTask::class_func_new (const GGS_uint & in_mTaskIndex,
+                                                                         Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) {
   GGS_C_5F_canMessageFromTask result ;
-  macroMyNew (result.mObjectPtr, cPtr_C_5F_canMessageFromTask (in_mTaskIndex COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_C_5F_canMessageFromTask (in_mTaskIndex,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -2895,9 +2878,17 @@ void GGS_C_5F_canMessageFromTask::setProperty_mTaskIndex (const GGS_uint & inVal
 //Pointer class for @C_canMessageFromTask class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_C_5F_canMessageFromTask::cPtr_C_5F_canMessageFromTask (const GGS_uint & in_mTaskIndex
+cPtr_C_5F_canMessageFromTask::cPtr_C_5F_canMessageFromTask (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_AC_5F_canMessage (inCompiler COMMA_THERE),
+mProperty_mTaskIndex () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_C_5F_canMessageFromTask::cPtr_C_5F_canMessageFromTask (const GGS_uint & in_mTaskIndex,
+                                                            Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) :
-cPtr_AC_5F_canMessage (THERE),
+cPtr_AC_5F_canMessage (inCompiler COMMA_THERE),
 mProperty_mTaskIndex () {
   mProperty_mTaskIndex = in_mTaskIndex ;
 }
@@ -2917,12 +2908,21 @@ void cPtr_C_5F_canMessageFromTask::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_C_5F_canMessageFromTask::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_C_5F_canMessageFromTask::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_C_5F_canMessageFromTask (mProperty_mTaskIndex COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_C_5F_canMessageFromTask (mProperty_mTaskIndex, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_C_5F_canMessageFromTask::printNonNullClassInstanceProperties (void) const {
+    cPtr_AC_5F_canMessage::printNonNullClassInstanceProperties () ;
+    mProperty_mTaskIndex.printNonNullClassInstanceProperties ("mTaskIndex") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -3791,20 +3791,6 @@ GGS_M_5F_messages GGS_M_5F_messages::extractObject (const GGS_object & inObject,
 // @AC_5F_task reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_AC_5F_task::cPtr_AC_5F_task (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_AC_5F_task::printNonNullClassInstanceProperties (void) const {
-    acStrongPtr_class::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_AC_5F_task::objectCompare (const GGS_AC_5F_task & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -3837,10 +3823,22 @@ AC_GALGAS_reference_class (inSourcePtr) {
 //Pointer class for @AC_task class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_AC_5F_task::cPtr_AC_5F_task (LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_AC_5F_task::cPtr_AC_5F_task (Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) :
+acStrongPtr_class (inCompiler COMMA_THERE) {
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_AC_5F_task::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -3999,20 +3997,6 @@ GGS_AC_5F_task_2E_weak GGS_AC_5F_task_2E_weak::extractObject (const GGS_object &
 // @C_5F_independantTask reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_C_5F_independantTask::cPtr_C_5F_independantTask (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_AC_5F_task (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_C_5F_independantTask::printNonNullClassInstanceProperties (void) const {
-    cPtr_AC_5F_task::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_C_5F_independantTask::objectCompare (const GGS_C_5F_independantTask & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -4062,9 +4046,9 @@ GGS_AC_5F_task (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_C_5F_independantTask GGS_C_5F_independantTask::class_func_new (LOCATION_ARGS) {
+GGS_C_5F_independantTask GGS_C_5F_independantTask::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_C_5F_independantTask result ;
-  macroMyNew (result.mObjectPtr, cPtr_C_5F_independantTask (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_C_5F_independantTask (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -4072,8 +4056,12 @@ GGS_C_5F_independantTask GGS_C_5F_independantTask::class_func_new (LOCATION_ARGS
 //Pointer class for @C_independantTask class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_C_5F_independantTask::cPtr_C_5F_independantTask (LOCATION_ARGS) :
-cPtr_AC_5F_task (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_C_5F_independantTask::cPtr_C_5F_independantTask (Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) :
+cPtr_AC_5F_task (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4089,12 +4077,20 @@ void cPtr_C_5F_independantTask::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_C_5F_independantTask::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_C_5F_independantTask::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_C_5F_independantTask (THERE)) ;
+  macroMyNew (ptr, cPtr_C_5F_independantTask (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_C_5F_independantTask::printNonNullClassInstanceProperties (void) const {
+    cPtr_AC_5F_task::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -5991,24 +5987,6 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_indexing (Lexique_oa_5F_s
 // @C_5F_taskDependsFromTask reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_C_5F_taskDependsFromTask::cPtr_C_5F_taskDependsFromTask (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_AC_5F_task (inCompiler COMMA_THERE),
-mProperty_mTask (),
-mProperty_mEvery () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_C_5F_taskDependsFromTask::printNonNullClassInstanceProperties (void) const {
-    cPtr_AC_5F_task::printNonNullClassInstanceProperties () ;
-    mProperty_mTask.printNonNullClassInstanceProperties ("mTask") ;
-    mProperty_mEvery.printNonNullClassInstanceProperties ("mEvery") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_C_5F_taskDependsFromTask::objectCompare (const GGS_C_5F_taskDependsFromTask & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -6065,10 +6043,11 @@ GGS_AC_5F_task (inSourcePtr) {
 //--------------------------------------------------------------------------------------------------
 
 GGS_C_5F_taskDependsFromTask GGS_C_5F_taskDependsFromTask::class_func_new (const GGS_uint & in_mTask,
-                                                                           const GGS_luint & in_mEvery
+                                                                           const GGS_luint & in_mEvery,
+                                                                           Compiler * inCompiler
                                                                            COMMA_LOCATION_ARGS) {
   GGS_C_5F_taskDependsFromTask result ;
-  macroMyNew (result.mObjectPtr, cPtr_C_5F_taskDependsFromTask (in_mTask, in_mEvery COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_C_5F_taskDependsFromTask (in_mTask, in_mEvery,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -6120,10 +6099,19 @@ void GGS_C_5F_taskDependsFromTask::setProperty_mEvery (const GGS_luint & inValue
 //Pointer class for @C_taskDependsFromTask class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_C_5F_taskDependsFromTask::cPtr_C_5F_taskDependsFromTask (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_AC_5F_task (inCompiler COMMA_THERE),
+mProperty_mTask (),
+mProperty_mEvery () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 cPtr_C_5F_taskDependsFromTask::cPtr_C_5F_taskDependsFromTask (const GGS_uint & in_mTask,
-                                                              const GGS_luint & in_mEvery
+                                                              const GGS_luint & in_mEvery,
+                                                              Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) :
-cPtr_AC_5F_task (THERE),
+cPtr_AC_5F_task (inCompiler COMMA_THERE),
 mProperty_mTask (),
 mProperty_mEvery () {
   mProperty_mTask = in_mTask ;
@@ -6147,12 +6135,22 @@ void cPtr_C_5F_taskDependsFromTask::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_C_5F_taskDependsFromTask::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_C_5F_taskDependsFromTask::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_C_5F_taskDependsFromTask (mProperty_mTask, mProperty_mEvery COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_C_5F_taskDependsFromTask (mProperty_mTask, mProperty_mEvery, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_C_5F_taskDependsFromTask::printNonNullClassInstanceProperties (void) const {
+    cPtr_AC_5F_task::printNonNullClassInstanceProperties () ;
+    mProperty_mTask.printNonNullClassInstanceProperties ("mTask") ;
+    mProperty_mEvery.printNonNullClassInstanceProperties ("mEvery") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -6198,24 +6196,6 @@ GGS_C_5F_taskDependsFromTask GGS_C_5F_taskDependsFromTask::extractObject (const 
 
 //--------------------------------------------------------------------------------------------------
 // @C_5F_taskDependsFromMessage reference class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_C_5F_taskDependsFromMessage::cPtr_C_5F_taskDependsFromMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_AC_5F_task (inCompiler COMMA_THERE),
-mProperty_mMessage (),
-mProperty_mEvery () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_C_5F_taskDependsFromMessage::printNonNullClassInstanceProperties (void) const {
-    cPtr_AC_5F_task::printNonNullClassInstanceProperties () ;
-    mProperty_mMessage.printNonNullClassInstanceProperties ("mMessage") ;
-    mProperty_mEvery.printNonNullClassInstanceProperties ("mEvery") ;
-  }
-#endif
-
 //--------------------------------------------------------------------------------------------------
 
 ComparisonResult GGS_C_5F_taskDependsFromMessage::objectCompare (const GGS_C_5F_taskDependsFromMessage & inOperand) const {
@@ -6274,10 +6254,11 @@ GGS_AC_5F_task (inSourcePtr) {
 //--------------------------------------------------------------------------------------------------
 
 GGS_C_5F_taskDependsFromMessage GGS_C_5F_taskDependsFromMessage::class_func_new (const GGS_uint & in_mMessage,
-                                                                                 const GGS_luint & in_mEvery
+                                                                                 const GGS_luint & in_mEvery,
+                                                                                 Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) {
   GGS_C_5F_taskDependsFromMessage result ;
-  macroMyNew (result.mObjectPtr, cPtr_C_5F_taskDependsFromMessage (in_mMessage, in_mEvery COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_C_5F_taskDependsFromMessage (in_mMessage, in_mEvery,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -6329,10 +6310,19 @@ void GGS_C_5F_taskDependsFromMessage::setProperty_mEvery (const GGS_luint & inVa
 //Pointer class for @C_taskDependsFromMessage class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_C_5F_taskDependsFromMessage::cPtr_C_5F_taskDependsFromMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_AC_5F_task (inCompiler COMMA_THERE),
+mProperty_mMessage (),
+mProperty_mEvery () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 cPtr_C_5F_taskDependsFromMessage::cPtr_C_5F_taskDependsFromMessage (const GGS_uint & in_mMessage,
-                                                                    const GGS_luint & in_mEvery
+                                                                    const GGS_luint & in_mEvery,
+                                                                    Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) :
-cPtr_AC_5F_task (THERE),
+cPtr_AC_5F_task (inCompiler COMMA_THERE),
 mProperty_mMessage (),
 mProperty_mEvery () {
   mProperty_mMessage = in_mMessage ;
@@ -6356,12 +6346,22 @@ void cPtr_C_5F_taskDependsFromMessage::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_C_5F_taskDependsFromMessage::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_C_5F_taskDependsFromMessage::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_C_5F_taskDependsFromMessage (mProperty_mMessage, mProperty_mEvery COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_C_5F_taskDependsFromMessage (mProperty_mMessage, mProperty_mEvery, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_C_5F_taskDependsFromMessage::printNonNullClassInstanceProperties (void) const {
+    cPtr_AC_5F_task::printNonNullClassInstanceProperties () ;
+    mProperty_mMessage.printNonNullClassInstanceProperties ("mMessage") ;
+    mProperty_mEvery.printNonNullClassInstanceProperties ("mEvery") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //

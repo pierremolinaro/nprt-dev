@@ -28,11 +28,10 @@ class cPtr_AC_5F_canMessage : public acStrongPtr_class {
 //--- Properties
 
 
-//--- Default constructor
-  public: cPtr_AC_5F_canMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
-  public: cPtr_AC_5F_canMessage (LOCATION_ARGS) ;
+  public: cPtr_AC_5F_canMessage (Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
 
 //--- Attribute accessors
 //--- Description

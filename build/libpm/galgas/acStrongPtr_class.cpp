@@ -35,7 +35,7 @@
 
 //--------------------------------------------------------------------------------------------------
 
-acStrongPtr_class::acStrongPtr_class (LOCATION_ARGS) :
+acStrongPtr_class::acStrongPtr_class (Compiler * COMMA_LOCATION_ARGS) :
 acPtr_class (THERE),
 #ifndef DO_NOT_GENERATE_CHECKINGS
   mPreviousPtr (nullptr),

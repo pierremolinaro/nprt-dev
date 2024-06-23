@@ -34,11 +34,12 @@ class cPtr_C_5F_canMessageFromMessage : public cPtr_AC_5F_canMessage {
   public: cPtr_C_5F_canMessageFromMessage (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
-  public: cPtr_C_5F_canMessageFromMessage (const GGS_uint & in_mMessageIndex
+  public: cPtr_C_5F_canMessageFromMessage (const GGS_uint & in_mMessageIndex,
+                                           Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description

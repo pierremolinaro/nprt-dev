@@ -1276,7 +1276,8 @@ class GGS_C_5F_canIndependantMessage : public GGS_AC_5F_canMessage {
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_C_5F_canIndependantMessage class_func_new (LOCATION_ARGS) ;
+  public: static class GGS_C_5F_canIndependantMessage class_func_new (Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_C_5F_canIndependantMessage & inOperand) const ;
@@ -1425,7 +1426,8 @@ class GGS_C_5F_canMessageFromMessage : public GGS_AC_5F_canMessage {
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_C_5F_canMessageFromMessage class_func_new (const class GGS_uint & inOperand0
+  public: static class GGS_C_5F_canMessageFromMessage class_func_new (const class GGS_uint & inOperand0,
+                                                                      class Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1575,7 +1577,8 @@ class GGS_C_5F_canMessageFromTask : public GGS_AC_5F_canMessage {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_C_5F_canMessageFromTask class_func_new (const class GGS_uint & inOperand0
+  public: static class GGS_C_5F_canMessageFromTask class_func_new (const class GGS_uint & inOperand0,
+                                                                   class Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2401,7 +2404,8 @@ class GGS_C_5F_independantTask : public GGS_AC_5F_task {
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_C_5F_independantTask class_func_new (LOCATION_ARGS) ;
+  public: static class GGS_C_5F_independantTask class_func_new (Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_C_5F_independantTask & inOperand) const ;
@@ -2555,7 +2559,8 @@ class GGS_C_5F_taskDependsFromTask : public GGS_AC_5F_task {
 
 //--------------------------------- GALGAS class functions
   public: static class GGS_C_5F_taskDependsFromTask class_func_new (const class GGS_uint & inOperand0,
-                                                                    const class GGS_luint & inOperand1
+                                                                    const class GGS_luint & inOperand1,
+                                                                    class Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2710,7 +2715,8 @@ class GGS_C_5F_taskDependsFromMessage : public GGS_AC_5F_task {
 
 //--------------------------------- GALGAS class functions
   public: static class GGS_C_5F_taskDependsFromMessage class_func_new (const class GGS_uint & inOperand0,
-                                                                       const class GGS_luint & inOperand1
+                                                                       const class GGS_luint & inOperand1,
+                                                                       class Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
