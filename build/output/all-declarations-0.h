@@ -314,31 +314,31 @@ class Lexique_oa_5F_scanner : public Lexique {
 
 
 //--- Terminal symbols enumeration
-  public: enum {kToken_,
-   kToken_identifier /* 1 */ ,
-   kToken_literal_5F_integer /* 2 */ ,
-   kToken_system /* 3 */ ,
-   kToken_end /* 4 */ ,
-   kToken_task /* 5 */ ,
-   kToken_standard /* 6 */ ,
-   kToken_extended /* 7 */ ,
-   kToken_message /* 8 */ ,
-   kToken_length /* 9 */ ,
-   kToken_priority /* 10 */ ,
-   kToken_period /* 11 */ ,
-   kToken_offset /* 12 */ ,
-   kToken_on /* 13 */ ,
-   kToken_deadline /* 14 */ ,
-   kToken_duration /* 15 */ ,
-   kToken_processor /* 16 */ ,
-   kToken_can /* 17 */ ,
-   kToken_van /* 18 */ ,
-   kToken_network /* 19 */ ,
-   kToken_scalingfactor /* 20 */ ,
-   kToken_every /* 21 */ ,
-   kToken__2C_ /* 22 */ ,
-   kToken__3B_ /* 23 */ ,
-   kToken__2E__2E_ /* 24 */ } ;
+  public: const static int32_t kToken_ = 0 ;
+  public: static const int32_t kToken_identifier = 1 ;
+  public: static const int32_t kToken_literal_5F_integer = 2 ;
+  public: static const int32_t kToken_system = 3 ;
+  public: static const int32_t kToken_end = 4 ;
+  public: static const int32_t kToken_task = 5 ;
+  public: static const int32_t kToken_standard = 6 ;
+  public: static const int32_t kToken_extended = 7 ;
+  public: static const int32_t kToken_message = 8 ;
+  public: static const int32_t kToken_length = 9 ;
+  public: static const int32_t kToken_priority = 10 ;
+  public: static const int32_t kToken_period = 11 ;
+  public: static const int32_t kToken_offset = 12 ;
+  public: static const int32_t kToken_on = 13 ;
+  public: static const int32_t kToken_deadline = 14 ;
+  public: static const int32_t kToken_duration = 15 ;
+  public: static const int32_t kToken_processor = 16 ;
+  public: static const int32_t kToken_can = 17 ;
+  public: static const int32_t kToken_van = 18 ;
+  public: static const int32_t kToken_network = 19 ;
+  public: static const int32_t kToken_scalingfactor = 20 ;
+  public: static const int32_t kToken_every = 21 ;
+  public: static const int32_t kToken__2C_ = 22 ;
+  public: static const int32_t kToken__3B_ = 23 ;
+  public: static const int32_t kToken__2E__2E_ = 24 ;
 
 //--- Key words table 'keyWordList'
   public: static int32_t search_into_keyWordList (const String & inSearchedString) ;
