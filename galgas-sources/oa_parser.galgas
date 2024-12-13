@@ -9,10 +9,10 @@ syntax oa_parser (oa_scanner) {
 rule <axiome>
 
 rule <axiome> {
-  var @M_processor outProcessorMap = @M_processor §[]
-  var @M_network outNetworkMap = @M_network §[]
-  var @M_messages outMessagesMap = @M_messages §[]
-  var @M_tasks outTaskMap = @M_tasks §[]
+  var @M_processor outProcessorMap = @M_processor @[]
+  var @M_network outNetworkMap = @M_network @[]
+  var @M_messages outMessagesMap = @M_messages @[]
+  var @M_tasks outTaskMap = @M_tasks @[]
   $system$
   repeat
   while
@@ -20,7 +20,7 @@ rule <axiome> {
     $identifier$ ?let processorName
     let @luint step
     select
-     step = @luint.init { !1 !@location.here}
+     step = @luint { !1 !@location.here}
     or
       $scalingfactor$
       $literal_integer$ ? step
@@ -43,7 +43,7 @@ rule <axiome> {
     $identifier$ ?let networkName
     let @luint factor
     select
-     factor = @luint.init { !1 !@location.here}
+     factor = @luint { !1 !@location.here}
     or
       $scalingfactor$
       $literal_integer$ ? factor
@@ -69,7 +69,7 @@ rule <axiome> {
       $literal_integer$ ? taskOffset
       explicitOffset = true
     or
-      taskOffset = @luint.init { !0 ! @location.here}
+      taskOffset = @luint { !0 ! @location.here}
       explicitOffset = false
     end
     let @luint taskDeadline
@@ -77,7 +77,7 @@ rule <axiome> {
       $deadline$
       $literal_integer$ ? taskDeadline
     or
-      taskDeadline = @luint.init { !4294967295 !@location.here}
+      taskDeadline = @luint { !4294967295 !@location.here}
     end
     let @AC_task taskKind
     let @uint taskProcessorIndex
@@ -88,7 +88,7 @@ rule <axiome> {
       $processor$
       $identifier$ ?let taskProcessorName
       [outProcessorMap searchKey !taskProcessorName ?taskProcessorIndex ?*]
-      taskKind = @C_independantTask.init
+      taskKind = @C_independantTask ()
     or
       $on$
       if explicitOffset then
@@ -99,13 +99,13 @@ rule <axiome> {
         $identifier$ ?let masterTaskName
         let @luint every
         select
-          every = @luint.init { !1 !@location.here}
+          every = @luint { !1 !@location.here}
         or
           $every$
           $literal_integer$ ? every
         end
         [outTaskMap searchKey !masterTaskName ?let masterTaskIndex ?* ?* ?* ?* ?* ?taskProcessorIndex ?taskPeriod ?*]
-        taskKind = @C_taskDependsFromTask.init { !masterTaskIndex !every}
+        taskKind = @C_taskDependsFromTask { !masterTaskIndex !every}
       or
         $message$
         $identifier$ ?let masterMessageName
@@ -114,13 +114,13 @@ rule <axiome> {
         $identifier$ ?let taskProcessorName
         let @luint every
         select
-          every = @luint.init { !1 !@location.here}
+          every = @luint { !1 !@location.here}
         or
           $every$
           $literal_integer$ ? every
         end
         [outProcessorMap searchKey !taskProcessorName ?taskProcessorIndex ?*]
-        taskKind = @C_taskDependsFromMessage.init { !masterMessageIndex !every}
+        taskKind = @C_taskDependsFromMessage { !masterMessageIndex !every}
       end
     end
     [!?outTaskMap insertKey !taskName ![outTaskMap count]
@@ -137,15 +137,15 @@ rule <axiome> {
     let @luint messageClass
     select
       $standard$
-      messageClass = @luint.init { !0 !@location.here}
+      messageClass = @luint { !0 !@location.here}
       $message$
     or
       $extended$
-      messageClass = @luint.init { !1 !@location.here}
+      messageClass = @luint { !1 !@location.here}
       $message$
     or
       $message$
-      messageClass = @luint.init { !2 !@location.here}
+      messageClass = @luint { !2 !@location.here}
     end
     $identifier$ ?let messageName
     $network$
@@ -172,7 +172,7 @@ rule <axiome> {
       $literal_integer$ ? offset
       explicitOffset = true
     or
-      offset = @luint.init { !0 !@location.here}
+      offset = @luint { !0 !@location.here}
       explicitOffset = false
     end
     let @luint deadline
@@ -180,14 +180,14 @@ rule <axiome> {
       $deadline$
       $literal_integer$ ? deadline
     or
-      deadline = @luint.init { !4294967295 !@location.here}
+      deadline = @luint { !4294967295 !@location.here}
     end
     let @AC_canMessage messageKind
     let @luint period
     select
       $period$
       $literal_integer$ ? period
-      messageKind = @C_canIndependantMessage.init
+      messageKind = @C_canIndependantMessage ()
     or
       $on$
       if explicitOffset then
@@ -197,12 +197,12 @@ rule <axiome> {
         $message$
         $identifier$ ?let name
         [outMessagesMap searchKey !name ?let messageIndex ?* ?* ?* ?* ?* ?* ?period ?*]
-        messageKind = @C_canMessageFromMessage.init { !messageIndex}
+        messageKind = @C_canMessageFromMessage { !messageIndex}
       or
         $task$
         $identifier$ ?let taskName
         [outTaskMap searchKey !taskName ?let taskIndex ?* ?* ?* ?* ?* ?* ?period ?*]
-        messageKind = @C_canMessageFromTask.init { !taskIndex}
+        messageKind = @C_canMessageFromTask { !taskIndex}
       end
     end
     [!?outMessagesMap insertKey !messageName ![outMessagesMap count]
