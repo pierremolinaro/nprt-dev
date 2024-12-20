@@ -13,8 +13,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "createIntermediateFiles",
     commandChar: "C",
     commandString: "create-intermediate-files",
-    comment: "Create the intermediate files",
-    defaultValue: ""
+    comment: "Create the intermediate files"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "oa_cli_options",
@@ -22,8 +21,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "useCANmaxLegth",
     commandChar: "M",
     commandString: "use-can-max-length",
-    comment: "Use only CAN messages max length",
-    defaultValue: ""
+    comment: "Use only CAN messages max length"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "galgas_cli_options",
@@ -31,8 +29,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "quiet_output",
     commandChar: "q",
     commandString: "quiet",
-    comment: "Quiet output",
-    defaultValue: ""
+    comment: "Quiet output"
   ))
   return array
 }

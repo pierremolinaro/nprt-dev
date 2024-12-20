@@ -20,9 +20,9 @@ NSArray * nibsAndClasses (void) {
 //    Project file extensions
 //--------------------------------------------------------------------------------------------------
 
-NSDictionary * indexingDescriptorDictionary (void) {
+/* NSDictionary * indexingDescriptorDictionary (void) {
  return [NSDictionary dictionary] ;
-}
+} */
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -154,7 +154,7 @@ class SWIFT_Tokenizer_0_oa_scanner : SWIFT_Lexique_oa_scanner, SWIFT_Tokenizer_P
 //   Global functions
 //--------------------------------------------------------------------------------------------------
 
-func tokenizerFor (extension inExtension : String) -> SWIFT_Tokenizer_Protocol? {
+@MainActor func tokenizerFor (extension inExtension : String) -> SWIFT_Tokenizer_Protocol? {
   var result : SWIFT_Tokenizer_Protocol? = nil
   if inExtension == "nprt" {
     result = SWIFT_Tokenizer_0_oa_scanner ()
@@ -164,7 +164,7 @@ func tokenizerFor (extension inExtension : String) -> SWIFT_Tokenizer_Protocol? 
 
 //--------------------------------------------------------------------------------------------------
 
-func tokenizers () -> [SWIFT_Tokenizer_Protocol] {
+@MainActor func tokenizers () -> [SWIFT_Tokenizer_Protocol] {
   return [
     SWIFT_Tokenizer_0_oa_scanner ()
   ]
