@@ -1,0 +1,1221 @@
+//
+//  Created by Pierre Molinaro on 04/11/2021.
+//
+//--------------------------------------------------------------------------------------------------
+
+import AppKit
+
+//--------------------------------------------------------------------------------------------------
+
+class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelegate {
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private var mTabArray = [SWIFT_DisplayDescriptor] ()
+  private var mSelectedTabIndex = -1
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //   https://www.hackingwithswift.com/example-code/system/how-to-run-an-external-program-using-process
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private var mProcess : Process? = nil
+  private var mProcessOutputPipe : Pipe? = nil
+  private var mResultData = Data ()
+  private let mBuildButton = AutoLayoutButton (title: "🔨", size: .regular)
+  private let mAbortButton = AutoLayoutButton (title: "🛑", size: .regular)
+  private var mBuildHasBeenAborted = false
+  private var mIssueArray = [SWIFT_Issue] ()
+  private let mWarningCountTextField = AutoLayoutStaticLabel (title: "", bold: false, size: .regular, alignment: .center).setTextColor (.orange)
+  private let mErrorCountTextField = AutoLayoutStaticLabel (title: "", bold: true, size: .regular, alignment: .center).setTextColor (.red)
+  private var mWarningCount = 0
+  private var mErrorCount = 0
+  private let mProgressIndicator = SpinningProgressIndicator (size: 20, displayedWhenStopped: false)
+  private var mCurrentBuildOutputColor = NSColor.black
+
+  let mBuildWindowFont = EBPreferenceProperty <NSFont> (
+    defaultValue: NSFont.userFixedPitchFont (ofSize: 10.0)!,
+    prefKey: "build-log-font"
+  )
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //   VIEWS
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private let mSourceEditionView = AutoLayoutVerticalStackView ().set (margins: .zero)
+
+  private let mHorizontalSplitView = AutoLayoutHorizontalSplitView ()
+
+  private let mInspectorTabView = AutoLayoutBorderLessTabView (size: .regular)
+
+  private let mBuildLogTextView = AutoLayoutStaticTextView (
+    drawsBackground: true,
+    horizontalScroller: false,
+    verticalScroller: true
+  )
+
+  private let mSearchInFilesView = AutoLayoutVerticalStackView ()
+  private let mSearchTextField = AutoLayoutSearchField (minWidth: 100, bold: false, size: .regular)
+  private let mSearchResultLabel = AutoLayoutStaticLabel (title: "", bold: false, size: .small, alignment: .center)
+  private let mSearchResultOutlineView = AutoLayoutOutlineView (size: .small, allowsEmptySelection: true, allowsMultipleSelection: false)
+    .noHeaderView ()
+    .setBackgroundColor (.clear)
+
+  private var mSearchResults = [FileSearchResult] ()
+
+  private let mBuildLogTextViewRuler : SWIFT_BuildLogViewRuler
+
+  private let mTabListView = AutoLayoutTableView (size: .regular, minWidth: 250, addControlButtons: false)
+
+  private var mBuildTextFontObserver : EBSimpleObserver? = nil
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  init (withDocument inDocument : SWIFT_SingleDocument) {
+    self.mBuildLogTextView.createVerticalRulerView { SWIFT_BuildLogViewRuler (scrollView: $0) }
+    self.mBuildLogTextViewRuler = self.mBuildLogTextView.verticalRuler as! SWIFT_BuildLogViewRuler
+
+    super.init (
+      contentRect: NSRect (x: 0, y: 0, width: 800, height: 500),
+      styleMask: [.titled, .closable, .miniaturizable, .resizable],
+      backing: .buffered,
+      defer: true
+    )
+    noteObjectAllocation (self)
+
+    self.delegate = self // NSWindowDelegate
+    self.isReleasedWhenClosed = false
+    self.setFrameAutosaveName ("WindowFrameFor_" + (inDocument.fileURL?.path ?? ""))
+  //--- Build user interface
+    _ = self.mBuildButton.setAction { [weak self] in self?.buildAction (nil) }
+    self.mAbortButton.setAction { [weak self] in self?.abortBuildAction () }
+      .setHidden (true)
+    _ = self.mInspectorTabView
+    .addTab (
+      title: "📁",
+      tooltip: "Files",
+      contentView: self.mTabListView
+    )
+    .addTab (
+      title: "🔨",
+      tooltip: "Build",
+      contentView: self.mBuildLogTextView
+    )
+    .addTab (
+      title: "🔍",
+      tooltip: "Search in files",
+      contentView: self.mSearchInFilesView
+    )
+
+    _ = self.mSearchInFilesView
+      .set (spacing: .zero)
+      .appendView (self.mSearchTextField)
+      .appendView (self.mSearchResultLabel)
+      .appendView (self.mSearchResultOutlineView)
+
+    self.configureTabListView (withDocument: inDocument)
+    let vStack = AutoLayoutVerticalStackView ()
+    .set (margins: .zero)
+    .set (spacing: .zero)
+    .appendView (
+      AutoLayoutHorizontalStackView ()
+        .set (margins: .zero)
+        .appendView (self.mBuildButton)
+        .appendView (self.mErrorCountTextField)
+        .appendView (self.mWarningCountTextField)
+        .appendFlexibleSpace ()
+        .appendView (self.mProgressIndicator)
+        .appendView (self.mAbortButton)
+      )
+    .appendSeparator ()
+    .appendView (self.mInspectorTabView)
+    _ = self.mHorizontalSplitView
+      .appendView (vStack)
+      .appendView (self.mSourceEditionView)
+    self.setRootView (self.mHorizontalSplitView)
+  //---
+    self.appendTab (document: inDocument, selectedRange: NSRange ())
+  //--- Open other tabs ?
+    self.openTabsFromUserDefaults (forDocument:  inDocument)
+  //--- Select first tab
+    self.selectTab (atIndex: 0)
+  //--- Configuring recent search menu
+    let cellMenu = NSMenu (title: NSLocalizedString ("Search Menu", comment: "Search Menu title"))
+    var item = NSMenuItem (
+      title: NSLocalizedString ("Clear", comment: "Clear menu title"),
+      action: nil,
+      keyEquivalent: ""
+    )
+    item.tag = NSSearchField.clearRecentsMenuItemTag
+    cellMenu.insertItem (item, at: 0)
+    item = NSMenuItem.separator ()
+    item.tag = NSSearchField.recentsTitleMenuItemTag
+    cellMenu.insertItem (item, at: 1)
+    item = NSMenuItem (
+      title: NSLocalizedString ("Recent Searches", comment: "Recent Searches menu title"),
+      action: nil,
+      keyEquivalent: ""
+    )
+    item.tag = NSSearchField.recentsTitleMenuItemTag
+    cellMenu.insertItem (item, at: 2)
+    item = NSMenuItem (
+      title: "Recents",
+      action: nil,
+      keyEquivalent:""
+    )
+    item.tag = NSSearchField.recentsMenuItemTag
+    cellMenu.insertItem (item, at: 3)
+    _ = self.mSearchTextField.setSearchMenuTemplate (cellMenu: cellMenu)
+      .setAction { [weak self] in self?.performSearchInFiles () }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func configureTabListView (withDocument inDocument : SWIFT_SingleDocument) {
+    self.mTabListView
+    .noHeaderView ()
+    .setIntercellSpacing (horizontal: 0, vertical: 5)
+    .set (hasHorizontalGrid : false)
+    .set (hasVerticalGrid : false)
+    .set (usesAlternatingRowBackgroundColors: false)
+    .configure (
+      allowsEmptySelection: false,
+      allowsMultipleSelection: false,
+      rowCountCallBack: { [weak self] in self?.mTabArray.count ?? 0 },
+      delegate: self
+    )
+    self.mTabListView.addColumn_AttributedString (
+      valueGetterDelegate: { [weak self] in
+        return self?.mTabArray [$0].title ?? NSAttributedString ()
+      },
+      title: "",
+      minWidth: 80,
+      maxWidth: 2000,
+      headerAlignment: .center,
+      contentAlignment: .left
+    )
+    self.mTabListView.addColumn_ButtonImage (
+      valueGetterDelegate: { [weak self] (_ inRow : Int) in
+        if inRow > 0, let n = self?.mTabArray.count, n > 1 {
+          return NSImage (named: NSImage.stopProgressTemplateName) ?? NSImage ()
+        }else{
+          return nil
+        }
+      },
+      actionDelegate: { [weak self] in self?.closeTab (atIndex: $0) },
+      title: "",
+      minWidth: 25,
+      maxWidth: 25,
+      headerAlignment: .center,
+      contentAlignment: .right
+    )
+    self.mTabListView.set (
+      draggedTypes: [.URL, .myPasteboardEntry],
+      dragFilterCallBack: { (inURLs) -> Bool in
+        for url in inURLs {
+          if !SWIFT_DocumentController.supportedDocumentExtensions.contains (url.pathExtension) {
+            return false
+          }
+        }
+        return true
+      },
+      dragConcludeCallBack: { [weak self] (inURLs) in
+        self?.openFilesInNewTabs (inURLs, atIndex: self?.mTabArray.count ?? 0)
+      }
+    )
+//      dragSourceCallBack : { [weak self] (_ inRow : Int) -> NSPasteboardWriting? in
+//        if let uwSelf = self, let fileURL = uwSelf.mTabArray [inRow].fileURL {
+//          let pw = FileEntryPasteboard (path: fileURL.path, index: inRow)
+//          return pw as NSPasteboardWriting?
+//        }else{
+//          return nil
+//        }
+//      },
+//      dragDestinationValidationCallBack: { (inTargetTableView : NSTableView, inInfo : NSDraggingInfo, inRow : Int, inDropOperation : NSTableView.DropOperation) -> NSDragOperation in
+//      //--- L'affichage indique que le drop se fait au dessus de l'item, pas sur l'item
+//        inTargetTableView.setDropRow (inRow, dropOperation: .above)
+//      //--- La table view insére temporairement un espace pour indiquer où le drop aura lieu
+//        inTargetTableView.draggingDestinationFeedbackStyle = .gap
+//      //---
+//        let draggingPasteboard = inInfo.draggingPasteboard
+//        if let urls = draggingPasteboard.readObjects (forClasses: [NSURL.self]) as? [URL], urls.count > 0 {
+//          let fileExtensions = SWIFT_DocumentController.supportedDocumentExtensions ()
+//          var idx = 0
+//          var ok = false
+//          while (idx < urls.count) && !ok {
+//            ok = fileExtensions.contains (urls [idx].pathExtension)
+//            idx += 1
+//          }
+//          NSCursor.dragCopy.set ()
+//          return .copy
+//        }else if let pbItems = draggingPasteboard.readObjects (forClasses: [FileEntryPasteboard.self]) as? [FileEntryPasteboard], pbItems.count > 0 {
+//          let sourceAndTargetIdentical : Bool
+//          if let draggingSource = inInfo.draggingSource as? NSTableView, draggingSource === inTargetTableView {
+//            sourceAndTargetIdentical = true
+//          }else{
+//            sourceAndTargetIdentical = false
+//          }
+//          let copy = NSEvent.modifierFlags.contains (.option) || !sourceAndTargetIdentical
+//          if copy {
+//            NSCursor.dragCopy.set ()
+//          }else{
+//            NSCursor.arrow.set ()
+//          }
+//          return copy ? .copy : .move
+//        }else{
+//          return []
+//        }
+//      },
+//      dragDestinationConcludeCallBack: { [weak self] (inTargetTableView : NSTableView, inInfo : NSDraggingInfo, inTargetRow : Int, inDropOperation : NSTableView.DropOperation) -> Bool in
+//        let draggingPasteboard = inInfo.draggingPasteboard
+//        if let uwSelf = self {
+//          if let urls = draggingPasteboard.readObjects (forClasses: [NSURL.self]) as? [URL], urls.count > 0 {
+//            uwSelf.openFilesInNewTabs (urls, at: inTargetRow)
+//            return true
+//          }else if let pbItems = draggingPasteboard.readObjects (forClasses: [FileEntryPasteboard.self]) as? [FileEntryPasteboard], pbItems.count == 1 {
+//            let sourceAndTargetIdentical : Bool
+//            if let draggingSource = inInfo.draggingSource as? NSTableView, draggingSource == inTargetTableView {
+//              sourceAndTargetIdentical = true
+//            }else{
+//              sourceAndTargetIdentical = false
+//            }
+//            let copy = NSEvent.modifierFlags.contains (.option) || !sourceAndTargetIdentical
+//            if copy { // Drag and drop from same table view
+//              let pathURL = URL (fileURLWithPath: pbItems [0].path)
+//              uwSelf.openFilesInNewTabs ([pathURL], at: inTargetRow)
+//            }else{
+//              let sourceRowIndex = pbItems [0].index
+//              uwSelf.moveTab (fromRow: sourceRowIndex, toRow: inTargetRow)
+//            }
+//            return true
+//          }else{
+//            return false
+//          }
+//        }else{
+//          return false
+//        }
+//      }
+//    )
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  deinit {
+    noteObjectDeallocation (self)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //  Close Window
+  //  Cette fonction est appelée lorsque l'utilisateur clique dans le bouton de fermeture de la fenêtre
+  //  ou lorsqu'il invoque "Close" dans le menu fichier
+  //  Attention, il semble que cette fonction n'est pas obligatoirement appelée dans le main thread
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  override func close () {
+    DispatchQueue.main.async {
+      self.mTabArray.removeAll ()
+      SWIFT_DocumentController.closeUnreferencedDocuments ()
+    }
+    super.close ()
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //MARK: Tabs
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  @IBAction func nextTab (_ inUnusedSender : Any?) {
+    let idx = (self.mSelectedTabIndex + 1) % self.mTabArray.count
+    self.selectTab (atIndex: idx)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func selectTab (atIndex inIndex : Int) {
+    if inIndex >= 0, inIndex < self.mTabArray.count, self.mSelectedTabIndex != inIndex {
+      self.mSelectedTabIndex = inIndex
+    //--- Remove all subviews of base view
+      while self.mSourceEditionView.subViews.count > 0 {
+        self.mSourceEditionView.subViews [0].removeFromSuperView ()
+      }
+    //--- Add new selected view
+      let presentationView = self.mTabArray [self.mSelectedTabIndex].sourcePresentationView
+      _ = self.mSourceEditionView.appendView (presentationView)
+    //--- Scroll to make selected range visible
+      DispatchQueue.main.async {
+        self.mTabArray [self.mSelectedTabIndex].scrollSelectedRangeToVisible ()
+      }
+    //--- Make the text view first responder
+      presentationView.makeFirstResponder (of: self)
+    //--- UpDate Window Title
+      self.updateWindowTitle ()
+      self.mTabListView.selectRowIndexes (IndexSet (integer: inIndex), byExtendingSelection: false)
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func appendTab (document inDocument : SWIFT_SingleDocument,
+                  selectedRange inSelectedRange : NSRange) {
+    let dd = SWIFT_DisplayDescriptor (withDocument: inDocument, selectedRange: inSelectedRange)
+    self.mTabArray.append (dd)
+    self.mTabListView.sortAndReloadData ()
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func appendTabUpdatingUserDefaults (document inDocument : SWIFT_SingleDocument,
+                                      selectedRange inSelectedRange : NSRange) {
+    let dd = SWIFT_DisplayDescriptor (withDocument: inDocument, selectedRange: inSelectedRange)
+    self.mTabArray.append (dd)
+    self.mTabListView.sortAndReloadData ()
+    self.updateUserDefaults ()
+    self.selectTab (atIndex: self.mTabArray.count - 1)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func insertTab (document inDocument : SWIFT_SingleDocument, at inIndex : Int) {
+    self.mTabArray.insert (SWIFT_DisplayDescriptor (withDocument: inDocument, selectedRange: NSRange ()), at: inIndex)
+    self.mTabListView.sortAndReloadData ()
+    self.updateUserDefaults ()
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func moveTab (fromRow inSourceIndex : Int, toRow inTargetIndex : Int) {
+  //  Swift.print ("moveTab \(inSourceIndex) -> \(inTargetIndex)")
+    if inSourceIndex < inTargetIndex {
+      let x = self.mTabArray.remove (at: inSourceIndex)
+      self.mTabArray.insert (x, at: inTargetIndex - 1)
+      self.mTabListView.beginUpdates ()
+      self.mTabListView.sortAndReloadData ()
+      self.selectTab (atIndex: inTargetIndex - 1)
+      self.mTabListView.endUpdates ()
+      self.updateUserDefaults ()
+    }else if inSourceIndex > inTargetIndex {
+      let x = self.mTabArray.remove (at: inSourceIndex)
+      self.mTabArray.insert (x, at: inTargetIndex)
+      self.mTabListView.beginUpdates ()
+      self.mTabListView.sortAndReloadData ()
+      self.selectTab (atIndex: inTargetIndex)
+      self.mTabListView.endUpdates ()
+      self.updateUserDefaults ()
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func tabsReferencing (document inDocument : SWIFT_SingleDocument) -> Int {
+    var result = 0
+    for displayDescriptor in self.mTabArray {
+      if displayDescriptor.isReferencing (document: inDocument) {
+        result += 1
+      }
+    }
+    return result
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func closeTab (atIndex inIndex : Int) {
+    if (inIndex >= 0) && (inIndex < self.mTabArray.count) {
+    //--- Supprimer l'entrée
+      self.mTabArray.remove (at: inIndex)
+    //--- Fermer les documents qui ne sont plus visibles (en fait, un seul peut être
+    //    fermé, celui dont on vient de supprimer l'entrée, si il n'est pas référencé ailleurs)
+      SWIFT_DocumentController.closeUnreferencedDocuments ()
+    //--- Mettre à jour la sélection
+      if inIndex == self.mTabArray.count {
+        self.selectTab (atIndex: self.mTabArray.count - 1)
+      }else{
+        self.selectTab (atIndex: inIndex)
+      }
+     self.mTabListView.sortAndReloadData ()
+     self.updateUserDefaults ()
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func openFilesInNewTabs (_ inURLs : [URL], atIndex inIndex : Int) {
+    var idx = inIndex
+    for url in inURLs {
+      let dc = NSDocumentController.shared
+      dc.openDocument (withContentsOf: url, display: false) { (inOptionalDocument : NSDocument?, _ : Bool, _ : Error?) in
+        if let document = inOptionalDocument as? SWIFT_SingleDocument {
+          self.insertTab (document: document, at: idx)
+          self.selectTab (atIndex: idx)
+          idx += 1
+          self.mInspectorTabView.selectTab (atIndex: 0)
+        }
+      }
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func findOrAddTab (forIssue inIssue : SWIFT_Issue) {
+    var found = false
+    for idx in 0 ..< self.mTabArray.count {
+      let dd = self.mTabArray [idx]
+      if !found, dd.fileURL == inIssue.fileURL {
+        self.selectTab (atIndex: idx)
+        let range = self.mTabArray [idx].mDocument.mTextStorage.rangeFor (
+          line: inIssue.line,
+          startColumn: 0,
+          length: 0
+        )
+        self.mTabArray [idx].sourcePresentationView.setSelectedRange (range)
+        self.mTabArray [idx].sourcePresentationView.scrollToSelectedRange ()
+        found = true
+      }
+    }
+    if !found {
+      let dc = NSDocumentController.shared
+      dc.openDocument (withContentsOf: inIssue.fileURL, display: false) { (_ inOptionalDocument : NSDocument?, _ : Bool, _ : Error?) in
+        if let document = inOptionalDocument as? SWIFT_SingleDocument {
+          self.appendTabUpdatingUserDefaults (document: document, selectedRange: NSRange ())
+          let idx = self.mTabArray.count - 1
+          DispatchQueue.main.async {
+            let range = self.mTabArray [idx].mDocument.mTextStorage.rangeFor (
+              line: inIssue.line,
+              startColumn: 0,
+              length: 0
+            )
+            self.mTabArray [idx].sourcePresentationView.setSelectedRange (range)
+            self.mTabArray [idx].sourcePresentationView.scrollToSelectedRange ()
+            DispatchQueue.main.async {
+              for issue in self.mIssueArray {
+                document.appendIssue (issue)
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func findOrAddTab (forURL inURL : URL,
+                     range inRange : NSRange,
+                     postAction inPostAction : (() -> Void)?) {
+    var found = false
+    for idx in 0 ..< self.mTabArray.count {
+      let dd = self.mTabArray [idx]
+      if !found, dd.fileURL == inURL {
+        self.selectTab (atIndex: idx)
+        self.mTabArray [idx].sourcePresentationView.setSelectedRange (inRange)
+        self.mTabArray [idx].sourcePresentationView.scrollToSelectedRange ()
+        inPostAction? ()
+        found = true
+      }
+    }
+    if !found {
+      let dc = NSDocumentController.shared
+      dc.openDocument (withContentsOf: inURL, display: false) { (_ inOptionalDocument : NSDocument?, _ : Bool, _ : Error?) in
+        if let document = inOptionalDocument as? SWIFT_SingleDocument {
+          self.appendTabUpdatingUserDefaults (document: document, selectedRange: inRange)
+          let idx = self.mTabArray.count - 1
+          DispatchQueue.main.async {
+            self.mTabArray [idx].sourcePresentationView.setSelectedRange (inRange)
+            self.mTabArray [idx].sourcePresentationView.scrollToSelectedRange ()
+            for issue in self.mIssueArray {
+              document.appendIssue (issue)
+            }
+            DispatchQueue.main.async { inPostAction? () }
+          }
+        }
+      }
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //MARK: Actions
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  @IBAction func findInFiles (_ inSender : Any?) {
+    let idx = self.mSelectedTabIndex
+    if (idx >= 0) && (idx < self.mTabArray.count) {
+      let tab = self.mTabArray [idx]
+      let selection = tab.selectedString
+      if !selection.isEmpty {
+        self.mSearchTextField.stringValue = selection
+        self.mInspectorTabView.selectTab (atIndex: 2)
+      }
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  @IBAction func saveDocument (_ inSender : Any?) {
+    for tab in self.mTabArray {
+      tab.mDocument.save (inSender)
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  @IBAction func openDocumentInNewTab (_ inUnusedSender : Any?) {
+    NSDocumentController.shared.beginOpenPanel { (inOptionalURLs : [URL]?) in
+      if let urls = inOptionalURLs {
+        self.openFilesInNewTabs (urls, atIndex: self.mTabArray.count)
+      }
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // Open from selection
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  @IBAction func openFromSelectionInTab (_ inUnusedSender : Any?) {
+    let displayDescriptor : SWIFT_DisplayDescriptor = self.mTabArray [self.mSelectedTabIndex]
+    if let p = displayDescriptor.pathFromSelection (), let fileURL = displayDescriptor.fileURL {
+      self.mInspectorTabView.selectTab (atIndex: 0)
+      let url = fileURL.deletingLastPathComponent ().appendingPathComponent (p)
+      var found = false
+      for idx in 0 ..< self.mTabArray.count {
+        let dd = self.mTabArray [idx]
+        if !found && (dd.fileURL == url) {
+          self.selectTab (atIndex: idx)
+          found = true
+        }
+      }
+      if !found {
+        let dc = NSDocumentController.shared
+        dc.openDocument (withContentsOf: url, display: false) { (_ inOptionalDocument : NSDocument?, _ : Bool, _ : Error?) in
+          if let document = inOptionalDocument as? SWIFT_SingleDocument {
+            self.appendTabUpdatingUserDefaults (document: document, selectedRange: NSRange ())
+          }
+        }
+      }
+    }else{
+      NSSound.beep ()
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  @IBAction func commentAction (_ inUnusedSender : Any?) {
+    if self.mSelectedTabIndex >= 0, self.mSelectedTabIndex < self.mTabArray.count {
+      let dd = self.mTabArray [self.mSelectedTabIndex]
+      dd.commentSelection ()
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  @IBAction func uncommentAction (_ inUnusedSender : Any?) {
+    if self.mSelectedTabIndex >= 0, self.mSelectedTabIndex < self.mTabArray.count {
+      let dd = self.mTabArray [self.mSelectedTabIndex]
+      dd.uncommentSelection ()
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //MARK: Utilities
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func updateWindowTitle () {
+    var s = self.mTabArray [0].lastComponentOfFileName
+    if self.mSelectedTabIndex > 0 {
+      s += " — " + self.mTabArray [self.mSelectedTabIndex].lastComponentOfFileName
+    }
+    if self.isDocumentEdited {
+      s += " ●"
+    }
+    self.title = s
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //MARK: Search in files
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  class FileSearchResult : OutlineViewNodeProtocol {
+
+    private let mFilePath : String
+    private let mIndexArray : [FileEntrySearchResult]
+    private weak var mWindow : SWIFT_SingleWindow?
+
+    init (_ inFilePath : String,
+          indexArray inIndexArray : [FileEntrySearchResult],
+          window inWindow : SWIFT_SingleWindow) {
+      self.mFilePath = inFilePath
+      self.mIndexArray = inIndexArray
+      self.mWindow = inWindow
+      noteObjectAllocation (self)
+    }
+
+    deinit {
+      noteObjectDeallocation (self)
+    }
+
+    func childView (forColumn inColumn : NSTableColumn) -> NSView {
+      let text = NSTextField ()
+      text.drawsBackground = false
+      text.isBordered = false
+      text.isEditable = false
+      text.alignment = .left
+      text.stringValue = String (self.mIndexArray.count) + ": " + self.mFilePath.lastPathComponent
+      text.toolTip = self.mFilePath
+      return text
+    }
+
+    func childDidSelect () {
+      self.mWindow?.findOrAddTab (forURL: URL (fileURLWithPath: self.mFilePath), range: NSRange ()) {
+        DispatchQueue.main.async {
+          _ = self.mWindow?.mSearchResultOutlineView.makeFirstResponder ()
+        }
+      }
+    }
+
+    func childrenCount () -> Int {
+      return self.mIndexArray.count
+    }
+    
+    func child (atIndex inIndex: Int) -> AnyObject {
+      return self.mIndexArray [inIndex]
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  class FileEntrySearchResult : OutlineViewChildProtocol {
+    private let mFilePath : String
+    private let mRange : NSRange
+    private let mLine : String
+    private weak var mWindow : SWIFT_SingleWindow?
+
+    init (_ inFilePath : String,
+          _ inRange : NSRange,
+          _ inLine : String,
+          window inWindow : SWIFT_SingleWindow) {
+      self.mFilePath = inFilePath
+      self.mRange = inRange
+      self.mLine = inLine
+      self.mWindow = inWindow
+      noteObjectAllocation (self)
+    }
+
+    deinit {
+      noteObjectDeallocation (self)
+    }
+
+    func childView (forColumn inColumn : NSTableColumn) -> NSView {
+      let text = NSTextField ()
+      text.drawsBackground = false
+      text.isBordered = false
+      text.isEditable = false
+      text.alignment = .left
+      text.stringValue = self.mLine
+      text.toolTip = text.stringValue
+      return text
+    }
+
+    func childDidSelect () {
+      self.mWindow?.findOrAddTab (forURL: URL (fileURLWithPath: self.mFilePath), range: self.mRange) {
+        DispatchQueue.main.async {
+          _ = self.mWindow?.mSearchResultOutlineView.makeFirstResponder ()
+        }
+      }
+    }
+
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func performSearchInFiles () {
+    let searchedString = self.mSearchTextField.stringValue
+    if !searchedString.isEmpty, !self.mTabArray.isEmpty, let firstTabURL = self.mTabArray [0].fileURL {
+      let directory : URL = firstTabURL.deletingLastPathComponent ()
+      self.mSearchResultLabel.stringValue = "Searching…"
+      self.mSearchResults.removeAll (keepingCapacity: true)
+      self.mSearchResultOutlineView.setContentArray (self.mSearchResults)
+      RunLoop.main.run (until: Date ())
+      let extensionSet = SWIFT_DocumentController.supportedDocumentExtensions
+      let enumerator = FileManager ().enumerator (atPath: directory.path)
+      while let file = enumerator?.nextObject () as? String {
+        if extensionSet.contains (file.pathExtension) {
+          let fullPath = directory.path + "/" + file
+          self.search (searchedString, inFile: fullPath)
+        }
+      }
+      if self.mSearchResults.count == 0 {
+        self.mSearchResultLabel.stringValue = "Not found"
+      }else{
+        var count = 0
+        for result in self.mSearchResults {
+          count += result.childrenCount ()
+        }
+        var s : String
+        if count == 1 {
+          s = "1 result"
+        }else{
+          s = "\(count) results"
+        }
+        s += " in "
+        if self.mSearchResults.count == 1 {
+          s += "1 file"
+        }else{
+          s += "\(self.mSearchResults.count) files"
+        }
+        self.mSearchResultLabel.stringValue = s
+        self.mSearchResultOutlineView.setContentArray (self.mSearchResults)
+      }
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func search (_ inSearchedString : String,
+                       inFile inFullPath : String) {
+    if let contents = try? String (contentsOfFile: inFullPath, encoding: .utf8) {
+      var indices = [FileEntrySearchResult] ()
+      var searchStartIndex = contents.startIndex
+      while searchStartIndex < contents.endIndex,
+          let range : Range <String.Index> = contents.range (of: inSearchedString, range: searchStartIndex ..< contents.endIndex),
+          !range.isEmpty {
+        let lineRange = contents.lineRange (for: range)
+        var line = String (contents [lineRange])
+        line.removeLast ()
+        let startRange : Int = contents.distance (from: contents.startIndex, to: range.lowerBound)
+        let endRange : Int = contents.distance (from: contents.startIndex, to: range.upperBound)
+        let nsRange = NSRange (location: startRange, length: endRange - startRange)
+        indices.append (FileEntrySearchResult (inFullPath, nsRange, line, window: self))
+        searchStartIndex = range.upperBound
+      }
+      if indices.count > 0 {
+        self.mSearchResults.append (FileSearchResult (inFullPath, indexArray: indices, window: self))
+      }
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //MARK: User Defaults
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private var mSetUpDone = false
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private var userDefaultKey : String { "CONFIG:" + self.mTabArray [0].fileURL!.path }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func updateUserDefaults () {
+    if self.mSetUpDone && (self.mTabArray.count > 0) {
+      var fileArray = [[String : String]] ()
+      for tab in self.mTabArray {
+        var dict = [String : String] ()
+        dict ["file"] = tab.fileURL!.path
+        dict ["range"] = NSStringFromRange (tab.selectedRange)
+        fileArray.append (dict)
+      }
+      fileArray.removeFirst () // Remove first tab
+      var globalDict = [String : Any] ()
+      globalDict ["tabs"] = fileArray
+      globalDict ["range"] = NSStringFromRange (self.mTabArray [0].selectedRange)
+      UserDefaults.standard.set (globalDict, forKey: self.userDefaultKey)
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func openTabsFromUserDefaults (forDocument inDocument : SWIFT_SingleDocument) {
+    if let globalDict = UserDefaults.standard.object (forKey: self.userDefaultKey) as? [String : Any],
+       let tabFilePathArray = globalDict ["tabs"] as? [[String : String]],
+       let tab0RangeString = globalDict ["range"] as? String {
+      DispatchQueue.main.async {
+        self.mTabArray [0].setSelectedRange (NSRangeFromString (tab0RangeString))
+      }
+      for tabDict in tabFilePathArray {
+        if let filePath = tabDict ["file"], let rangeString = tabDict ["range"] {
+          NSDocumentController.shared.openDocument (withContentsOf: URL (fileURLWithPath: filePath), display: false) { (inOptionalDocument : NSDocument?, _ : Bool, _ : Error?) in
+            if let document = inOptionalDocument as? SWIFT_SingleDocument {
+              self.appendTab (document: document, selectedRange: NSRangeFromString (rangeString))
+            }
+          }
+        }
+      }
+    }
+    self.mSetUpDone = true
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //MARK: AutoLayoutTableViewDelegate
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func tableViewDelegate_selectionDidChange (selectedRows inSelectedRows: IndexSet) {
+    if inSelectedRows.count == 1, let idx = inSelectedRows.first {
+      self.selectTab (atIndex: idx)
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func tableViewDelegate_indexesOfSelectedObjects () -> IndexSet {
+    return .init ()
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func tableViewDelegate_addEntry () {
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func tableViewDelegate_removeSelectedEntries () {
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func tableViewDelegate_beginSorting () {
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func tableViewDelegate_endSorting () {
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // Cette fonction est appelée par SWIFT_SingleDocument quand l'état d'édition d'un document a changé
+  //MARK: Document Edition State Did Change
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  class func documentEditionStateDidChange () {
+    for w in NSApp.windows {
+      if let window = w as? SWIFT_SingleWindow {
+        DispatchQueue.main.async {
+          window.mTabListView.sortAndReloadData ()
+          window.editionStateDidChange ()
+          window.updateUserDefaults ()
+        }
+      }
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func editionStateDidChange () {
+    var documentIsEdited = false
+    for descriptor in self.mTabArray {
+      if descriptor.mDocument.isDocumentEdited {
+        documentIsEdited = true
+      }
+    }
+    self.isDocumentEdited = documentIsEdited
+    self.updateWindowTitle ()
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func selectedRangeDidChange (forDocument inDocument : SWIFT_SingleDocument) {
+    self.updateUserDefaults ()
+  }
+  
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //MARK: Build
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  @IBAction func buildAction (_ inUnusedSender : Any?) {
+    SWIFT_DocumentController.mySaveAllDocuments ()
+    self.mResultData.removeAll (keepingCapacity: true)
+    _ = self.mBuildButton.set (enabled: false)
+    self.mProgressIndicator.startAnimation ()
+    self.mAbortButton.setHidden (false)
+    self.mIssueArray.removeAll (keepingCapacity: true)
+    self.mBuildLogTextViewRuler.setIssueArray ([])
+    for document in SWIFT_DocumentController.myDocuments () {
+      document.removeAllIssues ()
+    }
+    self.mBuildLogTextView.clear ()
+    _ = self.mBuildLogTextView.setFont (self.mBuildWindowFont.propval)
+    self.mInspectorTabView.selectTab (atIndex: 1)
+    self.mCurrentBuildOutputColor = .black
+    self.mBuildHasBeenAborted = false
+    self.mWarningCount = 0
+    self.mErrorCount = 0
+    self.mWarningCountTextField.setHidden (true)
+    self.mErrorCountTextField.setHidden (true)
+ //--- Create task
+    let process = Process ()
+    self.mProcess = process
+  //--- Command and arguments
+    let (command, arguments) = commandLineForBuildProcess ()
+    process.executableURL = URL (fileURLWithPath: command)
+    let sourceFile = self.mTabArray [0].fileURL!.path
+    process.arguments = arguments + [sourceFile, "--cocoa"]
+  //--- Set standard output notification
+    let pipe = Pipe ()
+    self.mProcessOutputPipe = pipe
+    process.standardOutput = pipe
+    process.standardError = pipe
+    NotificationCenter.default.addObserver (
+      self,
+      selector: #selector (Self.getDataFromTaskOutput(_:)),
+      name: FileHandle.readCompletionNotification,
+      object: pipe.fileHandleForReading
+    )
+    pipe.fileHandleForReading.readInBackgroundAndNotify ()
+  //---
+    NotificationCenter.default.addObserver (
+      self,
+      selector: #selector (Self.taskDidTerminate (_:)),
+      name: Process.didTerminateNotification,
+      object: process
+    )
+  //--- Start process
+    process.launch ()
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  @objc private func getDataFromTaskOutput (_ inNotification : NSNotification) {
+    if let dictionary = inNotification.userInfo as? [String : Any],
+       let data = dictionary [NSFileHandleNotificationDataItem] as? Data,
+       let fileHandle = inNotification.object as? FileHandle {
+      if !data.isEmpty {
+        self.appendBuildOutputData (data)
+        fileHandle.readInBackgroundAndNotify ()
+      }else{
+        NotificationCenter.default.removeObserver (
+          self,
+          name: FileHandle.readCompletionNotification,
+          object: self.mProcessOutputPipe?.fileHandleForReading
+        )
+        self.mProcessOutputPipe?.fileHandleForReading.closeFile ()
+        self.mProcessOutputPipe = nil
+        if self.mBuildHasBeenAborted {
+          self.mBuildLogTextView.appendErrorString ("Aborted.")
+        }else{
+          self.mBuildLogTextView.appendSuccessString ("Done.")
+        }
+      }
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  @objc private func taskDidTerminate (_ inNotification : NSNotification) {
+    if let process = self.mProcess {
+      NotificationCenter.default.removeObserver (
+        self,
+        name: Process.didTerminateNotification,
+        object: process
+      )
+      self.mProcess = nil
+    }
+//    self.mBuildButton.setHidden (false)
+    _ = self.mBuildButton.set (enabled: true)
+    self.mAbortButton.setHidden (true)
+    self.mProgressIndicator.stopAnimation ()
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func abortBuildAction () {
+    self.mBuildHasBeenAborted = true
+    self.mProcess?.terminate ()
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func appendBuildOutputData (_ inData : Data) {
+    self.mResultData.append (inData)
+  //--- Look for last line feed
+    let startIndex = self.mResultData.startIndex
+    var idx = self.mResultData.endIndex
+    var ok = false
+    while !ok, idx > 0 {
+      idx -= 1
+      ok = self.mResultData [idx] == ASCII.lineFeed.rawValue
+    }
+  //--- If found, extract data
+    if ok {
+      idx += 1
+      let data = self.mResultData [startIndex ..< idx]
+      if let string = String (data: data, encoding: .utf8) {
+        self.processBuildOutputString (string)
+        self.mResultData.removeSubrange (startIndex ..< idx)
+      }
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func processBuildOutputString (_ inString : String) {
+    let messageArray = inString.components (separatedBy: "\u{1B}")
+  //--- Enter first component with current attributes
+    self.mBuildLogTextView.appendMessageString (messageArray [0], color: self.mCurrentBuildOutputColor)
+  //--- Send next components
+     var i = 1
+     while i < messageArray.count {
+       let component = messageArray [i] as NSString
+       i += 1
+      var idx = 0
+      while idx < component.length, component.character (at: idx) == ASCII.leftBracket.rawValue {
+        idx += 1
+        var code = 0
+        while idx < component.length, component.character (at: idx) >= ASCII.zero.rawValue, component.character (at: idx) <= ASCII.nine.rawValue {
+          code *= 10
+          code += Int (component.character (at: idx)) - Int (ASCII.zero.rawValue)
+          idx += 1
+        }
+        if idx < component.length, component.character (at: idx) == ASCII.m.rawValue {
+          idx += 1
+        }
+        switch code {
+        case  0 : self.mCurrentBuildOutputColor = .black
+        case 30 : self.mCurrentBuildOutputColor = .black
+        case 31 : self.mCurrentBuildOutputColor = .red
+        case 32 : self.mCurrentBuildOutputColor = NSColor (calibratedRed: 0.0, green:0.5, blue:0.0, alpha:1.0)
+        case 33 : self.mCurrentBuildOutputColor = NSColor.orange
+        case 34 : self.mCurrentBuildOutputColor = NSColor.blue
+        case 35 : self.mCurrentBuildOutputColor = NSColor.magenta
+        case 36 : self.mCurrentBuildOutputColor = NSColor.cyan
+        case 37 : self.mCurrentBuildOutputColor = NSColor.white
+        case 40 : self.mCurrentBuildOutputColor = NSColor.white
+        case 41 : self.mCurrentBuildOutputColor = NSColor.red
+        case 42 : self.mCurrentBuildOutputColor = NSColor (calibratedRed: 0.0, green:0.5, blue:0.0, alpha:1.0)
+        case 43 : self.mCurrentBuildOutputColor = NSColor.orange
+        case 44 : self.mCurrentBuildOutputColor = NSColor.blue
+        case 45 : self.mCurrentBuildOutputColor = NSColor.magenta
+        case 46 : self.mCurrentBuildOutputColor = NSColor.cyan
+        case 47 : self.mCurrentBuildOutputColor = NSColor.white
+        default: ()
+        }
+      }
+      var s = component.substring (from: idx)
+      if !s.isEmpty {
+        let COCOA_WARNING_ID = Character (Unicode.Scalar (3)!)
+        let COCOA_ERROR_ID   = Character (Unicode.Scalar (4)!)
+        let locationInBuildTextView = (self.mBuildLogTextView.string as NSString).length
+        if s [s.startIndex] == COCOA_WARNING_ID {
+          s.removeFirst ()
+          self.appendIssue (s, locationInBuildTextView, .warning)
+        }else if s [s.startIndex] == COCOA_ERROR_ID {
+          s.removeFirst ()
+          self.appendIssue (s, locationInBuildTextView, .error)
+        }
+        self.mBuildLogTextView.appendMessageString (s, color: self.mCurrentBuildOutputColor)
+      }
+    }
+    self.mBuildLogTextView.scrollToEndOfText ()
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private func appendIssue (_ inMessage : String,
+                            _ inLocationInBuildLogTextView : Int,
+                            _ inKind : SWIFT_Issue.Kind) {
+  //--- Split message
+    let components = inMessage.components (separatedBy: ":")
+    if components.count >= 6,
+        let line = Int (components [1]),
+        let startColumn = Int (components [2]),
+        let endColumn = Int (components [3]) {
+      let sourcePath = components [0]
+      var messageComponents = components
+      messageComponents.removeFirst (5)
+      let message = messageComponents.joined (separator: ":")
+    //--- Append issue
+      let issue = SWIFT_Issue (
+        fileURL: URL (fileURLWithPath: sourcePath),
+        line: line,
+        startColumn: startColumn - 1,
+        length: endColumn - startColumn,
+        message: message,
+        kind: inKind,
+        locationInBuildLogTextView: inLocationInBuildLogTextView
+      )
+      self.mIssueArray.append (issue)
+      for document in SWIFT_DocumentController.myDocuments () {
+        document.appendIssue (issue)
+      }
+      self.mBuildLogTextViewRuler.setIssueArray (self.mIssueArray)
+    //--- Note issue on user interface
+      switch inKind {
+      case .warning :
+        self.mWarningCount += 1
+        self.mWarningCountTextField.stringValue = "⚠\(self.mWarningCount)"
+        self.mWarningCountTextField.setHidden (false)
+      case .error :
+        self.mErrorCount += 1
+        self.mErrorCountTextField.stringValue = "⚠\(self.mErrorCount)"
+        self.mErrorCountTextField.setHidden (false)
+      }
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+}
+
+//--------------------------------------------------------------------------------------------------
+
+fileprivate extension NSPasteboard.PasteboardType {
+  static let myPasteboardEntry = NSPasteboard.PasteboardType ("name.pcmolinaro.myEntry")
+}
+
+//--------------------------------------------------------------------------------------------------
+// Attention, les types des propriétés doivent être acceptés dans une property list
+//--------------------------------------------------------------------------------------------------
+
+fileprivate final class FileEntryPasteboard : NSObject, NSPasteboardWriting, NSPasteboardReading {
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // Implémentation du protocole NSPasteboardWriting (pour le drag source)
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    let path : String // Pas URL, non accepté dans une property list
+    let index : Int
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  init (path : String, index : Int) {
+    self.path = path
+    self.index = index
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func writableTypes (for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+    return [.myPasteboardEntry]
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func pasteboardPropertyList (forType type: NSPasteboard.PasteboardType) -> Any? {
+    let dictionary : NSDictionary = [
+      "path" : self.path,
+      "idx" : self.index
+    ]
+    return try? PropertyListSerialization.data (fromPropertyList: dictionary, format: .binary, options: 0)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // Implémentation du protocole NSPasteboardReading (pour le drag destination)
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  required init? (pasteboardPropertyList inPropertyList : Any, ofType inType: NSPasteboard.PasteboardType) {
+    if let data = inPropertyList as? Data,
+       let dictionary = try? PropertyListSerialization.propertyList (from: data, options: [], format: nil) as? NSDictionary,
+       let p = dictionary ["path"] as? String,
+       let idx = dictionary ["idx"] as? Int {
+      self.path = p
+      self.index = idx
+    }else{
+      return nil
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  static func readableTypes (for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+    return [.myPasteboardEntry]
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+}
+
+//--------------------------------------------------------------------------------------------------

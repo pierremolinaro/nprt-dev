@@ -4,7 +4,6 @@
 //--- END OF USER ZONE 1
 
 import AppKit
-import MyAutoLayoutKit
 
 //--------------------------------------------------------------------------------------------------
 //   LEXIQUE oa_scanner

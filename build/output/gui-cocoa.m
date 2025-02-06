@@ -150,7 +150,8 @@ static const UInt16 * gPopUpData_0_oa_5F_scanner [1] = {
 
 OC_Lexique * tokenizerForExtension (const NSString * inExtension) {
   OC_Lexique * result = nil ;
-  if ([inExtension isEqualToString:@"nprt"]) {
+  NSString * uppercasedExtension = [inExtension uppercaseString] ;
+  if ([uppercasedExtension isEqualToString:@"NPRT"]) {
     result = [OC_Tokenizer_0_oa_scanner new] ;
   }
   return result ;
