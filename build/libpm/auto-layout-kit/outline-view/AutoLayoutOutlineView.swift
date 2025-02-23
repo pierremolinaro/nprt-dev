@@ -192,12 +192,6 @@ public class AutoLayoutOutlineView : AutoLayoutVerticalStackView {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-//  final func scrollRowToVisible (row inRow : Int) {
-//    self.mCocoaOutlineView.scrollRowToVisible (inRow)
-//  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 }
 
 //--------------------------------------------------------------------------------------------------

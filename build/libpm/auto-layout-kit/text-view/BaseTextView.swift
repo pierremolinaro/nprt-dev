@@ -76,17 +76,13 @@ public class BaseTextView : BaseView {
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //MARK: Settings
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func setUsesFindBar () -> Self {
     self.mCocoaTextView.usesFindBar = true
     self.mCocoaTextView.isIncrementalSearchingEnabled = true
     return self
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public func triggerDisplay () {
-    self.mCocoaTextView.needsDisplay = true
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -105,6 +101,21 @@ public class BaseTextView : BaseView {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  public func setFont (_ inFont : NSFont) -> Self {
+    self.mCocoaTextView.font = inFont
+    return self
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public final func setUndoManager (_ inUndoManager : UndoManager?) {
+    self.mCocoaTextView.setUndoManager (inUndoManager)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //MARK: Getters
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   public final var textStorage : NSTextStorage? { self.mCocoaTextView.textStorage }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -120,6 +131,16 @@ public class BaseTextView : BaseView {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  public var verticalRuler : NSRulerView? { self.mScrollView.verticalRulerView }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public func triggerDisplay () {
+    self.mCocoaTextView.needsDisplay = true
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   public final func scrollRangeToVisible (_ inRange : NSRange) {
     self.mCocoaTextView.scrollRangeToVisible (inRange)
   }
@@ -128,32 +149,6 @@ public class BaseTextView : BaseView {
 
   public final func setSelectedRange (_ inRange : NSRange) {
     self.mCocoaTextView.setSelectedRange (inRange)
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-//  public func rangeFor (line inLine : Int,
-//                        startColumn inStartColumn : Int,
-//                        length inLength : Int) -> NSRange {
-//    var idx = 0
-//    if inLine > 1 {
-//      var lineIndex = 1
-//      let s = self.mCocoaTextView.string as NSString
-//      var found = false
-//      while !found, idx < s.length {
-//        lineIndex += 1
-//        let lineRange = s.lineRange (for: NSRange (location: idx, length: 1))
-//        idx = lineRange.location + lineRange.length
-//        found = inLine == lineIndex
-//      }
-//    }
-//    return NSRange (location: idx + inStartColumn, length: max (inLength, 0))
-//  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public final func setUndoManager (_ inUndoManager : UndoManager?) {
-    self.mCocoaTextView.setUndoManager (inUndoManager)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -182,20 +177,7 @@ public class BaseTextView : BaseView {
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public var verticalRuler : NSRulerView? { self.mScrollView.verticalRulerView }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  //   set font
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public func setFont (_ inFont : NSFont) -> Self {
-    self.mCocoaTextView.font = inFont
-    return self
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  //   Layout
+  //MARK: Layout
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public override var smallestSize : NSSize { self.mMinSize }
@@ -214,134 +196,15 @@ public class BaseTextView : BaseView {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public override func computeSimpleLayout (withFrame inFrame: NSRect) {
-    super.computeSimpleLayout (withFrame: inFrame)
-    if !self.mScrollView.hasHorizontalScroller {
-      var f = self.mCocoaTextView.frame
-      f.size.width = self.mScrollView.contentSize.width
-      self.mCocoaTextView.frame = f
-    }
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-}
-
-//--------------------------------------------------------------------------------------------------
-// https://stackoverflow.com/questions/11237622/using-autolayout-with-expanding-nstextviews
-//--------------------------------------------------------------------------------------------------
-
-public final class InternalCocoaTextView : NSTextView, NSTextViewDelegate {
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public weak var mDelegate : (any BaseTextViewDelegate)? = nil
-
-  //--- REQUIRED!!! Declaring theses properties ensures they are retained (required for ElCapitan)
-  private let mTextStorage : NSTextStorage // Subclassing NSTextStorage requires defining string, …
-  private let mLayoutManager = EmbeddedLayoutManager ()
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  // https://developer.apple.com/library/archive/documentation/TextFonts/Conceptual/CocoaTextArchitecture/TextSystemArchitecture/ArchitectureOverview.html#//apple_ref/doc/uid/TP40009459-CH7-CJBJHGAG
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  init (textStorage inOptionalTextStorage : NSTextStorage?) {
-    self.mTextStorage = inOptionalTextStorage ?? NSTextStorage ()
-    let textContainer = NSTextContainer (size: NSSize (width: 300, height: 300))
-    self.mTextStorage.addLayoutManager (self.mLayoutManager)
-    self.mLayoutManager.addTextContainer (textContainer)
-
-    super.init (frame: .zero, textContainer: textContainer)
-    noteObjectAllocation (self)
-    self.delegate = self // NSTextViewDelegate
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  override init (frame : NSRect, textContainer : NSTextContainer?) { // Required, otherwise run time error
-    fatalError ("init(frame:textContainer:) has not been implemented")
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  required init? (coder inCoder : NSCoder) {
-    fatalError ("init(coder:) has not been implemented")
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  deinit {
-    noteObjectDeallocation (self)
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public override var acceptsFirstResponder : Bool { self.isEditable }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  // https://stackoverflow.com/questions/11237622/using-autolayout-with-expanding-nstextviews
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-//  public override var intrinsicContentSize : NSSize {
-//    let textContainer = self.textContainer!
-//    let layoutManager = self.layoutManager!
-//    layoutManager.ensureLayout (for: textContainer)
-//    return layoutManager.usedRect (for: textContainer).size
+//---- Avec ce code, l'édition affecte le layout
+//  public override func computeSimpleLayout (withFrame inFrame: NSRect) {
+//    super.computeSimpleLayout (withFrame: inFrame)
+//    if !self.mScrollView.hasHorizontalScroller {
+//      var f = self.mCocoaTextView.frame
+//      f.size.width = self.mScrollView.contentSize.width
+//      self.mCocoaTextView.frame = f
+//    }
 //  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-//  public override var frame : NSRect {
-//    get { super.frame }
-//    set { super.frame = newValue ; self.invalidateIntrinsicContentSize () }
-//  }
-
-//  override func didChangeText () {
-//    super.didChangeText ()
-//    self.invalidateIntrinsicContentSize ()
-//    self.mTextDidChangeCallBack? ()
-//  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  private var mUndoManager : UndoManager? = nil
-  private var mTextViewDidChangeSelectionAction : (() -> Void)? = nil
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public final func setUndoManager (_ inUndoManager : UndoManager?) {
-    self.mUndoManager = inUndoManager
-    self.allowsUndo = true
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public final func setTextViewDidChangeSelectionAction (_ inAction : (() -> Void)?) {
-    self.mTextViewDidChangeSelectionAction = inAction
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  //   NSTextViewDelegate
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public func undoManager (for inView : NSTextView) -> UndoManager? {  // NSTextViewDelegate
-    return self.mUndoManager
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public func textViewDidChangeSelection (_ inNotification : Notification) { // NSTextViewDelegate
-    self.mTextViewDidChangeSelectionAction? ()
-    self.mDelegate?.selectedRangeDidChange (self.selectedRange (), self)
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public override func draw (_ inDirtyRect : NSRect) {
-    self.mDelegate?.willDrawTextView (inDirtyRect, self)
-    super.draw (inDirtyRect)
-    self.mDelegate?.didDrawTextView (inDirtyRect, self)
-  }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -380,9 +243,9 @@ public extension NSTextStorage {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func rangeFor (line inLine : Int,
-                        startColumn inStartColumn : Int,
-                        length inLength : Int) -> NSRange {
+  func rangeFor (line inLine : Int,
+                 startColumn inStartColumn : Int,
+                 length inLength : Int) -> NSRange {
     var idx = 0
     if inLine > 1 {
       var lineIndex = 1
@@ -427,6 +290,138 @@ public class InternalVerticalScroller : NSScroller {
   override public func draw (_ inDirtyRect : NSRect) {
     super.draw (inDirtyRect)
     self.mDelegate?.didDrawVerticalScroller (inDirtyRect, self)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+}
+
+//--------------------------------------------------------------------------------------------------
+// https://stackoverflow.com/questions/11237622/using-autolayout-with-expanding-nstextviews
+//--------------------------------------------------------------------------------------------------
+
+public final class InternalCocoaTextView : NSTextView, NSTextViewDelegate { //, NSTextFinderClient {
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public weak var mDelegate : (any BaseTextViewDelegate)? = nil
+
+  //--- REQUIRED!!! Declaring theses properties ensures they are retained (required for ElCapitan)
+  private let mTextStorage : NSTextStorage // Subclassing NSTextStorage requires defining string, …
+  private let mLayoutManager = EmbeddedLayoutManager ()
+//  private let mTextFinder = NSTextFinder ()
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // https://developer.apple.com/library/archive/documentation/TextFonts/Conceptual/CocoaTextArchitecture/TextSystemArchitecture/ArchitectureOverview.html#//apple_ref/doc/uid/TP40009459-CH7-CJBJHGAG
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  init (textStorage inOptionalTextStorage : NSTextStorage?) {
+    self.mTextStorage = inOptionalTextStorage ?? NSTextStorage ()
+    let textContainer = NSTextContainer (size: NSSize (width: 300, height: 300))
+    self.mTextStorage.addLayoutManager (self.mLayoutManager)
+    self.mLayoutManager.addTextContainer (textContainer)
+
+    super.init (frame: .zero, textContainer: textContainer)
+    noteObjectAllocation (self)
+    self.delegate = self // NSTextViewDelegate
+
+//    self.mTextFinder.client = self
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  override init (frame : NSRect, textContainer : NSTextContainer?) { // Required, otherwise run time error
+    fatalError ("init(frame:textContainer:) has not been implemented")
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  required init? (coder inCoder : NSCoder) {
+    fatalError ("init(coder:) has not been implemented")
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  deinit {
+    noteObjectDeallocation (self)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public override var acceptsFirstResponder : Bool { self.isEditable }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private var mUndoManager : UndoManager? = nil
+  private var mTextViewDidChangeSelectionAction : (() -> Void)? = nil
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public final func setUndoManager (_ inUndoManager : UndoManager?) {
+    self.mUndoManager = inUndoManager
+    self.allowsUndo = true
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public final func setTextViewDidChangeSelectionAction (_ inAction : (() -> Void)?) {
+    self.mTextViewDidChangeSelectionAction = inAction
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //   NSTextViewDelegate
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public func undoManager (for inView : NSTextView) -> UndoManager? {  // NSTextViewDelegate
+    return self.mUndoManager
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public func textViewDidChangeSelection (_ inNotification : Notification) { // NSTextViewDelegate
+    self.mTextViewDidChangeSelectionAction? ()
+    self.mDelegate?.selectedRangeDidChange (self.selectedRange (), self)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public override func selectionRange (forProposedRange inProposedSelRange : NSRange,
+                                       granularity inGranularity : NSSelectionGranularity) -> NSRange {
+//    let proposedSelRange = super.selectionRange (forProposedRange: inProposedSelRange, granularity: inGranularity)
+    let optRange = self.mDelegate?.selectionRange (
+      forProposedRange: inProposedSelRange,
+      granularity: inGranularity,
+      self
+    )
+    return optRange ?? super.selectionRange (forProposedRange: inProposedSelRange, granularity: inGranularity)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public override func keyDown (with inEvent : NSEvent) {
+    var callSuperOnReturn = true
+    self.mDelegate?.keyDown (with: inEvent, self, callSuperOnReturn: &callSuperOnReturn)
+    if callSuperOnReturn {
+      super.keyDown (with: inEvent)
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public override func mouseDown (with inEvent : NSEvent) {
+    var callSuperOnReturn = true
+    self.mDelegate?.mouseDown (with: inEvent, self, callSuperOnReturn: &callSuperOnReturn)
+    if callSuperOnReturn {
+      super.mouseDown (with: inEvent)
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public override func draw (_ inDirtyRect : NSRect) {
+    self.mDelegate?.willDrawTextView (inDirtyRect, self)
+    super.draw (inDirtyRect)
+    self.mDelegate?.didDrawTextView (inDirtyRect, self)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

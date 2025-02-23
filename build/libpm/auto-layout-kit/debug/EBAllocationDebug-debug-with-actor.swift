@@ -292,7 +292,7 @@ import AppKit
        _ = self.mEnableAllocationDebugCheckbox.bind_value (self.mEnableAllocationDebug)
        _ = self.mTotalAllocatedLabel.bind_observedValue (self.mTotalAllocated)
        _ = self.mCurrentlyAllocatedLabel.bind_observedValue (self.mCurrentlyAllocated)
-       self.mPerformSnapShotButton.setAction { [weak self] in self?.performSnapShotAction () }
+       _ = self.mPerformSnapShotButton.setAction { [weak self] in self?.performSnapShotAction () }
        _ = self.mFilterPopUpButton.bind_selectedTag (self.mAllocationStatsDisplayFilterIndex)
          .setAction { [weak self] in self?.allocationStatsDisplayFilterIndexDidChange () }
     //--- Configure table view

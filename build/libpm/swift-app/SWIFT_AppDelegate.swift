@@ -12,6 +12,10 @@ import Cocoa
 
 @MainActor let gPageGuideColumn = EBPreferenceProperty <Int> (defaultValue: 100, prefKey: "page-guide-column")
 
+@MainActor let gSpacesForHTab = EBPreferenceProperty <Int> (defaultValue: 2, prefKey: "spaces-for-htab")
+
+@MainActor let gToolPopUpButtonSelectedIndex = EBPreferenceProperty <Int> (defaultValue: 0, prefKey: "compiler-tool-index")
+
 //--------------------------------------------------------------------------------------------------
 
 @MainActor func commandLineForBuildProcess () -> (String, [String]) {
@@ -64,10 +68,9 @@ import Cocoa
   private var mStringOptions = [(EBPreferenceProperty <String>, SWIFT_CommandLineOption)] ()
 
   private var mToolCommands = [URL] ()
+  var compilerToolPath : String { self.mToolCommands [gToolPopUpButtonSelectedIndex.propval].path }
 
   private let mToolPopUpButton = AutoLayoutPopUpButton (size: .regular)
-
-  private let mToolPopUpButtonSelectedIndex = EBPreferenceProperty <Int> (defaultValue: 0, prefKey: "compiler-tool-index")
 
   private let mPrefixByTimeUtility = EBPreferenceProperty <Bool> (defaultValue: false, prefKey: "prefix-with-time-utility")
 
@@ -262,7 +265,7 @@ import Cocoa
       [weak self] in self?.updateCommandLineTextView ()
     }
     self.mPrefixByTimeUtility.startsBeingObserved (by: self.mToolCommandLineObserver)
-    self.mToolPopUpButtonSelectedIndex.startsBeingObserved (by: self.mToolCommandLineObserver)
+    gToolPopUpButtonSelectedIndex.startsBeingObserved (by: self.mToolCommandLineObserver)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -302,7 +305,7 @@ import Cocoa
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   @MainActor private func populateToolPopupButtonInView () {
-    _ = self.mToolPopUpButton.bind_selectedIndex (self.mToolPopUpButtonSelectedIndex)
+    _ = self.mToolPopUpButton.bind_selectedIndex (gToolPopUpButtonSelectedIndex)
   //--- Populate
     self.mToolPopUpButton.removeAllItems ()
     let resourcePath = Bundle.main.resourcePath!
@@ -327,14 +330,14 @@ import Cocoa
     if self.mPrefixByTimeUtility.propval {
       command = "/usr/bin/time"
       if inFlag {
-        arguments.append (self.mToolCommands [self.mToolPopUpButtonSelectedIndex.propval].path)
+        arguments.append (self.compilerToolPath)
       }else{
-        arguments.append (self.mToolCommands [self.mToolPopUpButtonSelectedIndex.propval].lastPathComponent)
+        arguments.append (self.compilerToolPath.lastPathComponent)
       }
     }else if inFlag {
-      command = self.mToolCommands [self.mToolPopUpButtonSelectedIndex.propval].path
+      command = self.compilerToolPath
     }else{
-      command = self.mToolCommands [self.mToolPopUpButtonSelectedIndex.propval].lastPathComponent
+      command = self.compilerToolPath.lastPathComponent
     }
     for (property, option) in self.mBoolOptions {
       if property.propval {

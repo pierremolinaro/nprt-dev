@@ -31,9 +31,18 @@ import AppKit
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  override func close () { // Is always called before deinit
+    self.releaseTimer ()
+    super.close ()
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   deinit { // Not always in main thead
-    self.mTimerForAutosaving?.invalidate ()
-    DispatchQueue.main.async { SWIFT_SingleWindow.documentEditionStateDidChange () }
+  //    mTimerForAutosaving has been released by close()
+    DispatchQueue.main.async {
+      SWIFT_SingleWindow.documentEditionStateDidChange ()
+    }
     noteObjectDeallocation (self)
   }
 
@@ -284,6 +293,17 @@ import AppKit
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  override func canClose (withDelegate delegate : Any,
+                          shouldClose shouldCloseSelector : Selector?,
+                          contextInfo : UnsafeMutableRawPointer?) {
+    if self.isDocumentEdited {
+      self.save (nil)
+    }
+    super.canClose (withDelegate: delegate, shouldClose: shouldCloseSelector, contextInfo: contextInfo)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   //MARK: Comment / uncomment
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -291,23 +311,16 @@ import AppKit
     var newSelectedRange = NSRange ()
     if let tokenizer = self.mTokenizer {
       self.mTextStorage.beginEditing ()
-  //---
+    //---
       let blockCommentString = NSAttributedString (string: tokenizer.blockComment (), attributes: nil)
-//    NSMutableAttributedString * mutableSourceString = mSourceTextStorage ;
-//    NSString * sourceString = [mutableSourceString string] ;
       let sourceString = self.mTextStorage.string as NSString
       let lineRange = sourceString.lineRange (for: inSelectedRangeValue)
-//    const NSRange lineRange = [sourceString lineRangeForRange:inSelectedRangeValue] ;
-//    NSInteger insertedCharsCount = 0 ;
       var insertedCharsCount = 0
-//    NSRange currentLineRange = [sourceString lineRangeForRange:NSMakeRange (lineRange.location + lineRange.length - 1, 1)] ;
       var currentLineRange = sourceString.lineRange (for: NSRange (location: lineRange.location + lineRange.length - 1, length: 1))
       repeat {
         self.mTextStorage.insert (blockCommentString, at: currentLineRange.location)
-//      [mutableSourceString insertAttributedString:blockCommentString atIndex:currentLineRange.location] ;
         insertedCharsCount += (blockCommentString.string as NSString).length
         if currentLineRange.location > 0 {
-//        currentLineRange = [sourceString lineRangeForRange:NSMakeRange (currentLineRange.location - 1, 1)] ;
           currentLineRange = sourceString.lineRange (for: NSRange (location: currentLineRange.location - 1, length: 1))
         }
       }while ((currentLineRange.location > 0) && (currentLineRange.location >= lineRange.location))
@@ -315,13 +328,7 @@ import AppKit
       self.mTextStorage.endEditing ()
   //--- Update selected range
       newSelectedRange = NSRange (location: inSelectedRangeValue.location, length: inSelectedRangeValue.length + insertedCharsCount)
-//    const NSRange newSelectedRange = NSMakeRange (inSelectedRangeValue.location, inSelectedRangeValue.length + (NSUInteger) insertedCharsCount) ;
     //--- Register undo
-//      [mUndoManager
-//        registerUndoWithTarget: self
-//        selector: @selector (uncommentRangeForUndo:)
-//        object: [NSValue valueWithRange: newSelectedRange]
-//      ] ;
       self.mUndoManager.registerUndo (
         withTarget: self,
         selector: #selector (Self.uncommentRangeForUndo(_:)),

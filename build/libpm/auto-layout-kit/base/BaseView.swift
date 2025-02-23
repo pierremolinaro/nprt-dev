@@ -61,6 +61,7 @@ import AppKit
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  public var window : NSWindow? { self.mCocoaView.window }
   public var cocoaView : NSView { self.mCocoaView }
   public var subViews : [BaseView] { self.mSubViews }
   public var visibleSubViews : [BaseView] { self.mSubViews.filter { !$0.isHidden } }

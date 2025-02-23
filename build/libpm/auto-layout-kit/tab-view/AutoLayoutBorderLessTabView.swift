@@ -23,7 +23,7 @@ public class AutoLayoutBorderLessTabView : AutoLayoutVerticalStackView {
     .set (topMargin: .small)
     .appendView (self.mSegmentedControl)
     .appendView (self.mTabView)
-    self.mSegmentedControl.setAction { [weak self] in
+    _ = self.mSegmentedControl.setAction { [weak self] in
       if let me = self {
         let idx = me.mSegmentedControl.selectedSegment
         me.selectTab (atIndex: idx)
@@ -34,7 +34,7 @@ public class AutoLayoutBorderLessTabView : AutoLayoutVerticalStackView {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public final func setSegmentStyle (_ inStyle : NSSegmentedControl.Style) -> Self {
-    self.mSegmentedControl.setSegmentStyle (inStyle)
+    _ = self.mSegmentedControl.setSegmentStyle (inStyle)
     return self
   }
 

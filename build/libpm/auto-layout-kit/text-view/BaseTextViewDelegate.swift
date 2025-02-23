@@ -16,6 +16,19 @@ import AppKit
                                 _ inCocoaScroller : InternalVerticalScroller)
 
   func selectedRangeDidChange (_ inSelectedRange : NSRange, _ inCocoaWiew : InternalCocoaTextView)
+
+  func selectionRange (forProposedRange inProposedSelRange : NSRange,
+                       granularity inGranularity : NSSelectionGranularity,
+                       _ inCocoaWiew : InternalCocoaTextView) -> NSRange?
+
+  func keyDown (with inEvent : NSEvent,
+                _ inCocoaWiew : InternalCocoaTextView,
+                callSuperOnReturn outCallSuperOnReturn : inout Bool)
+
+  func mouseDown (with inEvent : NSEvent,
+                  _ inCocoaWiew : InternalCocoaTextView,
+                  callSuperOnReturn outCallSuperOnReturn : inout Bool)
+
 }
 
 //--------------------------------------------------------------------------------------------------

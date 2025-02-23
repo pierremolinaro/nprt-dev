@@ -7,8 +7,8 @@ import AppKit
 //--------------------------------------------------------------------------------------------------
 
 public protocol OutlineViewChildProtocol : AnyObject {
-  func childView (forColumn inColumn : NSTableColumn) -> NSView
-  func childDidSelect ()
+  @MainActor func childView (forColumn inColumn : NSTableColumn) -> NSView
+  @MainActor func childDidSelect ()
 }
 
 //--------------------------------------------------------------------------------------------------
