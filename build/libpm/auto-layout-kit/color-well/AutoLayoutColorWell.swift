@@ -26,8 +26,8 @@ public class AutoLayoutColorWell : BaseControl {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   override func runAction () {
-    super.runAction ()
     self.mColorController?.updateModel (withValue: self.mColorWell.color)
+    super.runAction ()
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -46,6 +46,7 @@ public class AutoLayoutColorWell : BaseControl {
 
   public final func bind_color (_ inObject : EBObservableMutableProperty <NSColor>) -> Self {
     NSColorPanel.shared.showsAlpha = true
+    NSColorPanel.shared.isContinuous = false
     self.mColorController = EBGenericReadWritePropertyController <NSColor> (
       observedObject: inObject,
       callBack: { [weak self] in self?.updateColor (from: inObject)  }
