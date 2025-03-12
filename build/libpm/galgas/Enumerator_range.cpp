@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'cEnumerator_range' : galgas range enumerator                                                
+//  'Enumerator_range' : galgas range enumerator                                                
 //
 //  This file is part of libpm library                                                           
 //
@@ -21,69 +21,63 @@
 #include "all-predefined-types.h"
 
 //--------------------------------------------------------------------------------------------------
+// DownEnumerator_range
+//--------------------------------------------------------------------------------------------------
 
-cEnumerator_range::cEnumerator_range (const GGS_range & inEnumeratedRange,
-                                      const EnumerationOrder inOrder) :
+DownEnumerator_range::DownEnumerator_range (const GGS_range & inEnumeratedRange) :
 mIsValid (inEnumeratedRange.isValid ()),
-mAscending (inOrder == EnumerationOrder::up),
 mStart (inEnumeratedRange.mProperty_start.uintValue ()),
 mLength (inEnumeratedRange.mProperty_length.uintValue ()),
 mCurrent (0) {
-  if (mAscending) {
-    mCurrent = mStart ;
-  }else{
-    mCurrent = mStart + mLength - 1 ;
-  }
+  mCurrent = mStart + mLength - 1 ;
 }
 
 
 //--------------------------------------------------------------------------------------------------
 
-cEnumerator_range::~cEnumerator_range (void) {
+bool DownEnumerator_range::hasCurrentObject (void) const {
+  return mIsValid && (mCurrent >= mStart) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-bool cEnumerator_range::hasCurrentObject (void) const {
-  bool ok = false ;
-  if (mIsValid) {
-    if (mAscending) {
-      ok = mCurrent < (mStart + mLength) ;
-    }else{
-      ok = mCurrent >= mStart ;
-    }
-  }
-  return ok ;
+void DownEnumerator_range::gotoNextObject (void) {
+  mCurrent -= 1 ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-bool cEnumerator_range::hasNextObject (void) const {
-  bool ok = false ;
-  if (mIsValid) {
-    if (mAscending) {
-      ok = (mCurrent + 1) < (mStart + mLength) ;
-    }else{
-      ok = mCurrent > mStart ;
-    }
-  }
-  return ok ;
+GGS_uint DownEnumerator_range::current (UNUSED_LOCATION_ARGS) const {
+  return GGS_uint (hasCurrentObject (), uint32_t (mCurrent)) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+// UpEnumerator_range
+//--------------------------------------------------------------------------------------------------
+
+UpEnumerator_range::UpEnumerator_range (const GGS_range & inEnumeratedRange) :
+mIsValid (inEnumeratedRange.isValid ()),
+mStart (inEnumeratedRange.mProperty_start.uintValue ()),
+mLength (inEnumeratedRange.mProperty_length.uintValue ()),
+mCurrent (inEnumeratedRange.mProperty_start.uintValue ()) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void cEnumerator_range::gotoNextObject (void) {
-  if (mAscending) {
-    mCurrent ++ ;
-  }else{
-    mCurrent -- ;
-  }
+bool UpEnumerator_range::hasCurrentObject (void) const {
+  return mIsValid && (mCurrent < (mStart + mLength)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_uint cEnumerator_range::current (UNUSED_LOCATION_ARGS) const {
-  return GGS_uint (hasCurrentObject (), (uint32_t) (mCurrent)) ;
+void UpEnumerator_range::gotoNextObject (void) {
+  mCurrent += 1 ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_uint UpEnumerator_range::current (UNUSED_LOCATION_ARGS) const {
+  return GGS_uint (hasCurrentObject (), uint32_t (mCurrent)) ;
 }
 
 //--------------------------------------------------------------------------------------------------

@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'cEnumerator_range' : galgas range enumerator                                                
+//  'Enumerator_range' : galgas range enumerator
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2012, ..., 2023 Pierre Molinaro.
+//  Copyright (C) 2012, ..., 2025 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -22,30 +22,21 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "cGenericAbstractEnumerator.h"
-
-//--------------------------------------------------------------------------------------------------
-
 class GGS_range ;
 class GGS_uint ;
 
 //--------------------------------------------------------------------------------------------------
 
-class cEnumerator_range final {
+class UpEnumerator_range final {
 //--- Constructor
-  public: cEnumerator_range (const GGS_range & inEnumeratedRange,
-                             const EnumerationOrder inOrder) ;
-
-//--- Destructor
-  public: ~ cEnumerator_range (void) ;
+  public: UpEnumerator_range (const GGS_range & inEnumeratedRange) ;
 
 //--- No copy
-  private: cEnumerator_range (const cEnumerator_range &) = delete ;
-  private: cEnumerator_range & operator = (const cEnumerator_range &) = delete ;
+  private: UpEnumerator_range (const UpEnumerator_range &) = delete ;
+  private: UpEnumerator_range & operator = (const UpEnumerator_range &) = delete ;
 
 //--- 
   public: bool hasCurrentObject (void) const ;
-  public: bool hasNextObject (void) const ;
   public: void gotoNextObject (void) ;
 
 //--- Current element access
@@ -53,7 +44,30 @@ class cEnumerator_range final {
 
 //---- Properties
   private: const bool mIsValid ;
-  private: const bool mAscending ;
+  private: const int64_t mStart ;
+  private: const int64_t mLength ;
+  private: int64_t mCurrent ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+class DownEnumerator_range final {
+//--- Constructor
+  public: DownEnumerator_range (const GGS_range & inEnumeratedRange) ;
+
+//--- No copy
+  private: DownEnumerator_range (const DownEnumerator_range &) = delete ;
+  private: DownEnumerator_range & operator = (const DownEnumerator_range &) = delete ;
+
+//--- 
+  public: bool hasCurrentObject (void) const ;
+  public: void gotoNextObject (void) ;
+
+//--- Current element access
+  public: GGS_uint current (LOCATION_ARGS) const ;
+
+//---- Properties
+  private: const bool mIsValid ;
   private: const int64_t mStart ;
   private: const int64_t mLength ;
   private: int64_t mCurrent ;

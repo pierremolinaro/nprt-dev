@@ -44,17 +44,16 @@ class cGenericAbstractEnumerator {
   protected: virtual ~ cGenericAbstractEnumerator (void) ;
 
 //--- No copy
-  private: cGenericAbstractEnumerator (const cGenericAbstractEnumerator &) ;
-  private: cGenericAbstractEnumerator & operator = (const cGenericAbstractEnumerator &) ;
+  private: cGenericAbstractEnumerator (const cGenericAbstractEnumerator &) = delete ;
+  private: cGenericAbstractEnumerator & operator = (const cGenericAbstractEnumerator &) = delete ;
 
 //--- 
   public: inline bool hasCurrentObject (void) const { return mIndex < mEnumerationArray.count () ; }
-  public: inline bool hasNextObject (void) const { return (mIndex + 1) < mEnumerationArray.count () ; }
   public: inline void gotoNextObject (void) { mIndex ++ ; }
   public: inline void rewind (void) { mIndex = 0 ; }
-  public: inline uint32_t index (void) const { return mIndex ; } // For Sara compatibility
-  public: inline void gotoIndex (const uint32_t inIndex) { mIndex = inIndex ; } // For Sara compatibility
   protected: const cCollectionElement * currentObjectPtr (LOCATION_ARGS) const ;
+
+  public: inline uint32_t index (void) const { return mIndex ; } // For Sara compatibility
 } ;
 
 //--------------------------------------------------------------------------------------------------

@@ -387,8 +387,8 @@ class cCollectionElement_data : public cCollectionElement {
                                    COMMA_LOCATION_ARGS) ;
 
 //--- No copy
-  private: cCollectionElement_data (const cCollectionElement_data &) ;
-  private: cCollectionElement_data & operator = (const cCollectionElement_data &) ;
+  private: cCollectionElement_data (const cCollectionElement_data &) = delete ;
+  private: cCollectionElement_data & operator = (const cCollectionElement_data &) = delete ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -441,51 +441,50 @@ void cCollectionElement_data::description (String & ioString, const int32_t inIn
 
 //--------------------------------------------------------------------------------------------------
 //
-//     cEnumerator_data class
+//     Enumerator_data class
 //
 //--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
-  #pragma mark cEnumerator_data
+  #pragma mark Enumerator_data
 #endif
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_data::populateEnumerationArray (capCollectionElementArray & inEnumerationArray) const {
-  const int32_t count = mData.count () ;
-  inEnumerationArray.setCapacity (uint32_t (count)) ;
-  for (int32_t i=0 ; i<count ; i++) {
-    cCollectionElement_data * p = nullptr ;
-    macroMyNew (p, cCollectionElement_data (GGS_uint (mData (i COMMA_HERE)) COMMA_HERE)) ;
-    capCollectionElement object ;
-    object.setPointer (p) ;
-    macroDetachSharedObject (p) ;
-    inEnumerationArray.appendObject (object) ;
-  }
+UpEnumerator_data::UpEnumerator_data (const GGS_data & inOperand) :
+mArray (inOperand.mData),
+mIndex (0) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-cEnumerator_data::cEnumerator_data (const GGS_data & inEnumeratedObject,
-                                    const EnumerationOrder inOrder) :
-cGenericAbstractEnumerator (inOrder) {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+GGS_uint UpEnumerator_data::current_data (LOCATION_ARGS) const {
+  return GGS_uint (mArray (mIndex COMMA_THERE)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_uint cEnumerator_data::current_data (LOCATION_ARGS) const {
-  const cCollectionElement_data * p = (const cCollectionElement_data *) (currentObjectPtr (THERE)) ;
-  macroValidSharedObject (p, cCollectionElement_data) ;
-  return p->attribute_data () ;
+GGS_uint UpEnumerator_data::current (LOCATION_ARGS) const {
+  return GGS_uint (mArray (mIndex COMMA_THERE)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_uint cEnumerator_data::current (LOCATION_ARGS) const {
-  const cCollectionElement_data * p = (const cCollectionElement_data *) (currentObjectPtr (THERE)) ;
-  macroValidSharedObject (p, cCollectionElement_data) ;
-  return p->attribute_data () ;
+DownEnumerator_data::DownEnumerator_data (const GGS_data & inOperand) :
+mArray (inOperand.mData),
+mIndex (inOperand.mData.count () - 1) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_uint DownEnumerator_data::current_data (LOCATION_ARGS) const {
+  return GGS_uint (mArray (mIndex COMMA_THERE)) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_uint DownEnumerator_data::current (LOCATION_ARGS) const {
+  return GGS_uint (mArray (mIndex COMMA_THERE)) ;
 }
 
 //--------------------------------------------------------------------------------------------------

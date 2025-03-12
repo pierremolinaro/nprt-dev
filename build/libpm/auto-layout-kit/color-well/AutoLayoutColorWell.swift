@@ -12,7 +12,7 @@ public class AutoLayoutColorWell : BaseControl {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  let mColorWell : NSColorWell
+  private let mColorWell : NSColorWell
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
