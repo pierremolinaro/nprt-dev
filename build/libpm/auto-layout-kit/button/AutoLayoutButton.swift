@@ -46,11 +46,11 @@ public class AutoLayoutButton : BaseControl {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   override func runAction () {
-     super.runAction ()
-     self.mStateDidChangeAction? (self.mCocoaButton.state)
-     if let selector = self.mSelector {
+    super.runAction ()
+    self.mStateDidChangeAction? (self.mCocoaButton.state)
+    if let selector = self.mSelector {
       _ = self.mTarget?.perform (selector)
-     }
+    }
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

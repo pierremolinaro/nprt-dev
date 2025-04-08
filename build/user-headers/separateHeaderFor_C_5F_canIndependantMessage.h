@@ -3,9 +3,7 @@
 
 //--- END OF USER ZONE 1
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 2: pointer class for @C_canIndependantMessage class
-//
 //--------------------------------------------------------------------------------------------------
 
 class cPtr_C_5F_canIndependantMessage : public cPtr_AC_5F_canMessage {

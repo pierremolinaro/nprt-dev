@@ -3,9 +3,7 @@
 
 //--- END OF USER ZONE 1
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 2: pointer class for @C_canMessageFromTask class
-//
 //--------------------------------------------------------------------------------------------------
 
 class cPtr_C_5F_canMessageFromTask : public cPtr_AC_5F_canMessage {

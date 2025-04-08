@@ -16,8 +16,12 @@ import AppKit
   private let mLineHeightObserver = EBOutletEvent ()
   var mDisplayDescriptors = [SWIFT_WeakElement <SWIFT_DisplayDescriptor>] ()
   var mTokenRangeArray = [SWIFT_Token] ()
-  let mTextStorage = NSTextStorage (string: "")
+  public let mTextStorage = NSTextStorage (string: "")
   private(set) var mIssueArray = [SWIFT_Issue] ()
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public var string : String { self.mTextStorage.string }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -160,7 +164,7 @@ import AppKit
         startColumn: inIssue.startColumn,
         length: inIssue.length
       )
-      inIssue.range = range
+      inIssue.setRange (range)
       self.mIssueArray.append (inIssue)
       self.textViewNeedsDisplay ()
     }
@@ -225,7 +229,7 @@ import AppKit
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  //   NSTextStorageDelegate method
+  //MARK:   NSTextStorageDelegate method
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   func textStorage (_ inTextStorage : NSTextStorage,
@@ -293,6 +297,7 @@ import AppKit
   override func save (_ inSender : Any?) {
     super.save (inSender)
     self.releaseTimer ()
+    // NSSound.beep ()
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -376,8 +381,6 @@ import AppKit
       let blockCommentString = tokenizer.blockComment ()
       let blockCommentLength = (blockCommentString as NSString).length
     //--- Get source string
-//      NSMutableAttributedString * mutableSourceString = mTextStorage ;
-//      NSString * sourceString = [mutableSourceString string] ;
       let sourceString = self.mTextStorage.string as NSString
     //--- Final selection range
       finalSelectedRange = initialSelectedRange
@@ -385,7 +388,7 @@ import AppKit
       let lineRange = sourceString.lineRange (for: initialSelectedRange)
       var currentLineRange = sourceString.lineRange (for: NSRange (location: lineRange.location + lineRange.length - 1, length: 1))
       repeat {
-        let lineString = sourceString.substring (with: currentLineRange) as NSString
+        let lineString = self.mTextStorage.string.nsSubstring (with: currentLineRange) as NSString
         if lineString.compare (blockCommentString, options: .literal, range: NSRange (location: 0, length: blockCommentLength)) == .orderedSame {
           self.mTextStorage.replaceCharacters (in: NSRange (location: currentLineRange.location, length: blockCommentLength), with: "")
         //--- Examen du nombre de caractères à l'intérieur de la sélection

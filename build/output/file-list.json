@@ -121,6 +121,7 @@
        "AC_GALGAS_root.cpp",
        "AC_GALGAS_list.cpp",
        "SharedStringMap.cpp",
+       "SharedObjectWithValueSemantics.cpp",
        "AC_GALGAS_sortedlist.cpp",
        "AC_GALGAS_map.cpp",
        "AC_GALGAS_reference_class.cpp",
@@ -144,7 +145,7 @@
        "GALGAS_function.cpp",
        "GALGAS_location.cpp",
        "GALGAS_sint.cpp",
-       "GALGAS_sint_36__34_.cpp",
+       "GALGAS_sint64.cpp",
        "GALGAS_string.cpp",
        "GALGAS_string-getters.cpp",
        "GALGAS_stringset.cpp",
@@ -152,7 +153,7 @@
        "GALGAS_object.cpp",
        "GALGAS_uint.cpp",
        "GALGAS_timer.cpp",
-       "GALGAS_uint_36__34_.cpp"
+       "GALGAS_uint64.cpp"
     ],
     "USER_LINK_OPTIONS"  :  [
     ]

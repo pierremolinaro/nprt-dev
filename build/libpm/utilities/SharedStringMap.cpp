@@ -18,7 +18,8 @@ SharedObject (THERE),
 mInfPtr (),
 mSupPtr (),
 mBalance (0),
-mKey (inKey) {
+mKey (inKey),
+mValue () {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -29,7 +30,8 @@ SharedObject (THERE),
 mInfPtr (),
 mSupPtr (),
 mBalance (inNodePtr->mBalance),
-mKey (inNodePtr->mKey) {
+mKey (inNodePtr->mKey),
+mValue (inNodePtr->mValue) {
   if (inNodePtr->mInfPtr.isNotNil ()) {
     mInfPtr = OptionalSharedRef <SharedStringMapNode>::make (inNodePtr->mInfPtr COMMA_THERE) ;
   }
@@ -161,42 +163,35 @@ class SharedStringMapRoot final : public SharedObject {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   private: static void rotateLeft (OptionalSharedRef <SharedStringMapNode> & ioRootPtr) {
-    OptionalSharedRef <SharedStringMapNode> b = ioRootPtr->mSupPtr ;
-    ioRootPtr->mSupPtr = b->mInfPtr ;
-    b->mInfPtr = ioRootPtr;
-
-    if (b->mBalance >= 0) {
-      ioRootPtr->mBalance++ ;
+    if (ioRootPtr->mSupPtr->mBalance >= 0) {
+      ioRootPtr->mBalance += 1 ;
     }else{
-      ioRootPtr->mBalance += 1 - b->mBalance ;
+      ioRootPtr->mBalance += 1 - ioRootPtr->mSupPtr->mBalance ;
     }
 
     if (ioRootPtr->mBalance > 0) {
-      b->mBalance += ioRootPtr->mBalance + 1 ;
+      ioRootPtr->mSupPtr->mBalance += ioRootPtr->mBalance + 1 ;
     }else{
-      b->mBalance++ ;
+      ioRootPtr->mSupPtr->mBalance += 1 ;
     }
-    ioRootPtr = b ;
+
+    ioRootPtr.rotateOwnershipLeft (ioRootPtr->mSupPtr, ioRootPtr->mSupPtr->mInfPtr) ;
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   private: static void rotateRight (OptionalSharedRef <SharedStringMapNode> & ioRootPtr) {
-    OptionalSharedRef <SharedStringMapNode> b = ioRootPtr->mInfPtr ;
-    ioRootPtr->mInfPtr = b->mSupPtr ;
-    b->mSupPtr = ioRootPtr ;
-
-    if (b->mBalance > 0) {
-      ioRootPtr->mBalance -= b->mBalance + 1 ;
+    if (ioRootPtr->mInfPtr->mBalance > 0) {
+      ioRootPtr->mBalance -= ioRootPtr->mInfPtr->mBalance + 1 ;
     }else{
       ioRootPtr->mBalance -= 1 ;
     }
     if (ioRootPtr->mBalance >= 0) {
-      b->mBalance -= 1 ;
+      ioRootPtr->mInfPtr->mBalance -= 1 ;
     }else{
-      b->mBalance += ioRootPtr->mBalance - 1 ;
+      ioRootPtr->mInfPtr->mBalance += ioRootPtr->mBalance - 1 ;
     }
-    ioRootPtr = b ;
+    ioRootPtr.rotateOwnershipLeft (ioRootPtr->mInfPtr, ioRootPtr->mInfPtr->mSupPtr) ;
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -206,8 +201,10 @@ class SharedStringMapRoot final : public SharedObject {
                                          OptionalSharedRef <SharedStringMapNode> & ioObjectToInsert) {
     bool extension = false ;
     if (ioRootPtr.isNil ()) {
-      ioRootPtr = ioObjectToInsert ;
-      ioObjectToInsert.setToNil () ;
+      ioRootPtr.swap (ioObjectToInsert) ;
+      ioRootPtr->mInfPtr.setToNil () ;
+      ioRootPtr->mSupPtr.setToNil () ;
+      ioRootPtr->mBalance = 0 ;
       mCount += 1 ;
       extension = true ;
     }else{
@@ -218,8 +215,8 @@ class SharedStringMapRoot final : public SharedObject {
           ioRootPtr->mBalance += 1 ;
           if (ioRootPtr->mBalance == 0) {
             extension = false ;
-          }else if (ioRootPtr->mBalance == 2) {
-            if (ioRootPtr->mInfPtr->mBalance == -1) {
+          }else if (ioRootPtr->mBalance > 1) {
+            if (ioRootPtr->mInfPtr->mBalance < 0) {
               rotateLeft (ioRootPtr->mInfPtr) ;
             }
             rotateRight (ioRootPtr) ;
@@ -232,8 +229,8 @@ class SharedStringMapRoot final : public SharedObject {
           ioRootPtr->mBalance -= 1 ;
           if (ioRootPtr->mBalance == 0) {
             extension = false ;
-          }else if (ioRootPtr->mBalance == -2) {
-            if (ioRootPtr->mSupPtr->mBalance == 1) {
+          }else if (ioRootPtr->mBalance < -1) {
+            if (ioRootPtr->mSupPtr->mBalance > 0) {
               rotateRight (ioRootPtr->mSupPtr) ;
             }
             rotateLeft (ioRootPtr) ;
@@ -251,20 +248,20 @@ class SharedStringMapRoot final : public SharedObject {
   // Removing: return removed object, or nullptr
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public: OptionalSharedRef <SharedStringMapNode> removeObject (const String & inKey) {
+  public: void removeObject (const String & inKey,
+                             OptionalSharedRef <SharedStringMapNode> & outRemovedNode) {
     macroUniqueSharedObject (this) ;
 //    if (mCacheArrayIsBuilt) {
 //      mCacheArrayIsBuilt = false ;
 //      mCacheArray.removeAllKeepingCapacity () ;
 //    }
     bool ioBranchHasBeenRemoved ;
-    OptionalSharedRef <SharedStringMapNode> removedNode = internalRemoveEntry (inKey, mRootNode, ioBranchHasBeenRemoved) ;
-    return removedNode ;
+    internalRemoveEntry (inKey, mRootNode, outRemovedNode, ioBranchHasBeenRemoved) ;
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  private: static void supBranchDecreased (OptionalSharedRef <SharedStringMapNode> & ioRoot,
+  private: static inline void supBranchDecreased (OptionalSharedRef <SharedStringMapNode> & ioRoot,
                                            bool & ioBranchHasBeenRemoved) {
     ioRoot->mBalance += 1 ;
     switch (ioRoot->mBalance) {
@@ -293,14 +290,14 @@ class SharedStringMapRoot final : public SharedObject {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  private: static void infBranchDecreased (OptionalSharedRef <SharedStringMapNode> & ioRoot,
+  private: static inline void infBranchDecreased (OptionalSharedRef <SharedStringMapNode> & ioRoot,
                                            bool & ioBranchHasBeenRemoved) {
-    ioRoot->mBalance -- ;
+    ioRoot->mBalance -= 1 ;
     switch (ioRoot->mBalance) {
     case 0:
       break;
     case -1:
-      ioBranchHasBeenRemoved = false;
+      ioBranchHasBeenRemoved = false ;
       break;
     case -2:
       switch (ioRoot->mSupPtr->mBalance) {
@@ -339,66 +336,71 @@ class SharedStringMapRoot final : public SharedObject {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  private: OptionalSharedRef <SharedStringMapNode> internalRemoveEntry (const String & inKeyToRemove,
-                                              OptionalSharedRef <SharedStringMapNode> & ioRoot,
-                                              bool & ioBranchHasBeenRemoved) {
-    OptionalSharedRef <SharedStringMapNode> removedNode ;
+  private: void internalRemoveEntry (const String & inKeyToRemove,
+                                     OptionalSharedRef <SharedStringMapNode> & ioRoot,
+                                     OptionalSharedRef <SharedStringMapNode> & outRemovedNode,
+                                     bool & ioBranchHasBeenRemoved) {
     if (ioRoot.isNotNil ()) {
       const int32_t comparaison = ioRoot->mKey.compare (inKeyToRemove) ;
       if (comparaison > 0) {
-        removedNode = internalRemoveEntry (inKeyToRemove, ioRoot->mInfPtr, ioBranchHasBeenRemoved);
+        internalRemoveEntry (inKeyToRemove, ioRoot->mInfPtr, outRemovedNode, ioBranchHasBeenRemoved);
         if (ioBranchHasBeenRemoved) {
           infBranchDecreased (ioRoot, ioBranchHasBeenRemoved) ;
         }
       }else if (comparaison < 0) {
-        removedNode = internalRemoveEntry (inKeyToRemove, ioRoot->mSupPtr, ioBranchHasBeenRemoved);
+        internalRemoveEntry (inKeyToRemove, ioRoot->mSupPtr, outRemovedNode, ioBranchHasBeenRemoved);
         if (ioBranchHasBeenRemoved) {
           supBranchDecreased (ioRoot, ioBranchHasBeenRemoved);
         }
       }else{ // Found
-        removedNode = ioRoot ;
         mCount -= 1 ;
-        OptionalSharedRef <SharedStringMapNode> p = ioRoot ;
-        if (p->mInfPtr.isNil ()) {
-          ioRoot = p->mSupPtr;
-          p->mSupPtr.setToNil () ;
-          ioBranchHasBeenRemoved = true;
-        }else if (p->mSupPtr.isNil ()) {
-          ioRoot = p->mInfPtr;
-          p->mInfPtr.setToNil () ;
-          ioBranchHasBeenRemoved = true;
+        outRemovedNode.setToNil () ;
+        if (ioRoot->mInfPtr.isNil ()) {
+          outRemovedNode.rotateOwnershipLeft (ioRoot, ioRoot->mSupPtr) ;
+          ioBranchHasBeenRemoved = true ;
+        }else if (ioRoot->mSupPtr.isNil ()) {
+          outRemovedNode.rotateOwnershipLeft (ioRoot, ioRoot->mInfPtr) ;
+          ioBranchHasBeenRemoved = true ;
         }else{
+          outRemovedNode = ioRoot ;
+          OptionalSharedRef <SharedStringMapNode> p = ioRoot ;
           getPreviousElement (p->mInfPtr, ioRoot, ioBranchHasBeenRemoved) ;
           ioRoot->mSupPtr = p->mSupPtr;
           p->mSupPtr.setToNil () ;
           ioRoot->mInfPtr = p->mInfPtr;
           p->mInfPtr.setToNil () ;
+
           ioRoot->mBalance = p->mBalance;
-          p->mBalance = 0;
           if (ioBranchHasBeenRemoved) {
             infBranchDecreased (ioRoot, ioBranchHasBeenRemoved) ;
           }
         }
       }
     }
-    return removedNode ;
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public: OptionalSharedRef <SharedStringMapNode> nodeForKey (const String & inKey) const {
-    OptionalSharedRef <SharedStringMapNode> nodePtr = mRootNode ;
-    while (nodePtr.isNotNil ()) {
-      const int32_t comparaison = nodePtr->mKey.compare (inKey) ;
+  public: bool hasKey (const String & inKey) const {
+    return recursiveSearch (mRootNode, inKey) ;
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public: bool recursiveSearch (const OptionalSharedRef <SharedStringMapNode> & inNodePtr,
+                                const String & inKey) const {
+    bool result = false ;
+    if (inNodePtr.isNotNil ()) {
+      const int32_t comparaison = inNodePtr->mKey.compare (inKey) ;
       if (comparaison > 0) {
-        nodePtr = nodePtr->mInfPtr ;
+        result = recursiveSearch (inNodePtr->mInfPtr, inKey) ;
       }else if (comparaison < 0) {
-        nodePtr = nodePtr->mSupPtr ;
+        result = recursiveSearch (inNodePtr->mSupPtr, inKey) ;
       }else{ // Found
-        return nodePtr ;
+        result = true ;
       }
     }
-    return OptionalSharedRef <SharedStringMapNode> () ;
+    return result ;
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -499,14 +501,13 @@ void SharedStringMap::insert (OptionalSharedRef <SharedStringMapNode> & ioObject
 
 //--------------------------------------------------------------------------------------------------
 
-OptionalSharedRef <SharedStringMapNode> SharedStringMap::removeAndReturnRemovedNode (const String & inKey
-                                                                   COMMA_LOCATION_ARGS) {
-  OptionalSharedRef <SharedStringMapNode> removedNode ;
+void SharedStringMap::removeAndReturnRemovedNode (const String & inKey,
+                                         OptionalSharedRef <SharedStringMapNode> & outRemovedNode
+                                         COMMA_LOCATION_ARGS) {
   if (mSharedRoot.isNotNil ()) {
     insulate (THERE) ;
-    removedNode = mSharedRoot->removeObject (inKey) ;
+    mSharedRoot->removeObject (inKey, outRemovedNode) ;
   }
-  return removedNode ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -517,10 +518,10 @@ String SharedStringMap::rootNodeKey (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-OptionalSharedRef <SharedStringMapNode> SharedStringMap::nodeForKey (const String & inKey) const {
-  OptionalSharedRef <SharedStringMapNode> result ;
+bool SharedStringMap::hasKey (const String & inKey) const {
+  bool result = false ;
   if (mSharedRoot.isNotNil ()) {
-    result = mSharedRoot->nodeForKey (inKey) ;
+    result = mSharedRoot->hasKey (inKey) ;
   }
   return result ;
 }

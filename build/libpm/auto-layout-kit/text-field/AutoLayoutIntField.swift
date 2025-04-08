@@ -14,16 +14,6 @@ public final class AutoLayoutIntField : BaseTextField {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-//  private var mInputIsValid = true {
-//    didSet {
-//      if self.mInputIsValid != oldValue {
-//        self.needsDisplay = true
-//      }
-//    }
-//  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
   public init (minWidth inWidth : Int, size inSize : NSControl.ControlSize) {
     super.init (minWidth: inWidth, bold: true, size: inSize)
   //--- Number formatter
@@ -38,14 +28,14 @@ public final class AutoLayoutIntField : BaseTextField {
 
  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -····················
 
-  final func set (min inMin : Int) -> Self {
+  final func setMin (_ inMin : Int) -> Self {
     self.mNumberFormatter.minimum = NSNumber (value: inMin)
     return self
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  final func set (max inMax : Int) -> Self {
+  final func setMax (_ inMax : Int) -> Self {
     self.mNumberFormatter.maximum = NSNumber (value: inMax)
     return self
   }
@@ -73,28 +63,6 @@ public final class AutoLayoutIntField : BaseTextField {
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-//  override func draw (_ inDirtyRect : NSRect) {
-//    super.draw (inDirtyRect)
-//    if !self.mInputIsValid {
-//      NSColor.systemRed.withAlphaComponent (0.25).setFill ()
-//      NSBezierPath.fill (self.bounds)
-//    }
-//  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-//  @objc fileprivate func valueDidChangeAction (_ _ : Any?) {
-//    if let formatter = self.formatter as? NumberFormatter, let outletValueNumber = formatter.number (from: self.stringValue) {
-//      let value = Int (outletValueNumber.doubleValue.rounded ())
-//      self.mValueController?.updateModel (withValue: value)
-//    }else if let v = self.mValueController?.value {
-//      self.mInputIsValid = true
-//      self.integerValue = v
-//    }
-//  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   //MARK:  $value binding
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -103,7 +71,7 @@ public final class AutoLayoutIntField : BaseTextField {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public final func bind_value (_ inObject : EBObservableMutableProperty <Int>,
-                         sendContinously inSendContinously : Bool) -> Self {
+                                sendContinously inSendContinously : Bool) -> Self {
     self.mCocoaTextField.isContinuous = inSendContinously
     self.mValueController = EBGenericReadWritePropertyController <Int> (
       observedObject: inObject,

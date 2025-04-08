@@ -18,7 +18,7 @@ final class SWIFT_Issue {
   let kind : Kind
   let fixitArray : [MyFixitDecoder]
   let locationInBuildLogTextView : Int
-  var range = NSRange ()
+  private(set) var range = NSRange ()
   private(set) var mIsValid = true
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -91,6 +91,12 @@ final class SWIFT_Issue {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  func setRange (_ inRange : NSRange) {
+    self.range = inRange
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   enum Kind { case warning, error }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -99,11 +105,15 @@ final class SWIFT_Issue {
                                        changeInLength inChangeInLength : Int,
                                        updateDisplay ioUpdate : inout Bool) {
     if self.mIsValid {
-      if let _ = self.range.intersection (inEditedRange) {
+      let previousRange = NSRange (
+        location: inEditedRange.location,
+        length: inEditedRange.length - inChangeInLength
+      )
+      if let _ = self.range.intersection (previousRange) {
       //--- Edition occurs into issue range : make issue invalid
         self.mIsValid = false
         ioUpdate = true
-      }else if self.range.location >= (inEditedRange.location + inEditedRange.length) {
+      }else if self.range.location >= (previousRange.location + previousRange.length) {
       //--- Edition occurs before issue range : translate it
         self.range.location += inChangeInLength
       }

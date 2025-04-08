@@ -88,12 +88,15 @@ public final class AutoLayoutStaticTextView : BaseTextView {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public func appendMessageString (_ inString : String, color : NSColor) {
-    let attributes : [NSAttributedString.Key : NSObject] = [
-      .font : NSFont.boldSystemFont (ofSize: NSFont.smallSystemFontSize),
+  public func appendMessageString (_ inString : String, color : NSColor, bold inBold : Bool) {
+    let font = inBold
+      ? NSFont.boldSystemFont (ofSize: NSFont.smallSystemFontSize)
+      : NSFont.systemFont (ofSize: NSFont.smallSystemFontSize)
+    let attributes : [NSAttributedString.Key : Any] = [
+      .font : font,
       .foregroundColor : color
     ]
-    let str = NSAttributedString (string:inString, attributes: attributes)
+    let str = NSAttributedString (string: inString, attributes: attributes)
     self.appendAttributedString (str)
   }
 
@@ -112,19 +115,19 @@ public final class AutoLayoutStaticTextView : BaseTextView {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func appendErrorString (_ inString : String) {
-    self.appendMessageString (inString, color: .red)
+    self.appendMessageString (inString, color: .red, bold: true)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func appendWarningString (_ inString : String) {
-    self.appendMessageString (inString, color: .orange)
+    self.appendMessageString (inString, color: .orange, bold: true)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func appendSuccessString (_ inString : String) {
-    self.appendMessageString (inString, color: .blue)
+    self.appendMessageString (inString, color: .blue, bold: true)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

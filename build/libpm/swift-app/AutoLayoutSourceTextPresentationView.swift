@@ -28,7 +28,6 @@ final class AutoLayoutSourceTextPresentationView : AutoLayoutVerticalStackView, 
       minHeight: 400
     )
     .setUsesFindBar ()
-    self.mSourceTextView.mCocoaTextView.useAllLigatures (nil)
     self.mSourceTextView.mCocoaTextView.isAutomaticQuoteSubstitutionEnabled = false
     self.mSourceTextView.mCocoaTextView.smartInsertDeleteEnabled = false
     self.mSourceTextView.mCocoaTextView.isAutomaticDashSubstitutionEnabled = false
@@ -86,9 +85,22 @@ final class AutoLayoutSourceTextPresentationView : AutoLayoutVerticalStackView, 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   var selectedString : String {
-    let str = self.mSourceTextView.string as NSString
     let range = self.mSourceTextView.selectedRange
-    return str.substring (with: range)
+    return self.mSourceTextView.string.nsSubstring (with: range)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  var currentLine : Int { self.mSourceTextView.currentLine }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  var lineCount : Int { self.mSourceTextView.lineCount }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func selectLineStart (_ inLineIndex : Int) {
+    self.mSourceTextView.selectLineStart (inLineIndex)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -100,9 +112,6 @@ final class AutoLayoutSourceTextPresentationView : AutoLayoutVerticalStackView, 
     if var array = inPathComponents {
       if array.count > 0 {
         array.removeFirst () // First is '/'
-      }
-      if array.count > 0 {
-        array.removeLast () // Last is file name
       }
       var title = ""
       for pathComponent in array {
@@ -122,7 +131,7 @@ final class AutoLayoutSourceTextPresentationView : AutoLayoutVerticalStackView, 
   @objc private func revealInFinder (_ inSender : Any?) {
     if let menuItem = inSender as? NSMenuItem,
        let path = menuItem.representedObject as? String {
-      NSWorkspace.shared.open (URL (fileURLWithPath: path))
+      NSWorkspace.shared.activateFileViewerSelecting ([URL (fileURLWithPath: path)])
     }
   }
 
@@ -229,20 +238,23 @@ final class AutoLayoutSourceTextPresentationView : AutoLayoutVerticalStackView, 
 
   public func didDrawTextView (_ inDirtyRect : NSRect, _ inCocoaTextWiew : InternalCocoaTextView) {
     if let layoutManager = inCocoaTextWiew.layoutManager,
+       let textContainer = inCocoaTextWiew.textContainer,
        let ruler = self.mSourceTextView.verticalRuler as? SWIFT_TextViewRulerView,
        let issueArray = ruler.mDocument?.mIssueArray {
      //-------- Note: ruler view and text view are both flipped
       for issue in issueArray {
         if issue.mIsValid {
-          let lineFragmentRect = layoutManager.lineFragmentRect (
-            forGlyphAt: layoutManager.glyphIndexForCharacter (at: issue.range.location),
-            effectiveRange: nil
-          )
-          let p1 = layoutManager.location (forGlyphAt: layoutManager.glyphIndexForCharacter (at: issue.range.location))
-          let p2 = layoutManager.location (forGlyphAt: layoutManager.glyphIndexForCharacter (at: issue.range.location + issue.range.length + 1))
           let bp = NSBezierPath ()
-          bp.move (to: NSPoint (x: lineFragmentRect.origin.x + p1.x, y: lineFragmentRect.maxY))
-          bp.line (to: NSPoint (x: lineFragmentRect.origin.x + p2.x, y: lineFragmentRect.maxY))
+          let glyphRange = layoutManager.glyphRange (
+            forCharacterRange: issue.range,
+            actualCharacterRange: nil
+          )
+          let rr = layoutManager.boundingRect (
+            forGlyphRange: glyphRange,
+            in: textContainer
+          )
+          bp.move (to: NSPoint (x: rr.minX, y: rr.maxY))
+          bp.line (to: NSPoint (x: rr.maxX, y: rr.maxY))
           bp.lineWidth = 3.0
           bp.lineCapStyle = .round
           issue.color.setStroke ()
@@ -329,7 +341,7 @@ final class AutoLayoutSourceTextPresentationView : AutoLayoutVerticalStackView, 
       if char == "\t", alignment > 0 { // A Tab Character, without shift ?
         outCallSuperOnReturn = false
         let selectedRange = inCocoaTextWiew.selectedRange
-        let selectedString = nsString.substring (with: selectedRange)
+        let selectedString = inCocoaTextWiew.string.nsSubstring (with: selectedRange)
         if selectedString.contains ("\n") {
           self.shiftRightRange (inCocoaTextWiew)
         }else{
@@ -411,7 +423,7 @@ final class AutoLayoutSourceTextPresentationView : AutoLayoutVerticalStackView, 
     ]
   //--- Indexing dictionary
     let dictionaryArray = self.buildIndexingDictionaryArray ()
-    let tokenString = (self.mSourceTextView.string as NSString).substring (with: inSelectedRange)
+    let tokenString = self.mSourceTextView.string.nsSubstring (with: inSelectedRange)
   //--- Build array of all references of given token
     var allReferences = [String] ()
     for currentIndexDictionary in dictionaryArray {
@@ -490,7 +502,7 @@ final class AutoLayoutSourceTextPresentationView : AutoLayoutVerticalStackView, 
     let sourceString = inCocoaTextWiew.string as NSString
   //--- Line range contains all lines
     let lineRange = sourceString.lineRange (for: inCocoaTextWiew.selectedRange)
-    let lineRangeString = sourceString.substring (with: lineRange)
+    let lineRangeString = inCocoaTextWiew.string.nsSubstring (with: lineRange)
     let lines = lineRangeString.split (separator: "\n")
     let indentedLines = lines.map { spaceString + $0 }
     let newLineRangeString = indentedLines.joined (separator: "\n") + "\n"
@@ -508,7 +520,7 @@ final class AutoLayoutSourceTextPresentationView : AutoLayoutVerticalStackView, 
     let sourceString = inCocoaTextWiew.string as NSString
   //--- Line range contains all lines
     let lineRange = sourceString.lineRange (for: inCocoaTextWiew.selectedRange)
-    let lineRangeString = sourceString.substring (with: lineRange)
+    let lineRangeString = inCocoaTextWiew.string.nsSubstring (with: lineRange)
     let lines = lineRangeString.split (separator: "\n")
     let modifiedLines = lines.map {
       var result = $0

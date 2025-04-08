@@ -194,7 +194,7 @@ GGS_string GGS_string::class_func_CppSpaceComment (UNUSED_LOCATION_ARGS) {
 //--------------------------------------------------------------------------------------------------
 
 GGS_string GGS_string::class_func_CppString (const GGS_string & inString
-                                                   COMMA_UNUSED_LOCATION_ARGS) {
+                                             COMMA_UNUSED_LOCATION_ARGS) {
   GGS_string result ;
   if (inString.isValid ()) {
     String s ;
@@ -401,9 +401,9 @@ GGS_string GGS_string::add_operation (const GGS_string & inOperand,
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_string::plusAssign_operation (GGS_string inOperand,
-                                          Compiler * /* inCompiler */
-                                          COMMA_UNUSED_LOCATION_ARGS) {
+void GGS_string::plusAssignOperation (GGS_string inOperand,
+                                      Compiler * /* inCompiler */
+                                      COMMA_UNUSED_LOCATION_ARGS) {
   if (isValid () && inOperand.isValid ()) {
     mString.appendString (inOperand.mString) ;
   }else{
@@ -779,7 +779,7 @@ void GGS_string::class_method_deleteFile (GGS_string inFilePath,
     }else{
       const String errorMessage = FileManager::deleteFile (inFilePath.mString) ;
       if (errorMessage.length () == 0) {
-        ggs_printFileOperationSuccess (String ("Deleted '") + inFilePath.mString + "'.\n") ;
+        ggs_printFileDeletionSuccess (String ("Deleted '") + inFilePath.mString + "'.\n") ;
       }else{
         String message = "cannot perform delete '" ;
         message.appendString (inFilePath.mString) ;

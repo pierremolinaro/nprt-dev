@@ -55,7 +55,6 @@ public class BaseTextView : BaseView {
     self.mCocoaTextView.importsGraphics = false
     self.mCocoaTextView.allowsImageEditing = false
     self.mCocoaTextView.drawsBackground = inDrawsBackground
-    self.mCocoaTextView.string = ""
 
     let MAX_SIZE : CGFloat = 1_000_000.0 // CGFloat.greatestFiniteMagnitude
     self.mCocoaTextView.minSize = NSSize (width: 0.0, height: self.mScrollView.contentSize.height)
@@ -68,7 +67,6 @@ public class BaseTextView : BaseView {
 
     self.mCocoaTextView.isGrammarCheckingEnabled = false
     self.mCocoaTextView.isContinuousSpellCheckingEnabled = false
-    self.mCocoaTextView.useAllLigatures (nil)
     self.mCocoaTextView.isAutomaticQuoteSubstitutionEnabled = false
     self.mCocoaTextView.smartInsertDeleteEnabled = false
     self.mCocoaTextView.isAutomaticDashSubstitutionEnabled = false
@@ -123,6 +121,49 @@ public class BaseTextView : BaseView {
   public final var string : String {
     get { return self.mCocoaTextView.string }
     set { self.mCocoaTextView.string = newValue }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  var currentLine : Int {
+    let selectedRange = self.mCocoaTextView.selectedRange
+    let s = self.mCocoaTextView.string as NSString
+    var idx = 0
+    var lineIndex = 0
+    var found = false
+    while !found, idx < s.length {
+      lineIndex += 1
+      let lineRange = s.lineRange (for: NSRange (location: idx, length: 1))
+      idx = lineRange.location + lineRange.length
+      found = idx > selectedRange.location
+    }
+    return lineIndex
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  var lineCount : Int {
+    var lineIndex = 0
+    let s = self.mCocoaTextView.string as NSString
+    if s.length > 0 {
+      var idx = 0
+      while idx < s.length {
+        let lineRange = s.lineRange (for: NSRange (location: idx, length: 1))
+        idx = lineRange.location + lineRange.length
+        lineIndex += 1
+      }
+    }
+    return lineIndex
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func selectLineStart (_ inLine : Int) {
+    if let textStorage = self.mCocoaTextView.textStorage {
+      let range = textStorage.rangeFor (line: inLine, startColumn: 1, length: 0)
+      self.mCocoaTextView.setSelectedRange (range)
+      self.mCocoaTextView.scrollRangeToVisible (range)
+    }
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -258,7 +299,7 @@ public extension NSTextStorage {
         found = inLine == lineIndex
       }
     }
-    return NSRange (location: idx + inStartColumn, length: max (inLength, 0))
+    return NSRange (location: idx + inStartColumn - 1, length: max (inLength, 0))
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

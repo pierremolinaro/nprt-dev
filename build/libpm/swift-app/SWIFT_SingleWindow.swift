@@ -135,7 +135,7 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
   //---
     self.appendTab (document: inDocument, selectedRange: NSRange ())
   //--- Open other tabs ?
-    self.openTabsFromUserDefaults (forDocument:  inDocument)
+    self.openTabsFromUserDefaults (forDocument: inDocument)
   //--- Select first tab
     self.selectTab (atIndex: 0)
   //--- Configuring recent search menu
@@ -166,6 +166,9 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
     cellMenu.insertItem (item, at: 3)
     _ = self.mSearchTextField.setSearchMenuTemplate (cellMenu: cellMenu)
       .setAction { [weak self] in self?.performSearchInFiles () }
+    DispatchQueue.main.async {
+      self.makeKeyAndOrderFront (nil)
+    }
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -311,8 +314,13 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   override func close () {
+    for tab in self.mTabArray {
+      if tab.mDocument.isDocumentEdited {
+        tab.mDocument.save (nil)
+      }
+    }
+    self.mTabArray.removeAll ()
     DispatchQueue.main.async {
-      self.mTabArray.removeAll ()
       SWIFT_DocumentController.closeUnreferencedDocuments ()
     }
     super.close ()
@@ -417,7 +425,9 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   private func closeTab (atIndex inIndex : Int) {
-    if (inIndex >= 0) && (inIndex < self.mTabArray.count) {
+    if inIndex >= 0, inIndex < self.mTabArray.count {
+    //--- Enregistrer tous les documents
+      SWIFT_DocumentController.mySaveAllDocuments ()
     //--- Supprimer l'entrée
       self.mTabArray.remove (at: inIndex)
     //--- Fermer les documents qui ne sont plus visibles (en fait, un seul peut être
@@ -616,6 +626,56 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
     if self.mSelectedTabIndex >= 0, self.mSelectedTabIndex < self.mTabArray.count {
       let dd = self.mTabArray [self.mSelectedTabIndex]
       dd.uncommentSelection ()
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  @IBAction func gotoLineAction (_ inUnusedSender : Any?) {
+    if self.mSelectedTabIndex >= 0, self.mSelectedTabIndex < self.mTabArray.count {
+      let dd : SWIFT_DisplayDescriptor = self.mTabArray [self.mSelectedTabIndex]
+      let currentLine = dd.currentLine
+      let lineCount = dd.lineCount
+      if lineCount > 1 {
+        let panel = NSPanel (
+          contentRect: NSRect (x: 0.0, y: 0.0, width: 400.0, height: 150.0),
+          styleMask: [.titled],
+          backing: .buffered,
+          defer: false
+        )
+        let title = AutoLayoutStaticLabel (title: "Goto Line", bold: true, size: .regular, alignment: .center)
+        let lineProperty = EBStandAloneProperty <Int> (currentLine)
+        let intField = AutoLayoutIntField (minWidth: 100, size: .regular)
+          .setMin (1)
+          .setMax (lineCount)
+          .bind_value (lineProperty, sendContinously: true)
+        let rangeLabel = AutoLayoutStaticLabel (title: "(1 - \(lineCount))", bold: false, size: .regular, alignment: .center)
+        let intFieldLine = AutoLayoutHorizontalStackView ()
+          .set (margins: .zero)
+          .appendView (intField)
+          .appendView (rangeLabel)
+        let okButton = AutoLayoutSheetDefaultOkButton (title: "Goto Line", size: .regular, sheet: panel)
+        let cancelButton = AutoLayoutSheetCancelButton (title: "Cancel", size: .regular)
+        let lastLine = AutoLayoutHorizontalStackView ()
+          .set (margins: .zero)
+          .appendView (cancelButton)
+          .appendFlexibleSpace ()
+          .appendView (okButton)
+        let mainView = AutoLayoutVerticalStackView ()
+          .appendView (title)
+          .appendFlexibleSpace ()
+          .appendView (intFieldLine)
+          .appendView (lastLine)
+      //--- Set autolayout view to panel
+        panel.setRootView (mainView)
+        RunLoop.current.run (until: Date ()) 
+
+        self.beginSheet (panel) { (inResponse : NSApplication.ModalResponse) in
+          if inResponse == .stop {
+            dd.selectLineStart (lineProperty.propval)
+          }
+        }
+      }
     }
   }
 
@@ -823,6 +883,8 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
       var globalDict = [String : Any] ()
       globalDict ["tabs"] = fileArray
       globalDict ["range"] = NSStringFromRange (self.mTabArray [0].selectedRange)
+      globalDict ["selectedIndex"] = self.mSelectedTabIndex
+      globalDict ["windowRect"] = NSStringFromRect (self.frame)
       UserDefaults.standard.set (globalDict, forKey: self.userDefaultKey)
     }
   }
@@ -832,9 +894,14 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
   private func openTabsFromUserDefaults (forDocument inDocument : SWIFT_SingleDocument) {
     if let globalDict = UserDefaults.standard.object (forKey: self.userDefaultKey) as? [String : Any],
        let tabFilePathArray = globalDict ["tabs"] as? [[String : String]],
+       let selectedTabIndex = globalDict ["selectedIndex"] as? Int,
        let tab0RangeString = globalDict ["range"] as? String {
       DispatchQueue.main.async {
         self.mTabArray [0].setSelectedRange (NSRangeFromString (tab0RangeString))
+        if let str = globalDict ["windowRect"] as? String {
+          let r = NSRectFromString (str)
+          self.setFrame (r, display: true, animate: false)
+        }
       }
       for tabDict in tabFilePathArray {
         if let filePath = tabDict ["file"], let rangeString = tabDict ["range"] {
@@ -843,6 +910,11 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
               self.appendTab (document: document, selectedRange: NSRangeFromString (rangeString))
             }
           }
+        }
+      }
+      DispatchQueue.main.async {
+        if selectedTabIndex >= 0, selectedTabIndex < self.mTabArray.count {
+          self.selectTab (atIndex: selectedTabIndex)
         }
       }
     }
@@ -952,7 +1024,7 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
     let (command, arguments) = commandLineForBuildProcess ()
     process.executableURL = URL (fileURLWithPath: command)
     let sourceFile = self.mTabArray [0].fileURL!.path
-    process.arguments = arguments + [sourceFile, "--swift-app-json-output"] // "--cocoa"]
+    process.arguments = arguments + [sourceFile, "--swift-app-json-output"]
   //--- Set standard output notification
     let pipe = Pipe ()
     self.mProcessOutputPipe = pipe
@@ -1048,24 +1120,12 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
         self.mResultData.removeSubrange (self.mResultData.startIndex ..< idx)
       }
     }
-  //--- Look for last line feed
-//    let startIndex = self.mResultData.startIndex
-//    var idx = self.mResultData.endIndex
-//    var ok = false
-//    while !ok, idx > 0 {
-//      idx -= 1
-//      ok = self.mResultData [idx] == ASCII.lineFeed.rawValue
-//    }
-  //--- If found, extract data
-//    if ok {
-//      idx += 1
-//      let data = self.mResultData [startIndex ..< idx]
-//      if let string = String (data: data, encoding: .utf8) {
-//        self.processBuildOutputString (string)
-//        self.mResultData.removeSubrange (startIndex ..< idx)
-//      }
-//    }
   }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  private var mBuildOutputCurrentColor = NSColor.black
+  private var mBuildOutputIsBold = false
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -1073,25 +1133,74 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
     if let string = String (data: inData, encoding: .utf8) {
       if string.hasPrefix ("red:") {
         let str = String (string.dropFirst ("red:".count))
-        self.mBuildLogTextView.appendMessageString (str, color: .systemRed)
+        self.mBuildLogTextView.appendMessageString (str, color: .systemRed, bold: self.mBuildOutputIsBold)
       }else if string.hasPrefix ("green:") {
         let str = String (string.dropFirst ("green:".count))
-        self.mBuildLogTextView.appendMessageString (str, color: NSColor (calibratedRed: 0.0, green: 0.5, blue: 0.0, alpha: 1.0))
+        self.mBuildLogTextView.appendMessageString (str, color: NSColor (calibratedRed: 0.0, green: 0.5, blue: 0.0, alpha: 1.0), bold: self.mBuildOutputIsBold)
+      }else if string.hasPrefix ("magenta:") {
+        let str = String (string.dropFirst ("magenta:".count))
+        self.mBuildLogTextView.appendMessageString (str, color: .magenta, bold: self.mBuildOutputIsBold)
       }else if string.hasPrefix ("orange:") {
         let str = String (string.dropFirst ("orange:".count))
-        self.mBuildLogTextView.appendMessageString (str, color: .systemOrange)
+        self.mBuildLogTextView.appendMessageString (str, color: .systemOrange, bold: self.mBuildOutputIsBold)
       }else if string.hasPrefix ("blue:") {
         let str = String (string.dropFirst ("blue:".count))
-        self.mBuildLogTextView.appendMessageString (str, color: .systemBlue)
+        self.mBuildLogTextView.appendMessageString (str, color: .systemBlue, bold: self.mBuildOutputIsBold)
       }else if string.hasPrefix ("json:") {
         let str = String (string.dropFirst ("json:".count))
         let locationInBuildTextView = (self.mBuildLogTextView.string as NSString).length
         self.appendIssue (jsonString: str, locationInBuildTextView)
       }else{
-        self.mBuildLogTextView.appendMessageString (string, color: self.mCurrentBuildOutputColor)
+        var str = string
+        var displayString = ""
+        var loop = true
+        while loop {
+          if str.hasPrefix ("\u{1B}[") {
+            self.mBuildLogTextView.appendMessageString (displayString, color: self.mBuildOutputCurrentColor, bold: self.mBuildOutputIsBold)
+            displayString = ""
+            str = String (str.dropFirst ("\u{1B}[".count))
+            if str.hasPrefix ("30m") {
+              str = String (str.dropFirst ("30m".count))
+              self.mBuildOutputCurrentColor = .black
+            }else if str.hasPrefix ("31m") {
+              str = String (str.dropFirst ("31m".count))
+              self.mBuildOutputCurrentColor = .systemRed
+            }else if str.hasPrefix ("32m") {
+              str = String (str.dropFirst ("32m".count))
+              self.mBuildOutputCurrentColor = .systemGreen
+            }else if str.hasPrefix ("33m") {
+              str = String (str.dropFirst ("33m".count))
+              self.mBuildOutputCurrentColor = .systemYellow
+            }else if str.hasPrefix ("34m") {
+              str = String (str.dropFirst ("34m".count))
+              self.mBuildOutputCurrentColor = .systemBlue
+            }else if str.hasPrefix ("35m") {
+              str = String (str.dropFirst ("35m".count))
+              self.mBuildOutputCurrentColor = .magenta
+            }else if str.hasPrefix ("36m") {
+              str = String (str.dropFirst ("36m".count))
+              self.mBuildOutputCurrentColor = .cyan
+            }else if str.hasPrefix ("0m") {
+              str = String (str.dropFirst ("0m".count))
+              self.mBuildOutputCurrentColor = .black
+              self.mBuildOutputIsBold = false
+            }else if str.hasPrefix ("1m") {
+              str = String (str.dropFirst ("1m".count))
+              self.mBuildOutputIsBold = true
+            }else{
+              self.mBuildOutputCurrentColor = .black
+            }
+          }else if !str.isEmpty {
+            let c = str.removeFirst ()
+            displayString.append (c)
+          }else{
+            loop = false
+          }
+        }
+        self.mBuildLogTextView.appendMessageString (displayString, color: self.mBuildOutputCurrentColor, bold: self.mBuildOutputIsBold)
       }
     }else{
-      self.mBuildLogTextView.appendMessageString ("<<invalid output>>\n", color: self.mCurrentBuildOutputColor)
+      self.mBuildLogTextView.appendMessageString ("<<invalid output>>\n", color: self.mCurrentBuildOutputColor, bold: true)
     }
     self.mBuildLogTextView.scrollToEndOfText ()
   }
@@ -1101,12 +1210,16 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
   private func appendIssue (jsonString inString : String,
                             _ inLocationInBuildLogTextView : Int) {
     if let issue = SWIFT_Issue (jsonString: inString, inLocationInBuildLogTextView) {
-      self.mBuildLogTextView.appendMessageString ("\(issue.fileURL.path):\(issue.line):\(issue.startColumn)\n", color: .systemRed)
+      self.mBuildLogTextView.appendMessageString (
+        "\(issue.fileURL.path):\(issue.line):\(issue.startColumn)\n",
+        color: issue.color,
+        bold: true
+     )
       for str in issue.messageArray {
-        self.mBuildLogTextView.appendMessageString (str + "\n", color: .systemRed)
+        self.mBuildLogTextView.appendMessageString (str + "\n", color: issue.color, bold: true)
       }
       for fixit in issue.fixitArray {
-        self.mBuildLogTextView.appendMessageString ("  " + fixit.messageString + "\n", color: .systemBrown)
+        self.mBuildLogTextView.appendMessageString ("  " + fixit.messageString + "\n", color: .systemBrown, bold: false)
       }
     //--- Note issue on user interface
       self.mIssueArray.append (issue)
@@ -1125,7 +1238,7 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
         self.mErrorCountTextField.setHidden (false)
       }
     }else{
-      self.mBuildLogTextView.appendMessageString ("<<invalid \(inString)>>\n", color: .systemRed)
+      self.mBuildLogTextView.appendMessageString ("<<invalid \(inString)>>\n", color: .systemRed, bold: true)
     }
   }
 

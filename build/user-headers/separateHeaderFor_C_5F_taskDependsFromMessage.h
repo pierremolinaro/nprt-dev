@@ -3,9 +3,7 @@
 
 //--- END OF USER ZONE 1
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 2: pointer class for @C_taskDependsFromMessage class
-//
 //--------------------------------------------------------------------------------------------------
 
 class cPtr_C_5F_taskDependsFromMessage : public cPtr_AC_5F_task {

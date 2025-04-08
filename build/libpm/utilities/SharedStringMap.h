@@ -22,14 +22,14 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "SharedObject.h"
+#include "SharedObjectWithValueSemantics.h"
 #include "String-class.h"
 
 //--------------------------------------------------------------------------------------------------
 //  SharedStringMapNode
 //--------------------------------------------------------------------------------------------------
 
-class SharedStringMapNode : public SharedObject {
+class SharedStringMapNode final : public SharedObject {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -37,6 +37,7 @@ class SharedStringMapNode : public SharedObject {
   private: OptionalSharedRef <SharedStringMapNode> mSupPtr ;
   private: int32_t mBalance ;
   public: const String mKey ;
+  public: SharedPtrWithValueSemantics <SharedObjectWithValueSemantics> mValue ;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -113,10 +114,11 @@ class SharedStringMap final {
   public: void insert (OptionalSharedRef <SharedStringMapNode> & ioObject
                        COMMA_LOCATION_ARGS) ;
 
-  public: OptionalSharedRef <SharedStringMapNode> removeAndReturnRemovedNode (const String & inKey
-                                                                              COMMA_LOCATION_ARGS) ;
+  public: void removeAndReturnRemovedNode (const String & inKey,
+                           OptionalSharedRef <SharedStringMapNode> & outRemovedNode
+                           COMMA_LOCATION_ARGS) ;
 
-  public: OptionalSharedRef <SharedStringMapNode> nodeForKey (const String & inKey) const ;
+  public: bool hasKey (const String & inKey) const ;
 
   public: int32_t count (void) const ;
 

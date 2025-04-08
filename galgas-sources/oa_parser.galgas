@@ -9,10 +9,10 @@ syntax oa_parser (oa_scanner) {
 rule <axiome>
 
 rule <axiome> {
-  var @M_processor outProcessorMap = @M_processor @[]
-  var @M_network outNetworkMap = @M_network @[]
-  var @M_messages outMessagesMap = @M_messages @[]
-  var @M_tasks outTaskMap = @M_tasks @[]
+  var @M_processor outProcessorMap = @M_processor ()
+  var @M_network outNetworkMap = @M_network ()
+  var @M_messages outMessagesMap = @M_messages ()
+  var @M_tasks outTaskMap = @M_tasks ()
   $system$
   repeat
   while

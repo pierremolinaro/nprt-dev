@@ -7,12 +7,12 @@ import AppKit
 
 //--------------------------------------------------------------------------------------------------
 
-fileprivate let CHECK_RANGE_ARRAY = false
+fileprivate let DEBUG_RANGE_ARRAY = false
 
 //--------------------------------------------------------------------------------------------------
 
 fileprivate func DEBUG_PRINT (_ inString : String) {
-  if CHECK_RANGE_ARRAY {
+  if DEBUG_RANGE_ARRAY {
     Swift.print (inString)
   }
 }
@@ -26,7 +26,7 @@ extension SWIFT_SingleDocument {
   func computeLexicalColoring (_ inEditedRange : NSRange, _ inChangeInLength : Int) {
     if let tokenizer = self.mTokenizer {
       let lineRange = (self.mTextStorage.string as NSString).lineRange (for: inEditedRange)
-      DEBUG_PRINT ("inEditedRange \(inEditedRange), inChangeInLength \(inChangeInLength) -> lineRange \(lineRange)")
+      DEBUG_PRINT ("computeLexicalColoring: inEditedRange \(inEditedRange), inChangeInLength \(inChangeInLength) -> lineRange \(lineRange)")
     //---------------------------------------- Remove edited token from range array
       var tokenRangeInsertionIndex = 0
       var foundEditedRange = false
@@ -42,26 +42,27 @@ extension SWIFT_SingleDocument {
           tokenRangeInsertionIndex += 1
         }
       }
-      DEBUG_PRINT ("  foundEditedRange \(foundEditedRange), tokenRangeInsertionIndex \(tokenRangeInsertionIndex)")
+      DEBUG_PRINT ("  ➀ foundEditedRange \(foundEditedRange), tokenRangeInsertionIndex \(tokenRangeInsertionIndex)")
     //--- Remove tokens within edited range
       if foundEditedRange {
         var foundRangeToMove = false
         while !foundRangeToMove && (tokenRangeInsertionIndex < self.mTokenRangeArray.count) {
           let r = self.mTokenRangeArray [tokenRangeInsertionIndex]
-          foundRangeToMove = r.range.location > (lineRange.location + lineRange.length)
+          foundRangeToMove = r.range.location > (inEditedRange.location + inEditedRange.length - inChangeInLength)
           if !foundRangeToMove {
             self.mTokenRangeArray.remove (at: tokenRangeInsertionIndex)
             DEBUG_PRINT ("  REMOVED at \(tokenRangeInsertionIndex) : \(r)")
           }
         }
-        DEBUG_PRINT ("  self.mTokenRangeArray.count \(self.mTokenRangeArray.count), tokenRangeInsertionIndex \(tokenRangeInsertionIndex)")
+        DEBUG_PRINT ("    self.mTokenRangeArray.count \(self.mTokenRangeArray.count), tokenRangeInsertionIndex \(tokenRangeInsertionIndex)")
       //--- Translate token after edited range
         if foundRangeToMove {
           var idx = tokenRangeInsertionIndex
           while idx < self.mTokenRangeArray.count {
             let r = self.mTokenRangeArray [idx]
+            let newLocation = r.range.location + inChangeInLength
             self.mTokenRangeArray [idx] = SWIFT_Token (
-              range: NSRange (location: r.range.location + inChangeInLength, length: r.range.length),
+              range: NSRange (location: newLocation, length: r.range.length),
               tokenCode: r.tokenCode,
               templateDelimiterIndex: r.templateDelimiterIndex
             )
@@ -69,7 +70,8 @@ extension SWIFT_SingleDocument {
           }
         }
       }
-   //--- Loop over edited range for scanning tokens
+    //--- Loop over edited range for scanning tokens
+      DEBUG_PRINT ("  ➁ Loop over edited range for scanning tokens, firstEditedLocation \(firstEditedLocation)")
       var templateDelimiterIndex : Int? = nil
       if tokenRangeInsertionIndex > 0, (tokenRangeInsertionIndex - 1) < self.mTokenRangeArray.count {
         templateDelimiterIndex = self.mTokenRangeArray [tokenRangeInsertionIndex - 1].templateDelimiterIndex
@@ -81,17 +83,20 @@ extension SWIFT_SingleDocument {
       )
       var loop = true
       var attributesArray = [([NSAttributedString.Key : Any], NSRange)] ()
-      while loop && (tokenizer.currentLocation < (self.mTextStorage.string as NSString).length) {
+      while loop, tokenizer.currentLocation < (self.mTextStorage.string as NSString).length {
         let s : SWIFT_Token = tokenizer.parseLexicalTokenForLexicalColoring ()
         if s.tokenCode > 0 {
-          while tokenRangeInsertionIndex < self.mTokenRangeArray.count, (s.range.location + s.range.length) < NSMaxRange (self.mTokenRangeArray [tokenRangeInsertionIndex].range) {
-            self.mTokenRangeArray.remove (at: tokenRangeInsertionIndex)
+          while tokenRangeInsertionIndex < self.mTokenRangeArray.count,
+                (s.range.location + s.range.length) >= NSMaxRange (self.mTokenRangeArray [tokenRangeInsertionIndex].range) {
+           DEBUG_PRINT ("  removed at \(tokenRangeInsertionIndex)")
+           self.mTokenRangeArray.remove (at: tokenRangeInsertionIndex)
           }
-          if tokenRangeInsertionIndex < self.mTokenRangeArray.count, s == self.mTokenRangeArray [tokenRangeInsertionIndex] {
+          if tokenRangeInsertionIndex < self.mTokenRangeArray.count,
+             s == self.mTokenRangeArray [tokenRangeInsertionIndex] {
             loop = false
           }else{
             self.mTokenRangeArray.insert (s, at: tokenRangeInsertionIndex)
-            DEBUG_PRINT ("  inserted at \(tokenRangeInsertionIndex) : \(s), \"\((self.mTextStorage.string as NSString).substring (with: s.range))\"")
+            DEBUG_PRINT ("  inserted at \(tokenRangeInsertionIndex) : \(s), \"\(self.mTextStorage.string.nsSubstring (with: s.range))\"")
             tokenRangeInsertionIndex += 1
             afterLastEditedLocation = max (afterLastEditedLocation, s.range.location + s.range.length)
             let styleIndex = tokenizer.styleIndexFor (token: s.tokenCode)
@@ -102,6 +107,7 @@ extension SWIFT_SingleDocument {
         }
       }
     //--- Set default attributes to edited range
+      DEBUG_PRINT ("  ➂ Set default attributes to edited range")
       let fontManager = NSFontManager.shared
       var font = fontManager.convert (
         tokenizer.font.propval,
@@ -119,17 +125,30 @@ extension SWIFT_SingleDocument {
         .paragraphStyle : ps
       ]
       let modifiedRange =  NSRange (location: firstEditedLocation, length: afterLastEditedLocation - firstEditedLocation)
+      DEBUG_PRINT ("    set default attributes for range \(modifiedRange)")
       self.mTextStorage.addAttributes (defaultAttributes, range: modifiedRange)
     //--- Apply new attributes
+      DEBUG_PRINT ("  ➃ Apply \(attributesArray.count) new attributes")
       for (attributes, range) in attributesArray {
+        if DEBUG_RANGE_ARRAY {
+          if range.location < 0 {
+            Swift.print ("  ERROR: Negative range.location \(range.location), line \(#line)")
+            ()
+          }else if (range.location + range.length) > (self.mTextStorage.string as NSString).length {
+            Swift.print ("  ERROR: too large range \(range), string length \( (self.mTextStorage.string as NSString).length), line \(#line)")
+            ()
+          }
+        }
+        DEBUG_PRINT ("    set attributes for range \(range)")
         self.mTextStorage.addAttributes (attributes, range: range)
       }
     //--- IMPORTANT! This provides a default font to non represented glyphs
       self.mTextStorage.fixFontAttribute (in: modifiedRange)
-    //--- Update display
+    //--- Update entry popup buttons
+      DEBUG_PRINT ("  ➄ Update entry popup buttons")
       self.updateEntryPopUpButtons (tokenizer.popupListData ())
     //--- Check that range array is correct
-      if CHECK_RANGE_ARRAY {
+      if DEBUG_RANGE_ARRAY {
         tokenizer.set (sourceString: self.mTextStorage.string, location: 0, templateDelimiterIndex: nil)
         var tokenRangeArray = [SWIFT_Token] ()
         while tokenizer.currentLocation < (self.mTextStorage.string as NSString).length {
@@ -143,9 +162,9 @@ extension SWIFT_SingleDocument {
         var idx = 0
         while idx < n {
           if self.mTokenRangeArray [idx] == tokenRangeArray [idx] {
-            Swift.print ("  OK \(idx) : \(tokenRangeArray [idx]), \"\((self.mTextStorage.string as NSString).substring (with: tokenRangeArray [idx].range))\"")
+            Swift.print ("  OK \(idx) : \(tokenRangeArray [idx]), \"\(self.mTextStorage.string.nsSubstring (with: tokenRangeArray [idx].range))\"")
           }else{
-            Swift.print ("  ERROR \(idx) : mTokenRangeArray \(self.mTokenRangeArray [idx]), tokenRangeArray \(tokenRangeArray [idx]), \"\((self.mTextStorage.string as NSString).substring (with: tokenRangeArray [idx].range))\"")
+            Swift.print ("  ERROR \(idx) : mTokenRangeArray \(self.mTokenRangeArray [idx]), tokenRangeArray \(tokenRangeArray [idx]), \"\(self.mTextStorage.string.nsSubstring (with: tokenRangeArray [idx].range))\"")
             ok = false
             idx = n
           }
@@ -161,6 +180,7 @@ extension SWIFT_SingleDocument {
           NSSound.beep ()
         }
       }
+      DEBUG_PRINT ("computeLexicalColoring DONE")
     }
   }
 

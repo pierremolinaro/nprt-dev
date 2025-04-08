@@ -78,14 +78,18 @@ class GGS__32_lstringlist : public AC_GALGAS_list {
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public: VIRTUAL_IN_DEBUG void plusAssign_operation (const GGS__32_lstringlist inOperand,
-                                                       class Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG void plusAssignOperation (const GGS__32_lstringlist inOperand,
+                                                     class Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
-  public: VIRTUAL_IN_DEBUG void addAssign_operation (const class GGS_lstring & inOperand0,
-                                                     const class GGS_lstring & inOperand1
-                                                     COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG void addAssignOperation (const class GGS_lstring & inOperand0,
+                                                    const class GGS_lstring & inOperand1
+                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- ++= operator, collection value
+  public: VIRTUAL_IN_DEBUG void plusPlusAssignOperation (const GGS__32_lstringlist_2E_element & inOperand
+                                                         COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public: VIRTUAL_IN_DEBUG GGS__32_lstringlist add_operation (const GGS__32_lstringlist & inOperand,
                                                               Compiler * inCompiler
@@ -168,14 +172,9 @@ class GGS__32_lstringlist : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
-
-//--- Append element
-  public: VIRTUAL_IN_DEBUG void enterElement (const class GGS__32_lstringlist_2E_element & inValue,
-                                              Compiler * /* inCompiler */
-                                              COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Friend
   friend class UpEnumerator__32_lstringlist ;
   friend class DownEnumerator__32_lstringlist ;
@@ -265,6 +264,7 @@ class GGS__32_lstringlist_2E_element : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
+
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -470,17 +470,6 @@ class GGS_M_5F_processor : public AC_GALGAS_map {
   public: static class GGS_M_5F_processor class_func_mapWithMapToOverride (const class GGS_M_5F_processor & inOperand0
                                                                            COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- += operator (with list of field expressions)
-  public: VIRTUAL_IN_DEBUG void addAssign_operation (const class GGS_lstring & inOperand0,
-                                                     const class GGS_uint & inOperand1,
-                                                     const class GGS_luint & inOperand2,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-//--------------------------------- + operator
-  public: VIRTUAL_IN_DEBUG GGS_M_5F_processor add_operation (const GGS_M_5F_processor & inOperand,
-                                                             Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) const ;
-
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_insertKey (class GGS_lstring constinArgument0,
@@ -528,17 +517,12 @@ class GGS_M_5F_processor : public AC_GALGAS_map {
                                                                                        COMMA_LOCATION_ARGS) const ;
 
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
   public: VIRTUAL_IN_DEBUG cMapElement_M_5F_processor * readWriteAccessForWithInstruction (Compiler * inCompiler,
                                                                                            const GGS_string & inKey
                                                                                            COMMA_LOCATION_ARGS) ;
-
-
-//--- Append element
-  public: VIRTUAL_IN_DEBUG void enterElement (const class GGS_M_5F_processor_2E_element & inValue,
-                                              Compiler * /* inCompiler */
-                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Friend
   friend class UpEnumerator_M_5F_processor ;
@@ -551,9 +535,7 @@ class GGS_M_5F_processor : public AC_GALGAS_map {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_processor ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 2: class for element of '@M_processor' map
-//
 //--------------------------------------------------------------------------------------------------
 
 class cMapElement_M_5F_processor : public cMapElement {
@@ -674,6 +656,7 @@ class GGS_M_5F_processor_2E_element : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -684,9 +667,7 @@ class GGS_M_5F_processor_2E_element : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_processor_2E_element ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: M_processor.element? optional
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_M_5F_processor_2E_element_3F_ : public AC_GALGAS_root {
@@ -751,6 +732,7 @@ class GGS_M_5F_processor_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
+
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -837,18 +819,6 @@ class GGS_M_5F_network : public AC_GALGAS_map {
   public: static class GGS_M_5F_network class_func_mapWithMapToOverride (const class GGS_M_5F_network & inOperand0
                                                                          COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- += operator (with list of field expressions)
-  public: VIRTUAL_IN_DEBUG void addAssign_operation (const class GGS_lstring & inOperand0,
-                                                     const class GGS_uint & inOperand1,
-                                                     const class GGS_bool & inOperand2,
-                                                     const class GGS_luint & inOperand3,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-//--------------------------------- + operator
-  public: VIRTUAL_IN_DEBUG GGS_M_5F_network add_operation (const GGS_M_5F_network & inOperand,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const ;
-
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_insertKey (class GGS_lstring constinArgument0,
@@ -907,17 +877,12 @@ class GGS_M_5F_network : public AC_GALGAS_map {
                                                                                      COMMA_LOCATION_ARGS) const ;
 
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
   public: VIRTUAL_IN_DEBUG cMapElement_M_5F_network * readWriteAccessForWithInstruction (Compiler * inCompiler,
                                                                                          const GGS_string & inKey
                                                                                          COMMA_LOCATION_ARGS) ;
-
-
-//--- Append element
-  public: VIRTUAL_IN_DEBUG void enterElement (const class GGS_M_5F_network_2E_element & inValue,
-                                              Compiler * /* inCompiler */
-                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Friend
   friend class UpEnumerator_M_5F_network ;
@@ -930,9 +895,7 @@ class GGS_M_5F_network : public AC_GALGAS_map {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_network ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 2: class for element of '@M_network' map
-//
 //--------------------------------------------------------------------------------------------------
 
 class cMapElement_M_5F_network : public cMapElement {
@@ -1067,6 +1030,7 @@ class GGS_M_5F_network_2E_element : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1077,9 +1041,7 @@ class GGS_M_5F_network_2E_element : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_network_2E_element ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: M_network.element? optional
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_M_5F_network_2E_element_3F_ : public AC_GALGAS_root {
@@ -1145,6 +1107,7 @@ class GGS_M_5F_network_2E_element_3F_ : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1155,9 +1118,7 @@ class GGS_M_5F_network_2E_element_3F_ : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_network_2E_element_3F_ ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @AC_5F_canMessage reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_AC_5F_canMessage : public AC_GALGAS_reference_class {
@@ -1194,6 +1155,7 @@ class GGS_AC_5F_canMessage : public AC_GALGAS_reference_class {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1206,9 +1168,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_canMessage ;
 #include "separateHeaderFor_AC_5F_canMessage.h"
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @AC_5F_canMessage_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_AC_5F_canMessage_2E_weak : public AC_GALGAS_weak_reference {
@@ -1285,6 +1245,7 @@ class GGS_AC_5F_canMessage_2E_weak : public AC_GALGAS_weak_reference {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1295,9 +1256,7 @@ class GGS_AC_5F_canMessage_2E_weak : public AC_GALGAS_weak_reference {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_canMessage_2E_weak ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @C_5F_canIndependantMessage reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_C_5F_canIndependantMessage : public GGS_AC_5F_canMessage {
@@ -1338,6 +1297,7 @@ class GGS_C_5F_canIndependantMessage : public GGS_AC_5F_canMessage {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1350,9 +1310,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canIndependant
 #include "separateHeaderFor_C_5F_canIndependantMessage.h"
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @C_5F_canIndependantMessage_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_C_5F_canIndependantMessage_2E_weak : public GGS_AC_5F_canMessage_2E_weak {
@@ -1429,6 +1387,7 @@ class GGS_C_5F_canIndependantMessage_2E_weak : public GGS_AC_5F_canMessage_2E_we
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1439,9 +1398,7 @@ class GGS_C_5F_canIndependantMessage_2E_weak : public GGS_AC_5F_canMessage_2E_we
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canIndependantMessage_2E_weak ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @C_5F_canMessageFromMessage reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_C_5F_canMessageFromMessage : public GGS_AC_5F_canMessage {
@@ -1487,6 +1444,7 @@ class GGS_C_5F_canMessageFromMessage : public GGS_AC_5F_canMessage {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1499,9 +1457,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFrom
 #include "separateHeaderFor_C_5F_canMessageFromMessage.h"
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @C_5F_canMessageFromMessage_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_C_5F_canMessageFromMessage_2E_weak : public GGS_AC_5F_canMessage_2E_weak {
@@ -1578,6 +1534,7 @@ class GGS_C_5F_canMessageFromMessage_2E_weak : public GGS_AC_5F_canMessage_2E_we
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1588,9 +1545,7 @@ class GGS_C_5F_canMessageFromMessage_2E_weak : public GGS_AC_5F_canMessage_2E_we
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFromMessage_2E_weak ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @C_5F_canMessageFromTask reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_C_5F_canMessageFromTask : public GGS_AC_5F_canMessage {
@@ -1636,6 +1591,7 @@ class GGS_C_5F_canMessageFromTask : public GGS_AC_5F_canMessage {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1648,9 +1604,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_canMessageFrom
 #include "separateHeaderFor_C_5F_canMessageFromTask.h"
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @C_5F_canMessageFromTask_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_C_5F_canMessageFromTask_2E_weak : public GGS_AC_5F_canMessage_2E_weak {
@@ -1726,6 +1680,7 @@ class GGS_C_5F_canMessageFromTask_2E_weak : public GGS_AC_5F_canMessage_2E_weak 
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
+
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -1823,24 +1778,6 @@ class GGS_M_5F_messages : public AC_GALGAS_map {
 
   public: static class GGS_M_5F_messages class_func_mapWithMapToOverride (const class GGS_M_5F_messages & inOperand0
                                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public: VIRTUAL_IN_DEBUG void addAssign_operation (const class GGS_lstring & inOperand0,
-                                                     const class GGS_uint & inOperand1,
-                                                     const class GGS_luint & inOperand2,
-                                                     const class GGS_uint & inOperand3,
-                                                     const class GGS_luint & inOperand4,
-                                                     const class GGS_luint & inOperand5,
-                                                     const class GGS_luint & inOperand6,
-                                                     const class GGS_luint & inOperand7,
-                                                     const class GGS_luint & inOperand8,
-                                                     const class GGS_AC_5F_canMessage & inOperand9,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-//--------------------------------- + operator
-  public: VIRTUAL_IN_DEBUG GGS_M_5F_messages add_operation (const GGS_M_5F_messages & inOperand,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Setters
@@ -1966,17 +1903,12 @@ class GGS_M_5F_messages : public AC_GALGAS_map {
                                                                                       COMMA_LOCATION_ARGS) const ;
 
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
   public: VIRTUAL_IN_DEBUG cMapElement_M_5F_messages * readWriteAccessForWithInstruction (Compiler * inCompiler,
                                                                                           const GGS_string & inKey
                                                                                           COMMA_LOCATION_ARGS) ;
-
-
-//--- Append element
-  public: VIRTUAL_IN_DEBUG void enterElement (const class GGS_M_5F_messages_2E_element & inValue,
-                                              Compiler * /* inCompiler */
-                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Friend
   friend class UpEnumerator_M_5F_messages ;
@@ -1989,9 +1921,7 @@ class GGS_M_5F_messages : public AC_GALGAS_map {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 2: class for element of '@M_messages' map
-//
 //--------------------------------------------------------------------------------------------------
 
 class cMapElement_M_5F_messages : public cMapElement {
@@ -2210,6 +2140,7 @@ class GGS_M_5F_messages_2E_element : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -2220,9 +2151,7 @@ class GGS_M_5F_messages_2E_element : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages_2E_element ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: M_messages.element? optional
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_M_5F_messages_2E_element_3F_ : public AC_GALGAS_root {
@@ -2288,6 +2217,7 @@ class GGS_M_5F_messages_2E_element_3F_ : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -2298,9 +2228,7 @@ class GGS_M_5F_messages_2E_element_3F_ : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_messages_2E_element_3F_ ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @AC_5F_task reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_AC_5F_task : public AC_GALGAS_reference_class {
@@ -2337,6 +2265,7 @@ class GGS_AC_5F_task : public AC_GALGAS_reference_class {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -2349,9 +2278,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_task ;
 #include "separateHeaderFor_AC_5F_task.h"
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @AC_5F_task_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_AC_5F_task_2E_weak : public AC_GALGAS_weak_reference {
@@ -2428,6 +2355,7 @@ class GGS_AC_5F_task_2E_weak : public AC_GALGAS_weak_reference {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -2438,9 +2366,7 @@ class GGS_AC_5F_task_2E_weak : public AC_GALGAS_weak_reference {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_AC_5F_task_2E_weak ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @C_5F_independantTask reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_C_5F_independantTask : public GGS_AC_5F_task {
@@ -2481,6 +2407,7 @@ class GGS_C_5F_independantTask : public GGS_AC_5F_task {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -2493,9 +2420,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_independantTas
 #include "separateHeaderFor_C_5F_independantTask.h"
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @C_5F_independantTask_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_C_5F_independantTask_2E_weak : public GGS_AC_5F_task_2E_weak {
@@ -2572,6 +2497,7 @@ class GGS_C_5F_independantTask_2E_weak : public GGS_AC_5F_task_2E_weak {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -2582,9 +2508,7 @@ class GGS_C_5F_independantTask_2E_weak : public GGS_AC_5F_task_2E_weak {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_independantTask_2E_weak ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @C_5F_taskDependsFromTask reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_C_5F_taskDependsFromTask : public GGS_AC_5F_task {
@@ -2635,6 +2559,7 @@ class GGS_C_5F_taskDependsFromTask : public GGS_AC_5F_task {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -2647,9 +2572,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFro
 #include "separateHeaderFor_C_5F_taskDependsFromTask.h"
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @C_5F_taskDependsFromTask_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_C_5F_taskDependsFromTask_2E_weak : public GGS_AC_5F_task_2E_weak {
@@ -2726,6 +2649,7 @@ class GGS_C_5F_taskDependsFromTask_2E_weak : public GGS_AC_5F_task_2E_weak {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -2736,9 +2660,7 @@ class GGS_C_5F_taskDependsFromTask_2E_weak : public GGS_AC_5F_task_2E_weak {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFromTask_2E_weak ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @C_5F_taskDependsFromMessage reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_C_5F_taskDependsFromMessage : public GGS_AC_5F_task {
@@ -2789,6 +2711,7 @@ class GGS_C_5F_taskDependsFromMessage : public GGS_AC_5F_task {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -2801,9 +2724,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_C_5F_taskDependsFro
 #include "separateHeaderFor_C_5F_taskDependsFromMessage.h"
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @C_5F_taskDependsFromMessage_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_C_5F_taskDependsFromMessage_2E_weak : public GGS_AC_5F_task_2E_weak {
@@ -2879,6 +2800,7 @@ class GGS_C_5F_taskDependsFromMessage_2E_weak : public GGS_AC_5F_task_2E_weak {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
+
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -2976,24 +2898,6 @@ class GGS_M_5F_tasks : public AC_GALGAS_map {
 
   public: static class GGS_M_5F_tasks class_func_mapWithMapToOverride (const class GGS_M_5F_tasks & inOperand0
                                                                        COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public: VIRTUAL_IN_DEBUG void addAssign_operation (const class GGS_lstring & inOperand0,
-                                                     const class GGS_uint & inOperand1,
-                                                     const class GGS_luint & inOperand2,
-                                                     const class GGS_luint & inOperand3,
-                                                     const class GGS_luint & inOperand4,
-                                                     const class GGS_luint & inOperand5,
-                                                     const class GGS_luint & inOperand6,
-                                                     const class GGS_uint & inOperand7,
-                                                     const class GGS_luint & inOperand8,
-                                                     const class GGS_AC_5F_task & inOperand9,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-//--------------------------------- + operator
-  public: VIRTUAL_IN_DEBUG GGS_M_5F_tasks add_operation (const GGS_M_5F_tasks & inOperand,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Setters
@@ -3119,17 +3023,12 @@ class GGS_M_5F_tasks : public AC_GALGAS_map {
                                                                                    COMMA_LOCATION_ARGS) const ;
 
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
   public: VIRTUAL_IN_DEBUG cMapElement_M_5F_tasks * readWriteAccessForWithInstruction (Compiler * inCompiler,
                                                                                        const GGS_string & inKey
                                                                                        COMMA_LOCATION_ARGS) ;
-
-
-//--- Append element
-  public: VIRTUAL_IN_DEBUG void enterElement (const class GGS_M_5F_tasks_2E_element & inValue,
-                                              Compiler * /* inCompiler */
-                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Friend
   friend class UpEnumerator_M_5F_tasks ;
@@ -3142,9 +3041,7 @@ class GGS_M_5F_tasks : public AC_GALGAS_map {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_tasks ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 2: class for element of '@M_tasks' map
-//
 //--------------------------------------------------------------------------------------------------
 
 class cMapElement_M_5F_tasks : public cMapElement {
@@ -3363,6 +3260,7 @@ class GGS_M_5F_tasks_2E_element : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -3373,9 +3271,7 @@ class GGS_M_5F_tasks_2E_element : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_M_5F_tasks_2E_element ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: M_tasks.element? optional
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_M_5F_tasks_2E_element_3F_ : public AC_GALGAS_root {
@@ -3440,6 +3336,7 @@ class GGS_M_5F_tasks_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
+
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;

@@ -51,24 +51,25 @@ import AppKit
 
   func pathFromSelection () -> String? {
   //--- Get source string
-    let sourceString : NSString = self.mSourcePresentationView.sourceTextView.string as NSString
-    let length = sourceString.length
+    let sourceString : String = self.mSourcePresentationView.sourceTextView.string
+    let nsSourceString : NSString = sourceString as NSString
+    let length = nsSourceString.length
   //--- Get selection
     var selection = self.mSourcePresentationView.sourceTextView.selectedRange
   //--- A selection is available ?
     var ok = selection.location != NSNotFound
-    if ok && (selection.length > 1) && (sourceString.character (at: selection.location) == ASCII.quotation.rawValue) {
+    if ok && (selection.length > 1) && (nsSourceString.character (at: selection.location) == ASCII.quotation.rawValue) {
       selection.location += 1
       selection.length -= 1
     }
-    if ok && (selection.length > 1) && (sourceString.character (at: selection.location + selection.length - 1) == ASCII.quotation.rawValue) {
+    if ok && (selection.length > 1) && (nsSourceString.character (at: selection.location + selection.length - 1) == ASCII.quotation.rawValue) {
       selection.length -= 1
     }
   //--- Check there is end of line within the selection
     if ok {
       var i : Int = selection.location
       while (i < (selection.location + selection.length)) && ok {
-        let c : unichar = sourceString.character (at: i)
+        let c : unichar = nsSourceString.character (at: i)
         ok = (c != ASCII.lineFeed.rawValue) && (c != ASCII.carriageReturn.rawValue)
         i += 1
       }
@@ -77,9 +78,9 @@ import AppKit
     if ok {
       var idx = selection.location + selection.length
       while (idx < length)
-          && (sourceString.character (at: idx) != ASCII.carriageReturn.rawValue)
-          && (sourceString.character (at: idx) != ASCII.lineFeed.rawValue)
-          && (sourceString.character (at: idx) != ASCII.quotation.rawValue) {
+          && (nsSourceString.character (at: idx) != ASCII.carriageReturn.rawValue)
+          && (nsSourceString.character (at: idx) != ASCII.lineFeed.rawValue)
+          && (nsSourceString.character (at: idx) != ASCII.quotation.rawValue) {
         idx += 1
         selection.length += 1
       }
@@ -88,16 +89,16 @@ import AppKit
     if ok && (selection.location > 0) {
       var idx = selection.location - 1
       while (idx > 0)
-          && (sourceString.character (at: idx) != ASCII.carriageReturn.rawValue)
-          && (sourceString.character (at: idx) != ASCII.lineFeed.rawValue)
-          && (sourceString.character (at: idx) != ASCII.quotation.rawValue) {
+          && (nsSourceString.character (at: idx) != ASCII.carriageReturn.rawValue)
+          && (nsSourceString.character (at: idx) != ASCII.lineFeed.rawValue)
+          && (nsSourceString.character (at: idx) != ASCII.quotation.rawValue) {
         idx -= 1
         selection.location -= 1
         selection.length += 1
       }
     }
   //---
-    let relativePath = sourceString.substring (with: selection)
+    let relativePath = sourceString.nsSubstring (with: selection)
     return ok ? relativePath : nil
   }
 
@@ -136,6 +137,20 @@ import AppKit
   
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  var currentLine : Int { self.sourcePresentationView.currentLine }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  var lineCount : Int { self.sourcePresentationView.lineCount }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func selectLineStart (_ inLineIndex : Int) {
+    self.sourcePresentationView.selectLineStart (inLineIndex)
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   var selectedRange : NSRange { self.sourcePresentationView.selectedRange }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -159,7 +174,6 @@ import AppKit
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   func commentSelection () {
-//    let newRange = [documentData.textSyntaxColoring commentRange:mTextView.selectedRange] ;
     let newRange = self.mDocument.commentRange (self.selectedRange)
     self.setSelectedRange (newRange)
   }
@@ -169,8 +183,6 @@ import AppKit
   func uncommentSelection () {
     let newRange = self.mDocument.uncommentRange (self.selectedRange)
     self.setSelectedRange (newRange)
-//    const NSRange newRange = [documentData.textSyntaxColoring uncommentRange:mTextView.selectedRange] ;
-//    mTextView.selectedRange = newRange ;
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
