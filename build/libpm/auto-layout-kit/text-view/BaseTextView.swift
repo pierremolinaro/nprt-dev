@@ -106,6 +106,13 @@ public class BaseTextView : BaseView {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  public func setSelectable (_ inFlag : Bool) -> Self {
+    self.mCocoaTextView.isSelectable = inFlag
+    return self
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   public final func setUndoManager (_ inUndoManager : UndoManager?) {
     self.mCocoaTextView.setUndoManager (inUndoManager)
   }
@@ -365,8 +372,6 @@ public final class InternalCocoaTextView : NSTextView, NSTextViewDelegate { //, 
     super.init (frame: .zero, textContainer: textContainer)
     noteObjectAllocation (self)
     self.delegate = self // NSTextViewDelegate
-
-//    self.mTextFinder.client = self
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -428,7 +433,6 @@ public final class InternalCocoaTextView : NSTextView, NSTextViewDelegate { //, 
 
   public override func selectionRange (forProposedRange inProposedSelRange : NSRange,
                                        granularity inGranularity : NSSelectionGranularity) -> NSRange {
-//    let proposedSelRange = super.selectionRange (forProposedRange: inProposedSelRange, granularity: inGranularity)
     let optRange = self.mDelegate?.selectionRange (
       forProposedRange: inProposedSelRange,
       granularity: inGranularity,
@@ -464,6 +468,14 @@ public final class InternalCocoaTextView : NSTextView, NSTextViewDelegate { //, 
     super.draw (inDirtyRect)
     self.mDelegate?.didDrawTextView (inDirtyRect, self)
   }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+//  public func textView (_ textView : NSTextView,
+//                        willChangeSelectionFromCharacterRanges oldSelectedCharRanges : [NSValue],
+//                        toCharacterRanges newSelectedCharRanges : [NSValue]) -> [NSValue] {
+//    return newSelectedCharRanges ;
+//  }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

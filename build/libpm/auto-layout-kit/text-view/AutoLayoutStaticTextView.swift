@@ -23,13 +23,6 @@ public final class AutoLayoutStaticTextView : BaseTextView {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public final func setSelectable (_ inFlag : Bool) -> Self {
-    self.mCocoaTextView.isSelectable = inFlag
-    return self
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 //  public final func setFont (_ inFont : NSFont) -> Self {
 //    self.mCocoaTextView.setFont (inFont)
 //    return self
@@ -103,7 +96,8 @@ public final class AutoLayoutStaticTextView : BaseTextView {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public func appendCodeString (_ inString : String, color : NSColor) {
-    let font = NSFont.userFixedPitchFont (ofSize: NSFont.smallSystemFontSize) ?? NSFont.boldSystemFont (ofSize: NSFont.smallSystemFontSize)
+    let font = NSFont.userFixedPitchFont (ofSize: NSFont.smallSystemFontSize)
+        ?? NSFont.boldSystemFont (ofSize: NSFont.smallSystemFontSize)
     let attributes : [NSAttributedString.Key : NSObject] = [
       .font : font,
       .foregroundColor : color

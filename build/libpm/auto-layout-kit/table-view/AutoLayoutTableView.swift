@@ -235,6 +235,7 @@ public class AutoLayoutTableView : AutoLayoutVerticalStackView {
       }
     }
     self.mDelegate?.tableViewDelegate_endSorting ()
+  //--- Reload
     self.mCocoaTableView.reloadData ()
     self.mTransmitSelectionChangeToDelegate = true
   //--- Restore Selection
@@ -260,9 +261,9 @@ public class AutoLayoutTableView : AutoLayoutVerticalStackView {
       }
     }
   //--- Scroll to make selection visible
-    if self.mCocoaTableView.selectedRow >= 0 {
-      self.mCocoaTableView.scrollRowToVisible (self.mCocoaTableView.selectedRow)
-    }
+//    if self.mCocoaTableView.selectedRow >= 0 {
+//      self.mCocoaTableView.scrollRowToVisible (self.mCocoaTableView.selectedRow)
+//    }
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
