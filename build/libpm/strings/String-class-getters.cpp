@@ -307,7 +307,7 @@ String String::subString (const int32_t inStartIndex,
 
 //--------------------------------------------------------------------------------------------------
 
-String String::stringByCapitalizingFirstCharacter (void) const {
+String String::capitalizingFirstCharacter (void) const {
   String s ;
   const int32_t receiver_length = length () ;
   s.setCapacity (receiver_length) ;
@@ -990,7 +990,7 @@ String String::pathExtension (void) const {
 //   stringByDeletingPathExtension
 //--------------------------------------------------------------------------------------------------
 
-String String::stringByDeletingPathExtension (void) const {
+String String::deletingPathExtension (void) const {
   int32_t receiver_length = length ();
 //--- Suppress training '/'
   while ((receiver_length > 1) && (UNICODE_VALUE (charAtIndex (receiver_length - 1 COMMA_HERE)) == '/')) {
@@ -1081,7 +1081,7 @@ String String::lastPathComponent (void) const {
 
 String String::lastPathComponentWithoutExtension (void) const {
   const String fileNameWithExtension = lastPathComponent () ;
-  return fileNameWithExtension.stringByDeletingPathExtension () ;
+  return fileNameWithExtension.deletingPathExtension () ;
 }
 
 //--------------------------------------------------------------------------------------------------

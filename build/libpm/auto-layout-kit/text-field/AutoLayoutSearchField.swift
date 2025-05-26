@@ -41,6 +41,13 @@ public class AutoLayoutSearchField : BaseControl {
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  final func setRecentsAutosaveName (_ inName : String) -> Self {
+    self.mCocoaTextField.recentsAutosaveName = inName
+    return self
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // NE PAS DÉFINIR acceptsFirstResponder, SINON UN CHAMP SANS SÉLECTION RESTE ACTIF
   //  final override var acceptsFirstResponder: Bool { return true }
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

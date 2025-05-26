@@ -30,14 +30,6 @@ extension AutoLayoutTableView {
       contentAlignment: inContentAlignment,
       valueGetterDelegate: inGetterDelegate
     )
-//    column.title = inTitle
-//    column.headerCell.controlSize = self.controlSize
-//    column.headerCell.font = self.font
-//    column.headerCell.alignment = inHeaderAlignment.cocoaAlignment
-//    column.minWidth = CGFloat (inMinWidth)
-//    column.maxWidth = CGFloat (inMaxWidth)
-////    column.width = (column.minWidth + column.maxWidth) / 2.0
-//    column.width = column.minWidth // §§
   //--- Add Column
     self.appendTableColumn (column)
   }
@@ -117,11 +109,6 @@ fileprivate final class InternalImageIntValueTableColumn : AutoLayoutTableColumn
     if let v = value.0 {
       textField.integerValue = v
     }
-
-//    let hStack = AutoLayoutHorizontalStackView ()
-//      .appendView (imageView)
-//      .appendView (textField)
-//      .appendFlexibleSpace ()
     return imageView
   }
 

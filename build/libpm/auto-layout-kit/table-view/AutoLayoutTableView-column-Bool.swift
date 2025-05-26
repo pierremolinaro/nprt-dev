@@ -32,14 +32,6 @@ extension AutoLayoutTableView {
       valueSetterDelegate: inSetterDelegate,
       valueGetterDelegate: inGetterDelegate
     )
-//    column.title = inTitle
-//    column.headerCell.controlSize = self.controlSize
-//    column.headerCell.font = self.font
-//    column.headerCell.alignment = inHeaderAlignment.cocoaAlignment
-//    column.minWidth = CGFloat (inMinWidth)
-//    column.maxWidth = CGFloat (inMaxWidth)
-////    column.width = (column.minWidth + column.maxWidth) / 2.0
-//    column.width = column.minWidth // §§
   //--- Add Column
     self.appendTableColumn (column)
   }
@@ -94,10 +86,6 @@ fileprivate final class InternalBoolValueTableColumn : AutoLayoutTableColumn {
 
   @MainActor override func configureTableCellView (forRowIndex inRowIndex : Int) -> NSView? {
     let checkbox = NSButton (frame: .zero)
-//    let checkbox = NSButton (title: "", size: .small)
-//    checkbox.setContentHuggingPriority (.defaultLow, for: .horizontal)
-//    checkbox.setContentHuggingPriority (.defaultLow, for: .vertical)
-//    checkbox.size = .
     checkbox.setButtonType (.switch)
 
     let editable = self.mValueSetterDelegate != nil

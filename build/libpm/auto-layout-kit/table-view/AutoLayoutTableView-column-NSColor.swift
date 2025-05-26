@@ -30,14 +30,6 @@ extension AutoLayoutTableView {
       contentAlignment: inContentAlignment,
       valueGetterDelegate: inGetterDelegate
     )
-//    column.title = inTitle
-//    column.headerCell.controlSize = self.controlSize
-//    column.headerCell.font = self.font
-//    column.headerCell.alignment = inHeaderAlignment.cocoaAlignment
-//    column.minWidth = CGFloat (inMinWidth)
-//    column.maxWidth = CGFloat (inMaxWidth)
-////    column.width = (column.minWidth + column.maxWidth) / 2.0
-//    column.width = column.minWidth // §§
   //--- Add Column
     self.appendTableColumn (column)
   }
@@ -87,10 +79,6 @@ fileprivate final class InternalColorValueTableColumn : AutoLayoutTableColumn {
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   @MainActor override func configureTableCellView (forRowIndex inRowIndex : Int) -> NSView? {
-//    let view = AutoLayoutViewWithBackground ()
-//    let color = self.mValueGetterDelegate (inRowIndex)
-//    view.mBackGroundColor = color
-// §   return view
    return nil
   }
   

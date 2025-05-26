@@ -247,7 +247,7 @@ class String : public AbstractOutputStream {
 
 //--- Returns a string made by deleting the extension (if any, and only the last)
 //    from the receiver.
-  public: String stringByDeletingPathExtension (void) const ;
+  public: String deletingPathExtension (void) const ;
 
 //--- Returns the last path component of the receiver.
   public: String lastPathComponent (void) const ;
@@ -257,7 +257,7 @@ class String : public AbstractOutputStream {
   public: bool containsString (const String & inSearchedString) const ;
 
 //--- Return string, with first letter in upper case
-  public: String stringByCapitalizingFirstCharacter (void) const ;
+  public: String capitalizingFirstCharacter (void) const ;
 
 //--- Return string, with all letters in upper case
   public: String uppercaseString (void) const ;

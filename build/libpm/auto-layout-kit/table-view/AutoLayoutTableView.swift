@@ -260,10 +260,6 @@ public class AutoLayoutTableView : AutoLayoutVerticalStackView {
         self.mCocoaTableView.selectRowIndexes (IndexSet (integer: 0), byExtendingSelection: false)
       }
     }
-  //--- Scroll to make selection visible
-//    if self.mCocoaTableView.selectedRow >= 0 {
-//      self.mCocoaTableView.scrollRowToVisible (self.mCocoaTableView.selectedRow)
-//    }
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

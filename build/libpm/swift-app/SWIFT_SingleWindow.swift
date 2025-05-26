@@ -55,6 +55,7 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
 
   private let mSearchInFilesView = AutoLayoutVerticalStackView ()
   private let mSearchTextField = AutoLayoutSearchField (minWidth: 100, bold: false, size: .regular)
+    .setRecentsAutosaveName ("SearchTextFieldRecents")
   private let mSearchResultLabel = AutoLayoutStaticLabel (title: "", bold: false, size: .small, alignment: .center)
   private let mSearchResultOutlineView = AutoLayoutOutlineView (size: .small, allowsEmptySelection: true, allowsMultipleSelection: false)
     .noHeaderView ()
@@ -967,7 +968,7 @@ class SWIFT_SingleWindow : NSWindow, NSWindowDelegate, AutoLayoutTableViewDelega
     for w in NSApp.windows {
       if let window = w as? SWIFT_SingleWindow {
         DispatchQueue.main.async {
-          window.mTabListView.sortAndReloadData ()
+    // §      window.mTabListView.sortAndReloadData ()
           window.editionStateDidChange ()
           window.updateUserDefaults ()
         }

@@ -2527,6 +2527,8 @@ class GGS_string : public AC_GALGAS_root {
 
   public: VIRTUAL_IN_DEBUG class GGS_uint getter_capacity (LOCATION_ARGS) const ;
 
+  public: VIRTUAL_IN_DEBUG class GGS_string getter_capitalizingFirstCharacter (LOCATION_ARGS) const ;
+
   public: VIRTUAL_IN_DEBUG class GGS_char getter_characterAtIndex (const class GGS_uint & constinOperand0,
                                                                    Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) const ;
@@ -2567,6 +2569,8 @@ class GGS_string : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG class GGS_string getter_decodedStringFromRepresentation (Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) const ;
 
+  public: VIRTUAL_IN_DEBUG class GGS_string getter_deletingPathExtension (LOCATION_ARGS) const ;
+
   public: VIRTUAL_IN_DEBUG class GGS_stringlist getter_directories (const class GGS_bool & constinOperand0
                                                                     COMMA_LOCATION_ARGS) const ;
 
@@ -2586,6 +2590,12 @@ class GGS_string : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG class GGS_string getter_fileNameRepresentation (LOCATION_ARGS) const ;
 
   public: VIRTUAL_IN_DEBUG class GGS_char getter_firstCharacterOrNul (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GGS_bool getter_hasPrefix (const class GGS_string & constinOperand0
+                                                            COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GGS_bool getter_hasSuffix (const class GGS_string & constinOperand0
+                                                            COMMA_LOCATION_ARGS) const ;
 
   public: VIRTUAL_IN_DEBUG class GGS_lstring getter_here (Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) const ;
@@ -2655,11 +2665,7 @@ class GGS_string : public AC_GALGAS_root {
 
   public: VIRTUAL_IN_DEBUG class GGS_string getter_sha_32__35__36_ (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GGS_string getter_stringByCapitalizingFirstCharacter (LOCATION_ARGS) const ;
-
   public: VIRTUAL_IN_DEBUG class GGS_string getter_stringByDeletingLastPathComponent (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GGS_string getter_stringByDeletingPathExtension (LOCATION_ARGS) const ;
 
   public: VIRTUAL_IN_DEBUG class GGS_string getter_stringByLeftAndRightPadding (const class GGS_uint & constinOperand0,
                                                                                 const class GGS_char & constinOperand1

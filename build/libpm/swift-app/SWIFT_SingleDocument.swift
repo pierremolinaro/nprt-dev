@@ -72,6 +72,13 @@ import AppKit
   override func read (from inData : Data, ofType inTypeName : String) throws {
     let str = String (data: inData, encoding: .utf8) ?? ""
     DispatchQueue.main.async {
+      self.mLineHeightObserver.mEventCallBack = { [weak self] in
+        if let me = self {
+          for displayDescriptor in me.mDisplayDescriptors {
+            displayDescriptor.possibleElement?.textViewNeedsDisplay ()
+          }
+        }
+      }
       self.mTokenizer = tokenizerFor (extension: self.lastComponentOfFileName.pathExtension)
       if let tokenizer = self.mTokenizer {
         for i : UInt8 in 0 ..< (tokenizer.styleCount () + 3) {
@@ -86,15 +93,11 @@ import AppKit
       self.mDisplayStyleChangeObserver.mEventCallBack = { [weak self] in
         if let me = self {
           me.mTextStorage.beginEditing ()
-          me.computeLexicalColoring (NSRange (location: 0, length: me.mTextStorage.length), 0)
+          me.computeLexicalColoring (
+            editedRange: NSRange (location: 0, length: me.mTextStorage.length),
+            changeInLength: 0
+          )
           me.mTextStorage.endEditing ()
-          for displayDescriptor in me.mDisplayDescriptors {
-            displayDescriptor.possibleElement?.textViewNeedsDisplay ()
-          }
-        }
-      }
-      self.mLineHeightObserver.mEventCallBack = { [weak self] in
-        if let me = self {
           for displayDescriptor in me.mDisplayDescriptors {
             displayDescriptor.possibleElement?.textViewNeedsDisplay ()
           }
@@ -131,7 +134,10 @@ import AppKit
       self.releaseTimer ()
       self.mActivateTimerOnChange = false
       self.mTextStorage.beginEditing ()
-      self.mTextStorage.replaceCharacters (in: NSRange (location: 0, length: self.mTextStorage.length), with: inString)
+      self.mTextStorage.replaceCharacters (
+        in: NSRange (location: 0, length: self.mTextStorage.length),
+        with: inString
+      )
       self.mTextStorage.endEditing ()
     }
   }
@@ -238,7 +244,7 @@ import AppKit
                     changeInLength inDelta : Int) {
     if inEditedMask.contains (.editedCharacters) {
       self.mTextStorage.beginEditing ()
-      self.computeLexicalColoring (inEditedRange, inDelta)
+      self.computeLexicalColoring (editedRange: inEditedRange, changeInLength: inDelta)
       self.mTextStorage.endEditing ()
       if self.mActivateTimerOnChange && (nil == self.mTimerForAutosaving) {
         let timer = Timer (
@@ -297,7 +303,6 @@ import AppKit
   override func save (_ inSender : Any?) {
     super.save (inSender)
     self.releaseTimer ()
-    // NSSound.beep ()
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
