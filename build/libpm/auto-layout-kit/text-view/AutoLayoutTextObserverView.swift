@@ -31,6 +31,8 @@ public final class AutoLayoutTextObserverView : BaseTextView {
       self.mFontSize = NSFont.systemFontSize
     case .large:
       self.mFontSize = NSFont.systemFontSize * 1.2
+    case .extraLarge:
+      self.mFontSize = NSFont.systemFontSize * 1.5
     @unknown default:
       self.mFontSize = NSFont.systemFontSize
     }

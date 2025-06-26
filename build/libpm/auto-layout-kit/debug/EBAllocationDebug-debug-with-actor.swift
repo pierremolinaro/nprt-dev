@@ -54,7 +54,7 @@ import AppKit
 
 #if CONFIGURATION_IS_DEBUG
   @globalActor fileprivate final actor PendingAllocationBufferActor {
-    static var shared = PendingAllocationBufferActor ()
+    static let shared = PendingAllocationBufferActor ()
   }
 #endif
 
@@ -115,7 +115,7 @@ import AppKit
 
 #if CONFIGURATION_IS_DEBUG
   @globalActor fileprivate final actor AllocationDebugActor {
-    static var shared = AllocationDebugActor ()
+    static let shared = AllocationDebugActor ()
   }
 #endif
 
