@@ -9,19 +9,19 @@ import AppKit
 //--------------------------------------------------------------------------------------------------
 
 #if CONFIGURATION_IS_DEBUG
-  private let prefsEnableObjectAllocationDebugString        = "EBAllocationDebug:enableObjectAllocationDebug"
-  private let prefsEnableObjectAllocationStatsWindowVisible = "EBAllocationDebug:allocationStatsWindowVisible"
-  private let prefsEnableObjectAllocationStatsDisplayFilter = "EBAllocationDebug:allocationStatsDisplayFilter"
+  fileprivate let prefsEnableObjectAllocationDebugString        = "EBAllocationDebug:enableObjectAllocationDebug"
+  fileprivate let prefsEnableObjectAllocationStatsWindowVisible = "EBAllocationDebug:allocationStatsWindowVisible"
+  fileprivate let prefsEnableObjectAllocationStatsDisplayFilter = "EBAllocationDebug:allocationStatsDisplayFilter"
 #endif
 
 //--------------------------------------------------------------------------------------------------
 
 #if CONFIGURATION_IS_DEBUG
-  private let gEnableObjectAllocationDebug = UserDefaults.standard.bool (forKey: prefsEnableObjectAllocationDebugString)
+  fileprivate let gEnableObjectAllocationDebug = UserDefaults.standard.bool (forKey: prefsEnableObjectAllocationDebugString)
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//    Public routines
+//    noteObjectAllocation
 //--------------------------------------------------------------------------------------------------
 
 #if CONFIGURATION_IS_DEBUG
@@ -36,7 +36,7 @@ import AppKit
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//    pmNoteObjectDeallocation
+//    noteObjectDeallocation
 //--------------------------------------------------------------------------------------------------
 
 #if CONFIGURATION_IS_DEBUG

@@ -18,17 +18,16 @@
 //
 //--------------------------------------------------------------------------------------------------
 
+#include <math.h>
+#include <string.h>
+#include <ctype.h>
+
+//--------------------------------------------------------------------------------------------------
+
 #include "MF_MemoryControl.h"
 #include "md5.h"
 #include "SharedObject.h"
 #include "unicode_character_cpp.h"
-#include "TC_UniqueArray2.h"
-
-//--------------------------------------------------------------------------------------------------
-
-#include <math.h>
-#include <string.h>
-#include <ctype.h>
 
 //--------------------------------------------------------------------------------------------------
 
@@ -39,7 +38,7 @@
 //--------------------------------------------------------------------------------------------------
 
 class PrivateEmbeddedString final : public SharedObject {
-  private: TC_UniqueArray <utf32> mCharArray ;
+  private: GenericUniqueArray <utf32> mCharArray ;
   private: char * mUTF8CString ; // Zero terminated string
 
   public: PrivateEmbeddedString (const int32_t inCapacity COMMA_LOCATION_ARGS) ;
@@ -593,7 +592,7 @@ void String::insertCharacterAtIndex (const utf32 inChar,
 //   G E T    L I N E S    A R R A Y
 //--------------------------------------------------------------------------------------------------
 
-void String::linesArray (TC_UniqueArray <String> & outStringArray) const {
+void String::linesArray (GenericUniqueArray <String> & outStringArray) const {
   const int32_t currentStringLength = length () ;
   if (currentStringLength > 0) {
     int32_t index = outStringArray.count () ;

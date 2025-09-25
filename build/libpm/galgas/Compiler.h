@@ -22,7 +22,7 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "TC_UniqueArray.h"
+#include "GenericUniqueArray.h"
 #include "String-class.h"
 #include "SharedObject.h"
 #include "LocationInSource.h"
@@ -39,7 +39,7 @@
 class GGS_location ;
 class GGS_string ;
 class GGS_lstring ;
-class C_galgas_type_descriptor ;
+class GALGAS_TypeDescriptor ;
 
 //--------------------------------------------------------------------------------------------------
 //                 Compiler class
@@ -60,7 +60,7 @@ class Compiler : public SharedObject {
   protected: Compiler * mCallerCompiler ;
 
 //--- Issue array
-  private: TC_UniqueArray <IssueDescriptor> mIssueArray ;
+  private: GenericUniqueArray <IssueDescriptor> mIssueArray ;
   public: void appendIssue (const IssueDescriptor & inIssue) ;
   public: void writeIssueJSONFile (const String & inFile) ;
 
@@ -135,7 +135,7 @@ class Compiler : public SharedObject {
 //--- Print semantic error
   public: void semanticErrorAtLocation (const GGS_location & inErrorLocation,
                                         const String & inErrorMessage,
-                                        const TC_Array <FixItDescription> & inFixItArray
+                                        const GenericArray <FixItDescription> & inFixItArray
                                         COMMA_LOCATION_ARGS) ;
 
 //--- Print semantic warning
@@ -154,38 +154,38 @@ class Compiler : public SharedObject {
 
 //--- Emit a warning
   public: void emitSemanticWarning (const GGS_location & inWarningLocation,
-                                     const GGS_string & inWarningMessage,
-                                     const TC_Array <FixItDescription> & inFixItArray
-                                     COMMA_LOCATION_ARGS) ;
+                                    const GGS_string & inWarningMessage,
+                                    const GenericArray <FixItDescription> & inFixItArray
+                                    COMMA_LOCATION_ARGS) ;
 
 //--- Emit an error
   public: void emitSemanticError (const GGS_location & inErrorLocation,
-                                   const GGS_string & inErrorMessage,
-                                   const TC_Array <FixItDescription> & inFixItArray
-                                   COMMA_LOCATION_ARGS) ;
+                                  const GGS_string & inErrorMessage,
+                                  const GenericArray <FixItDescription> & inFixItArray
+                                  COMMA_LOCATION_ARGS) ;
 
 //--- Emit an error message with an error message that contains %K espace sequence
   public: void semanticErrorWith_K_message (const GGS_lstring & inKey,
-                                             TC_UniqueArray <String> & ioNearestKeyArray,
-                                             const char * in_K_ErrorMessage
-                                             COMMA_LOCATION_ARGS) ;
+                                            GenericUniqueArray <String> & ioNearestKeyArray,
+                                            const char * in_K_ErrorMessage
+                                            COMMA_LOCATION_ARGS) ;
 
 //--- Emit an error message with an error message that contains %K and %L espace sequences
   public: void semanticErrorWith_K_L_message (const GGS_lstring & inKey,
-                                               const char * in_K_L_ErrorMessage,
-                                               const GGS_location & inExistingKeyLocation
-                                               COMMA_LOCATION_ARGS) ;
+                                              const char * in_K_L_ErrorMessage,
+                                              const GGS_location & inExistingKeyLocation
+                                              COMMA_LOCATION_ARGS) ;
 
 //--- Emit an warning message with an error message that contains %K and %L espace sequences
   public: void semanticWarningWith_K_L_message (const GGS_lstring & inKey,
-                                                 const char * in_K_L_ErrorMessage,
-                                                 const GGS_location & inExistingKeyLocation
-                                                 COMMA_LOCATION_ARGS) ;
+                                                const char * in_K_L_ErrorMessage,
+                                                const GGS_location & inExistingKeyLocation
+                                                COMMA_LOCATION_ARGS) ;
 
 //--- Cast error
   public: void castError (const String & inTargetTypeName,
-                           const C_galgas_type_descriptor * inObjectDynamicTypeDescriptor
-                           COMMA_LOCATION_ARGS) ;
+                          const GALGAS_TypeDescriptor * inObjectDynamicTypeDescriptor
+                          COMMA_LOCATION_ARGS) ;
 
 //--- File read logging
   public: static bool performLogFileRead (void) ;
@@ -197,7 +197,7 @@ class Compiler : public SharedObject {
 
 //--- Generate file in directory
   public: void generateFile (const String & inLineCommentPrefix,
-                             const TC_UniqueArray <String> & inDirectoriesToExclude,
+                             const GenericUniqueArray <String> & inDirectoriesToExclude,
                              const String & inFileName,
                              const String & inHeader,
                              const String & inDefaultUserZone1,
@@ -207,7 +207,7 @@ class Compiler : public SharedObject {
                              const bool inMakeExecutable) ;
 
   public: void generateFileWithPatternFromPathes (const String & inStartPath,
-                                                  const TC_UniqueArray <String> & inDirectoriesToExclude,
+                                                  const GenericUniqueArray <String> & inDirectoriesToExclude,
                                                   const String & inLineCommentPrefix,
                                                   const String & inFileName,
                                                   const String & inHeader,
@@ -218,7 +218,7 @@ class Compiler : public SharedObject {
                                                   const bool inMakeExecutable) ;
 
   public: void generateFileFromPathes (const String & inStartPath,
-                                       const TC_UniqueArray <String> & inDirectoriesToExclude,
+                                       const GenericUniqueArray <String> & inDirectoriesToExclude,
                                        const String & inFileName,
                                        const String & inContents) ;
 } ;

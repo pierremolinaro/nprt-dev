@@ -128,13 +128,6 @@ class capCollectionElementArray final {
                                   Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) const ;
 
-//--- Compare
-  public: ComparisonResult compareCollectionElementArray (const capCollectionElementArray & inOperand) const ;
-
-//--- Description
-  public: void description (String & ioString,
-                             const int32_t inIndentation) const ;
-
 //--- Internal
   private: void insulateOrCreate (void) ;
 

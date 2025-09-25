@@ -189,7 +189,7 @@ void Compiler::onTheFlySemanticError (const String & inErrorMessage
                                         COMMA_LOCATION_ARGS) {
   signalSemanticError (this,
                        sourceText (),
-                       IssueWithFixIt (mCurrentLocation, mCurrentLocation, TC_Array <FixItDescription> ()),
+                       IssueWithFixIt (mCurrentLocation, mCurrentLocation, GenericArray <FixItDescription> ()),
                        inErrorMessage
                        COMMA_THERE) ;
 }
@@ -206,7 +206,7 @@ void Compiler::onTheFlySemanticWarning (const String & inWarningMessage
                                           COMMA_LOCATION_ARGS) {
   signalSemanticWarning (this,
                          sourceText (),
-                         IssueWithFixIt (mCurrentLocation, mCurrentLocation, TC_Array <FixItDescription> ()),
+                         IssueWithFixIt (mCurrentLocation, mCurrentLocation, GenericArray <FixItDescription> ()),
                          inWarningMessage
                          COMMA_THERE) ;
 }
@@ -268,8 +268,8 @@ void Compiler::loopRunTimeVariantError (LOCATION_ARGS) {
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::castError (const String & inTargetTypeName,
-                            const C_galgas_type_descriptor * inObjectDynamicTypeDescriptor
-                            COMMA_LOCATION_ARGS) {
+                          const GALGAS_TypeDescriptor * inObjectDynamicTypeDescriptor
+                          COMMA_LOCATION_ARGS) {
   String m = "cannot cast an @" ;
   m.appendString (inObjectDynamicTypeDescriptor->mGalgasTypeName) ;
   m.appendCString (" to an @") ;
@@ -287,7 +287,7 @@ void Compiler::castError (const String & inTargetTypeName,
 
 void Compiler::semanticErrorAtLocation (const GGS_location & inErrorLocation,
                                           const String & inErrorMessage,
-                                          const TC_Array <FixItDescription> & inFixItArray
+                                          const GenericArray <FixItDescription> & inFixItArray
                                           COMMA_LOCATION_ARGS) {
   if (inErrorLocation.isValid ()) { // No error raised if not built
     if (!inErrorLocation.sourceText ().isValid ()) {
@@ -306,7 +306,7 @@ void Compiler::semanticErrorAtLocation (const GGS_location & inErrorLocation,
 
 void Compiler::emitSemanticError (const GGS_location & inErrorLocation,
                                     const GGS_string & inErrorMessage,
-                                    const TC_Array <FixItDescription> & inFixItArray
+                                    const GenericArray <FixItDescription> & inFixItArray
                                     COMMA_LOCATION_ARGS) {
   if (inErrorLocation.isValid () && inErrorMessage.isValid ()) {
     const String errorMessage = inErrorMessage.stringValue () ;
@@ -325,7 +325,7 @@ void Compiler::emitSemanticError (const GGS_location & inErrorLocation,
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::semanticErrorWith_K_message (const GGS_lstring & inKey,
-                                              TC_UniqueArray <String> & ioNearestKeyArray,
+                                              GenericUniqueArray <String> & ioNearestKeyArray,
                                               const char * in_K_ErrorMessage
                                               COMMA_LOCATION_ARGS) {
   const String key = inKey.mProperty_string.stringValue () ;
@@ -348,7 +348,7 @@ void Compiler::semanticErrorWith_K_message (const GGS_lstring & inKey,
     }
   }
 //--- Add nearest keys, if any
-  TC_Array <FixItDescription> fixItArray ;
+  GenericArray <FixItDescription> fixItArray ;
   for (int32_t i=0 ; i<ioNearestKeyArray.count () ; i++) {
     fixItArray.appendObject (FixItDescription (EnumFixItKind::fixItReplace, ioNearestKeyArray (i COMMA_HERE))) ;
   }
@@ -360,9 +360,9 @@ void Compiler::semanticErrorWith_K_message (const GGS_lstring & inKey,
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::semanticErrorWith_K_L_message (const GGS_lstring & inKey,
-                                                const char * in_K_L_ErrorMessage,
-                                                const GGS_location & inExistingKeyLocation
-                                                COMMA_LOCATION_ARGS) {
+                                              const char * in_K_L_ErrorMessage,
+                                              const GGS_location & inExistingKeyLocation
+                                              COMMA_LOCATION_ARGS) {
   const String key = inKey.mProperty_string.stringValue () ;
 //--- Build error message
   String message ;
@@ -392,7 +392,7 @@ void Compiler::semanticErrorWith_K_L_message (const GGS_lstring & inKey,
   }
 //--- Emit error message
   const GGS_location key_location = inKey.mProperty_location ;
-  semanticErrorAtLocation (key_location, message, TC_Array <FixItDescription> () COMMA_THERE) ;
+  semanticErrorAtLocation (key_location, message, GenericArray <FixItDescription> () COMMA_THERE) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -444,7 +444,7 @@ void Compiler::semanticWarningAtLocation (const GGS_location & inWarningLocation
     }else{
       signalSemanticWarning (this,
                              inWarningLocation.sourceText (),
-                             IssueWithFixIt (inWarningLocation.startLocation (), inWarningLocation.endLocation (), TC_Array <FixItDescription> ()),
+                             IssueWithFixIt (inWarningLocation.startLocation (), inWarningLocation.endLocation (), GenericArray <FixItDescription> ()),
                              inWarningMessage
                              COMMA_THERE) ;
     }
@@ -455,7 +455,7 @@ void Compiler::semanticWarningAtLocation (const GGS_location & inWarningLocation
 
 void Compiler::emitSemanticWarning (const GGS_location & inWarningLocation,
                                       const GGS_string & inWarningMessage,
-                                      const TC_Array <FixItDescription> & inFixItArray
+                                      const GenericArray <FixItDescription> & inFixItArray
                                       COMMA_LOCATION_ARGS) {
   if (inWarningLocation.isValid () && inWarningMessage.isValid ()) {
     const String warningMessage = inWarningMessage.stringValue () ;
@@ -528,7 +528,7 @@ static const char END_OF_USER_ZONE_2   [] =  "--- END OF USER ZONE 2\n" ;
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::generateFile (const String & inLineCommentPrefix,
-                               const TC_UniqueArray <String> & inDirectoriesToExclude,
+                               const GenericUniqueArray <String> & inDirectoriesToExclude,
                                const String & inFileName,
                                const String & inHeader,
                                const String & inDefaultUserZone1,
@@ -536,7 +536,7 @@ void Compiler::generateFile (const String & inLineCommentPrefix,
                                const String & inDefaultUserZone2,
                                const String & inGeneratedZone3,
                                const bool inMakeExecutable) {
-  generateFileWithPatternFromPathes (sourceFilePath ().stringByDeletingLastPathComponent (),
+  generateFileWithPatternFromPathes (sourceFilePath ().deletingLastPathComponent (),
                           inDirectoriesToExclude,
                           inLineCommentPrefix,
                           inFileName,
@@ -551,14 +551,14 @@ void Compiler::generateFile (const String & inLineCommentPrefix,
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::generateFileFromPathes (const String & inStartPath,
-                                         const TC_UniqueArray <String> & inDirectoriesToExclude,
+                                         const GenericUniqueArray <String> & inDirectoriesToExclude,
                                          const String & inFileName,
                                          const String & inContents) {
 //--- Verbose option ?
   const bool verboseOptionOn = verboseOutput () ;
 //--- Start path : by default, use source file directory
   const String startPath = (inStartPath.length () == 0)
-   ? sourceFilePath ().stringByDeletingLastPathComponent ()
+   ? sourceFilePath ().deletingLastPathComponent ()
    : inStartPath ;
 //--- Search file in directory
   const String fullPathName = FileManager::findFileInDirectory (startPath, inFileName, inDirectoriesToExclude) ;
@@ -567,7 +567,7 @@ void Compiler::generateFileFromPathes (const String & inStartPath,
     String fileName = startPath ;
     fileName.appendCString ("/") ;
     fileName.appendString (inFileName) ;
-    const String directory = fileName.stringByDeletingLastPathComponent () ;
+    const String directory = fileName.deletingLastPathComponent () ;
     FileManager::makeDirectoryIfDoesNotExist (directory) ;
     if (performGeneration ()) {
       TextFileWrite f (fileName) ;
@@ -613,7 +613,7 @@ void Compiler::generateFileFromPathes (const String & inStartPath,
 
 void Compiler::generateFileWithPatternFromPathes (
   const String & inStartPath,
-  const TC_UniqueArray <String> & inDirectoriesToExclude,
+  const GenericUniqueArray <String> & inDirectoriesToExclude,
   const String & inLineCommentPrefix,
   const String & inFileName,
   const String & inHeader,
@@ -632,7 +632,7 @@ void Compiler::generateFileWithPatternFromPathes (
   const String kEND_OF_USER_ZONE_2   = String (inLineCommentPrefix) + END_OF_USER_ZONE_2 ;
 //--- Start path : by default, use source file directory
   const String startPath = (inStartPath.length () == 0)
-    ? sourceFilePath ().stringByDeletingLastPathComponent ()
+    ? sourceFilePath ().deletingLastPathComponent ()
     : inStartPath
   ;
 //--- Search file in directory
@@ -642,7 +642,7 @@ void Compiler::generateFileWithPatternFromPathes (
     String fileName = startPath ;
     fileName.appendCString ("/") ;
     fileName.appendString (inFileName) ;
-    const String directory = fileName.stringByDeletingLastPathComponent () ;
+    const String directory = fileName.deletingLastPathComponent () ;
     FileManager::makeDirectoryIfDoesNotExist (directory) ;
     if (performGeneration ()) {
       TextFileWrite f (fileName) ;
@@ -684,7 +684,7 @@ void Compiler::generateFileWithPatternFromPathes (
     String secondGeneratedPart ;
     logFileRead (fullPathName) ;
     String s = FileManager::stringWithContentOfFile (fullPathName) ;
-    TC_UniqueArray <String> stringArray ;
+    GenericUniqueArray <String> stringArray ;
     s.componentsSeparatedByString (kSTART_OF_USER_ZONE_1, stringArray) ;
     String header ;
     bool ok = stringArray.count () == 2 ;

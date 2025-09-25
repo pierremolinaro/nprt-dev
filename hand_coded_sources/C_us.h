@@ -22,7 +22,7 @@
 
 //---------------------------------------------------------------------------*
 
-#include "TC_UniqueArray.h"
+#include "GenericUniqueArray.h"
 #include "String-class.h"
 
 //---------------------------------------------------------------------------*
@@ -98,7 +98,7 @@ class C_us {
 
 //--- print a vector
   public : void printVector (AbstractOutputStream & inStream,
-                             const TC_UniqueArray <String> & inNames,
+                             const GenericUniqueArray <String> & inNames,
                              const int32_t inFirst,
                              const int32_t inStep) const ;
 

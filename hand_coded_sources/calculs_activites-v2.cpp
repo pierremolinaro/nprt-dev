@@ -268,8 +268,8 @@ routine_performComputations_26__26__26__26_ (GGS_M_5F_processor & inProcessorMap
                              GGS_M_5F_tasks & inTasksMap,
                              Compiler * inCompiler
                              COMMA_UNUSED_LOCATION_ARGS) {
-  TC_UniqueArray <cResource> Resource ;
-  TC_UniqueArray <cElement> Element ;
+  GenericUniqueArray <cResource> Resource ;
+  GenericUniqueArray <cElement> Element ;
 
   const bool CreateIntermediateFiles = gOption_oa_5F_cli_5F_options_createIntermediateFiles.mValue ;
   const bool useCANmaxLengthOnly = gOption_oa_5F_cli_5F_options_useCANmaxLegth.mValue ;
@@ -277,16 +277,18 @@ routine_performComputations_26__26__26__26_ (GGS_M_5F_processor & inProcessorMap
   const String sourceFile = inCompiler->sourceFilePath () ;
 
 
-  const String htmlFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + ".html" ;
-  const String activitiesHTMLFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + "_activities.html" ;
-  const String raw_outputHTMLFileName = sourceFile.stringByDeletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + "_raw_output.html" ;
+  const String htmlFileName = sourceFile.deletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + ".html" ;
+  const String activitiesHTMLFileName = sourceFile.deletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + "_activities.html" ;
+  const String raw_outputHTMLFileName = sourceFile.deletingLastPathComponent () + "/" + sourceFile.lastPathComponentWithoutExtension () + "_raw_output.html" ;
 
-  buildCSSfile (inCompiler, sourceFile.stringByDeletingLastPathComponent ()) ;
+  buildCSSfile (inCompiler, sourceFile.deletingLastPathComponent ()) ;
 
-  HTMLFileWrite htmlFile (htmlFileName,
-                             sourceFile.lastPathComponent () + " results",
-                             "style.css",
-                             "") ;
+  HTMLFileWrite htmlFile (
+    htmlFileName,
+    sourceFile.lastPathComponent () + " results",
+    "style.css",
+    ""
+  ) ;
   if (! htmlFile.isOpened ()) {
     String message ;
     message.appendString ("Cannot open '") ;
@@ -671,10 +673,10 @@ routine_performComputations_26__26__26__26_ (GGS_M_5F_processor & inProcessorMap
 
   if (NecessaryConditions_OK (inCompiler, Element, Resource) ){
 
-  	TC_UniqueArray <cActivity> exElement ;
-  	TC_UniqueArray <cResponseTime> responseTimeArray ;
-  	TC_UniqueArray <cMTElement> MTElement ;
-  	TC_UniqueArray <cReadyAtThisInstant>  ReadyAtThisInstant;
+  	GenericUniqueArray <cActivity> exElement ;
+  	GenericUniqueArray <cResponseTime> responseTimeArray ;
+  	GenericUniqueArray <cMTElement> MTElement ;
+  	GenericUniqueArray <cReadyAtThisInstant>  ReadyAtThisInstant;
 
    int32_t NoInterButUseB =
          BuildExtendedList (inCompiler,

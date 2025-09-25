@@ -469,7 +469,7 @@ static bool parseWithEncoding (const U8Data & inDataString,
   while ((idx < inDataString.count ()) && (inDataString (idx COMMA_HERE) != 0) && ok) {
     const uint8_t c = inDataString (idx COMMA_HERE) ;
     if (c == 0x0A) { // LF
-      if (! foundCR) {
+      if (!foundCR) {
         outString.appendChar (TO_UNICODE ('\n')) ;
       }
       foundCR = false ;
@@ -625,7 +625,7 @@ String FileManager::stringWithContentOfFile (const String & inFilePath) {
 
 bool FileManager::writeStringToFile (const String & inString,
                                        const String & inFilePath) {
-  makeDirectoryIfDoesNotExist (inFilePath.stringByDeletingLastPathComponent ()) ;
+  makeDirectoryIfDoesNotExist (inFilePath.deletingLastPathComponent ()) ;
   TextFileWrite file (inFilePath) ;
   bool success = file.isOpened () ;
   file.appendString (inString) ;
@@ -639,7 +639,7 @@ bool FileManager::writeStringToFile (const String & inString,
 
 bool FileManager::writeStringToExecutableFile (const String & inString,
                                                  const String & inFilePath) {
-  makeDirectoryIfDoesNotExist (inFilePath.stringByDeletingLastPathComponent()) ;
+  makeDirectoryIfDoesNotExist (inFilePath.deletingLastPathComponent()) ;
   TextFileWrite file (inFilePath) ;
   file.appendString (inString) ;
   bool success = file.isOpened () ;
@@ -658,7 +658,7 @@ bool FileManager::writeStringToExecutableFile (const String & inString,
 
 bool FileManager::writeBinaryDataToFile (const U8Data & inBinaryData,
                                            const String & inFilePath) {
-  makeDirectoryIfDoesNotExist (inFilePath.stringByDeletingLastPathComponent()) ;
+  makeDirectoryIfDoesNotExist (inFilePath.deletingLastPathComponent()) ;
 //---
   BinaryFileWrite binaryFile (inFilePath) ;
   bool success = binaryFile.isOpened () ;
@@ -675,7 +675,7 @@ bool FileManager::writeBinaryDataToFile (const U8Data & inBinaryData,
 
 bool FileManager::writeBinaryDataToExecutableFile (const U8Data & inBinaryData,
                                                      const String & inFilePath) {
-  makeDirectoryIfDoesNotExist (inFilePath.stringByDeletingLastPathComponent()) ;
+  makeDirectoryIfDoesNotExist (inFilePath.deletingLastPathComponent()) ;
 //---
   BinaryFileWrite binaryFile (inFilePath) ;
   bool success = binaryFile.isOpened () ;
@@ -778,7 +778,7 @@ bool FileManager::makeDirectoryIfDoesNotExist (const String & inDirectoryPath) {
   const String directoryPath = absolutePathFromCurrentDirectory (inDirectoryPath) ;
   bool ok = directoryExists (directoryPath) ;
   if (! ok) {
-    ok = makeDirectoryIfDoesNotExist (directoryPath.stringByDeletingLastPathComponent ()) ;
+    ok = makeDirectoryIfDoesNotExist (directoryPath.deletingLastPathComponent ()) ;
     if (ok && !directoryExists (directoryPath)) { // Special case when the path contains ../
       const String nativePath = nativePathWithUnixPath (directoryPath) ;
     //--- Create directory (mkdir returns 0 if creation is ok)
@@ -854,11 +854,11 @@ String FileManager::absolutePathFromPath (const String & inPath,
 //--------------------------------------------------------------------------------------------------
 
 String FileManager::relativePathFromPath (const String & inPath,
-                                              const String & inFromPath) {
-  TC_UniqueArray <String> absoluteReferencePathComponents ;
-  absolutePathFromCurrentDirectory (inFromPath.stringByStandardizingPath ()).componentsSeparatedByString("/", absoluteReferencePathComponents) ;
-  TC_UniqueArray <String> absoluteReceiverPathComponents ;
-  absolutePathFromCurrentDirectory (inPath.stringByStandardizingPath ()).componentsSeparatedByString("/", absoluteReceiverPathComponents) ;
+                                          const String & inFromPath) {
+  GenericUniqueArray <String> absoluteReferencePathComponents ;
+  absolutePathFromCurrentDirectory (inFromPath.standardizedPath ()).componentsSeparatedByString("/", absoluteReferencePathComponents) ;
+  GenericUniqueArray <String> absoluteReceiverPathComponents ;
+  absolutePathFromCurrentDirectory (inPath.standardizedPath ()).componentsSeparatedByString("/", absoluteReceiverPathComponents) ;
   String result ;
   int32_t idx = 0 ;
   while ((idx < absoluteReferencePathComponents.count ())
@@ -987,7 +987,7 @@ String FileManager::deleteFile (const String & inFilePath) {
 static String recursiveSearchInDirectory (const String & inStartSearchPath,
                                             const String & inFileName,
                                             const int32_t inDirectoriesToExcludeCount,
-                                            const TC_UniqueArray <String> & inDirectoriesToExclude) {
+                                            const GenericUniqueArray <String> & inDirectoriesToExclude) {
   String result ;
   const String nativeStartSearchPath = FileManager::nativePathWithUnixPath (inStartSearchPath) ;
   DIR * dir = ::opendir (nativeStartSearchPath.cString ()) ;
@@ -1031,7 +1031,7 @@ static String recursiveSearchInDirectory (const String & inStartSearchPath,
 
 String FileManager::findFileInDirectory (const String & inDirectoryPath,
                                              const String & inFileName,
-                                             const TC_UniqueArray <String> & inDirectoriesToExclude) {
+                                             const GenericUniqueArray <String> & inDirectoriesToExclude) {
   const int32_t directoriesToExcludeCount = inDirectoriesToExclude.count () ;
   return recursiveSearchInDirectory (inDirectoryPath, inFileName, directoriesToExcludeCount, inDirectoriesToExclude) ;
 }
@@ -1046,7 +1046,7 @@ String FileManager::findFileInDirectory (const String & inDirectoryPath,
 
 static void recursiveFindAllFilesInDirectory (const String & inStartSearchPath,
                                               const String & inExtension,
-                                              TC_UniqueArray <String> & outFoundFilePathes) {
+                                              GenericUniqueArray <String> & outFoundFilePathes) {
 //--- Iterate throught directory
   const String nativeStartSearchPath = FileManager::nativePathWithUnixPath (inStartSearchPath) ;
   DIR * dir = ::opendir (nativeStartSearchPath.cString ()) ;
@@ -1073,7 +1073,7 @@ static void recursiveFindAllFilesInDirectory (const String & inStartSearchPath,
 
 void FileManager::findAllFilesInDirectoryFromExtension (const String & inDirectoryPath,
                                                           const String & inExtension,
-                                                          TC_UniqueArray <String> & outFoundFilePathes) {
+                                                          GenericUniqueArray <String> & outFoundFilePathes) {
   if (directoryExists (inDirectoryPath)) {
     recursiveFindAllFilesInDirectory (inDirectoryPath, inExtension, outFoundFilePathes) ;
   }

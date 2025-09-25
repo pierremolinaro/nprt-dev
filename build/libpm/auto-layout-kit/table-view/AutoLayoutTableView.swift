@@ -50,6 +50,7 @@ public class AutoLayoutTableView : AutoLayoutVerticalStackView {
     self.mCocoaTableView.myTableView = self
     self.mCocoaTableView.focusRingType = .none
     self.mCocoaTableView.isEnabled = true
+//    self.mCocoaTableView.clipsToBounds = true
     self.mCocoaTableView.gridStyleMask = [.solidHorizontalGridLineMask, .solidVerticalGridLineMask]
     self.mCocoaTableView.usesAlternatingRowBackgroundColors = true
     self.mCocoaTableView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
@@ -60,6 +61,7 @@ public class AutoLayoutTableView : AutoLayoutVerticalStackView {
     self.mCocoaScrollView.hasHorizontalScroller = false
     self.mCocoaScrollView.hasVerticalScroller = true
     self.mCocoaScrollView.borderType = .noBorder
+//    self.mCocoaScrollView.clipsToBounds = true
     self.mCocoaScrollView.documentView = self.mCocoaTableView
   //--- Add Control Buttons ?
     if inAddControlButtons {

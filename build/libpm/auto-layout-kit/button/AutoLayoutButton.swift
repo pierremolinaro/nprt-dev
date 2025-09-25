@@ -101,7 +101,7 @@ public class AutoLayoutButton : BaseControl {
 
 //--------------------------------------------------------------------------------------------------
 
-fileprivate class InternalNSButton : NSButton {
+fileprivate final class InternalNSButton : NSButton {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

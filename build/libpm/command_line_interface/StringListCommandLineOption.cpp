@@ -162,7 +162,7 @@ void StringListCommandLineOption::printStringOptions (void) {
 void StringListCommandLineOption::releaseStrings (void) {
   StringListCommandLineOption * p = gFirstStringListOption ;
   while (p != nullptr) {
-    p->mValue.free () ;
+    p->mValue.removeAll () ;
     p = p->mNext ;
   }
 }
@@ -173,7 +173,7 @@ PrologueEpilogue gReleaseStringList (nullptr, StringListCommandLineOption::relea
 
 //--------------------------------------------------------------------------------------------------
 
-void StringListCommandLineOption::getStringOptionNameList (TC_UniqueArray <String> & outArray) {
+void StringListCommandLineOption::getStringOptionNameList (GenericUniqueArray <String> & outArray) {
   StringListCommandLineOption * p = gFirstStringListOption ;
   while (p != nullptr) {
     outArray.appendObject (p->mDomainName) ;

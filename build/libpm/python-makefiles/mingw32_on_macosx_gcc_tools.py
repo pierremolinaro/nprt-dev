@@ -1,13 +1,12 @@
 #! /usr/bin/python3
 # -*- coding: UTF-8 -*-
-
-#-----------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 import sys, time, os, json
 import makefile, default_build_options
 import generic_galgas_makefile
 
-#-----------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 def buildForWin32OnMacOSX (dictionary, jsonFilePath, EXECUTABLE, BUILD_DIR_NAME, GOAL, maxParallelJobs, displayCommands) :
   executable = makefile.find_executable ("x86_64-w64-mingw32-gcc")
@@ -54,4 +53,4 @@ def buildForWin32OnMacOSX (dictionary, jsonFilePath, EXECUTABLE, BUILD_DIR_NAME,
 #--- Run makefile
   gmf.run ()
 
-#-----------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------

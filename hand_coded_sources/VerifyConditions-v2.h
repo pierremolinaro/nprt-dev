@@ -1,10 +1,10 @@
 #pragma once
 
-#include "TC_UniqueArray.h"
+#include "GenericUniqueArray.h"
 
 class Compiler ;
 
 bool
 NecessaryConditions_OK (Compiler * inCompiler,
-                        const TC_UniqueArray <cElement> & Element,
-                        const TC_UniqueArray <cResource> & Resource);
+                        const GenericUniqueArray <cElement> & Element,
+                        const GenericUniqueArray <cResource> & Resource);

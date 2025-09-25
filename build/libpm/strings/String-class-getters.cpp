@@ -23,7 +23,7 @@
 #include "SHA256.h"
 #include "SharedObject.h"
 #include "unicode_character_cpp.h"
-#include "TC_UniqueArray2.h"
+#include "GenericUniqueMatrix.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -129,7 +129,7 @@ bool String::containsString (const String & inSearchedString) const {
 //--------------------------------------------------------------------------------------------------
 
 void String::componentsSeparatedByString (const String & inSeparatorString,
-                                          TC_UniqueArray <String> & outResult) const {
+                                          GenericUniqueArray <String> & outResult) const {
   outResult.removeAllKeepingCapacity () ;
   const int32_t sourceLength = length () ;
   const int32_t splitStringLength = inSeparatorString.length () ;
@@ -162,7 +162,7 @@ void String::componentsSeparatedByString (const String & inSeparatorString,
 //   componentsJoinedByString
 //--------------------------------------------------------------------------------------------------
 
-String String::componentsJoinedByString (const TC_UniqueArray <String> & inComponentArray,
+String String::componentsJoinedByString (const GenericUniqueArray <String> & inComponentArray,
                                          const String & inSeparator) {
   String result ;
   if (inComponentArray.count () > 0) {
@@ -194,8 +194,8 @@ bool String::endsWithString (const String & inString) const {
 
 //--- Substitute 'inCharacter' by 'inString' ; if the character occurs twice, suppress one
 
-String String::stringByReplacingCharacterByString (const utf32 inCharacter,
-                                                   const String & inString) const {
+String String::replacingCharacterByString (const utf32 inCharacter,
+                                           const String & inString) const {
   const int32_t stringLength = length () ;
   String resultingString ;
   bool previousCharIsSubstituteChar = false ;
@@ -227,9 +227,9 @@ String String::stringByReplacingCharacterByString (const utf32 inCharacter,
 //  if inSearchedString is empty, returns the receiver
 //--------------------------------------------------------------------------------------------------
 
-String String::stringByReplacingStringByString (const String inSearchedString,
-                                                const String inReplacementString,
-                                                uint32_t & outReplacementCount) const {
+String String::replacingStringByString (const String inSearchedString,
+                                        const String inReplacementString,
+                                        uint32_t & outReplacementCount) const {
   String result ;
   outReplacementCount = 0 ;
   if (inSearchedString.length () == 0) {
@@ -264,10 +264,10 @@ String String::stringByReplacingStringByString (const String inSearchedString,
 
 //--------------------------------------------------------------------------------------------------
 
-String String::stringByReplacingStringByString (const String inSearchedString,
-                                                const String inReplacementString) const {
+String String::replacingStringByString (const String inSearchedString,
+                                        const String inReplacementString) const {
   uint32_t unusedReplacementCount = 0 ;
-  return stringByReplacingStringByString (inSearchedString, inReplacementString, unusedReplacementCount) ;
+  return replacingStringByString (inSearchedString, inReplacementString, unusedReplacementCount) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -322,7 +322,7 @@ String String::capitalizingFirstCharacter (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-String String::lowercaseString (void) const {
+String String::lowercasedString (void) const {
   String s ;
   const int32_t receiver_length = length () ;
   s.setCapacity (receiver_length) ;
@@ -334,7 +334,7 @@ String String::lowercaseString (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-String String::stringByTrimmingSeparators (void) const {
+String String::trimmingSeparators (void) const {
   String s ;
   const int32_t receiver_length = length () ;
   s.setCapacity (receiver_length) ;
@@ -363,7 +363,7 @@ String String::stringByTrimmingSeparators (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-String String::uppercaseString (void) const {
+String String::uppercasedString (void) const {
   String s ;
   const int32_t receiver_length = length () ;
   s.setCapacity (receiver_length) ;
@@ -812,7 +812,7 @@ String String::utf8RepresentationWithUnicodeEscaping (void) const {
 //--------------------------------------------------------------------------------------------------
 
 String String::decodedStringFromRepresentation (bool & outOk) const {
-  TC_UniqueArray <String> components ;
+  GenericUniqueArray <String> components ;
   componentsSeparatedByString ("_", components) ;
   String result ;
   outOk = true ;
@@ -1011,10 +1011,10 @@ String String::deletingPathExtension (void) const {
 }
 
 //--------------------------------------------------------------------------------------------------
-//   stringByDeletingLastPathComponent
+//   deletingLastPathComponent
 //--------------------------------------------------------------------------------------------------
 
-String String::stringByDeletingLastPathComponent (void) const {
+String String::deletingLastPathComponent (void) const {
   String result ;
   int32_t receiver_length = length () ;
 //--- Suppress training '/'
@@ -1035,10 +1035,10 @@ String String::stringByDeletingLastPathComponent (void) const {
 }
 
 //--------------------------------------------------------------------------------------------------
-//   stringByAppendingPathComponent
+//   appendingPathComponent
 //--------------------------------------------------------------------------------------------------
 
-String String::stringByAppendingPathComponent (const String & inPathComponent) const {
+String String::appendingPathComponent (const String & inPathComponent) const {
   String result = *this ;
   if (result.length () == 0) {
     result = inPathComponent ;
@@ -1182,9 +1182,9 @@ String String::XMLEscapedString (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-String String::stringByStandardizingPath (void) const {
+String String::standardizedPath (void) const {
   #ifdef COMPILE_FOR_WINDOWS
-    String path = stringByReplacingCharacterByString (TO_UNICODE ('\\'), "/") ;
+    String path = replacingCharacterByString (TO_UNICODE ('\\'), "/") ;
   #else
     String path = * this ;
   #endif
@@ -1192,7 +1192,7 @@ String String::stringByStandardizingPath (void) const {
     path.appendCString (".") ;
   }else{
   //--- Decompose path
-    TC_UniqueArray <String> componentArray ;
+    GenericUniqueArray <String> componentArray ;
     path.componentsSeparatedByString ("/", componentArray) ;
   //--- Remove empty components (but the first one)
     int32_t componentIndex = 1 ;
@@ -1247,7 +1247,7 @@ uint32_t String::LevenshteinDistanceFromString (const String & inOperand) const 
   // for all i and j, d[i,j] will hold the Levenshtein distance between
   // the first i characters of s and the first j characters of t;
   // note that d has (m+1)x(n+1) values
-  TC_UniqueArray2 <uint32_t> distance (myLength + 1, operandLength + 1) ;
+  GenericUniqueMatrix <uint32_t> distance (myLength + 1, operandLength + 1) ;
 
   for (int32_t i=0 ; i<=myLength ; i++) {
     distance.setObjectAtIndexes ((uint32_t) i, i, 0 COMMA_HERE) ;

@@ -23,7 +23,7 @@
 
 //---------------------------------------------------------------------------*
 
-#include "TC_UniqueArray.h"
+#include "GenericUniqueArray.h"
 #include "String-class.h"
 #include "ExtendedList-v2.h"
 
@@ -65,16 +65,16 @@ class C_activitiesToSchedule {
 //--- Get first activity to schedule
   public : int32_t getFirstToScheduleAndSuppress (const int32_t inCurrentInstant) ;
   public : int32_t getMinimumBusyPeriod4Activity  (const int32_t inCurrentActivity,
-                                                    const TC_UniqueArray <cActivity> & inActivities) const ;
+                                                    const GenericUniqueArray <cActivity> & inActivities) const ;
 
   public : int32_t getMaximumBusyPeriod (const int32_t currentActivityIndex,
-                                          const TC_UniqueArray <cActivity> & inActivities) const ;
+                                          const GenericUniqueArray <cActivity> & inActivities) const ;
 
   public : int32_t getMinimumBusyPeriod (const int32_t currentActivityIndex,
-                                          const TC_UniqueArray <cActivity> & inActivities) const ;
+                                          const GenericUniqueArray <cActivity> & inActivities) const ;
 
   public : int32_t getLowerPriority (const int32_t currentActivityIndex,
-                                      const TC_UniqueArray <cActivity> & inActivities) const ;
+                                      const GenericUniqueArray <cActivity> & inActivities) const ;
 
   public : int32_t getFirstToSchedule (const int32_t inCurrentInstant) const ;
   public : int32_t getFirstScheduledInstant (const int32_t inCurrentInstant) const ;
@@ -89,7 +89,7 @@ class C_activitiesToSchedule {
 
 //--- Print a list
   public : void printList (AbstractOutputStream & inStream,
-                           const TC_UniqueArray <String> & inNames) const ;
+                           const GenericUniqueArray <String> & inNames) const ;
 
 //------------------------ INTERNAL STUFF ------------------------
 
@@ -175,20 +175,20 @@ class C_activitiesToSchedule {
 
 void SuccessorsMaxBusyDuration (int32_t & ioBusyDuration, const int32_t activityIndex,
                                 const int32_t ResourceIndex,
-                                const TC_UniqueArray <cActivity> & inActivities);
+                                const GenericUniqueArray <cActivity> & inActivities);
 
 void LowerPriorityOnResource (int32_t & lowerPriority, const int32_t activityIndex,
                               const int32_t ResourceIndex,
-                              const TC_UniqueArray <cActivity> & inActivities);
+                              const GenericUniqueArray <cActivity> & inActivities);
 
 void SuccessorsMinBusyDuration (int32_t & ioBusyDuration, const int32_t activityIndex,
                                 const int32_t ResourceIndex,
-                                const TC_UniqueArray <cActivity> & inActivities);
+                                const GenericUniqueArray <cActivity> & inActivities);
 
 void SuccessorsMinBusyDuration4Activity (int32_t & ioBusyDuration, const int32_t activityIndex,
                                 const int32_t ResourceIndex,
                                 const int32_t priorityOfCurrentActivity,
-                                const TC_UniqueArray <cActivity> & inActivities);
+                                const GenericUniqueArray <cActivity> & inActivities);
 
 //---------------------------------------------------------------------------*
 

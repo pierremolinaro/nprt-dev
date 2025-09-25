@@ -4,7 +4,7 @@
 #include <math.h>
 #include <algorithm>
 
-#include "TC_UniqueArray.h"
+#include "GenericUniqueArray.h"
 #include "HTMLFileWrite.h"
 #include "Compiler.h"
 
@@ -17,10 +17,10 @@
 
 void
 ExtractWorstBestRT (Compiler * inCompiler,
-                    const TC_UniqueArray <cActivity> & exElement,
-          const TC_UniqueArray <cResource> & Resource,
-          TC_UniqueArray <cMTElement> & MTElement,
-          const TC_UniqueArray <cResponseTime> & inResponseTimeArray,
+                    const GenericUniqueArray <cActivity> & exElement,
+          const GenericUniqueArray <cResource> & Resource,
+          GenericUniqueArray <cMTElement> & MTElement,
+          const GenericUniqueArray <cResponseTime> & inResponseTimeArray,
           bool CreateIntermediateFiles,
    				const String & raw_outputHTMLFileName,
           HTMLFileWrite & in_htmlFile) {

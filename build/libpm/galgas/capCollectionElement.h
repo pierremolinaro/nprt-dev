@@ -62,14 +62,8 @@ class capCollectionElement final {
   public: inline cCollectionElement * ptr (void) { return mPtr ; }
   public: inline const cCollectionElement * ptr (void) const { return mPtr ; }
 
-//--- Method for comparing elements
-  public: ComparisonResult compare (const capCollectionElement & inOperand) const ;
-
 //--- Method that returns a copy of current object
   public: capCollectionElement copy (void) ;
-
-//--- Description
- public: void description (String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //--------------------------------------------------------------------------------------------------

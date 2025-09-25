@@ -8,8 +8,8 @@
 
 bool
 NecessaryConditions_OK (Compiler * inCompiler,
-                        const TC_UniqueArray <cElement> & Element,
-            						const TC_UniqueArray <cResource> & Resource){
+                        const GenericUniqueArray <cElement> & Element,
+            						const GenericUniqueArray <cResource> & Resource){
 
   const int32_t NumOfElements = Element.count ();
   const int32_t NumOfResources = Resource.count ();

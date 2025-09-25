@@ -357,7 +357,6 @@ public final class InternalCocoaTextView : NSTextView, NSTextViewDelegate { //, 
   //--- REQUIRED!!! Declaring theses properties ensures they are retained (required for ElCapitan)
   private let mTextStorage : NSTextStorage // Subclassing NSTextStorage requires defining string, …
   private let mLayoutManager = EmbeddedLayoutManager ()
-//  private let mTextFinder = NSTextFinder ()
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // https://developer.apple.com/library/archive/documentation/TextFonts/Conceptual/CocoaTextArchitecture/TextSystemArchitecture/ArchitectureOverview.html#//apple_ref/doc/uid/TP40009459-CH7-CJBJHGAG
@@ -468,14 +467,6 @@ public final class InternalCocoaTextView : NSTextView, NSTextViewDelegate { //, 
     super.draw (inDirtyRect)
     self.mDelegate?.didDrawTextView (inDirtyRect, self)
   }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-//  public func textView (_ textView : NSTextView,
-//                        willChangeSelectionFromCharacterRanges oldSelectedCharRanges : [NSValue],
-//                        toCharacterRanges newSelectedCharRanges : [NSValue]) -> [NSValue] {
-//    return newSelectedCharRanges ;
-//  }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

@@ -66,14 +66,6 @@ bool capCollectionElement::isValid (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult capCollectionElement::compare (const capCollectionElement & inOperand) const {
-  macroValidSharedObject (mPtr, cCollectionElement) ;
-  macroValidSharedObject (inOperand.mPtr, cCollectionElement) ;
-  return mPtr->compare (inOperand.mPtr) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 capCollectionElement capCollectionElement::copy (void) {
   capCollectionElement result ;
   cCollectionElement * p = mPtr->copy () ;
@@ -95,16 +87,6 @@ void capCollectionElement::insulate (void) {
     cCollectionElement * p = mPtr->copy () ;
     macroAssignSharedObject (mPtr, p) ;
     macroDetachSharedObject (p) ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void capCollectionElement::description (String & ioString, const int32_t inIndentation) const {
-  if (nullptr == mPtr) {
-    ioString.appendCString ("NULL") ;
-  }else{
-    mPtr->description (ioString, inIndentation) ;
   }
 }
 

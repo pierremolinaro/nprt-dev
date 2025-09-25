@@ -283,7 +283,7 @@ getFirstToScheduleAndSuppress (const int32_t inCurrentInstant) {
 //static
 void LowerPriorityOnResource (int32_t & lowerPriority, const int32_t activityIndex,
                               const int32_t ResourceIndex,
-                              const TC_UniqueArray <cActivity> & inActivities){
+                              const GenericUniqueArray <cActivity> & inActivities){
   if (activityIndex >= 0){
 	  int32_t successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
 	  if (successorIndex >= 0){
@@ -309,7 +309,7 @@ void LowerPriorityOnResource (int32_t & lowerPriority, const int32_t activityInd
 //---------------------------------------------------------------------------*
 
 int32_t C_activitiesToSchedule::getLowerPriority (const int32_t currentActivityIndex,
-                                                  const TC_UniqueArray <cActivity> & inActivities) const {
+                                                  const GenericUniqueArray <cActivity> & inActivities) const {
   int32_t lowerPriority = 0 ;
   int32_t activityIndex = currentActivityIndex ;// Means none
   int32_t ResourceIndex = inActivities (activityIndex COMMA_HERE).mResourceId;
@@ -334,7 +334,7 @@ int32_t C_activitiesToSchedule::getLowerPriority (const int32_t currentActivityI
 
 void SuccessorsMaxBusyDuration (int32_t & ioBusyDuration, const int32_t activityIndex,
                                 const int32_t ResourceIndex,
-                                const TC_UniqueArray <cActivity> & inActivities){
+                                const GenericUniqueArray <cActivity> & inActivities){
 
   if (activityIndex >= 0){
 	  int32_t successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
@@ -366,7 +366,7 @@ void SuccessorsMaxBusyDuration (int32_t & ioBusyDuration, const int32_t activity
 //---------------------------------------------------------------------------*
 
 int32_t C_activitiesToSchedule::getMaximumBusyPeriod (const int32_t currentActivityIndex,
-                                                      const TC_UniqueArray <cActivity> & inActivities) const {
+                                                      const GenericUniqueArray <cActivity> & inActivities) const {
 
   int32_t BusyDuration=0;
   const int32_t ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
@@ -390,7 +390,7 @@ int32_t C_activitiesToSchedule::getMaximumBusyPeriod (const int32_t currentActiv
 void SuccessorsMinBusyDuration4Activity (int32_t & ioBusyDuration, const int32_t activityIndex,
                                 const int32_t ResourceIndex,
                                 const int32_t priorityOfCurrentActivity,
-                                const TC_UniqueArray <cActivity> & inActivities){
+                                const GenericUniqueArray <cActivity> & inActivities){
 
   if (activityIndex >= 0){
 	  int32_t successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
@@ -430,7 +430,7 @@ void SuccessorsMinBusyDuration4Activity (int32_t & ioBusyDuration, const int32_t
 //---------------------------------------------------------------------------*
 
 int32_t C_activitiesToSchedule::getMinimumBusyPeriod4Activity (const int32_t currentActivityIndex,
-                                                               const TC_UniqueArray <cActivity> & inActivities) const {
+                                                               const GenericUniqueArray <cActivity> & inActivities) const {
 
   int32_t BusyDuration=0;
   const int32_t ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
@@ -458,7 +458,7 @@ int32_t C_activitiesToSchedule::getMinimumBusyPeriod4Activity (const int32_t cur
 //--------------------------------------------------------------------------------
 /*int32_t C_activitiesToSchedule::
 getLeastBusyPeriod (const int32_t inCurrentActivity,
-                    const TC_UniqueArray <cActivity> & inActivities) {
+                    const GenericUniqueArray <cActivity> & inActivities) {
   int32_t LeastActiviyPeriod = 0 ; // Means none
   const int32_t priorityOfCurrentActivity = inActivities (inCurrentActivity COMMA_HERE).mPriority;
   if (mRootPointer != NULL){
@@ -482,7 +482,7 @@ getLeastBusyPeriod (const int32_t inCurrentActivity,
 
 void SuccessorsMinBusyDuration (int32_t & ioBusyDuration, const int32_t activityIndex,
                                 const int32_t ResourceIndex,
-                                const TC_UniqueArray <cActivity> & inActivities){
+                                const GenericUniqueArray <cActivity> & inActivities){
 
   if (activityIndex >= 0){
 	  int32_t successorIndex = inActivities (activityIndex COMMA_HERE).mSuccessorId;
@@ -514,7 +514,7 @@ void SuccessorsMinBusyDuration (int32_t & ioBusyDuration, const int32_t activity
 //---------------------------------------------------------------------------*
 
 int32_t C_activitiesToSchedule::getMinimumBusyPeriod (const int32_t currentActivityIndex,
-                                                      const TC_UniqueArray <cActivity> & inActivities) const {
+                                                      const GenericUniqueArray <cActivity> & inActivities) const {
 
   int32_t BusyDuration=0;
   const int32_t ResourceIndex = inActivities (currentActivityIndex COMMA_HERE).mResourceId;
@@ -613,7 +613,7 @@ bool C_activitiesToSchedule::AnyNotReadyToScheduleAt (const int32_t inCurrentIns
 //---------------------------------------------------------------------------*
 
  void C_activitiesToSchedule::printList (AbstractOutputStream & inStream,
-                                         const TC_UniqueArray <String> & inNames) const {
+                                         const GenericUniqueArray <String> & inNames) const {
    cVDLnodeInfo * p = mRootPointer ;
    while (p != NULL) {
      const int32_t index = p->mActivityIndex ;

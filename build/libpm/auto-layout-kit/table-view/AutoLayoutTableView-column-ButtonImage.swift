@@ -94,6 +94,7 @@ fileprivate class InternalButtonImageTableColumn : AutoLayoutTableColumn {
       button.bezelStyle = .regularSquare
       button.isBordered = false
       button.imagePosition = .imageOnly
+      button.clipsToBounds = true
 
       button.target = self
       button.action = #selector (Self.buttonAction (_:))

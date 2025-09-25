@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TC_UniqueArray.h"
+#include "GenericUniqueArray.h"
 
 class String ;
 
@@ -87,11 +87,11 @@ class Compiler ;
 
 int32_t
 BuildExtendedList (Compiler * inCompiler,
-                   TC_UniqueArray < cReadyAtThisInstant> & ReadyAtThisInstant,
-                   TC_UniqueArray <cElement> & Element,
-                   const TC_UniqueArray <cResource> & Resource,
-                   TC_UniqueArray <cActivity> & exElement,
-                   TC_UniqueArray <cMTElement> & outMTElement,
+                   GenericUniqueArray < cReadyAtThisInstant> & ReadyAtThisInstant,
+                   GenericUniqueArray <cElement> & Element,
+                   const GenericUniqueArray <cResource> & Resource,
+                   GenericUniqueArray <cActivity> & exElement,
+                   GenericUniqueArray <cMTElement> & outMTElement,
                    const int32_t Nu_oftasks, const int32_t Nu_ofMessages,
                    bool CreateIntermediateFiles,
                    bool & ioUseBalgorithm,
@@ -100,10 +100,10 @@ BuildExtendedList (Compiler * inCompiler,
 
 void
 ExtractWorstBestRT (Compiler * inCompiler,
-                    const TC_UniqueArray <cActivity> & exElement,
-                    const TC_UniqueArray <cResource> & Resource,
-                    TC_UniqueArray <cMTElement> & MTElement,
-                    const TC_UniqueArray <cResponseTime> & inResponseTimeArray,
+                    const GenericUniqueArray <cActivity> & exElement,
+                    const GenericUniqueArray <cResource> & Resource,
+                    GenericUniqueArray <cMTElement> & MTElement,
+                    const GenericUniqueArray <cResponseTime> & inResponseTimeArray,
                     bool CreateIntermediateFiles,
                     const String & raw_outputHTMLFileName,
                     HTMLFileWrite & in_htmlFile);

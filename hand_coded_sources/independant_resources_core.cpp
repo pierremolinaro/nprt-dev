@@ -18,7 +18,7 @@
 //                                                                           *
 //---------------------------------------------------------------------------*
 
-#include "TC_UniqueArray.h"
+#include "GenericUniqueArray.h"
 #include "analyzeCommandLineOptions.h"
 #include "F_mainForLIBPM.h"
 
@@ -74,7 +74,7 @@ class cIndependantResourceSchedule  {
 //---------------------------------------------------------------------------*
 
 class cIndependantResourcesScheduleMap {
-  private : TC_UniqueArray <cIndependantResourceSchedule  *> mResourceScheduleArray ;
+  private : GenericUniqueArray <cIndependantResourceSchedule  *> mResourceScheduleArray ;
   private : int32_t mCurrentInstant ;
   private : int32_t mLatestInstant ;
 
@@ -97,7 +97,7 @@ class cIndependantResourcesScheduleMap {
   public : void dumpStructure (void) ;
   public : void insertAtInstant (cIndependantResourceSchedule  * inResource,
                                  const int32_t inInstant) ;
-  public : void computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & ioResponseTimeArray) ;
+  public : void computeBestAndWorstResponseTime (GenericUniqueArray <cResponseTime> & ioResponseTimeArray) ;
   protected : void reallocIfNeeded (const int32_t inInstant) ;
 
 } ;
@@ -287,7 +287,7 @@ static void unMark (void) {
 //---------------------------------------------------------------------------*
 
 void cIndependantResourcesScheduleMap::
-computeBestAndWorstResponseTime (TC_UniqueArray <cResponseTime> & ioResponseTimeArray) {
+computeBestAndWorstResponseTime (GenericUniqueArray <cResponseTime> & ioResponseTimeArray) {
   cIndependantResourcesActivitySchedule * p = gPtrNodeList ;
   while (p != NULL) {
     const int32_t activityIndex = p->mActivityIndex ;
@@ -374,8 +374,8 @@ dumpStructure (void) {
 //---------------------------------------------------------------------------*
 
 void
-independantResourcesScheduleActivities (const TC_UniqueArray <cActivity> & inActivities,
-                                        TC_UniqueArray <cResponseTime> & outResponseTimeArray) {
+independantResourcesScheduleActivities (const GenericUniqueArray <cActivity> & inActivities,
+                                        GenericUniqueArray <cResponseTime> & outResponseTimeArray) {
 //--- Schedule map
   cIndependantResourcesScheduleMap scheduleMap ;
 //--- Enter independant activities
