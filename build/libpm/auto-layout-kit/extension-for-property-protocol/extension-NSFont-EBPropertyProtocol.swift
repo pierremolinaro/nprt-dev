@@ -51,7 +51,7 @@ extension NSFont : EBStoredPropertyProtocol, @unchecked @retroactive Sendable {
         return NSFont.systemFont (ofSize: fs)
       }
     }else{
-      return nil
+      return NSFont.systemFont (ofSize: 12.0)
     }
   }
 

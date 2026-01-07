@@ -15,7 +15,7 @@ final class SWIFT_SharedTextModel : NSObject, ObservableObject, Identifiable, NS
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  private var mScanner : SWIFT_Scanner
+  private var mScanner : SWIFT_Scanner?
   private let mTextStorage = NSTextStorage ()
   var mDocumentString : String {
     didSet {
@@ -40,7 +40,7 @@ final class SWIFT_SharedTextModel : NSObject, ObservableObject, Identifiable, NS
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  init (scanner inScanner : SWIFT_Scanner,
+  init (scanner inScanner : SWIFT_Scanner?,
         initialString inString : String) {
     self.mScanner = inScanner
     self.mDocumentString = inString
@@ -74,7 +74,7 @@ final class SWIFT_SharedTextModel : NSObject, ObservableObject, Identifiable, NS
     )
   //---
     self.mTextStorage.delegate = self // NSTextStorageDelegate
-    self.mScanner.performLexicalColoringAfterUserDefaultChange (textStorage: self.mTextStorage)
+    self.mScanner?.performLexicalColoringAfterUserDefaultChange (textStorage: self.mTextStorage)
     let attributedStr = NSMutableAttributedString (string: self.mDocumentString)
     self.mTextStorage.setAttributedString (attributedStr)
   //--- Inutile d'en faire plus, la méthode textStorage (_:didProcessEditing:range:changeInLength)
@@ -118,7 +118,7 @@ final class SWIFT_SharedTextModel : NSObject, ObservableObject, Identifiable, NS
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   @objc func userDefaultDidChange () {
-    self.mScanner.performLexicalColoringAfterUserDefaultChange (textStorage: self.mTextStorage)
+    self.mScanner?.performLexicalColoringAfterUserDefaultChange (textStorage: self.mTextStorage)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -188,11 +188,15 @@ final class SWIFT_SharedTextModel : NSObject, ObservableObject, Identifiable, NS
   func selectionRange (forProposedRange inProposedSelectionRange : NSRange,
                        granularity inGranularity : NSSelectionGranularity,
                        nsTextViewComputedRange inTextViewComputedRange : NSRange) -> NSRange {
-    return self.mScanner.selectionRange (
-      forProposedRange: inProposedSelectionRange,
-      granularity: inGranularity,
-      nsTextViewComputedRange: inTextViewComputedRange
-    )
+    if let scanner = self.mScanner{
+      return scanner.selectionRange (
+        forProposedRange: inProposedSelectionRange,
+        granularity: inGranularity,
+        nsTextViewComputedRange: inTextViewComputedRange
+      )
+    }else{
+      return inProposedSelectionRange
+    }
   }
 
  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -206,7 +210,7 @@ final class SWIFT_SharedTextModel : NSObject, ObservableObject, Identifiable, NS
                     range inEditedRange : NSRange,
                     changeInLength inDelta : Int) { // NSTextStorageDelegate
     if inEditedMask.contains (.editedCharacters) {
-      self.mScanner.performLexicalAnalysisAndColoring (
+      self.mScanner?.performLexicalAnalysisAndColoring (
         textStorage: self.mTextStorage,
         editedRange: inEditedRange,
         changeInLength: inDelta

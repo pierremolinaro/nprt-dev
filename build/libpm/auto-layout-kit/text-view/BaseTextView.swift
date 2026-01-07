@@ -220,7 +220,7 @@ public class BaseTextView : BaseView {
   public final func textViewNeedsDisplay () {
     self.mCocoaTextView.needsDisplay = true
     self.mScrollView.verticalScroller?.needsDisplay = true
-    self.mScrollView.verticalRulerView?.needsDisplay = true
+//    self.mScrollView.verticalRulerView?.needsDisplay = true
     self.mScrollView.verticalRulerView?.invalidateHashMarks ()
   }
 
@@ -463,9 +463,9 @@ public final class InternalCocoaTextView : NSTextView, NSTextViewDelegate { //, 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   public override func draw (_ inDirtyRect : NSRect) {
-    self.mDelegate?.willDrawTextView (inDirtyRect, self)
+//    self.mDelegate?.willDrawTextView (inDirtyRect, self)
     super.draw (inDirtyRect)
-    self.mDelegate?.didDrawTextView (inDirtyRect, self)
+//    self.mDelegate?.didDrawTextView (inDirtyRect, self)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

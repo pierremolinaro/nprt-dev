@@ -25,7 +25,7 @@ struct ProjectDocumentView : View {
     self._mDocument = inDocumentBinding
     self.mProjectFileURL = inFileURL
     let projectSharedTextModel = SWIFT_SharedTextModel (
-      scanner: ScannerFor_galgasScanner3 (),
+      scanner: scannerFor (extension: inFileURL.pathExtension),
       initialString: inDocumentBinding.mString.wrappedValue
     )
     self._mProjectTextModel = StateObject (wrappedValue: projectSharedTextModel)
@@ -56,6 +56,10 @@ struct ProjectDocumentView : View {
     }detail: {
       self.detailView
     }
+  //--- Save all edited files
+    .onReceive (NotificationCenter.default.publisher (for: Notification.Name.mySaveAllCommand)) { _ in
+      self.mRootDirectoryNode.saveAllEditedFiles ()
+    }
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -82,15 +86,14 @@ struct ProjectDocumentView : View {
     if let fileNodeID = self.mRootDirectoryNode.mSelectedFileNodeID {
       if let stm = self.mRootDirectoryNode.findOrAddSourceText (forNodeID: fileNodeID) {
         HStack {
-          Text (self.mRootDirectoryNode.fileBaseName (forNodeID: fileNodeID))
-//          .bold (self.mRootDirectoryNode.isFileEdited (forNodeID: fileNodeID))
+          Text (self.mRootDirectoryNode.fileLastPathComponent (forNodeID: fileNodeID))
           if self.mRootDirectoryNode.isFileEdited (forNodeID: fileNodeID) {
             Text ("— Edited").textScale (.secondary)
           }
           Spacer ()
         }
         SWIFT_TextSyntaxColoringView (model: stm)
-        .id (fileNodeID) // Force le rafraîchisserment à chaque changement de fileNodeID
+        .id (fileNodeID) // Force le rafraîchissement à chaque changement de fileNodeID
       }else{
         EmptyView ()
       }
@@ -124,7 +127,7 @@ fileprivate final class ProjectDocumentSaveScheduler : ObservableObject {
   func scheduleProjectDocumentSaveOperation () {
     if !self.mSaveScheduled {
       self.mSaveScheduled = true
-      DispatchQueue.main.asyncAfter (deadline: .now () + 5.0) { self.saveProjectDocument () }
+      DispatchQueue.main.asyncAfter (deadline: .now () + AUTOMATIC_SAVE_DELAY) { self.saveProjectDocument () }
     }
   }
 

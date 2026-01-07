@@ -7,7 +7,6 @@
 //--------------------------------------------------------------------------------------------------
 
 import SwiftUI
-import AppKit
 
 //--------------------------------------------------------------------------------------------------
 
@@ -150,7 +149,7 @@ struct SettingViewFor_oa_scanner : View {
 
 //--------------------------------------------------------------------------------------------------
 
-final class ScannerFor_oa_scanner : SWIFT_Scanner {
+class ScannerFor_oa_scanner : SWIFT_Scanner {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -323,47 +322,47 @@ final class ScannerFor_oa_scanner : SWIFT_Scanner {
 
  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  private var mFont = CustomFont (nsFont: NSFont.monospacedSystemFont (ofSize: 13.0, weight: .regular))
-  private var mLineHeight : Int = 12
-  private var mDefaultColor : Color = .black
-  private var mColorFor_identifier : Color = .black
-  private var mBoldFor_identifier : Bool = false
-  private var mItalicFor_identifier : Bool = false
-  private var mColorFor_keyWords : Color = .black
-  private var mBoldFor_keyWords : Bool = false
-  private var mItalicFor_keyWords : Bool = false
-  private var mColorFor_delimitors : Color = .black
-  private var mBoldFor_delimitors : Bool = false
-  private var mItalicFor_delimitors : Bool = false
-  private var mColorFor_integerStyle : Color = .black
-  private var mBoldFor_integerStyle : Bool = false
-  private var mItalicFor_integerStyle : Bool = false
-  private var mColorFor_lexical_error : Color = .red
-  private var mBoldFor_lexical_error : Bool = false
-  private var mItalicFor_lexical_error : Bool = false
-  private var mColorFor_template : Color = .gray
-  private var mBoldFor_template : Bool = false
-  private var mItalicFor_template : Bool = false
-  private var mTokenAttributeArray = [[NSAttributedString.Key : Any]?] ()
+  final var mFont = CustomFont (nsFont: NSFont.monospacedSystemFont (ofSize: 13.0, weight: .regular))
+  final var mLineHeight : Int = 12
+  final var mDefaultColor : Color = .black
+  final var mColorFor_identifier : Color = .black
+  final var mBoldFor_identifier : Bool = false
+  final var mItalicFor_identifier : Bool = false
+  final var mColorFor_keyWords : Color = .black
+  final var mBoldFor_keyWords : Bool = false
+  final var mItalicFor_keyWords : Bool = false
+  final var mColorFor_delimitors : Color = .black
+  final var mBoldFor_delimitors : Bool = false
+  final var mItalicFor_delimitors : Bool = false
+  final var mColorFor_integerStyle : Color = .black
+  final var mBoldFor_integerStyle : Bool = false
+  final var mItalicFor_integerStyle : Bool = false
+  final var mColorFor_lexical_error : Color = .red
+  final var mBoldFor_lexical_error : Bool = false
+  final var mItalicFor_lexical_error : Bool = false
+  final var mColorFor_template : Color = .gray
+  final var mBoldFor_template : Bool = false
+  final var mItalicFor_template : Bool = false
+  final var mTokenAttributeArray = [[NSAttributedString.Key : Any]?] ()
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  private func updateTokenStyleArrays (_ ioStyleDidChange : inout Bool) {
+  func updateTokenStyleArrays (_ ioStyleDidChange : inout Bool) {
     ioStyleDidChange = false
     let ud = UserDefaults.standard
-    if let s = ud.string (forKey: "FontFor_galgasScanner3"), let v = CustomFont (rawValue: s) {
+    if let s = ud.string (forKey: "FontFor_oa_scanner"), let v = CustomFont (rawValue: s) {
       if self.mFont != v {
         self.mFont = v
         ioStyleDidChange = true
       }
     }
-    if let s = ud.string (forKey: "LineHeightFor_galgasScanner3"), let v = Int (s) {
+    if let s = ud.string (forKey: "LineHeightFor_oa_scanner"), let v = Int (s) {
       if self.mLineHeight != v {
         self.mLineHeight = v
         ioStyleDidChange = true
       }
     }
-    if let s = ud.string (forKey: "ColorFor_galgasScanner3"), let v = Color (rawValue: s) {
+    if let s = ud.string (forKey: "ColorFor_oa_scanner"), let v = Color (rawValue: s) {
       if self.mDefaultColor != v {
         self.mDefaultColor = v
         ioStyleDidChange = true
@@ -588,7 +587,7 @@ final class ScannerFor_oa_scanner : SWIFT_Scanner {
       let nsString = inTextStorage.string as NSString
       let fullRange = NSRange (location: 0, length: nsString.length)
     //---- Apply default attributes
-      let tsDelegate : NSTextStorageDelegate? = inTextStorage.delegate
+      let tsDelegate : (any NSTextStorageDelegate)? = inTextStorage.delegate
       inTextStorage.delegate = nil // NSTextStorageDelegate
       inTextStorage.beginEditing ()
       let defaultFont = self.mFont.nsFont
@@ -709,7 +708,7 @@ final class ScannerFor_oa_scanner : SWIFT_Scanner {
     let start2 = Date ()
     if modificationStart < modificationEnd {
       let modifiedRange = NSRange (location: modificationStart, length: modificationEnd - modificationStart)
-      let tsDelegate : NSTextStorageDelegate? = inTextStorage.delegate
+      let tsDelegate : (any NSTextStorageDelegate)? = inTextStorage.delegate
       inTextStorage.delegate = nil // NSTextStorageDelegate
       inTextStorage.beginEditing ()
       let defaultFont = self.mFont.nsFont

@@ -25,6 +25,7 @@
 #include "macroAssert.h"
 #include "M_machine.h"
 #include "string_encodings.h"
+#include "utf32.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -113,6 +114,7 @@ class AbstractOutputStream {
 
 //--- Methods for writing C and C++ code
   public: void appendStringAsCLiteralStringConstant (const String & inCstring) ;
+  public: void appendStringAsUTF8LiteralStringConstant (const String & inCstring) ;
 
   public: void appendStringAsCLiteralStringConstant (const String & inCstring,
                                                      const int32_t inLineMaxLength) ;

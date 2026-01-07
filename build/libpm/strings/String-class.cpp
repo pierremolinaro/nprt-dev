@@ -27,7 +27,8 @@
 #include "MF_MemoryControl.h"
 #include "md5.h"
 #include "SharedObject.h"
-#include "unicode_character_cpp.h"
+#include "utf32.h"
+#include "String-class.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -188,7 +189,7 @@ const char * PrivateEmbeddedString::cString (void) {
     int32_t idx = 0 ;
     for (int32_t i = 0 ; i < length () ; i++) {
       char buffer [5] ;
-      const int32_t n = UTF8StringFromUTF32Character (UNICODE_VALUE (charAtIndex (i COMMA_HERE)), buffer) ;
+      const int32_t n = UTF8StringFromUTF32Character (charAtIndex (i COMMA_HERE).u32 (), buffer) ;
       for (int32_t j = 0 ; j < n ; j++) {
         if (allocatedSize == idx) {
           allocatedSize += allocatedSize / 2 ;
@@ -342,7 +343,7 @@ utf32 String::charAtIndex (const int32_t inIndex COMMA_LOCATION_ARGS) const {
 //--------------------------------------------------------------------------------------------------
 
 utf32 String::readCharOrNul (const int32_t inIndex COMMA_LOCATION_ARGS) const {
-  utf32 result = TO_UNICODE ('\0') ;
+  utf32 result = utf32 ('\0') ;
   if (mEmbeddedString != nullptr) {
     macroValidSharedObjectThere (mEmbeddedString, PrivateEmbeddedString) ;
     if (inIndex < mEmbeddedString->length ()) {
@@ -370,7 +371,7 @@ bool String::containsChar (const utf32 inCharacter) const {
   bool found = false ;
   if (nullptr != mEmbeddedString) {
     for (int32_t i=0 ; (i < length ()) && !found ; i++) {
-      found = UNICODE_VALUE (charAtIndex (i COMMA_HERE)) == UNICODE_VALUE (inCharacter) ;
+      found = charAtIndex (i COMMA_HERE) == inCharacter ;
     }
   }
   return found ;
@@ -388,9 +389,9 @@ bool String::containsCharInRange (const utf32 inFirstCharacter,
     macroValidSharedObject (mEmbeddedString, PrivateEmbeddedString) ;
     for (int32_t i=0 ; (i < mEmbeddedString->length ()) && !found ; i++) {
       found =
-        (UNICODE_VALUE (charAtIndex (i COMMA_HERE)) >= UNICODE_VALUE (inFirstCharacter))
+        (charAtIndex (i COMMA_HERE).u32 () >= inFirstCharacter.u32 ())
       &&
-        (UNICODE_VALUE (charAtIndex (i COMMA_HERE)) <= UNICODE_VALUE (inLastCharacter))
+        (charAtIndex (i COMMA_HERE).u32 () <= inLastCharacter.u32 ())
       ;
     }
   }
@@ -526,7 +527,7 @@ void String::handleAppendUTF8Array (const char * inCharArray,
     bool ok = true ;
     while ((idx < inArrayCount) && ok) {
       if ((inCharArray [idx] & 0x80) == 0) { // ASCII
-        mEmbeddedString->appendChar (TO_UNICODE (uint32_t (inCharArray [idx])) COMMA_HERE) ;
+        mEmbeddedString->appendChar (utf32 (uint32_t (inCharArray [idx])) COMMA_HERE) ;
         idx += 1 ;
       }else{
         const utf32 unicodeChar = utf32CharacterForPointer ((const uint8_t *) inCharArray, idx, inArrayCount, ok) ;
@@ -603,7 +604,7 @@ void String::linesArray (GenericUniqueArray <String> & outStringArray) const {
       const utf32 c = charAtIndex (i COMMA_HERE) ;
       switch (state) {
       case kAppendToCurrentLine :
-        switch (UNICODE_VALUE (c)) {
+        switch (c.u32 ()) {
         case 0x000B : // VT: Vertical Tab
         case 0x000C : // FF: Form Feed
         case 0x0085 : // NEL: Next Line
@@ -623,7 +624,7 @@ void String::linesArray (GenericUniqueArray <String> & outStringArray) const {
         }
         break ;
       case kGotCarriageReturn :
-        switch (UNICODE_VALUE (c)) {
+        switch (c.u32 ()) {
         case '\n' : // LF
           state = kGotLineFeed ;
           break ;
@@ -639,7 +640,7 @@ void String::linesArray (GenericUniqueArray <String> & outStringArray) const {
         }
         break ;
       case kGotLineFeed :
-        switch (UNICODE_VALUE (c)) {
+        switch (c.u32 ()) {
         case '\n' : // LF
           outStringArray.appendObject (String ()) ;
           index += 1 ;
@@ -700,21 +701,21 @@ bool String::parseUTF8 (const U8Data & inDataString,
       idx = inDataString.count () ; // For exiting loop
     }else if (c == 0x0A) { // LF
       if (! foundCR) {
-        outString.appendChar (TO_UNICODE ('\n')) ;
+        outString.appendChar (utf32 ('\n')) ;
       }
       foundCR = false ;
       idx += 1 ;
     }else if (c == 0x0D) { // CR
-      outString.appendChar (TO_UNICODE ('\n')) ;
+      outString.appendChar (utf32 ('\n')) ;
       foundCR = true ;
       idx += 1 ;
     }else if ((c & 0x80) == 0) { // ASCII Character
-      outString.appendChar (TO_UNICODE (c)) ;
+      outString.appendChar (utf32 (c)) ;
       foundCR = false ;
       idx += 1 ;
     }else{
       const utf32 uc = utf32CharacterForPointer (inDataString.unsafeDataPointer (), idx, inDataString.count (), ok) ;
-      switch (UNICODE_VALUE (uc)) {
+      switch (uc.u32 ()) {
       case 0x000B : // VT: Vertical Tab
       case 0x000C : // FF: Form Feed
       case 0x0085 : // NEL: Next Line
@@ -730,7 +731,7 @@ bool String::parseUTF8 (const U8Data & inDataString,
     }
   }
   if (foundCR) {
-    outString.appendChar (TO_UNICODE ('\n')) ;
+    outString.appendChar (utf32 ('\n')) ;
   }
   return ok ;
 }

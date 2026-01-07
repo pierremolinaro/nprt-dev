@@ -19,6 +19,7 @@ public class AutoLayoutColorWell : BaseControl {
   public init (minWidth inMinWidth : Int, size inSize : NSControl.ControlSize) {
     self.mColorWell = NSColorWell (frame: .zero)
     super.init (cocoaControl: self.mColorWell, size: inSize)
+    _ = self.setMinWidth (inMinWidth)
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

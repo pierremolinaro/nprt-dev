@@ -60,7 +60,7 @@ setUIntOptionForCommandChar (const String & inCommandCommandLineOptionString,
   outCommandLineOptionStringIsValid = (optionLength > 2) && (inCommandCommandLineOptionString.charAtIndex (1 COMMA_HERE) == '=') ;
   uint32_t optionValue = 0 ;
   for (int32_t i=2 ; (i<optionLength) && outCommandLineOptionStringIsValid ; i++) {
-    const uint32_t c = UNICODE_VALUE (inCommandCommandLineOptionString.charAtIndex (i COMMA_HERE)) ;
+    const uint32_t c = inCommandCommandLineOptionString.charAtIndex (i COMMA_HERE).u32 () ;
     outCommandLineOptionStringIsValid = (c >= '0') && (c <= '9') ;
     optionValue *= 10 ;
     optionValue += c - '0' ;
@@ -69,7 +69,7 @@ setUIntOptionForCommandChar (const String & inCommandCommandLineOptionString,
   UIntCommandLineOption * p = gFirstIntOption ;
   if (outCommandLineOptionStringIsValid) {
     while ((p != nullptr) && ! outFound) {
-      outFound = UNICODE_VALUE (inCommandCommandLineOptionString.charAtIndex (0 COMMA_HERE)) == uint32_t (p->mCommandChar) ;
+      outFound = inCommandCommandLineOptionString.charAtIndex (0 COMMA_HERE).u32 () == uint32_t (p->mCommandChar) ;
       if (outFound) {
         p->mValue = optionValue ;
       }
@@ -101,7 +101,7 @@ setUIntOptionForCommandString (const String & inCommandCommandLineOptionString,
 //--- Compute option value
   uint32_t optionValue = 0 ;
   for (int32_t i=equalSignIndex+1 ; (i<optionLength) && outCommandLineOptionStringIsValid ; i++) {
-    const uint32_t c = UNICODE_VALUE (inCommandCommandLineOptionString.charAtIndex (i COMMA_HERE)) ;
+    const uint32_t c = inCommandCommandLineOptionString.charAtIndex (i COMMA_HERE).u32 () ;
     outCommandLineOptionStringIsValid = (c >= '0') && (c <= '9') ;
     optionValue *= 10 ;
     optionValue += uint32_t (c - '0') ;
@@ -184,12 +184,12 @@ void UIntCommandLineOption::getUIntOptionNameList (GenericUniqueArray <String> &
 
 utf32 UIntCommandLineOption::getUIntOptionInvocationLetter (const String & inDomainName,
                                                             const String & inIdentifier) {
-  utf32 result = TO_UNICODE (0) ;
+  utf32 result = utf32 (0) ;
   UIntCommandLineOption * p = gFirstIntOption ;
   bool found = false ;
   while ((p != nullptr) && not found) {
     found = (inDomainName == p->mDomainName) && (inIdentifier == p->mIdentifier) ;
-    result = TO_UNICODE ((uint32_t) p->mCommandChar) ;
+    result = utf32 ((uint32_t) p->mCommandChar) ;
     p = p->mNext ;
 }
   return result ;

@@ -51,7 +51,7 @@ void BoolCommandLineOption::setBoolOptionForCommandChar (const utf32 inCommandCh
   outFound = false ;
   BoolCommandLineOption * p = gFirstBoolCommand ;
   while ((p != nullptr) && ! outFound) {
-    if (uint32_t (p->mCommandChar) == UNICODE_VALUE (inCommandChar)) {
+    if (uint32_t (p->mCommandChar) == inCommandChar.u32 ()) {
       outFound = true ;
       p->mValue = true ;
     }
@@ -135,12 +135,12 @@ void BoolCommandLineOption::getBoolOptionNameList (GenericUniqueArray <String> &
 
 utf32 BoolCommandLineOption::getBoolOptionInvocationLetter (const String & inDomainName,
                                                             const String & inIdentifier) {
-  utf32 result = TO_UNICODE (0) ;
+  utf32 result = utf32 (0) ;
   BoolCommandLineOption * p = gFirstBoolCommand ;
   bool found = false ;
   while ((p != nullptr) && not found) {
     found = (inDomainName == p->mDomainName) && (inIdentifier == p->mIdentifier) && p->mVisibleInGalgas ;
-    result = TO_UNICODE ((uint32_t) p->mCommandChar) ;
+    result = utf32 ((uint32_t) p->mCommandChar) ;
     p = p->mNext ;
 }
   return result ;

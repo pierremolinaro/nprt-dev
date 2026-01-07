@@ -58,7 +58,7 @@ void StringListCommandLineOption::setStringListOptionForCommandChar (const Strin
   if (outCommandLineOptionStringIsValid) {
     StringListCommandLineOption * p = gFirstStringListOption ;
     while ((p != nullptr) && ! outFound) {
-      outFound = UNICODE_VALUE (inCommandString.charAtIndex (0 COMMA_HERE)) == uint32_t (p->mCommandChar) ;
+      outFound = inCommandString.charAtIndex (0 COMMA_HERE).u32 () == uint32_t (p->mCommandChar) ;
       if (outFound) {
         p->mValue.appendObject (inCommandString.subStringFromIndex (2)) ;
       }
@@ -79,7 +79,7 @@ void StringListCommandLineOption::setStringListOptionForCommandString (const Str
   if (outCommandLineOptionStringIsValid) {
     outFound = false ;
     while ((equalSignIndex < optionLength) && outCommandLineOptionStringIsValid && ! outFound) {
-      outFound = UNICODE_VALUE (inCommandString.charAtIndex (equalSignIndex COMMA_HERE)) == '=' ;
+      outFound = inCommandString.charAtIndex (equalSignIndex COMMA_HERE).u32 () == '=' ;
       if (! outFound) {
         equalSignIndex += 1 ;
       }
@@ -186,12 +186,12 @@ void StringListCommandLineOption::getStringOptionNameList (GenericUniqueArray <S
 
 utf32 StringListCommandLineOption::getStringOptionInvocationLetter (const String & inDomainName,
                                                                     const String & inIdentifier) {
-  utf32 result = TO_UNICODE (0) ;
+  utf32 result = utf32 (0) ;
   StringListCommandLineOption * p = gFirstStringListOption ;
   bool found = false ;
   while ((p != nullptr) && not found) {
     found = (inDomainName == String (p->mDomainName)) && (inIdentifier == String (p->mIdentifier)) ;
-    result = TO_UNICODE ((uint32_t) p->mCommandChar) ;
+    result = utf32 ((uint32_t) p->mCommandChar) ;
     p = p->mNext ;
 }
   return result ;

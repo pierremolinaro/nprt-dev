@@ -172,7 +172,7 @@ final class SWIFT_RootDirectoryNode : ObservableObject {
              let data = try? Data (contentsOf: fileURL),
              let str = String (data: data, encoding: .utf8) {
       let stm = SWIFT_SharedTextModel (
-        scanner: ScannerFor_galgasScanner3 (),
+        scanner: scannerFor (extension: fileURL.pathExtension),
         initialString: str
       )
       stm.setWriteFileCallback { str in self.scheduleSave (forNodeID: inID, contents: str) }
@@ -185,9 +185,9 @@ final class SWIFT_RootDirectoryNode : ObservableObject {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  func fileBaseName (forNodeID inID : SWIFT_FileNodeID) -> String {
+  func fileLastPathComponent (forNodeID inID : SWIFT_FileNodeID) -> String {
     if let fileURL = self.fileURL (forID: inID) {
-      fileURL.deletingPathExtension ().lastPathComponent
+      fileURL.lastPathComponent
     }else{
       "?"
     }
@@ -203,7 +203,7 @@ final class SWIFT_RootDirectoryNode : ObservableObject {
 
   private func scheduleSave (forNodeID inID : SWIFT_FileNodeID, contents inString : String) {
     if self.mScheduledSaveDictionary [inID] == nil {
-      DispatchQueue.main.asyncAfter (deadline: .now () + 5.0) { self.saveFile (forNodeID: inID) }
+      DispatchQueue.main.asyncAfter (deadline: .now () + AUTOMATIC_SAVE_DELAY) { self.saveFile (forNodeID: inID) }
     //--- Trigger a change for updating file saving status
       self.mSelectedFileNodeID = self.mSelectedFileNodeID
       self.mScheduledSaveDictionary [inID] = inString
@@ -235,6 +235,22 @@ final class SWIFT_RootDirectoryNode : ObservableObject {
 
   func isFileEdited (forNodeID inID : SWIFT_FileNodeID) -> Bool {
     return self.mScheduledSaveDictionary [inID] != nil
+  }
+
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  func saveAllEditedFiles () {
+    for (fileID, str) in self.mScheduledSaveDictionary {
+      if let fileURL = self.fileURL (forID: fileID),
+         let data = str.data (using: .utf8) {
+        try? data.write (to: fileURL)
+      }
+    }
+    self.mScheduledSaveDictionary.removeAll ()
+    for child in self.mChildren {
+      child.propagateFileEditionState (Set ())
+    }
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -21,7 +21,7 @@
 #include "AbstractOutputStream.h"
 #include "String-class.h"
 #include "DateTime.h"
-#include "unicode_character_cpp.h"
+#include "utf32.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -77,11 +77,11 @@ void AbstractOutputStream::performAppendCharacter (const utf32 inCharacter) {
   }else{
     if (mStartingLine) {
       for (int32_t j=0 ; j<mIndentation ; j++) {
-        handleAppendCharacter (TO_UNICODE (' ')) ;
+        handleAppendCharacter (utf32 (' ')) ;
       }
     }
     handleAppendCharacter (inCharacter) ;
-    mStartingLine = UNICODE_VALUE (inCharacter) == '\n' ;
+    mStartingLine = inCharacter.u32 () == '\n' ;
   }
 }
 
@@ -117,19 +117,19 @@ void AbstractOutputStream::appendString (const char * inCString, const int32_t i
 
 void AbstractOutputStream::appendUTF32LiteralStringConstant (const String inString,
                                                              const bool inAppendZeroTerminator) {
-  appendChar (TO_UNICODE ('{')) ;
+  appendChar (utf32 ('{')) ;
   for (int32_t i=0 ; i < inString.length () ; i++) {
     const utf32 c = inString.charAtIndex (i COMMA_HERE) ;
-    appendCString ("\n  TO_UNICODE (") ;
-    if (isprint (int (UNICODE_VALUE (c)))) {
+    appendCString ("\n  utf32 (") ;
+    if (isprint (int (c.u32 ()))) {
       appendStringAsCLiteralCharConstant (c) ;
     }else{
-      appendUnsigned (UNICODE_VALUE (c)) ;
+      appendUnsigned (c.u32 ()) ;
     }
     appendCString ("),") ;
   }
   if (inAppendZeroTerminator) {
-    appendCString ("\n  TO_UNICODE (0)") ;
+    appendCString ("\n  utf32 (0)") ;
   }
   appendCString ("\n}") ;
 }
@@ -137,7 +137,7 @@ void AbstractOutputStream::appendUTF32LiteralStringConstant (const String inStri
 //--------------------------------------------------------------------------------------------------
 
 void AbstractOutputStream::appendASCIIChar (const char inValue) {
-  appendChar (TO_UNICODE (uint32_t (inValue))) ;
+  appendChar (utf32 (uint32_t (inValue))) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -247,7 +247,7 @@ void AbstractOutputStream::appendPointer (const void * inValue) {
 
 void AbstractOutputStream::appendSpaces (const int32_t inSpaceCount) {
   for (int32_t i=0 ; i<inSpaceCount ; i++) {
-    appendChar (TO_UNICODE (' ')) ;
+    appendChar (utf32 (' ')) ;
   }
 }
 
@@ -404,7 +404,7 @@ static void internalWriteCstringConstantWithoutDelimiters (AbstractOutputStream 
     }
     currentColumn += 1 ;
     const utf32 c = inString.charAtIndex (i COMMA_HERE) ;
-    switch (UNICODE_VALUE (c)) {
+    switch (c.u32 ()) {
     case '\0' :
       break ;
     case '\a' :
@@ -439,7 +439,63 @@ static void internalWriteCstringConstantWithoutDelimiters (AbstractOutputStream 
       ioStream.appendCString ("\\\"") ;
       break ;
     default :
-      if ((UNICODE_VALUE (c) >= ' ') && (UNICODE_VALUE (c) < 127)) {
+      ioStream.appendChar (c) ;
+      break ;
+    }
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+static void
+internalWriteCstringConstantWithoutDelimitersEscapingNonASCII (AbstractOutputStream & ioStream,
+                                                               const String & inString,
+                                                               const int32_t inStringLength,
+                                                               const int32_t inLineMaxLength) {
+  int32_t currentColumn = 0 ;
+  for (int32_t i=0 ; i<inStringLength ; i++) {
+    if (currentColumn > inLineMaxLength) {
+      ioStream.appendCString ("\"\n  \"") ;
+      currentColumn = 0 ;
+    }
+    currentColumn += 1 ;
+    const utf32 c = inString.charAtIndex (i COMMA_HERE) ;
+    switch (c.u32 ()) {
+    case '\0' :
+      break ;
+    case '\a' :
+      ioStream.appendCString ("\\a") ;
+      break ;
+    case '\b' :
+      ioStream.appendCString ("\\b") ;
+      break ;
+    case '\f' :
+      ioStream.appendCString ("\\f") ;
+      break ;
+    case '\n' :
+      ioStream.appendCString ("\\n") ;
+      if (i < (inStringLength - 1)) {
+        ioStream.appendCString ("\"\n  \"") ;
+        currentColumn = 1 ;
+      }
+      break ;
+    case '\r' :
+      ioStream.appendCString ("\\r") ;
+      break ;
+    case '\t' :
+      ioStream.appendCString ("\\t") ;
+      break ;
+    case '\v' :
+      ioStream.appendCString ("\\v") ;
+      break ;
+    case '\\' :
+      ioStream.appendCString ("\\\\") ;
+      break ;
+    case '\"' :
+      ioStream.appendCString ("\\\"") ;
+      break ;
+    default :
+      if ((c.u32 () >= ' ') && (c.u32 () < 127)) {
         ioStream.appendChar (c) ;
       }else{
         char buffer [5] ;
@@ -461,7 +517,7 @@ static void internalWriteCstringConstant (AbstractOutputStream & ioStream,
                                           const int32_t inStringLength,
                                           const int32_t inLineMaxLength) {
   ioStream.appendCString ("\"") ;
-  internalWriteCstringConstantWithoutDelimiters (ioStream, inString, inStringLength, inLineMaxLength) ;
+  internalWriteCstringConstantWithoutDelimitersEscapingNonASCII (ioStream, inString, inStringLength, inLineMaxLength) ;
   ioStream.appendCString ("\"") ;
 }
 
@@ -469,6 +525,14 @@ static void internalWriteCstringConstant (AbstractOutputStream & ioStream,
 
 void AbstractOutputStream::appendStringAsCLiteralStringConstant (const String & inString) {
   internalWriteCstringConstant (*this, inString, inString.length (), INT32_MAX) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void AbstractOutputStream::appendStringAsUTF8LiteralStringConstant (const String & inString) {
+  appendCString ("\"") ;
+  internalWriteCstringConstantWithoutDelimiters (*this, inString, inString.length (), INT32_MAX) ;
+  appendCString ("\"") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -481,20 +545,20 @@ void AbstractOutputStream::appendStringAsCLiteralStringConstant (const String & 
 //--------------------------------------------------------------------------------------------------
 
 void AbstractOutputStream::appendStringAsCLiteralStringConstantWithoutDelimiters (const String & inString) {
-  internalWriteCstringConstantWithoutDelimiters (*this, inString, inString.length (), INT32_MAX) ;
+  internalWriteCstringConstantWithoutDelimitersEscapingNonASCII (*this, inString, inString.length (), INT32_MAX) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
 void AbstractOutputStream::appendStringAsCLiteralStringConstantWithoutDelimiters (const String & inString,
                                                                                   const int32_t inLineMaxLength) {
-  internalWriteCstringConstantWithoutDelimiters (*this, inString, inString.length (), inLineMaxLength) ;
+  internalWriteCstringConstantWithoutDelimitersEscapingNonASCII (*this, inString, inString.length (), inLineMaxLength) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
 void AbstractOutputStream::appendStringAsCLiteralCharConstant (const utf32 c) {
-  switch (UNICODE_VALUE (c)) {
+  switch (c.u32 ()) {
   case '\0' :
     appendCString ("'\\0'") ;
     break ;
@@ -532,12 +596,12 @@ void AbstractOutputStream::appendStringAsCLiteralCharConstant (const utf32 c) {
     appendCString ("'\\\?'") ;
     break ;
   default :
-    if ((UNICODE_VALUE (c) >= ' ') && (UNICODE_VALUE (c) <= '~')) {
+    if ((c.u32 () >= ' ') && (c.u32 () <= '~')) {
       appendCString ("'") ;
       appendChar (c) ;
       appendCString ("'") ;
     }else{
-      appendUnsigned (UNICODE_VALUE (c)) ;
+      appendUnsigned (c.u32 ()) ;
     }
     break ;
   }
@@ -577,7 +641,7 @@ String stringWithSigned (const int64_t inValue) {
 
 String stringWithCharacter (const char inValue) {
   String result ;
-  result.appendChar (TO_UNICODE (uint32_t (inValue))) ;
+  result.appendChar (utf32 (uint32_t (inValue))) ;
   return result ;
 }
 

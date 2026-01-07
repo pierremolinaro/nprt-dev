@@ -62,9 +62,9 @@ GGS_uint_36__34_ GGS_uint_36__34_::class_func_uint_36__34_MaskWithCompressedBitS
     for (int32_t i=0 ; (i<bitStringLength) && ok ; i++) {
       v <<= 1 ;
       const utf32 c = inBitString.stringValue ().charAtIndex (i COMMA_HERE) ;
-      if ((UNICODE_VALUE (c) == '1') || (UNICODE_VALUE (c) == '0')) {
+      if ((c.u32 () == '1') || (c.u32 () == '0')) {
         v += 1 ;
-      }else if (UNICODE_VALUE (c) != 'X') {
+      }else if (c.u32 () != 'X') {
         ok = false ;
       }
     }
@@ -90,9 +90,9 @@ GGS_uint_36__34_ GGS_uint_36__34_::class_func_uint_36__34_BaseValueWithCompresse
     for (int32_t i=0 ; (i<bitStringLength) && ok ; i++) {
       v <<= 1 ;
       const utf32 c = inBitString.stringValue ().charAtIndex (i COMMA_HERE) ;
-      if (UNICODE_VALUE (c) == '1') {
+      if (c.u32 () == '1') {
         v += 1 ;
-      }else if ((UNICODE_VALUE (c) != '0') && (UNICODE_VALUE (c) != 'X')) {
+      }else if ((c.u32 () != '0') && (c.u32 () != 'X')) {
         ok = false ;
       }
     }
@@ -118,9 +118,9 @@ GGS_uint_36__34_ GGS_uint_36__34_::class_func_uint_36__34_WithBitString (const G
     for (int32_t i=0 ; (i<bitStringLength) && ok ; i++) {
       v <<= 1 ;
       const utf32 c = inBitString.stringValue ().charAtIndex (i COMMA_HERE) ;
-      if (UNICODE_VALUE (c) == '1') {
+      if (c.u32 () == '1') {
         v += 1 ;
-      }else if (UNICODE_VALUE (c) != '0') {
+      }else if (c.u32 () != '0') {
         ok = false ;
       }
     }
@@ -608,7 +608,7 @@ GGS_string GGS_uint_36__34_::getter_alphaString (UNUSED_LOCATION_ARGS) const {
     uint64_t v = mUInt64Value ;
     int32_t idx = 13 ;
     while (v > 0) {
-      const utf32 c = TO_UNICODE (uint32_t ((v % 26) + 'a')) ;
+      const utf32 c = utf32 (uint32_t ((v % 26) + 'a')) ;
       s.setCharAtIndex (c, idx COMMA_HERE) ;
       idx -= 1 ;
       v /= 26 ;
