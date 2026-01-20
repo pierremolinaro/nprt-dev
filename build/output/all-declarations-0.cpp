@@ -623,797 +623,6 @@ GGS__32_lstringlist GGS__32_lstringlist::extractObject (const GGS_object & inObj
 }
 
 //--------------------------------------------------------------------------------------------------
-//
-//     L E X I Q U E                                                                             
-//
-//--------------------------------------------------------------------------------------------------
-
-#include "utf32.h"
-#include "scanner_actions.h"
-#include "LexiqueIntrospection.h"
-
-//--------------------------------------------------------------------------------------------------
-
-cTokenFor_oa_5F_scanner::cTokenFor_oa_5F_scanner (void) :
-mLexicalAttribute_identifierString (),
-mLexicalAttribute_ulongValue () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-Lexique_oa_5F_scanner::Lexique_oa_5F_scanner (Compiler * inCallerCompiler,
-                                              const String & inSourceFileName
-                                              COMMA_LOCATION_ARGS) :
-Lexique (inCallerCompiler, inSourceFileName COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-Lexique_oa_5F_scanner::Lexique_oa_5F_scanner (Compiler * inCallerCompiler,
-                                              const String & inSourceString,
-                                              const String & inStringForError
-                                              COMMA_LOCATION_ARGS) :
-Lexique (inCallerCompiler, inSourceString, inStringForError COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-//                        Lexical error message list                                             
-//--------------------------------------------------------------------------------------------------
-
-static const char * gLexicalMessage_oa_5F_scanner_decimalNumberTooLarge = "decimal number too large" ;
-
-static const char * gLexicalMessage_oa_5F_scanner_incorrectEndOfComment = "incorrect end of comment" ;
-
-static const char * gLexicalMessage_oa_5F_scanner_internalError = "internal error" ;
-
-//--------------------------------------------------------------------------------------------------
-//                getMessageForTerminal                                                          
-//--------------------------------------------------------------------------------------------------
-
-String Lexique_oa_5F_scanner::getMessageForTerminal (const int32_t inTerminalIndex) const {
-  String result = "<unknown>" ;
-  if ((inTerminalIndex >= 0) && (inTerminalIndex < 25)) {
-    static const char * syntaxErrorMessageArray [25] = {kEndOfSourceLexicalErrorMessage,
-        "an identifier",
-        "a decimal number",
-        "the 'system' key word",
-        "the 'end' key word",
-        "the 'task' key word",
-        "the 'standard' key word",
-        "the 'extended' key word",
-        "the 'message' key word",
-        "the 'length' key word",
-        "the 'priority' key word",
-        "the 'period' key word",
-        "the 'offset' key word",
-        "the 'on' key word",
-        "the 'deadline' key word",
-        "the 'duration' key word",
-        "the 'processor' key word",
-        "the 'can' key word",
-        "the 'van' key word",
-        "the 'network' key word",
-        "the 'scalingfactor' key word",
-        "the 'every' key word",
-        "the '','' delimitor",
-        "the '';'' delimitor",
-        "the ''..'' delimitor"
-    } ;
-    result = syntaxErrorMessageArray [inTerminalIndex] ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//                      U N I C O D E    S T R I N G S                                           
-//--------------------------------------------------------------------------------------------------
-
-//--- Unicode string for '$,$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner__2C_ = {
-  utf32 (','),
-} ;
-
-//--- Unicode string for '$..$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner__2E__2E_ = {
-  utf32 ('.'),
-  utf32 ('.'),
-} ;
-
-//--- Unicode string for '$;$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner__3B_ = {
-  utf32 (';'),
-} ;
-
-//--- Unicode string for '$can$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_can = {
-  utf32 ('c'),
-  utf32 ('a'),
-  utf32 ('n'),
-} ;
-
-//--- Unicode string for '$deadline$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_deadline = {
-  utf32 ('d'),
-  utf32 ('e'),
-  utf32 ('a'),
-  utf32 ('d'),
-  utf32 ('l'),
-  utf32 ('i'),
-  utf32 ('n'),
-  utf32 ('e'),
-} ;
-
-//--- Unicode string for '$duration$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_duration = {
-  utf32 ('d'),
-  utf32 ('u'),
-  utf32 ('r'),
-  utf32 ('a'),
-  utf32 ('t'),
-  utf32 ('i'),
-  utf32 ('o'),
-  utf32 ('n'),
-} ;
-
-//--- Unicode string for '$end$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_end = {
-  utf32 ('e'),
-  utf32 ('n'),
-  utf32 ('d'),
-} ;
-
-//--- Unicode string for '$every$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_every = {
-  utf32 ('e'),
-  utf32 ('v'),
-  utf32 ('e'),
-  utf32 ('r'),
-  utf32 ('y'),
-} ;
-
-//--- Unicode string for '$extended$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_extended = {
-  utf32 ('e'),
-  utf32 ('x'),
-  utf32 ('t'),
-  utf32 ('e'),
-  utf32 ('n'),
-  utf32 ('d'),
-  utf32 ('e'),
-  utf32 ('d'),
-} ;
-
-//--- Unicode string for '$length$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_length = {
-  utf32 ('l'),
-  utf32 ('e'),
-  utf32 ('n'),
-  utf32 ('g'),
-  utf32 ('t'),
-  utf32 ('h'),
-} ;
-
-//--- Unicode string for '$message$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_message = {
-  utf32 ('m'),
-  utf32 ('e'),
-  utf32 ('s'),
-  utf32 ('s'),
-  utf32 ('a'),
-  utf32 ('g'),
-  utf32 ('e'),
-} ;
-
-//--- Unicode string for '$network$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_network = {
-  utf32 ('n'),
-  utf32 ('e'),
-  utf32 ('t'),
-  utf32 ('w'),
-  utf32 ('o'),
-  utf32 ('r'),
-  utf32 ('k'),
-} ;
-
-//--- Unicode string for '$offset$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_offset = {
-  utf32 ('o'),
-  utf32 ('f'),
-  utf32 ('f'),
-  utf32 ('s'),
-  utf32 ('e'),
-  utf32 ('t'),
-} ;
-
-//--- Unicode string for '$on$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_on = {
-  utf32 ('o'),
-  utf32 ('n'),
-} ;
-
-//--- Unicode string for '$period$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_period = {
-  utf32 ('p'),
-  utf32 ('e'),
-  utf32 ('r'),
-  utf32 ('i'),
-  utf32 ('o'),
-  utf32 ('d'),
-} ;
-
-//--- Unicode string for '$priority$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_priority = {
-  utf32 ('p'),
-  utf32 ('r'),
-  utf32 ('i'),
-  utf32 ('o'),
-  utf32 ('r'),
-  utf32 ('i'),
-  utf32 ('t'),
-  utf32 ('y'),
-} ;
-
-//--- Unicode string for '$processor$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_processor = {
-  utf32 ('p'),
-  utf32 ('r'),
-  utf32 ('o'),
-  utf32 ('c'),
-  utf32 ('e'),
-  utf32 ('s'),
-  utf32 ('s'),
-  utf32 ('o'),
-  utf32 ('r'),
-} ;
-
-//--- Unicode string for '$scalingfactor$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_scalingfactor = {
-  utf32 ('s'),
-  utf32 ('c'),
-  utf32 ('a'),
-  utf32 ('l'),
-  utf32 ('i'),
-  utf32 ('n'),
-  utf32 ('g'),
-  utf32 ('f'),
-  utf32 ('a'),
-  utf32 ('c'),
-  utf32 ('t'),
-  utf32 ('o'),
-  utf32 ('r'),
-} ;
-
-//--- Unicode string for '$standard$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_standard = {
-  utf32 ('s'),
-  utf32 ('t'),
-  utf32 ('a'),
-  utf32 ('n'),
-  utf32 ('d'),
-  utf32 ('a'),
-  utf32 ('r'),
-  utf32 ('d'),
-} ;
-
-//--- Unicode string for '$system$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_system = {
-  utf32 ('s'),
-  utf32 ('y'),
-  utf32 ('s'),
-  utf32 ('t'),
-  utf32 ('e'),
-  utf32 ('m'),
-} ;
-
-//--- Unicode string for '$task$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_task = {
-  utf32 ('t'),
-  utf32 ('a'),
-  utf32 ('s'),
-  utf32 ('k'),
-} ;
-
-//--- Unicode string for '$van$'
-static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_van = {
-  utf32 ('v'),
-  utf32 ('a'),
-  utf32 ('n'),
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//             Key words table 'delimitorsList'      
-//--------------------------------------------------------------------------------------------------
-
-static const int32_t ktable_size_oa_5F_scanner_delimitorsList = 3 ;
-
-static const C_unicode_lexique_table_entry ktable_for_oa_5F_scanner_delimitorsList [ktable_size_oa_5F_scanner_delimitorsList] = {
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner__2C_, Lexique_oa_5F_scanner::kToken__2C_),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner__3B_, Lexique_oa_5F_scanner::kToken__3B_),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner__2E__2E_, Lexique_oa_5F_scanner::kToken__2E__2E_)
-} ;
-
-int32_t Lexique_oa_5F_scanner::search_into_delimitorsList (const String & inSearchedString) {
-  return searchInList (inSearchedString, ktable_for_oa_5F_scanner_delimitorsList, ktable_size_oa_5F_scanner_delimitorsList) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//             Key words table 'keyWordList'      
-//--------------------------------------------------------------------------------------------------
-
-static const int32_t ktable_size_oa_5F_scanner_keyWordList = 19 ;
-
-static const C_unicode_lexique_table_entry ktable_for_oa_5F_scanner_keyWordList [ktable_size_oa_5F_scanner_keyWordList] = {
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_on, Lexique_oa_5F_scanner::kToken_on),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_can, Lexique_oa_5F_scanner::kToken_can),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_end, Lexique_oa_5F_scanner::kToken_end),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_van, Lexique_oa_5F_scanner::kToken_van),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_task, Lexique_oa_5F_scanner::kToken_task),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_every, Lexique_oa_5F_scanner::kToken_every),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_length, Lexique_oa_5F_scanner::kToken_length),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_offset, Lexique_oa_5F_scanner::kToken_offset),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_period, Lexique_oa_5F_scanner::kToken_period),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_system, Lexique_oa_5F_scanner::kToken_system),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_message, Lexique_oa_5F_scanner::kToken_message),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_network, Lexique_oa_5F_scanner::kToken_network),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_deadline, Lexique_oa_5F_scanner::kToken_deadline),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_duration, Lexique_oa_5F_scanner::kToken_duration),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_extended, Lexique_oa_5F_scanner::kToken_extended),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_priority, Lexique_oa_5F_scanner::kToken_priority),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_standard, Lexique_oa_5F_scanner::kToken_standard),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_processor, Lexique_oa_5F_scanner::kToken_processor),
-  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_scalingfactor, Lexique_oa_5F_scanner::kToken_scalingfactor)
-} ;
-
-int32_t Lexique_oa_5F_scanner::search_into_keyWordList (const String & inSearchedString) {
-  return searchInList (inSearchedString, ktable_for_oa_5F_scanner_keyWordList, ktable_size_oa_5F_scanner_keyWordList) ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//                          getCurrentTokenString                                                
-//--------------------------------------------------------------------------------------------------
-
-String Lexique_oa_5F_scanner::getCurrentTokenString (const cToken * inTokenPtr) const {
-  const cTokenFor_oa_5F_scanner * ptr = (const cTokenFor_oa_5F_scanner *) inTokenPtr ;
-  String s ;
-  if (ptr == nullptr) {
-    s.appendCString ("$$") ;
-  }else{
-    switch (ptr->mTokenCode) {
-    case kToken_:
-      s.appendCString ("$$") ;
-      break ;
-    case kToken_identifier:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("identifier") ;
-      s.appendChar (utf32 ('$')) ;
-      s.appendChar (utf32 (' ')) ;
-      s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_identifierString) ;
-      break ;
-    case kToken_literal_5F_integer:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("literal_integer") ;
-      s.appendChar (utf32 ('$')) ;
-      s.appendChar (utf32 (' ')) ;
-      s.appendUnsigned (ptr->mLexicalAttribute_ulongValue) ;
-      break ;
-    case kToken_system:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("system") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_end:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("end") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_task:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("task") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_standard:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("standard") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_extended:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("extended") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_message:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("message") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_length:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("length") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_priority:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("priority") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_period:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("period") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_offset:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("offset") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_on:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("on") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_deadline:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("deadline") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_duration:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("duration") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_processor:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("processor") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_can:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("can") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_van:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("van") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_network:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("network") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_scalingfactor:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("scalingfactor") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken_every:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("every") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken__2C_:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString (",") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken__3B_:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString (";") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    case kToken__2E__2E_:
-      s.appendChar (utf32 ('$')) ;
-      s.appendCString ("..") ;
-      s.appendChar (utf32 ('$')) ;
-      break ;
-    default:
-      break ;
-    }
-  }
-  return s ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//                           Template Delimiters                                                 
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-//                           Template Replacements                                               
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-//            Terminal Symbols as end of script in template mark                                 
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-//               INTERNAL PARSE LEXICAL TOKEN                                         
-//--------------------------------------------------------------------------------------------------
-
-void Lexique_oa_5F_scanner::internalParseLexicalToken (cTokenFor_oa_5F_scanner & token) {
-  bool loop = true ;
-  token.mLexicalAttribute_identifierString.removeAllKeepingCapacity () ;
-  token.mLexicalAttribute_ulongValue = 0 ;
-  mTokenStartLocation = mCurrentLocation ;
-  try{
-    if (testForInputUTF32CharRange (utf32 ('a'), utf32 ('z')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('Z'))) {
-      do {
-        ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_identifierString, previousChar ()) ;
-        if (testForInputUTF32CharRange (utf32 ('a'), utf32 ('z')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('Z')) || testForInputUTF32Char (utf32 ('_')) || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
-        }else{
-          loop = false ;
-        }
-      }while (loop) ;
-      loop = true ;
-      if (token.mTokenCode == -1) {
-        token.mTokenCode = search_into_keyWordList (token.mLexicalAttribute_identifierString) ;
-      }
-      if (token.mTokenCode == -1) {
-        token.mTokenCode = kToken_identifier ;
-      }
-      enterToken (token) ;
-    }else if (testForInputUTF32String (kUnicodeString_oa_5F_scanner__2E__2E_, true)) {
-      token.mTokenCode = kToken__2E__2E_ ;
-      enterToken (token) ;
-    }else if (testForInputUTF32String (kUnicodeString_oa_5F_scanner__3B_, true)) {
-      token.mTokenCode = kToken__3B_ ;
-      enterToken (token) ;
-    }else if (testForInputUTF32String (kUnicodeString_oa_5F_scanner__2C_, true)) {
-      token.mTokenCode = kToken__2C_ ;
-      enterToken (token) ;
-    }else if (testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
-      ::scanner_routine_enterDigitIntoUInt (*this, previousChar (), token.mLexicalAttribute_ulongValue, gLexicalMessage_oa_5F_scanner_decimalNumberTooLarge, gLexicalMessage_oa_5F_scanner_internalError) ;
-      do {
-        if (testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
-          ::scanner_routine_enterDigitIntoUInt (*this, previousChar (), token.mLexicalAttribute_ulongValue, gLexicalMessage_oa_5F_scanner_decimalNumberTooLarge, gLexicalMessage_oa_5F_scanner_internalError) ;
-        }else if (testForInputUTF32Char (utf32 ('_'))) {
-        }else{
-          loop = false ;
-        }
-      }while (loop) ;
-      loop = true ;
-      token.mTokenCode = kToken_literal_5F_integer ;
-      enterToken (token) ;
-    }else if (testForInputUTF32CharRange (utf32 (1), utf32 (' '))) {
-    }else if (testForInputUTF32Char (utf32 ('#'))) {
-      do {
-        if (testForInputUTF32CharRange (utf32 (1), utf32 ('\t')) || testForInputUTF32CharRange (utf32 ('\v'), utf32 ('~'))) {
-        }else{
-          loop = false ;
-        }
-      }while (loop) ;
-      loop = true ;
-      if (testForInputUTF32Char (utf32 ('\n'))) {
-      }else{
-        lexicalError (gLexicalMessage_oa_5F_scanner_incorrectEndOfComment COMMA_LINE_AND_SOURCE_FILE) ;
-      }
-    }else if (testForInputUTF32Char (utf32 ('\0'))) { // End of source text ? 
-      token.mTokenCode = kToken_ ; // Empty string code
-    }else{ // Unknown input character
-      unknownCharacterLexicalError (LINE_AND_SOURCE_FILE) ;
-      token.mTokenCode = -1 ; // No token
-      advance () ; // ... go throught unknown character
-    }
-  }catch (const C_lexicalErrorException &) {
-    token.mTokenCode = -1 ; // No token
-    advance () ; // ... go throught unknown character
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-//               P A R S E    L E X I C A L    T O K E N                                         
-//--------------------------------------------------------------------------------------------------
-
-bool Lexique_oa_5F_scanner::parseLexicalToken (void) {
-  cTokenFor_oa_5F_scanner token ;
-  token.mTokenCode = -1 ;
-  while ((token.mTokenCode < 0) && (mCurrentChar.u32 () != '\0')) {
-    internalParseLexicalToken (token) ;
-  }
-  if (mCurrentChar.u32 () == '\0') {
-    token.mTokenCode = 0 ;
-    enterToken (token) ;
-  }
-  return token.mTokenCode > 0 ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//                         E N T E R    T O K E N                                                
-//--------------------------------------------------------------------------------------------------
-
-void Lexique_oa_5F_scanner::enterToken (cTokenFor_oa_5F_scanner & ioToken) {
-  cTokenFor_oa_5F_scanner * ptr = nullptr ;
-  macroMyNew (ptr, cTokenFor_oa_5F_scanner ()) ;
-  ptr->mTokenCode = ioToken.mTokenCode ;
-  ptr->mStartLocation = mTokenStartLocation ;
-  ptr->mEndLocation = mTokenEndLocation ;
-  ptr->mTemplateStringBeforeToken = ioToken.mTemplateStringBeforeToken ;
-  ioToken.mTemplateStringBeforeToken = "" ;
-  ptr->mLexicalAttribute_identifierString = ioToken.mLexicalAttribute_identifierString ;
-  ptr->mLexicalAttribute_ulongValue = ioToken.mLexicalAttribute_ulongValue ;
-  enterTokenFromPointer (ptr) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//               A T T R I B U T E   A C C E S S                                                 
-//--------------------------------------------------------------------------------------------------
-
-String Lexique_oa_5F_scanner::attributeValue_identifierString (void) const {
-  cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) currentTokenPtr (HERE) ;
-  return ptr->mLexicalAttribute_identifierString ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-uint32_t Lexique_oa_5F_scanner::attributeValue_ulongValue (void) const {
-  cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) currentTokenPtr (HERE) ;
-  return ptr->mLexicalAttribute_ulongValue ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//         A S S I G N    F R O M    A T T R I B U T E                                           
-//--------------------------------------------------------------------------------------------------
-
-GGS_lstring Lexique_oa_5F_scanner::synthetizedAttribute_identifierString (void) const {
-  cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) currentTokenPtr (HERE) ;
-  macroValidSharedObject (ptr, cTokenFor_oa_5F_scanner) ;
-  GGS_location currentLocation (ptr->mStartLocation, ptr->mEndLocation, sourceText ()) ;
-  GGS_string value (ptr->mLexicalAttribute_identifierString) ;
-  GGS_lstring result (value, currentLocation) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_luint Lexique_oa_5F_scanner::synthetizedAttribute_ulongValue (void) const {
-  cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) currentTokenPtr (HERE) ;
-  macroValidSharedObject (ptr, cTokenFor_oa_5F_scanner) ;
-  GGS_location currentLocation (ptr->mStartLocation, ptr->mEndLocation, sourceText ()) ;
-  GGS_uint value (ptr->mLexicalAttribute_ulongValue) ;
-  GGS_luint result (value, currentLocation) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//                         I N T R O S P E C T I O N                                             
-//--------------------------------------------------------------------------------------------------
-
-GGS_stringlist Lexique_oa_5F_scanner::symbols (LOCATION_ARGS) {
-  GGS_stringlist result = GGS_stringlist::class_func_emptyList (THERE) ;
-  result.addAssignOperation (GGS_string ("identifier") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("literal_integer") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("system") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("end") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("task") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("standard") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("extended") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("message") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("length") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("priority") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("period") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("offset") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("on") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("deadline") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("duration") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("processor") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("can") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("van") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("network") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("scalingfactor") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("every") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string (",") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string (";") COMMA_HERE) ;
-  result.addAssignOperation (GGS_string ("..") COMMA_HERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-static void getKeywordLists_oa_5F_scanner (GenericUniqueArray <String> & ioList) {
-  ioList.appendObject ("oa_scanner:delimitorsList") ;
-  ioList.appendObject ("oa_scanner:keyWordList") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-static void getKeywordsForIdentifier_oa_5F_scanner (const String & inIdentifier,
-                                                    bool & ioFound,
-                                                    GenericUniqueArray <String> & ioList) {
-  if (inIdentifier == "oa_scanner:delimitorsList") {
-    ioFound = true ;
-    ioList.appendObject (",") ;
-    ioList.appendObject (";") ;
-    ioList.appendObject ("..") ;
-    ioList.sortArrayUsingCompareMethod() ;
-  }
-  if (inIdentifier == "oa_scanner:keyWordList") {
-    ioFound = true ;
-    ioList.appendObject ("on") ;
-    ioList.appendObject ("can") ;
-    ioList.appendObject ("end") ;
-    ioList.appendObject ("van") ;
-    ioList.appendObject ("task") ;
-    ioList.appendObject ("every") ;
-    ioList.appendObject ("length") ;
-    ioList.appendObject ("offset") ;
-    ioList.appendObject ("period") ;
-    ioList.appendObject ("system") ;
-    ioList.appendObject ("message") ;
-    ioList.appendObject ("network") ;
-    ioList.appendObject ("deadline") ;
-    ioList.appendObject ("duration") ;
-    ioList.appendObject ("extended") ;
-    ioList.appendObject ("priority") ;
-    ioList.appendObject ("standard") ;
-    ioList.appendObject ("processor") ;
-    ioList.appendObject ("scalingfactor") ;
-    ioList.sortArrayUsingCompareMethod() ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-static LexiqueIntrospection lexiqueIntrospection_oa_5F_scanner
-__attribute__ ((used))
-__attribute__ ((unused)) (getKeywordLists_oa_5F_scanner, getKeywordsForIdentifier_oa_5F_scanner) ;
-
-//--------------------------------------------------------------------------------------------------
-//   S T Y L E   I N D E X    F O R    T E R M I N A L                                           
-//--------------------------------------------------------------------------------------------------
-
-uint32_t Lexique_oa_5F_scanner::styleIndexForTerminal (const int32_t inTerminalIndex) const {
-  static const uint32_t kTerminalSymbolStyles [25] = {0,
-    1 /* oa_scanner_1_identifier */,
-    4 /* oa_scanner_1_literal_5F_integer */,
-    2 /* oa_scanner_1_system */,
-    2 /* oa_scanner_1_end */,
-    2 /* oa_scanner_1_task */,
-    2 /* oa_scanner_1_standard */,
-    2 /* oa_scanner_1_extended */,
-    2 /* oa_scanner_1_message */,
-    2 /* oa_scanner_1_length */,
-    2 /* oa_scanner_1_priority */,
-    2 /* oa_scanner_1_period */,
-    2 /* oa_scanner_1_offset */,
-    2 /* oa_scanner_1_on */,
-    2 /* oa_scanner_1_deadline */,
-    2 /* oa_scanner_1_duration */,
-    2 /* oa_scanner_1_processor */,
-    2 /* oa_scanner_1_can */,
-    2 /* oa_scanner_1_van */,
-    2 /* oa_scanner_1_network */,
-    2 /* oa_scanner_1_scalingfactor */,
-    2 /* oa_scanner_1_every */,
-    3 /* oa_scanner_1__2C_ */,
-    3 /* oa_scanner_1__3B_ */,
-    3 /* oa_scanner_1__2E__2E_ */
-  } ;
-  return (inTerminalIndex >= 0) ? kTerminalSymbolStyles [inTerminalIndex] : 0 ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//   S T Y L E   N A M E    F O R    S T Y L E    I N D E X                                      
-//--------------------------------------------------------------------------------------------------
-
-String Lexique_oa_5F_scanner::styleNameForIndex (const uint32_t inStyleIndex) const {
-  String result ;
-  if (inStyleIndex < 5) {
-    static const char * kStyleArray [5] = {
-      "",
-      "identifier",
-      "keyWords",
-      "delimitors",
-      "integerStyle"
-    } ;
-    result = kStyleArray [inStyleIndex] ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
 //  Map type @M_5F_processor
 //--------------------------------------------------------------------------------------------------
 
@@ -6350,6 +5559,797 @@ GGS_M_5F_tasks GGS_M_5F_tasks::extractObject (const GGS_object & inObject,
     }else{
       inCompiler->castError ("M_tasks", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     L E X I Q U E                                                                             
+//
+//--------------------------------------------------------------------------------------------------
+
+#include "utf32.h"
+#include "scanner_actions.h"
+#include "LexiqueIntrospection.h"
+
+//--------------------------------------------------------------------------------------------------
+
+cTokenFor_oa_5F_scanner::cTokenFor_oa_5F_scanner (void) :
+mLexicalAttribute_identifierString (),
+mLexicalAttribute_ulongValue () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+Lexique_oa_5F_scanner::Lexique_oa_5F_scanner (Compiler * inCallerCompiler,
+                                              const String & inSourceFileName
+                                              COMMA_LOCATION_ARGS) :
+Lexique (inCallerCompiler, inSourceFileName COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+Lexique_oa_5F_scanner::Lexique_oa_5F_scanner (Compiler * inCallerCompiler,
+                                              const String & inSourceString,
+                                              const String & inStringForError
+                                              COMMA_LOCATION_ARGS) :
+Lexique (inCallerCompiler, inSourceString, inStringForError COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+//                        Lexical error message list                                             
+//--------------------------------------------------------------------------------------------------
+
+static const char * gLexicalMessage_oa_5F_scanner_decimalNumberTooLarge = "decimal number too large" ;
+
+static const char * gLexicalMessage_oa_5F_scanner_incorrectEndOfComment = "incorrect end of comment" ;
+
+static const char * gLexicalMessage_oa_5F_scanner_internalError = "internal error" ;
+
+//--------------------------------------------------------------------------------------------------
+//                getMessageForTerminal                                                          
+//--------------------------------------------------------------------------------------------------
+
+String Lexique_oa_5F_scanner::getMessageForTerminal (const int32_t inTerminalIndex) const {
+  String result = "<unknown>" ;
+  if ((inTerminalIndex >= 0) && (inTerminalIndex < 25)) {
+    static const char * syntaxErrorMessageArray [25] = {kEndOfSourceLexicalErrorMessage,
+        "an identifier",
+        "a decimal number",
+        "the 'system' key word",
+        "the 'end' key word",
+        "the 'task' key word",
+        "the 'standard' key word",
+        "the 'extended' key word",
+        "the 'message' key word",
+        "the 'length' key word",
+        "the 'priority' key word",
+        "the 'period' key word",
+        "the 'offset' key word",
+        "the 'on' key word",
+        "the 'deadline' key word",
+        "the 'duration' key word",
+        "the 'processor' key word",
+        "the 'can' key word",
+        "the 'van' key word",
+        "the 'network' key word",
+        "the 'scalingfactor' key word",
+        "the 'every' key word",
+        "the '','' delimitor",
+        "the '';'' delimitor",
+        "the ''..'' delimitor"
+    } ;
+    result = syntaxErrorMessageArray [inTerminalIndex] ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//                      U N I C O D E    S T R I N G S                                           
+//--------------------------------------------------------------------------------------------------
+
+//--- Unicode string for '$,$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner__2C_ = {
+  utf32 (','),
+} ;
+
+//--- Unicode string for '$..$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner__2E__2E_ = {
+  utf32 ('.'),
+  utf32 ('.'),
+} ;
+
+//--- Unicode string for '$;$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner__3B_ = {
+  utf32 (';'),
+} ;
+
+//--- Unicode string for '$can$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_can = {
+  utf32 ('c'),
+  utf32 ('a'),
+  utf32 ('n'),
+} ;
+
+//--- Unicode string for '$deadline$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_deadline = {
+  utf32 ('d'),
+  utf32 ('e'),
+  utf32 ('a'),
+  utf32 ('d'),
+  utf32 ('l'),
+  utf32 ('i'),
+  utf32 ('n'),
+  utf32 ('e'),
+} ;
+
+//--- Unicode string for '$duration$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_duration = {
+  utf32 ('d'),
+  utf32 ('u'),
+  utf32 ('r'),
+  utf32 ('a'),
+  utf32 ('t'),
+  utf32 ('i'),
+  utf32 ('o'),
+  utf32 ('n'),
+} ;
+
+//--- Unicode string for '$end$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_end = {
+  utf32 ('e'),
+  utf32 ('n'),
+  utf32 ('d'),
+} ;
+
+//--- Unicode string for '$every$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_every = {
+  utf32 ('e'),
+  utf32 ('v'),
+  utf32 ('e'),
+  utf32 ('r'),
+  utf32 ('y'),
+} ;
+
+//--- Unicode string for '$extended$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_extended = {
+  utf32 ('e'),
+  utf32 ('x'),
+  utf32 ('t'),
+  utf32 ('e'),
+  utf32 ('n'),
+  utf32 ('d'),
+  utf32 ('e'),
+  utf32 ('d'),
+} ;
+
+//--- Unicode string for '$length$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_length = {
+  utf32 ('l'),
+  utf32 ('e'),
+  utf32 ('n'),
+  utf32 ('g'),
+  utf32 ('t'),
+  utf32 ('h'),
+} ;
+
+//--- Unicode string for '$message$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_message = {
+  utf32 ('m'),
+  utf32 ('e'),
+  utf32 ('s'),
+  utf32 ('s'),
+  utf32 ('a'),
+  utf32 ('g'),
+  utf32 ('e'),
+} ;
+
+//--- Unicode string for '$network$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_network = {
+  utf32 ('n'),
+  utf32 ('e'),
+  utf32 ('t'),
+  utf32 ('w'),
+  utf32 ('o'),
+  utf32 ('r'),
+  utf32 ('k'),
+} ;
+
+//--- Unicode string for '$offset$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_offset = {
+  utf32 ('o'),
+  utf32 ('f'),
+  utf32 ('f'),
+  utf32 ('s'),
+  utf32 ('e'),
+  utf32 ('t'),
+} ;
+
+//--- Unicode string for '$on$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_on = {
+  utf32 ('o'),
+  utf32 ('n'),
+} ;
+
+//--- Unicode string for '$period$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_period = {
+  utf32 ('p'),
+  utf32 ('e'),
+  utf32 ('r'),
+  utf32 ('i'),
+  utf32 ('o'),
+  utf32 ('d'),
+} ;
+
+//--- Unicode string for '$priority$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_priority = {
+  utf32 ('p'),
+  utf32 ('r'),
+  utf32 ('i'),
+  utf32 ('o'),
+  utf32 ('r'),
+  utf32 ('i'),
+  utf32 ('t'),
+  utf32 ('y'),
+} ;
+
+//--- Unicode string for '$processor$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_processor = {
+  utf32 ('p'),
+  utf32 ('r'),
+  utf32 ('o'),
+  utf32 ('c'),
+  utf32 ('e'),
+  utf32 ('s'),
+  utf32 ('s'),
+  utf32 ('o'),
+  utf32 ('r'),
+} ;
+
+//--- Unicode string for '$scalingfactor$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_scalingfactor = {
+  utf32 ('s'),
+  utf32 ('c'),
+  utf32 ('a'),
+  utf32 ('l'),
+  utf32 ('i'),
+  utf32 ('n'),
+  utf32 ('g'),
+  utf32 ('f'),
+  utf32 ('a'),
+  utf32 ('c'),
+  utf32 ('t'),
+  utf32 ('o'),
+  utf32 ('r'),
+} ;
+
+//--- Unicode string for '$standard$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_standard = {
+  utf32 ('s'),
+  utf32 ('t'),
+  utf32 ('a'),
+  utf32 ('n'),
+  utf32 ('d'),
+  utf32 ('a'),
+  utf32 ('r'),
+  utf32 ('d'),
+} ;
+
+//--- Unicode string for '$system$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_system = {
+  utf32 ('s'),
+  utf32 ('y'),
+  utf32 ('s'),
+  utf32 ('t'),
+  utf32 ('e'),
+  utf32 ('m'),
+} ;
+
+//--- Unicode string for '$task$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_task = {
+  utf32 ('t'),
+  utf32 ('a'),
+  utf32 ('s'),
+  utf32 ('k'),
+} ;
+
+//--- Unicode string for '$van$'
+static const std::initializer_list <utf32> kUnicodeString_oa_5F_scanner_van = {
+  utf32 ('v'),
+  utf32 ('a'),
+  utf32 ('n'),
+} ;
+
+//--------------------------------------------------------------------------------------------------
+//             Key words table 'delimitorsList'      
+//--------------------------------------------------------------------------------------------------
+
+static const int32_t ktable_size_oa_5F_scanner_delimitorsList = 3 ;
+
+static const C_unicode_lexique_table_entry ktable_for_oa_5F_scanner_delimitorsList [ktable_size_oa_5F_scanner_delimitorsList] = {
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner__2C_, Lexique_oa_5F_scanner::kToken__2C_),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner__3B_, Lexique_oa_5F_scanner::kToken__3B_),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner__2E__2E_, Lexique_oa_5F_scanner::kToken__2E__2E_)
+} ;
+
+int32_t Lexique_oa_5F_scanner::search_into_delimitorsList (const String & inSearchedString) {
+  return searchInList (inSearchedString, ktable_for_oa_5F_scanner_delimitorsList, ktable_size_oa_5F_scanner_delimitorsList) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//             Key words table 'keyWordList'      
+//--------------------------------------------------------------------------------------------------
+
+static const int32_t ktable_size_oa_5F_scanner_keyWordList = 19 ;
+
+static const C_unicode_lexique_table_entry ktable_for_oa_5F_scanner_keyWordList [ktable_size_oa_5F_scanner_keyWordList] = {
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_on, Lexique_oa_5F_scanner::kToken_on),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_can, Lexique_oa_5F_scanner::kToken_can),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_end, Lexique_oa_5F_scanner::kToken_end),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_van, Lexique_oa_5F_scanner::kToken_van),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_task, Lexique_oa_5F_scanner::kToken_task),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_every, Lexique_oa_5F_scanner::kToken_every),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_length, Lexique_oa_5F_scanner::kToken_length),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_offset, Lexique_oa_5F_scanner::kToken_offset),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_period, Lexique_oa_5F_scanner::kToken_period),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_system, Lexique_oa_5F_scanner::kToken_system),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_message, Lexique_oa_5F_scanner::kToken_message),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_network, Lexique_oa_5F_scanner::kToken_network),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_deadline, Lexique_oa_5F_scanner::kToken_deadline),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_duration, Lexique_oa_5F_scanner::kToken_duration),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_extended, Lexique_oa_5F_scanner::kToken_extended),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_priority, Lexique_oa_5F_scanner::kToken_priority),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_standard, Lexique_oa_5F_scanner::kToken_standard),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_processor, Lexique_oa_5F_scanner::kToken_processor),
+  C_unicode_lexique_table_entry (kUnicodeString_oa_5F_scanner_scalingfactor, Lexique_oa_5F_scanner::kToken_scalingfactor)
+} ;
+
+int32_t Lexique_oa_5F_scanner::search_into_keyWordList (const String & inSearchedString) {
+  return searchInList (inSearchedString, ktable_for_oa_5F_scanner_keyWordList, ktable_size_oa_5F_scanner_keyWordList) ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//                          getCurrentTokenString                                                
+//--------------------------------------------------------------------------------------------------
+
+String Lexique_oa_5F_scanner::getCurrentTokenString (const cToken * inTokenPtr) const {
+  const cTokenFor_oa_5F_scanner * ptr = (const cTokenFor_oa_5F_scanner *) inTokenPtr ;
+  String s ;
+  if (ptr == nullptr) {
+    s.appendCString ("$$") ;
+  }else{
+    switch (ptr->mTokenCode) {
+    case kToken_:
+      s.appendCString ("$$") ;
+      break ;
+    case kToken_identifier:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("identifier") ;
+      s.appendChar (utf32 ('$')) ;
+      s.appendChar (utf32 (' ')) ;
+      s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_identifierString) ;
+      break ;
+    case kToken_literal_5F_integer:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("literal_integer") ;
+      s.appendChar (utf32 ('$')) ;
+      s.appendChar (utf32 (' ')) ;
+      s.appendUnsigned (ptr->mLexicalAttribute_ulongValue) ;
+      break ;
+    case kToken_system:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("system") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_end:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("end") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_task:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("task") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_standard:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("standard") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_extended:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("extended") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_message:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("message") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_length:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("length") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_priority:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("priority") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_period:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("period") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_offset:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("offset") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_on:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("on") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_deadline:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("deadline") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_duration:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("duration") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_processor:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("processor") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_can:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("can") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_van:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("van") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_network:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("network") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_scalingfactor:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("scalingfactor") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken_every:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("every") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken__2C_:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString (",") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken__3B_:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString (";") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    case kToken__2E__2E_:
+      s.appendChar (utf32 ('$')) ;
+      s.appendCString ("..") ;
+      s.appendChar (utf32 ('$')) ;
+      break ;
+    default:
+      break ;
+    }
+  }
+  return s ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//                           Template Delimiters                                                 
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+//                           Template Replacements                                               
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+//            Terminal Symbols as end of script in template mark                                 
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+//               INTERNAL PARSE LEXICAL TOKEN                                         
+//--------------------------------------------------------------------------------------------------
+
+void Lexique_oa_5F_scanner::internalParseLexicalToken (cTokenFor_oa_5F_scanner & token) {
+  bool loop = true ;
+  token.mLexicalAttribute_identifierString.removeAllKeepingCapacity () ;
+  token.mLexicalAttribute_ulongValue = 0 ;
+  mTokenStartLocation = mCurrentLocation ;
+  try{
+    if (testForInputUTF32CharRange (utf32 ('a'), utf32 ('z')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('Z'))) {
+      do {
+        ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_identifierString, previousChar ()) ;
+        if (testForInputUTF32CharRange (utf32 ('a'), utf32 ('z')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('Z')) || testForInputUTF32Char (utf32 ('_')) || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
+        }else{
+          loop = false ;
+        }
+      }while (loop) ;
+      loop = true ;
+      if (token.mTokenCode == -1) {
+        token.mTokenCode = search_into_keyWordList (token.mLexicalAttribute_identifierString) ;
+      }
+      if (token.mTokenCode == -1) {
+        token.mTokenCode = kToken_identifier ;
+      }
+      enterToken (token) ;
+    }else if (testForInputUTF32String (kUnicodeString_oa_5F_scanner__2E__2E_, true)) {
+      token.mTokenCode = kToken__2E__2E_ ;
+      enterToken (token) ;
+    }else if (testForInputUTF32String (kUnicodeString_oa_5F_scanner__3B_, true)) {
+      token.mTokenCode = kToken__3B_ ;
+      enterToken (token) ;
+    }else if (testForInputUTF32String (kUnicodeString_oa_5F_scanner__2C_, true)) {
+      token.mTokenCode = kToken__2C_ ;
+      enterToken (token) ;
+    }else if (testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
+      ::scanner_routine_enterDigitIntoUInt (*this, previousChar (), token.mLexicalAttribute_ulongValue, gLexicalMessage_oa_5F_scanner_decimalNumberTooLarge, gLexicalMessage_oa_5F_scanner_internalError) ;
+      do {
+        if (testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
+          ::scanner_routine_enterDigitIntoUInt (*this, previousChar (), token.mLexicalAttribute_ulongValue, gLexicalMessage_oa_5F_scanner_decimalNumberTooLarge, gLexicalMessage_oa_5F_scanner_internalError) ;
+        }else if (testForInputUTF32Char (utf32 ('_'))) {
+        }else{
+          loop = false ;
+        }
+      }while (loop) ;
+      loop = true ;
+      token.mTokenCode = kToken_literal_5F_integer ;
+      enterToken (token) ;
+    }else if (testForInputUTF32CharRange (utf32 (1), utf32 (' '))) {
+    }else if (testForInputUTF32Char (utf32 ('#'))) {
+      do {
+        if (testForInputUTF32CharRange (utf32 (1), utf32 ('\t')) || testForInputUTF32CharRange (utf32 ('\v'), utf32 ('~'))) {
+        }else{
+          loop = false ;
+        }
+      }while (loop) ;
+      loop = true ;
+      if (testForInputUTF32Char (utf32 ('\n'))) {
+      }else{
+        lexicalError (gLexicalMessage_oa_5F_scanner_incorrectEndOfComment COMMA_LINE_AND_SOURCE_FILE) ;
+      }
+    }else if (testForInputUTF32Char (utf32 ('\0'))) { // End of source text ? 
+      token.mTokenCode = kToken_ ; // Empty string code
+    }else{ // Unknown input character
+      unknownCharacterLexicalError (LINE_AND_SOURCE_FILE) ;
+      token.mTokenCode = -1 ; // No token
+      advance () ; // ... go throught unknown character
+    }
+  }catch (const C_lexicalErrorException &) {
+    token.mTokenCode = -1 ; // No token
+    advance () ; // ... go throught unknown character
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+//               P A R S E    L E X I C A L    T O K E N                                         
+//--------------------------------------------------------------------------------------------------
+
+bool Lexique_oa_5F_scanner::parseLexicalToken (void) {
+  cTokenFor_oa_5F_scanner token ;
+  token.mTokenCode = -1 ;
+  while ((token.mTokenCode < 0) && (mCurrentChar.u32 () != '\0')) {
+    internalParseLexicalToken (token) ;
+  }
+  if (mCurrentChar.u32 () == '\0') {
+    token.mTokenCode = 0 ;
+    enterToken (token) ;
+  }
+  return token.mTokenCode > 0 ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//                         E N T E R    T O K E N                                                
+//--------------------------------------------------------------------------------------------------
+
+void Lexique_oa_5F_scanner::enterToken (cTokenFor_oa_5F_scanner & ioToken) {
+  cTokenFor_oa_5F_scanner * ptr = nullptr ;
+  macroMyNew (ptr, cTokenFor_oa_5F_scanner ()) ;
+  ptr->mTokenCode = ioToken.mTokenCode ;
+  ptr->mStartLocation = mTokenStartLocation ;
+  ptr->mEndLocation = mTokenEndLocation ;
+  ptr->mTemplateStringBeforeToken = ioToken.mTemplateStringBeforeToken ;
+  ioToken.mTemplateStringBeforeToken = "" ;
+  ptr->mLexicalAttribute_identifierString = ioToken.mLexicalAttribute_identifierString ;
+  ptr->mLexicalAttribute_ulongValue = ioToken.mLexicalAttribute_ulongValue ;
+  enterTokenFromPointer (ptr) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//               A T T R I B U T E   A C C E S S                                                 
+//--------------------------------------------------------------------------------------------------
+
+String Lexique_oa_5F_scanner::attributeValue_identifierString (void) const {
+  cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) currentTokenPtr (HERE) ;
+  return ptr->mLexicalAttribute_identifierString ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+uint32_t Lexique_oa_5F_scanner::attributeValue_ulongValue (void) const {
+  cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) currentTokenPtr (HERE) ;
+  return ptr->mLexicalAttribute_ulongValue ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//         A S S I G N    F R O M    A T T R I B U T E                                           
+//--------------------------------------------------------------------------------------------------
+
+GGS_lstring Lexique_oa_5F_scanner::synthetizedAttribute_identifierString (void) const {
+  cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) currentTokenPtr (HERE) ;
+  macroValidSharedObject (ptr, cTokenFor_oa_5F_scanner) ;
+  GGS_location currentLocation (ptr->mStartLocation, ptr->mEndLocation, sourceText ()) ;
+  GGS_string value (ptr->mLexicalAttribute_identifierString) ;
+  GGS_lstring result (value, currentLocation) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_luint Lexique_oa_5F_scanner::synthetizedAttribute_ulongValue (void) const {
+  cTokenFor_oa_5F_scanner * ptr = (cTokenFor_oa_5F_scanner *) currentTokenPtr (HERE) ;
+  macroValidSharedObject (ptr, cTokenFor_oa_5F_scanner) ;
+  GGS_location currentLocation (ptr->mStartLocation, ptr->mEndLocation, sourceText ()) ;
+  GGS_uint value (ptr->mLexicalAttribute_ulongValue) ;
+  GGS_luint result (value, currentLocation) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//                         I N T R O S P E C T I O N                                             
+//--------------------------------------------------------------------------------------------------
+
+GGS_stringlist Lexique_oa_5F_scanner::symbols (LOCATION_ARGS) {
+  GGS_stringlist result = GGS_stringlist::class_func_emptyList (THERE) ;
+  result.addAssignOperation (GGS_string ("identifier") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("literal_integer") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("system") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("end") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("task") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("standard") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("extended") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("message") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("length") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("priority") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("period") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("offset") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("on") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("deadline") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("duration") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("processor") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("can") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("van") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("network") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("scalingfactor") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("every") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string (",") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string (";") COMMA_HERE) ;
+  result.addAssignOperation (GGS_string ("..") COMMA_HERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+static void getKeywordLists_oa_5F_scanner (GenericUniqueArray <String> & ioList) {
+  ioList.appendObject ("oa_scanner:delimitorsList") ;
+  ioList.appendObject ("oa_scanner:keyWordList") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+static void getKeywordsForIdentifier_oa_5F_scanner (const String & inIdentifier,
+                                                    bool & ioFound,
+                                                    GenericUniqueArray <String> & ioList) {
+  if (inIdentifier == "oa_scanner:delimitorsList") {
+    ioFound = true ;
+    ioList.appendObject (",") ;
+    ioList.appendObject (";") ;
+    ioList.appendObject ("..") ;
+    ioList.sortArrayUsingCompareMethod() ;
+  }
+  if (inIdentifier == "oa_scanner:keyWordList") {
+    ioFound = true ;
+    ioList.appendObject ("on") ;
+    ioList.appendObject ("can") ;
+    ioList.appendObject ("end") ;
+    ioList.appendObject ("van") ;
+    ioList.appendObject ("task") ;
+    ioList.appendObject ("every") ;
+    ioList.appendObject ("length") ;
+    ioList.appendObject ("offset") ;
+    ioList.appendObject ("period") ;
+    ioList.appendObject ("system") ;
+    ioList.appendObject ("message") ;
+    ioList.appendObject ("network") ;
+    ioList.appendObject ("deadline") ;
+    ioList.appendObject ("duration") ;
+    ioList.appendObject ("extended") ;
+    ioList.appendObject ("priority") ;
+    ioList.appendObject ("standard") ;
+    ioList.appendObject ("processor") ;
+    ioList.appendObject ("scalingfactor") ;
+    ioList.sortArrayUsingCompareMethod() ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+static LexiqueIntrospection lexiqueIntrospection_oa_5F_scanner
+__attribute__ ((used))
+__attribute__ ((unused)) (getKeywordLists_oa_5F_scanner, getKeywordsForIdentifier_oa_5F_scanner) ;
+
+//--------------------------------------------------------------------------------------------------
+//   S T Y L E   I N D E X    F O R    T E R M I N A L                                           
+//--------------------------------------------------------------------------------------------------
+
+uint32_t Lexique_oa_5F_scanner::styleIndexForTerminal (const int32_t inTerminalIndex) const {
+  static const uint32_t kTerminalSymbolStyles [25] = {0,
+    1 /* oa_scanner_1_identifier */,
+    4 /* oa_scanner_1_literal_5F_integer */,
+    2 /* oa_scanner_1_system */,
+    2 /* oa_scanner_1_end */,
+    2 /* oa_scanner_1_task */,
+    2 /* oa_scanner_1_standard */,
+    2 /* oa_scanner_1_extended */,
+    2 /* oa_scanner_1_message */,
+    2 /* oa_scanner_1_length */,
+    2 /* oa_scanner_1_priority */,
+    2 /* oa_scanner_1_period */,
+    2 /* oa_scanner_1_offset */,
+    2 /* oa_scanner_1_on */,
+    2 /* oa_scanner_1_deadline */,
+    2 /* oa_scanner_1_duration */,
+    2 /* oa_scanner_1_processor */,
+    2 /* oa_scanner_1_can */,
+    2 /* oa_scanner_1_van */,
+    2 /* oa_scanner_1_network */,
+    2 /* oa_scanner_1_scalingfactor */,
+    2 /* oa_scanner_1_every */,
+    3 /* oa_scanner_1__2C_ */,
+    3 /* oa_scanner_1__3B_ */,
+    3 /* oa_scanner_1__2E__2E_ */
+  } ;
+  return (inTerminalIndex >= 0) ? kTerminalSymbolStyles [inTerminalIndex] : 0 ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//   S T Y L E   N A M E    F O R    S T Y L E    I N D E X                                      
+//--------------------------------------------------------------------------------------------------
+
+String Lexique_oa_5F_scanner::styleNameForIndex (const uint32_t inStyleIndex) const {
+  String result ;
+  if (inStyleIndex < 5) {
+    static const char * kStyleArray [5] = {
+      "",
+      "identifier",
+      "keyWords",
+      "delimitors",
+      "integerStyle"
+    } ;
+    result = kStyleArray [inStyleIndex] ;
   }
   return result ;
 }

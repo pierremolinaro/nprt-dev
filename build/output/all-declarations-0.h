@@ -339,127 +339,6 @@ class GGS__32_lstringlist_2E_element : public AC_GALGAS_root {
 extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS__32_lstringlist_2E_element ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//LEXIQUE oa_5F_scanner
-//
-//--------------------------------------------------------------------------------------------------
-
-#include "Lexique.h"
-
-//--------------------------------------------------------------------------------------------------
-//                    E X T E R N    R O U T I N E S
-//--------------------------------------------------------------------------------------------------
-
-//--------------------------------------------------------------------------------------------------
-//                    E X T E R N    F U N C T I O N S
-//--------------------------------------------------------------------------------------------------
-
-//--------------------------------------------------------------------------------------------------
-//                       T O K E N    C L A S S
-//--------------------------------------------------------------------------------------------------
-
-class cTokenFor_oa_5F_scanner : public cToken {
-  public: String mLexicalAttribute_identifierString ;
-  public: uint32_t mLexicalAttribute_ulongValue ;
-
-  public: cTokenFor_oa_5F_scanner (void) ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//                     S C A N N E R    C L A S S
-//--------------------------------------------------------------------------------------------------
-
-class Lexique_oa_5F_scanner : public Lexique {
-//--- Constructors
-  public: Lexique_oa_5F_scanner (Compiler * inCallerCompiler,
-                       const String & inSourceFileName
-                       COMMA_LOCATION_ARGS) ;
-
-  public: Lexique_oa_5F_scanner (Compiler * inCallerCompiler,
-                       const String & inSourceString,
-                       const String & inStringForError
-                       COMMA_LOCATION_ARGS) ;
-
-//--- Instrospection
-  public: static GGS_stringlist symbols (LOCATION_ARGS) ;
-
-//--- Declaring a protected virtual destructor enables the compiler to raise
-//    an error if a direct delete is performed; only the static method
-//    SharedObject::detachPointer may invoke delete.
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    protected: virtual ~ Lexique_oa_5F_scanner (void) { }
-  #endif
-
-
-
-//--- Terminal symbols enumeration
-  public: const static int32_t kToken_ = 0 ;
-  public: static const int32_t kToken_identifier = 1 ;
-  public: static const int32_t kToken_literal_5F_integer = 2 ;
-  public: static const int32_t kToken_system = 3 ;
-  public: static const int32_t kToken_end = 4 ;
-  public: static const int32_t kToken_task = 5 ;
-  public: static const int32_t kToken_standard = 6 ;
-  public: static const int32_t kToken_extended = 7 ;
-  public: static const int32_t kToken_message = 8 ;
-  public: static const int32_t kToken_length = 9 ;
-  public: static const int32_t kToken_priority = 10 ;
-  public: static const int32_t kToken_period = 11 ;
-  public: static const int32_t kToken_offset = 12 ;
-  public: static const int32_t kToken_on = 13 ;
-  public: static const int32_t kToken_deadline = 14 ;
-  public: static const int32_t kToken_duration = 15 ;
-  public: static const int32_t kToken_processor = 16 ;
-  public: static const int32_t kToken_can = 17 ;
-  public: static const int32_t kToken_van = 18 ;
-  public: static const int32_t kToken_network = 19 ;
-  public: static const int32_t kToken_scalingfactor = 20 ;
-  public: static const int32_t kToken_every = 21 ;
-  public: static const int32_t kToken__2C_ = 22 ;
-  public: static const int32_t kToken__3B_ = 23 ;
-  public: static const int32_t kToken__2E__2E_ = 24 ;
-
-//--- Key words table 'keyWordList'
-  public: static int32_t search_into_keyWordList (const String & inSearchedString) ;
-
-//--- Key words table 'delimitorsList'
-  public: static int32_t search_into_delimitorsList (const String & inSearchedString) ;
-  
-
-//--- Assign from attribute
-  public: GGS_lstring synthetizedAttribute_identifierString (void) const ;
-  public: GGS_luint synthetizedAttribute_ulongValue (void) const ;
-
-
-//--- Attribute access
-  public: String attributeValue_identifierString (void) const ;
-  public: uint32_t attributeValue_ulongValue (void) const ;
-
-
-//--- indexing keys
-
-//--- Parse lexical token
-  protected: void internalParseLexicalToken (cTokenFor_oa_5F_scanner & token) ;
-  protected: virtual bool parseLexicalToken (void) override ;
-
-//--- Get terminal message
-  protected: virtual String getMessageForTerminal (const int32_t inTerminalSymbol) const override ;
-
-//--- Get terminal count
-  public: virtual int32_t terminalVocabularyCount (void) const override { return 24 ; }
-
-//--- Get Token String
-  public: virtual String getCurrentTokenString (const cToken * inTokenPtr) const override ;
-
-//--- Enter Token
-  protected: void enterToken (cTokenFor_oa_5F_scanner & ioToken) ;
-
-//--- Style name for Latex
-  protected: virtual String styleNameForIndex (const uint32_t inStyleIndex) const override ;
-  protected: virtual uint32_t styleIndexForTerminal (const int32_t inTerminalIndex) const override ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
 // Phase 1: @M_5F_processor map
 //--------------------------------------------------------------------------------------------------
 
@@ -3502,6 +3381,127 @@ class GGS_M_5F_tasks_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------------------------------------------------------------------------
 
 extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_M_5F_tasks_2E_element_3F_ ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//LEXIQUE oa_5F_scanner
+//
+//--------------------------------------------------------------------------------------------------
+
+#include "Lexique.h"
+
+//--------------------------------------------------------------------------------------------------
+//                    E X T E R N    R O U T I N E S
+//--------------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------------
+//                    E X T E R N    F U N C T I O N S
+//--------------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------------
+//                       T O K E N    C L A S S
+//--------------------------------------------------------------------------------------------------
+
+class cTokenFor_oa_5F_scanner : public cToken {
+  public: String mLexicalAttribute_identifierString ;
+  public: uint32_t mLexicalAttribute_ulongValue ;
+
+  public: cTokenFor_oa_5F_scanner (void) ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+//                     S C A N N E R    C L A S S
+//--------------------------------------------------------------------------------------------------
+
+class Lexique_oa_5F_scanner : public Lexique {
+//--- Constructors
+  public: Lexique_oa_5F_scanner (Compiler * inCallerCompiler,
+                       const String & inSourceFileName
+                       COMMA_LOCATION_ARGS) ;
+
+  public: Lexique_oa_5F_scanner (Compiler * inCallerCompiler,
+                       const String & inSourceString,
+                       const String & inStringForError
+                       COMMA_LOCATION_ARGS) ;
+
+//--- Instrospection
+  public: static GGS_stringlist symbols (LOCATION_ARGS) ;
+
+//--- Declaring a protected virtual destructor enables the compiler to raise
+//    an error if a direct delete is performed; only the static method
+//    SharedObject::detachPointer may invoke delete.
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    protected: virtual ~ Lexique_oa_5F_scanner (void) { }
+  #endif
+
+
+
+//--- Terminal symbols enumeration
+  public: const static int32_t kToken_ = 0 ;
+  public: static const int32_t kToken_identifier = 1 ;
+  public: static const int32_t kToken_literal_5F_integer = 2 ;
+  public: static const int32_t kToken_system = 3 ;
+  public: static const int32_t kToken_end = 4 ;
+  public: static const int32_t kToken_task = 5 ;
+  public: static const int32_t kToken_standard = 6 ;
+  public: static const int32_t kToken_extended = 7 ;
+  public: static const int32_t kToken_message = 8 ;
+  public: static const int32_t kToken_length = 9 ;
+  public: static const int32_t kToken_priority = 10 ;
+  public: static const int32_t kToken_period = 11 ;
+  public: static const int32_t kToken_offset = 12 ;
+  public: static const int32_t kToken_on = 13 ;
+  public: static const int32_t kToken_deadline = 14 ;
+  public: static const int32_t kToken_duration = 15 ;
+  public: static const int32_t kToken_processor = 16 ;
+  public: static const int32_t kToken_can = 17 ;
+  public: static const int32_t kToken_van = 18 ;
+  public: static const int32_t kToken_network = 19 ;
+  public: static const int32_t kToken_scalingfactor = 20 ;
+  public: static const int32_t kToken_every = 21 ;
+  public: static const int32_t kToken__2C_ = 22 ;
+  public: static const int32_t kToken__3B_ = 23 ;
+  public: static const int32_t kToken__2E__2E_ = 24 ;
+
+//--- Key words table 'keyWordList'
+  public: static int32_t search_into_keyWordList (const String & inSearchedString) ;
+
+//--- Key words table 'delimitorsList'
+  public: static int32_t search_into_delimitorsList (const String & inSearchedString) ;
+  
+
+//--- Assign from attribute
+  public: GGS_lstring synthetizedAttribute_identifierString (void) const ;
+  public: GGS_luint synthetizedAttribute_ulongValue (void) const ;
+
+
+//--- Attribute access
+  public: String attributeValue_identifierString (void) const ;
+  public: uint32_t attributeValue_ulongValue (void) const ;
+
+
+//--- indexing keys
+
+//--- Parse lexical token
+  protected: void internalParseLexicalToken (cTokenFor_oa_5F_scanner & token) ;
+  protected: virtual bool parseLexicalToken (void) override ;
+
+//--- Get terminal message
+  protected: virtual String getMessageForTerminal (const int32_t inTerminalSymbol) const override ;
+
+//--- Get terminal count
+  public: virtual int32_t terminalVocabularyCount (void) const override { return 24 ; }
+
+//--- Get Token String
+  public: virtual String getCurrentTokenString (const cToken * inTokenPtr) const override ;
+
+//--- Enter Token
+  protected: void enterToken (cTokenFor_oa_5F_scanner & ioToken) ;
+
+//--- Style name for Latex
+  protected: virtual String styleNameForIndex (const uint32_t inStyleIndex) const override ;
+  protected: virtual uint32_t styleIndexForTerminal (const int32_t inTerminalIndex) const override ;
+} ;
 
 //--------------------------------------------------------------------------------------------------
 //
