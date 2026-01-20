@@ -6,25 +6,5 @@ project (1:2:0) -> "nprt" {
   %makefile-win32-on-macosx
   %MacSwiftApp
   %applicationBundleBase : "fr.irccyn"
-
-  "sources/oa_scanner.galgas"
-  "sources/oa_semantics.galgas"
-  "sources/oa_cli_options.galgas"
-  "sources/oa_parser.galgas"
-  "sources/oa_grammar.galgas"
-  "sources/cocoaOA.galgas"
-  "sources/oa_main.galgas"
-
-  %tool-source : "hand_coded_sources/C_us.cpp"
-  %tool-source : "hand_coded_sources/activities_core.cpp"
-  %tool-source : "hand_coded_sources/C_activitiesToSchedule.cpp"
-  %tool-source : "hand_coded_sources/C_VDL_hashmap.cpp"
-  %tool-source : "hand_coded_sources/calculs_activites-v2.cpp"
-  %tool-source : "hand_coded_sources/CANMmessageBounds.cpp"
-  %tool-source : "hand_coded_sources/ExtendedList-v2.cpp"
-  %tool-source : "hand_coded_sources/ExtractRTs-v2.cpp"
-  %tool-source : "hand_coded_sources/independant_resources_core.cpp"
-  %tool-source : "hand_coded_sources/VerifyConditions-v2.cpp"
-  %tool-source : "hand_coded_sources/C_us_hashmap.cpp"
 }
 
