@@ -1,14 +1,10 @@
-//
-//  Application.swift
-//  galgas-ide-swiftui
-//
+//--------------------------------------------------------------------------------------------------
 //  Created by Pierre Molinaro on 11/09/2025.
-//
 //--------------------------------------------------------------------------------------------------
 
 import SwiftUI
 import Combine
-import AppKit
+import UniformTypeIdentifiers
 
 //--------------------------------------------------------------------------------------------------
 
@@ -16,40 +12,28 @@ let AUTOMATIC_SAVE_DELAY : TimeInterval = 5.0
 
 //--------------------------------------------------------------------------------------------------
 
-extension Notification.Name {
-  static let mySaveAllCommand = Notification.Name ("my.save.all.command")
+extension UTType {
+  nonisolated static let projectDocument = UTType (exportedAs: Bundle.main.bundleIdentifier! + ".projectDocument")
 }
 
 //--------------------------------------------------------------------------------------------------
 
 @main struct Application : App {
 
-//  @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  static var readableContentTypes : [UTType] { [.projectDocument] }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   @Environment(\.openWindow) private var openWindow
-//  @Environment(\.scenePhase) private var scenePhase
-
-//  private let mAllocationWindowVisibleAtLaunch : Bool
   @State private var mAllocationWindowIsPresented = false
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  init () {
-//    self.mAllocationWindowVisibleAtLaunch = UserDefaults.standard.bool (forKey: ENABLE_ALLOCATION_VISIBLE_AT_LAUNCH)
-//    if self.mAllocationWindowVisibleAtLaunch {
-////      DispatchQueue.main.async {
-////        self.openWindow (id: "AllocationDebug")
-////      }
-//    }
-  }
-  
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
   var body : some Scene {
     DocumentGroup (newDocument: ProjectDocument ()) { file in
-      ProjectDocumentView (document: file.$document, fileURL: file.fileURL!)
+      ProjectWindowManagerView (document: file.$document, projectFileURL: file.fileURL!)
     }
     Settings {
       SettingsView ()
@@ -60,7 +44,7 @@ extension Notification.Name {
       .frame (minWidth: 800, minHeight: 400)
     }
   //--- Undo / Redo commands
-    .commands { MyUndoRedoCommands () }
+    .commands { UndoRedoCommands () }
   //--- Quit COMMAND
     .commands {
       CommandGroup (replacing: .appTermination) {
@@ -93,6 +77,8 @@ extension Notification.Name {
         .keyboardShortcut ("r", modifiers: .command)
       }
     }
+  //--- Action Menu
+    .commands { ActionMenuCommands () }
   //--- Debug Menu
     .commands {
       CommandMenu ("Debug") {
@@ -142,29 +128,47 @@ extension Notification.Name {
 
 //--------------------------------------------------------------------------------------------------
 
-//final class AppDelegate : NSObject, NSApplicationDelegate {
-//
-//  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//
-//  func applicationDidFinishLaunching (_ inNotification : Notification) {
-//    print ("Finish Launching")
-////    NSApp.openWindow (id: "AllocationDebug")
-//  }
-//
-//  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//
-//  func applicationShouldTerminate (_ inSender : NSApplication) -> NSApplication.TerminateReply {
-//    print ("Terminate")
-//        // Récupérer la fenêtre active et son document
-//    return .terminateNow
-//  }
-//
-//  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//}
+struct ActionMenuCommands : Commands {
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  @FocusedValue(\.activeDocument) var activeDocument
+  @FocusedValue(\.activeView) var activeView
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  var body: some Commands {
+    CommandMenu ("Action") {
+      Button ("Build") {
+        NotificationCenter.default.post (name: .myCompileProjectCommand, object: self.activeDocument?.projectURL)
+      }
+      .keyboardShortcut ("b", modifiers: .command)
+      .disabled (self.activeDocument == nil)
+      Button ("Goto Line…") {
+        self.activeView?.presentGotoLineSheet ()
+      }
+      .keyboardShortcut ("g", modifiers: [.option, .command])
+      .disabled (self.activeView == nil)
+      Button ("Comment") {
+        self.activeView?.commentSelection ()
+      }
+      .keyboardShortcut ("k", modifiers: [.command])
+      .disabled (self.activeView == nil)
+      Button ("Uncomment") {
+        self.activeView?.uncommentSelection ()
+      }
+      .keyboardShortcut ("k", modifiers: [.option, .command])
+      .disabled (self.activeView == nil)
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+}
 
 //--------------------------------------------------------------------------------------------------
 
-struct MyUndoRedoCommands : Commands {
+struct UndoRedoCommands : Commands {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -181,35 +185,6 @@ struct MyUndoRedoCommands : Commands {
       .keyboardShortcut ("z", modifiers: [.shift, .command])
       .disabled (!(self.activeView?.canRedo ?? false))
     }
-  }
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-}
-
-//--------------------------------------------------------------------------------------------------
-
-struct ActiveViewKeyStructValue {
-  let sharedTextModel: SWIFT_SharedTextModel
-  let canUndo : Bool
-  let canRedo : Bool
-}
-
-//--------------------------------------------------------------------------------------------------
-
-struct ActiveViewKey : FocusedValueKey {
-  typealias Value = ActiveViewKeyStructValue
-}
-
-//--------------------------------------------------------------------------------------------------
-
-extension FocusedValues {
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  var activeView : ActiveViewKeyStructValue? {
-    get { self [ActiveViewKey.self] }
-    set { self [ActiveViewKey.self] = newValue }
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -26,6 +26,7 @@
 IssueDescriptor::IssueDescriptor (void) :
 mIsError (false),
 mFile (""),
+mStartLocation (0),
 mLine (0),
 mStartColumn (0),
 mEndColumn (0),
@@ -36,12 +37,14 @@ mMessage ("") {
 
 IssueDescriptor::IssueDescriptor (const bool inIsError,
                                   const String & inFile,
+                                  const int32_t inStartLocation,
                                   const int32_t inLine,
                                   const int32_t inStartColumn,
                                   const int32_t inEndColumn,
                                   const String & inMessage) :
 mIsError (inIsError),
 mFile (inFile),
+mStartLocation (inStartLocation),
 mLine (inLine),
 mStartColumn (inStartColumn),
 mEndColumn (inEndColumn),
@@ -85,6 +88,9 @@ String IssueDescriptor::jsonDescriptionString (const String & inMessage,
 //--- file
   result.appendString (",\"file\":") ;
   result.appendStringAsUTF8LiteralStringConstant (mFile) ;
+//--- Index
+  result.appendString (",\"startLocation\":") ;
+  result.appendSigned (mStartLocation) ;
 //--- Line
   result.appendString (",\"line\":") ;
   result.appendSigned (mLine) ;
