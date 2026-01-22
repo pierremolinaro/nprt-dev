@@ -14,10 +14,10 @@ extension ProjectDocumentView {
     if !self.mSearchString.isEmpty {
       self.mSearchMessage = "Searching…"
       self.mSelectedSearchResultID = nil
+      self.mSearchResultSections.removeAll ()
       self.mSearchResults.removeAll ()
       self.mRootDirectoryNode.saveAllEditedFiles ()
       self.mProjectDocumentSaveScheduler.saveProjectDocument {
-        RunLoop.main.run (until: Date ()) // For updating UI
       //--- Search in project file
         self.search (inFileURL: self.mProjectFileURL, fileNodeID: nil)
       //---
@@ -78,7 +78,6 @@ extension ProjectDocumentView {
         let rangeInLine = NSRange (location: startLocation - startLineLocation, length: endLocation - startLocation)
         var lineContentsAT = AttributedString (lineContents)
         let rangeAT = Range <AttributedString.Index> (rangeInLine, in: lineContentsAT)!
-//        lineContentsAT [rangeAT].font = .system (.body, design: .default).bold()
         lineContentsAT [rangeAT].foregroundColor = .blue
         let r = SearchResultItem (
           fileNodeID: inFileNodeID,
@@ -130,7 +129,8 @@ extension ProjectDocumentView {
         SearchResultNodeView (
           node: node,
           selectedResultItemID: self.$mSelectedSearchResultID,
-          selectedFileNodeID: self.$mRootDirectoryNode.mSelectedFileNodeID
+          selectedFileNodeID: self.$mRootDirectoryNode.mSelectedFileNodeID,
+          searchResultSections: self.$mSearchResultSections
         )
       }.controlSize (.small)
       Spacer ()

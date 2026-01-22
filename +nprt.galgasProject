@@ -1,5 +1,4 @@
 project (1:2:0) -> "nprt" {
-#--- Targets
   %makefile-unix
   %makefile-x86linux32-on-macosx
   %makefile-x86linux64-on-macosx

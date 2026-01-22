@@ -130,8 +130,6 @@ class GGS__32_lstringlist : public AC_GALGAS_root {
                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS__32_lstringlist class_func_emptyList (LOCATION_ARGS) ;
-
   public: static class GGS__32_lstringlist class_func_listWithValue (const class GGS_lstring & inOperand0,
                                                                      const class GGS_lstring & inOperand1
                                                                      COMMA_LOCATION_ARGS) ;
@@ -309,12 +307,6 @@ class GGS__32_lstringlist_2E_element : public AC_GALGAS_root {
                                                                Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- GALGAS class functions
-  public: static class GGS__32_lstringlist_2E_element class_func_new (const class GGS_lstring & inOperand0,
-                                                                      const class GGS_lstring & inOperand1,
-                                                                      class Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
@@ -465,8 +457,6 @@ class GGS_M_5F_processor : public AC_GALGAS_root {
                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_M_5F_processor class_func_emptyMap (LOCATION_ARGS) ;
-
   public: static class GGS_M_5F_processor class_func_mapWithMapToOverride (const class GGS_M_5F_processor & inOperand0
                                                                            COMMA_LOCATION_ARGS) ;
 
@@ -622,13 +612,6 @@ class GGS_M_5F_processor_2E_element : public AC_GALGAS_root {
   public: static GGS_M_5F_processor_2E_element extractObject (const GGS_object & inObject,
                                                               Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_M_5F_processor_2E_element class_func_new (const class GGS_lstring & inOperand0,
-                                                                     const class GGS_uint & inOperand1,
-                                                                     const class GGS_luint & inOperand2,
-                                                                     class Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
@@ -860,8 +843,6 @@ class GGS_M_5F_network : public AC_GALGAS_root {
                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_M_5F_network class_func_emptyMap (LOCATION_ARGS) ;
-
   public: static class GGS_M_5F_network class_func_mapWithMapToOverride (const class GGS_M_5F_network & inOperand0
                                                                          COMMA_LOCATION_ARGS) ;
 
@@ -1039,14 +1020,6 @@ class GGS_M_5F_network_2E_element : public AC_GALGAS_root {
   public: static GGS_M_5F_network_2E_element extractObject (const GGS_object & inObject,
                                                             Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_M_5F_network_2E_element class_func_new (const class GGS_lstring & inOperand0,
-                                                                   const class GGS_uint & inOperand1,
-                                                                   const class GGS_bool & inOperand2,
-                                                                   const class GGS_luint & inOperand3,
-                                                                   class Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
@@ -1303,10 +1276,6 @@ class GGS_C_5F_canIndependantMessage : public GGS_AC_5F_canMessage {
                                                                Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- GALGAS class functions
-  public: static class GGS_C_5F_canIndependantMessage class_func_new (Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_C_5F_canIndependantMessage & inOperand) const ;
 
@@ -1440,11 +1409,6 @@ class GGS_C_5F_canMessageFromMessage : public GGS_AC_5F_canMessage {
                                                                Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- GALGAS class functions
-  public: static class GGS_C_5F_canMessageFromMessage class_func_new (const class GGS_uint & inOperand0,
-                                                                      class Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_C_5F_canMessageFromMessage & inOperand) const ;
 
@@ -1577,11 +1541,6 @@ class GGS_C_5F_canMessageFromTask : public GGS_AC_5F_canMessage {
   public: static GGS_C_5F_canMessageFromTask extractObject (const GGS_object & inObject,
                                                             Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_C_5F_canMessageFromTask class_func_new (const class GGS_uint & inOperand0,
-                                                                   class Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_C_5F_canMessageFromTask & inOperand) const ;
@@ -1834,8 +1793,6 @@ class GGS_M_5F_messages : public AC_GALGAS_root {
                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_M_5F_messages class_func_emptyMap (LOCATION_ARGS) ;
-
   public: static class GGS_M_5F_messages class_func_mapWithMapToOverride (const class GGS_M_5F_messages & inOperand0
                                                                           COMMA_LOCATION_ARGS) ;
 
@@ -2146,20 +2103,6 @@ class GGS_M_5F_messages_2E_element : public AC_GALGAS_root {
                                                              Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- GALGAS class functions
-  public: static class GGS_M_5F_messages_2E_element class_func_new (const class GGS_lstring & inOperand0,
-                                                                    const class GGS_uint & inOperand1,
-                                                                    const class GGS_luint & inOperand2,
-                                                                    const class GGS_uint & inOperand3,
-                                                                    const class GGS_luint & inOperand4,
-                                                                    const class GGS_luint & inOperand5,
-                                                                    const class GGS_luint & inOperand6,
-                                                                    const class GGS_luint & inOperand7,
-                                                                    const class GGS_luint & inOperand8,
-                                                                    const class GGS_AC_5F_canMessage & inOperand9,
-                                                                    class Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
@@ -2415,10 +2358,6 @@ class GGS_C_5F_independantTask : public GGS_AC_5F_task {
                                                          Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- GALGAS class functions
-  public: static class GGS_C_5F_independantTask class_func_new (Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_C_5F_independantTask & inOperand) const ;
 
@@ -2556,12 +2495,6 @@ class GGS_C_5F_taskDependsFromTask : public GGS_AC_5F_task {
                                                              Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- GALGAS class functions
-  public: static class GGS_C_5F_taskDependsFromTask class_func_new (const class GGS_uint & inOperand0,
-                                                                    const class GGS_luint & inOperand1,
-                                                                    class Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_C_5F_taskDependsFromTask & inOperand) const ;
 
@@ -2698,12 +2631,6 @@ class GGS_C_5F_taskDependsFromMessage : public GGS_AC_5F_task {
   public: static GGS_C_5F_taskDependsFromMessage extractObject (const GGS_object & inObject,
                                                                 Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_C_5F_taskDependsFromMessage class_func_new (const class GGS_uint & inOperand0,
-                                                                       const class GGS_luint & inOperand1,
-                                                                       class Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_C_5F_taskDependsFromMessage & inOperand) const ;
@@ -2956,8 +2883,6 @@ class GGS_M_5F_tasks : public AC_GALGAS_root {
                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_M_5F_tasks class_func_emptyMap (LOCATION_ARGS) ;
-
   public: static class GGS_M_5F_tasks class_func_mapWithMapToOverride (const class GGS_M_5F_tasks & inOperand0
                                                                        COMMA_LOCATION_ARGS) ;
 
@@ -3267,20 +3192,6 @@ class GGS_M_5F_tasks_2E_element : public AC_GALGAS_root {
   public: static GGS_M_5F_tasks_2E_element extractObject (const GGS_object & inObject,
                                                           Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_M_5F_tasks_2E_element class_func_new (const class GGS_lstring & inOperand0,
-                                                                 const class GGS_uint & inOperand1,
-                                                                 const class GGS_luint & inOperand2,
-                                                                 const class GGS_luint & inOperand3,
-                                                                 const class GGS_luint & inOperand4,
-                                                                 const class GGS_luint & inOperand5,
-                                                                 const class GGS_luint & inOperand6,
-                                                                 const class GGS_uint & inOperand7,
-                                                                 const class GGS_luint & inOperand8,
-                                                                 const class GGS_AC_5F_task & inOperand9,
-                                                                 class Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,

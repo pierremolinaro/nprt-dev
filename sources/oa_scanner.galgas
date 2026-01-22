@@ -1,8 +1,8 @@
-#---------------------------------------------------------------------------*
-#                                                                           *
-#   L E X I Q U E                                                           *
-#                                                                           *
-#---------------------------------------------------------------------------*
+//---------------------------------------------------------------------------*
+//                                                                           *
+//   L E X I Q U E                                                           *
+//                                                                           *
+//---------------------------------------------------------------------------*
 
 lexique oa_scanner {
 @string identifierString
@@ -12,9 +12,9 @@ style keyWords -> "Key words"
 style delimitors -> "Delimitors"
 style integerStyle -> "Integer constants"
 
-# -------------------------- identifier or key word --------------------
-# keywords can be written in lower
-# for identifiers, case is significant
+// -------------------------- identifier or key word --------------------
+// keywords can be written in lower
+// for identifiers, case is significant
 $identifier$ ! identifierString  style identifier error message "an identifier"
 
 list keyWordList style keyWords error message "the '%K' key word"{
@@ -30,11 +30,11 @@ rule 'a'->'z' | 'A'->'Z' {
   send search identifierString in keyWordList default $identifier$
 }
 
-#--- Delimitors
+//--- Delimitors
   list delimitorsList style delimitors error message "the ''%K'' delimitor"{
     ",", ";", ".." }
   rule list delimitorsList
-#------------------------------- Decimal positive number ------------------
+//------------------------------- Decimal positive number ------------------
 $literal_integer$ ! ulongValue  style integerStyle error message "a decimal number"
 
 message decimalNumberTooLarge : "decimal number too large"
@@ -50,10 +50,10 @@ rule '0'->'9' {
   end
   send $literal_integer$
 }
-#--- separators
+//--- separators
   rule '\u0001' -> ' ' {
   }
-# ------------------------------------ Comment ----------------------------
+// ------------------------------------ Comment ----------------------------
 message incorrectEndOfComment : "incorrect end of comment"
 
 rule '#' {
@@ -68,4 +68,4 @@ rule '#' {
 }
 }
 
-#---------------------------------------------------------------------------*
+//---------------------------------------------------------------------------*

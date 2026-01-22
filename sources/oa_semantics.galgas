@@ -1,10 +1,8 @@
-#---------------------------------------------------------------------------*
-#                                                                           *
-#   S E M A N T I C S                                                       *
-#                                                                           *
-#---------------------------------------------------------------------------*
-
-
+//---------------------------------------------------------------------------*
+//                                                                           *
+//   S E M A N T I C S                                                       *
+//                                                                           *
+//---------------------------------------------------------------------------*
 
   map @M_processor {
     public var @uint mIndex
@@ -37,7 +35,7 @@
     
   map @M_messages {
     public var @uint mIndex
-    public var @luint mClass # 0 : standard can, 1 : extented can, 2 : van
+    public var @luint mClass // 0 : standard can, 1 : extented can, 2 : van
     public var @uint mNetworkIndex
     public var @luint mBytesCount
     public var @luint mPriority
