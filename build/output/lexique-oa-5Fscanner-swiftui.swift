@@ -159,8 +159,8 @@ class ScannerFor_oa_scanner : AbstractScanner {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  final override func blockComment () -> String? {
-    return gBlockComment_oa_scanner
+  final override func lineComment () -> String? {
+    return gLineComment_oa_scanner
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

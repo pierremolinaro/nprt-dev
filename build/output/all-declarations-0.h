@@ -3427,15 +3427,13 @@ class cParser_oa_5F_parser {
 //--- Non terminal declarations
   protected: virtual void nt_axiome_ (class Lexique_oa_5F_scanner * inLexique) = 0 ;
 
-  protected: virtual void nt_axiome_parse (class Lexique_oa_5F_scanner * inLexique) = 0 ;
-
   protected: virtual void nt_axiome_indexing (class Lexique_oa_5F_scanner * inLexique) = 0 ;
 
 
 //--- Rule declarations
   protected: void rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner * inLexique) ;
 
-  protected: void rule_oa_5F_parser_axiome_i0_parse (Lexique_oa_5F_scanner * inLexique) ;
+/*  protected: void rule_oa_5F_parser_axiome_i0_parse (Lexique_oa_5F_scanner * inLexique) ; */
 
   protected: void rule_oa_5F_parser_axiome_i0_indexing (Lexique_oa_5F_scanner * inLexique) ;
 
@@ -3495,7 +3493,7 @@ void routine_performComputations_26__26__26__26_ (class GGS_M_5F_processor & ioA
 class cGrammar_oa_5F_grammar : public cParser_oa_5F_parser {
 //------------------------------------- 'axiome' non terminal
 //--- 'parse' label
-  public: virtual void nt_axiome_parse (Lexique_oa_5F_scanner * inCompiler) ;
+ /*  public: virtual void nt_axiome_parse (Lexique_oa_5F_scanner * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_axiome_indexing (Lexique_oa_5F_scanner * inCompiler) ;

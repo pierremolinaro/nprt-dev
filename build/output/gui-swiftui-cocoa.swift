@@ -89,7 +89,7 @@ let gPopUpData_oa_scanner : [[UInt16]] = [
 //   Block Comment for 'oa_scanner' lexique
 //--------------------------------------------------------------------------------------------------
 
-let gBlockComment_oa_scanner : String? = nil
+let gLineComment_oa_scanner : String? = nil
 
 
 //--------------------------------------------------------------------------------------------------
