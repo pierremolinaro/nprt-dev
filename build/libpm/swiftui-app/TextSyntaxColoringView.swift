@@ -19,7 +19,7 @@ struct TextSyntaxColoringView : View {
 
   private let mIssueArray : [CompilationIssue]
   private let mPopulateContextualMenuCallBack : (NSMenu, String, [String]) -> Void
-  @ObservedObject private var mSharedTextModel : SharedTextModel
+  @State private var mSharedTextModel : SharedTextModel
 
   @State private var mIsPresentingGotoLineSheetForTopView : Bool = false
   @State private var mIsPresentingGotoLineSheetForBottomView : Bool = false

@@ -28,7 +28,7 @@ rule <axiome> {
         error step : "the step value must be > 0"
       end
     end
-    [!?outProcessorMap insertKey !processorName ![outProcessorMap count] !step]
+    [!?outProcessorMap insertKey !processorName !outProcessorMap.count !step]
     $;$
   while
     let @bool network
@@ -51,7 +51,7 @@ rule <axiome> {
         error factor : "the factor value must be > 0"
       end
     end
-    [!?outNetworkMap insertKey !networkName ![outNetworkMap count] !network !factor]
+    [!?outNetworkMap insertKey !networkName !outNetworkMap.count !network !factor]
     $;$
   while
     $task$
@@ -123,7 +123,7 @@ rule <axiome> {
         taskKind = @C_taskDependsFromMessage { !masterMessageIndex !every}
       end
     end
-    [!?outTaskMap insertKey !taskName ![outTaskMap count]
+    [!?outTaskMap insertKey !taskName !outTaskMap.count
                                       !taskPriority
                                         !taskOffset
                                         !taskDeadline
@@ -205,7 +205,7 @@ rule <axiome> {
         messageKind = @C_canMessageFromTask { !taskIndex}
       end
     end
-    [!?outMessagesMap insertKey !messageName ![outMessagesMap count]
+    [!?outMessagesMap insertKey !messageName !outMessagesMap.count
          !messageClass !networkIndex !bytesCount !priority !offset !deadline !period !messageKind]
     $;$        
   end
