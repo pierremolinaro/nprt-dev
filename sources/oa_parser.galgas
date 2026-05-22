@@ -25,7 +25,7 @@ rule <axiome> {
       $scalingfactor$
       $literal_integer$ ? step
       if step.uint == 0 then
-        error step : "the step value must be > 0"
+        error (step : "the step value must be > 0")
       end
     end
     [!?outProcessorMap insertKey !processorName !outProcessorMap.count !step]
@@ -48,7 +48,7 @@ rule <axiome> {
       $scalingfactor$
       $literal_integer$ ? factor
       if factor.uint == 0 then
-        error factor : "the factor value must be > 0"
+       error (factor : "the factor value must be > 0")
       end
     end
     [!?outNetworkMap insertKey !networkName !outNetworkMap.count !network !factor]
@@ -92,7 +92,7 @@ rule <axiome> {
     or
       $on$
       if explicitOffset then
-        error @location.here : "A dependant task cannot have an offset"
+       error (@location.here : "A dependant task cannot have an offset")
       end
       select
         $task$
@@ -152,16 +152,16 @@ rule <axiome> {
     $identifier$ ?let networkName
     [outNetworkMap searchKey !networkName ?let networkIndex ?let CANnetwork ?*]
     if CANnetwork & (messageClass.uint == 2) then
-      error messageClass : "a CAN message must be either standard either extended"
+     error (messageClass : "a CAN message must be either standard either extended")
     elsif (not CANnetwork) & (messageClass.uint != 2) then
-      error messageClass : "a VAN message cannot be standard or extended"
+     error (messageClass : "a VAN message cannot be standard or extended")
     end
     $length$
     $literal_integer$ ?let bytesCount
     if CANnetwork & (bytesCount.uint > 8) then
-      error bytesCount : "CAN message length must be <= 8 bytes"
+      error (bytesCount : "CAN message length must be <= 8 bytes")
     elsif (not CANnetwork) & (bytesCount.uint > 28) then
-      error bytesCount : "VAN message must be <= 28 bytes"
+      error (bytesCount : "VAN message must be <= 28 bytes")
     end
     $priority$
     $literal_integer$ ?let priority
@@ -191,7 +191,7 @@ rule <axiome> {
     or
       $on$
       if explicitOffset then
-        error @location.here : "A dependant task cannot have an offset"
+        error (@location.here : "A dependant task cannot have an offset")
       end
       select
         $message$
