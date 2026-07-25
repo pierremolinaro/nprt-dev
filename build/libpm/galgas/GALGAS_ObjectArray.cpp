@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  GALGAS_enumerable : Base class for GALGAS enumerable object                                  
+//  GALGAS_ObjectArray
 //
-//  This file is part of libpm library                                                           
+//  This file is part of libpm library
 //
-//  Copyright (C) 2010, ..., 2010 Pierre Molinaro.
+//  Copyright (C) 2010, ..., 2026 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,32 +18,36 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#pragma once
+#include "GALGAS_ObjectArray.h"
+#include "all-predefined-types.h"
 
 //--------------------------------------------------------------------------------------------------
 
-#include "SharedObject.h"
-#include "ComparisonResult.h"
+GALGAS_ObjectArray::GALGAS_ObjectArray (const GGS_objectlist & inObjectList,
+                                        Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) :
+mArray (nullptr),
+mCount (0) {
+  mCount = inObjectList.count () ;
+  macroMyNewArray (mArray, GGS_object, mCount) ;
+  for (uint32_t i=0 ; i<mCount ; i++) {
+    mArray [i] = inObjectList.getter_mValueAtIndex (GGS_uint (i), inCompiler COMMA_THERE) ;
+  }
+}
 
 //--------------------------------------------------------------------------------------------------
 
-class String ;
+GALGAS_ObjectArray::~GALGAS_ObjectArray (void) {
+  macroMyDeleteArray (mArray) ;
+  mCount = 0 ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
-class cCollectionElement : public SharedObject {
-//--- Default constructor
-  public: cCollectionElement (LOCATION_ARGS) ;
-
-//--- No copy
-  private: cCollectionElement (const cCollectionElement &) = delete ;
-  private: cCollectionElement & operator = (const cCollectionElement &) = delete ;
-
-//--- Virtual method that checks that all attributes are valid
-  public: virtual bool isValid (void) const = 0 ;
-
-//--- Virtual method that returns a copy of current object
-  public: virtual cCollectionElement * copy (void) = 0 ;
-} ;
+GGS_object GALGAS_ObjectArray::objectAtIndex (const uint32_t inIndex
+                                              COMMA_LOCATION_ARGS) const {
+  macroAssertThere (inIndex < mCount, "inIndex (%ld) >= mCount (%ld)", inIndex, mCount) ;
+  return mArray [inIndex] ;
+}
 
 //--------------------------------------------------------------------------------------------------

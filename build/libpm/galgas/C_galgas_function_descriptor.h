@@ -31,7 +31,7 @@ class GGS_location ;
 class GGS_object ;
 class GALGAS_TypeDescriptor ;
 class GGS_objectlist ;
-class cObjectArray ;
+class GALGAS_ObjectArray ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -40,7 +40,7 @@ class cObjectArray ;
 //--------------------------------------------------------------------------------------------------
 
 typedef GGS_object (*functionPrototypeForIntrospection) (Compiler * inCompiler,
-                                                            const cObjectArray & inEffectiveParameterArray,
+                                                            const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                             const GGS_location & inErrorLocation
                                                             COMMA_LOCATION_ARGS) ;
 

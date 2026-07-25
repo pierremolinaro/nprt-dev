@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  cObjectArray
+//  GALGAS_enumerable : Base class for GALGAS enumerable object                                  
 //
-//  This file is part of libpm library
+//  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2010, ..., 2010 Pierre Molinaro.
+//  Copyright (C) 2010, ..., 2026 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,36 +18,32 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "cObjectArray.h"
-#include "all-predefined-types.h"
+#pragma once
 
 //--------------------------------------------------------------------------------------------------
 
-cObjectArray::cObjectArray (const GGS_objectlist & inObjectList,
-                            Compiler * inCompiler
-                            COMMA_LOCATION_ARGS) :
-mArray (nullptr),
-mCount (0) {
-  mCount = inObjectList.count () ;
-  macroMyNewArray (mArray, GGS_object, mCount) ;
-  for (uint32_t i=0 ; i<mCount ; i++) {
-    mArray [i] = inObjectList.getter_mValueAtIndex (GGS_uint (i), inCompiler COMMA_THERE) ;
-  }
-}
+#include "SharedObject.h"
+#include "ComparisonResult.h"
 
 //--------------------------------------------------------------------------------------------------
 
-cObjectArray::~cObjectArray (void) {
-  macroMyDeleteArray (mArray) ;
-  mCount = 0 ;
-}
+class String ;
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_object cObjectArray::objectAtIndex (const uint32_t inIndex
-                                           COMMA_LOCATION_ARGS) const {
-  macroAssertThere (inIndex < mCount, "inIndex (%ld) >= mCount (%ld)", inIndex, mCount) ;
-  return mArray [inIndex] ;
-}
+class CollectionElement : public SharedObject {
+//--- Default constructor
+  public: CollectionElement (LOCATION_ARGS) ;
+
+//--- No copy
+  private: CollectionElement (const CollectionElement &) = delete ;
+  private: CollectionElement & operator = (const CollectionElement &) = delete ;
+
+//--- Virtual method that checks that all attributes are valid
+  public: virtual bool isValid (void) const = 0 ;
+
+//--- Virtual method that returns a copy of current object
+  public: virtual CollectionElement * copy (void) = 0 ;
+} ;
 
 //--------------------------------------------------------------------------------------------------
