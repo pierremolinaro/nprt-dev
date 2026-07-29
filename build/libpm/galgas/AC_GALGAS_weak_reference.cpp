@@ -19,9 +19,9 @@
 //--------------------------------------------------------------------------------------------------
 
 #include "AC_GALGAS_weak_reference.h"
-#include "cPtr_weakReference_proxy.h"
+#include "PtrWeakReferenceProxy.h"
 #include "AC_GALGAS_reference_class.h"
-#include "acStrongPtr_class.h"
+#include "AbstractStrongPtrClass.h"
 #include "GALGAS_TypeDescriptor.h"
 #include "String-class.h"
 
@@ -59,9 +59,9 @@ AC_GALGAS_weak_reference::~AC_GALGAS_weak_reference (void) {
 AC_GALGAS_weak_reference::AC_GALGAS_weak_reference (const AC_GALGAS_reference_class & inSource) :
 AC_GALGAS_root (),
 mProxyPtr (nullptr) {
-  acStrongPtr_class * ptr = (acStrongPtr_class *) inSource.ptr () ;
+  AbstractStrongPtrClass * ptr = (AbstractStrongPtrClass *) inSource.ptr () ;
   if (ptr != nullptr) {
-    cPtr_weakReference_proxy * proxy = ptr->getProxy () ;
+    PtrWeakReferenceProxy * proxy = ptr->getProxy () ;
     macroAssignSharedObject (mProxyPtr, proxy) ;
   }
 }
@@ -91,8 +91,8 @@ void AC_GALGAS_weak_reference::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-acStrongPtr_class * AC_GALGAS_weak_reference::ptr (void) const {
-  acStrongPtr_class * result = nullptr ;
+AbstractStrongPtrClass * AC_GALGAS_weak_reference::ptr (void) const {
+  AbstractStrongPtrClass * result = nullptr ;
   if (mProxyPtr != nullptr) {
     result = mProxyPtr->strongObject () ;
   }
@@ -106,11 +106,11 @@ void AC_GALGAS_weak_reference::description (String & ioString,
   ioString.appendCString ("<@") ;
   ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
   ioString.appendCString (":") ;
-  acStrongPtr_class * ptr = (acStrongPtr_class *) mProxyPtr ;
+  AbstractStrongPtrClass * ptr = (AbstractStrongPtrClass *) mProxyPtr ;
   if (ptr == nullptr) {
     ioString.appendCString ("not built") ;
   }else{
-    cPtr_weakReference_proxy * proxy = ptr->getProxy () ;
+    PtrWeakReferenceProxy * proxy = ptr->getProxy () ;
     if (proxy == nullptr) {
       ioString.appendCString ("nil") ;
     }else{

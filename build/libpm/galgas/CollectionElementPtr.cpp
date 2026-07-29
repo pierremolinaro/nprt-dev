@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  acPtr_class : Base class for GALGAS class                                                    
+//  GALGAS_enumerable : Base class for GALGAS enumerable object                                  
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2008, ..., 2011 Pierre Molinaro.
+//  Copyright (C) 2010, ..., 2026 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,11 +18,11 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "acPtr_class.h"
+#include "CollectionElementPtr.h"
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class::acPtr_class (LOCATION_ARGS) :
+CollectionElementPtr::CollectionElementPtr (LOCATION_ARGS) :
 SharedObject (THERE) {
 }
 

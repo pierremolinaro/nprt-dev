@@ -6,7 +6,7 @@
 // Phase 2: pointer class for @AC_canMessage class
 //--------------------------------------------------------------------------------------------------
 
-class cPtr_AC_5F_canMessage : public acStrongPtr_class {
+class cPtr_AC_5F_canMessage : public AbstractStrongPtrClass {
 
   #ifndef DO_NOT_GENERATE_CHECKINGS
     public: virtual void printNonNullClassInstanceProperties (void) const override ;

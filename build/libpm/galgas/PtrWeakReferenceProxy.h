@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  acStrongPtr_class : Base class for reference class class
+//  PtrWeakReferenceProxy : Base class for reference class class
 //
 //  This file is part of libpm library
 //
-//  Copyright (C) 2021, ..., 2021 Pierre Molinaro.
+//  Copyright (C) 2021, ..., 2026 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -22,45 +22,43 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "acPtr_class.h"
+#include "AbstractPtrClass.h"
 
 //--------------------------------------------------------------------------------------------------
 
-class cPtr_weakReference_proxy ;
+class AbstractStrongPtrClass ;
 
 //--------------------------------------------------------------------------------------------------
 
-class acStrongPtr_class : public acPtr_class {
-//--- Properties
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    private: acStrongPtr_class * mPreviousPtr ;
-    private: acStrongPtr_class * mNextPtr ;
-  #endif
-
-//--- Default constructor
-  public: acStrongPtr_class (class Compiler * inCompiler COMMA_LOCATION_ARGS) ;
+class PtrWeakReferenceProxy final : public AbstractPtrClass {
+//--- Public default constructor
+  public: PtrWeakReferenceProxy (LOCATION_ARGS) ;
 
 //--- Destructor
-  public: virtual ~ acStrongPtr_class (void) ;
+  public: virtual ~ PtrWeakReferenceProxy (void) ;
 
 //--- Private property
-  private: cPtr_weakReference_proxy * mProxyPtr ;
+  private: AbstractStrongPtrClass * mStrongObjectPtr ;
+  public: AbstractStrongPtrClass * strongObject (void) const { return mStrongObjectPtr ; }
 
-//--- Get proxy
-  public: cPtr_weakReference_proxy * getProxy (void) ;
+//--- Virtual methods from AbstractPtrClass
+  public: virtual void description (String &, const int32_t) const {} // Never invoked
+
+  public: virtual ComparisonResult dynamicObjectCompare (const AbstractPtrClass *) const { // Never invoked
+    return ComparisonResult::invalid ;
+  }
+
+  public: virtual const GALGAS_TypeDescriptor * classDescriptor (void) const ;
+
+  public: AbstractPtrClass * duplicate (LOCATION_ARGS) const ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //--- No Copy
-  private: acStrongPtr_class (const acStrongPtr_class &) = delete ;
-  private: acStrongPtr_class & operator = (const acStrongPtr_class &) = delete ;
+  private: PtrWeakReferenceProxy (const PtrWeakReferenceProxy &) = delete ;
+  private: PtrWeakReferenceProxy & operator = (const PtrWeakReferenceProxy &) = delete ;
 
 //--- Friend
-  friend class cPtr_weakReference_proxy ;
-
-//--- Print all existing objects
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    public: static void printExistingClassInstances (void) ;
-    public: virtual void printNonNullClassInstanceProperties (void) const ;
-  #endif
+  friend class AbstractStrongPtrClass ;
 } ;
 
 //--------------------------------------------------------------------------------------------------

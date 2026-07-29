@@ -107,10 +107,10 @@ class GGS__32_lstringlist : public AC_GALGAS_root {
 
 
 //--- List constructor for graph
-  public: GGS__32_lstringlist (const capCollectionElementArray & inSharedArray) ;
+  public: GGS__32_lstringlist (const CollectionElementArray & inSharedArray) ;
 
 //--- Element constructor
-  public: static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
                                                  const class GGS_lstring & in_mValue_30_,
                                                  const class GGS_lstring & in_mValue_31_
                                                  COMMA_LOCATION_ARGS) ;
@@ -1189,7 +1189,7 @@ class GGS_AC_5F_canMessage_2E_weak : public AC_GALGAS_weak_reference {
 //--------------------------------- nil initializer
   public: inline static GGS_AC_5F_canMessage_2E_weak init_nil (void) {
     GGS_AC_5F_canMessage_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -1318,7 +1318,7 @@ class GGS_C_5F_canIndependantMessage_2E_weak : public GGS_AC_5F_canMessage_2E_we
 //--------------------------------- nil initializer
   public: inline static GGS_C_5F_canIndependantMessage_2E_weak init_nil (void) {
     GGS_C_5F_canIndependantMessage_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -1451,7 +1451,7 @@ class GGS_C_5F_canMessageFromMessage_2E_weak : public GGS_AC_5F_canMessage_2E_we
 //--------------------------------- nil initializer
   public: inline static GGS_C_5F_canMessageFromMessage_2E_weak init_nil (void) {
     GGS_C_5F_canMessageFromMessage_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -1584,7 +1584,7 @@ class GGS_C_5F_canMessageFromTask_2E_weak : public GGS_AC_5F_canMessage_2E_weak 
 //--------------------------------- nil initializer
   public: inline static GGS_C_5F_canMessageFromTask_2E_weak init_nil (void) {
     GGS_C_5F_canMessageFromTask_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -2271,7 +2271,7 @@ class GGS_AC_5F_task_2E_weak : public AC_GALGAS_weak_reference {
 //--------------------------------- nil initializer
   public: inline static GGS_AC_5F_task_2E_weak init_nil (void) {
     GGS_AC_5F_task_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -2400,7 +2400,7 @@ class GGS_C_5F_independantTask_2E_weak : public GGS_AC_5F_task_2E_weak {
 //--------------------------------- nil initializer
   public: inline static GGS_C_5F_independantTask_2E_weak init_nil (void) {
     GGS_C_5F_independantTask_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -2537,7 +2537,7 @@ class GGS_C_5F_taskDependsFromTask_2E_weak : public GGS_AC_5F_task_2E_weak {
 //--------------------------------- nil initializer
   public: inline static GGS_C_5F_taskDependsFromTask_2E_weak init_nil (void) {
     GGS_C_5F_taskDependsFromTask_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -2674,7 +2674,7 @@ class GGS_C_5F_taskDependsFromMessage_2E_weak : public GGS_AC_5F_task_2E_weak {
 //--------------------------------- nil initializer
   public: inline static GGS_C_5F_taskDependsFromMessage_2E_weak init_nil (void) {
     GGS_C_5F_taskDependsFromMessage_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 

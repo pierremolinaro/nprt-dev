@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  capCollectionElementArray
+//  CollectionElementArray
 //
 //  This file is part of libpm library
 //
-//  Copyright (C) 2010, ..., 2023 Pierre Molinaro.
+//  Copyright (C) 2010, ..., 2026 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,7 +18,7 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "capCollectionElementArray.h"
+#include "CollectionElementArray.h"
 #include "MF_MemoryControl.h"
 #include "String-class.h"
 #include "Compiler.h"
@@ -48,12 +48,12 @@ class capCollectionRoot : public SharedObject {
   private: capCollectionRoot & operator = (const capCollectionRoot &) ;
 
 //--- Private properties
-  private: capCollectionElement * mArray ;
+  private: CollectionElement * mArray ;
   private: uint32_t mCapacity ;
   private: uint32_t mCount ;
 
 //--- Friend
-  friend class capCollectionElementArray ;
+  friend class CollectionElementArray ;
 } ;
 
 //--------------------------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ mCapacity (0),
 mCount (0) {
   macroValidPointer (inSource) ;
   if (inSource->mCount > 0) {
-    macroMyNewArray (mArray, capCollectionElement, inSource->mCount) ;
+    macroMyNewArray (mArray, CollectionElement, inSource->mCount) ;
     for (uint32_t i=0 ; i<inSource->mCount ; i++) {
       mArray [i] = inSource->mArray [i] ;
     }
@@ -90,36 +90,36 @@ capCollectionRoot::~ capCollectionRoot (void) {
 }
 
 //--------------------------------------------------------------------------------------------------
-//   capCollectionElementArray
+//   CollectionElementArray
 //--------------------------------------------------------------------------------------------------
 
 #ifdef PRAGMA_MARK_ALLOWED
-  #pragma mark capCollectionElementArray
+  #pragma mark CollectionElementArray
 #endif
 
 //--------------------------------------------------------------------------------------------------
 
-capCollectionElementArray::capCollectionElementArray (void) :
+CollectionElementArray::CollectionElementArray (void) :
 mSharedRoot (nullptr) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-capCollectionElementArray::capCollectionElementArray (const uint32_t inCapacity) :
+CollectionElementArray::CollectionElementArray (const uint32_t inCapacity) :
 mSharedRoot (nullptr) {
   setCapacity (inCapacity) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-capCollectionElementArray::capCollectionElementArray (const capCollectionElementArray & inSource) :
+CollectionElementArray::CollectionElementArray (const CollectionElementArray & inSource) :
 mSharedRoot (nullptr) {
   macroAssignSharedObject (mSharedRoot, inSource.mSharedRoot) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-capCollectionElementArray & capCollectionElementArray::operator = (const capCollectionElementArray & inSource) {
+CollectionElementArray & CollectionElementArray::operator = (const CollectionElementArray & inSource) {
   if (mSharedRoot != inSource.mSharedRoot) {
     macroAssignSharedObject (mSharedRoot, inSource.mSharedRoot) ;
   }
@@ -128,25 +128,25 @@ capCollectionElementArray & capCollectionElementArray::operator = (const capColl
 
 //--------------------------------------------------------------------------------------------------
 
-capCollectionElementArray::~capCollectionElementArray (void) {
+CollectionElementArray::~CollectionElementArray (void) {
   macroDetachSharedObject (mSharedRoot) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t capCollectionElementArray::count (void) const {
+uint32_t CollectionElementArray::count (void) const {
   return (nullptr == mSharedRoot) ? 0 : mSharedRoot->mCount ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-uint32_t capCollectionElementArray::capacity (void) const {
+uint32_t CollectionElementArray::capacity (void) const {
   return (nullptr == mSharedRoot) ? 0 : mSharedRoot->mCapacity ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::insulateOrCreate (void) {
+void CollectionElementArray::insulateOrCreate (void) {
   if (nullptr == mSharedRoot) {
     macroMyNew (mSharedRoot, capCollectionRoot) ;
   }else if (!mSharedRoot->isUniquelyReferenced()) { // Copy
@@ -159,7 +159,7 @@ void capCollectionElementArray::insulateOrCreate (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::setCapacity (const uint32_t inNewCapacity) {
+void CollectionElementArray::setCapacity (const uint32_t inNewCapacity) {
   insulateOrCreate () ;
   macroUniqueSharedObject (mSharedRoot) ;
   if (inNewCapacity > capacity ()) {
@@ -167,8 +167,8 @@ void capCollectionElementArray::setCapacity (const uint32_t inNewCapacity) {
     while (newCapacity < inNewCapacity) {
       newCapacity <<= 1 ;
     }
-    capCollectionElement * newArray = nullptr ;
-    macroMyNewArray (newArray, capCollectionElement, newCapacity) ;
+    CollectionElement * newArray = nullptr ;
+    macroMyNewArray (newArray, CollectionElement, newCapacity) ;
     for (uint32_t i=0 ; i<count () ; i++) {
       newArray [i] = mSharedRoot->mArray [i] ;
     }
@@ -179,7 +179,7 @@ void capCollectionElementArray::setCapacity (const uint32_t inNewCapacity) {
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::appendObject (const capCollectionElement & inObject) {
+void CollectionElementArray::appendObject (const CollectionElement & inObject) {
   setCapacity (count () + 1) ;
   macroUniqueSharedObject (mSharedRoot) ;
   macroAssert (count () < capacity (), "mCount (%lld) >= mCapacity (%lld)", count (), capacity ()) ;
@@ -189,7 +189,7 @@ void capCollectionElementArray::appendObject (const capCollectionElement & inObj
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::insertObjectAtIndex (const capCollectionElement & inObject,
+void CollectionElementArray::insertObjectAtIndex (const CollectionElement & inObject,
                                                      const uint32_t inInsertionIndex,
                                                      Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
@@ -214,7 +214,7 @@ void capCollectionElementArray::insertObjectAtIndex (const capCollectionElement 
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::removeObjectAtIndex (capCollectionElement & outObject,
+void CollectionElementArray::removeObjectAtIndex (CollectionElement & outObject,
                                                      const uint32_t inIndex,
                                                      Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
@@ -240,7 +240,7 @@ void capCollectionElementArray::removeObjectAtIndex (capCollectionElement & outO
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::removeFirstObject (capCollectionElement & outObject,
+void CollectionElementArray::removeFirstObject (CollectionElement & outObject,
                                                    Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
   insulateOrCreate () ;
@@ -260,7 +260,7 @@ void capCollectionElementArray::removeFirstObject (capCollectionElement & outObj
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::readFirstObject (capCollectionElement & outObject,
+void CollectionElementArray::readFirstObject (CollectionElement & outObject,
                                                  Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
   if (count () == 0) {
@@ -273,7 +273,7 @@ void capCollectionElementArray::readFirstObject (capCollectionElement & outObjec
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::removeLastObject (capCollectionElement & outObject,
+void CollectionElementArray::removeLastObject (CollectionElement & outObject,
                                                   Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) {
   insulateOrCreate () ;
@@ -290,7 +290,7 @@ void capCollectionElementArray::removeLastObject (capCollectionElement & outObje
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::readLastObject (capCollectionElement & outObject,
+void CollectionElementArray::readLastObject (CollectionElement & outObject,
                                                 Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
   if (count () == 0) {
@@ -303,7 +303,7 @@ void capCollectionElementArray::readLastObject (capCollectionElement & outObject
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::replaceObjectAtIndex (const capCollectionElement & inObject,
+void CollectionElementArray::replaceObjectAtIndex (const CollectionElement & inObject,
                                                       const uint32_t inIndex
                                                       COMMA_LOCATION_ARGS) {
   insulateOrCreate () ;
@@ -314,7 +314,7 @@ void capCollectionElementArray::replaceObjectAtIndex (const capCollectionElement
 
 //--------------------------------------------------------------------------------------------------
 
-capCollectionElement capCollectionElementArray::objectAtIndex (const uint32_t inIndex
+CollectionElement CollectionElementArray::objectAtIndex (const uint32_t inIndex
                                                                COMMA_LOCATION_ARGS) const {
   macroAssertThere (inIndex < count (), "inIndex (%ld) >= mCount (%ld)", inIndex, count ()) ;
   return mSharedRoot->mArray [inIndex] ;
@@ -322,7 +322,7 @@ capCollectionElement capCollectionElementArray::objectAtIndex (const uint32_t in
 
 //--------------------------------------------------------------------------------------------------
 
-CollectionElement * capCollectionElementArray::uniquelyReferencedPointerAtIndex (const uint32_t inIndex
+CollectionElementPtr * CollectionElementArray::uniquelyReferencedPointerAtIndex (const uint32_t inIndex
                                                                                   COMMA_LOCATION_ARGS) {
   insulateOrCreate () ;
   macroUniqueSharedObject (mSharedRoot) ;
@@ -333,7 +333,7 @@ CollectionElement * capCollectionElementArray::uniquelyReferencedPointerAtIndex 
 
 //--------------------------------------------------------------------------------------------------
 
-const CollectionElement * capCollectionElementArray::pointerAtIndexForReadAccess (const uint32_t inIndex
+const CollectionElementPtr * CollectionElementArray::pointerAtIndexForReadAccess (const uint32_t inIndex
                                                                                    COMMA_LOCATION_ARGS) const {
   macroAssertThere (inIndex < count (), "inIndex (%ld) >= mCount (%ld)", inIndex, count ()) ;
   return mSharedRoot->mArray [inIndex].ptr () ;
@@ -341,7 +341,7 @@ const CollectionElement * capCollectionElementArray::pointerAtIndexForReadAccess
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::removeObjectAtIndex (const uint32_t inIndex) {
+void CollectionElementArray::removeObjectAtIndex (const uint32_t inIndex) {
   insulateOrCreate () ;
   macroUniqueSharedObject (mSharedRoot) ;
   macroAssert (count () > inIndex, "mCount (%ld) <= inIndex (%lld)", count (), inIndex) ;
@@ -354,7 +354,7 @@ void capCollectionElementArray::removeObjectAtIndex (const uint32_t inIndex) {
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::predendObject (const capCollectionElement & inObject) {
+void CollectionElementArray::predendObject (const CollectionElement & inObject) {
   setCapacity (count () + 1) ;
   macroUniqueSharedObject (mSharedRoot) ;
   macroAssert (count () < capacity (), "mCount (%lld) >= mCapacity (%lld)", count (), capacity ()) ;
@@ -367,7 +367,7 @@ void capCollectionElementArray::predendObject (const capCollectionElement & inOb
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::removeAllObjects (void) {
+void CollectionElementArray::removeAllObjects (void) {
   insulateOrCreate () ;
   macroUniqueSharedObject (mSharedRoot) ;
   for (uint32_t i=0 ; i<mSharedRoot->mCount ; i++) {
@@ -378,7 +378,7 @@ void capCollectionElementArray::removeAllObjects (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::appendObjects (const capCollectionElementArray inObjects) {
+void CollectionElementArray::appendObjects (const CollectionElementArray inObjects) {
   const uint32_t operandCount = inObjects.count () ;
   if (operandCount > 0) {
     const uint32_t receiverCount = count () ;
@@ -393,7 +393,7 @@ void capCollectionElementArray::appendObjects (const capCollectionElementArray i
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::subListToIndex (capCollectionElementArray & outSubList,
+void CollectionElementArray::subListToIndex (CollectionElementArray & outSubList,
                                                 const uint32_t inIndex,
                                                 bool & outOk,
                                                 Compiler * inCompiler
@@ -419,7 +419,7 @@ void capCollectionElementArray::subListToIndex (capCollectionElementArray & outS
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::subListWithRange (capCollectionElementArray & outSubList,
+void CollectionElementArray::subListWithRange (CollectionElementArray & outSubList,
                                                   const uint32_t inStartIndex,
                                                   const uint32_t inLength,
                                                   bool & outOk,
@@ -447,7 +447,7 @@ void capCollectionElementArray::subListWithRange (capCollectionElementArray & ou
 
 //--------------------------------------------------------------------------------------------------
 
-void capCollectionElementArray::subListFromIndex (capCollectionElementArray & outSubList,
+void CollectionElementArray::subListFromIndex (CollectionElementArray & outSubList,
                                                   const uint32_t inIndex,
                                                   bool & outOk,
                                                   Compiler * inCompiler

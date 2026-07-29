@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  acPtr_class : Base class for GALGAS class                                                    
+//  GALGAS_enumerable : Base class for GALGAS enumerable object                                  
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2008, ..., 2010 Pierre Molinaro.
+//  Copyright (C) 2010, ..., 2026 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -23,36 +23,27 @@
 //--------------------------------------------------------------------------------------------------
 
 #include "SharedObject.h"
+#include "ComparisonResult.h"
 
 //--------------------------------------------------------------------------------------------------
 
-class GGS_type ;
-class AC_GALGAS_root ;
+class String ;
 
 //--------------------------------------------------------------------------------------------------
 
-class cPtr_object : public SharedObject {
-//--- Default Constructor
-  public: cPtr_object (LOCATION_ARGS) ;
+class CollectionElementPtr : public SharedObject {
+//--- Default constructor
+  public: CollectionElementPtr (LOCATION_ARGS) ;
 
-//--- Constructor with embedded object
-  public: cPtr_object (AC_GALGAS_root * inObjectPointer
-                       COMMA_LOCATION_ARGS) ;
+//--- No copy
+  private: CollectionElementPtr (const CollectionElementPtr &) = delete ;
+  private: CollectionElementPtr & operator = (const CollectionElementPtr &) = delete ;
 
-//--- Destructor
-  public: virtual ~cPtr_object (void) ;
+//--- Virtual method that checks that all attributes are valid
+  public: virtual bool isValid (void) const = 0 ;
 
-//--- No Copy
-  private: cPtr_object (const cPtr_object &) = delete ;
-  private: cPtr_object & operator = (const cPtr_object &) = delete ;
-
-//--- Private attribute
-  private: AC_GALGAS_root * mEmbeddedObjectPtr ;
-  public: const AC_GALGAS_root * embeddedObjectPtr (void) const { return mEmbeddedObjectPtr ; }
-
-//--- Accessing embedded object types
-  public: GGS_type objectStaticType (void) const ;
-  public: GGS_type objectDynamicType (void) const ;
+//--- Virtual method that returns a copy of current object
+  public: virtual CollectionElementPtr * copy (void) = 0 ;
 } ;
 
 //--------------------------------------------------------------------------------------------------

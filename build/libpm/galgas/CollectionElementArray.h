@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  capCollectionElementArray                                                                    
+//  CollectionElementArray                                                                    
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2010, ..., 2023 Pierre Molinaro.
+//  Copyright (C) 2010, ..., 2026 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -22,7 +22,7 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "capCollectionElement.h"
+#include "CollectionElement.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -30,67 +30,67 @@ class Compiler ;
 
 //--------------------------------------------------------------------------------------------------
 
-class capCollectionElementArray final {
+class CollectionElementArray final {
 //--- Default constructor
-  public: capCollectionElementArray (void) ;
+  public: CollectionElementArray (void) ;
 
 //--- Default constructor
-  public: capCollectionElementArray (const uint32_t inCapacity) ;
+  public: CollectionElementArray (const uint32_t inCapacity) ;
 
 //--- Virtual destructor
-  public: ~ capCollectionElementArray (void) ;
+  public: ~ CollectionElementArray (void) ;
 
 //--- Handle copy
-  public: capCollectionElementArray (const capCollectionElementArray & inSource) ;
-  public: capCollectionElementArray & operator = (const capCollectionElementArray & inSource) ;
+  public: CollectionElementArray (const CollectionElementArray & inSource) ;
+  public: CollectionElementArray & operator = (const CollectionElementArray & inSource) ;
 
 //--- Set capacity
   public: void setCapacity (const uint32_t inNewCapacity) ;
 
 //--- Append Object
-  public: void appendObject (const capCollectionElement & inObject) ;
+  public: void appendObject (const CollectionElement & inObject) ;
 
-  public: void insertObjectAtIndex (const capCollectionElement & inObject,
+  public: void insertObjectAtIndex (const CollectionElement & inObject,
                                      const uint32_t inInsertionIndex,
                                      Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
 
-  public: void removeObjectAtIndex (capCollectionElement & outObject,
+  public: void removeObjectAtIndex (CollectionElement & outObject,
                                      const uint32_t inInsertionIndex,
                                      Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
 
-  public: void removeFirstObject (capCollectionElement & outObject,
+  public: void removeFirstObject (CollectionElement & outObject,
                                    Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
-  public: void readFirstObject (capCollectionElement & outObject,
+  public: void readFirstObject (CollectionElement & outObject,
                                  Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) const ;
 
-  public: void removeLastObject (capCollectionElement & outObject,
+  public: void removeLastObject (CollectionElement & outObject,
                                   Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) ;
 
-  public: void readLastObject (capCollectionElement & outObject,
+  public: void readLastObject (CollectionElement & outObject,
                                 Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) const ;
 
-  public: void replaceObjectAtIndex (const capCollectionElement & inObject,
+  public: void replaceObjectAtIndex (const CollectionElement & inObject,
                                       const uint32_t inIndex
                                       COMMA_LOCATION_ARGS) ;
 
-  public: void appendObjects (const capCollectionElementArray inObjects) ; // Passing using copy constructor
+  public: void appendObjects (const CollectionElementArray inObjects) ; // Passing using copy constructor
 
 //--- Get object
-  public: capCollectionElement objectAtIndex (const uint32_t inIndex COMMA_LOCATION_ARGS) const ;
+  public: CollectionElement objectAtIndex (const uint32_t inIndex COMMA_LOCATION_ARGS) const ;
 
 //--- Get object pointer for writing (perform implicitly an "insulate" action)
-  public: CollectionElement * uniquelyReferencedPointerAtIndex (const uint32_t inIndex
+  public: CollectionElementPtr * uniquelyReferencedPointerAtIndex (const uint32_t inIndex
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--- Get object pointer for reading
-  public: const CollectionElement * pointerAtIndexForReadAccess (const uint32_t inIndex
+  public: const CollectionElementPtr * pointerAtIndexForReadAccess (const uint32_t inIndex
                                                                    COMMA_LOCATION_ARGS) const ;
 
 //--- Get count
@@ -103,26 +103,26 @@ class capCollectionElementArray final {
   public: void removeObjectAtIndex (const uint32_t inIndex) ;
 
 //--- Prepend object (insert them from index 0)
-  public: void predendObject (const capCollectionElement & inObject) ;
+  public: void predendObject (const CollectionElement & inObject) ;
 
 //--- Remove all objects (without changing capacity)
   public: void removeAllObjects (void) ;
 
 //--- Sublists
-  public: void subListToIndex (capCollectionElementArray & outSubList,
+  public: void subListToIndex (CollectionElementArray & outSubList,
                                 const uint32_t inIndex,
                                 bool & outOk,
                                 Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) const ;
 
-  public: void subListWithRange (capCollectionElementArray & ioSubList,
+  public: void subListWithRange (CollectionElementArray & ioSubList,
                                   const uint32_t inStartIndex,
                                   const uint32_t inLength,
                                   bool & outOk,
                                   Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) const ;
 
-  public: void subListFromIndex (capCollectionElementArray & ioSubList,
+  public: void subListFromIndex (CollectionElementArray & ioSubList,
                                   const uint32_t inIndex,
                                   bool & outOk,
                                   Compiler * inCompiler

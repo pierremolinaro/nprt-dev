@@ -6,7 +6,7 @@
 // Phase 2: pointer class for @AC_task class
 //--------------------------------------------------------------------------------------------------
 
-class cPtr_AC_5F_task : public acStrongPtr_class {
+class cPtr_AC_5F_task : public AbstractStrongPtrClass {
 
   #ifndef DO_NOT_GENERATE_CHECKINGS
     public: virtual void printNonNullClassInstanceProperties (void) const override ;

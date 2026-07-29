@@ -29,15 +29,15 @@
 class String ;
 class GALGAS_TypeDescriptor ;
 class AC_GALGAS_reference_class ;
-class cPtr_weakReference_proxy ;
-class acStrongPtr_class ;
+class PtrWeakReferenceProxy ;
+class AbstractStrongPtrClass ;
 
 //--------------------------------------------------------------------------------------------------
 
 class AC_GALGAS_weak_reference : public AC_GALGAS_root { // AC_GALGAS_weak_reference est une classe abstraite
 //--- Properties
-  protected: cPtr_weakReference_proxy * mProxyPtr ;
-  public: acStrongPtr_class * ptr (void) const ;
+  protected: PtrWeakReferenceProxy * mProxyPtr ;
+  public: AbstractStrongPtrClass * ptr (void) const ;
 
 //--- Default constructor
   protected: AC_GALGAS_weak_reference (void) ;

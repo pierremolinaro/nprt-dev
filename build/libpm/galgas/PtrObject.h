@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  GALGAS_enumerable : Base class for GALGAS enumerable object                                  
+//  PtrObject : Base class for GALGAS class                                                    
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2010, ..., 2010 Pierre Molinaro.
+//  Copyright (C) 2008, ..., 2026 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -23,47 +23,36 @@
 //--------------------------------------------------------------------------------------------------
 
 #include "SharedObject.h"
-#include "ComparisonResult.h"
 
 //--------------------------------------------------------------------------------------------------
 
-class String ;
-class CollectionElement ;
+class GGS_type ;
+class AC_GALGAS_root ;
 
 //--------------------------------------------------------------------------------------------------
 
-class capCollectionElement final {
-//--- Private pointer
-  private: CollectionElement * mPtr ;
+class PtrObject : public SharedObject {
+//--- Default Constructor
+  public: PtrObject (LOCATION_ARGS) ;
 
-//--- Default constructor
-  public: capCollectionElement (void) ;
+//--- Constructor with embedded object
+  public: PtrObject (AC_GALGAS_root * inObjectPointer
+                     COMMA_LOCATION_ARGS) ;
 
 //--- Destructor
-  public: ~ capCollectionElement (void) ;
+  public: virtual ~PtrObject (void) ;
 
-//--- Handle copy
-  public: capCollectionElement (const capCollectionElement & inSource) ;
-  public: capCollectionElement & operator = (const capCollectionElement & inSource) ;
+//--- No Copy
+  private: PtrObject (const PtrObject &) = delete ;
+  private: PtrObject & operator = (const PtrObject &) = delete ;
 
-//--- set pointer
-  public: void setPointer (CollectionElement * inObjectPointer) ;
+//--- Private attribute
+  private: AC_GALGAS_root * mEmbeddedObjectPtr ;
+  public: const AC_GALGAS_root * embeddedObjectPtr (void) const { return mEmbeddedObjectPtr ; }
 
-//--- Method that checks that all attributes are valid
-  public: bool isValid (void) const ;
-
-//--- Method that ensures that pointer object is unique
-  public: void insulate (void) ;
-
-//--- Method that release object
-  public: void drop (void) ;
-
-//--- Get pointer (for temporary use)
-  public: inline CollectionElement * ptr (void) { return mPtr ; }
-  public: inline const CollectionElement * ptr (void) const { return mPtr ; }
-
-//--- Method that returns a copy of current object
-  public: capCollectionElement copy (void) ;
+//--- Accessing embedded object types
+  public: GGS_type objectStaticType (void) const ;
+  public: GGS_type objectDynamicType (void) const ;
 } ;
 
 //--------------------------------------------------------------------------------------------------

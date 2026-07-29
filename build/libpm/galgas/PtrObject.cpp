@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  acPtr_class : Base class for GALGAS class
+//  AbstractPtrClass : Base class for GALGAS class
 //
 //  This file is part of libpm library
 //
-//  Copyright (C) 2008, ..., 2010 Pierre Molinaro.
+//  Copyright (C) 2008, ..., 2026 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,20 +18,20 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "cPtr_object.h"
+#include "PtrObject.h"
 #include "all-predefined-types.h"
 #include "MF_MemoryControl.h"
 
 //--------------------------------------------------------------------------------------------------
 
-cPtr_object::cPtr_object (LOCATION_ARGS) :
+PtrObject::PtrObject (LOCATION_ARGS) :
 SharedObject (THERE),
 mEmbeddedObjectPtr (nullptr) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-cPtr_object::cPtr_object (AC_GALGAS_root * inObjectPointer
+PtrObject::PtrObject (AC_GALGAS_root * inObjectPointer
                           COMMA_LOCATION_ARGS) :
 SharedObject (THERE),
 mEmbeddedObjectPtr (nullptr) {
@@ -40,13 +40,13 @@ mEmbeddedObjectPtr (nullptr) {
 
 //--------------------------------------------------------------------------------------------------
 
-cPtr_object::~cPtr_object (void) {
+PtrObject::~PtrObject (void) {
   macroMyDelete (mEmbeddedObjectPtr) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_type cPtr_object::objectStaticType (void) const {
+GGS_type PtrObject::objectStaticType (void) const {
   GGS_type result ;
   if (nullptr != mEmbeddedObjectPtr) {
     result = mEmbeddedObjectPtr->getter_staticType (HERE) ;
@@ -56,7 +56,7 @@ GGS_type cPtr_object::objectStaticType (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_type cPtr_object::objectDynamicType (void) const {
+GGS_type PtrObject::objectDynamicType (void) const {
   GGS_type result ;
   if (nullptr != mEmbeddedObjectPtr) {
     result = mEmbeddedObjectPtr->getter_dynamicType (HERE) ;

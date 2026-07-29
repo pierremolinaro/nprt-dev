@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  cPtr_weakReference_proxy : Base class for reference class class
+//  PtrWeakReferenceProxy : Base class for reference class class
 //
 //  This file is part of libpm library
 //
-//  Copyright (C) 2021, ..., 2021 Pierre Molinaro.
+//  Copyright (C) 2021, ..., 2026 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -18,20 +18,20 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "cPtr_weakReference_proxy.h"
-#include "acStrongPtr_class.h"
+#include "PtrWeakReferenceProxy.h"
+#include "AbstractStrongPtrClass.h"
 #include "String-class.h"
 
 //--------------------------------------------------------------------------------------------------
 
-cPtr_weakReference_proxy::cPtr_weakReference_proxy (LOCATION_ARGS) :
-acPtr_class (THERE),
+PtrWeakReferenceProxy::PtrWeakReferenceProxy (LOCATION_ARGS) :
+AbstractPtrClass (THERE),
 mStrongObjectPtr (nullptr) {
 }
 
 //--------------------------------------------------------------------------------------------------
 
-cPtr_weakReference_proxy::~ cPtr_weakReference_proxy (void) {
+PtrWeakReferenceProxy::~ PtrWeakReferenceProxy (void) {
   if (mStrongObjectPtr != nullptr) {
     mStrongObjectPtr->mProxyPtr = nullptr ;
   }
@@ -39,7 +39,7 @@ cPtr_weakReference_proxy::~ cPtr_weakReference_proxy (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-const GALGAS_TypeDescriptor * cPtr_weakReference_proxy::classDescriptor (void) const {
+const GALGAS_TypeDescriptor * PtrWeakReferenceProxy::classDescriptor (void) const {
   const GALGAS_TypeDescriptor * result = nullptr ;
   if (mStrongObjectPtr != nullptr) {
     result = mStrongObjectPtr->classDescriptor () ;
@@ -49,13 +49,13 @@ const GALGAS_TypeDescriptor * cPtr_weakReference_proxy::classDescriptor (void) c
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_weakReference_proxy::duplicate (UNUSED_LOCATION_ARGS) const {
+AbstractPtrClass * PtrWeakReferenceProxy::duplicate (UNUSED_LOCATION_ARGS) const {
   return nullptr ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_weakReference_proxy::duplicate (Compiler * COMMA_UNUSED_LOCATION_ARGS) const {
+AbstractPtrClass * PtrWeakReferenceProxy::duplicate (Compiler * COMMA_UNUSED_LOCATION_ARGS) const {
   return nullptr ;
 }
 

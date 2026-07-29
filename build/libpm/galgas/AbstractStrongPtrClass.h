@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  cPtr_weakReference_proxy : Base class for reference class class
+//  AbstractStrongPtrClass : Base class for reference class class
 //
 //  This file is part of libpm library
 //
@@ -22,43 +22,45 @@
 
 //--------------------------------------------------------------------------------------------------
 
-#include "acPtr_class.h"
+#include "AbstractPtrClass.h"
 
 //--------------------------------------------------------------------------------------------------
 
-class acStrongPtr_class ;
+class PtrWeakReferenceProxy ;
 
 //--------------------------------------------------------------------------------------------------
 
-class cPtr_weakReference_proxy final : public acPtr_class {
-//--- Public default constructor
-  public: cPtr_weakReference_proxy (LOCATION_ARGS) ;
+class AbstractStrongPtrClass : public AbstractPtrClass {
+//--- Properties
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    private: AbstractStrongPtrClass * mPreviousPtr ;
+    private: AbstractStrongPtrClass * mNextPtr ;
+  #endif
+
+//--- Default constructor
+  public: AbstractStrongPtrClass (class Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Destructor
-  public: virtual ~ cPtr_weakReference_proxy (void) ;
+  public: virtual ~ AbstractStrongPtrClass (void) ;
 
 //--- Private property
-  private: acStrongPtr_class * mStrongObjectPtr ;
-  public: acStrongPtr_class * strongObject (void) const { return mStrongObjectPtr ; }
+  private: PtrWeakReferenceProxy * mProxyPtr ;
 
-//--- Virtual methods from acPtr_class
-  public: virtual void description (String &, const int32_t) const {} // Never invoked
-
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class *) const { // Never invoked
-    return ComparisonResult::invalid ;
-  }
-
-  public: virtual const GALGAS_TypeDescriptor * classDescriptor (void) const ;
-
-  public: acPtr_class * duplicate (LOCATION_ARGS) const ;
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+//--- Get proxy
+  public: PtrWeakReferenceProxy * getProxy (void) ;
 
 //--- No Copy
-  private: cPtr_weakReference_proxy (const cPtr_weakReference_proxy &) = delete ;
-  private: cPtr_weakReference_proxy & operator = (const cPtr_weakReference_proxy &) = delete ;
+  private: AbstractStrongPtrClass (const AbstractStrongPtrClass &) = delete ;
+  private: AbstractStrongPtrClass & operator = (const AbstractStrongPtrClass &) = delete ;
 
 //--- Friend
-  friend class acStrongPtr_class ;
+  friend class PtrWeakReferenceProxy ;
+
+//--- Print all existing objects
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    public: static void printExistingClassInstances (void) ;
+    public: virtual void printNonNullClassInstanceProperties (void) const ;
+  #endif
 } ;
 
 //--------------------------------------------------------------------------------------------------
