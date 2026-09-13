@@ -6287,29 +6287,29 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
   GGS_M_5F_network var_outNetworkMap_530 = GGS_M_5F_network::init (inCompiler COMMA_HERE) ;
   GGS_M_5F_messages var_outMessagesMap_578 = GGS_M_5F_messages::init (inCompiler COMMA_HERE) ;
   GGS_M_5F_tasks var_outTaskMap_625 = GGS_M_5F_tasks::init (inCompiler COMMA_HERE) ;
-  inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_system COMMA_SOURCE_FILE ("oa_parser.galgas", 16)) ;
+  inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_system COMMA_SOURCE_FILE ("oa_parser.galgas3", 16)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_oa_5F_parser_0 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 19)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas3", 19)) ;
       GGS_lstring var_processorName_716 = inCompiler->synthetizedAttribute_identifierString () ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 20)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 20)) ;
       GGS_luint var_step_745 ;
       switch (select_oa_5F_parser_1 (inCompiler)) {
       case 1: {
-        var_step_745 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 23)), inCompiler COMMA_HERE) ;
+        var_step_745 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 23)), inCompiler COMMA_HERE) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 25)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas3", 25)) ;
         var_step_745 = inCompiler->synthetizedAttribute_ulongValue () ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 26)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 26)) ;
         GalgasBool test_1 = GalgasBool::boolTrue ;
         if (GalgasBool::boolTrue == test_1) {
           test_1 = GGS_bool (ComparisonKind::equal, var_step_745.readProperty_uint ().objectCompare (GGS_uint (uint32_t (0U)))).boolEnum () ;
           if (GalgasBool::boolTrue == test_1) {
             GenericArray <FixItDescription> fixItArray2 ;
-            inCompiler->emitSemanticError (var_step_745.readProperty_location (), GGS_string ("the step value must be > 0"), fixItArray2  COMMA_SOURCE_FILE ("oa_parser.galgas", 28)) ;
+            inCompiler->emitSemanticError (var_step_745.readProperty_location (), GGS_string ("the step value must be > 0"), fixItArray2  COMMA_SOURCE_FILE ("oa_parser.galgas3", 28)) ;
           }
         }
       } break ;
@@ -6317,42 +6317,42 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         break ;
       }
       {
-      var_outProcessorMap_479.setter_insertKey (var_processorName_716, var_outProcessorMap_479.getter_count (SOURCE_FILE ("oa_parser.galgas", 31)), var_step_745, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 31)) ;
+      var_outProcessorMap_479.setter_insertKey (var_processorName_716, var_outProcessorMap_479.getter_count (SOURCE_FILE ("oa_parser.galgas3", 31)), var_step_745, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas3", 31)) ;
       }
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 32)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas3", 32)) ;
     } break ;
     case 3: {
       GGS_bool var_network_1069 ;
       switch (select_oa_5F_parser_2 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_can COMMA_SOURCE_FILE ("oa_parser.galgas", 36)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_can COMMA_SOURCE_FILE ("oa_parser.galgas3", 36)) ;
         var_network_1069 = GGS_bool (true) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_van COMMA_SOURCE_FILE ("oa_parser.galgas", 39)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_van COMMA_SOURCE_FILE ("oa_parser.galgas3", 39)) ;
         var_network_1069 = GGS_bool (false) ;
       } break ;
       default:
         break ;
       }
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas", 42)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas3", 42)) ;
       GGS_lstring var_networkName_1206 = inCompiler->synthetizedAttribute_identifierString () ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 43)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 43)) ;
       GGS_luint var_factor_1233 ;
       switch (select_oa_5F_parser_3 (inCompiler)) {
       case 1: {
-        var_factor_1233 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 46)), inCompiler COMMA_HERE) ;
+        var_factor_1233 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 46)), inCompiler COMMA_HERE) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 48)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas3", 48)) ;
         var_factor_1233 = inCompiler->synthetizedAttribute_ulongValue () ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 49)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 49)) ;
         GalgasBool test_3 = GalgasBool::boolTrue ;
         if (GalgasBool::boolTrue == test_3) {
           test_3 = GGS_bool (ComparisonKind::equal, var_factor_1233.readProperty_uint ().objectCompare (GGS_uint (uint32_t (0U)))).boolEnum () ;
           if (GalgasBool::boolTrue == test_3) {
             GenericArray <FixItDescription> fixItArray4 ;
-            inCompiler->emitSemanticError (var_factor_1233.readProperty_location (), GGS_string ("the factor value must be > 0"), fixItArray4  COMMA_SOURCE_FILE ("oa_parser.galgas", 51)) ;
+            inCompiler->emitSemanticError (var_factor_1233.readProperty_location (), GGS_string ("the factor value must be > 0"), fixItArray4  COMMA_SOURCE_FILE ("oa_parser.galgas3", 51)) ;
           }
         }
       } break ;
@@ -6360,34 +6360,34 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         break ;
       }
       {
-      var_outNetworkMap_530.setter_insertKey (var_networkName_1206, var_outNetworkMap_530.getter_count (SOURCE_FILE ("oa_parser.galgas", 54)), var_network_1069, var_factor_1233, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 54)) ;
+      var_outNetworkMap_530.setter_insertKey (var_networkName_1206, var_outNetworkMap_530.getter_count (SOURCE_FILE ("oa_parser.galgas3", 54)), var_network_1069, var_factor_1233, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas3", 54)) ;
       }
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 55)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas3", 55)) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 57)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas3", 57)) ;
       GGS_lstring var_taskName_1592 = inCompiler->synthetizedAttribute_identifierString () ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 58)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas", 59)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 58)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas3", 59)) ;
       GGS_luint var_taskPriority_1643 = inCompiler->synthetizedAttribute_ulongValue () ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 60)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_duration COMMA_SOURCE_FILE ("oa_parser.galgas", 61)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 60)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_duration COMMA_SOURCE_FILE ("oa_parser.galgas3", 61)) ;
       GGS_luint var_taskDurationMin_1698 = inCompiler->synthetizedAttribute_ulongValue () ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 62)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__2E__2E_ COMMA_SOURCE_FILE ("oa_parser.galgas", 63)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 62)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__2E__2E_ COMMA_SOURCE_FILE ("oa_parser.galgas3", 63)) ;
       GGS_luint var_taskDurationMax_1750 = inCompiler->synthetizedAttribute_ulongValue () ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 64)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 64)) ;
       GGS_luint var_taskOffset_1781 ;
       GGS_bool var_explicitOffset_1806 ;
       switch (select_oa_5F_parser_4 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas", 68)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas3", 68)) ;
         var_taskOffset_1781 = inCompiler->synthetizedAttribute_ulongValue () ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 69)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 69)) ;
         var_explicitOffset_1806 = GGS_bool (true) ;
       } break ;
       case 2: {
-        var_taskOffset_1781 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (0U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 72)), inCompiler COMMA_HERE) ;
+        var_taskOffset_1781 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (0U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 72)), inCompiler COMMA_HERE) ;
         var_explicitOffset_1806 = GGS_bool (false) ;
       } break ;
       default:
@@ -6396,12 +6396,12 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
       GGS_luint var_taskDeadline_2020 ;
       switch (select_oa_5F_parser_5 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas", 77)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas3", 77)) ;
         var_taskDeadline_2020 = inCompiler->synthetizedAttribute_ulongValue () ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 78)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 78)) ;
       } break ;
       case 2: {
-        var_taskDeadline_2020 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (4294967295U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 80)), inCompiler COMMA_HERE) ;
+        var_taskDeadline_2020 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (4294967295U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 80)), inCompiler COMMA_HERE) ;
       } break ;
       default:
         break ;
@@ -6411,40 +6411,40 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
       GGS_luint var_taskPeriod_2248 ;
       switch (select_oa_5F_parser_6 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas", 86)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas3", 86)) ;
         var_taskPeriod_2248 = inCompiler->synthetizedAttribute_ulongValue () ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 87)) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 88)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 87)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas3", 88)) ;
         GGS_lstring var_taskProcessorName_2364 = inCompiler->synthetizedAttribute_identifierString () ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 89)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 89)) ;
         GGS_luint joker_2454 ; // Joker input parameter
-        var_outProcessorMap_479.method_searchKey (var_taskProcessorName_2364, var_taskProcessorIndex_2214, joker_2454, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 90)) ;
+        var_outProcessorMap_479.method_searchKey (var_taskProcessorName_2364, var_taskProcessorIndex_2214, joker_2454, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas3", 90)) ;
         var_taskKind_2191 = GGS_C_5F_independantTask::init (inCompiler COMMA_HERE) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 93)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas3", 93)) ;
         GalgasBool test_5 = GalgasBool::boolTrue ;
         if (GalgasBool::boolTrue == test_5) {
           test_5 = var_explicitOffset_1806.boolEnum () ;
           if (GalgasBool::boolTrue == test_5) {
             GenericArray <FixItDescription> fixItArray6 ;
-            inCompiler->emitSemanticError (GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)), GGS_string ("A dependant task cannot have an offset"), fixItArray6  COMMA_SOURCE_FILE ("oa_parser.galgas", 95)) ;
+            inCompiler->emitSemanticError (GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 95)), GGS_string ("A dependant task cannot have an offset"), fixItArray6  COMMA_SOURCE_FILE ("oa_parser.galgas3", 95)) ;
           }
         }
         switch (select_oa_5F_parser_7 (inCompiler)) {
         case 1: {
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 98)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas3", 98)) ;
           GGS_lstring var_masterTaskName_2681 = inCompiler->synthetizedAttribute_identifierString () ;
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 99)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 99)) ;
           GGS_luint var_every_2715 ;
           switch (select_oa_5F_parser_8 (inCompiler)) {
           case 1: {
-            var_every_2715 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 102)), inCompiler COMMA_HERE) ;
+            var_every_2715 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 102)), inCompiler COMMA_HERE) ;
           } break ;
           case 2: {
-            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas", 104)) ;
+            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas3", 104)) ;
             var_every_2715 = inCompiler->synthetizedAttribute_ulongValue () ;
-            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 105)) ;
+            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 105)) ;
           } break ;
           default:
             break ;
@@ -6456,13 +6456,13 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
           GGS_luint joker_2936 ; // Joker input parameter
           GGS_luint joker_2939 ; // Joker input parameter
           GGS_AC_5F_task joker_2974 ; // Joker input parameter
-          var_outTaskMap_625.method_searchKey (var_masterTaskName_2681, var_masterTaskIndex_2911, joker_2927, joker_2930, joker_2933, joker_2936, joker_2939, var_taskProcessorIndex_2214, var_taskPeriod_2248, joker_2974, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 107)) ;
+          var_outTaskMap_625.method_searchKey (var_masterTaskName_2681, var_masterTaskIndex_2911, joker_2927, joker_2930, joker_2933, joker_2936, joker_2939, var_taskProcessorIndex_2214, var_taskPeriod_2248, joker_2974, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas3", 107)) ;
           var_taskKind_2191 = GGS_C_5F_taskDependsFromTask::init_21__21_ (var_masterTaskIndex_2911, var_every_2715, inCompiler COMMA_HERE) ;
         } break ;
         case 2: {
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 110)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas3", 110)) ;
           GGS_lstring var_masterMessageName_3100 = inCompiler->synthetizedAttribute_identifierString () ;
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 111)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 111)) ;
           GGS_uint var_masterMessageIndex_3176 ;
           GGS_luint joker_3195 ; // Joker input parameter
           GGS_uint joker_3198 ; // Joker input parameter
@@ -6471,25 +6471,25 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
           GGS_luint joker_3207 ; // Joker input parameter
           GGS_luint joker_3210 ; // Joker input parameter
           GGS_AC_5F_canMessage joker_3225 ; // Joker input parameter
-          var_outMessagesMap_578.method_searchKey (var_masterMessageName_3100, var_masterMessageIndex_3176, joker_3195, joker_3198, joker_3201, joker_3204, joker_3207, joker_3210, var_taskPeriod_2248, joker_3225, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 112)) ;
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 113)) ;
+          var_outMessagesMap_578.method_searchKey (var_masterMessageName_3100, var_masterMessageIndex_3176, joker_3195, joker_3198, joker_3201, joker_3204, joker_3207, joker_3210, var_taskPeriod_2248, joker_3225, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas3", 112)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas3", 113)) ;
           GGS_lstring var_taskProcessorName_3275 = inCompiler->synthetizedAttribute_identifierString () ;
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 114)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 114)) ;
           GGS_luint var_every_3312 ;
           switch (select_oa_5F_parser_9 (inCompiler)) {
           case 1: {
-            var_every_3312 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 117)), inCompiler COMMA_HERE) ;
+            var_every_3312 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 117)), inCompiler COMMA_HERE) ;
           } break ;
           case 2: {
-            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas", 119)) ;
+            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas3", 119)) ;
             var_every_3312 = inCompiler->synthetizedAttribute_ulongValue () ;
-            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 120)) ;
+            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 120)) ;
           } break ;
           default:
             break ;
           }
           GGS_luint joker_3531 ; // Joker input parameter
-          var_outProcessorMap_479.method_searchKey (var_taskProcessorName_3275, var_taskProcessorIndex_2214, joker_3531, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 122)) ;
+          var_outProcessorMap_479.method_searchKey (var_taskProcessorName_3275, var_taskProcessorIndex_2214, joker_3531, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas3", 122)) ;
           var_taskKind_2191 = GGS_C_5F_taskDependsFromMessage::init_21__21_ (var_masterMessageIndex_3176, var_every_3312, inCompiler COMMA_HERE) ;
         } break ;
         default:
@@ -6500,92 +6500,92 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         break ;
       }
       {
-      var_outTaskMap_625.setter_insertKey (var_taskName_1592, var_outTaskMap_625.getter_count (SOURCE_FILE ("oa_parser.galgas", 126)), var_taskPriority_1643, var_taskOffset_1781, var_taskDeadline_2020, var_taskDurationMin_1698, var_taskDurationMax_1750, var_taskProcessorIndex_2214, var_taskPeriod_2248, var_taskKind_2191, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 126)) ;
+      var_outTaskMap_625.setter_insertKey (var_taskName_1592, var_outTaskMap_625.getter_count (SOURCE_FILE ("oa_parser.galgas3", 126)), var_taskPriority_1643, var_taskOffset_1781, var_taskDeadline_2020, var_taskDurationMin_1698, var_taskDurationMax_1750, var_taskProcessorIndex_2214, var_taskPeriod_2248, var_taskKind_2191, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas3", 126)) ;
       }
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 135)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas3", 135)) ;
     } break ;
     case 5: {
       GGS_luint var_messageClass_4150 ;
       switch (select_oa_5F_parser_10 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_standard COMMA_SOURCE_FILE ("oa_parser.galgas", 139)) ;
-        var_messageClass_4150 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (0U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 140)), inCompiler COMMA_HERE) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 141)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_standard COMMA_SOURCE_FILE ("oa_parser.galgas3", 139)) ;
+        var_messageClass_4150 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (0U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 140)), inCompiler COMMA_HERE) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas3", 141)) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_extended COMMA_SOURCE_FILE ("oa_parser.galgas", 143)) ;
-        var_messageClass_4150 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 144)), inCompiler COMMA_HERE) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 145)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_extended COMMA_SOURCE_FILE ("oa_parser.galgas3", 143)) ;
+        var_messageClass_4150 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (1U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 144)), inCompiler COMMA_HERE) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas3", 145)) ;
       } break ;
       case 3: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 147)) ;
-        var_messageClass_4150 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (2U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 148)), inCompiler COMMA_HERE) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas3", 147)) ;
+        var_messageClass_4150 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (2U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 148)), inCompiler COMMA_HERE) ;
       } break ;
       default:
         break ;
       }
       GGS_lstring var_messageName_4450 = inCompiler->synthetizedAttribute_identifierString () ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 150)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas", 151)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 150)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas3", 151)) ;
       GGS_lstring var_networkName_4498 = inCompiler->synthetizedAttribute_identifierString () ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 152)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 152)) ;
       GGS_uint var_networkIndex_4557 ;
       GGS_bool var_CANnetwork_4575 ;
       GGS_luint joker_4586 ; // Joker input parameter
-      var_outNetworkMap_530.method_searchKey (var_networkName_4498, var_networkIndex_4557, var_CANnetwork_4575, joker_4586, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 153)) ;
+      var_outNetworkMap_530.method_searchKey (var_networkName_4498, var_networkIndex_4557, var_CANnetwork_4575, joker_4586, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas3", 153)) ;
       GalgasBool test_7 = GalgasBool::boolTrue ;
       if (GalgasBool::boolTrue == test_7) {
-        test_7 = var_CANnetwork_4575.operator_and (GGS_bool (ComparisonKind::equal, var_messageClass_4150.readProperty_uint ().objectCompare (GGS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 154)).boolEnum () ;
+        test_7 = var_CANnetwork_4575.operator_and (GGS_bool (ComparisonKind::equal, var_messageClass_4150.readProperty_uint ().objectCompare (GGS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas3", 154)).boolEnum () ;
         if (GalgasBool::boolTrue == test_7) {
           GenericArray <FixItDescription> fixItArray8 ;
-          inCompiler->emitSemanticError (var_messageClass_4150.readProperty_location (), GGS_string ("a CAN message must be either standard either extended"), fixItArray8  COMMA_SOURCE_FILE ("oa_parser.galgas", 155)) ;
+          inCompiler->emitSemanticError (var_messageClass_4150.readProperty_location (), GGS_string ("a CAN message must be either standard either extended"), fixItArray8  COMMA_SOURCE_FILE ("oa_parser.galgas3", 155)) ;
         }
       }
       if (GalgasBool::boolFalse == test_7) {
         GalgasBool test_9 = GalgasBool::boolTrue ;
         if (GalgasBool::boolTrue == test_9) {
-          test_9 = var_CANnetwork_4575.operator_not (SOURCE_FILE ("oa_parser.galgas", 156)).operator_and (GGS_bool (ComparisonKind::notEqual, var_messageClass_4150.readProperty_uint ().objectCompare (GGS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 156)).boolEnum () ;
+          test_9 = var_CANnetwork_4575.operator_not (SOURCE_FILE ("oa_parser.galgas3", 156)).operator_and (GGS_bool (ComparisonKind::notEqual, var_messageClass_4150.readProperty_uint ().objectCompare (GGS_uint (uint32_t (2U)))) COMMA_SOURCE_FILE ("oa_parser.galgas3", 156)).boolEnum () ;
           if (GalgasBool::boolTrue == test_9) {
             GenericArray <FixItDescription> fixItArray10 ;
-            inCompiler->emitSemanticError (var_messageClass_4150.readProperty_location (), GGS_string ("a VAN message cannot be standard or extended"), fixItArray10  COMMA_SOURCE_FILE ("oa_parser.galgas", 157)) ;
+            inCompiler->emitSemanticError (var_messageClass_4150.readProperty_location (), GGS_string ("a VAN message cannot be standard or extended"), fixItArray10  COMMA_SOURCE_FILE ("oa_parser.galgas3", 157)) ;
           }
         }
       }
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_length COMMA_SOURCE_FILE ("oa_parser.galgas", 159)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_length COMMA_SOURCE_FILE ("oa_parser.galgas3", 159)) ;
       GGS_luint var_bytesCount_4906 = inCompiler->synthetizedAttribute_ulongValue () ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 160)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 160)) ;
       GalgasBool test_11 = GalgasBool::boolTrue ;
       if (GalgasBool::boolTrue == test_11) {
-        test_11 = var_CANnetwork_4575.operator_and (GGS_bool (ComparisonKind::greaterThan, var_bytesCount_4906.readProperty_uint ().objectCompare (GGS_uint (uint32_t (8U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 161)).boolEnum () ;
+        test_11 = var_CANnetwork_4575.operator_and (GGS_bool (ComparisonKind::greaterThan, var_bytesCount_4906.readProperty_uint ().objectCompare (GGS_uint (uint32_t (8U)))) COMMA_SOURCE_FILE ("oa_parser.galgas3", 161)).boolEnum () ;
         if (GalgasBool::boolTrue == test_11) {
           GenericArray <FixItDescription> fixItArray12 ;
-          inCompiler->emitSemanticError (var_bytesCount_4906.readProperty_location (), GGS_string ("CAN message length must be <= 8 bytes"), fixItArray12  COMMA_SOURCE_FILE ("oa_parser.galgas", 162)) ;
+          inCompiler->emitSemanticError (var_bytesCount_4906.readProperty_location (), GGS_string ("CAN message length must be <= 8 bytes"), fixItArray12  COMMA_SOURCE_FILE ("oa_parser.galgas3", 162)) ;
         }
       }
       if (GalgasBool::boolFalse == test_11) {
         GalgasBool test_13 = GalgasBool::boolTrue ;
         if (GalgasBool::boolTrue == test_13) {
-          test_13 = var_CANnetwork_4575.operator_not (SOURCE_FILE ("oa_parser.galgas", 163)).operator_and (GGS_bool (ComparisonKind::greaterThan, var_bytesCount_4906.readProperty_uint ().objectCompare (GGS_uint (uint32_t (28U)))) COMMA_SOURCE_FILE ("oa_parser.galgas", 163)).boolEnum () ;
+          test_13 = var_CANnetwork_4575.operator_not (SOURCE_FILE ("oa_parser.galgas3", 163)).operator_and (GGS_bool (ComparisonKind::greaterThan, var_bytesCount_4906.readProperty_uint ().objectCompare (GGS_uint (uint32_t (28U)))) COMMA_SOURCE_FILE ("oa_parser.galgas3", 163)).boolEnum () ;
           if (GalgasBool::boolTrue == test_13) {
             GenericArray <FixItDescription> fixItArray14 ;
-            inCompiler->emitSemanticError (var_bytesCount_4906.readProperty_location (), GGS_string ("VAN message must be <= 28 bytes"), fixItArray14  COMMA_SOURCE_FILE ("oa_parser.galgas", 164)) ;
+            inCompiler->emitSemanticError (var_bytesCount_4906.readProperty_location (), GGS_string ("VAN message must be <= 28 bytes"), fixItArray14  COMMA_SOURCE_FILE ("oa_parser.galgas3", 164)) ;
           }
         }
       }
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas", 166)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas3", 166)) ;
       GGS_luint var_priority_5199 = inCompiler->synthetizedAttribute_ulongValue () ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 167)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 167)) ;
       GGS_luint var_offset_5223 ;
       GGS_bool var_explicitOffset_5244 ;
       switch (select_oa_5F_parser_11 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas", 171)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas3", 171)) ;
         var_offset_5223 = inCompiler->synthetizedAttribute_ulongValue () ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 172)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 172)) ;
         var_explicitOffset_5244 = GGS_bool (true) ;
       } break ;
       case 2: {
-        var_offset_5223 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (0U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 175)), inCompiler COMMA_HERE) ;
+        var_offset_5223 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (0U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 175)), inCompiler COMMA_HERE) ;
         var_explicitOffset_5244 = GGS_bool (false) ;
       } break ;
       default:
@@ -6594,12 +6594,12 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
       GGS_luint var_deadline_5449 ;
       switch (select_oa_5F_parser_12 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas", 180)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas3", 180)) ;
         var_deadline_5449 = inCompiler->synthetizedAttribute_ulongValue () ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 181)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 181)) ;
       } break ;
       case 2: {
-        var_deadline_5449 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (4294967295U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 183)), inCompiler COMMA_HERE) ;
+        var_deadline_5449 = GGS_luint::init_21__21_ (GGS_uint (uint32_t (4294967295U)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 183)), inCompiler COMMA_HERE) ;
       } break ;
       default:
         break ;
@@ -6608,26 +6608,26 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
       GGS_luint var_period_5641 ;
       switch (select_oa_5F_parser_13 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas", 188)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas3", 188)) ;
         var_period_5641 = inCompiler->synthetizedAttribute_ulongValue () ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 189)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 189)) ;
         var_messageKind_5614 = GGS_C_5F_canIndependantMessage::init (inCompiler COMMA_HERE) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 192)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas3", 192)) ;
         GalgasBool test_15 = GalgasBool::boolTrue ;
         if (GalgasBool::boolTrue == test_15) {
           test_15 = var_explicitOffset_5244.boolEnum () ;
           if (GalgasBool::boolTrue == test_15) {
             GenericArray <FixItDescription> fixItArray16 ;
-            inCompiler->emitSemanticError (GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)), GGS_string ("A dependant task cannot have an offset"), fixItArray16  COMMA_SOURCE_FILE ("oa_parser.galgas", 194)) ;
+            inCompiler->emitSemanticError (GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 194)), GGS_string ("A dependant task cannot have an offset"), fixItArray16  COMMA_SOURCE_FILE ("oa_parser.galgas3", 194)) ;
           }
         }
         switch (select_oa_5F_parser_14 (inCompiler)) {
         case 1: {
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 197)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas3", 197)) ;
           GGS_lstring var_name_5943 = inCompiler->synthetizedAttribute_identifierString () ;
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 198)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 198)) ;
           GGS_uint var_messageIndex_5993 ;
           GGS_luint joker_6006 ; // Joker input parameter
           GGS_uint joker_6009 ; // Joker input parameter
@@ -6636,13 +6636,13 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
           GGS_luint joker_6018 ; // Joker input parameter
           GGS_luint joker_6021 ; // Joker input parameter
           GGS_AC_5F_canMessage joker_6032 ; // Joker input parameter
-          var_outMessagesMap_578.method_searchKey (var_name_5943, var_messageIndex_5993, joker_6006, joker_6009, joker_6012, joker_6015, joker_6018, joker_6021, var_period_5641, joker_6032, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 199)) ;
+          var_outMessagesMap_578.method_searchKey (var_name_5943, var_messageIndex_5993, joker_6006, joker_6009, joker_6012, joker_6015, joker_6018, joker_6021, var_period_5641, joker_6032, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas3", 199)) ;
           var_messageKind_5614 = GGS_C_5F_canMessageFromMessage::init_21_ (var_messageIndex_5993, inCompiler COMMA_HERE) ;
         } break ;
         case 2: {
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 202)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas3", 202)) ;
           GGS_lstring var_taskName_6150 = inCompiler->synthetizedAttribute_identifierString () ;
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 203)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 203)) ;
           GGS_uint var_taskIndex_6204 ;
           GGS_luint joker_6214 ; // Joker input parameter
           GGS_luint joker_6217 ; // Joker input parameter
@@ -6651,7 +6651,7 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
           GGS_luint joker_6226 ; // Joker input parameter
           GGS_uint joker_6229 ; // Joker input parameter
           GGS_AC_5F_task joker_6240 ; // Joker input parameter
-          var_outTaskMap_625.method_searchKey (var_taskName_6150, var_taskIndex_6204, joker_6214, joker_6217, joker_6220, joker_6223, joker_6226, joker_6229, var_period_5641, joker_6240, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 204)) ;
+          var_outTaskMap_625.method_searchKey (var_taskName_6150, var_taskIndex_6204, joker_6214, joker_6217, joker_6220, joker_6223, joker_6226, joker_6229, var_period_5641, joker_6240, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas3", 204)) ;
           var_messageKind_5614 = GGS_C_5F_canMessageFromTask::init_21_ (var_taskIndex_6204, inCompiler COMMA_HERE) ;
         } break ;
         default:
@@ -6662,81 +6662,81 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_ (Lexique_oa_5F_scanner *
         break ;
       }
       {
-      var_outMessagesMap_578.setter_insertKey (var_messageName_4450, var_outMessagesMap_578.getter_count (SOURCE_FILE ("oa_parser.galgas", 208)), var_messageClass_4150, var_networkIndex_4557, var_bytesCount_4906, var_priority_5199, var_offset_5223, var_deadline_5449, var_period_5641, var_messageKind_5614, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas", 208)) ;
+      var_outMessagesMap_578.setter_insertKey (var_messageName_4450, var_outMessagesMap_578.getter_count (SOURCE_FILE ("oa_parser.galgas3", 208)), var_messageClass_4150, var_networkIndex_4557, var_bytesCount_4906, var_priority_5199, var_offset_5223, var_deadline_5449, var_period_5641, var_messageKind_5614, inCompiler COMMA_SOURCE_FILE ("oa_parser.galgas3", 208)) ;
       }
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 210)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas3", 210)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_end COMMA_SOURCE_FILE ("oa_parser.galgas", 212)) ;
+  inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_end COMMA_SOURCE_FILE ("oa_parser.galgas3", 212)) ;
   {
-  routine_performComputations_26__26__26__26_ (var_outProcessorMap_479, var_outNetworkMap_530, var_outMessagesMap_578, var_outTaskMap_625, inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas", 213)) ;
+  routine_performComputations_26__26__26__26_ (var_outProcessorMap_479, var_outNetworkMap_530, var_outMessagesMap_578, var_outTaskMap_625, inCompiler  COMMA_SOURCE_FILE ("oa_parser.galgas3", 213)) ;
   }
 }
 
 //------------------------------------------------------------------------------------------------
 
 void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_indexing (Lexique_oa_5F_scanner * inCompiler) {
-  inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_system COMMA_SOURCE_FILE ("oa_parser.galgas", 16)) ;
+  inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_system COMMA_SOURCE_FILE ("oa_parser.galgas3", 16)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_oa_5F_parser_0 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 19)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 20)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas3", 19)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 20)) ;
       switch (select_oa_5F_parser_1 (inCompiler)) {
       case 1: {
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 25)) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 26)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas3", 25)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 26)) ;
       } break ;
       default:
         break ;
       }
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 32)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas3", 32)) ;
     } break ;
     case 3: {
       switch (select_oa_5F_parser_2 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_can COMMA_SOURCE_FILE ("oa_parser.galgas", 36)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_can COMMA_SOURCE_FILE ("oa_parser.galgas3", 36)) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_van COMMA_SOURCE_FILE ("oa_parser.galgas", 39)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_van COMMA_SOURCE_FILE ("oa_parser.galgas3", 39)) ;
       } break ;
       default:
         break ;
       }
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas", 42)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 43)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas3", 42)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 43)) ;
       switch (select_oa_5F_parser_3 (inCompiler)) {
       case 1: {
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas", 48)) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 49)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_scalingfactor COMMA_SOURCE_FILE ("oa_parser.galgas3", 48)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 49)) ;
       } break ;
       default:
         break ;
       }
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 55)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas3", 55)) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 57)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 58)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas", 59)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 60)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_duration COMMA_SOURCE_FILE ("oa_parser.galgas", 61)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 62)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__2E__2E_ COMMA_SOURCE_FILE ("oa_parser.galgas", 63)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 64)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas3", 57)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 58)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas3", 59)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 60)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_duration COMMA_SOURCE_FILE ("oa_parser.galgas3", 61)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 62)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__2E__2E_ COMMA_SOURCE_FILE ("oa_parser.galgas3", 63)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 64)) ;
       switch (select_oa_5F_parser_4 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas", 68)) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 69)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas3", 68)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 69)) ;
       } break ;
       case 2: {
       } break ;
@@ -6745,8 +6745,8 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_indexing (Lexique_oa_5F_s
       }
       switch (select_oa_5F_parser_5 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas", 77)) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 78)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas3", 77)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 78)) ;
       } break ;
       case 2: {
       } break ;
@@ -6755,39 +6755,39 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_indexing (Lexique_oa_5F_s
       }
       switch (select_oa_5F_parser_6 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas", 86)) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 87)) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 88)) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 89)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas3", 86)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 87)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas3", 88)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 89)) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 93)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas3", 93)) ;
         switch (select_oa_5F_parser_7 (inCompiler)) {
         case 1: {
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 98)) ;
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 99)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas3", 98)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 99)) ;
           switch (select_oa_5F_parser_8 (inCompiler)) {
           case 1: {
           } break ;
           case 2: {
-            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas", 104)) ;
-            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 105)) ;
+            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas3", 104)) ;
+            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 105)) ;
           } break ;
           default:
             break ;
           }
         } break ;
         case 2: {
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 110)) ;
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 111)) ;
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas", 113)) ;
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 114)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas3", 110)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 111)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_processor COMMA_SOURCE_FILE ("oa_parser.galgas3", 113)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 114)) ;
           switch (select_oa_5F_parser_9 (inCompiler)) {
           case 1: {
           } break ;
           case 2: {
-            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas", 119)) ;
-            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 120)) ;
+            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_every COMMA_SOURCE_FILE ("oa_parser.galgas3", 119)) ;
+            inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 120)) ;
           } break ;
           default:
             break ;
@@ -6800,35 +6800,35 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_indexing (Lexique_oa_5F_s
       default:
         break ;
       }
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 135)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas3", 135)) ;
     } break ;
     case 5: {
       switch (select_oa_5F_parser_10 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_standard COMMA_SOURCE_FILE ("oa_parser.galgas", 139)) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 141)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_standard COMMA_SOURCE_FILE ("oa_parser.galgas3", 139)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas3", 141)) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_extended COMMA_SOURCE_FILE ("oa_parser.galgas", 143)) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 145)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_extended COMMA_SOURCE_FILE ("oa_parser.galgas3", 143)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas3", 145)) ;
       } break ;
       case 3: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 147)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas3", 147)) ;
       } break ;
       default:
         break ;
       }
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 150)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas", 151)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 152)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_length COMMA_SOURCE_FILE ("oa_parser.galgas", 159)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 160)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas", 166)) ;
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 167)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 150)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_network COMMA_SOURCE_FILE ("oa_parser.galgas3", 151)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 152)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_length COMMA_SOURCE_FILE ("oa_parser.galgas3", 159)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 160)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_priority COMMA_SOURCE_FILE ("oa_parser.galgas3", 166)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 167)) ;
       switch (select_oa_5F_parser_11 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas", 171)) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 172)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_offset COMMA_SOURCE_FILE ("oa_parser.galgas3", 171)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 172)) ;
       } break ;
       case 2: {
       } break ;
@@ -6837,8 +6837,8 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_indexing (Lexique_oa_5F_s
       }
       switch (select_oa_5F_parser_12 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas", 180)) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 181)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_deadline COMMA_SOURCE_FILE ("oa_parser.galgas3", 180)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 181)) ;
       } break ;
       case 2: {
       } break ;
@@ -6847,19 +6847,19 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_indexing (Lexique_oa_5F_s
       }
       switch (select_oa_5F_parser_13 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas", 188)) ;
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas", 189)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_period COMMA_SOURCE_FILE ("oa_parser.galgas3", 188)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_literal_5F_integer COMMA_SOURCE_FILE ("oa_parser.galgas3", 189)) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas", 192)) ;
+        inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_on COMMA_SOURCE_FILE ("oa_parser.galgas3", 192)) ;
         switch (select_oa_5F_parser_14 (inCompiler)) {
         case 1: {
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas", 197)) ;
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 198)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_message COMMA_SOURCE_FILE ("oa_parser.galgas3", 197)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 198)) ;
         } break ;
         case 2: {
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas", 202)) ;
-          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas", 203)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_task COMMA_SOURCE_FILE ("oa_parser.galgas3", 202)) ;
+          inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_identifier COMMA_SOURCE_FILE ("oa_parser.galgas3", 203)) ;
         } break ;
         default:
           break ;
@@ -6868,14 +6868,14 @@ void cParser_oa_5F_parser::rule_oa_5F_parser_axiome_i0_indexing (Lexique_oa_5F_s
       default:
         break ;
       }
-      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas", 210)) ;
+      inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken__3B_ COMMA_SOURCE_FILE ("oa_parser.galgas3", 210)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_end COMMA_SOURCE_FILE ("oa_parser.galgas", 212)) ;
+  inCompiler->acceptTerminal (Lexique_oa_5F_scanner::kToken_end COMMA_SOURCE_FILE ("oa_parser.galgas3", 212)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7273,674 +7273,6 @@ GGS_C_5F_taskDependsFromMessage GGS_C_5F_taskDependsFromMessage::extractObject (
   }
   return result ;
 }
-
-//--------------------------------------------------------------------------------------------------
-
-#include "MF_MemoryControl.h"
-#include "C_galgas_CLI_Options.h"
-
-#include "FileManager.h"
-
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                     LL(1) PRODUCTION RULES                                       
-//
-//--------------------------------------------------------------------------------------------------
-
-static const int32_t gProductions_oa_grammar [] = {
-// At index 0 : <axiome>, in file 'oa_parser.ggs', line 11
-  TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_system) // $system$
-, TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_end) // $end$
-, TOP_DOWN_END_PRODUCTION ()
-//---- Added productions from 'select' and 'repeat' instructions
-// At index 4 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-, TOP_DOWN_END_PRODUCTION ()
-// At index 5 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_processor) // $processor$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
-, TOP_DOWN_NONTERMINAL (2) // <select_oa_5F_parser_1>
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__3B_) // $;$
-, TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
-, TOP_DOWN_END_PRODUCTION ()
-// At index 11 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-, TOP_DOWN_NONTERMINAL (3) // <select_oa_5F_parser_2>
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_network) // $network$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
-, TOP_DOWN_NONTERMINAL (4) // <select_oa_5F_parser_3>
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__3B_) // $;$
-, TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
-, TOP_DOWN_END_PRODUCTION ()
-// At index 18 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_task) // $task$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_priority) // $priority$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_duration) // $duration$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__2E__2E_) // $..$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_NONTERMINAL (5) // <select_oa_5F_parser_4>
-, TOP_DOWN_NONTERMINAL (6) // <select_oa_5F_parser_5>
-, TOP_DOWN_NONTERMINAL (7) // <select_oa_5F_parser_6>
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__3B_) // $;$
-, TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
-, TOP_DOWN_END_PRODUCTION ()
-// At index 32 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-, TOP_DOWN_NONTERMINAL (11) // <select_oa_5F_parser_10>
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_network) // $network$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_length) // $length$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_priority) // $priority$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_NONTERMINAL (12) // <select_oa_5F_parser_11>
-, TOP_DOWN_NONTERMINAL (13) // <select_oa_5F_parser_12>
-, TOP_DOWN_NONTERMINAL (14) // <select_oa_5F_parser_13>
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__3B_) // $;$
-, TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
-, TOP_DOWN_END_PRODUCTION ()
-// At index 46 : <select_oa_5F_parser_1>, in file 'oa_parser.ggs', line 22
-, TOP_DOWN_END_PRODUCTION ()
-// At index 47 : <select_oa_5F_parser_1>, in file 'oa_parser.ggs', line 22
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_scalingfactor) // $scalingfactor$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 50 : <select_oa_5F_parser_2>, in file 'oa_parser.ggs', line 35
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_can) // $can$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 52 : <select_oa_5F_parser_2>, in file 'oa_parser.ggs', line 35
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_van) // $van$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 54 : <select_oa_5F_parser_3>, in file 'oa_parser.ggs', line 45
-, TOP_DOWN_END_PRODUCTION ()
-// At index 55 : <select_oa_5F_parser_3>, in file 'oa_parser.ggs', line 45
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_scalingfactor) // $scalingfactor$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 58 : <select_oa_5F_parser_4>, in file 'oa_parser.ggs', line 67
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_offset) // $offset$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 61 : <select_oa_5F_parser_4>, in file 'oa_parser.ggs', line 67
-, TOP_DOWN_END_PRODUCTION ()
-// At index 62 : <select_oa_5F_parser_5>, in file 'oa_parser.ggs', line 76
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_deadline) // $deadline$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 65 : <select_oa_5F_parser_5>, in file 'oa_parser.ggs', line 76
-, TOP_DOWN_END_PRODUCTION ()
-// At index 66 : <select_oa_5F_parser_6>, in file 'oa_parser.ggs', line 85
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_period) // $period$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_processor) // $processor$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 71 : <select_oa_5F_parser_6>, in file 'oa_parser.ggs', line 85
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_on) // $on$
-, TOP_DOWN_NONTERMINAL (8) // <select_oa_5F_parser_7>
-, TOP_DOWN_END_PRODUCTION ()
-// At index 74 : <select_oa_5F_parser_7>, in file 'oa_parser.ggs', line 97
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_task) // $task$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
-, TOP_DOWN_NONTERMINAL (9) // <select_oa_5F_parser_8>
-, TOP_DOWN_END_PRODUCTION ()
-// At index 78 : <select_oa_5F_parser_7>, in file 'oa_parser.ggs', line 97
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_processor) // $processor$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
-, TOP_DOWN_NONTERMINAL (10) // <select_oa_5F_parser_9>
-, TOP_DOWN_END_PRODUCTION ()
-// At index 84 : <select_oa_5F_parser_8>, in file 'oa_parser.ggs', line 101
-, TOP_DOWN_END_PRODUCTION ()
-// At index 85 : <select_oa_5F_parser_8>, in file 'oa_parser.ggs', line 101
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_every) // $every$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 88 : <select_oa_5F_parser_9>, in file 'oa_parser.ggs', line 116
-, TOP_DOWN_END_PRODUCTION ()
-// At index 89 : <select_oa_5F_parser_9>, in file 'oa_parser.ggs', line 116
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_every) // $every$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 92 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_standard) // $standard$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 95 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_extended) // $extended$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 98 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 100 : <select_oa_5F_parser_11>, in file 'oa_parser.ggs', line 170
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_offset) // $offset$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 103 : <select_oa_5F_parser_11>, in file 'oa_parser.ggs', line 170
-, TOP_DOWN_END_PRODUCTION ()
-// At index 104 : <select_oa_5F_parser_12>, in file 'oa_parser.ggs', line 179
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_deadline) // $deadline$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 107 : <select_oa_5F_parser_12>, in file 'oa_parser.ggs', line 179
-, TOP_DOWN_END_PRODUCTION ()
-// At index 108 : <select_oa_5F_parser_13>, in file 'oa_parser.ggs', line 187
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_period) // $period$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 111 : <select_oa_5F_parser_13>, in file 'oa_parser.ggs', line 187
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_on) // $on$
-, TOP_DOWN_NONTERMINAL (15) // <select_oa_5F_parser_14>
-, TOP_DOWN_END_PRODUCTION ()
-// At index 114 : <select_oa_5F_parser_14>, in file 'oa_parser.ggs', line 196
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 117 : <select_oa_5F_parser_14>, in file 'oa_parser.ggs', line 196
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_task) // $task$
-, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
-, TOP_DOWN_END_PRODUCTION ()
-// At index 120 : <>, in file '.ggs', line 0
-, TOP_DOWN_NONTERMINAL (0) // <axiome>
-, TOP_DOWN_END_PRODUCTION ()
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                P R O D U C T I O N    N A M E S                                  
-//
-//--------------------------------------------------------------------------------------------------
-
-static const ProductionNameDescriptor gProductionNames_oa_grammar [36] = {
- {"<axiome>", "oa_parser", 0}, // at index 0
- {"<select_oa_5F_parser_0>", "oa_parser", 4}, // at index 1
- {"<select_oa_5F_parser_0>", "oa_parser", 5}, // at index 2
- {"<select_oa_5F_parser_0>", "oa_parser", 11}, // at index 3
- {"<select_oa_5F_parser_0>", "oa_parser", 18}, // at index 4
- {"<select_oa_5F_parser_0>", "oa_parser", 32}, // at index 5
- {"<select_oa_5F_parser_1>", "oa_parser", 46}, // at index 6
- {"<select_oa_5F_parser_1>", "oa_parser", 47}, // at index 7
- {"<select_oa_5F_parser_2>", "oa_parser", 50}, // at index 8
- {"<select_oa_5F_parser_2>", "oa_parser", 52}, // at index 9
- {"<select_oa_5F_parser_3>", "oa_parser", 54}, // at index 10
- {"<select_oa_5F_parser_3>", "oa_parser", 55}, // at index 11
- {"<select_oa_5F_parser_4>", "oa_parser", 58}, // at index 12
- {"<select_oa_5F_parser_4>", "oa_parser", 61}, // at index 13
- {"<select_oa_5F_parser_5>", "oa_parser", 62}, // at index 14
- {"<select_oa_5F_parser_5>", "oa_parser", 65}, // at index 15
- {"<select_oa_5F_parser_6>", "oa_parser", 66}, // at index 16
- {"<select_oa_5F_parser_6>", "oa_parser", 71}, // at index 17
- {"<select_oa_5F_parser_7>", "oa_parser", 74}, // at index 18
- {"<select_oa_5F_parser_7>", "oa_parser", 78}, // at index 19
- {"<select_oa_5F_parser_8>", "oa_parser", 84}, // at index 20
- {"<select_oa_5F_parser_8>", "oa_parser", 85}, // at index 21
- {"<select_oa_5F_parser_9>", "oa_parser", 88}, // at index 22
- {"<select_oa_5F_parser_9>", "oa_parser", 89}, // at index 23
- {"<select_oa_5F_parser_10>", "oa_parser", 92}, // at index 24
- {"<select_oa_5F_parser_10>", "oa_parser", 95}, // at index 25
- {"<select_oa_5F_parser_10>", "oa_parser", 98}, // at index 26
- {"<select_oa_5F_parser_11>", "oa_parser", 100}, // at index 27
- {"<select_oa_5F_parser_11>", "oa_parser", 103}, // at index 28
- {"<select_oa_5F_parser_12>", "oa_parser", 104}, // at index 29
- {"<select_oa_5F_parser_12>", "oa_parser", 107}, // at index 30
- {"<select_oa_5F_parser_13>", "oa_parser", 108}, // at index 31
- {"<select_oa_5F_parser_13>", "oa_parser", 111}, // at index 32
- {"<select_oa_5F_parser_14>", "oa_parser", 114}, // at index 33
- {"<select_oa_5F_parser_14>", "oa_parser", 117}, // at index 34
- {"<>", "", 120} // at index 35
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                       L L ( 1 )    P R O D U C T I O N    I N D E X E S                          
-//
-//--------------------------------------------------------------------------------------------------
-
-static const int32_t gProductionIndexes_oa_grammar [36] = {
-0, // index 0 : <axiome>, in file 'oa_parser.ggs', line 11
-4, // index 1 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-5, // index 2 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-11, // index 3 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-18, // index 4 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-32, // index 5 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-46, // index 6 : <select_oa_5F_parser_1>, in file 'oa_parser.ggs', line 22
-47, // index 7 : <select_oa_5F_parser_1>, in file 'oa_parser.ggs', line 22
-50, // index 8 : <select_oa_5F_parser_2>, in file 'oa_parser.ggs', line 35
-52, // index 9 : <select_oa_5F_parser_2>, in file 'oa_parser.ggs', line 35
-54, // index 10 : <select_oa_5F_parser_3>, in file 'oa_parser.ggs', line 45
-55, // index 11 : <select_oa_5F_parser_3>, in file 'oa_parser.ggs', line 45
-58, // index 12 : <select_oa_5F_parser_4>, in file 'oa_parser.ggs', line 67
-61, // index 13 : <select_oa_5F_parser_4>, in file 'oa_parser.ggs', line 67
-62, // index 14 : <select_oa_5F_parser_5>, in file 'oa_parser.ggs', line 76
-65, // index 15 : <select_oa_5F_parser_5>, in file 'oa_parser.ggs', line 76
-66, // index 16 : <select_oa_5F_parser_6>, in file 'oa_parser.ggs', line 85
-71, // index 17 : <select_oa_5F_parser_6>, in file 'oa_parser.ggs', line 85
-74, // index 18 : <select_oa_5F_parser_7>, in file 'oa_parser.ggs', line 97
-78, // index 19 : <select_oa_5F_parser_7>, in file 'oa_parser.ggs', line 97
-84, // index 20 : <select_oa_5F_parser_8>, in file 'oa_parser.ggs', line 101
-85, // index 21 : <select_oa_5F_parser_8>, in file 'oa_parser.ggs', line 101
-88, // index 22 : <select_oa_5F_parser_9>, in file 'oa_parser.ggs', line 116
-89, // index 23 : <select_oa_5F_parser_9>, in file 'oa_parser.ggs', line 116
-92, // index 24 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
-95, // index 25 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
-98, // index 26 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
-100, // index 27 : <select_oa_5F_parser_11>, in file 'oa_parser.ggs', line 170
-103, // index 28 : <select_oa_5F_parser_11>, in file 'oa_parser.ggs', line 170
-104, // index 29 : <select_oa_5F_parser_12>, in file 'oa_parser.ggs', line 179
-107, // index 30 : <select_oa_5F_parser_12>, in file 'oa_parser.ggs', line 179
-108, // index 31 : <select_oa_5F_parser_13>, in file 'oa_parser.ggs', line 187
-111, // index 32 : <select_oa_5F_parser_13>, in file 'oa_parser.ggs', line 187
-114, // index 33 : <select_oa_5F_parser_14>, in file 'oa_parser.ggs', line 196
-117, // index 34 : <select_oa_5F_parser_14>, in file 'oa_parser.ggs', line 196
-120 // index 35 : <>, in file '.ggs', line 0
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                 L L ( 1 )    F I R S T    P R O D U C T I O N    I N D E X E S                   
-//
-//--------------------------------------------------------------------------------------------------
-
-static const int32_t gFirstProductionIndexes_oa_grammar [18] = {
-0, // at 0 : <axiome>
-1, // at 1 : <select_oa_5F_parser_0>
-6, // at 2 : <select_oa_5F_parser_1>
-8, // at 3 : <select_oa_5F_parser_2>
-10, // at 4 : <select_oa_5F_parser_3>
-12, // at 5 : <select_oa_5F_parser_4>
-14, // at 6 : <select_oa_5F_parser_5>
-16, // at 7 : <select_oa_5F_parser_6>
-18, // at 8 : <select_oa_5F_parser_7>
-20, // at 9 : <select_oa_5F_parser_8>
-22, // at 10 : <select_oa_5F_parser_9>
-24, // at 11 : <select_oa_5F_parser_10>
-27, // at 12 : <select_oa_5F_parser_11>
-29, // at 13 : <select_oa_5F_parser_12>
-31, // at 14 : <select_oa_5F_parser_13>
-33, // at 15 : <select_oa_5F_parser_14>
-35, // at 16 : <>
-0} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                          L L ( 1 )    D E C I S I O N    T A B L E S                             
-//
-//--------------------------------------------------------------------------------------------------
-
-static const int32_t gDecision_oa_grammar [] = {
-// At index 0 : <axiome> only one production, no choice
-  -1,
-//---- Added non terminal symbols from 'select' and 'repeat' instructions
-// At index 1 : <select_oa_5F_parser_0>
-Lexique_oa_5F_scanner::kToken_end, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_processor, -1, // Choice 2
-Lexique_oa_5F_scanner::kToken_can, Lexique_oa_5F_scanner::kToken_van, -1, // Choice 3
-Lexique_oa_5F_scanner::kToken_task, -1, // Choice 4
-Lexique_oa_5F_scanner::kToken_message, Lexique_oa_5F_scanner::kToken_standard, Lexique_oa_5F_scanner::kToken_extended, -1, // Choice 5
-  -1,
-// At index 15 : <select_oa_5F_parser_1>
-Lexique_oa_5F_scanner::kToken__3B_, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_scalingfactor, -1, // Choice 2
-  -1,
-// At index 20 : <select_oa_5F_parser_2>
-Lexique_oa_5F_scanner::kToken_can, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_van, -1, // Choice 2
-  -1,
-// At index 25 : <select_oa_5F_parser_3>
-Lexique_oa_5F_scanner::kToken__3B_, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_scalingfactor, -1, // Choice 2
-  -1,
-// At index 30 : <select_oa_5F_parser_4>
-Lexique_oa_5F_scanner::kToken_offset, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_deadline, Lexique_oa_5F_scanner::kToken_period, Lexique_oa_5F_scanner::kToken_on, -1, // Choice 2
-  -1,
-// At index 37 : <select_oa_5F_parser_5>
-Lexique_oa_5F_scanner::kToken_deadline, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_period, Lexique_oa_5F_scanner::kToken_on, -1, // Choice 2
-  -1,
-// At index 43 : <select_oa_5F_parser_6>
-Lexique_oa_5F_scanner::kToken_period, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_on, -1, // Choice 2
-  -1,
-// At index 48 : <select_oa_5F_parser_7>
-Lexique_oa_5F_scanner::kToken_task, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_message, -1, // Choice 2
-  -1,
-// At index 53 : <select_oa_5F_parser_8>
-Lexique_oa_5F_scanner::kToken__3B_, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_every, -1, // Choice 2
-  -1,
-// At index 58 : <select_oa_5F_parser_9>
-Lexique_oa_5F_scanner::kToken__3B_, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_every, -1, // Choice 2
-  -1,
-// At index 63 : <select_oa_5F_parser_10>
-Lexique_oa_5F_scanner::kToken_standard, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_extended, -1, // Choice 2
-Lexique_oa_5F_scanner::kToken_message, -1, // Choice 3
-  -1,
-// At index 70 : <select_oa_5F_parser_11>
-Lexique_oa_5F_scanner::kToken_offset, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_deadline, Lexique_oa_5F_scanner::kToken_period, Lexique_oa_5F_scanner::kToken_on, -1, // Choice 2
-  -1,
-// At index 77 : <select_oa_5F_parser_12>
-Lexique_oa_5F_scanner::kToken_deadline, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_period, Lexique_oa_5F_scanner::kToken_on, -1, // Choice 2
-  -1,
-// At index 83 : <select_oa_5F_parser_13>
-Lexique_oa_5F_scanner::kToken_period, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_on, -1, // Choice 2
-  -1,
-// At index 88 : <select_oa_5F_parser_14>
-Lexique_oa_5F_scanner::kToken_message, -1, // Choice 1
-Lexique_oa_5F_scanner::kToken_task, -1, // Choice 2
-  -1,
-// At index 93 : <> only one production, no choice
-  -1,
-0} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                  L L ( 1 )    D E C I S I O N    T A B L E S    I N D E X E S                    
-//
-//--------------------------------------------------------------------------------------------------
-
-static const int32_t gDecisionIndexes_oa_grammar [18] = {
-0, // at 0 : <axiome>
-1, // at 1 : <select_oa_5F_parser_0>
-15, // at 2 : <select_oa_5F_parser_1>
-20, // at 3 : <select_oa_5F_parser_2>
-25, // at 4 : <select_oa_5F_parser_3>
-30, // at 5 : <select_oa_5F_parser_4>
-37, // at 6 : <select_oa_5F_parser_5>
-43, // at 7 : <select_oa_5F_parser_6>
-48, // at 8 : <select_oa_5F_parser_7>
-53, // at 9 : <select_oa_5F_parser_8>
-58, // at 10 : <select_oa_5F_parser_9>
-63, // at 11 : <select_oa_5F_parser_10>
-70, // at 12 : <select_oa_5F_parser_11>
-77, // at 13 : <select_oa_5F_parser_12>
-83, // at 14 : <select_oa_5F_parser_13>
-88, // at 15 : <select_oa_5F_parser_14>
-93, // at 16 : <>
-0} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                              'axiome' non terminal implementation                                
-//
-//--------------------------------------------------------------------------------------------------
-
-void cGrammar_oa_5F_grammar::nt_axiome_indexing (Lexique_oa_5F_scanner * inLexique) {
-  rule_oa_5F_parser_axiome_i0_indexing(inLexique) ;
-}
-
-void cGrammar_oa_5F_grammar::nt_axiome_ (Lexique_oa_5F_scanner * inLexique) {
-  rule_oa_5F_parser_axiome_i0_(inLexique) ;
-}
-
-void cGrammar_oa_5F_grammar::performIndexing (Compiler * inCompiler,
-             const String & inSourceFilePath) {
-  Lexique_oa_5F_scanner * scanner = nullptr ;
-  macroMyNew (scanner, Lexique_oa_5F_scanner (inCompiler, inSourceFilePath COMMA_HERE)) ;
-  scanner->enableIndexing () ;
-  if (scanner->sourceText ().isValid ()) {
-    const bool ok = scanner->performTopDownParsing (gProductions_oa_grammar, gProductionNames_oa_grammar, gProductionIndexes_oa_grammar,
-                                                    gFirstProductionIndexes_oa_grammar, gDecision_oa_grammar, gDecisionIndexes_oa_grammar, 120) ;
-    if (ok) {
-      cGrammar_oa_5F_grammar grammar ;
-      grammar.nt_axiome_indexing (scanner) ;
-    }
-    scanner->generateIndexFile () ;
-  }
-  macroDetachSharedObject (scanner) ;
-}
-
-void cGrammar_oa_5F_grammar::performOnlyLexicalAnalysis (Compiler * inCompiler,
-             const String & inSourceFilePath) {
-  Lexique_oa_5F_scanner * scanner = nullptr ;
-  macroMyNew (scanner, Lexique_oa_5F_scanner (inCompiler, inSourceFilePath COMMA_HERE)) ;
-  if (scanner->sourceText ().isValid ()) {
-    scanner->performLexicalAnalysis () ;
-  }
-  macroDetachSharedObject (scanner) ;
-}
-
-void cGrammar_oa_5F_grammar::performOnlySyntaxAnalysis (Compiler * inCompiler,
-             const String & inSourceFilePath) {
-  Lexique_oa_5F_scanner * scanner = nullptr ;
-  macroMyNew (scanner, Lexique_oa_5F_scanner (inCompiler, inSourceFilePath COMMA_HERE)) ;
-  if (scanner->sourceText ().isValid ()) {
-    scanner->performTopDownParsing (gProductions_oa_grammar, gProductionNames_oa_grammar, gProductionIndexes_oa_grammar,
-                                    gFirstProductionIndexes_oa_grammar, gDecision_oa_grammar, gDecisionIndexes_oa_grammar, 120) ;
-  }
-  macroDetachSharedObject (scanner) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                              Grammar start symbol implementation                                 
-//
-//--------------------------------------------------------------------------------------------------
-
-void cGrammar_oa_5F_grammar::_performSourceFileParsing_ (Compiler * inCompiler,
-                                GGS_lstring inFilePath
-                                COMMA_LOCATION_ARGS) {
-  if (inFilePath.isValid ()) {
-    const GGS_string filePathAsString = inFilePath.readProperty_string () ;
-    String filePath = filePathAsString.stringValue () ;
-    if (! FileManager::isAbsolutePath (filePath)) {
-      filePath = inCompiler->sourceFilePath ().deletingLastPathComponent ().appendingPathComponent (filePath) ;
-    }
-    if (FileManager::fileExistsAtPath (filePath)) {
-    Lexique_oa_5F_scanner * scanner = nullptr ;
-    macroMyNew (scanner, Lexique_oa_5F_scanner (inCompiler, filePath COMMA_HERE)) ;
-    if (scanner->sourceText ().isValid ()) {
-      const bool ok = scanner->performTopDownParsing (gProductions_oa_grammar, gProductionNames_oa_grammar, gProductionIndexes_oa_grammar,
-                                                      gFirstProductionIndexes_oa_grammar, gDecision_oa_grammar, gDecisionIndexes_oa_grammar, 120) ;
-      if (ok && ! executionModeIsSyntaxAnalysisOnly ()) {
-        cGrammar_oa_5F_grammar grammar ;
-        grammar.nt_axiome_ (scanner) ;
-        }
-      }else{
-        String message ;
-        message.appendString ("the '") ;
-        message.appendString (filePath) ;
-        message.appendString ("' file exists, but cannot be read") ;
-        const GGS_location errorLocation (inFilePath.readProperty_location ()) ;
-        inCompiler->semanticErrorAtLocation (errorLocation, message, GenericArray <FixItDescription> () COMMA_THERE) ;
-      }
-      macroDetachSharedObject (scanner) ;
-    }else{
-      String message ;
-      message.appendString ("the '") ;
-      message.appendString (filePath) ;
-      message.appendString ("' file does not exist") ;
-      const GGS_location errorLocation (inFilePath.readProperty_location ()) ;
-      inCompiler->semanticErrorAtLocation (errorLocation, message, GenericArray <FixItDescription> () COMMA_THERE) ;
-    }
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void cGrammar_oa_5F_grammar::_performSourceStringParsing_ (Compiler * inCompiler,
-                                GGS_string inSourceString,
-                                GGS_string inNameString
-                                COMMA_UNUSED_LOCATION_ARGS) {
-  if (inSourceString.isValid () && inNameString.isValid ()) {
-    const String sourceString = inSourceString.stringValue () ;
-    const String nameString = inNameString.stringValue () ;
-    Lexique_oa_5F_scanner * scanner = nullptr ;
-    macroMyNew (scanner, Lexique_oa_5F_scanner (inCompiler, sourceString, nameString COMMA_HERE)) ;
-    const bool ok = scanner->performTopDownParsing (gProductions_oa_grammar, gProductionNames_oa_grammar, gProductionIndexes_oa_grammar,
-                                                    gFirstProductionIndexes_oa_grammar, gDecision_oa_grammar, gDecisionIndexes_oa_grammar, 120) ;
-    if (ok && ! executionModeIsSyntaxAnalysisOnly ()) {
-      cGrammar_oa_5F_grammar grammar ;
-      grammar.nt_axiome_ (scanner) ;
-    }
-    macroDetachSharedObject (scanner) ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_0' added non terminal implementation                      
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_0 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_1' added non terminal implementation                      
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_1 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_2' added non terminal implementation                      
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_2 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_3' added non terminal implementation                      
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_3 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_4' added non terminal implementation                      
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_4 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_5' added non terminal implementation                      
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_5 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_6' added non terminal implementation                      
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_6 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_7' added non terminal implementation                      
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_7 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_8' added non terminal implementation                      
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_8 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_9' added non terminal implementation                      
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_9 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_10' added non terminal implementation                     
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_10 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_11' added non terminal implementation                     
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_11 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_12' added non terminal implementation                     
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_12 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_13' added non terminal implementation                     
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_13 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//                   'select_oa_5F_parser_14' added non terminal implementation                     
-//
-//--------------------------------------------------------------------------------------------------
-
-int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_14 (Lexique_oa_5F_scanner * inLexique) {
-  return inLexique->nextProductionIndex () ;
-}
-
-//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9185,6 +8517,674 @@ GGS_M_5F_tasks_2E_element_3F_ GGS_M_5F_tasks_2E_element_3F_::extractObject (cons
 }
 
 //--------------------------------------------------------------------------------------------------
+
+#include "MF_MemoryControl.h"
+#include "C_galgas_CLI_Options.h"
+
+#include "FileManager.h"
+
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//                                     LL(1) PRODUCTION RULES                                       
+//
+//--------------------------------------------------------------------------------------------------
+
+static const int32_t gProductions_oa_grammar [] = {
+// At index 0 : <axiome>, in file 'oa_parser.ggs', line 11
+  TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_system) // $system$
+, TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_end) // $end$
+, TOP_DOWN_END_PRODUCTION ()
+//---- Added productions from 'select' and 'repeat' instructions
+// At index 4 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+, TOP_DOWN_END_PRODUCTION ()
+// At index 5 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_processor) // $processor$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
+, TOP_DOWN_NONTERMINAL (2) // <select_oa_5F_parser_1>
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__3B_) // $;$
+, TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
+, TOP_DOWN_END_PRODUCTION ()
+// At index 11 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+, TOP_DOWN_NONTERMINAL (3) // <select_oa_5F_parser_2>
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_network) // $network$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
+, TOP_DOWN_NONTERMINAL (4) // <select_oa_5F_parser_3>
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__3B_) // $;$
+, TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
+, TOP_DOWN_END_PRODUCTION ()
+// At index 18 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_task) // $task$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_priority) // $priority$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_duration) // $duration$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__2E__2E_) // $..$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_NONTERMINAL (5) // <select_oa_5F_parser_4>
+, TOP_DOWN_NONTERMINAL (6) // <select_oa_5F_parser_5>
+, TOP_DOWN_NONTERMINAL (7) // <select_oa_5F_parser_6>
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__3B_) // $;$
+, TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
+, TOP_DOWN_END_PRODUCTION ()
+// At index 32 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+, TOP_DOWN_NONTERMINAL (11) // <select_oa_5F_parser_10>
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_network) // $network$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_length) // $length$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_priority) // $priority$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_NONTERMINAL (12) // <select_oa_5F_parser_11>
+, TOP_DOWN_NONTERMINAL (13) // <select_oa_5F_parser_12>
+, TOP_DOWN_NONTERMINAL (14) // <select_oa_5F_parser_13>
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__3B_) // $;$
+, TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
+, TOP_DOWN_END_PRODUCTION ()
+// At index 46 : <select_oa_5F_parser_1>, in file 'oa_parser.ggs', line 22
+, TOP_DOWN_END_PRODUCTION ()
+// At index 47 : <select_oa_5F_parser_1>, in file 'oa_parser.ggs', line 22
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_scalingfactor) // $scalingfactor$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 50 : <select_oa_5F_parser_2>, in file 'oa_parser.ggs', line 35
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_can) // $can$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 52 : <select_oa_5F_parser_2>, in file 'oa_parser.ggs', line 35
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_van) // $van$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 54 : <select_oa_5F_parser_3>, in file 'oa_parser.ggs', line 45
+, TOP_DOWN_END_PRODUCTION ()
+// At index 55 : <select_oa_5F_parser_3>, in file 'oa_parser.ggs', line 45
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_scalingfactor) // $scalingfactor$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 58 : <select_oa_5F_parser_4>, in file 'oa_parser.ggs', line 67
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_offset) // $offset$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 61 : <select_oa_5F_parser_4>, in file 'oa_parser.ggs', line 67
+, TOP_DOWN_END_PRODUCTION ()
+// At index 62 : <select_oa_5F_parser_5>, in file 'oa_parser.ggs', line 76
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_deadline) // $deadline$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 65 : <select_oa_5F_parser_5>, in file 'oa_parser.ggs', line 76
+, TOP_DOWN_END_PRODUCTION ()
+// At index 66 : <select_oa_5F_parser_6>, in file 'oa_parser.ggs', line 85
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_period) // $period$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_processor) // $processor$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 71 : <select_oa_5F_parser_6>, in file 'oa_parser.ggs', line 85
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_on) // $on$
+, TOP_DOWN_NONTERMINAL (8) // <select_oa_5F_parser_7>
+, TOP_DOWN_END_PRODUCTION ()
+// At index 74 : <select_oa_5F_parser_7>, in file 'oa_parser.ggs', line 97
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_task) // $task$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
+, TOP_DOWN_NONTERMINAL (9) // <select_oa_5F_parser_8>
+, TOP_DOWN_END_PRODUCTION ()
+// At index 78 : <select_oa_5F_parser_7>, in file 'oa_parser.ggs', line 97
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_processor) // $processor$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
+, TOP_DOWN_NONTERMINAL (10) // <select_oa_5F_parser_9>
+, TOP_DOWN_END_PRODUCTION ()
+// At index 84 : <select_oa_5F_parser_8>, in file 'oa_parser.ggs', line 101
+, TOP_DOWN_END_PRODUCTION ()
+// At index 85 : <select_oa_5F_parser_8>, in file 'oa_parser.ggs', line 101
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_every) // $every$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 88 : <select_oa_5F_parser_9>, in file 'oa_parser.ggs', line 116
+, TOP_DOWN_END_PRODUCTION ()
+// At index 89 : <select_oa_5F_parser_9>, in file 'oa_parser.ggs', line 116
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_every) // $every$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 92 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_standard) // $standard$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 95 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_extended) // $extended$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 98 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 100 : <select_oa_5F_parser_11>, in file 'oa_parser.ggs', line 170
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_offset) // $offset$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 103 : <select_oa_5F_parser_11>, in file 'oa_parser.ggs', line 170
+, TOP_DOWN_END_PRODUCTION ()
+// At index 104 : <select_oa_5F_parser_12>, in file 'oa_parser.ggs', line 179
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_deadline) // $deadline$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 107 : <select_oa_5F_parser_12>, in file 'oa_parser.ggs', line 179
+, TOP_DOWN_END_PRODUCTION ()
+// At index 108 : <select_oa_5F_parser_13>, in file 'oa_parser.ggs', line 187
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_period) // $period$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 111 : <select_oa_5F_parser_13>, in file 'oa_parser.ggs', line 187
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_on) // $on$
+, TOP_DOWN_NONTERMINAL (15) // <select_oa_5F_parser_14>
+, TOP_DOWN_END_PRODUCTION ()
+// At index 114 : <select_oa_5F_parser_14>, in file 'oa_parser.ggs', line 196
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 117 : <select_oa_5F_parser_14>, in file 'oa_parser.ggs', line 196
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_task) // $task$
+, TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
+, TOP_DOWN_END_PRODUCTION ()
+// At index 120 : <>, in file '.ggs', line 0
+, TOP_DOWN_NONTERMINAL (0) // <axiome>
+, TOP_DOWN_END_PRODUCTION ()
+} ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//                                P R O D U C T I O N    N A M E S                                  
+//
+//--------------------------------------------------------------------------------------------------
+
+static const ProductionNameDescriptor gProductionNames_oa_grammar [36] = {
+ {"<axiome>", "oa_parser", 0}, // at index 0
+ {"<select_oa_5F_parser_0>", "oa_parser", 4}, // at index 1
+ {"<select_oa_5F_parser_0>", "oa_parser", 5}, // at index 2
+ {"<select_oa_5F_parser_0>", "oa_parser", 11}, // at index 3
+ {"<select_oa_5F_parser_0>", "oa_parser", 18}, // at index 4
+ {"<select_oa_5F_parser_0>", "oa_parser", 32}, // at index 5
+ {"<select_oa_5F_parser_1>", "oa_parser", 46}, // at index 6
+ {"<select_oa_5F_parser_1>", "oa_parser", 47}, // at index 7
+ {"<select_oa_5F_parser_2>", "oa_parser", 50}, // at index 8
+ {"<select_oa_5F_parser_2>", "oa_parser", 52}, // at index 9
+ {"<select_oa_5F_parser_3>", "oa_parser", 54}, // at index 10
+ {"<select_oa_5F_parser_3>", "oa_parser", 55}, // at index 11
+ {"<select_oa_5F_parser_4>", "oa_parser", 58}, // at index 12
+ {"<select_oa_5F_parser_4>", "oa_parser", 61}, // at index 13
+ {"<select_oa_5F_parser_5>", "oa_parser", 62}, // at index 14
+ {"<select_oa_5F_parser_5>", "oa_parser", 65}, // at index 15
+ {"<select_oa_5F_parser_6>", "oa_parser", 66}, // at index 16
+ {"<select_oa_5F_parser_6>", "oa_parser", 71}, // at index 17
+ {"<select_oa_5F_parser_7>", "oa_parser", 74}, // at index 18
+ {"<select_oa_5F_parser_7>", "oa_parser", 78}, // at index 19
+ {"<select_oa_5F_parser_8>", "oa_parser", 84}, // at index 20
+ {"<select_oa_5F_parser_8>", "oa_parser", 85}, // at index 21
+ {"<select_oa_5F_parser_9>", "oa_parser", 88}, // at index 22
+ {"<select_oa_5F_parser_9>", "oa_parser", 89}, // at index 23
+ {"<select_oa_5F_parser_10>", "oa_parser", 92}, // at index 24
+ {"<select_oa_5F_parser_10>", "oa_parser", 95}, // at index 25
+ {"<select_oa_5F_parser_10>", "oa_parser", 98}, // at index 26
+ {"<select_oa_5F_parser_11>", "oa_parser", 100}, // at index 27
+ {"<select_oa_5F_parser_11>", "oa_parser", 103}, // at index 28
+ {"<select_oa_5F_parser_12>", "oa_parser", 104}, // at index 29
+ {"<select_oa_5F_parser_12>", "oa_parser", 107}, // at index 30
+ {"<select_oa_5F_parser_13>", "oa_parser", 108}, // at index 31
+ {"<select_oa_5F_parser_13>", "oa_parser", 111}, // at index 32
+ {"<select_oa_5F_parser_14>", "oa_parser", 114}, // at index 33
+ {"<select_oa_5F_parser_14>", "oa_parser", 117}, // at index 34
+ {"<>", "", 120} // at index 35
+} ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//                       L L ( 1 )    P R O D U C T I O N    I N D E X E S                          
+//
+//--------------------------------------------------------------------------------------------------
+
+static const int32_t gProductionIndexes_oa_grammar [36] = {
+0, // index 0 : <axiome>, in file 'oa_parser.ggs', line 11
+4, // index 1 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+5, // index 2 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+11, // index 3 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+18, // index 4 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+32, // index 5 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+46, // index 6 : <select_oa_5F_parser_1>, in file 'oa_parser.ggs', line 22
+47, // index 7 : <select_oa_5F_parser_1>, in file 'oa_parser.ggs', line 22
+50, // index 8 : <select_oa_5F_parser_2>, in file 'oa_parser.ggs', line 35
+52, // index 9 : <select_oa_5F_parser_2>, in file 'oa_parser.ggs', line 35
+54, // index 10 : <select_oa_5F_parser_3>, in file 'oa_parser.ggs', line 45
+55, // index 11 : <select_oa_5F_parser_3>, in file 'oa_parser.ggs', line 45
+58, // index 12 : <select_oa_5F_parser_4>, in file 'oa_parser.ggs', line 67
+61, // index 13 : <select_oa_5F_parser_4>, in file 'oa_parser.ggs', line 67
+62, // index 14 : <select_oa_5F_parser_5>, in file 'oa_parser.ggs', line 76
+65, // index 15 : <select_oa_5F_parser_5>, in file 'oa_parser.ggs', line 76
+66, // index 16 : <select_oa_5F_parser_6>, in file 'oa_parser.ggs', line 85
+71, // index 17 : <select_oa_5F_parser_6>, in file 'oa_parser.ggs', line 85
+74, // index 18 : <select_oa_5F_parser_7>, in file 'oa_parser.ggs', line 97
+78, // index 19 : <select_oa_5F_parser_7>, in file 'oa_parser.ggs', line 97
+84, // index 20 : <select_oa_5F_parser_8>, in file 'oa_parser.ggs', line 101
+85, // index 21 : <select_oa_5F_parser_8>, in file 'oa_parser.ggs', line 101
+88, // index 22 : <select_oa_5F_parser_9>, in file 'oa_parser.ggs', line 116
+89, // index 23 : <select_oa_5F_parser_9>, in file 'oa_parser.ggs', line 116
+92, // index 24 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
+95, // index 25 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
+98, // index 26 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
+100, // index 27 : <select_oa_5F_parser_11>, in file 'oa_parser.ggs', line 170
+103, // index 28 : <select_oa_5F_parser_11>, in file 'oa_parser.ggs', line 170
+104, // index 29 : <select_oa_5F_parser_12>, in file 'oa_parser.ggs', line 179
+107, // index 30 : <select_oa_5F_parser_12>, in file 'oa_parser.ggs', line 179
+108, // index 31 : <select_oa_5F_parser_13>, in file 'oa_parser.ggs', line 187
+111, // index 32 : <select_oa_5F_parser_13>, in file 'oa_parser.ggs', line 187
+114, // index 33 : <select_oa_5F_parser_14>, in file 'oa_parser.ggs', line 196
+117, // index 34 : <select_oa_5F_parser_14>, in file 'oa_parser.ggs', line 196
+120 // index 35 : <>, in file '.ggs', line 0
+} ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//                 L L ( 1 )    F I R S T    P R O D U C T I O N    I N D E X E S                   
+//
+//--------------------------------------------------------------------------------------------------
+
+static const int32_t gFirstProductionIndexes_oa_grammar [18] = {
+0, // at 0 : <axiome>
+1, // at 1 : <select_oa_5F_parser_0>
+6, // at 2 : <select_oa_5F_parser_1>
+8, // at 3 : <select_oa_5F_parser_2>
+10, // at 4 : <select_oa_5F_parser_3>
+12, // at 5 : <select_oa_5F_parser_4>
+14, // at 6 : <select_oa_5F_parser_5>
+16, // at 7 : <select_oa_5F_parser_6>
+18, // at 8 : <select_oa_5F_parser_7>
+20, // at 9 : <select_oa_5F_parser_8>
+22, // at 10 : <select_oa_5F_parser_9>
+24, // at 11 : <select_oa_5F_parser_10>
+27, // at 12 : <select_oa_5F_parser_11>
+29, // at 13 : <select_oa_5F_parser_12>
+31, // at 14 : <select_oa_5F_parser_13>
+33, // at 15 : <select_oa_5F_parser_14>
+35, // at 16 : <>
+0} ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//                          L L ( 1 )    D E C I S I O N    T A B L E S                             
+//
+//--------------------------------------------------------------------------------------------------
+
+static const int32_t gDecision_oa_grammar [] = {
+// At index 0 : <axiome> only one production, no choice
+  -1,
+//---- Added non terminal symbols from 'select' and 'repeat' instructions
+// At index 1 : <select_oa_5F_parser_0>
+Lexique_oa_5F_scanner::kToken_end, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_processor, -1, // Choice 2
+Lexique_oa_5F_scanner::kToken_can, Lexique_oa_5F_scanner::kToken_van, -1, // Choice 3
+Lexique_oa_5F_scanner::kToken_task, -1, // Choice 4
+Lexique_oa_5F_scanner::kToken_message, Lexique_oa_5F_scanner::kToken_standard, Lexique_oa_5F_scanner::kToken_extended, -1, // Choice 5
+  -1,
+// At index 15 : <select_oa_5F_parser_1>
+Lexique_oa_5F_scanner::kToken__3B_, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_scalingfactor, -1, // Choice 2
+  -1,
+// At index 20 : <select_oa_5F_parser_2>
+Lexique_oa_5F_scanner::kToken_can, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_van, -1, // Choice 2
+  -1,
+// At index 25 : <select_oa_5F_parser_3>
+Lexique_oa_5F_scanner::kToken__3B_, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_scalingfactor, -1, // Choice 2
+  -1,
+// At index 30 : <select_oa_5F_parser_4>
+Lexique_oa_5F_scanner::kToken_offset, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_deadline, Lexique_oa_5F_scanner::kToken_period, Lexique_oa_5F_scanner::kToken_on, -1, // Choice 2
+  -1,
+// At index 37 : <select_oa_5F_parser_5>
+Lexique_oa_5F_scanner::kToken_deadline, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_period, Lexique_oa_5F_scanner::kToken_on, -1, // Choice 2
+  -1,
+// At index 43 : <select_oa_5F_parser_6>
+Lexique_oa_5F_scanner::kToken_period, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_on, -1, // Choice 2
+  -1,
+// At index 48 : <select_oa_5F_parser_7>
+Lexique_oa_5F_scanner::kToken_task, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_message, -1, // Choice 2
+  -1,
+// At index 53 : <select_oa_5F_parser_8>
+Lexique_oa_5F_scanner::kToken__3B_, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_every, -1, // Choice 2
+  -1,
+// At index 58 : <select_oa_5F_parser_9>
+Lexique_oa_5F_scanner::kToken__3B_, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_every, -1, // Choice 2
+  -1,
+// At index 63 : <select_oa_5F_parser_10>
+Lexique_oa_5F_scanner::kToken_standard, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_extended, -1, // Choice 2
+Lexique_oa_5F_scanner::kToken_message, -1, // Choice 3
+  -1,
+// At index 70 : <select_oa_5F_parser_11>
+Lexique_oa_5F_scanner::kToken_offset, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_deadline, Lexique_oa_5F_scanner::kToken_period, Lexique_oa_5F_scanner::kToken_on, -1, // Choice 2
+  -1,
+// At index 77 : <select_oa_5F_parser_12>
+Lexique_oa_5F_scanner::kToken_deadline, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_period, Lexique_oa_5F_scanner::kToken_on, -1, // Choice 2
+  -1,
+// At index 83 : <select_oa_5F_parser_13>
+Lexique_oa_5F_scanner::kToken_period, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_on, -1, // Choice 2
+  -1,
+// At index 88 : <select_oa_5F_parser_14>
+Lexique_oa_5F_scanner::kToken_message, -1, // Choice 1
+Lexique_oa_5F_scanner::kToken_task, -1, // Choice 2
+  -1,
+// At index 93 : <> only one production, no choice
+  -1,
+0} ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//                  L L ( 1 )    D E C I S I O N    T A B L E S    I N D E X E S                    
+//
+//--------------------------------------------------------------------------------------------------
+
+static const int32_t gDecisionIndexes_oa_grammar [18] = {
+0, // at 0 : <axiome>
+1, // at 1 : <select_oa_5F_parser_0>
+15, // at 2 : <select_oa_5F_parser_1>
+20, // at 3 : <select_oa_5F_parser_2>
+25, // at 4 : <select_oa_5F_parser_3>
+30, // at 5 : <select_oa_5F_parser_4>
+37, // at 6 : <select_oa_5F_parser_5>
+43, // at 7 : <select_oa_5F_parser_6>
+48, // at 8 : <select_oa_5F_parser_7>
+53, // at 9 : <select_oa_5F_parser_8>
+58, // at 10 : <select_oa_5F_parser_9>
+63, // at 11 : <select_oa_5F_parser_10>
+70, // at 12 : <select_oa_5F_parser_11>
+77, // at 13 : <select_oa_5F_parser_12>
+83, // at 14 : <select_oa_5F_parser_13>
+88, // at 15 : <select_oa_5F_parser_14>
+93, // at 16 : <>
+0} ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//                              'axiome' non terminal implementation                                
+//
+//--------------------------------------------------------------------------------------------------
+
+void cGrammar_oa_5F_grammar::nt_axiome_indexing (Lexique_oa_5F_scanner * inLexique) {
+  rule_oa_5F_parser_axiome_i0_indexing(inLexique) ;
+}
+
+void cGrammar_oa_5F_grammar::nt_axiome_ (Lexique_oa_5F_scanner * inLexique) {
+  rule_oa_5F_parser_axiome_i0_(inLexique) ;
+}
+
+void cGrammar_oa_5F_grammar::performIndexing (Compiler * inCompiler,
+             const String & inSourceFilePath) {
+  Lexique_oa_5F_scanner * scanner = nullptr ;
+  macroMyNew (scanner, Lexique_oa_5F_scanner (inCompiler, inSourceFilePath COMMA_HERE)) ;
+  scanner->enableIndexing () ;
+  if (scanner->sourceText ().isValid ()) {
+    const bool ok = scanner->performTopDownParsing (gProductions_oa_grammar, gProductionNames_oa_grammar, gProductionIndexes_oa_grammar,
+                                                    gFirstProductionIndexes_oa_grammar, gDecision_oa_grammar, gDecisionIndexes_oa_grammar, 120) ;
+    if (ok) {
+      cGrammar_oa_5F_grammar grammar ;
+      grammar.nt_axiome_indexing (scanner) ;
+    }
+    scanner->generateIndexFile () ;
+  }
+  macroDetachSharedObject (scanner) ;
+}
+
+void cGrammar_oa_5F_grammar::performOnlyLexicalAnalysis (Compiler * inCompiler,
+             const String & inSourceFilePath) {
+  Lexique_oa_5F_scanner * scanner = nullptr ;
+  macroMyNew (scanner, Lexique_oa_5F_scanner (inCompiler, inSourceFilePath COMMA_HERE)) ;
+  if (scanner->sourceText ().isValid ()) {
+    scanner->performLexicalAnalysis () ;
+  }
+  macroDetachSharedObject (scanner) ;
+}
+
+void cGrammar_oa_5F_grammar::performOnlySyntaxAnalysis (Compiler * inCompiler,
+             const String & inSourceFilePath) {
+  Lexique_oa_5F_scanner * scanner = nullptr ;
+  macroMyNew (scanner, Lexique_oa_5F_scanner (inCompiler, inSourceFilePath COMMA_HERE)) ;
+  if (scanner->sourceText ().isValid ()) {
+    scanner->performTopDownParsing (gProductions_oa_grammar, gProductionNames_oa_grammar, gProductionIndexes_oa_grammar,
+                                    gFirstProductionIndexes_oa_grammar, gDecision_oa_grammar, gDecisionIndexes_oa_grammar, 120) ;
+  }
+  macroDetachSharedObject (scanner) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                              Grammar start symbol implementation                                 
+//
+//--------------------------------------------------------------------------------------------------
+
+void cGrammar_oa_5F_grammar::_performSourceFileParsing_ (Compiler * inCompiler,
+                                GGS_lstring inFilePath
+                                COMMA_LOCATION_ARGS) {
+  if (inFilePath.isValid ()) {
+    const GGS_string filePathAsString = inFilePath.readProperty_string () ;
+    String filePath = filePathAsString.stringValue () ;
+    if (! FileManager::isAbsolutePath (filePath)) {
+      filePath = inCompiler->sourceFilePath ().deletingLastPathComponent ().appendingPathComponent (filePath) ;
+    }
+    if (FileManager::fileExistsAtPath (filePath)) {
+    Lexique_oa_5F_scanner * scanner = nullptr ;
+    macroMyNew (scanner, Lexique_oa_5F_scanner (inCompiler, filePath COMMA_HERE)) ;
+    if (scanner->sourceText ().isValid ()) {
+      const bool ok = scanner->performTopDownParsing (gProductions_oa_grammar, gProductionNames_oa_grammar, gProductionIndexes_oa_grammar,
+                                                      gFirstProductionIndexes_oa_grammar, gDecision_oa_grammar, gDecisionIndexes_oa_grammar, 120) ;
+      if (ok && ! executionModeIsSyntaxAnalysisOnly ()) {
+        cGrammar_oa_5F_grammar grammar ;
+        grammar.nt_axiome_ (scanner) ;
+        }
+      }else{
+        String message ;
+        message.appendString ("the '") ;
+        message.appendString (filePath) ;
+        message.appendString ("' file exists, but cannot be read") ;
+        const GGS_location errorLocation (inFilePath.readProperty_location ()) ;
+        inCompiler->semanticErrorAtLocation (errorLocation, message, GenericArray <FixItDescription> () COMMA_THERE) ;
+      }
+      macroDetachSharedObject (scanner) ;
+    }else{
+      String message ;
+      message.appendString ("the '") ;
+      message.appendString (filePath) ;
+      message.appendString ("' file does not exist") ;
+      const GGS_location errorLocation (inFilePath.readProperty_location ()) ;
+      inCompiler->semanticErrorAtLocation (errorLocation, message, GenericArray <FixItDescription> () COMMA_THERE) ;
+    }
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cGrammar_oa_5F_grammar::_performSourceStringParsing_ (Compiler * inCompiler,
+                                GGS_string inSourceString,
+                                GGS_string inNameString
+                                COMMA_UNUSED_LOCATION_ARGS) {
+  if (inSourceString.isValid () && inNameString.isValid ()) {
+    const String sourceString = inSourceString.stringValue () ;
+    const String nameString = inNameString.stringValue () ;
+    Lexique_oa_5F_scanner * scanner = nullptr ;
+    macroMyNew (scanner, Lexique_oa_5F_scanner (inCompiler, sourceString, nameString COMMA_HERE)) ;
+    const bool ok = scanner->performTopDownParsing (gProductions_oa_grammar, gProductionNames_oa_grammar, gProductionIndexes_oa_grammar,
+                                                    gFirstProductionIndexes_oa_grammar, gDecision_oa_grammar, gDecisionIndexes_oa_grammar, 120) ;
+    if (ok && ! executionModeIsSyntaxAnalysisOnly ()) {
+      cGrammar_oa_5F_grammar grammar ;
+      grammar.nt_axiome_ (scanner) ;
+    }
+    macroDetachSharedObject (scanner) ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_0' added non terminal implementation                      
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_0 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_1' added non terminal implementation                      
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_1 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_2' added non terminal implementation                      
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_2 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_3' added non terminal implementation                      
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_3 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_4' added non terminal implementation                      
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_4 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_5' added non terminal implementation                      
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_5 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_6' added non terminal implementation                      
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_6 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_7' added non terminal implementation                      
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_7 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_8' added non terminal implementation                      
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_8 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_9' added non terminal implementation                      
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_9 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_10' added non terminal implementation                     
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_10 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_11' added non terminal implementation                     
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_11 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_12' added non terminal implementation                     
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_12 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_13' added non terminal implementation                     
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_13 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//                   'select_oa_5F_parser_14' added non terminal implementation                     
+//
+//--------------------------------------------------------------------------------------------------
+
+int32_t cGrammar_oa_5F_grammar::select_oa_5F_parser_14 (Lexique_oa_5F_scanner * inLexique) {
+  return inLexique->nextProductionIndex () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------------
 //
 //                               Bool options                                                    
 //
@@ -9291,7 +9291,7 @@ static void routine_after (Compiler * /* inCompiler */
 static void routine_programRule_5F__30_ (const GGS_lstring constinArgument_inSourceFile,
                                          Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
-  cGrammar_oa_5F_grammar::_performSourceFileParsing_ (inCompiler, constinArgument_inSourceFile  COMMA_SOURCE_FILE ("oa_main.galgas", 11)) ;
+  cGrammar_oa_5F_grammar::_performSourceFileParsing_ (inCompiler, constinArgument_inSourceFile  COMMA_SOURCE_FILE ("oa_main.galgas3", 11)) ;
 }
 
 
