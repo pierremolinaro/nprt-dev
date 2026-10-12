@@ -8533,22 +8533,22 @@ GGS_M_5F_tasks_2E_element_3F_ GGS_M_5F_tasks_2E_element_3F_::extractObject (cons
 //--------------------------------------------------------------------------------------------------
 
 static const int32_t gProductions_oa_grammar [] = {
-// At index 0 : <axiome>, in file 'oa_parser.ggs', line 11
+// At index 0 : <axiome>, in file 'oa_parser.galgas', line 11
   TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_system) // $system$
 , TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_end) // $end$
 , TOP_DOWN_END_PRODUCTION ()
 //---- Added productions from 'select' and 'repeat' instructions
-// At index 4 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+// At index 4 : <select_oa_5F_parser_0>, in file 'oa_parser.galgas', line 17
 , TOP_DOWN_END_PRODUCTION ()
-// At index 5 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+// At index 5 : <select_oa_5F_parser_0>, in file 'oa_parser.galgas', line 17
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_processor) // $processor$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
 , TOP_DOWN_NONTERMINAL (2) // <select_oa_5F_parser_1>
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__3B_) // $;$
 , TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
 , TOP_DOWN_END_PRODUCTION ()
-// At index 11 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+// At index 11 : <select_oa_5F_parser_0>, in file 'oa_parser.galgas', line 17
 , TOP_DOWN_NONTERMINAL (3) // <select_oa_5F_parser_2>
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_network) // $network$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
@@ -8556,7 +8556,7 @@ static const int32_t gProductions_oa_grammar [] = {
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__3B_) // $;$
 , TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
 , TOP_DOWN_END_PRODUCTION ()
-// At index 18 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+// At index 18 : <select_oa_5F_parser_0>, in file 'oa_parser.galgas', line 17
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_task) // $task$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_priority) // $priority$
@@ -8571,7 +8571,7 @@ static const int32_t gProductions_oa_grammar [] = {
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__3B_) // $;$
 , TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
 , TOP_DOWN_END_PRODUCTION ()
-// At index 32 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
+// At index 32 : <select_oa_5F_parser_0>, in file 'oa_parser.galgas', line 17
 , TOP_DOWN_NONTERMINAL (11) // <select_oa_5F_parser_10>
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_network) // $network$
@@ -8586,110 +8586,110 @@ static const int32_t gProductions_oa_grammar [] = {
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken__3B_) // $;$
 , TOP_DOWN_NONTERMINAL (1) // <select_oa_5F_parser_0>
 , TOP_DOWN_END_PRODUCTION ()
-// At index 46 : <select_oa_5F_parser_1>, in file 'oa_parser.ggs', line 22
+// At index 46 : <select_oa_5F_parser_1>, in file 'oa_parser.galgas', line 22
 , TOP_DOWN_END_PRODUCTION ()
-// At index 47 : <select_oa_5F_parser_1>, in file 'oa_parser.ggs', line 22
+// At index 47 : <select_oa_5F_parser_1>, in file 'oa_parser.galgas', line 22
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_scalingfactor) // $scalingfactor$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 50 : <select_oa_5F_parser_2>, in file 'oa_parser.ggs', line 35
+// At index 50 : <select_oa_5F_parser_2>, in file 'oa_parser.galgas', line 35
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_can) // $can$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 52 : <select_oa_5F_parser_2>, in file 'oa_parser.ggs', line 35
+// At index 52 : <select_oa_5F_parser_2>, in file 'oa_parser.galgas', line 35
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_van) // $van$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 54 : <select_oa_5F_parser_3>, in file 'oa_parser.ggs', line 45
+// At index 54 : <select_oa_5F_parser_3>, in file 'oa_parser.galgas', line 45
 , TOP_DOWN_END_PRODUCTION ()
-// At index 55 : <select_oa_5F_parser_3>, in file 'oa_parser.ggs', line 45
+// At index 55 : <select_oa_5F_parser_3>, in file 'oa_parser.galgas', line 45
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_scalingfactor) // $scalingfactor$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 58 : <select_oa_5F_parser_4>, in file 'oa_parser.ggs', line 67
+// At index 58 : <select_oa_5F_parser_4>, in file 'oa_parser.galgas', line 67
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_offset) // $offset$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 61 : <select_oa_5F_parser_4>, in file 'oa_parser.ggs', line 67
+// At index 61 : <select_oa_5F_parser_4>, in file 'oa_parser.galgas', line 67
 , TOP_DOWN_END_PRODUCTION ()
-// At index 62 : <select_oa_5F_parser_5>, in file 'oa_parser.ggs', line 76
+// At index 62 : <select_oa_5F_parser_5>, in file 'oa_parser.galgas', line 76
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_deadline) // $deadline$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 65 : <select_oa_5F_parser_5>, in file 'oa_parser.ggs', line 76
+// At index 65 : <select_oa_5F_parser_5>, in file 'oa_parser.galgas', line 76
 , TOP_DOWN_END_PRODUCTION ()
-// At index 66 : <select_oa_5F_parser_6>, in file 'oa_parser.ggs', line 85
+// At index 66 : <select_oa_5F_parser_6>, in file 'oa_parser.galgas', line 85
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_period) // $period$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_processor) // $processor$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 71 : <select_oa_5F_parser_6>, in file 'oa_parser.ggs', line 85
+// At index 71 : <select_oa_5F_parser_6>, in file 'oa_parser.galgas', line 85
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_on) // $on$
 , TOP_DOWN_NONTERMINAL (8) // <select_oa_5F_parser_7>
 , TOP_DOWN_END_PRODUCTION ()
-// At index 74 : <select_oa_5F_parser_7>, in file 'oa_parser.ggs', line 97
+// At index 74 : <select_oa_5F_parser_7>, in file 'oa_parser.galgas', line 97
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_task) // $task$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
 , TOP_DOWN_NONTERMINAL (9) // <select_oa_5F_parser_8>
 , TOP_DOWN_END_PRODUCTION ()
-// At index 78 : <select_oa_5F_parser_7>, in file 'oa_parser.ggs', line 97
+// At index 78 : <select_oa_5F_parser_7>, in file 'oa_parser.galgas', line 97
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_processor) // $processor$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
 , TOP_DOWN_NONTERMINAL (10) // <select_oa_5F_parser_9>
 , TOP_DOWN_END_PRODUCTION ()
-// At index 84 : <select_oa_5F_parser_8>, in file 'oa_parser.ggs', line 101
+// At index 84 : <select_oa_5F_parser_8>, in file 'oa_parser.galgas', line 101
 , TOP_DOWN_END_PRODUCTION ()
-// At index 85 : <select_oa_5F_parser_8>, in file 'oa_parser.ggs', line 101
+// At index 85 : <select_oa_5F_parser_8>, in file 'oa_parser.galgas', line 101
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_every) // $every$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 88 : <select_oa_5F_parser_9>, in file 'oa_parser.ggs', line 116
+// At index 88 : <select_oa_5F_parser_9>, in file 'oa_parser.galgas', line 116
 , TOP_DOWN_END_PRODUCTION ()
-// At index 89 : <select_oa_5F_parser_9>, in file 'oa_parser.ggs', line 116
+// At index 89 : <select_oa_5F_parser_9>, in file 'oa_parser.galgas', line 116
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_every) // $every$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 92 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
+// At index 92 : <select_oa_5F_parser_10>, in file 'oa_parser.galgas', line 138
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_standard) // $standard$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 95 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
+// At index 95 : <select_oa_5F_parser_10>, in file 'oa_parser.galgas', line 138
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_extended) // $extended$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 98 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
+// At index 98 : <select_oa_5F_parser_10>, in file 'oa_parser.galgas', line 138
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 100 : <select_oa_5F_parser_11>, in file 'oa_parser.ggs', line 170
+// At index 100 : <select_oa_5F_parser_11>, in file 'oa_parser.galgas', line 170
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_offset) // $offset$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 103 : <select_oa_5F_parser_11>, in file 'oa_parser.ggs', line 170
+// At index 103 : <select_oa_5F_parser_11>, in file 'oa_parser.galgas', line 170
 , TOP_DOWN_END_PRODUCTION ()
-// At index 104 : <select_oa_5F_parser_12>, in file 'oa_parser.ggs', line 179
+// At index 104 : <select_oa_5F_parser_12>, in file 'oa_parser.galgas', line 179
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_deadline) // $deadline$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 107 : <select_oa_5F_parser_12>, in file 'oa_parser.ggs', line 179
+// At index 107 : <select_oa_5F_parser_12>, in file 'oa_parser.galgas', line 179
 , TOP_DOWN_END_PRODUCTION ()
-// At index 108 : <select_oa_5F_parser_13>, in file 'oa_parser.ggs', line 187
+// At index 108 : <select_oa_5F_parser_13>, in file 'oa_parser.galgas', line 187
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_period) // $period$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_literal_5F_integer) // $literal_integer$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 111 : <select_oa_5F_parser_13>, in file 'oa_parser.ggs', line 187
+// At index 111 : <select_oa_5F_parser_13>, in file 'oa_parser.galgas', line 187
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_on) // $on$
 , TOP_DOWN_NONTERMINAL (15) // <select_oa_5F_parser_14>
 , TOP_DOWN_END_PRODUCTION ()
-// At index 114 : <select_oa_5F_parser_14>, in file 'oa_parser.ggs', line 196
+// At index 114 : <select_oa_5F_parser_14>, in file 'oa_parser.galgas', line 196
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_message) // $message$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 117 : <select_oa_5F_parser_14>, in file 'oa_parser.ggs', line 196
+// At index 117 : <select_oa_5F_parser_14>, in file 'oa_parser.galgas', line 196
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_task) // $task$
 , TOP_DOWN_TERMINAL (Lexique_oa_5F_scanner::kToken_identifier) // $identifier$
 , TOP_DOWN_END_PRODUCTION ()
-// At index 120 : <>, in file '.ggs', line 0
+// At index 120 : <>, in file '.galgas', line 0
 , TOP_DOWN_NONTERMINAL (0) // <axiome>
 , TOP_DOWN_END_PRODUCTION ()
 } ;
@@ -8746,42 +8746,42 @@ static const ProductionNameDescriptor gProductionNames_oa_grammar [36] = {
 //--------------------------------------------------------------------------------------------------
 
 static const int32_t gProductionIndexes_oa_grammar [36] = {
-0, // index 0 : <axiome>, in file 'oa_parser.ggs', line 11
-4, // index 1 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-5, // index 2 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-11, // index 3 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-18, // index 4 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-32, // index 5 : <select_oa_5F_parser_0>, in file 'oa_parser.ggs', line 17
-46, // index 6 : <select_oa_5F_parser_1>, in file 'oa_parser.ggs', line 22
-47, // index 7 : <select_oa_5F_parser_1>, in file 'oa_parser.ggs', line 22
-50, // index 8 : <select_oa_5F_parser_2>, in file 'oa_parser.ggs', line 35
-52, // index 9 : <select_oa_5F_parser_2>, in file 'oa_parser.ggs', line 35
-54, // index 10 : <select_oa_5F_parser_3>, in file 'oa_parser.ggs', line 45
-55, // index 11 : <select_oa_5F_parser_3>, in file 'oa_parser.ggs', line 45
-58, // index 12 : <select_oa_5F_parser_4>, in file 'oa_parser.ggs', line 67
-61, // index 13 : <select_oa_5F_parser_4>, in file 'oa_parser.ggs', line 67
-62, // index 14 : <select_oa_5F_parser_5>, in file 'oa_parser.ggs', line 76
-65, // index 15 : <select_oa_5F_parser_5>, in file 'oa_parser.ggs', line 76
-66, // index 16 : <select_oa_5F_parser_6>, in file 'oa_parser.ggs', line 85
-71, // index 17 : <select_oa_5F_parser_6>, in file 'oa_parser.ggs', line 85
-74, // index 18 : <select_oa_5F_parser_7>, in file 'oa_parser.ggs', line 97
-78, // index 19 : <select_oa_5F_parser_7>, in file 'oa_parser.ggs', line 97
-84, // index 20 : <select_oa_5F_parser_8>, in file 'oa_parser.ggs', line 101
-85, // index 21 : <select_oa_5F_parser_8>, in file 'oa_parser.ggs', line 101
-88, // index 22 : <select_oa_5F_parser_9>, in file 'oa_parser.ggs', line 116
-89, // index 23 : <select_oa_5F_parser_9>, in file 'oa_parser.ggs', line 116
-92, // index 24 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
-95, // index 25 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
-98, // index 26 : <select_oa_5F_parser_10>, in file 'oa_parser.ggs', line 138
-100, // index 27 : <select_oa_5F_parser_11>, in file 'oa_parser.ggs', line 170
-103, // index 28 : <select_oa_5F_parser_11>, in file 'oa_parser.ggs', line 170
-104, // index 29 : <select_oa_5F_parser_12>, in file 'oa_parser.ggs', line 179
-107, // index 30 : <select_oa_5F_parser_12>, in file 'oa_parser.ggs', line 179
-108, // index 31 : <select_oa_5F_parser_13>, in file 'oa_parser.ggs', line 187
-111, // index 32 : <select_oa_5F_parser_13>, in file 'oa_parser.ggs', line 187
-114, // index 33 : <select_oa_5F_parser_14>, in file 'oa_parser.ggs', line 196
-117, // index 34 : <select_oa_5F_parser_14>, in file 'oa_parser.ggs', line 196
-120 // index 35 : <>, in file '.ggs', line 0
+0, // index 0 : <axiome>, in file 'oa_parser.galgas', line 11
+4, // index 1 : <select_oa_5F_parser_0>, in file 'oa_parser.galgas', line 17
+5, // index 2 : <select_oa_5F_parser_0>, in file 'oa_parser.galgas', line 17
+11, // index 3 : <select_oa_5F_parser_0>, in file 'oa_parser.galgas', line 17
+18, // index 4 : <select_oa_5F_parser_0>, in file 'oa_parser.galgas', line 17
+32, // index 5 : <select_oa_5F_parser_0>, in file 'oa_parser.galgas', line 17
+46, // index 6 : <select_oa_5F_parser_1>, in file 'oa_parser.galgas', line 22
+47, // index 7 : <select_oa_5F_parser_1>, in file 'oa_parser.galgas', line 22
+50, // index 8 : <select_oa_5F_parser_2>, in file 'oa_parser.galgas', line 35
+52, // index 9 : <select_oa_5F_parser_2>, in file 'oa_parser.galgas', line 35
+54, // index 10 : <select_oa_5F_parser_3>, in file 'oa_parser.galgas', line 45
+55, // index 11 : <select_oa_5F_parser_3>, in file 'oa_parser.galgas', line 45
+58, // index 12 : <select_oa_5F_parser_4>, in file 'oa_parser.galgas', line 67
+61, // index 13 : <select_oa_5F_parser_4>, in file 'oa_parser.galgas', line 67
+62, // index 14 : <select_oa_5F_parser_5>, in file 'oa_parser.galgas', line 76
+65, // index 15 : <select_oa_5F_parser_5>, in file 'oa_parser.galgas', line 76
+66, // index 16 : <select_oa_5F_parser_6>, in file 'oa_parser.galgas', line 85
+71, // index 17 : <select_oa_5F_parser_6>, in file 'oa_parser.galgas', line 85
+74, // index 18 : <select_oa_5F_parser_7>, in file 'oa_parser.galgas', line 97
+78, // index 19 : <select_oa_5F_parser_7>, in file 'oa_parser.galgas', line 97
+84, // index 20 : <select_oa_5F_parser_8>, in file 'oa_parser.galgas', line 101
+85, // index 21 : <select_oa_5F_parser_8>, in file 'oa_parser.galgas', line 101
+88, // index 22 : <select_oa_5F_parser_9>, in file 'oa_parser.galgas', line 116
+89, // index 23 : <select_oa_5F_parser_9>, in file 'oa_parser.galgas', line 116
+92, // index 24 : <select_oa_5F_parser_10>, in file 'oa_parser.galgas', line 138
+95, // index 25 : <select_oa_5F_parser_10>, in file 'oa_parser.galgas', line 138
+98, // index 26 : <select_oa_5F_parser_10>, in file 'oa_parser.galgas', line 138
+100, // index 27 : <select_oa_5F_parser_11>, in file 'oa_parser.galgas', line 170
+103, // index 28 : <select_oa_5F_parser_11>, in file 'oa_parser.galgas', line 170
+104, // index 29 : <select_oa_5F_parser_12>, in file 'oa_parser.galgas', line 179
+107, // index 30 : <select_oa_5F_parser_12>, in file 'oa_parser.galgas', line 179
+108, // index 31 : <select_oa_5F_parser_13>, in file 'oa_parser.galgas', line 187
+111, // index 32 : <select_oa_5F_parser_13>, in file 'oa_parser.galgas', line 187
+114, // index 33 : <select_oa_5F_parser_14>, in file 'oa_parser.galgas', line 196
+117, // index 34 : <select_oa_5F_parser_14>, in file 'oa_parser.galgas', line 196
+120 // index 35 : <>, in file '.galgas', line 0
 } ;
 
 //--------------------------------------------------------------------------------------------------
