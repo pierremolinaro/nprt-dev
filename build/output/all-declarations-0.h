@@ -307,7 +307,7 @@ class GGS__32_lstringlist_2E_element : public AC_GALGAS_root {
                                                                Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- Implementation of getter 'description'
+//--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
 
@@ -613,7 +613,7 @@ class GGS_M_5F_processor_2E_element : public AC_GALGAS_root {
                                                               Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- Implementation of getter 'description'
+//--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
 
@@ -1021,7 +1021,7 @@ class GGS_M_5F_network_2E_element : public AC_GALGAS_root {
                                                             Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- Implementation of getter 'description'
+//--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
 
@@ -2103,7 +2103,7 @@ class GGS_M_5F_messages_2E_element : public AC_GALGAS_root {
                                                              Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- Implementation of getter 'description'
+//--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
 
@@ -3193,7 +3193,7 @@ class GGS_M_5F_tasks_2E_element : public AC_GALGAS_root {
                                                           Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- Implementation of getter 'description'
+//--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
 
@@ -3339,7 +3339,7 @@ class Lexique_oa_5F_scanner : public Lexique {
   public: static GGS_stringlist symbols (LOCATION_ARGS) ;
 
 //--- Declaring a protected virtual destructor enables the compiler to raise
-//    an error if a direct delete is performed; only the static method
+//    an error if a direct delete is performed; only the static proc
 //    SharedObject::detachPointer may invoke delete.
   #ifndef DO_NOT_GENERATE_CHECKINGS
     protected: virtual ~ Lexique_oa_5F_scanner (void) { }
@@ -3379,7 +3379,7 @@ class Lexique_oa_5F_scanner : public Lexique {
 
 //--- Key words table 'delimitorsList'
   public: static int32_t search_into_delimitorsList (const String & inSearchedString) ;
-  
+
 
 //--- Assign from attribute
   public: GGS_lstring synthetizedAttribute_identifierString (void) const ;
