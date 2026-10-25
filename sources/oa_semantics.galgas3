@@ -78,8 +78,8 @@
   }
 
 extern proc performComputations
-  ?!@M_processor outProcessorMap
-  ?!@M_network outNetworkMap
-  ?!@M_messages outMessagesMap
-  ?!@M_tasks outTaskMap
+  (?!@M_processor outProcessorMap,
+  ?!@M_network outNetworkMap,
+  ?!@M_messages outMessagesMap,
+  ?!@M_tasks outTaskMap)
 
