@@ -20,7 +20,7 @@ rule <axiome> () {
     $identifier$ (?let processorName)
     let @luint step
     select
-     step = @luint ( !1, @location.here)
+     step = @luint ( 1, @location.here)
     or
       $scalingfactor$
       $literal_integer$ (? step)
@@ -28,7 +28,7 @@ rule <axiome> () {
         error (step : "the step value must be > 0")
       end
     end
-    !?outProcessorMap.insertKey (!processorName, !outProcessorMap.count, !step)
+    !?outProcessorMap.insertKey (processorName, outProcessorMap.count, step)
     $;$
   while
     let @bool network
@@ -43,7 +43,7 @@ rule <axiome> () {
     $identifier$ (?let networkName)
     let @luint factor
     select
-     factor = @luint ( !1, @location.here)
+     factor = @luint ( 1, @location.here)
     or
       $scalingfactor$
       $literal_integer$ (? factor)
@@ -51,7 +51,7 @@ rule <axiome> () {
        error (factor : "the factor value must be > 0")
       end
     end
-    !?outNetworkMap.insertKey (!networkName, !outNetworkMap.count, !network, !factor)
+    !?outNetworkMap.insertKey (networkName, outNetworkMap.count, network, factor)
     $;$
   while
     $task$
@@ -69,7 +69,7 @@ rule <axiome> () {
       $literal_integer$ (? taskOffset)
       explicitOffset = true
     or
-      taskOffset = @luint ( !0,  @location.here)
+      taskOffset = @luint ( 0,  @location.here)
       explicitOffset = false
     end
     let @luint taskDeadline
@@ -77,7 +77,7 @@ rule <axiome> () {
       $deadline$
       $literal_integer$ (? taskDeadline)
     or
-      taskDeadline = @luint ( !4294967295, @location.here)
+      taskDeadline = @luint ( 4294967295, @location.here)
     end
     let @AC_task taskKind
     let @uint taskProcessorIndex
@@ -87,7 +87,7 @@ rule <axiome> () {
       $literal_integer$ (? taskPeriod)
       $processor$
       $identifier$ (?let taskProcessorName)
-      outProcessorMap.searchKey (!taskProcessorName, ?taskProcessorIndex, ?*)
+      outProcessorMap.searchKey (taskProcessorName, ?taskProcessorIndex, ?*)
       taskKind = @C_independantTask ()
     or
       $on$
@@ -99,58 +99,58 @@ rule <axiome> () {
         $identifier$ (?let masterTaskName)
         let @luint every
         select
-          every = @luint ( !1, @location.here)
+          every = @luint ( 1, @location.here)
         or
           $every$
           $literal_integer$ (? every)
         end
-        outTaskMap.searchKey (!masterTaskName, ?let masterTaskIndex, ?*, ?*, ?*, ?*, ?*, ?taskProcessorIndex, ?taskPeriod, ?*)
-        taskKind = @C_taskDependsFromTask ( !masterTaskIndex, every)
+        outTaskMap.searchKey (masterTaskName, ?let masterTaskIndex, ?*, ?*, ?*, ?*, ?*, ?taskProcessorIndex, ?taskPeriod, ?*)
+        taskKind = @C_taskDependsFromTask ( masterTaskIndex, every)
       or
         $message$
         $identifier$ (?let masterMessageName)
-        outMessagesMap.searchKey (!masterMessageName, ?let masterMessageIndex, ?*, ?*, ?*, ?*, ?*, ?*, ?taskPeriod, ?*)
+        outMessagesMap.searchKey (masterMessageName, ?let masterMessageIndex, ?*, ?*, ?*, ?*, ?*, ?*, ?taskPeriod, ?*)
         $processor$
         $identifier$ (?let taskProcessorName)
         let @luint every
         select
-          every = @luint ( !1, @location.here)
+          every = @luint ( 1, @location.here)
         or
           $every$
           $literal_integer$ (? every)
         end
-        outProcessorMap.searchKey (!taskProcessorName, ?taskProcessorIndex, ?*)
-        taskKind = @C_taskDependsFromMessage ( !masterMessageIndex, every)
+        outProcessorMap.searchKey (taskProcessorName, ?taskProcessorIndex, ?*)
+        taskKind = @C_taskDependsFromMessage ( masterMessageIndex, every)
       end
     end
-    !?outTaskMap.insertKey (!taskName, !outTaskMap.count,
-                                      !taskPriority,
-                                        !taskOffset,
-                                        !taskDeadline,
-                                        !taskDurationMin,
-                                        !taskDurationMax,
-                                        !taskProcessorIndex,
-                                        !taskPeriod,
-                                        !taskKind)
+    !?outTaskMap.insertKey (taskName, outTaskMap.count,
+                                      taskPriority,
+                                        taskOffset,
+                                        taskDeadline,
+                                        taskDurationMin,
+                                        taskDurationMax,
+                                        taskProcessorIndex,
+                                        taskPeriod,
+                                        taskKind)
     $;$
   while
     let @luint messageClass
     select
       $standard$
-      messageClass = @luint ( !0, @location.here)
+      messageClass = @luint ( 0, @location.here)
       $message$
     or
       $extended$
-      messageClass = @luint ( !1, @location.here)
+      messageClass = @luint ( 1, @location.here)
       $message$
     or
       $message$
-      messageClass = @luint ( !2, @location.here)
+      messageClass = @luint ( 2, @location.here)
     end
     $identifier$ (?let messageName)
     $network$
     $identifier$ (?let networkName)
-    outNetworkMap.searchKey (!networkName, ?let networkIndex, ?let CANnetwork, ?*)
+    outNetworkMap.searchKey (networkName, ?let networkIndex, ?let CANnetwork, ?*)
     if CANnetwork & (messageClass.uint == 2) then
      error (messageClass : "a CAN message must be either standard either extended")
     elsif (not CANnetwork) & (messageClass.uint != 2) then
@@ -172,7 +172,7 @@ rule <axiome> () {
       $literal_integer$ (? offset)
       explicitOffset = true
     or
-      offset = @luint ( !0, @location.here)
+      offset = @luint ( 0, @location.here)
       explicitOffset = false
     end
     let @luint deadline
@@ -180,7 +180,7 @@ rule <axiome> () {
       $deadline$
       $literal_integer$ (? deadline)
     or
-      deadline = @luint ( !4294967295, @location.here)
+      deadline = @luint ( 4294967295, @location.here)
     end
     let @AC_canMessage messageKind
     let @luint period
@@ -196,17 +196,17 @@ rule <axiome> () {
       select
         $message$
         $identifier$ (?let name)
-        outMessagesMap.searchKey (!name, ?let messageIndex, ?*, ?*, ?*, ?*, ?*, ?*, ?period, ?*)
-        messageKind = @C_canMessageFromMessage ( !messageIndex)
+        outMessagesMap.searchKey (name, ?let messageIndex, ?*, ?*, ?*, ?*, ?*, ?*, ?period, ?*)
+        messageKind = @C_canMessageFromMessage ( messageIndex)
       or
         $task$
         $identifier$ (?let taskName)
-        outTaskMap.searchKey (!taskName, ?let taskIndex, ?*, ?*, ?*, ?*, ?*, ?*, ?period, ?*)
-        messageKind = @C_canMessageFromTask ( !taskIndex)
+        outTaskMap.searchKey (taskName, ?let taskIndex, ?*, ?*, ?*, ?*, ?*, ?*, ?period, ?*)
+        messageKind = @C_canMessageFromTask ( taskIndex)
       end
     end
-    !?outMessagesMap.insertKey (!messageName, !outMessagesMap.count,
-         !messageClass, !networkIndex, !bytesCount, !priority, !offset, !deadline, !period, !messageKind)
+    !?outMessagesMap.insertKey (messageName, outMessagesMap.count,
+         messageClass, networkIndex, bytesCount, priority, offset, deadline, period, messageKind)
     $;$
   end
   $end$

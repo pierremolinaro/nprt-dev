@@ -1,20 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  AC_GALGAS_reference_class : base class for reference class objects
-//
-//  This file is part of libpm library
-//
 //  Copyright (C) 2021, ..., 2023 Pierre Molinaro.
-//
-//  e-mail : pierre@pcmolinaro.name
-//
-//  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
-//  Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option)
-//  any later version.
-//
-//  This program is distributed in the hope it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-//  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-//  more details.
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -55,9 +41,6 @@ class AC_GALGAS_reference_class : public AC_GALGAS_root { // AC_GALGAS_reference
 //--- Handle copy
   protected: AC_GALGAS_reference_class (const AC_GALGAS_reference_class & inSource) ;
   protected: AC_GALGAS_reference_class & operator = (const AC_GALGAS_reference_class & inSource) ;
-
-//--- Dynamic Type Descriptor
-  public: virtual const GALGAS_TypeDescriptor * dynamicTypeDescriptor (void) const ;
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;

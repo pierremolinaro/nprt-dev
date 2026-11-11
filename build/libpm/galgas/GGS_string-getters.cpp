@@ -1,20 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'GGS_string' : class of galgas string
-//
-//  This file is part of libpm library
-//
 //  Copyright (C) 1996, ..., 2026 Pierre Molinaro.
-//
-//  e-mail : pierre@pcmolinaro.name
-//
-//  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
-//  Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option)
-//  any later version.
-//
-//  This program is distributed in the hope it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-//  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-//  more details.
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -701,15 +687,15 @@ GGS_string GGS_string::getter_nativePathWithUnixPath (UNUSED_LOCATION_ARGS) cons
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_stringlist GGS_string::getter_componentsSeparatedByString (const GGS_string & inSeparator
-                                                               COMMA_LOCATION_ARGS) const {
-  GGS_stringlist result ;
+GGS__5B_string_5D_ GGS_string::getter_componentsSeparatedByString (const GGS_string & inSeparator
+                                                                   COMMA_LOCATION_ARGS) const {
+  GGS__5B_string_5D_ result ;
   if (inSeparator.isValid ()) {
-    result = GGS_stringlist::init (nullptr COMMA_THERE) ;
+    result = GGS__5B_string_5D_::init (nullptr COMMA_THERE) ;
     GenericUniqueArray <String> components ;
     mString.componentsSeparatedByString (inSeparator.mString, components) ;
     for (int32_t i=0 ; i<components.count () ; i++) {
-      result.addAssignOperation (GGS_string (components (i COMMA_HERE)) COMMA_HERE) ;
+      result.plusPlusAssignOperation (GGS_string (components (i COMMA_HERE)) COMMA_HERE) ;
     }
   }
   return result ;
@@ -727,7 +713,7 @@ GGS_sint GGS_string::getter_system (UNUSED_LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_sint GGS_string::getter_commandWithArguments (const GGS_stringlist & inArguments,
+GGS_sint GGS_string::getter_commandWithArguments (const GGS__5B_string_5D_ & inArguments,
                                                   Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
   GGS_sint result ;
@@ -735,7 +721,7 @@ GGS_sint GGS_string::getter_commandWithArguments (const GGS_stringlist & inArgum
     String command = String ("'") + mString + "'" ;
     for (uint32_t i=0 ; i<inArguments.count () ; i++) {
       command.appendCString (" '") ;
-      command.appendString (inArguments.getter_mValueAtIndex (GGS_uint (i), inCompiler COMMA_THERE).stringValue ()) ;
+      command.appendString (inArguments.readSubscript__3F_ (GGS_uint (i), inCompiler COMMA_THERE).stringValue ()) ;
       command.appendCString ("'") ;
     }
     result = GGS_sint (::system (command.cString ())) ;
@@ -745,7 +731,7 @@ GGS_sint GGS_string::getter_commandWithArguments (const GGS_stringlist & inArgum
 
  //--------------------------------------------------------------------------------------------------
 
-GGS_string GGS_string::getter_hiddenCommandWithArguments (const GGS_stringlist & inArguments,
+GGS_string GGS_string::getter_hiddenCommandWithArguments (const GGS__5B_string_5D_ & inArguments,
                                                           Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) const {
   GGS_string result ;
@@ -753,7 +739,7 @@ GGS_string GGS_string::getter_hiddenCommandWithArguments (const GGS_stringlist &
     String command = String ("'") + mString + "'" ;
     for (uint32_t i=0 ; i<inArguments.count () ; i++) {
       command.appendCString (" '") ;
-      command.appendString (inArguments.getter_mValueAtIndex (GGS_uint (i), inCompiler COMMA_THERE).stringValue ()) ;
+      command.appendString (inArguments.readSubscript__3F_ (GGS_uint (i), inCompiler COMMA_THERE).stringValue ()) ;
       command.appendCString ("'") ;
     }
     result = GGS_string (command).getter_popen (inCompiler COMMA_THERE) ;
@@ -766,7 +752,7 @@ GGS_string GGS_string::getter_hiddenCommandWithArguments (const GGS_stringlist &
 static void recursiveSearchForRegularFiles (const String & inUnixStartPath,
                                             const bool inRecursiveSearch,
                                             const String & inRelativePath,
-                                            GGS_stringlist & ioResult) {
+                                            GGS__5B_string_5D_ & ioResult) {
   const String nativeStartPath = FileManager::nativePathWithUnixPath (inUnixStartPath) ;
   DIR * dir = ::opendir (nativeStartPath.cString ()) ;
   if (dir != nullptr) {
@@ -778,14 +764,16 @@ static void recursiveSearchForRegularFiles (const String & inUnixStartPath,
         name.appendString (current->d_name) ;
         if (FileManager::directoryExistsWithNativePath (name)) {
           if (inRecursiveSearch) {
-            recursiveSearchForRegularFiles (name,
-                                            inRecursiveSearch,
-                                            inRelativePath + current->d_name + "/",
-                                            ioResult) ;
+            recursiveSearchForRegularFiles (
+              name,
+              inRecursiveSearch,
+              inRelativePath + current->d_name + "/",
+              ioResult
+            ) ;
           }
         }else if (FileManager::fileExistsAtPath (name)) {
           const String relativePath = inRelativePath + current->d_name ;
-          ioResult.addAssignOperation (GGS_string (relativePath) COMMA_HERE) ;
+          ioResult.plusPlusAssignOperation (GGS_string (relativePath) COMMA_HERE) ;
         }
       }
       current = readdir (dir) ;
@@ -796,11 +784,11 @@ static void recursiveSearchForRegularFiles (const String & inUnixStartPath,
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_stringlist GGS_string::getter_regularFiles (const GGS_bool & inRecursiveSearch
-                                                COMMA_LOCATION_ARGS) const {
-  GGS_stringlist result ;
+GGS__5B_string_5D_ GGS_string::getter_regularFiles (const GGS_bool & inRecursiveSearch
+                                                    COMMA_LOCATION_ARGS) const {
+  GGS__5B_string_5D_ result ;
   if (inRecursiveSearch.isValid ()) {
-    result = GGS_stringlist::init (nullptr COMMA_THERE) ;
+    result = GGS__5B_string_5D_::init (nullptr COMMA_THERE) ;
     recursiveSearchForRegularFiles (
       mString,
       inRecursiveSearch.boolValue (),
@@ -816,7 +804,7 @@ GGS_stringlist GGS_string::getter_regularFiles (const GGS_bool & inRecursiveSear
 static void recursiveSearchForHiddenFiles (const String & inUnixStartPath,
                                            const bool inRecursiveSearch,
                                            const String & inRelativePath,
-                                           GGS_stringlist & ioResult) {
+                                           GGS__5B_string_5D_ & ioResult) {
   const String nativeStartPath = FileManager::nativePathWithUnixPath (inUnixStartPath) ;
   DIR * dir = ::opendir (nativeStartPath.cString ()) ;
   if (dir != nullptr) {
@@ -828,14 +816,16 @@ static void recursiveSearchForHiddenFiles (const String & inUnixStartPath,
         name.appendString (current->d_name) ;
         if (FileManager::directoryExistsWithNativePath (name)) {
           if (inRecursiveSearch) {
-            recursiveSearchForHiddenFiles (name,
-                                           inRecursiveSearch,
-                                           inRelativePath + current->d_name + "/",
-                                           ioResult) ;
+            recursiveSearchForHiddenFiles (
+              name,
+              inRecursiveSearch,
+              inRelativePath + current->d_name + "/",
+              ioResult
+            ) ;
           }
         }else if (FileManager::fileExistsAtPath (name)) {
           const String relativePath = inRelativePath + current->d_name ;
-          ioResult.addAssignOperation (GGS_string (relativePath) COMMA_HERE) ;
+          ioResult.plusPlusAssignOperation (GGS_string (relativePath) COMMA_HERE) ;
         }
       }
       current = readdir (dir) ;
@@ -846,11 +836,11 @@ static void recursiveSearchForHiddenFiles (const String & inUnixStartPath,
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_stringlist GGS_string::getter_hiddenFiles (const GGS_bool & inRecursiveSearch
+GGS__5B_string_5D_ GGS_string::getter_hiddenFiles (const GGS_bool & inRecursiveSearch
                                                COMMA_LOCATION_ARGS) const {
-  GGS_stringlist result ;
+  GGS__5B_string_5D_ result ;
   if (inRecursiveSearch.isValid ()) {
-    result = GGS_stringlist::init (nullptr COMMA_THERE) ;
+    result = GGS__5B_string_5D_::init (nullptr COMMA_THERE) ;
     recursiveSearchForHiddenFiles (
       mString,
       inRecursiveSearch.boolValue (),
@@ -866,7 +856,7 @@ GGS_stringlist GGS_string::getter_hiddenFiles (const GGS_bool & inRecursiveSearc
 static void recursiveSearchForDirectories (const String & inUnixStartPath,
                                            const bool inRecursiveSearch,
                                            const String & inRelativePath,
-                                           GGS_stringlist & ioResult) {
+                                           GGS__5B_string_5D_ & ioResult) {
   const String nativeStartPath = FileManager::nativePathWithUnixPath (inUnixStartPath) ;
   DIR * dir = ::opendir (nativeStartPath.cString ()) ;
   if (dir != nullptr) {
@@ -878,12 +868,14 @@ static void recursiveSearchForDirectories (const String & inUnixStartPath,
         name.appendString (current->d_name) ;
         if (FileManager::directoryExistsWithNativePath (name)) {
           const String relativePath = inRelativePath + current->d_name ;
-          ioResult.addAssignOperation (GGS_string (relativePath) COMMA_HERE) ;
+          ioResult.plusPlusAssignOperation (GGS_string (relativePath) COMMA_HERE) ;
           if (inRecursiveSearch) {
-            recursiveSearchForDirectories (name,
-                                           inRecursiveSearch,
-                                           inRelativePath + current->d_name + "/",
-                                           ioResult) ;
+            recursiveSearchForDirectories (
+              name,
+              inRecursiveSearch,
+              inRelativePath + current->d_name + "/",
+              ioResult
+            ) ;
           }
         }
       }
@@ -895,11 +887,11 @@ static void recursiveSearchForDirectories (const String & inUnixStartPath,
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_stringlist GGS_string::getter_directories (const GGS_bool & inRecursiveSearch
-                                               COMMA_LOCATION_ARGS) const {
-  GGS_stringlist result ;
+GGS__5B_string_5D_ GGS_string::getter_directories (const GGS_bool & inRecursiveSearch
+                                                   COMMA_LOCATION_ARGS) const {
+  GGS__5B_string_5D_ result ;
   if (inRecursiveSearch.isValid ()) {
-    result = GGS_stringlist::init (nullptr COMMA_THERE) ;
+    result = GGS__5B_string_5D_::init (nullptr COMMA_THERE) ;
     if (FileManager::directoryExists (mString)) {
       recursiveSearchForDirectories (
         mString,
@@ -915,10 +907,10 @@ GGS_stringlist GGS_string::getter_directories (const GGS_bool & inRecursiveSearc
 //--------------------------------------------------------------------------------------------------
 
 static void recursiveSearchForRegularFiles (const String & inUnixStartPath,
-                                            GGS_stringlist inExtensionList,
+                                            GGS__5B_string_5D_ inExtensionList,
                                             const bool inRecursiveSearch,
                                             const String & inRelativePath,
-                                            GGS_stringlist & ioResult) {
+                                            GGS__5B_string_5D_ & ioResult) {
   const String nativeStartPath = FileManager::nativePathWithUnixPath (inUnixStartPath) ;
   DIR * dir = ::opendir (nativeStartPath.cString ()) ;
   if (dir != nullptr) {
@@ -930,23 +922,25 @@ static void recursiveSearchForRegularFiles (const String & inUnixStartPath,
         name.appendString (current->d_name) ;
         if (FileManager::directoryExistsWithNativePath (name)) {
           if (inRecursiveSearch) {
-            recursiveSearchForRegularFiles (name,
-                                            inExtensionList,
-                                            inRecursiveSearch,
-                                            inRelativePath + current->d_name + "/",
-                                            ioResult) ;
+            recursiveSearchForRegularFiles (
+              name,
+              inExtensionList,
+              inRecursiveSearch,
+              inRelativePath + current->d_name + "/",
+              ioResult
+            ) ;
           }
         }else if (FileManager::fileExistsAtPath (name)) {
           const String extension = name.pathExtension () ;
           bool extensionFound = false ;
-          UpEnumerator_stringlist currentExtension (inExtensionList) ;
+          UpEnumerator__5B_string_5D_ currentExtension (inExtensionList) ;
           while (currentExtension.hasCurrentObject () && ! extensionFound) {
-            extensionFound = currentExtension.current_mValue (HERE).stringValue () == extension ;
+            extensionFound = currentExtension.current (HERE).stringValue () == extension ;
             currentExtension.gotoNextObject () ;
           }
           if (extensionFound) {
             const String relativePath = inRelativePath + current->d_name ;
-            ioResult.addAssignOperation (GGS_string (relativePath) COMMA_HERE) ;
+            ioResult.plusPlusAssignOperation (GGS_string (relativePath) COMMA_HERE) ;
           }
         }
       }
@@ -958,12 +952,12 @@ static void recursiveSearchForRegularFiles (const String & inUnixStartPath,
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_stringlist GGS_string::getter_regularFilesWithExtensions (const GGS_bool & inRecursiveSearch,
-                                                              const GGS_stringlist & inExtensionList
-                                                              COMMA_LOCATION_ARGS) const {
-  GGS_stringlist result ;
+GGS__5B_string_5D_ GGS_string::getter_regularFilesWithExtensions (const GGS_bool & inRecursiveSearch,
+                                                                  const GGS__5B_string_5D_ & inExtensionList
+                                                                  COMMA_LOCATION_ARGS) const {
+  GGS__5B_string_5D_ result ;
   if ((inRecursiveSearch.isValid ()) && (inExtensionList.isValid ())) {
-    result = GGS_stringlist::init (nullptr COMMA_THERE) ;
+    result = GGS__5B_string_5D_::init (nullptr COMMA_THERE) ;
     if (FileManager::directoryExists (mString)) {
       recursiveSearchForRegularFiles (
         mString,
@@ -980,10 +974,10 @@ GGS_stringlist GGS_string::getter_regularFilesWithExtensions (const GGS_bool & i
 //--------------------------------------------------------------------------------------------------
 
 static void recursiveSearchForDirectories (const String & inUnixStartPath,
-                                           GGS_stringlist inExtensionList,
+                                           GGS__5B_string_5D_ inExtensionList,
                                            const bool inRecursiveSearch,
                                            const String & inRelativePath,
-                                           GGS_stringlist & ioResult) {
+                                           GGS__5B_string_5D_ & ioResult) {
   const String nativeStartPath = FileManager::nativePathWithUnixPath (inUnixStartPath) ;
   DIR * dir = ::opendir (nativeStartPath.cString ()) ;
   if (dir != nullptr) {
@@ -997,22 +991,24 @@ static void recursiveSearchForDirectories (const String & inUnixStartPath,
         //--- Look for extension
           const String extension = name.pathExtension () ;
           bool extensionFound = false ;
-          UpEnumerator_stringlist currentExtension (inExtensionList) ;
+          UpEnumerator__5B_string_5D_ currentExtension (inExtensionList) ;
           while (currentExtension.hasCurrentObject () && ! extensionFound) {
-            extensionFound = currentExtension.current_mValue (HERE).stringValue () == extension ;
+            extensionFound = currentExtension.current (HERE).stringValue () == extension ;
             currentExtension.gotoNextObject () ;
           }
           if (extensionFound) {
             const String relativePath = inRelativePath + current->d_name ;
-            ioResult.addAssignOperation (GGS_string (relativePath) COMMA_HERE) ;
+            ioResult.plusPlusAssignOperation (GGS_string (relativePath) COMMA_HERE) ;
           }
         //--- Recursive Search ?
           if (inRecursiveSearch) {
-            recursiveSearchForDirectories (name,
-                                           inExtensionList,
-                                           inRecursiveSearch,
-                                           inRelativePath + current->d_name + "/",
-                                           ioResult) ;
+            recursiveSearchForDirectories (
+              name,
+              inExtensionList,
+              inRecursiveSearch,
+              inRelativePath + current->d_name + "/",
+              ioResult
+            ) ;
           }
         }
       }
@@ -1024,12 +1020,12 @@ static void recursiveSearchForDirectories (const String & inUnixStartPath,
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_stringlist GGS_string::getter_directoriesWithExtensions (const GGS_bool & inRecursiveSearch,
-                                                             const GGS_stringlist & inExtensionList
-                                                             COMMA_LOCATION_ARGS) const {
-  GGS_stringlist result ;
+GGS__5B_string_5D_ GGS_string::getter_directoriesWithExtensions (const GGS_bool & inRecursiveSearch,
+                                                                 const GGS__5B_string_5D_ & inExtensionList
+                                                                 COMMA_LOCATION_ARGS) const {
+  GGS__5B_string_5D_ result ;
   if (isValid () && inRecursiveSearch.isValid () && inExtensionList.isValid ()) {
-    result = GGS_stringlist::init (nullptr COMMA_THERE) ;
+    result = GGS__5B_string_5D_::init (nullptr COMMA_THERE) ;
     if (FileManager::directoryExists (mString)) {
       recursiveSearchForDirectories (
         mString,

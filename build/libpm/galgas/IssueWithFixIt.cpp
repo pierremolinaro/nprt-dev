@@ -1,20 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  IssueWithFixIt                                                                             
-//
-//  This file is part of libpm library                                                           
-//
-//  Copyright (C) 2016, ..., 2025 Pierre Molinaro.
-//
-//  e-mail : pierre@pcmolinaro.name
-//
-//  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
-//  Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option)
-//  any later version.
-//
-//  This program is distributed in the hope it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-//  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-//  more details.
+//  Copyright (C) 2016, ..., 2026 Pierre Molinaro.
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -47,8 +33,8 @@ mFixItArray () {
 //--------------------------------------------------------------------------------------------------
 
 IssueWithFixIt::IssueWithFixIt (const LocationInSource & inStartLocation,
-                                    const LocationInSource & inEndLocation,
-                                    const GenericArray <FixItDescription> & inFixItArray) :
+                                const LocationInSource & inEndLocation,
+                                const GenericArray <FixItDescription> & inFixItArray) :
 mStartLocation (inStartLocation),
 mEndLocation (inEndLocation),
 mFixItArray (inFixItArray) {
@@ -56,36 +42,12 @@ mFixItArray (inFixItArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-//String IssueWithFixIt::jsonDescriptionString (void) const {
-//  String result = "{" ;
-////--- Error
-//  result.appendString ("\"error\":") ;
-//  result.appendString (mIsError ? "true" : "false") ;
-////--- file
-//  result.appendString (",\"file\":") ;
-//  result.appendString (mFile) ;
-////--- Line
-//  result.appendString (",\"line\":") ;
-//  result.appendSigned (mLine) ;
-////--- Start Column
-//  result.appendString (",\"startCol\":") ;
-//  result.appendSigned (mStartColumn) ;
-////--- End Column
-//  result.appendString (",\"lastCol\":") ;
-//  result.appendSigned (mEndColumn) ;
-//
-//  result.appendString ("}") ;
-//  return result ;
-//}
-
-//--------------------------------------------------------------------------------------------------
-
 void appendFixItActions (GenericArray <FixItDescription> & ioArray,
                          const EnumFixItKind inKind,
-                         const GGS_stringlist & inList) {
-  UpEnumerator_stringlist enumerator (inList) ;
+                         const GGS__5B_string_5D_ & inList) {
+  UpEnumerator__5B_string_5D_ enumerator (inList) ;
   while (enumerator.hasCurrentObject ()) {
-    const String s = enumerator.current_mValue (HERE).stringValue () ;
+    const String s = enumerator.current (HERE).stringValue () ;
     ioArray.appendObject (FixItDescription (inKind, s)) ;
     enumerator.gotoNextObject () ;
   }
@@ -95,10 +57,10 @@ void appendFixItActions (GenericArray <FixItDescription> & ioArray,
 
 void appendFixItActions (GenericArray <FixItDescription> & ioArray,
                          const EnumFixItKind inKind,
-                         const GGS_lstringlist & inList) {
-  UpEnumerator_lstringlist enumerator (inList) ;
+                         const GGS__5B_lstring_5D_ & inList) {
+  UpEnumerator__5B_lstring_5D_ enumerator (inList) ;
   while (enumerator.hasCurrentObject ()) {
-    const String s = enumerator.current_mValue (HERE).mProperty_string.stringValue () ;
+    const String s = enumerator.current (HERE).mProperty_string.stringValue () ;
     ioArray.appendObject (FixItDescription (inKind, s)) ;
     enumerator.gotoNextObject () ;
   }

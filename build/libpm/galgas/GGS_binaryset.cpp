@@ -1,22 +1,8 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  GGS_binaryset
-//
-//  This file is part of libpm library
-//
 //  Created january 22, 2007.
 //
 //  Copyright (C) 2007, ..., 2024 Pierre Molinaro.
-//
-//  e-mail : pierre@pcmolinaro.name
-//
-//  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
-//  Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option)
-//  any later version.
-//
-//  This program is distributed in the hope it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-//  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-//  more details.
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -609,16 +595,16 @@ GGS_uint_36__34_ GGS_binaryset::getter_compressedValueCount (UNUSED_LOCATION_ARG
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_uint_36__34_list GGS_binaryset::getter_uint_36__34_ValueList (const GGS_uint & inVariableCount
-                                                                        COMMA_LOCATION_ARGS) const {
-  GGS_uint_36__34_list result ;
+GGS__5B_uint_36__34__5D_ GGS_binaryset::getter_uint_36__34_ValueList (const GGS_uint & inVariableCount
+                                                                      COMMA_LOCATION_ARGS) const {
+  GGS__5B_uint_36__34__5D_ result ;
   if (isValid () && inVariableCount.isValid ()) {
     GenericUniqueArray <uint64_t> valuesArray ;
     mBDD.buildValue64Array (valuesArray, inVariableCount.uintValue ()) ;
-    result = GGS_uint_36__34_list::init (nullptr COMMA_THERE) ;
+    result = GGS__5B_uint_36__34__5D_::init (nullptr COMMA_THERE) ;
     for (int32_t i=0 ; i<valuesArray.count () ; i++) {
       const uint64_t v = valuesArray (i COMMA_HERE) ;
-      result.addAssignOperation (GGS_uint_36__34_ (v) COMMA_HERE) ;
+      result.plusPlusAssignOperation (GGS_uint_36__34_ (v) COMMA_HERE) ;
     }
   }
   return result ;
@@ -626,19 +612,19 @@ GGS_uint_36__34_list GGS_binaryset::getter_uint_36__34_ValueList (const GGS_uint
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_stringlist GGS_binaryset::getter_stringValueListWithNameList (const GGS_uint & inVariableCount,
-                                                                        const GGS_stringlist & inStringList,
-                                                                        Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) const {
-  GGS_stringlist result ;
+GGS__5B_string_5D_ GGS_binaryset::getter_stringValueListWithNameList (const GGS_uint & inVariableCount,
+                                                                      const GGS__5B_string_5D_ & inStringList,
+                                                                      Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const {
+  GGS__5B_string_5D_ result ;
   if (isValid () && inVariableCount.isValid () && inStringList.isValid ()) {
     GenericUniqueArray <uint64_t> valuesArray ;
     mBDD.buildValue64Array (valuesArray, inVariableCount.uintValue ()) ;
-    result = GGS_stringlist::init (nullptr COMMA_THERE) ;
+    result = GGS__5B_string_5D_::init (nullptr COMMA_THERE) ;
     for (int32_t i=0 ; i<valuesArray.count () ; i++) {
       const uint32_t v = (uint32_t) (valuesArray (i COMMA_HERE) & UINT32_MAX) ;
       GGS_uint object = GGS_uint (v) ;
-      result.addAssignOperation (inStringList.getter_mValueAtIndex (object, inCompiler COMMA_HERE) COMMA_HERE) ;
+      result.plusPlusAssignOperation (inStringList.readSubscript__3F_ (object, inCompiler COMMA_HERE) COMMA_HERE) ;
     }
   }
   return result ;
@@ -646,10 +632,10 @@ GGS_stringlist GGS_binaryset::getter_stringValueListWithNameList (const GGS_uint
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_stringlist GGS_binaryset::getter_compressedStringValueList (const GGS_uint & inVariableCount,
-                                                                      Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) const {
-  GGS_stringlist result ;
+GGS__5B_string_5D_ GGS_binaryset::getter_compressedStringValueList (const GGS_uint & inVariableCount,
+                                                                    Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const {
+  GGS__5B_string_5D_ result ;
   if (isValid () && inVariableCount.isValid ()) {
     const uint32_t variableCount = inVariableCount.uintValue () ;
     const uint32_t actualVariableCount = mBDD.significantVariableCount () ;
@@ -664,10 +650,10 @@ GGS_stringlist GGS_binaryset::getter_compressedStringValueList (const GGS_uint &
     }else{
       GenericUniqueArray <String> valuesArray ;
       mBDD.buildCompressedBigEndianStringValueArray (valuesArray, variableCount COMMA_THERE) ;
-      result = GGS_stringlist::init (nullptr COMMA_THERE) ;
+      result = GGS__5B_string_5D_::init (nullptr COMMA_THERE) ;
       for (int32_t i=0 ; i<valuesArray.count () ; i++) {
         const String v = valuesArray (i COMMA_HERE) ;
-        result.addAssignOperation (GGS_string (v) COMMA_HERE) ;
+        result.plusPlusAssignOperation (GGS_string (v) COMMA_HERE) ;
       }
     }
   }
@@ -676,16 +662,16 @@ GGS_stringlist GGS_binaryset::getter_compressedStringValueList (const GGS_uint &
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_stringlist GGS_binaryset::getter_stringValueList (const GGS_uint & inVariableCount
-                                                            COMMA_LOCATION_ARGS) const {
-  GGS_stringlist result ;
+GGS__5B_string_5D_ GGS_binaryset::getter_stringValueList (const GGS_uint & inVariableCount
+                                                          COMMA_LOCATION_ARGS) const {
+  GGS__5B_string_5D_ result ;
   if (isValid () && inVariableCount.isValid ()) {
     GenericUniqueArray <String> valuesArray ;
     mBDD.buildBigEndianStringValueArray (valuesArray, inVariableCount.uintValue ()) ;
-    result = GGS_stringlist::init (nullptr COMMA_THERE) ;
+    result = GGS__5B_string_5D_::init (nullptr COMMA_THERE) ;
     for (int32_t i=0 ; i<valuesArray.count () ; i++) {
       const String v = valuesArray (i COMMA_HERE) ;
-      result.addAssignOperation (GGS_string (v) COMMA_HERE) ;
+      result.plusPlusAssignOperation (GGS_string (v) COMMA_HERE) ;
     }
   }
   return result ;
@@ -743,19 +729,19 @@ GGS_binaryset GGS_binaryset::getter_existOnBitIndexAndBeyond (const GGS_uint & i
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_string GGS_binaryset::getter_print (const GGS_stringlist & inVariableList,
-                                              const GGS_uintlist & inBDDCount
-                                              COMMA_UNUSED_LOCATION_ARGS) const {
+GGS_string GGS_binaryset::getter_print (const GGS__5B_string_5D_ & inVariableList,
+                                        const GGS__5B_uint_5D_ & inBDDCount
+                                        COMMA_UNUSED_LOCATION_ARGS) const {
   GGS_string result ;
   if (isValid () && inVariableList.isValid () && inBDDCount.isValid ()) {
     GenericUniqueArray <String> variablesNames ;
     GenericUniqueArray <int32_t> bitCounts ;
-    UpEnumerator_stringlist variableEnumerator (inVariableList) ;
-    UpEnumerator_uintlist bddCountEnumerator (inBDDCount) ;
+    UpEnumerator__5B_string_5D_ variableEnumerator (inVariableList) ;
+    UpEnumerator__5B_uint_5D_ bddCountEnumerator (inBDDCount) ;
     while (variableEnumerator.hasCurrentObject () && bddCountEnumerator.hasCurrentObject ()) {
-      const String name = variableEnumerator.current_mValue (HERE).stringValue () ;
+      const String name = variableEnumerator.current (HERE).stringValue () ;
       variablesNames.appendObject (name) ;
-      const uint32_t bddCount = bddCountEnumerator.current_mValue (HERE).uintValue () ;
+      const uint32_t bddCount = bddCountEnumerator.current (HERE).uintValue () ;
       bitCounts.appendObject ((int32_t) bddCount) ;
       variableEnumerator.gotoNextObject () ;
       bddCountEnumerator.gotoNextObject () ;
@@ -769,16 +755,16 @@ GGS_string GGS_binaryset::getter_print (const GGS_stringlist & inVariableList,
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_binaryset GGS_binaryset::getter_transformedBy (const GGS_uintlist & inTransformationArray
-                                                         COMMA_LOCATION_ARGS) const {
+GGS_binaryset GGS_binaryset::getter_transformedBy (const GGS__5B_uint_5D_ & inTransformationArray
+                                                   COMMA_LOCATION_ARGS) const {
   GGS_binaryset result ;
   if (isValid () && inTransformationArray.isValid ()) {
     uint32_t * substitutionArray = nullptr ;
     macroMyNewPODArray (substitutionArray, uint32_t, inTransformationArray.count ()) ;
-    UpEnumerator_uintlist enumerator (inTransformationArray) ;
+    UpEnumerator__5B_uint_5D_ enumerator (inTransformationArray) ;
     uint32_t idx = 0 ;
     while (enumerator.hasCurrentObject ()) {
-      const uint32_t value = enumerator.current_mValue (HERE).uintValue () ;
+      const uint32_t value = enumerator.current (HERE).uintValue () ;
       substitutionArray [idx] = value ;
       idx += 1 ;
       enumerator.gotoNextObject () ;
@@ -801,14 +787,14 @@ GGS_uint_36__34_ GGS_binaryset::getter_nodeCount (UNUSED_LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_string GGS_binaryset::getter_graphviz (const GGS_stringlist & inBitNameList
-                                                 COMMA_UNUSED_LOCATION_ARGS) const {
+GGS_string GGS_binaryset::getter_graphviz (const GGS__5B_string_5D_ & inBitNameList
+                                           COMMA_UNUSED_LOCATION_ARGS) const {
   GGS_string result ;
   if (isValid () && inBitNameList.isValid ()) {
     GenericUniqueArray <String> bitNameArray ;
-    UpEnumerator_stringlist variableEnumerator (inBitNameList) ;
+    UpEnumerator__5B_string_5D_ variableEnumerator (inBitNameList) ;
     while (variableEnumerator.hasCurrentObject ()) {
-      const String name = variableEnumerator.current_mValue (HERE).stringValue () ;
+      const String name = variableEnumerator.current (HERE).stringValue () ;
       bitNameArray.appendObject (name) ;
       variableEnumerator.gotoNextObject () ;
     }
@@ -999,16 +985,16 @@ GGS_binaryset GGS_binaryset::getter_existsOnBitRange (const GGS_uint & inFirstIn
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_binaryset GGS_binaryset::getter_transposedBy (const class GGS_uintlist & inVector,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
+GGS_binaryset GGS_binaryset::getter_transposedBy (const GGS__5B_uint_5D_ & inVector,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
   GGS_binaryset result ;
   if (isValid () && inVector.isValid ()) {
-    const uint32_t varCount = inVector.count() ;
+    const uint32_t varCount = inVector.count () ;
     uint32_t * substitionArray = nullptr ;
     macroMyNewArray (substitionArray, uint32_t, varCount) ;
     for (uint32_t i=0 ; i<varCount ; i++) {
-      const GGS_uint v = inVector.getter_mValueAtIndex (GGS_uint (i), inCompiler COMMA_THERE) ;
+      const GGS_uint v = inVector.readSubscript__3F_ (GGS_uint (i), inCompiler COMMA_THERE) ;
       substitionArray [i] = v.uintValue () ;
     }
     result = GGS_binaryset (mBDD.substitution (substitionArray, varCount COMMA_THERE)) ;

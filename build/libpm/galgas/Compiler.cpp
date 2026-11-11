@@ -1,20 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'Compiler' : the compiler base class ;
-//
-//  This file is part of libpm library
-//
 //  Copyright (C) 2009, ..., 2015 Pierre Molinaro.
-//
-//  e-mail : pierre@pcmolinaro.name
-//
-//  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
-//  Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option)
-//  any later version.
-//
-//  This program is distributed in the hope it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-//  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-//  more details.
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -186,7 +172,7 @@ void Compiler::resetAndLoadSourceFromText (const SourceTextInString & inSourceTe
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::onTheFlySemanticError (const String & inErrorMessage
-                                        COMMA_LOCATION_ARGS) {
+                                      COMMA_LOCATION_ARGS) {
   signalSemanticError (this,
                        sourceText (),
                        IssueWithFixIt (mCurrentLocation, mCurrentLocation, GenericArray <FixItDescription> ()),
@@ -203,7 +189,7 @@ void Compiler::onTheFlySemanticError (const String & inErrorMessage
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::onTheFlySemanticWarning (const String & inWarningMessage
-                                          COMMA_LOCATION_ARGS) {
+                                        COMMA_LOCATION_ARGS) {
   signalSemanticWarning (this,
                          sourceText (),
                          IssueWithFixIt (mCurrentLocation, mCurrentLocation, GenericArray <FixItDescription> ()),
@@ -286,9 +272,9 @@ void Compiler::castError (const String & inTargetTypeName,
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::semanticErrorAtLocation (const GGS_location & inErrorLocation,
-                                          const String & inErrorMessage,
-                                          const GenericArray <FixItDescription> & inFixItArray
-                                          COMMA_LOCATION_ARGS) {
+                                        const String & inErrorMessage,
+                                        const GenericArray <FixItDescription> & inFixItArray
+                                        COMMA_LOCATION_ARGS) {
   if (inErrorLocation.isValid ()) { // No error raised if not built
     if (!inErrorLocation.sourceText ().isValid ()) {
       onTheFlyRunTimeError (inErrorMessage COMMA_THERE) ;
@@ -305,9 +291,9 @@ void Compiler::semanticErrorAtLocation (const GGS_location & inErrorLocation,
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::emitSemanticError (const GGS_location & inErrorLocation,
-                                    const GGS_string & inErrorMessage,
-                                    const GenericArray <FixItDescription> & inFixItArray
-                                    COMMA_LOCATION_ARGS) {
+                                  const GGS_string & inErrorMessage,
+                                  const GenericArray <FixItDescription> & inFixItArray
+                                  COMMA_LOCATION_ARGS) {
   if (inErrorLocation.isValid () && inErrorMessage.isValid ()) {
     const String errorMessage = inErrorMessage.stringValue () ;
     if (!inErrorLocation.sourceText ().isValid ()) {
@@ -325,9 +311,9 @@ void Compiler::emitSemanticError (const GGS_location & inErrorLocation,
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::semanticErrorWith_K_message (const GGS_lstring & inKey,
-                                              GenericUniqueArray <String> & ioNearestKeyArray,
-                                              const char * in_K_ErrorMessage
-                                              COMMA_LOCATION_ARGS) {
+                                            GenericUniqueArray <String> & ioNearestKeyArray,
+                                            const char * in_K_ErrorMessage
+                                            COMMA_LOCATION_ARGS) {
   const String key = inKey.mProperty_string.stringValue () ;
 //--- Build error message
   String message ;
@@ -398,9 +384,9 @@ void Compiler::semanticErrorWith_K_L_message (const GGS_lstring & inKey,
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::semanticWarningWith_K_L_message (const GGS_lstring & inKey,
-                                                  const char * in_K_L_ErrorMessage,
-                                                  const GGS_location & inExistingKeyLocation
-                                                  COMMA_LOCATION_ARGS) {
+                                                const char * in_K_L_ErrorMessage,
+                                                const GGS_location & inExistingKeyLocation
+                                                COMMA_LOCATION_ARGS) {
   const String key = inKey.mProperty_string.stringValue () ;
 //--- Build error message
   String message ;
@@ -436,8 +422,8 @@ void Compiler::semanticWarningWith_K_L_message (const GGS_lstring & inKey,
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::semanticWarningAtLocation (const GGS_location & inWarningLocation,
-                                            const String & inWarningMessage
-                                            COMMA_LOCATION_ARGS) {
+                                          const String & inWarningMessage
+                                          COMMA_LOCATION_ARGS) {
   if (inWarningLocation.isValid ()) { // No warning raised if not built
     if (!inWarningLocation.sourceText ().isValid ()) {
       signalRunTimeWarning (this, inWarningMessage COMMA_THERE) ;
@@ -480,7 +466,7 @@ void Compiler::emitSemanticWarning (const GGS_location & inWarningLocation,
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::onTheFlyRunTimeError (const String & inRunTimeErrorMessage
-                                       COMMA_LOCATION_ARGS) {
+                                     COMMA_LOCATION_ARGS) {
   signalRunTimeError (this, inRunTimeErrorMessage COMMA_THERE) ;
 }
 
@@ -528,14 +514,14 @@ static const char END_OF_USER_ZONE_2   [] =  "--- END OF USER ZONE 2\n" ;
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::generateFile (const String & inLineCommentPrefix,
-                               const GenericUniqueArray <String> & inDirectoriesToExclude,
-                               const String & inFileName,
-                               const String & inHeader,
-                               const String & inDefaultUserZone1,
-                               const String & inGeneratedZone2,
-                               const String & inDefaultUserZone2,
-                               const String & inGeneratedZone3,
-                               const bool inMakeExecutable) {
+                             const GenericUniqueArray <String> & inDirectoriesToExclude,
+                             const String & inFileName,
+                             const String & inHeader,
+                             const String & inDefaultUserZone1,
+                             const String & inGeneratedZone2,
+                             const String & inDefaultUserZone2,
+                             const String & inGeneratedZone3,
+                             const bool inMakeExecutable) {
   generateFileWithPatternFromPathes (sourceFilePath ().deletingLastPathComponent (),
                           inDirectoriesToExclude,
                           inLineCommentPrefix,
@@ -551,9 +537,9 @@ void Compiler::generateFile (const String & inLineCommentPrefix,
 //--------------------------------------------------------------------------------------------------
 
 void Compiler::generateFileFromPathes (const String & inStartPath,
-                                         const GenericUniqueArray <String> & inDirectoriesToExclude,
-                                         const String & inFileName,
-                                         const String & inContents) {
+                                       const GenericUniqueArray <String> & inDirectoriesToExclude,
+                                       const String & inFileName,
+                                       const String & inContents) {
 //--- Verbose option ?
   const bool verboseOptionOn = verboseOutput () ;
 //--- Start path : by default, use source file directory

@@ -1,20 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  'GGS_string' : class of galgas string
-//
-//  This file is part of libpm library
-//
 //  Copyright (C) 1996, ..., 2026 Pierre Molinaro.
-//
-//  e-mail : pierre@pcmolinaro.name
-//
-//  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
-//  Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option)
-//  any later version.
-//
-//  This program is distributed in the hope it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-//  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-//  more details.
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -307,21 +293,21 @@ GGS_string GGS_string::class_func_stringWithEnvironmentVariableOrEmpty (const GG
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_string GGS_string::class_func_componentsJoinedByString (const GGS_stringlist & inComponents,
-                                                                  const GGS_string & inSeparator
-                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+GGS_string GGS_string::class_func_componentsJoinedByString (const GGS__5B_string_5D_ & inComponents,
+                                                            const GGS_string & inSeparator
+                                                            COMMA_UNUSED_LOCATION_ARGS) {
   GGS_string result ;
   if ((inComponents.isValid ()) && (inSeparator.isValid ())) {
     bool first = true ;
     String s ;
-    UpEnumerator_stringlist current (inComponents) ;
+    UpEnumerator__5B_string_5D_ current (inComponents) ;
     while (current.hasCurrentObject ()) {
       if (first) {
         first = false ;
       }else{
         s.appendString (inSeparator.mString) ;
       }
-      s.appendString (current.current_mValue (HERE).mString) ;
+      s.appendString (current.current (HERE).mString) ;
       current.gotoNextObject () ;
     }
     result = GGS_string (s) ;

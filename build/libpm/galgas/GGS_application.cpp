@@ -1,18 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  This file is part of libpm library                                                           
-//
 //  Copyright (C) 2010, ..., 2023 Pierre Molinaro.
-//
-//  e-mail : pierre@pcmolinaro.name
-//
-//  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
-//  Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option)
-//  any later version.
-//
-//  This program is distributed in the hope it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-//  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-//  more details.
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -348,16 +336,16 @@ GGS_stringset GGS_application::class_func_keywordIdentifierSet (LOCATION_ARGS) {
 
 //--------------------------------------------------------------------------------------------------*
 
-GGS_stringlist GGS_application::class_func_keywordListForIdentifier (const GGS_string & inIdentifier
-                                                                     COMMA_LOCATION_ARGS) {
-  GGS_stringlist result ;
+GGS__5B_string_5D_ GGS_application::class_func_keywordListForIdentifier (const GGS_string & inIdentifier
+                                                                         COMMA_LOCATION_ARGS) {
+  GGS__5B_string_5D_ result ;
   if (inIdentifier.isValid ()) {
-    result = GGS_stringlist::init (nullptr COMMA_THERE) ;
+    result = GGS__5B_string_5D_::init (nullptr COMMA_THERE) ;
     GenericUniqueArray <String> list ;
     bool found = false ;
     LexiqueIntrospection::getKeywordListForIdentifier (inIdentifier.stringValue(), found, list) ;
     for (int32_t i=0 ; i < list.count () ; i++) {
-      result.addAssignOperation (GGS_string (list (i COMMA_HERE)) COMMA_HERE) ;
+      result.plusPlusAssignOperation (GGS_string (list (i COMMA_HERE)) COMMA_HERE) ;
     }
   }
   return result ;

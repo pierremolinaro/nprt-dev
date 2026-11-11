@@ -1,20 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 //
-//  GGS_stringset
-//
-//  This file is part of libpm library
-//
 //  Copyright (C) 2005, ..., 2025 Pierre Molinaro.
-//
-//  e-mail : pierre@pcmolinaro.name
-//
-//  This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General
-//  Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option)
-//  any later version.
-//
-//  This program is distributed in the hope it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-//  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-//  more details.
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -180,10 +166,10 @@ GGS_stringset GGS_stringset::substract_operation (const GGS_stringset & inOperan
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_stringlist GGS_stringset::getter_stringList (LOCATION_ARGS) const {
-  GGS_stringlist result ;
+GGS__5B_string_5D_ GGS_stringset::getter_stringArray (LOCATION_ARGS) const {
+  GGS__5B_string_5D_ result ;
   if (isValid ()) {
-    result = GGS_stringlist::init (nullptr COMMA_THERE) ;
+    result = GGS__5B_string_5D_::init (nullptr COMMA_THERE) ;
     const GenericArray <String> array = mSharedMap.sortedKeyArray () ;
     for (int32_t i=0 ; i<array.count () ; i++) {
       result.plusPlusAssignOperation (GGS_string (array (i COMMA_HERE)) COMMA_HERE) ;
@@ -194,11 +180,11 @@ GGS_stringlist GGS_stringset::getter_stringList (LOCATION_ARGS) const {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_bool GGS_stringset::getter_hasKey (const GGS_string & inKey
-                                       COMMA_UNUSED_LOCATION_ARGS) const {
+GGS_bool GGS_stringset::getter_contains (const GGS_string & inKey
+                                         COMMA_UNUSED_LOCATION_ARGS) const {
   GGS_bool result ;
   if (isValid () && inKey.isValid ()) {
-    result = GGS_bool (mSharedMap.hasKey (inKey.stringValue ())) ;
+    result = GGS_bool (mSharedMap.contains (inKey.stringValue ())) ;
   }
   return result ;
 }
@@ -279,6 +265,36 @@ GGS_stringset GGS_stringset::init (Compiler * COMMA_LOCATION_ARGS) {
 
 //--------------------------------------------------------------------------------------------------
 
+GGS_stringset GGS_stringset::init_21_stringArray (const GGS__5B_string_5D_ & inStringArray,
+                                                  Compiler * /* inCompiler */
+                                                  COMMA_LOCATION_ARGS) {
+  GGS_stringset result ;
+  result.mSharedMap = SharedStringMap::build (THERE) ;
+  UpEnumerator__5B_string_5D_ iterator (inStringArray) ;
+  while (iterator.hasCurrentObject ()) {
+    result.plusPlusAssignOperation (iterator.current (HERE) COMMA_HERE) ;
+    iterator.gotoNextObject () ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_stringset GGS_stringset::init_21_lstringArray (const GGS__5B_lstring_5D_ & inStringArray,
+                                                   Compiler * /* inCompiler */
+                                                   COMMA_LOCATION_ARGS) {
+  GGS_stringset result ;
+  result.mSharedMap = SharedStringMap::build (THERE) ;
+  UpEnumerator__5B_lstring_5D_ iterator (inStringArray) ;
+  while (iterator.hasCurrentObject ()) {
+    result.plusPlusAssignOperation (iterator.current (HERE).mProperty_string COMMA_HERE) ;
+    iterator.gotoNextObject () ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
 void GGS_stringset::plusPlusAssignOperation (const GGS_string & inValue
                                              COMMA_LOCATION_ARGS) {
   if (isValid () && (inValue.isValid ())) {
@@ -301,14 +317,14 @@ GGS_stringset GGS_stringset::class_func_setWithString (const GGS_string & inStri
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_stringset GGS_stringset::class_func_setWithStringList (const GGS_stringlist & inStringList
+GGS_stringset GGS_stringset::class_func_setWithStringArray (const GGS__5B_string_5D_ & inStringList
                                                            COMMA_LOCATION_ARGS) {
   GGS_stringset result ;
   if (inStringList.isValid ()) {
     result = class_func_emptySet (THERE) ;
-    UpEnumerator_stringlist enumerator (inStringList) ;
+    UpEnumerator__5B_string_5D_ enumerator (inStringList) ;
     while (enumerator.hasCurrentObject ()) {
-      result.plusPlusAssignOperation (enumerator.current_mValue (THERE) COMMA_THERE) ;
+      result.plusPlusAssignOperation (enumerator.current (THERE) COMMA_THERE) ;
       enumerator.gotoNextObject () ;
     }
   }
@@ -317,14 +333,14 @@ GGS_stringset GGS_stringset::class_func_setWithStringList (const GGS_stringlist 
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_stringset GGS_stringset::class_func_setWithLStringList (const GGS_lstringlist & inStringList
-                                                            COMMA_LOCATION_ARGS) {
+GGS_stringset GGS_stringset::class_func_setWithLStringArray (const GGS__5B_lstring_5D_ & inStringList
+                                                             COMMA_LOCATION_ARGS) {
   GGS_stringset result ;
   if (inStringList.isValid ()) {
     result = class_func_emptySet (THERE) ;
-    UpEnumerator_lstringlist enumerator (inStringList) ;
+    UpEnumerator__5B_lstring_5D_ enumerator (inStringList) ;
     while (enumerator.hasCurrentObject ()) {
-      result.plusPlusAssignOperation (enumerator.current_mValue (THERE).mProperty_string COMMA_THERE) ;
+      result.plusPlusAssignOperation (enumerator.current (THERE).mProperty_string COMMA_THERE) ;
       enumerator.gotoNextObject () ;
     }
   }
@@ -702,7 +718,7 @@ class SharedStringMapRoot final : public SharedObject {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  public: bool hasKey (const String & inKey) const {
+  public: bool contains (const String & inKey) const {
     return recursiveSearch (mRootNode, inKey) ;
   }
 
@@ -820,10 +836,10 @@ String SharedStringMap::rootNodeKey (void) const {
 
 //--------------------------------------------------------------------------------------------------
 
-bool SharedStringMap::hasKey (const String & inKey) const {
+bool SharedStringMap::contains (const String & inKey) const {
   bool result = false ;
   if (mSharedRoot.isNotNil ()) {
-    result = mSharedRoot->hasKey (inKey) ;
+    result = mSharedRoot->contains (inKey) ;
   }
   return result ;
 }
@@ -838,5 +854,4 @@ int32_t SharedStringMap::count (void) const {
   }
 }
 
-//--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------

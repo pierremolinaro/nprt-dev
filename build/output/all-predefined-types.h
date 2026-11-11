@@ -17,41 +17,2436 @@
 #include "String-class.h"
 #include "Timer.h"
 #include "AC_GALGAS_reference_class.h"
-#include "AC_GALGAS_value_class.h"
 #include "AC_GALGAS_enumAssociatedValues.h"
-#include "AC_GALGAS_graph.h"
+#include "DirectedGraph.h"
 #include "AbstractStrongPtrClass.h"
 #include "PtrWeakReferenceProxy.h"
 #include "AC_GALGAS_weak_reference.h"
 #include "BoolCommandLineOption.h"
 #include "UIntCommandLineOption.h"
 #include "StringCommandLineOption.h"
-#include "StringListCommandLineOption.h"
 #include "PrologueEpilogue.h"
 #include "BigSigned.h"
 
 //--------------------------------------------------------------------------------------------------
 
 class Compiler ;
-class GGS_uint ;
-class GGS_bool ;
+class GGS_uint64 ;
 class GGS_application ;
 class GGS_bigint ;
 class GGS_binaryset ;
+class GGS_bool ;
 class GGS_char ;
 class GGS_data ;
 class GGS_double ;
 class GGS_filewrapper ;
-class GGS_function ;
 class GGS_location ;
-class GGS_object ;
 class GGS_sint ;
 class GGS_sint64 ;
 class GGS_string ;
+class GGS_uint ;
 class GGS_stringset ;
 class GGS_timer ;
-class GGS_type ;
-class GGS_uint64 ;
+
+//--------------------------------------------------------------------------------------------------
+//  @uint64 type
+//--------------------------------------------------------------------------------------------------
+
+class GGS_uint_36__34_ : public AC_GALGAS_root {
+//--------------------------------- Private data members
+  private: bool mIsValid ;
+  private: uint64_t mUInt64Value ;
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
+  public: inline uint64_t uint64Value (void) const { return mUInt64Value ; }
+
+//--------------------------------- Default constructor
+  public: GGS_uint_36__34_ (void) ;
+
+//--------------------------------- Native constructor
+  public: GGS_uint_36__34_ (const uint64_t inValue) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+//--------------------------------- GALGAS class functions
+  public: static class GGS_uint_36__34_ class_func_max (LOCATION_ARGS) ;
+
+  public: static class GGS_uint_36__34_ class_func_uint_36__34_BaseValueWithCompressedBitString (const class GGS_string & inOperand0,
+                                                                                                 class Compiler * inCompiler
+                                                                                                 COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_uint_36__34_ class_func_uint_36__34_MaskWithCompressedBitString (const class GGS_string & inOperand0,
+                                                                                            class Compiler * inCompiler
+                                                                                            COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_uint_36__34_ class_func_uint_36__34_WithBitString (const class GGS_string & inOperand0,
+                                                                              class Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- << and >> shift operators
+  public: GGS_uint_36__34_ left_shift_operation (const GGS_uint inShiftOperand,
+                                                 class Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_uint_36__34_ left_shift_operation (const GGS_bigint inShiftOperand,
+                                                 class Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_uint_36__34_ right_shift_operation (const GGS_uint inShiftOperand,
+                                                  class Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_uint_36__34_ right_shift_operation (const GGS_bigint inShiftOperand,
+                                                  class Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- += operator (with expression)
+  public: void plusAssignOperation (const GGS_uint_36__34_ inOperand,
+                                    class Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- -= operator (with expression)
+  public: void minusAssignOperation (const GGS_uint_36__34_ inOperand,
+                                     class Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- *= operator (with expression)
+  public: void mulAssignOperation (const GGS_uint_36__34_ inOperand,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- /= operator (with expression)
+  public: void divAssignOperation (const GGS_uint_36__34_ inOperand,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- & operator
+  public: GGS_uint_36__34_ operator_and (const GGS_uint_36__34_ & inOperand
+                                         COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- | operator
+  public: GGS_uint_36__34_ operator_or (const GGS_uint_36__34_ & inOperand
+                                        COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ^ operator
+  public: GGS_uint_36__34_ operator_xor (const GGS_uint_36__34_ & inOperand
+                                         COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ~ operator
+  public: GGS_uint_36__34_ operator_tilde (LOCATION_ARGS) const ;
+
+//--------------------------------- + operator
+  public: GGS_uint_36__34_ add_operation (const GGS_uint_36__34_ & inOperand,
+                                          Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- &+ operator
+  public: GGS_uint_36__34_ add_operation_no_ovf (const GGS_uint_36__34_ & inOperand) const ;
+
+//--------------------------------- &- operator
+  public: GGS_uint_36__34_ substract_operation_no_ovf (const GGS_uint_36__34_ & inOperand) const ;
+
+//--------------------------------- - operator
+  public: GGS_uint_36__34_ substract_operation (const GGS_uint_36__34_ & inOperand,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- * operator
+  public: GGS_uint_36__34_ multiply_operation (const GGS_uint_36__34_ & inOperand,
+                                               Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- &* operator
+  public: GGS_uint_36__34_ multiply_operation_no_ovf (const GGS_uint_36__34_ & inOperand) const ;
+
+//--------------------------------- / operator
+  public: GGS_uint_36__34_ divide_operation (const GGS_uint_36__34_ & inOperand,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- &/ operator
+  public: GGS_uint_36__34_ divide_operation_no_ovf (const GGS_uint_36__34_ & inOperand) const ;
+
+//--------------------------------- mod operator
+  public: GGS_uint_36__34_ modulo_operation (const GGS_uint_36__34_ & inOperand,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ++, -- operators
+  public: void increment_operation (Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+  public: void decrement_operation (Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- &++, &-- operators
+  public: void increment_operation_no_overflow (void) ;
+
+  public: void decrement_operation_no_overflow (void) ;
+
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_uint_36__34_ & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: class GGS_string getter_alphaString (LOCATION_ARGS) const ;
+
+  public: class GGS_bigint getter_bigint (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_canAdd (const class GGS_uint_36__34_ & constinOperand0
+                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_canDivide (const class GGS_uint_36__34_ & constinOperand0
+                                           COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_canMultiply (const class GGS_uint_36__34_ & constinOperand0
+                                             COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_canSubstract (const class GGS_uint_36__34_ & constinOperand0
+                                              COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_double (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_hexString (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_hexStringSeparatedBy (const class GGS_char & constinOperand0,
+                                                        const class GGS_uint & constinOperand1,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_sint getter_sint (Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_sint_36__34_ getter_sint_36__34_ (Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_string (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_uint (Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_uintSlice (const class GGS_uint & constinOperand0,
+                                           const class GGS_uint & constinOperand1,
+                                           Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_xString (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_uint_36__34_ ;
+
+//--------------------------------------------------------------------------------------------------
+//@application package
+//--------------------------------------------------------------------------------------------------
+
+class GGS_application final {
+
+//-- Start of package generic part
+
+//--------------------------------- GALGAS class getters
+  public: static class GGS_string class_func_boolOptionCommentString (const class GGS_string & inOperand0,
+                                                                      const class GGS_string & inOperand1
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_char class_func_boolOptionInvocationCharacter (const class GGS_string & inOperand0,
+                                                                          const class GGS_string & inOperand1
+                                                                          COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_boolOptionInvocationString (const class GGS_string & inOperand0,
+                                                                         const class GGS_string & inOperand1
+                                                                         COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS__32_stringlist class_func_boolOptionNameList (LOCATION_ARGS) ;
+
+  public: static class GGS_bool class_func_boolOptionValue (const class GGS_string & inOperand0,
+                                                            const class GGS_string & inOperand1
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_commandLineArgumentAtIndex (const class GGS_uint & inOperand0,
+                                                                         class Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_uint class_func_commandLineArgumentCount (LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_galgasVersionString (LOCATION_ARGS) ;
+
+  public: static class GGS_stringset class_func_keywordIdentifierSet (LOCATION_ARGS) ;
+
+  public: static class GGS__5B_string_5D_ class_func_keywordListForIdentifier (const class GGS_string & inOperand0
+                                                                               COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_projectVersionString (LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_stringOptionCommentString (const class GGS_string & inOperand0,
+                                                                        const class GGS_string & inOperand1
+                                                                        COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_char class_func_stringOptionInvocationCharacter (const class GGS_string & inOperand0,
+                                                                            const class GGS_string & inOperand1
+                                                                            COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_stringOptionInvocationString (const class GGS_string & inOperand0,
+                                                                           const class GGS_string & inOperand1
+                                                                           COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS__32_stringlist class_func_stringOptionNameList (LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_stringOptionValue (const class GGS_string & inOperand0,
+                                                                const class GGS_string & inOperand1
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_system (LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_uintOptionCommentString (const class GGS_string & inOperand0,
+                                                                      const class GGS_string & inOperand1
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_char class_func_uintOptionInvocationCharacter (const class GGS_string & inOperand0,
+                                                                          const class GGS_string & inOperand1
+                                                                          COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_uintOptionInvocationString (const class GGS_string & inOperand0,
+                                                                         const class GGS_string & inOperand1
+                                                                         COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS__32_stringlist class_func_uintOptionNameList (LOCATION_ARGS) ;
+
+  public: static class GGS_uint class_func_uintOptionValue (const class GGS_string & inOperand0,
+                                                            const class GGS_string & inOperand1
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_bool class_func_verboseOutput (LOCATION_ARGS) ;
+
+//--------------------------------- Class Methods
+  public: static void class_method_exit (class GGS_uint constinArgument0
+                                         COMMA_LOCATION_ARGS) ;
+
+  public: static void class_method_setBoolOptionValue (class GGS_string constinArgument0,
+                                                       class GGS_string constinArgument1,
+                                                       class GGS_bool constinArgument2
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public: static void class_method_setStringOptionValue (class GGS_string constinArgument0,
+                                                         class GGS_string constinArgument1,
+                                                         class GGS_string constinArgument2
+                                                         COMMA_LOCATION_ARGS) ;
+
+  public: static void class_method_setUIntOptionValue (class GGS_string constinArgument0,
+                                                       class GGS_string constinArgument1,
+                                                       class GGS_uint constinArgument2
+                                                       COMMA_LOCATION_ARGS) ;
+
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+//   @bigint type
+//--------------------------------------------------------------------------------------------------
+ 
+class GGS_bigint : public AC_GALGAS_root {
+//--------------------------------- Private properties
+  private: bool mIsValid ;
+  private: BigSigned mValue ;
+
+//--------------------------------- Accessors
+  public: inline bool isValid (void) const override { return mIsValid ; }
+  public: inline BigSigned bigintValue (void) const { return mValue ; }
+  public: VIRTUAL_IN_DEBUG void drop (void) override ;
+
+//--------------------------------- Default constructor
+  public: GGS_bigint (void) ;
+
+//--------------------------------- Constructor
+  public: GGS_bigint (const BigSigned & inValue) ;
+  public: GGS_bigint (const char * inDecimalString, Compiler * inCompiler COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Destructor
+  public: virtual ~ GGS_bigint (void) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+//--------------------------------- GALGAS class functions
+  public: static class GGS_bigint class_func_zero (LOCATION_ARGS) ;
+
+//--------------------------------- << and >> shift operators
+  public: GGS_bigint left_shift_operation (const GGS_uint inShiftOperand,
+                                           class Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_bigint left_shift_operation (const GGS_bigint inShiftOperand,
+                                           class Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_bigint right_shift_operation (const GGS_uint inShiftOperand,
+                                            class Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_bigint right_shift_operation (const GGS_bigint inShiftOperand,
+                                            class Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- += operator (with expression)
+  public: void plusAssignOperation (const GGS_bigint inOperand,
+                                    class Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- -= operator (with expression)
+  public: void minusAssignOperation (const GGS_bigint inOperand,
+                                     class Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- *= operator (with expression)
+  public: void mulAssignOperation (const GGS_bigint inOperand,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- /= operator (with expression)
+  public: void divAssignOperation (const GGS_bigint inOperand,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- & operator
+  public: GGS_bigint operator_and (const GGS_bigint & inOperand
+                                   COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- | operator
+  public: GGS_bigint operator_or (const GGS_bigint & inOperand
+                                  COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ^ operator
+  public: GGS_bigint operator_xor (const GGS_bigint & inOperand
+                                   COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ~ operator
+  public: GGS_bigint operator_tilde (LOCATION_ARGS) const ;
+
+//--------------------------------- + operator
+  public: GGS_bigint add_operation (const GGS_bigint & inOperand,
+                                    Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- - operator
+  public: GGS_bigint substract_operation (const GGS_bigint & inOperand,
+                                          Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- * operator
+  public: GGS_bigint multiply_operation (const GGS_bigint & inOperand,
+                                         Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- / operator
+  public: GGS_bigint divide_operation (const GGS_bigint & inOperand,
+                                       Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- mod operator
+  public: GGS_bigint modulo_operation (const GGS_bigint & inOperand,
+                                       Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- prefix - operator
+  public: GGS_bigint operator_unary_minus (Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ++, -- operators
+  public: void increment_operation (Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+  public: void decrement_operation (Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_bigint & inOperand) const ;
+
+//--------------------------------- Setters
+  public: void setter_complementBitAtIndex (class GGS_uint constinArgument0
+                                            COMMA_LOCATION_ARGS) ;
+
+  public: void setter_setBitAtIndex (class GGS_bool constinArgument0,
+                                     class GGS_uint constinArgument1
+                                     COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public: void method_divideBy (class GGS_bigint constinArgument0,
+                                class GGS_bigint & outArgument1,
+                                class GGS_bigint & outArgument2,
+                                Compiler * inCompiler
+                                COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: class GGS_bigint getter_abs (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_bitAtIndex (const class GGS_uint & constinOperand0
+                                            COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_bitCountForSignedRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_bitCountForUnsignedRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS__5B_uint_5D_ getter_extract_33__32_ForSignedRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS__5B_uint_5D_ getter_extract_33__32_ForUnsignedRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS__5B_uint_36__34__5D_ getter_extract_36__34_ForSignedRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS__5B_uint_36__34__5D_ getter_extract_36__34_ForUnsignedRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS__5B_uint_5D_ getter_extract_38_ForSignedRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS__5B_uint_5D_ getter_extract_38_ForUnsignedRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_fitsInSInt (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_fitsInSInt_36__34_ (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_fitsInUInt (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_fitsInUInt_36__34_ (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_hexString (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_hexStringSeparatedBy (const class GGS_char & constinOperand0,
+                                                        const class GGS_uint & constinOperand1,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isZero (LOCATION_ARGS) const ;
+
+  public: class GGS_sint getter_sign (LOCATION_ARGS) const ;
+
+  public: class GGS_sint getter_sint (Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_sint_36__34_ getter_sint_36__34_ (Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_spacedString (const class GGS_uint & constinOperand0
+                                                COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_string (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_uint (Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint_36__34_ getter_uint_36__34_ (Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_xString (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_bigint ;
+
+//--------------------------------------------------------------------------------------------------
+// @binaryset type
+//--------------------------------------------------------------------------------------------------
+
+#include "BinaryDecisionDiagram.h"
+
+//--------------------------------------------------------------------------------------------------
+
+class GGS_binaryset : public AC_GALGAS_root {
+//--------------------------------- Private data members
+  private: bool mIsValid ;
+  private: BinaryDecisionDiagram mBDD ;
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
+  public: inline BinaryDecisionDiagram bddValue (void) const { return mBDD ; }
+
+//--------------------------------- Default constructor
+  public: GGS_binaryset (void) ;
+
+//--------------------------------- Native constructor
+  public: GGS_binaryset (const BinaryDecisionDiagram & inValue) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GGS_binaryset init (Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+//--------------------------------- GALGAS class functions
+  public: static class GGS_binaryset class_func_binarySetWithBit (const class GGS_uint & inOperand0,
+                                                                  class Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_binarySetWithEqualComparison (const class GGS_uint & inOperand0,
+                                                                              const class GGS_uint & inOperand1,
+                                                                              const class GGS_uint & inOperand2,
+                                                                              class Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_binarySetWithEqualToConstant (const class GGS_uint & inOperand0,
+                                                                              const class GGS_uint & inOperand1,
+                                                                              const class GGS_uint_36__34_ & inOperand2,
+                                                                              class Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_binarySetWithGreaterOrEqualComparison (const class GGS_uint & inOperand0,
+                                                                                       const class GGS_uint & inOperand1,
+                                                                                       const class GGS_uint & inOperand2,
+                                                                                       class Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_binarySetWithGreaterOrEqualToConstant (const class GGS_uint & inOperand0,
+                                                                                       const class GGS_uint & inOperand1,
+                                                                                       const class GGS_uint_36__34_ & inOperand2,
+                                                                                       class Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_binarySetWithLowerOrEqualComparison (const class GGS_uint & inOperand0,
+                                                                                     const class GGS_uint & inOperand1,
+                                                                                     const class GGS_uint & inOperand2,
+                                                                                     class Compiler * inCompiler
+                                                                                     COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_binarySetWithLowerOrEqualToConstant (const class GGS_uint & inOperand0,
+                                                                                     const class GGS_uint & inOperand1,
+                                                                                     const class GGS_uint_36__34_ & inOperand2,
+                                                                                     class Compiler * inCompiler
+                                                                                     COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_binarySetWithNotEqualComparison (const class GGS_uint & inOperand0,
+                                                                                 const class GGS_uint & inOperand1,
+                                                                                 const class GGS_uint & inOperand2,
+                                                                                 class Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_binarySetWithNotEqualToConstant (const class GGS_uint & inOperand0,
+                                                                                 const class GGS_uint & inOperand1,
+                                                                                 const class GGS_uint_36__34_ & inOperand2,
+                                                                                 class Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_binarySetWithPredicateString (const class GGS_string & inOperand0,
+                                                                              class Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_binarySetWithStrictGreaterComparison (const class GGS_uint & inOperand0,
+                                                                                      const class GGS_uint & inOperand1,
+                                                                                      const class GGS_uint & inOperand2,
+                                                                                      class Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_binarySetWithStrictGreaterThanConstant (const class GGS_uint & inOperand0,
+                                                                                        const class GGS_uint & inOperand1,
+                                                                                        const class GGS_uint_36__34_ & inOperand2,
+                                                                                        class Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_binarySetWithStrictLowerComparison (const class GGS_uint & inOperand0,
+                                                                                    const class GGS_uint & inOperand1,
+                                                                                    const class GGS_uint & inOperand2,
+                                                                                    class Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_binarySetWithStrictLowerThanConstant (const class GGS_uint & inOperand0,
+                                                                                      const class GGS_uint & inOperand1,
+                                                                                      const class GGS_uint_36__34_ & inOperand2,
+                                                                                      class Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_emptyBinarySet (LOCATION_ARGS) ;
+
+  public: static class GGS_binaryset class_func_fullBinarySet (LOCATION_ARGS) ;
+
+//--------------------------------- << and >> shift operators
+  public: GGS_binaryset left_shift_operation (const GGS_uint inShiftOperand,
+                                              class Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_binaryset left_shift_operation (const GGS_bigint inShiftOperand,
+                                              class Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_binaryset right_shift_operation (const GGS_uint inShiftOperand,
+                                               class Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_binaryset right_shift_operation (const GGS_bigint inShiftOperand,
+                                               class Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- & operator
+  public: GGS_binaryset operator_and (const GGS_binaryset & inOperand
+                                      COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- | operator
+  public: GGS_binaryset operator_or (const GGS_binaryset & inOperand
+                                     COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ^ operator
+  public: GGS_binaryset operator_xor (const GGS_binaryset & inOperand
+                                      COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ~ operator
+  public: GGS_binaryset operator_tilde (LOCATION_ARGS) const ;
+
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_binaryset & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+  public: static void class_method_setAndTableSize (class GGS_uint constinArgument0
+                                                    COMMA_LOCATION_ARGS) ;
+
+  public: static void class_method_setNodeTableSize (class GGS_uint constinArgument0
+                                                     COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Getters
+  public: class GGS_binaryset getter_ITE (const class GGS_binaryset & constinOperand0,
+                                          const class GGS_binaryset & constinOperand1
+                                          COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_accessibleStates (const class GGS_binaryset & constinOperand0,
+                                                       const class GGS_uint & constinOperand1
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bigint getter_bigValueCount (const class GGS_uint & constinOperand0,
+                                                 Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_binarySetByTranslatingFromIndex (const class GGS_uint & constinOperand0,
+                                                                      const class GGS_uint & constinOperand1
+                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_compressedStringValueList (const class GGS_uint & constinOperand0,
+                                                                     Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint_36__34_ getter_compressedValueCount (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_containsValue (const class GGS_uint_36__34_ & constinOperand0,
+                                               const class GGS_uint & constinOperand1,
+                                               const class GGS_uint & constinOperand2
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_equalTo (const class GGS_binaryset & constinOperand0
+                                              COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_existOnBitIndex (const class GGS_uint & constinOperand0
+                                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_existOnBitIndexAndBeyond (const class GGS_uint & constinOperand0
+                                                               COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_existsOnBitRange (const class GGS_uint & constinOperand0,
+                                                       const class GGS_uint & constinOperand1
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_forAllOnBitIndex (const class GGS_uint & constinOperand0
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_forAllOnBitIndexAndBeyond (const class GGS_uint & constinOperand0
+                                                                COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_graphviz (const class GGS__5B_string_5D_ & constinOperand0
+                                            COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_graphvizDump (LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_greaterOrEqualTo (const class GGS_binaryset & constinOperand0
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_implies (const class GGS_binaryset & constinOperand0
+                                              COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isEmpty (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isFull (LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_lowerOrEqualTo (const class GGS_binaryset & constinOperand0
+                                                     COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint_36__34_ getter_nodeCount (LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_notEqualTo (const class GGS_binaryset & constinOperand0
+                                                 COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_predicateStringValue (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_print (const class GGS__5B_string_5D_ & constinOperand0,
+                                         const class GGS__5B_uint_5D_ & constinOperand1
+                                         COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_significantVariableCount (LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_strictGreaterThan (const class GGS_binaryset & constinOperand0
+                                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_strictLowerThan (const class GGS_binaryset & constinOperand0
+                                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_stringValueList (const class GGS_uint & constinOperand0
+                                                           COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_stringValueListWithNameList (const class GGS_uint & constinOperand0,
+                                                                       const class GGS__5B_string_5D_ & constinOperand1,
+                                                                       Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_swap_30__32__31_ (const class GGS_uint & constinOperand0,
+                                                       const class GGS_uint & constinOperand1,
+                                                       const class GGS_uint & constinOperand2
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_swap_31__30_ (const class GGS_uint & constinOperand0,
+                                                   const class GGS_uint & constinOperand1
+                                                   COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_swap_31__30__32_ (const class GGS_uint & constinOperand0,
+                                                       const class GGS_uint & constinOperand1,
+                                                       const class GGS_uint & constinOperand2
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_swap_31__32__30_ (const class GGS_uint & constinOperand0,
+                                                       const class GGS_uint & constinOperand1,
+                                                       const class GGS_uint & constinOperand2
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_swap_32__30__31_ (const class GGS_uint & constinOperand0,
+                                                       const class GGS_uint & constinOperand1,
+                                                       const class GGS_uint & constinOperand2
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_swap_32__31__30_ (const class GGS_uint & constinOperand0,
+                                                       const class GGS_uint & constinOperand1,
+                                                       const class GGS_uint & constinOperand2
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_transformedBy (const class GGS__5B_uint_5D_ & constinOperand0
+                                                    COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_transitiveClosure (const class GGS_uint & constinOperand0
+                                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_binaryset getter_transposedBy (const class GGS__5B_uint_5D_ & constinOperand0,
+                                                   Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_uint_36__34__5D_ getter_uint_36__34_ValueList (const class GGS_uint & constinOperand0
+                                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint_36__34_ getter_valueCount (const class GGS_uint & constinOperand0,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_binaryset ;
+
+//--------------------------------------------------------------------------------------------------
+//  @bool type
+//--------------------------------------------------------------------------------------------------
+
+enum class GalgasBool {boolNotValid, boolFalse, boolTrue} ;
+
+//--------------------------------------------------------------------------------------------------
+
+class GGS_bool : public AC_GALGAS_root {
+//--------------------------------- Private data members
+  private: bool mIsValid ;
+  private: bool mBoolValue ;
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
+  public: inline bool isValidAndTrue (void) const { return mIsValid && mBoolValue ; }
+  public: inline bool boolValue (void) const { return mBoolValue ; }
+  public: GalgasBool boolEnum (void) const ;
+
+//--------------------------------- Drop
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
+
+//--------------------------------- Default constructor
+  public: GGS_bool (void) ;
+
+//--------------------------------- Native constructors
+  public: GGS_bool (const bool inValue) ; // Is built
+  public: GGS_bool (const bool inBuilt, const bool inValue) ;
+
+//--------------------------------- Constructor for comparison result
+  public: GGS_bool (const ComparisonKind inComparisonKind,
+                    const ComparisonResult inComparisonResult) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+//--------------------------------- & operator
+  public: GGS_bool operator_and (const GGS_bool & inOperand
+                                 COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- | operator
+  public: GGS_bool operator_or (const GGS_bool & inOperand
+                                COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ^ operator
+  public: GGS_bool operator_xor (const GGS_bool & inOperand
+                                 COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- not operator
+  public: GGS_bool operator_not (LOCATION_ARGS) const ;
+
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_bool & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: class GGS_bigint getter_bigint (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_cString (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_ocString (LOCATION_ARGS) const ;
+
+  public: class GGS_sint getter_sint (LOCATION_ARGS) const ;
+
+  public: class GGS_sint_36__34_ getter_sint_36__34_ (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_uint (LOCATION_ARGS) const ;
+
+  public: class GGS_uint_36__34_ getter_uint_36__34_ (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_bool ;
+
+//--------------------------------------------------------------------------------------------------
+//   @char type
+//--------------------------------------------------------------------------------------------------
+
+class GGS_char : public AC_GALGAS_root {
+//--------------------------------- Private data members
+  private: bool mIsValid ;
+  private: utf32 mCharValue ;
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
+  public: inline utf32 charValue (void) const { return mCharValue ; }
+
+//--------------------------------- Default constructor
+  public: GGS_char (void) ;
+
+//--------------------------------- Native constructor
+  public: GGS_char (const utf32 inValue) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+//--------------------------------- GALGAS class functions
+  public: static class GGS_char class_func_replacementCharacter (LOCATION_ARGS) ;
+
+  public: static class GGS_char class_func_unicodeCharacterFromRawKeyboard (Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_char class_func_unicodeCharacterWithUnsigned (const class GGS_uint & inOperand0
+                                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_char & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: class GGS_bool getter_isUnicodeCommand (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isUnicodeLetter (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isUnicodeMark (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isUnicodeNumber (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isUnicodePunctuation (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isUnicodeSeparator (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isUnicodeSymbol (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isalnum (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isalpha (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_iscntrl (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isdigit (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_islower (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isupper (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isxdigit (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_string (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_uint (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_unicodeName (LOCATION_ARGS) const ;
+
+  public: class GGS_char getter_unicodeToLower (LOCATION_ARGS) const ;
+
+  public: class GGS_char getter_unicodeToUpper (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_utf_33__32_CharConstantRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_utf_38_Length (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_char ;
+
+//--------------------------------------------------------------------------------------------------
+//   Phase 1: @data enumerator
+//--------------------------------------------------------------------------------------------------
+
+class UpEnumerator_data final {
+  public: UpEnumerator_data (const class GGS_data & inEnumeratedObject) ;
+
+  public: bool hasCurrentObject (void) const { return mIndex < mArray.count () ; }
+
+  public: void gotoNextObject (void) { mIndex += 1 ; }
+
+//--- Current element access
+  public: class GGS_uint current_data (LOCATION_ARGS) const ;
+  public: class GGS_uint current (LOCATION_ARGS) const ;
+
+//--- Private properties
+  private: U8Data mArray ;
+  private: int32_t mIndex ;
+
+//--- No copy
+  private: UpEnumerator_data (const UpEnumerator_data &) = delete ;
+  private: UpEnumerator_data & operator = (const UpEnumerator_data &) = delete ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+class DownEnumerator_data final {
+
+  public: DownEnumerator_data (const class GGS_data & inEnumeratedObject) ;
+
+  public: bool hasCurrentObject (void) const { return mIndex >= 0 ; }
+
+  public: void gotoNextObject (void) { mIndex -= 1 ; }
+
+//--- Current element access
+  public: class GGS_uint current_data (LOCATION_ARGS) const ;
+  public: class GGS_uint current (LOCATION_ARGS) const ;
+
+//--- Private properties
+  private: U8Data mArray ;
+  private: int32_t mIndex ;
+
+//--- No copy
+  private: DownEnumerator_data (const DownEnumerator_data &) = delete ;
+  private: DownEnumerator_data & operator = (const DownEnumerator_data &) = delete ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+//   @data type
+//--------------------------------------------------------------------------------------------------
+
+class GGS_data : public AC_GALGAS_root {
+//--------------------------------- Private data members
+  private: bool mIsValid ;
+  private: U8Data mData ;
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
+  public: inline U8Data dataValue (void) const { return mData ; }
+
+//--------------------------------- Default constructor
+  public: GGS_data (void) ;
+
+//--------------------------------- Native constructor
+  public: GGS_data (const U8Data & inData) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GGS_data init (Compiler * inCompiler
+                                COMMA_LOCATION_ARGS) ;
+//--------------------------------- GALGAS class functions
+  public: static class GGS_data class_func_dataWithContentsOfFile (const class GGS_string & inOperand0,
+                                                                   class Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_data class_func_emptyData (LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_data & inOperand) const ;
+
+//--------------------------------- Setters
+  public: void setter_appendByte (class GGS_uint constinArgument0,
+                                  Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) ;
+
+  public: void setter_appendData (class GGS_data constinArgument0
+                                  COMMA_LOCATION_ARGS) ;
+
+  public: void setter_appendShortBE (class GGS_uint constinArgument0,
+                                     Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+  public: void setter_appendShortLE (class GGS_uint constinArgument0,
+                                     Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+  public: void setter_appendUIntBE (class GGS_uint constinArgument0
+                                    COMMA_LOCATION_ARGS) ;
+
+  public: void setter_appendUIntLE (class GGS_uint constinArgument0
+                                    COMMA_LOCATION_ARGS) ;
+
+  public: void setter_appendUTF_38_String (class GGS_string constinArgument0
+                                           COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public: void method_writeToExecutableFile (class GGS_string constinArgument0,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const ;
+
+  public: void method_writeToFile (class GGS_string constinArgument0,
+                                   Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) const ;
+
+  public: void method_writeToFileWhenDifferentContents (class GGS_string constinArgument0,
+                                                        class GGS_bool & outArgument1,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: class GGS_string getter_cStringRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+//--------------------------------- Friend
+  friend class UpEnumerator_data ;
+  friend class DownEnumerator_data ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_data ;
+
+//--------------------------------------------------------------------------------------------------
+//  @double type
+//--------------------------------------------------------------------------------------------------
+
+class GGS_double : public AC_GALGAS_root {
+//--------------------------------- Private data members
+  private: bool mIsValid ;
+  private: double mDoubleValue ;
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
+  public: inline double doubleValue (void) const { return mDoubleValue ; }
+
+//--------------------------------- Default constructor
+  public: GGS_double (void) ;
+
+//--------------------------------- Native constructor
+  public: GGS_double (const double inValue) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+//--------------------------------- GALGAS class functions
+  public: static class GGS_double class_func_doubleWithBinaryImage (const class GGS_uint_36__34_ & inOperand0
+                                                                    COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_double class_func_pi (LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with expression)
+  public: void plusAssignOperation (const GGS_double inOperand,
+                                    class Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- -= operator (with expression)
+  public: void minusAssignOperation (const GGS_double inOperand,
+                                     class Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- *= operator (with expression)
+  public: void mulAssignOperation (const GGS_double inOperand,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- /= operator (with expression)
+  public: void divAssignOperation (const GGS_double inOperand,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- + operator
+  public: GGS_double add_operation (const GGS_double & inOperand,
+                                    Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- - operator
+  public: GGS_double substract_operation (const GGS_double & inOperand,
+                                          Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- * operator
+  public: GGS_double multiply_operation (const GGS_double & inOperand,
+                                         Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- / operator
+  public: GGS_double divide_operation (const GGS_double & inOperand,
+                                       Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- &/ operator
+  public: GGS_double divide_operation_no_ovf (const GGS_double & inOperand) const ;
+
+//--------------------------------- mod operator
+  public: GGS_double modulo_operation (const GGS_double & inOperand,
+                                       Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- prefix - operator
+  public: GGS_double operator_unary_minus (Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_double & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: class GGS_uint_36__34_ getter_binaryImage (LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_cos (LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_cosDegree (LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_exp (LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_log_31__30_ (Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_log_32_ (Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_logn (Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_power (const class GGS_double & constinOperand0,
+                                         Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_sin (LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_sinDegree (LOCATION_ARGS) const ;
+
+  public: class GGS_sint getter_sint (Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_sint_36__34_ getter_sint_36__34_ (Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_sqrt (Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_string (LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_tan (LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_tanDegree (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_uint (Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint_36__34_ getter_uint_36__34_ (Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_double ;
+
+//--------------------------------------------------------------------------------------------------
+//   @filewrapper type
+//--------------------------------------------------------------------------------------------------
+
+class cRegularFileWrapper {
+  public: const char * mName ;
+  public: const char * mExtension ;
+  public: const bool mIsTextFile ; // True: text file, false: binary file
+  public: const uint32_t mFileLength ;
+  public: const char * mContents ;
+
+//--- Constructor
+  public: cRegularFileWrapper (const char * inName,
+                                const char * inExtension,
+                                const bool inIsTextFile,
+                                const uint32_t inFileLength,
+                                const char * inContents) ;
+
+//--- No copy
+  private: cRegularFileWrapper (const cRegularFileWrapper &) ;
+  private: cRegularFileWrapper & operator = (const cRegularFileWrapper &) ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+class cDirectoryWrapper {
+  public: const char * mDirectoryName ;
+  public: const uint32_t mFileCount ;
+  public: const cRegularFileWrapper * * const mFiles ;
+  public: const uint32_t mDirectoryCount ;
+  public: const cDirectoryWrapper * * mDirectories ;
+
+//--- Constructor
+  public: cDirectoryWrapper (const char * inDirectoryName,
+                              const uint32_t inFileCount,
+                              const cRegularFileWrapper * * const inFiles,
+                              const uint32_t inDirectoryCount,
+                              const cDirectoryWrapper * * inDirectories) ;
+
+//--- No copy
+  private: cDirectoryWrapper (const cDirectoryWrapper &) ;
+  private: cDirectoryWrapper & operator = (const cDirectoryWrapper &) ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+class GGS_filewrapper : public AC_GALGAS_root {
+//--------------------------------- Private data members
+  private: const cDirectoryWrapper * mRootDirectoryPtr ;
+  private: String mCurrentDirectory ;
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return nullptr != mRootDirectoryPtr ; }
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mRootDirectoryPtr = nullptr ; }
+
+//--------------------------------- Default constructor
+  public: GGS_filewrapper (void) ;
+
+//--------------------------------- Native constructor
+  public: GGS_filewrapper (const cDirectoryWrapper & inRootDirectory) ;
+
+//--------------------------------- Handle copy
+  public: GGS_filewrapper (const GGS_filewrapper & inSource) ;
+  public: GGS_filewrapper & operator = (const GGS_filewrapper & inSource) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+
+//--------------------------------- Setters
+  public: void setter_setCurrentDirectory (class GGS_string constinArgument0,
+                                           Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: class GGS_string getter_absolutePathForPath (const class GGS_string & constinOperand0,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_allBinaryFilePaths (LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_allDirectoryPaths (LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_allFilePathsWithExtension (const class GGS_string & constinOperand0
+                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_allTextFilePaths (LOCATION_ARGS) const ;
+
+  public: class GGS_data getter_binaryFileContentsAtPath (const class GGS_string & constinOperand0,
+                                                          Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_binaryFilesAtPath (const class GGS_string & constinOperand0,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_currentDirectory (LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_directoriesAtPath (const class GGS_string & constinOperand0,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_directoryExistsAtPath (const class GGS_string & constinOperand0,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_fileExistsAtPath (const class GGS_string & constinOperand0,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_textFileContentsAtPath (const class GGS_string & constinOperand0,
+                                                          Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_textFilesAtPath (const class GGS_string & constinOperand0,
+                                                           Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_filewrapper ;
+
+//--------------------------------------------------------------------------------------------------
+//   @location type
+//--------------------------------------------------------------------------------------------------
+
+#include "LocationInSource.h"
+#include "SourceTextInString.h"
+
+//--------------------------------------------------------------------------------------------------
+
+class GGS_location : public AC_GALGAS_root {
+//--------------------------------- Private properties
+  private: class InternalLocation * mInternalLocation ;
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
+  public: VIRTUAL_IN_DEBUG bool isValidAndNotNowhere (void) const ;
+  public: VIRTUAL_IN_DEBUG void drop (void) override ;
+  public: LocationInSource startLocation (void) const ;
+  public: LocationInSource endLocation (void) const ;
+  public: SourceTextInString sourceText (void) const ;
+
+//--------------------------------- Default constructor
+  public: GGS_location (void) ;
+
+//--------------------------------- Handle copy
+  public: GGS_location (const GGS_location & inSource) ;
+  public: GGS_location & operator = (const GGS_location & inSource) ;
+
+//--------------------------------- Destructor
+  public: virtual ~ GGS_location (void) ;
+
+//--------------------------------- Native constructor
+  public: GGS_location (const LocationInSource & inStartLocationInSource,
+                        const LocationInSource & inEndLocationInSource,
+                        const SourceTextInString & inSourceText) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+//--------------------------------- GALGAS class functions
+  public: static class GGS_location class_func_here (Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_location class_func_next (Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_location class_func_nowhere (LOCATION_ARGS) ;
+
+  public: static class GGS_location class_func_separator (Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_location & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: class GGS_uint getter_endColumn (Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_endLine (Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_endLocationIndex (Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_endLocationString (Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_file (Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isNowhere (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_startColumn (Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_startLine (Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_startLocationIndex (Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_startLocationString (Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_location getter_union (const class GGS_location & constinOperand0,
+                                           Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_location ;
+
+//--------------------------------------------------------------------------------------------------
+//   @sint type
+//--------------------------------------------------------------------------------------------------
+
+class GGS_sint : public AC_GALGAS_root {
+//--------------------------------- Private data members
+  private: bool mIsValid ;
+  private: int32_t mSIntValue ;
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
+  public: inline int32_t intValue (void) const { return mSIntValue ; }
+
+//--------------------------------- Default constructor
+  public: GGS_sint (void) ;
+
+//--------------------------------- Native constructor
+  public: GGS_sint (const int32_t inValue) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+//--------------------------------- GALGAS class functions
+  public: static class GGS_sint class_func_max (LOCATION_ARGS) ;
+
+  public: static class GGS_sint class_func_min (LOCATION_ARGS) ;
+
+//--------------------------------- << and >> shift operators
+  public: GGS_sint left_shift_operation (const GGS_uint inShiftOperand,
+                                         class Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_sint left_shift_operation (const GGS_bigint inShiftOperand,
+                                         class Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_sint right_shift_operation (const GGS_uint inShiftOperand,
+                                          class Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_sint right_shift_operation (const GGS_bigint inShiftOperand,
+                                          class Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- += operator (with expression)
+  public: void plusAssignOperation (const GGS_sint inOperand,
+                                    class Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- -= operator (with expression)
+  public: void minusAssignOperation (const GGS_sint inOperand,
+                                     class Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- *= operator (with expression)
+  public: void mulAssignOperation (const GGS_sint inOperand,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- /= operator (with expression)
+  public: void divAssignOperation (const GGS_sint inOperand,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- & operator
+  public: GGS_sint operator_and (const GGS_sint & inOperand
+                                 COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- | operator
+  public: GGS_sint operator_or (const GGS_sint & inOperand
+                                COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ^ operator
+  public: GGS_sint operator_xor (const GGS_sint & inOperand
+                                 COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ~ operator
+  public: GGS_sint operator_tilde (LOCATION_ARGS) const ;
+
+//--------------------------------- + operator
+  public: GGS_sint add_operation (const GGS_sint & inOperand,
+                                  Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- &+ operator
+  public: GGS_sint add_operation_no_ovf (const GGS_sint & inOperand) const ;
+
+//--------------------------------- &- operator
+  public: GGS_sint substract_operation_no_ovf (const GGS_sint & inOperand) const ;
+
+//--------------------------------- - operator
+  public: GGS_sint substract_operation (const GGS_sint & inOperand,
+                                        Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- * operator
+  public: GGS_sint multiply_operation (const GGS_sint & inOperand,
+                                       Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- &* operator
+  public: GGS_sint multiply_operation_no_ovf (const GGS_sint & inOperand) const ;
+
+//--------------------------------- / operator
+  public: GGS_sint divide_operation (const GGS_sint & inOperand,
+                                     Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- &/ operator
+  public: GGS_sint divide_operation_no_ovf (const GGS_sint & inOperand) const ;
+
+//--------------------------------- mod operator
+  public: GGS_sint modulo_operation (const GGS_sint & inOperand,
+                                     Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- prefix - operator
+  public: GGS_sint operator_unary_minus (Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- prefix &- operator
+  public: GGS_sint operator_unary_minus_no_ovf (void) const ;
+
+//--------------------------------- ++, -- operators
+  public: void increment_operation (Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+  public: void decrement_operation (Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- &++, &-- operators
+  public: void increment_operation_no_overflow (void) ;
+
+  public: void decrement_operation_no_overflow (void) ;
+
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_sint & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: class GGS_bigint getter_bigint (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_canAdd (const class GGS_sint & constinOperand0
+                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_canDivide (const class GGS_sint & constinOperand0
+                                           COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_canMultiply (const class GGS_sint & constinOperand0
+                                             COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_canSubstract (const class GGS_sint & constinOperand0
+                                              COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_double (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_hexString (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_hexStringSeparatedBy (const class GGS_char & constinOperand0,
+                                                        const class GGS_uint & constinOperand1,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_sint_36__34_ getter_sint_36__34_ (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_string (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_uint (Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint_36__34_ getter_uint_36__34_ (Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_xString (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_sint ;
+
+//--------------------------------------------------------------------------------------------------
+//   @sint64 type
+//--------------------------------------------------------------------------------------------------
+
+class GGS_sint_36__34_ : public AC_GALGAS_root {
+//--------------------------------- Private data members
+  private: bool mIsValid ;
+  private: int64_t mSInt64Value ;
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
+  public: inline int64_t int64Value (void) const { return mSInt64Value ; }
+
+//--------------------------------- Default constructor
+  public: GGS_sint_36__34_ (void) ;
+
+//--------------------------------- Native constructor
+  public: GGS_sint_36__34_ (const int64_t inValue) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+//--------------------------------- GALGAS class functions
+  public: static class GGS_sint_36__34_ class_func_max (LOCATION_ARGS) ;
+
+  public: static class GGS_sint_36__34_ class_func_min (LOCATION_ARGS) ;
+
+//--------------------------------- << and >> shift operators
+  public: GGS_sint_36__34_ left_shift_operation (const GGS_uint inShiftOperand,
+                                                 class Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_sint_36__34_ left_shift_operation (const GGS_bigint inShiftOperand,
+                                                 class Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_sint_36__34_ right_shift_operation (const GGS_uint inShiftOperand,
+                                                  class Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
+  public: GGS_sint_36__34_ right_shift_operation (const GGS_bigint inShiftOperand,
+                                                  class Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- += operator (with expression)
+  public: void plusAssignOperation (const GGS_sint_36__34_ inOperand,
+                                    class Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- -= operator (with expression)
+  public: void minusAssignOperation (const GGS_sint_36__34_ inOperand,
+                                     class Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- *= operator (with expression)
+  public: void mulAssignOperation (const GGS_sint_36__34_ inOperand,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- /= operator (with expression)
+  public: void divAssignOperation (const GGS_sint_36__34_ inOperand,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- & operator
+  public: GGS_sint_36__34_ operator_and (const GGS_sint_36__34_ & inOperand
+                                         COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- | operator
+  public: GGS_sint_36__34_ operator_or (const GGS_sint_36__34_ & inOperand
+                                        COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ^ operator
+  public: GGS_sint_36__34_ operator_xor (const GGS_sint_36__34_ & inOperand
+                                         COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- ~ operator
+  public: GGS_sint_36__34_ operator_tilde (LOCATION_ARGS) const ;
+
+//--------------------------------- + operator
+  public: GGS_sint_36__34_ add_operation (const GGS_sint_36__34_ & inOperand,
+                                          Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- &+ operator
+  public: GGS_sint_36__34_ add_operation_no_ovf (const GGS_sint_36__34_ & inOperand) const ;
+
+//--------------------------------- &- operator
+  public: GGS_sint_36__34_ substract_operation_no_ovf (const GGS_sint_36__34_ & inOperand) const ;
+
+//--------------------------------- - operator
+  public: GGS_sint_36__34_ substract_operation (const GGS_sint_36__34_ & inOperand,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- * operator
+  public: GGS_sint_36__34_ multiply_operation (const GGS_sint_36__34_ & inOperand,
+                                               Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- &* operator
+  public: GGS_sint_36__34_ multiply_operation_no_ovf (const GGS_sint_36__34_ & inOperand) const ;
+
+//--------------------------------- / operator
+  public: GGS_sint_36__34_ divide_operation (const GGS_sint_36__34_ & inOperand,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- &/ operator
+  public: GGS_sint_36__34_ divide_operation_no_ovf (const GGS_sint_36__34_ & inOperand) const ;
+
+//--------------------------------- mod operator
+  public: GGS_sint_36__34_ modulo_operation (const GGS_sint_36__34_ & inOperand,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- prefix - operator
+  public: GGS_sint_36__34_ operator_unary_minus (Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- prefix &- operator
+  public: GGS_sint_36__34_ operator_unary_minus_no_ovf (void) const ;
+
+//--------------------------------- ++, -- operators
+  public: void increment_operation (Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+  public: void decrement_operation (Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- &++, &-- operators
+  public: void increment_operation_no_overflow (void) ;
+
+  public: void decrement_operation_no_overflow (void) ;
+
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_sint_36__34_ & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: class GGS_bigint getter_bigint (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_canAdd (const class GGS_sint_36__34_ & constinOperand0
+                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_canDivide (const class GGS_sint_36__34_ & constinOperand0
+                                           COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_canMultiply (const class GGS_sint_36__34_ & constinOperand0
+                                             COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_canSubstract (const class GGS_sint_36__34_ & constinOperand0
+                                              COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_double (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_hexString (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_hexStringSeparatedBy (const class GGS_char & constinOperand0,
+                                                        const class GGS_uint & constinOperand1,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_sint getter_sint (Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_string (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_uint (Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint_36__34_ getter_uint_36__34_ (Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_xString (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_sint_36__34_ ;
+
+//--------------------------------------------------------------------------------------------------
+//   @string type
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string : public AC_GALGAS_root {
+//--------------------------------- Private data members
+  private: bool mIsValid ;
+  private: String mString ;
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
+  public: VIRTUAL_IN_DEBUG void drop (void) override ;
+  public: inline String stringValue (void) const { return mString ; }
+
+//--------------------------------- Default constructor
+  public: GGS_string (void) ;
+
+//--------------------------------- Constructor for making an empty string
+  public: static GGS_string makeEmptyString (void) ;
+
+//--------------------------------- Native constructor
+  public: GGS_string (const String & inValue) ;
+
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    public: virtual void printNonNullClassInstanceProperties (const char * inPropertyName) const override ;
+  #endif
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+//--------------------------------- GALGAS class functions
+  public: static class GGS_string class_func_CppChar (const class GGS_char & inOperand0
+                                                      COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_CppLineComment (LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_CppSpaceComment (LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_CppString (const class GGS_string & inOperand0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_CppTitleComment (const class GGS_string & inOperand0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_componentsJoinedByString (const class GGS__5B_string_5D_ & inOperand0,
+                                                                       const class GGS_string & inOperand1
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_homeDirectory (LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_newWithStdIn (LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_retrieveAndResetTemplateString (Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_separatorString (Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_stringByRepeatingString (const class GGS_string & inOperand0,
+                                                                      const class GGS_uint & inOperand1
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_stringWithContentsOfFile (const class GGS_string & inOperand0,
+                                                                       class Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_stringWithCurrentDateTime (LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_stringWithCurrentDirectory (LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_stringWithEnvironmentVariable (const class GGS_string & inOperand0,
+                                                                            class Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_stringWithEnvironmentVariableOrEmpty (const class GGS_string & inOperand0
+                                                                                   COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_stringWithSequenceOfCharacters (const class GGS_char & inOperand0,
+                                                                             const class GGS_uint & inOperand1
+                                                                             COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_stringWithSourceFilePath (Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public: static class GGS_string class_func_stringWithSymbolicLinkContents (const class GGS_string & inOperand0,
+                                                                             class Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with expression)
+  public: void plusAssignOperation (const GGS_string inOperand,
+                                    class Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- + operator
+  public: GGS_string add_operation (const GGS_string & inOperand,
+                                    Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_string & inOperand) const ;
+
+//--------------------------------- Setters
+  public: void setter_appendSpacesUntilColumn (class GGS_uint constinArgument0,
+                                               Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+  public: void setter_decIndentation (class GGS_uint constinArgument0,
+                                      Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+  public: void setter_incIndentation (class GGS_uint constinArgument0,
+                                      Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+  public: void setter_insertCharacterAtIndex (class GGS_char constinArgument0,
+                                              class GGS_uint constinArgument1,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+  public: void setter_removeCharacterAtIndex (class GGS_char & outArgument0,
+                                              class GGS_uint constinArgument1,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+  public: void setter_setCapacity (class GGS_uint constinArgument0,
+                                   Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+  public: void setter_setCharacterAtIndex (class GGS_char constinArgument0,
+                                           class GGS_uint constinArgument1,
+                                           Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public: void method_makeDirectory (Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) const ;
+
+  public: void method_makeDirectoryAndWriteToExecutableFile (class GGS_string constinArgument0,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const ;
+
+  public: void method_makeDirectoryAndWriteToFile (class GGS_string constinArgument0,
+                                                   Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const ;
+
+  public: void method_makeSymbolicLinkWithPath (class GGS_string constinArgument0,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const ;
+
+  public: void method_writeToExecutableFile (class GGS_string constinArgument0,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const ;
+
+  public: void method_writeToExecutableFileWhenDifferentContents (class GGS_string constinArgument0,
+                                                                  class GGS_bool & outArgument1,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const ;
+
+  public: void method_writeToFile (class GGS_string constinArgument0,
+                                   Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) const ;
+
+  public: void method_writeToFileWhenDifferentContents (class GGS_string constinArgument0,
+                                                        class GGS_bool & outArgument1,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+  public: static void class_method_deleteFile (class GGS_string constinArgument0,
+                                               Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+  public: static void class_method_deleteFileIfExists (class GGS_string constinArgument0,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public: static void class_method_generateFile (class GGS_string constinArgument0,
+                                                 class GGS_string constinArgument1,
+                                                 class GGS_string constinArgument2,
+                                                 Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+  public: static void class_method_generateFileWithPattern (class GGS_string constinArgument0,
+                                                            class GGS_string constinArgument1,
+                                                            class GGS_string constinArgument2,
+                                                            class GGS_string constinArgument3,
+                                                            class GGS_string constinArgument4,
+                                                            class GGS_string constinArgument5,
+                                                            class GGS_string constinArgument6,
+                                                            class GGS_string constinArgument7,
+                                                            class GGS_bool constinArgument8,
+                                                            Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public: static void class_method_removeDirectoryRecursively (class GGS_string constinArgument0,
+                                                               Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public: static void class_method_removeEmptyDirectory (class GGS_string constinArgument0,
+                                                         Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Getters
+  public: class GGS_string getter_HTMLRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_absolutePathFromPath (const class GGS_string & constinOperand0
+                                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_assemblerRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS_bigint_3F_ getter_bigint (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_cStringRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_capacity (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_capitalizingFirstCharacter (LOCATION_ARGS) const ;
+
+  public: class GGS_char getter_characterAtIndex (const class GGS_uint & constinOperand0,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_sint getter_commandWithArguments (const class GGS__5B_string_5D_ & constinOperand0,
+                                                      Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_componentsSeparatedByString (const class GGS_string & constinOperand0
+                                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_containsCharacter (const class GGS_char & constinOperand0
+                                                   COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_containsCharacterInRange (const class GGS_char & constinOperand0,
+                                                          const class GGS_char & constinOperand1
+                                                          COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_currentColumn (LOCATION_ARGS) const ;
+
+  public: class GGS_sint_36__34_ getter_decimalSigned_36__34_Number (Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bigint getter_decimalSignedBigInt (Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_sint getter_decimalSignedNumber (Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint_36__34_ getter_decimalUnsigned_36__34_Number (Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_decimalUnsignedNumber (Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_decodedStringFromRepresentation (Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_deletingLastPathComponent (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_deletingPathExtension (LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_directories (const class GGS_bool & constinOperand0
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_directoriesWithExtensions (const class GGS_bool & constinOperand0,
+                                                                     const class GGS__5B_string_5D_ & constinOperand1
+                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_directoryExists (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_doesEnvironmentVariableExist (LOCATION_ARGS) const ;
+
+  public: class GGS_double getter_doubleNumber (Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_fileExists (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_fileNameRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS_char getter_firstCharacterOrNul (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_hasPrefix (const class GGS_string & constinOperand0
+                                           COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_hasSuffix (const class GGS_string & constinOperand0
+                                           COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_lstring getter_here (Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_hiddenCommandWithArguments (const class GGS__5B_string_5D_ & constinOperand0,
+                                                              Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_hiddenFiles (const class GGS_bool & constinOperand0
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_identifierRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isDecimalSigned_36__34_Number (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isDecimalSignedBigInt (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isDecimalSignedNumber (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isDecimalUnsigned_36__34_Number (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isDecimalUnsignedNumber (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isDoubleNumber (LOCATION_ARGS) const ;
+
+  public: class GGS_bool getter_isSymbolicLink (LOCATION_ARGS) const ;
+
+  public: class GGS_char getter_lastCharacter (Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_lastPathComponent (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_leftAndRightPadding (const class GGS_uint & constinOperand0,
+                                                       const class GGS_char & constinOperand1
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_leftPadding (const class GGS_uint & constinOperand0,
+                                               const class GGS_char & constinOperand1
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_leftSubString (const class GGS_uint & constinOperand0
+                                                 COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_lowercased (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_md_35_ (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_nameRepresentation (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_nativePathWithUnixPath (LOCATION_ARGS) const ;
+
+  public: class GGS_lstring getter_nowhere (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_pathExtension (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_popen (Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_range getter_range (LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_regularFiles (const class GGS_bool & constinOperand0
+                                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_string_5D_ getter_regularFilesWithExtensions (const class GGS_bool & constinOperand0,
+                                                                      const class GGS__5B_string_5D_ & constinOperand1
+                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_relativePathFromPath (const class GGS_string & constinOperand0
+                                                        COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_removingCharacterAtIndex (const class GGS_uint & constinOperand0,
+                                                            Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_removingFirst (Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_replacing (const class GGS_string & constinOperand0,
+                                             const class GGS_string & constinOperand1,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_reversed (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_rightPadding (const class GGS_uint & constinOperand0,
+                                                const class GGS_char & constinOperand1
+                                                COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_rightSubString (const class GGS_uint & constinOperand0
+                                                  COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_sha_32__35__36_ (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_standardizedPath (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_subString (const class GGS_uint & constinOperand0,
+                                             const class GGS_uint & constinOperand1
+                                             COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_subStringFromIndex (const class GGS_uint & constinOperand0
+                                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_sint getter_system (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_trimmingSpaces (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_unixPathWithNativePath (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_uppercased (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_utf_33__32_Representation (const class GGS_bool & constinOperand0
+                                                             COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_utf_38_Length (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_utf_38_Representation (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_utf_38_RepresentationEnclosedWithin (const class GGS_char & constinOperand0
+                                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_utf_38_RepresentationEscapingQuestionMark (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_utf_38_RepresentationWithUnicodeEscaping (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_utf_38_RepresentationWithoutDelimiters (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_string ;
 
 //--------------------------------------------------------------------------------------------------
 //   @uint type
@@ -78,15 +2473,6 @@ class GGS_uint : public AC_GALGAS_root {
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_uint extractObject (const GGS_object & inObject,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- GALGAS class functions
   public: static class GGS_uint class_func_compilationMode (LOCATION_ARGS) ;
 
@@ -273,2465 +2659,12 @@ class GGS_uint : public AC_GALGAS_root {
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
 
 extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_uint ;
-
-//--------------------------------------------------------------------------------------------------
-//  @bool type
-//--------------------------------------------------------------------------------------------------
-
-enum class GalgasBool {boolNotValid, boolFalse, boolTrue} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class GGS_bool : public AC_GALGAS_root {
-//--------------------------------- Private data members
-  private: bool mIsValid ;
-  private: bool mBoolValue ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
-  public: inline bool isValidAndTrue (void) const { return mIsValid && mBoolValue ; }
-  public: inline bool boolValue (void) const { return mBoolValue ; }
-  public: GalgasBool boolEnum (void) const ;
-
-//--------------------------------- Drop
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
-
-//--------------------------------- Default constructor
-  public: GGS_bool (void) ;
-
-//--------------------------------- Native constructors
-  public: GGS_bool (const bool inValue) ; // Is built
-  public: GGS_bool (const bool inBuilt, const bool inValue) ;
-
-//--------------------------------- Constructor for comparison result
-  public: GGS_bool (const ComparisonKind inComparisonKind,
-                    const ComparisonResult inComparisonResult) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_bool extractObject (const GGS_object & inObject,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- & operator
-  public: GGS_bool operator_and (const GGS_bool & inOperand
-                                 COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- | operator
-  public: GGS_bool operator_or (const GGS_bool & inOperand
-                                COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- ^ operator
-  public: GGS_bool operator_xor (const GGS_bool & inOperand
-                                 COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- not operator
-  public: GGS_bool operator_not (LOCATION_ARGS) const ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_bool & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_bigint getter_bigint (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_cString (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_ocString (LOCATION_ARGS) const ;
-
-  public: class GGS_sint getter_sint (LOCATION_ARGS) const ;
-
-  public: class GGS_sint_36__34_ getter_sint_36__34_ (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_uint (LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_ getter_uint_36__34_ (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_bool ;
-
-//--------------------------------------------------------------------------------------------------
-//@application package
-//--------------------------------------------------------------------------------------------------
-
-class GGS_application final {
-
-//-- Start of package generic part
-
-//--------------------------------- GALGAS class getters
-  public: static class GGS_string class_func_boolOptionCommentString (const class GGS_string & inOperand0,
-                                                                      const class GGS_string & inOperand1
-                                                                      COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_char class_func_boolOptionInvocationCharacter (const class GGS_string & inOperand0,
-                                                                          const class GGS_string & inOperand1
-                                                                          COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_boolOptionInvocationString (const class GGS_string & inOperand0,
-                                                                         const class GGS_string & inOperand1
-                                                                         COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS__32_stringlist class_func_boolOptionNameList (LOCATION_ARGS) ;
-
-  public: static class GGS_bool class_func_boolOptionValue (const class GGS_string & inOperand0,
-                                                            const class GGS_string & inOperand1
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_commandLineArgumentAtIndex (const class GGS_uint & inOperand0,
-                                                                         class Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_uint class_func_commandLineArgumentCount (LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_galgasVersionString (LOCATION_ARGS) ;
-
-  public: static class GGS_stringset class_func_keywordIdentifierSet (LOCATION_ARGS) ;
-
-  public: static class GGS_stringlist class_func_keywordListForIdentifier (const class GGS_string & inOperand0
-                                                                           COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_projectVersionString (LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_stringOptionCommentString (const class GGS_string & inOperand0,
-                                                                        const class GGS_string & inOperand1
-                                                                        COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_char class_func_stringOptionInvocationCharacter (const class GGS_string & inOperand0,
-                                                                            const class GGS_string & inOperand1
-                                                                            COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_stringOptionInvocationString (const class GGS_string & inOperand0,
-                                                                           const class GGS_string & inOperand1
-                                                                           COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS__32_stringlist class_func_stringOptionNameList (LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_stringOptionValue (const class GGS_string & inOperand0,
-                                                                const class GGS_string & inOperand1
-                                                                COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_system (LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_uintOptionCommentString (const class GGS_string & inOperand0,
-                                                                      const class GGS_string & inOperand1
-                                                                      COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_char class_func_uintOptionInvocationCharacter (const class GGS_string & inOperand0,
-                                                                          const class GGS_string & inOperand1
-                                                                          COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_uintOptionInvocationString (const class GGS_string & inOperand0,
-                                                                         const class GGS_string & inOperand1
-                                                                         COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS__32_stringlist class_func_uintOptionNameList (LOCATION_ARGS) ;
-
-  public: static class GGS_uint class_func_uintOptionValue (const class GGS_string & inOperand0,
-                                                            const class GGS_string & inOperand1
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_bool class_func_verboseOutput (LOCATION_ARGS) ;
-
-//--------------------------------- Class Methods
-  public: static void class_method_exit (class GGS_uint constinArgument0
-                                         COMMA_LOCATION_ARGS) ;
-
-  public: static void class_method_setBoolOptionValue (class GGS_string constinArgument0,
-                                                       class GGS_string constinArgument1,
-                                                       class GGS_bool constinArgument2
-                                                       COMMA_LOCATION_ARGS) ;
-
-  public: static void class_method_setStringOptionValue (class GGS_string constinArgument0,
-                                                         class GGS_string constinArgument1,
-                                                         class GGS_string constinArgument2
-                                                         COMMA_LOCATION_ARGS) ;
-
-  public: static void class_method_setUIntOptionValue (class GGS_string constinArgument0,
-                                                       class GGS_string constinArgument1,
-                                                       class GGS_uint constinArgument2
-                                                       COMMA_LOCATION_ARGS) ;
-
-
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//   @bigint type
-//--------------------------------------------------------------------------------------------------
- 
-class GGS_bigint : public AC_GALGAS_root {
-//--------------------------------- Private properties
-  private: bool mIsValid ;
-  private: BigSigned mValue ;
-
-//--------------------------------- Accessors
-  public: inline bool isValid (void) const override { return mIsValid ; }
-  public: inline BigSigned bigintValue (void) const { return mValue ; }
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_bigint (void) ;
-
-//--------------------------------- Constructor
-  public: GGS_bigint (const BigSigned & inValue) ;
-  public: GGS_bigint (const char * inDecimalString, Compiler * inCompiler COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Destructor
-  public: virtual ~ GGS_bigint (void) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_bigint extractObject (const GGS_object & inObject,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_bigint class_func_zero (LOCATION_ARGS) ;
-
-//--------------------------------- << and >> shift operators
-  public: GGS_bigint left_shift_operation (const GGS_uint inShiftOperand,
-                                           class Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_bigint left_shift_operation (const GGS_bigint inShiftOperand,
-                                           class Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_bigint right_shift_operation (const GGS_uint inShiftOperand,
-                                            class Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_bigint right_shift_operation (const GGS_bigint inShiftOperand,
-                                            class Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_bigint inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- -= operator (with expression)
-  public: void minusAssignOperation (const GGS_bigint inOperand,
-                                     class Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- *= operator (with expression)
-  public: void mulAssignOperation (const GGS_bigint inOperand,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- /= operator (with expression)
-  public: void divAssignOperation (const GGS_bigint inOperand,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- & operator
-  public: GGS_bigint operator_and (const GGS_bigint & inOperand
-                                   COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- | operator
-  public: GGS_bigint operator_or (const GGS_bigint & inOperand
-                                  COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- ^ operator
-  public: GGS_bigint operator_xor (const GGS_bigint & inOperand
-                                   COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- ~ operator
-  public: GGS_bigint operator_tilde (LOCATION_ARGS) const ;
-
-//--------------------------------- + operator
-  public: GGS_bigint add_operation (const GGS_bigint & inOperand,
-                                    Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- - operator
-  public: GGS_bigint substract_operation (const GGS_bigint & inOperand,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- * operator
-  public: GGS_bigint multiply_operation (const GGS_bigint & inOperand,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- / operator
-  public: GGS_bigint divide_operation (const GGS_bigint & inOperand,
-                                       Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- mod operator
-  public: GGS_bigint modulo_operation (const GGS_bigint & inOperand,
-                                       Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- prefix - operator
-  public: GGS_bigint operator_unary_minus (Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- ++, -- operators
-  public: void increment_operation (Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-  public: void decrement_operation (Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_bigint & inOperand) const ;
-
-//--------------------------------- Setters
-  public: void setter_complementBitAtIndex (class GGS_uint constinArgument0
-                                            COMMA_LOCATION_ARGS) ;
-
-  public: void setter_setBitAtIndex (class GGS_bool constinArgument0,
-                                     class GGS_uint constinArgument1
-                                     COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public: void method_divideBy (class GGS_bigint constinArgument0,
-                                class GGS_bigint & outArgument1,
-                                class GGS_bigint & outArgument2,
-                                Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_bigint getter_abs (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_bitAtIndex (const class GGS_uint & constinOperand0
-                                            COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_bitCountForSignedRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_bitCountForUnsignedRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_uintlist getter_extract_33__32_ForSignedRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_uintlist getter_extract_33__32_ForUnsignedRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_list getter_extract_36__34_ForSignedRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_list getter_extract_36__34_ForUnsignedRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_uintlist getter_extract_38_ForSignedRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_uintlist getter_extract_38_ForUnsignedRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_fitsInSInt (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_fitsInSInt_36__34_ (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_fitsInUInt (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_fitsInUInt_36__34_ (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_hexString (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_hexStringSeparatedBy (const class GGS_char & constinOperand0,
-                                                        const class GGS_uint & constinOperand1,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isZero (LOCATION_ARGS) const ;
-
-  public: class GGS_sint getter_sign (LOCATION_ARGS) const ;
-
-  public: class GGS_sint getter_sint (Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_sint_36__34_ getter_sint_36__34_ (Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_spacedString (const class GGS_uint & constinOperand0
-                                                COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_string (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_uint (Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_ getter_uint_36__34_ (Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_xString (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_bigint ;
-
-//--------------------------------------------------------------------------------------------------
-// @binaryset type
-//--------------------------------------------------------------------------------------------------
-
-#include "BinaryDecisionDiagram.h"
-
-//--------------------------------------------------------------------------------------------------
-
-class GGS_binaryset : public AC_GALGAS_root {
-//--------------------------------- Private data members
-  private: bool mIsValid ;
-  private: BinaryDecisionDiagram mBDD ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
-  public: inline BinaryDecisionDiagram bddValue (void) const { return mBDD ; }
-
-//--------------------------------- Default constructor
-  public: GGS_binaryset (void) ;
-
-//--------------------------------- Native constructor
-  public: GGS_binaryset (const BinaryDecisionDiagram & inValue) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_binaryset init (Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_binaryset extractObject (const GGS_object & inObject,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_binaryset class_func_binarySetWithBit (const class GGS_uint & inOperand0,
-                                                                  class Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_binarySetWithEqualComparison (const class GGS_uint & inOperand0,
-                                                                              const class GGS_uint & inOperand1,
-                                                                              const class GGS_uint & inOperand2,
-                                                                              class Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_binarySetWithEqualToConstant (const class GGS_uint & inOperand0,
-                                                                              const class GGS_uint & inOperand1,
-                                                                              const class GGS_uint_36__34_ & inOperand2,
-                                                                              class Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_binarySetWithGreaterOrEqualComparison (const class GGS_uint & inOperand0,
-                                                                                       const class GGS_uint & inOperand1,
-                                                                                       const class GGS_uint & inOperand2,
-                                                                                       class Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_binarySetWithGreaterOrEqualToConstant (const class GGS_uint & inOperand0,
-                                                                                       const class GGS_uint & inOperand1,
-                                                                                       const class GGS_uint_36__34_ & inOperand2,
-                                                                                       class Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_binarySetWithLowerOrEqualComparison (const class GGS_uint & inOperand0,
-                                                                                     const class GGS_uint & inOperand1,
-                                                                                     const class GGS_uint & inOperand2,
-                                                                                     class Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_binarySetWithLowerOrEqualToConstant (const class GGS_uint & inOperand0,
-                                                                                     const class GGS_uint & inOperand1,
-                                                                                     const class GGS_uint_36__34_ & inOperand2,
-                                                                                     class Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_binarySetWithNotEqualComparison (const class GGS_uint & inOperand0,
-                                                                                 const class GGS_uint & inOperand1,
-                                                                                 const class GGS_uint & inOperand2,
-                                                                                 class Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_binarySetWithNotEqualToConstant (const class GGS_uint & inOperand0,
-                                                                                 const class GGS_uint & inOperand1,
-                                                                                 const class GGS_uint_36__34_ & inOperand2,
-                                                                                 class Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_binarySetWithPredicateString (const class GGS_string & inOperand0,
-                                                                              class Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_binarySetWithStrictGreaterComparison (const class GGS_uint & inOperand0,
-                                                                                      const class GGS_uint & inOperand1,
-                                                                                      const class GGS_uint & inOperand2,
-                                                                                      class Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_binarySetWithStrictGreaterThanConstant (const class GGS_uint & inOperand0,
-                                                                                        const class GGS_uint & inOperand1,
-                                                                                        const class GGS_uint_36__34_ & inOperand2,
-                                                                                        class Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_binarySetWithStrictLowerComparison (const class GGS_uint & inOperand0,
-                                                                                    const class GGS_uint & inOperand1,
-                                                                                    const class GGS_uint & inOperand2,
-                                                                                    class Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_binarySetWithStrictLowerThanConstant (const class GGS_uint & inOperand0,
-                                                                                      const class GGS_uint & inOperand1,
-                                                                                      const class GGS_uint_36__34_ & inOperand2,
-                                                                                      class Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_emptyBinarySet (LOCATION_ARGS) ;
-
-  public: static class GGS_binaryset class_func_fullBinarySet (LOCATION_ARGS) ;
-
-//--------------------------------- << and >> shift operators
-  public: GGS_binaryset left_shift_operation (const GGS_uint inShiftOperand,
-                                              class Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_binaryset left_shift_operation (const GGS_bigint inShiftOperand,
-                                              class Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_binaryset right_shift_operation (const GGS_uint inShiftOperand,
-                                               class Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_binaryset right_shift_operation (const GGS_bigint inShiftOperand,
-                                               class Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- & operator
-  public: GGS_binaryset operator_and (const GGS_binaryset & inOperand
-                                      COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- | operator
-  public: GGS_binaryset operator_or (const GGS_binaryset & inOperand
-                                     COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- ^ operator
-  public: GGS_binaryset operator_xor (const GGS_binaryset & inOperand
-                                      COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- ~ operator
-  public: GGS_binaryset operator_tilde (LOCATION_ARGS) const ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_binaryset & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-  public: static void class_method_setAndTableSize (class GGS_uint constinArgument0
-                                                    COMMA_LOCATION_ARGS) ;
-
-  public: static void class_method_setNodeTableSize (class GGS_uint constinArgument0
-                                                     COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Getters
-  public: class GGS_binaryset getter_ITE (const class GGS_binaryset & constinOperand0,
-                                          const class GGS_binaryset & constinOperand1
-                                          COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_accessibleStates (const class GGS_binaryset & constinOperand0,
-                                                       const class GGS_uint & constinOperand1
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bigint getter_bigValueCount (const class GGS_uint & constinOperand0,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_binarySetByTranslatingFromIndex (const class GGS_uint & constinOperand0,
-                                                                      const class GGS_uint & constinOperand1
-                                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_compressedStringValueList (const class GGS_uint & constinOperand0,
-                                                                 Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_ getter_compressedValueCount (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_containsValue (const class GGS_uint_36__34_ & constinOperand0,
-                                               const class GGS_uint & constinOperand1,
-                                               const class GGS_uint & constinOperand2
-                                               COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_equalTo (const class GGS_binaryset & constinOperand0
-                                              COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_existOnBitIndex (const class GGS_uint & constinOperand0
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_existOnBitIndexAndBeyond (const class GGS_uint & constinOperand0
-                                                               COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_existsOnBitRange (const class GGS_uint & constinOperand0,
-                                                       const class GGS_uint & constinOperand1
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_forAllOnBitIndex (const class GGS_uint & constinOperand0
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_forAllOnBitIndexAndBeyond (const class GGS_uint & constinOperand0
-                                                                COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_graphviz (const class GGS_stringlist & constinOperand0
-                                            COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_graphvizDump (LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_greaterOrEqualTo (const class GGS_binaryset & constinOperand0
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_implies (const class GGS_binaryset & constinOperand0
-                                              COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isEmpty (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isFull (LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_lowerOrEqualTo (const class GGS_binaryset & constinOperand0
-                                                     COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_ getter_nodeCount (LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_notEqualTo (const class GGS_binaryset & constinOperand0
-                                                 COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_predicateStringValue (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_print (const class GGS_stringlist & constinOperand0,
-                                         const class GGS_uintlist & constinOperand1
-                                         COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_significantVariableCount (LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_strictGreaterThan (const class GGS_binaryset & constinOperand0
-                                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_strictLowerThan (const class GGS_binaryset & constinOperand0
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_stringValueList (const class GGS_uint & constinOperand0
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_stringValueListWithNameList (const class GGS_uint & constinOperand0,
-                                                                   const class GGS_stringlist & constinOperand1,
-                                                                   Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_swap_30__32__31_ (const class GGS_uint & constinOperand0,
-                                                       const class GGS_uint & constinOperand1,
-                                                       const class GGS_uint & constinOperand2
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_swap_31__30_ (const class GGS_uint & constinOperand0,
-                                                   const class GGS_uint & constinOperand1
-                                                   COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_swap_31__30__32_ (const class GGS_uint & constinOperand0,
-                                                       const class GGS_uint & constinOperand1,
-                                                       const class GGS_uint & constinOperand2
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_swap_31__32__30_ (const class GGS_uint & constinOperand0,
-                                                       const class GGS_uint & constinOperand1,
-                                                       const class GGS_uint & constinOperand2
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_swap_32__30__31_ (const class GGS_uint & constinOperand0,
-                                                       const class GGS_uint & constinOperand1,
-                                                       const class GGS_uint & constinOperand2
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_swap_32__31__30_ (const class GGS_uint & constinOperand0,
-                                                       const class GGS_uint & constinOperand1,
-                                                       const class GGS_uint & constinOperand2
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_transformedBy (const class GGS_uintlist & constinOperand0
-                                                    COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_transitiveClosure (const class GGS_uint & constinOperand0
-                                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_binaryset getter_transposedBy (const class GGS_uintlist & constinOperand0,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_list getter_uint_36__34_ValueList (const class GGS_uint & constinOperand0
-                                                                   COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_ getter_valueCount (const class GGS_uint & constinOperand0,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_binaryset ;
-
-//--------------------------------------------------------------------------------------------------
-//   @char type
-//--------------------------------------------------------------------------------------------------
-
-class GGS_char : public AC_GALGAS_root {
-//--------------------------------- Private data members
-  private: bool mIsValid ;
-  private: utf32 mCharValue ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
-  public: inline utf32 charValue (void) const { return mCharValue ; }
-
-//--------------------------------- Default constructor
-  public: GGS_char (void) ;
-
-//--------------------------------- Native constructor
-  public: GGS_char (const utf32 inValue) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_char extractObject (const GGS_object & inObject,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_char class_func_replacementCharacter (LOCATION_ARGS) ;
-
-  public: static class GGS_char class_func_unicodeCharacterFromRawKeyboard (Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_char class_func_unicodeCharacterWithUnsigned (const class GGS_uint & inOperand0
-                                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_char & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_bool getter_isUnicodeCommand (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isUnicodeLetter (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isUnicodeMark (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isUnicodeNumber (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isUnicodePunctuation (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isUnicodeSeparator (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isUnicodeSymbol (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isalnum (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isalpha (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_iscntrl (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isdigit (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_islower (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isupper (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isxdigit (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_string (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_uint (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_unicodeName (LOCATION_ARGS) const ;
-
-  public: class GGS_char getter_unicodeToLower (LOCATION_ARGS) const ;
-
-  public: class GGS_char getter_unicodeToUpper (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_utf_33__32_CharConstantRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_utf_38_Length (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_char ;
-
-//--------------------------------------------------------------------------------------------------
-//   Phase 1: @data enumerator
-//--------------------------------------------------------------------------------------------------
-
-class UpEnumerator_data final {
-  public: UpEnumerator_data (const class GGS_data & inEnumeratedObject) ;
-
-  public: bool hasCurrentObject (void) const { return mIndex < mArray.count () ; }
-
-  public: void gotoNextObject (void) { mIndex += 1 ; }
-
-//--- Current element access
-  public: class GGS_uint current_data (LOCATION_ARGS) const ;
-  public: class GGS_uint current (LOCATION_ARGS) const ;
-
-//--- Private properties
-  private: U8Data mArray ;
-  private: int32_t mIndex ;
-
-//--- No copy
-  private: UpEnumerator_data (const UpEnumerator_data &) = delete ;
-  private: UpEnumerator_data & operator = (const UpEnumerator_data &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class DownEnumerator_data final {
-
-  public: DownEnumerator_data (const class GGS_data & inEnumeratedObject) ;
-
-  public: bool hasCurrentObject (void) const { return mIndex >= 0 ; }
-
-  public: void gotoNextObject (void) { mIndex -= 1 ; }
-
-//--- Current element access
-  public: class GGS_uint current_data (LOCATION_ARGS) const ;
-  public: class GGS_uint current (LOCATION_ARGS) const ;
-
-//--- Private properties
-  private: U8Data mArray ;
-  private: int32_t mIndex ;
-
-//--- No copy
-  private: DownEnumerator_data (const DownEnumerator_data &) = delete ;
-  private: DownEnumerator_data & operator = (const DownEnumerator_data &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//   @data type
-//--------------------------------------------------------------------------------------------------
-
-class GGS_data : public AC_GALGAS_root {
-//--------------------------------- Private data members
-  private: bool mIsValid ;
-  private: U8Data mData ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
-  public: inline U8Data dataValue (void) const { return mData ; }
-
-//--------------------------------- Default constructor
-  public: GGS_data (void) ;
-
-//--------------------------------- Native constructor
-  public: GGS_data (const U8Data & inData) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_data init (Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_data extractObject (const GGS_object & inObject,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_data class_func_dataWithContentsOfFile (const class GGS_string & inOperand0,
-                                                                   class Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_data class_func_emptyData (LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_data & inOperand) const ;
-
-//--------------------------------- Setters
-  public: void setter_appendByte (class GGS_uint constinArgument0,
-                                  Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) ;
-
-  public: void setter_appendData (class GGS_data constinArgument0
-                                  COMMA_LOCATION_ARGS) ;
-
-  public: void setter_appendShortBE (class GGS_uint constinArgument0,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_appendShortLE (class GGS_uint constinArgument0,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_appendUIntBE (class GGS_uint constinArgument0
-                                    COMMA_LOCATION_ARGS) ;
-
-  public: void setter_appendUIntLE (class GGS_uint constinArgument0
-                                    COMMA_LOCATION_ARGS) ;
-
-  public: void setter_appendUTF_38_String (class GGS_string constinArgument0
-                                           COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public: void method_writeToExecutableFile (class GGS_string constinArgument0,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
-
-  public: void method_writeToFile (class GGS_string constinArgument0,
-                                   Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) const ;
-
-  public: void method_writeToFileWhenDifferentContents (class GGS_string constinArgument0,
-                                                        class GGS_bool & outArgument1,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_string getter_cStringRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
-//--------------------------------- Friend
-  friend class UpEnumerator_data ;
-  friend class DownEnumerator_data ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_data ;
-
-//--------------------------------------------------------------------------------------------------
-//  @double type
-//--------------------------------------------------------------------------------------------------
-
-class GGS_double : public AC_GALGAS_root {
-//--------------------------------- Private data members
-  private: bool mIsValid ;
-  private: double mDoubleValue ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
-  public: inline double doubleValue (void) const { return mDoubleValue ; }
-
-//--------------------------------- Default constructor
-  public: GGS_double (void) ;
-
-//--------------------------------- Native constructor
-  public: GGS_double (const double inValue) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_double extractObject (const GGS_object & inObject,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_double class_func_doubleWithBinaryImage (const class GGS_uint_36__34_ & inOperand0
-                                                                    COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_double class_func_pi (LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_double inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- -= operator (with expression)
-  public: void minusAssignOperation (const GGS_double inOperand,
-                                     class Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- *= operator (with expression)
-  public: void mulAssignOperation (const GGS_double inOperand,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- /= operator (with expression)
-  public: void divAssignOperation (const GGS_double inOperand,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- + operator
-  public: GGS_double add_operation (const GGS_double & inOperand,
-                                    Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- - operator
-  public: GGS_double substract_operation (const GGS_double & inOperand,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- * operator
-  public: GGS_double multiply_operation (const GGS_double & inOperand,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- / operator
-  public: GGS_double divide_operation (const GGS_double & inOperand,
-                                       Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- &/ operator
-  public: GGS_double divide_operation_no_ovf (const GGS_double & inOperand) const ;
-
-//--------------------------------- mod operator
-  public: GGS_double modulo_operation (const GGS_double & inOperand,
-                                       Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- prefix - operator
-  public: GGS_double operator_unary_minus (Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_double & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_uint_36__34_ getter_binaryImage (LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_cos (LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_cosDegree (LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_exp (LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_log_31__30_ (Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_log_32_ (Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_logn (Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_power (const class GGS_double & constinOperand0,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_sin (LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_sinDegree (LOCATION_ARGS) const ;
-
-  public: class GGS_sint getter_sint (Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_sint_36__34_ getter_sint_36__34_ (Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_sqrt (Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_string (LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_tan (LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_tanDegree (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_uint (Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_ getter_uint_36__34_ (Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_double ;
-
-//--------------------------------------------------------------------------------------------------
-//   @filewrapper type
-//--------------------------------------------------------------------------------------------------
-
-class cRegularFileWrapper {
-  public: const char * mName ;
-  public: const char * mExtension ;
-  public: const bool mIsTextFile ; // True: text file, false: binary file
-  public: const uint32_t mFileLength ;
-  public: const char * mContents ;
-
-//--- Constructor
-  public: cRegularFileWrapper (const char * inName,
-                                const char * inExtension,
-                                const bool inIsTextFile,
-                                const uint32_t inFileLength,
-                                const char * inContents) ;
-
-//--- No copy
-  private: cRegularFileWrapper (const cRegularFileWrapper &) ;
-  private: cRegularFileWrapper & operator = (const cRegularFileWrapper &) ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cDirectoryWrapper {
-  public: const char * mDirectoryName ;
-  public: const uint32_t mFileCount ;
-  public: const cRegularFileWrapper * * const mFiles ;
-  public: const uint32_t mDirectoryCount ;
-  public: const cDirectoryWrapper * * mDirectories ;
-
-//--- Constructor
-  public: cDirectoryWrapper (const char * inDirectoryName,
-                              const uint32_t inFileCount,
-                              const cRegularFileWrapper * * const inFiles,
-                              const uint32_t inDirectoryCount,
-                              const cDirectoryWrapper * * inDirectories) ;
-
-//--- No copy
-  private: cDirectoryWrapper (const cDirectoryWrapper &) ;
-  private: cDirectoryWrapper & operator = (const cDirectoryWrapper &) ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class GGS_filewrapper : public AC_GALGAS_root {
-//--------------------------------- Private data members
-  private: const cDirectoryWrapper * mRootDirectoryPtr ;
-  private: String mCurrentDirectory ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return nullptr != mRootDirectoryPtr ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mRootDirectoryPtr = nullptr ; }
-
-//--------------------------------- Default constructor
-  public: GGS_filewrapper (void) ;
-
-//--------------------------------- Native constructor
-  public: GGS_filewrapper (const cDirectoryWrapper & inRootDirectory) ;
-
-//--------------------------------- Handle copy
-  public: GGS_filewrapper (const GGS_filewrapper & inSource) ;
-  public: GGS_filewrapper & operator = (const GGS_filewrapper & inSource) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_filewrapper extractObject (const GGS_object & inObject,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-
-//--------------------------------- Setters
-  public: void setter_setCurrentDirectory (class GGS_string constinArgument0,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_string getter_absolutePathForPath (const class GGS_string & constinOperand0,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_allBinaryFilePaths (LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_allDirectoryPaths (LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_allFilePathsWithExtension (const class GGS_string & constinOperand0
-                                                                 COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_allTextFilePaths (LOCATION_ARGS) const ;
-
-  public: class GGS_data getter_binaryFileContentsAtPath (const class GGS_string & constinOperand0,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_binaryFilesAtPath (const class GGS_string & constinOperand0,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_currentDirectory (LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_directoriesAtPath (const class GGS_string & constinOperand0,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_directoryExistsAtPath (const class GGS_string & constinOperand0,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_fileExistsAtPath (const class GGS_string & constinOperand0,
-                                                  Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_textFileContentsAtPath (const class GGS_string & constinOperand0,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_textFilesAtPath (const class GGS_string & constinOperand0,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_filewrapper ;
-
-//--------------------------------------------------------------------------------------------------
-//   @function type
-//--------------------------------------------------------------------------------------------------
-
-class C_galgas_function_descriptor ;
-
-//--------------------------------------------------------------------------------------------------
-
-class GGS_function : public AC_GALGAS_root {
-//--------------------------------- Private data member
-  private: const C_galgas_function_descriptor * mFunctionDescriptor ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return nullptr != mFunctionDescriptor ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mFunctionDescriptor = nullptr ; }
-  public: VIRTUAL_IN_DEBUG inline const C_galgas_function_descriptor * functionValue (void) const { return mFunctionDescriptor ; }
-
-//--------------------------------- Default constructor
-  public: GGS_function (void) ;
-
-//--------------------------------- Destructor (virtual in debug mode)
-  public: virtual ~ GGS_function (void) ;
-
-//--------------------------------- Handle copy
-  public: GGS_function (const GGS_function & inSource) ;
-  public: GGS_function & operator = (const GGS_function & inSource) ;
-
-//--------------------------------- Native constructor
-  public: GGS_function (const C_galgas_function_descriptor * inValue) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_function extractObject (const GGS_object & inObject,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_functionlist class_func_functionList (LOCATION_ARGS) ;
-
-  public: static class GGS_function class_func_functionWithName (const class GGS_string & inOperand0
-                                                                 COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_bool class_func_isFunctionDefined (const class GGS_string & inOperand0
-                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_function & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_typelist getter_formalParameterTypeList (LOCATION_ARGS) const ;
-
-  public: class GGS_object getter_invoke (const class GGS_objectlist & constinOperand0,
-                                          const class GGS_location & constinOperand1,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_name (LOCATION_ARGS) const ;
-
-  public: class GGS_type getter_resultType (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_function ;
-
-//--------------------------------------------------------------------------------------------------
-//   @location type
-//--------------------------------------------------------------------------------------------------
-
-#include "LocationInSource.h"
-#include "SourceTextInString.h"
-
-//--------------------------------------------------------------------------------------------------
-
-class GGS_location : public AC_GALGAS_root {
-//--------------------------------- Private properties
-  private: class InternalLocation * mInternalLocation ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
-  public: VIRTUAL_IN_DEBUG bool isValidAndNotNowhere (void) const ;
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-  public: LocationInSource startLocation (void) const ;
-  public: LocationInSource endLocation (void) const ;
-  public: SourceTextInString sourceText (void) const ;
-
-//--------------------------------- Default constructor
-  public: GGS_location (void) ;
-
-//--------------------------------- Handle copy
-  public: GGS_location (const GGS_location & inSource) ;
-  public: GGS_location & operator = (const GGS_location & inSource) ;
-
-//--------------------------------- Destructor
-  public: virtual ~ GGS_location (void) ;
-
-//--------------------------------- Native constructor
-  public: GGS_location (const LocationInSource & inStartLocationInSource,
-                        const LocationInSource & inEndLocationInSource,
-                        const SourceTextInString & inSourceText) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_location extractObject (const GGS_object & inObject,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_location class_func_here (Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_location class_func_next (Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_location class_func_nowhere (LOCATION_ARGS) ;
-
-  public: static class GGS_location class_func_separator (Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_location & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_uint getter_endColumn (Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_endLine (Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_endLocationIndex (Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_endLocationString (Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_file (Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isNowhere (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_startColumn (Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_startLine (Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_startLocationIndex (Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_startLocationString (Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_location getter_union (const class GGS_location & constinOperand0,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_location ;
-
-//--------------------------------------------------------------------------------------------------
-//   @object type
-//--------------------------------------------------------------------------------------------------
-
-class PtrObject ;
-
-//--------------------------------------------------------------------------------------------------
-
-class GGS_object : public AC_GALGAS_root {
-//--------------------------------- Private data member
-  private: PtrObject * mSharedObject ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mSharedObject != nullptr ; }
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_object (void) ;
-
-//--------------------------------- Constructor from pointer
-  public: GGS_object (AC_GALGAS_root * inObjectPointer
-                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Destructor (virtual in debug mode)
-  public: virtual ~ GGS_object (void) ;
-
-//--------------------------------- Handle copy
-  public: GGS_object (const GGS_object & inSource) ;
-  public: GGS_object & operator = (const GGS_object & inSource) ;
-
-//--------------------------------- Embedded Object
-  public: const AC_GALGAS_root * embeddedObject (void) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_object extractObject (const GGS_object & inObject,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_object & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_type getter_objectDynamicType (LOCATION_ARGS) const ;
-
-  public: class GGS_type getter_objectStaticType (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_object ;
-
-//--------------------------------------------------------------------------------------------------
-//   @sint type
-//--------------------------------------------------------------------------------------------------
-
-class GGS_sint : public AC_GALGAS_root {
-//--------------------------------- Private data members
-  private: bool mIsValid ;
-  private: int32_t mSIntValue ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
-  public: inline int32_t intValue (void) const { return mSIntValue ; }
-
-//--------------------------------- Default constructor
-  public: GGS_sint (void) ;
-
-//--------------------------------- Native constructor
-  public: GGS_sint (const int32_t inValue) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_sint extractObject (const GGS_object & inObject,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_sint class_func_max (LOCATION_ARGS) ;
-
-  public: static class GGS_sint class_func_min (LOCATION_ARGS) ;
-
-//--------------------------------- << and >> shift operators
-  public: GGS_sint left_shift_operation (const GGS_uint inShiftOperand,
-                                         class Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_sint left_shift_operation (const GGS_bigint inShiftOperand,
-                                         class Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_sint right_shift_operation (const GGS_uint inShiftOperand,
-                                          class Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_sint right_shift_operation (const GGS_bigint inShiftOperand,
-                                          class Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_sint inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- -= operator (with expression)
-  public: void minusAssignOperation (const GGS_sint inOperand,
-                                     class Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- *= operator (with expression)
-  public: void mulAssignOperation (const GGS_sint inOperand,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- /= operator (with expression)
-  public: void divAssignOperation (const GGS_sint inOperand,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- & operator
-  public: GGS_sint operator_and (const GGS_sint & inOperand
-                                 COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- | operator
-  public: GGS_sint operator_or (const GGS_sint & inOperand
-                                COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- ^ operator
-  public: GGS_sint operator_xor (const GGS_sint & inOperand
-                                 COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- ~ operator
-  public: GGS_sint operator_tilde (LOCATION_ARGS) const ;
-
-//--------------------------------- + operator
-  public: GGS_sint add_operation (const GGS_sint & inOperand,
-                                  Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- &+ operator
-  public: GGS_sint add_operation_no_ovf (const GGS_sint & inOperand) const ;
-
-//--------------------------------- &- operator
-  public: GGS_sint substract_operation_no_ovf (const GGS_sint & inOperand) const ;
-
-//--------------------------------- - operator
-  public: GGS_sint substract_operation (const GGS_sint & inOperand,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- * operator
-  public: GGS_sint multiply_operation (const GGS_sint & inOperand,
-                                       Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- &* operator
-  public: GGS_sint multiply_operation_no_ovf (const GGS_sint & inOperand) const ;
-
-//--------------------------------- / operator
-  public: GGS_sint divide_operation (const GGS_sint & inOperand,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- &/ operator
-  public: GGS_sint divide_operation_no_ovf (const GGS_sint & inOperand) const ;
-
-//--------------------------------- mod operator
-  public: GGS_sint modulo_operation (const GGS_sint & inOperand,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- prefix - operator
-  public: GGS_sint operator_unary_minus (Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- prefix &- operator
-  public: GGS_sint operator_unary_minus_no_ovf (void) const ;
-
-//--------------------------------- ++, -- operators
-  public: void increment_operation (Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-  public: void decrement_operation (Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- &++, &-- operators
-  public: void increment_operation_no_overflow (void) ;
-
-  public: void decrement_operation_no_overflow (void) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_sint & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_bigint getter_bigint (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_canAdd (const class GGS_sint & constinOperand0
-                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_canDivide (const class GGS_sint & constinOperand0
-                                           COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_canMultiply (const class GGS_sint & constinOperand0
-                                             COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_canSubstract (const class GGS_sint & constinOperand0
-                                              COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_double (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_hexString (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_hexStringSeparatedBy (const class GGS_char & constinOperand0,
-                                                        const class GGS_uint & constinOperand1,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_sint_36__34_ getter_sint_36__34_ (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_string (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_uint (Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_ getter_uint_36__34_ (Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_xString (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_sint ;
-
-//--------------------------------------------------------------------------------------------------
-//   @sint64 type
-//--------------------------------------------------------------------------------------------------
-
-class GGS_sint_36__34_ : public AC_GALGAS_root {
-//--------------------------------- Private data members
-  private: bool mIsValid ;
-  private: int64_t mSInt64Value ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
-  public: inline int64_t int64Value (void) const { return mSInt64Value ; }
-
-//--------------------------------- Default constructor
-  public: GGS_sint_36__34_ (void) ;
-
-//--------------------------------- Native constructor
-  public: GGS_sint_36__34_ (const int64_t inValue) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_sint_36__34_ extractObject (const GGS_object & inObject,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_sint_36__34_ class_func_max (LOCATION_ARGS) ;
-
-  public: static class GGS_sint_36__34_ class_func_min (LOCATION_ARGS) ;
-
-//--------------------------------- << and >> shift operators
-  public: GGS_sint_36__34_ left_shift_operation (const GGS_uint inShiftOperand,
-                                                 class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_sint_36__34_ left_shift_operation (const GGS_bigint inShiftOperand,
-                                                 class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_sint_36__34_ right_shift_operation (const GGS_uint inShiftOperand,
-                                                  class Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_sint_36__34_ right_shift_operation (const GGS_bigint inShiftOperand,
-                                                  class Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_sint_36__34_ inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- -= operator (with expression)
-  public: void minusAssignOperation (const GGS_sint_36__34_ inOperand,
-                                     class Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- *= operator (with expression)
-  public: void mulAssignOperation (const GGS_sint_36__34_ inOperand,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- /= operator (with expression)
-  public: void divAssignOperation (const GGS_sint_36__34_ inOperand,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- & operator
-  public: GGS_sint_36__34_ operator_and (const GGS_sint_36__34_ & inOperand
-                                         COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- | operator
-  public: GGS_sint_36__34_ operator_or (const GGS_sint_36__34_ & inOperand
-                                        COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- ^ operator
-  public: GGS_sint_36__34_ operator_xor (const GGS_sint_36__34_ & inOperand
-                                         COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- ~ operator
-  public: GGS_sint_36__34_ operator_tilde (LOCATION_ARGS) const ;
-
-//--------------------------------- + operator
-  public: GGS_sint_36__34_ add_operation (const GGS_sint_36__34_ & inOperand,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- &+ operator
-  public: GGS_sint_36__34_ add_operation_no_ovf (const GGS_sint_36__34_ & inOperand) const ;
-
-//--------------------------------- &- operator
-  public: GGS_sint_36__34_ substract_operation_no_ovf (const GGS_sint_36__34_ & inOperand) const ;
-
-//--------------------------------- - operator
-  public: GGS_sint_36__34_ substract_operation (const GGS_sint_36__34_ & inOperand,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- * operator
-  public: GGS_sint_36__34_ multiply_operation (const GGS_sint_36__34_ & inOperand,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- &* operator
-  public: GGS_sint_36__34_ multiply_operation_no_ovf (const GGS_sint_36__34_ & inOperand) const ;
-
-//--------------------------------- / operator
-  public: GGS_sint_36__34_ divide_operation (const GGS_sint_36__34_ & inOperand,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- &/ operator
-  public: GGS_sint_36__34_ divide_operation_no_ovf (const GGS_sint_36__34_ & inOperand) const ;
-
-//--------------------------------- mod operator
-  public: GGS_sint_36__34_ modulo_operation (const GGS_sint_36__34_ & inOperand,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- prefix - operator
-  public: GGS_sint_36__34_ operator_unary_minus (Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- prefix &- operator
-  public: GGS_sint_36__34_ operator_unary_minus_no_ovf (void) const ;
-
-//--------------------------------- ++, -- operators
-  public: void increment_operation (Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-  public: void decrement_operation (Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- &++, &-- operators
-  public: void increment_operation_no_overflow (void) ;
-
-  public: void decrement_operation_no_overflow (void) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_sint_36__34_ & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_bigint getter_bigint (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_canAdd (const class GGS_sint_36__34_ & constinOperand0
-                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_canDivide (const class GGS_sint_36__34_ & constinOperand0
-                                           COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_canMultiply (const class GGS_sint_36__34_ & constinOperand0
-                                             COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_canSubstract (const class GGS_sint_36__34_ & constinOperand0
-                                              COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_double (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_hexString (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_hexStringSeparatedBy (const class GGS_char & constinOperand0,
-                                                        const class GGS_uint & constinOperand1,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_sint getter_sint (Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_string (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_uint (Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_ getter_uint_36__34_ (Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_xString (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_sint_36__34_ ;
-
-//--------------------------------------------------------------------------------------------------
-//   @string type
-//--------------------------------------------------------------------------------------------------
-
-class GGS_string : public AC_GALGAS_root {
-//--------------------------------- Private data members
-  private: bool mIsValid ;
-  private: String mString ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-  public: inline String stringValue (void) const { return mString ; }
-
-//--------------------------------- Default constructor
-  public: GGS_string (void) ;
-
-//--------------------------------- Constructor for making an empty string
-  public: static GGS_string makeEmptyString (void) ;
-
-//--------------------------------- Native constructor
-  public: GGS_string (const String & inValue) ;
-
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    public: virtual void printNonNullClassInstanceProperties (const char * inPropertyName) const override ;
-  #endif
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_string extractObject (const GGS_object & inObject,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_string class_func_CppChar (const class GGS_char & inOperand0
-                                                      COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_CppLineComment (LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_CppSpaceComment (LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_CppString (const class GGS_string & inOperand0
-                                                        COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_CppTitleComment (const class GGS_string & inOperand0
-                                                              COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_componentsJoinedByString (const class GGS_stringlist & inOperand0,
-                                                                       const class GGS_string & inOperand1
-                                                                       COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_homeDirectory (LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_newWithStdIn (LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_retrieveAndResetTemplateString (Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_separatorString (Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_stringByRepeatingString (const class GGS_string & inOperand0,
-                                                                      const class GGS_uint & inOperand1
-                                                                      COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_stringWithContentsOfFile (const class GGS_string & inOperand0,
-                                                                       class Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_stringWithCurrentDateTime (LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_stringWithCurrentDirectory (LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_stringWithEnvironmentVariable (const class GGS_string & inOperand0,
-                                                                            class Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_stringWithEnvironmentVariableOrEmpty (const class GGS_string & inOperand0
-                                                                                   COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_stringWithSequenceOfCharacters (const class GGS_char & inOperand0,
-                                                                             const class GGS_uint & inOperand1
-                                                                             COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_stringWithSourceFilePath (Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_string class_func_stringWithSymbolicLinkContents (const class GGS_string & inOperand0,
-                                                                             class Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_string inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- + operator
-  public: GGS_string add_operation (const GGS_string & inOperand,
-                                    Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_string & inOperand) const ;
-
-//--------------------------------- Setters
-  public: void setter_appendSpacesUntilColumn (class GGS_uint constinArgument0,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-  public: void setter_decIndentation (class GGS_uint constinArgument0,
-                                      Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-
-  public: void setter_incIndentation (class GGS_uint constinArgument0,
-                                      Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-
-  public: void setter_insertCharacterAtIndex (class GGS_char constinArgument0,
-                                              class GGS_uint constinArgument1,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-  public: void setter_removeCharacterAtIndex (class GGS_char & outArgument0,
-                                              class GGS_uint constinArgument1,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-  public: void setter_setCapacity (class GGS_uint constinArgument0,
-                                   Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-  public: void setter_setCharacterAtIndex (class GGS_char constinArgument0,
-                                           class GGS_uint constinArgument1,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public: void method_makeDirectory (Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) const ;
-
-  public: void method_makeDirectoryAndWriteToExecutableFile (class GGS_string constinArgument0,
-                                                             Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) const ;
-
-  public: void method_makeDirectoryAndWriteToFile (class GGS_string constinArgument0,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
-
-  public: void method_makeSymbolicLinkWithPath (class GGS_string constinArgument0,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const ;
-
-  public: void method_writeToExecutableFile (class GGS_string constinArgument0,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
-
-  public: void method_writeToExecutableFileWhenDifferentContents (class GGS_string constinArgument0,
-                                                                  class GGS_bool & outArgument1,
-                                                                  Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) const ;
-
-  public: void method_writeToFile (class GGS_string constinArgument0,
-                                   Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) const ;
-
-  public: void method_writeToFileWhenDifferentContents (class GGS_string constinArgument0,
-                                                        class GGS_bool & outArgument1,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-  public: static void class_method_deleteFile (class GGS_string constinArgument0,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-  public: static void class_method_deleteFileIfExists (class GGS_string constinArgument0,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-  public: static void class_method_generateFile (class GGS_string constinArgument0,
-                                                 class GGS_string constinArgument1,
-                                                 class GGS_string constinArgument2,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-  public: static void class_method_generateFileWithPattern (class GGS_string constinArgument0,
-                                                            class GGS_string constinArgument1,
-                                                            class GGS_string constinArgument2,
-                                                            class GGS_string constinArgument3,
-                                                            class GGS_string constinArgument4,
-                                                            class GGS_string constinArgument5,
-                                                            class GGS_string constinArgument6,
-                                                            class GGS_string constinArgument7,
-                                                            class GGS_bool constinArgument8,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public: static void class_method_removeDirectoryRecursively (class GGS_string constinArgument0,
-                                                               Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-  public: static void class_method_removeEmptyDirectory (class GGS_string constinArgument0,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Getters
-  public: class GGS_string getter_HTMLRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_absolutePathFromPath (const class GGS_string & constinOperand0
-                                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_assemblerRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_bigint_3F_ getter_bigint (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_cStringRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_capacity (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_capitalizingFirstCharacter (LOCATION_ARGS) const ;
-
-  public: class GGS_char getter_characterAtIndex (const class GGS_uint & constinOperand0,
-                                                  Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_sint getter_commandWithArguments (const class GGS_stringlist & constinOperand0,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_componentsSeparatedByString (const class GGS_string & constinOperand0
-                                                                   COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_containsCharacter (const class GGS_char & constinOperand0
-                                                   COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_containsCharacterInRange (const class GGS_char & constinOperand0,
-                                                          const class GGS_char & constinOperand1
-                                                          COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_currentColumn (LOCATION_ARGS) const ;
-
-  public: class GGS_sint_36__34_ getter_decimalSigned_36__34_Number (Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bigint getter_decimalSignedBigInt (Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_sint getter_decimalSignedNumber (Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_ getter_decimalUnsigned_36__34_Number (Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_decimalUnsignedNumber (Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_decodedStringFromRepresentation (Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_deletingLastPathComponent (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_deletingPathExtension (LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_directories (const class GGS_bool & constinOperand0
-                                                   COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_directoriesWithExtensions (const class GGS_bool & constinOperand0,
-                                                                 const class GGS_stringlist & constinOperand1
-                                                                 COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_directoryExists (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_doesEnvironmentVariableExist (LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_doubleNumber (Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_fileExists (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_fileNameRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_char getter_firstCharacterOrNul (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_hasPrefix (const class GGS_string & constinOperand0
-                                           COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_hasSuffix (const class GGS_string & constinOperand0
-                                           COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_lstring getter_here (Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_hiddenCommandWithArguments (const class GGS_stringlist & constinOperand0,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_hiddenFiles (const class GGS_bool & constinOperand0
-                                                   COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_identifierRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isDecimalSigned_36__34_Number (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isDecimalSignedBigInt (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isDecimalSignedNumber (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isDecimalUnsigned_36__34_Number (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isDecimalUnsignedNumber (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isDoubleNumber (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_isSymbolicLink (LOCATION_ARGS) const ;
-
-  public: class GGS_char getter_lastCharacter (Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_lastPathComponent (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_leftAndRightPadding (const class GGS_uint & constinOperand0,
-                                                       const class GGS_char & constinOperand1
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_leftPadding (const class GGS_uint & constinOperand0,
-                                               const class GGS_char & constinOperand1
-                                               COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_leftSubString (const class GGS_uint & constinOperand0
-                                                 COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_lowercased (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_md_35_ (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_nameRepresentation (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_nativePathWithUnixPath (LOCATION_ARGS) const ;
-
-  public: class GGS_lstring getter_nowhere (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_pathExtension (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_popen (Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_range getter_range (LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_regularFiles (const class GGS_bool & constinOperand0
-                                                    COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_regularFilesWithExtensions (const class GGS_bool & constinOperand0,
-                                                                  const class GGS_stringlist & constinOperand1
-                                                                  COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_relativePathFromPath (const class GGS_string & constinOperand0
-                                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_removingCharacterAtIndex (const class GGS_uint & constinOperand0,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_removingFirst (Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_replacing (const class GGS_string & constinOperand0,
-                                             const class GGS_string & constinOperand1,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_reversed (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_rightPadding (const class GGS_uint & constinOperand0,
-                                                const class GGS_char & constinOperand1
-                                                COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_rightSubString (const class GGS_uint & constinOperand0
-                                                  COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_sha_32__35__36_ (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_standardizedPath (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_subString (const class GGS_uint & constinOperand0,
-                                             const class GGS_uint & constinOperand1
-                                             COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_subStringFromIndex (const class GGS_uint & constinOperand0
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_sint getter_system (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_trimmingSpaces (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_unixPathWithNativePath (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_uppercased (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_utf_33__32_Representation (const class GGS_bool & constinOperand0
-                                                             COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_utf_38_Length (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_utf_38_Representation (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_utf_38_RepresentationEnclosedWithin (const class GGS_char & constinOperand0
-                                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_utf_38_RepresentationEscapingQuestionMark (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_utf_38_RepresentationWithUnicodeEscaping (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_utf_38_RepresentationWithoutDelimiters (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_string ;
 
 //--------------------------------------------------------------------------------------------------
 // Phase 1: @stringset
@@ -2826,7 +2759,7 @@ class SharedStringMap final {
                            OptionalSharedRef <SharedStringMapNode> & outRemovedNode
                            COMMA_LOCATION_ARGS) ;
 
-  public: bool hasKey (const String & inKey) const ;
+  public: bool contains (const String & inKey) const ;
 
   public: int32_t count (void) const ;
 
@@ -2905,26 +2838,23 @@ class GGS_stringset : public AC_GALGAS_root {
 //--------------------------------- Initializers
   public: static GGS_stringset init (Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_stringset extractObject (const GGS_object & inObject,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
+  public: static GGS_stringset init_21_lstringArray (const class GGS__5B_lstring_5D_ & inOperand0,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+  public: static GGS_stringset init_21_stringArray (const class GGS__5B_string_5D_ & inOperand0,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 //--------------------------------- GALGAS class functions
   public: static class GGS_stringset class_func_emptySet (LOCATION_ARGS) ;
 
-  public: static class GGS_stringset class_func_setWithLStringList (const class GGS_lstringlist & inOperand0
-                                                                    COMMA_LOCATION_ARGS) ;
+  public: static class GGS_stringset class_func_setWithLStringArray (const class GGS__5B_lstring_5D_ & inOperand0
+                                                                     COMMA_LOCATION_ARGS) ;
 
   public: static class GGS_stringset class_func_setWithString (const class GGS_string & inOperand0
                                                                COMMA_LOCATION_ARGS) ;
 
-  public: static class GGS_stringset class_func_setWithStringList (const class GGS_stringlist & inOperand0
-                                                                   COMMA_LOCATION_ARGS) ;
+  public: static class GGS_stringset class_func_setWithStringArray (const class GGS__5B_string_5D_ & inOperand0
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Handle copy
   public: GGS_stringset (const GGS_stringset & inSource) ;
@@ -2977,12 +2907,12 @@ class GGS_stringset : public AC_GALGAS_root {
   public: class GGS_string getter_anyString (Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) const ;
 
+  public: class GGS_bool getter_contains (const class GGS_string & constinOperand0
+                                          COMMA_LOCATION_ARGS) const ;
+
   public: class GGS_uint getter_count (LOCATION_ARGS) const ;
 
-  public: class GGS_bool getter_hasKey (const class GGS_string & constinOperand0
-                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_stringList (LOCATION_ARGS) const ;
+  public: class GGS__5B_string_5D_ getter_stringArray (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
@@ -2993,7 +2923,7 @@ class GGS_stringset : public AC_GALGAS_root {
 //--------------------------------- Friend
   friend class UpEnumerator_stringset ;
   friend class DownEnumerator_stringset ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
@@ -3021,15 +2951,6 @@ class GGS_timer : public AC_GALGAS_root {
 //--------------------------------- Initializers
   public: static GGS_timer init (Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_timer extractObject (const GGS_object & inObject,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- GALGAS class functions
   public: static class GGS_timer class_func_start (LOCATION_ARGS) ;
 
@@ -3059,7 +2980,7 @@ class GGS_timer : public AC_GALGAS_root {
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
@@ -3067,2503 +2988,362 @@ class GGS_timer : public AC_GALGAS_root {
 extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_timer ;
 
 //--------------------------------------------------------------------------------------------------
-//   @type type
+// Phase 1: [uint64] array
 //--------------------------------------------------------------------------------------------------
 
-class GGS_type : public AC_GALGAS_root {
-//--------------------------------- Private data members
-  private: const GALGAS_TypeDescriptor * mTypeDescriptor ;
+class DownEnumerator__5B_uint_36__34__5D_ final {
+//--- Constructor
+  public: DownEnumerator__5B_uint_36__34__5D_ (const class GGS__5B_uint_36__34__5D_ & inOperand) ;
 
-//--------------------------------- Accessors
-  public: inline bool isValid (void) const override { return nullptr != mTypeDescriptor ; }
-  public: inline void drop (void) override { mTypeDescriptor = nullptr ; }
-  public: inline const GALGAS_TypeDescriptor * typeValue (void) const { return mTypeDescriptor ; }
+//--- No copy
+  private: DownEnumerator__5B_uint_36__34__5D_ (const DownEnumerator__5B_uint_36__34__5D_ &) = delete ;
+  private: DownEnumerator__5B_uint_36__34__5D_ & operator = (const DownEnumerator__5B_uint_36__34__5D_ &) = delete ;
+
+//---
+  public: inline bool hasCurrentObject (void) const {
+    return mCurrent >= 0 ;
+  }
+
+//---
+  public: inline void gotoNextObject (void) {
+    mCurrent -= 1 ;
+  }
+
+//--- Current element access
+  public: class GGS_uint_36__34_ current (LOCATION_ARGS) const ;
+  public: class GGS_uint_36__34_ current_entry (LOCATION_ARGS) const ; // Pour instruction for dans template
+
+//---- Properties
+  private: const GenericArray <GGS_uint_36__34_> mSharedArray ;
+  private: int32_t mCurrent ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+class UpEnumerator__5B_uint_36__34__5D_ final {
+//--- Constructor
+  public: UpEnumerator__5B_uint_36__34__5D_ (const class GGS__5B_uint_36__34__5D_ & inOperand) ;
+
+//--- No copy
+  private: UpEnumerator__5B_uint_36__34__5D_ (const UpEnumerator__5B_uint_36__34__5D_ &) = delete ;
+  private: UpEnumerator__5B_uint_36__34__5D_ & operator = (const UpEnumerator__5B_uint_36__34__5D_ &) = delete ;
+
+//---
+  public: inline bool hasCurrentObject (void) const {
+    return mCurrent < mSharedArray.count () ;
+  }
+
+//---
+  public: inline void gotoNextObject (void) {
+    mCurrent += 1 ;
+  }
+
+//--- Current element access
+  public: class GGS_uint_36__34_ current (LOCATION_ARGS) const ;
+  public: class GGS_uint_36__34_ current_entry (LOCATION_ARGS) const ;
+
+//---- Properties
+  private: const GenericArray <GGS_uint_36__34_> mSharedArray ;
+  private: int32_t mCurrent ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+class GGS__5B_uint_36__34__5D_ final : public AC_GALGAS_root {
+//--------------------------------- Private property
+  private: GenericArray <GGS_uint_36__34_> mSharedArray ;
+  private: bool mIsValid ;
 
 //--------------------------------- Default constructor
-  public: GGS_type (void) ;
-
-//--------------------------------- Destructor (virtual in debug mode)
-  public: virtual ~ GGS_type (void) ;
+  public: GGS__5B_uint_36__34__5D_ (void) ;
 
 //--------------------------------- Handle copy
-  public: GGS_type (const GGS_type & inSource) ;
-  public: GGS_type & operator = (const GGS_type & inSource) ;
+  public: GGS__5B_uint_36__34__5D_ (const GGS__5B_uint_36__34__5D_ & inSource) ;
+  public: GGS__5B_uint_36__34__5D_ & operator = (const GGS__5B_uint_36__34__5D_ & inSource) ;
 
-//--------------------------------- Native constructor
-  public: GGS_type (const GALGAS_TypeDescriptor * inValue) ;
+//--------------------------------- Direct access
+  public: void removeAll (void) ;
+  public: inline uint32_t count (void) const { return uint32_t (mSharedArray.count ()) ; }
 
-//-- Start of type generic part
+//--- Methods that every type should implement
+  public: virtual bool isValid (void) const override { return mIsValid ; }
 
-//--------------------------------- Initializers
+  public: virtual void drop (void) override ;
 
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_type extractObject (const GGS_object & inObject,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_typelist class_func_typeList (LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_type & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_bool getter_hasSuperclass (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_name (LOCATION_ARGS) const ;
-
-  public: class GGS_type getter_superclass (Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_type ;
-
-//--------------------------------------------------------------------------------------------------
-//  @uint64 type
-//--------------------------------------------------------------------------------------------------
-
-class GGS_uint_36__34_ : public AC_GALGAS_root {
-//--------------------------------- Private data members
-  private: bool mIsValid ;
-  private: uint64_t mUInt64Value ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mIsValid ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mIsValid = false ; }
-  public: inline uint64_t uint64Value (void) const { return mUInt64Value ; }
-
-//--------------------------------- Default constructor
-  public: GGS_uint_36__34_ (void) ;
-
-//--------------------------------- Native constructor
-  public: GGS_uint_36__34_ (const uint64_t inValue) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_uint_36__34_ extractObject (const GGS_object & inObject,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_uint_36__34_ class_func_max (LOCATION_ARGS) ;
-
-  public: static class GGS_uint_36__34_ class_func_uint_36__34_BaseValueWithCompressedBitString (const class GGS_string & inOperand0,
-                                                                                                 class Compiler * inCompiler
-                                                                                                 COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_uint_36__34_ class_func_uint_36__34_MaskWithCompressedBitString (const class GGS_string & inOperand0,
-                                                                                            class Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) ;
-
-  public: static class GGS_uint_36__34_ class_func_uint_36__34_WithBitString (const class GGS_string & inOperand0,
-                                                                              class Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- << and >> shift operators
-  public: GGS_uint_36__34_ left_shift_operation (const GGS_uint inShiftOperand,
-                                                 class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_uint_36__34_ left_shift_operation (const GGS_bigint inShiftOperand,
-                                                 class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_uint_36__34_ right_shift_operation (const GGS_uint inShiftOperand,
-                                                  class Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-  public: GGS_uint_36__34_ right_shift_operation (const GGS_bigint inShiftOperand,
-                                                  class Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_uint_36__34_ inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- -= operator (with expression)
-  public: void minusAssignOperation (const GGS_uint_36__34_ inOperand,
-                                     class Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- *= operator (with expression)
-  public: void mulAssignOperation (const GGS_uint_36__34_ inOperand,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- /= operator (with expression)
-  public: void divAssignOperation (const GGS_uint_36__34_ inOperand,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- & operator
-  public: GGS_uint_36__34_ operator_and (const GGS_uint_36__34_ & inOperand
-                                         COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- | operator
-  public: GGS_uint_36__34_ operator_or (const GGS_uint_36__34_ & inOperand
-                                        COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- ^ operator
-  public: GGS_uint_36__34_ operator_xor (const GGS_uint_36__34_ & inOperand
-                                         COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- ~ operator
-  public: GGS_uint_36__34_ operator_tilde (LOCATION_ARGS) const ;
-
-//--------------------------------- + operator
-  public: GGS_uint_36__34_ add_operation (const GGS_uint_36__34_ & inOperand,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- &+ operator
-  public: GGS_uint_36__34_ add_operation_no_ovf (const GGS_uint_36__34_ & inOperand) const ;
-
-//--------------------------------- &- operator
-  public: GGS_uint_36__34_ substract_operation_no_ovf (const GGS_uint_36__34_ & inOperand) const ;
-
-//--------------------------------- - operator
-  public: GGS_uint_36__34_ substract_operation (const GGS_uint_36__34_ & inOperand,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- * operator
-  public: GGS_uint_36__34_ multiply_operation (const GGS_uint_36__34_ & inOperand,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- &* operator
-  public: GGS_uint_36__34_ multiply_operation_no_ovf (const GGS_uint_36__34_ & inOperand) const ;
-
-//--------------------------------- / operator
-  public: GGS_uint_36__34_ divide_operation (const GGS_uint_36__34_ & inOperand,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- &/ operator
-  public: GGS_uint_36__34_ divide_operation_no_ovf (const GGS_uint_36__34_ & inOperand) const ;
-
-//--------------------------------- mod operator
-  public: GGS_uint_36__34_ modulo_operation (const GGS_uint_36__34_ & inOperand,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- ++, -- operators
-  public: void increment_operation (Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-  public: void decrement_operation (Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- &++, &-- operators
-  public: void increment_operation_no_overflow (void) ;
-
-  public: void decrement_operation_no_overflow (void) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_uint_36__34_ & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_string getter_alphaString (LOCATION_ARGS) const ;
-
-  public: class GGS_bigint getter_bigint (LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_canAdd (const class GGS_uint_36__34_ & constinOperand0
-                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_canDivide (const class GGS_uint_36__34_ & constinOperand0
-                                           COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_canMultiply (const class GGS_uint_36__34_ & constinOperand0
-                                             COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bool getter_canSubstract (const class GGS_uint_36__34_ & constinOperand0
-                                              COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_double getter_double (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_hexString (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_hexStringSeparatedBy (const class GGS_char & constinOperand0,
-                                                        const class GGS_uint & constinOperand1,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_sint getter_sint (Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_sint_36__34_ getter_sint_36__34_ (Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_string (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_uint (Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_uintSlice (const class GGS_uint & constinOperand0,
-                                           const class GGS_uint & constinOperand1,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_xString (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_uint_36__34_ ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @functionlist list enumerator
-//--------------------------------------------------------------------------------------------------
-
-class DownEnumerator_functionlist final {
-  public: DownEnumerator_functionlist (const class GGS_functionlist & inList) ;
-
-  public: ~ DownEnumerator_functionlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex >= 0 ; }
-
-  public: inline void gotoNextObject (void) { mIndex -= 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_function current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_functionlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_functionlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: DownEnumerator_functionlist (const DownEnumerator_functionlist &) = delete ;
-  private: DownEnumerator_functionlist & operator = (const DownEnumerator_functionlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class UpEnumerator_functionlist final {
-  public: UpEnumerator_functionlist (const class GGS_functionlist & inList)  ;
-
-  public: ~ UpEnumerator_functionlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex < mArray.count () ; }
-
-  public: inline void gotoNextObject (void) { mIndex += 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_function current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_functionlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_functionlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: UpEnumerator_functionlist (const UpEnumerator_functionlist &) = delete ;
-  private: UpEnumerator_functionlist & operator = (const UpEnumerator_functionlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-// @functionlist list
-//--------------------------------------------------------------------------------------------------
-
-class GGS_functionlist : public AC_GALGAS_root {
-//--- Private property
-  private: GenericArray <GGS_functionlist_2E_element> mArray ;
-
-//--- Default constructor
-  public: GGS_functionlist (void) ;
-
-//--- Destructor
-  public: virtual ~ GGS_functionlist (void) = default ;
-
-//--- Copy
-  public: GGS_functionlist (const GGS_functionlist &) = default ;
-  public: GGS_functionlist & operator = (const GGS_functionlist &) = default ;
-
-//--- Is valid
-  public: inline bool isValid (void) const override { return mArray.isAllocated () ; }
-
-//--- Drop
-  public: inline virtual void drop (void) override { mArray.removeAll () ; }
-
-//--- Description
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-//--- Count
-  public: inline uint32_t count (void) const { return uint32_t (mArray.count ()) ; }
- 
-//--- sortedElementArray
-  public : inline GenericArray <GGS_functionlist_2E_element> sortedElementArray (void) const {
-    return mArray ;
-  }
-
-//--- subList
-  private: GGS_functionlist subList (const int32_t inStart,
-                                     const int32_t inLength,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) const ;
-
-
-//--- List constructor for graph
-  public: GGS_functionlist (const CollectionElementArray & inSharedArray) ;
-
-//--- Element constructor
-  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
-                                                 const class GGS_function & in_mValue
-                                                 COMMA_LOCATION_ARGS) ;
-
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GGS_functionlist init (Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_functionlist extractObject (const GGS_object & inObject,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_functionlist class_func_listWithValue (const class GGS_function & inOperand0
-                                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_functionlist inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public: void addAssignOperation (const class GGS_function & inOperand0
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- ++= operator, collection value
-  public: void plusPlusAssignOperation (const GGS_functionlist_2E_element & inOperand
-                                        COMMA_LOCATION_ARGS) ;
-//--------------------------------- + operator
-  public: GGS_functionlist add_operation (const GGS_functionlist & inOperand,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_functionlist & inOperand) const ;
-
-//--------------------------------- Setters
-  public: void setter_append (class GGS_function constinArgument0,
-                              Compiler * inCompiler
-                              COMMA_LOCATION_ARGS) ;
-
-  public: void setter_insertAtIndex (class GGS_function constinArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popFirst (class GGS_function & outArgument0,
-                                Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popLast (class GGS_function & outArgument0,
-                               Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-  public: void setter_removeAtIndex (class GGS_function & outArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_setMValueAtIndex (class GGS_function constinArgument0,
-                                        class GGS_uint constinArgument1,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public: void method_first (class GGS_function & outArgument0,
-                             Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) const ;
-
-  public: void method_last (class GGS_function & outArgument0,
-                            Compiler * inCompiler
-                            COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
-
-  public: class GGS_function getter_mValueAtIndex (const class GGS_uint & constinOperand0,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_range getter_range (LOCATION_ARGS) const ;
-
-  public: class GGS_functionlist getter_subListFromIndex (const class GGS_uint & constinOperand0,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_functionlist getter_subListToIndex (const class GGS_uint & constinOperand0,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_functionlist getter_subListWithRange (const class GGS_range & constinOperand0,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
-//--------------------------------- Friend
-  friend class UpEnumerator_functionlist ;
-  friend class DownEnumerator_functionlist ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_functionlist ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @luintlist list enumerator
-//--------------------------------------------------------------------------------------------------
-
-class DownEnumerator_luintlist final {
-  public: DownEnumerator_luintlist (const class GGS_luintlist & inList) ;
-
-  public: ~ DownEnumerator_luintlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex >= 0 ; }
-
-  public: inline void gotoNextObject (void) { mIndex -= 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_luint current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_luintlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_luintlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: DownEnumerator_luintlist (const DownEnumerator_luintlist &) = delete ;
-  private: DownEnumerator_luintlist & operator = (const DownEnumerator_luintlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class UpEnumerator_luintlist final {
-  public: UpEnumerator_luintlist (const class GGS_luintlist & inList)  ;
-
-  public: ~ UpEnumerator_luintlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex < mArray.count () ; }
-
-  public: inline void gotoNextObject (void) { mIndex += 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_luint current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_luintlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_luintlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: UpEnumerator_luintlist (const UpEnumerator_luintlist &) = delete ;
-  private: UpEnumerator_luintlist & operator = (const UpEnumerator_luintlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-// @luintlist list
-//--------------------------------------------------------------------------------------------------
-
-class GGS_luintlist : public AC_GALGAS_root {
-//--- Private property
-  private: GenericArray <GGS_luintlist_2E_element> mArray ;
-
-//--- Default constructor
-  public: GGS_luintlist (void) ;
-
-//--- Destructor
-  public: virtual ~ GGS_luintlist (void) = default ;
-
-//--- Copy
-  public: GGS_luintlist (const GGS_luintlist &) = default ;
-  public: GGS_luintlist & operator = (const GGS_luintlist &) = default ;
-
-//--- Is valid
-  public: inline bool isValid (void) const override { return mArray.isAllocated () ; }
-
-//--- Drop
-  public: inline virtual void drop (void) override { mArray.removeAll () ; }
-
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-//--- Count
-  public: inline uint32_t count (void) const { return uint32_t (mArray.count ()) ; }
- 
-//--- sortedElementArray
-  public : inline GenericArray <GGS_luintlist_2E_element> sortedElementArray (void) const {
-    return mArray ;
-  }
-
-//--- subList
-  private: GGS_luintlist subList (const int32_t inStart,
-                                  const int32_t inLength,
-                                  Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) const ;
-
-
-//--- List constructor for graph
-  public: GGS_luintlist (const CollectionElementArray & inSharedArray) ;
-
-//--- Element constructor
-  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
-                                                 const class GGS_luint & in_mValue
-                                                 COMMA_LOCATION_ARGS) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_luintlist init (Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_luintlist extractObject (const GGS_object & inObject,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_luintlist class_func_listWithValue (const class GGS_luint & inOperand0
-                                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_luintlist inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public: void addAssignOperation (const class GGS_luint & inOperand0
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- ++= operator, collection value
-  public: void plusPlusAssignOperation (const GGS_luintlist_2E_element & inOperand
-                                        COMMA_LOCATION_ARGS) ;
-//--------------------------------- + operator
-  public: GGS_luintlist add_operation (const GGS_luintlist & inOperand,
-                                       Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_luintlist & inOperand) const ;
-
-//--------------------------------- Setters
-  public: void setter_append (class GGS_luint constinArgument0,
-                              Compiler * inCompiler
-                              COMMA_LOCATION_ARGS) ;
-
-  public: void setter_insertAtIndex (class GGS_luint constinArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popFirst (class GGS_luint & outArgument0,
-                                Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popLast (class GGS_luint & outArgument0,
-                               Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-  public: void setter_removeAtIndex (class GGS_luint & outArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_setMValueAtIndex (class GGS_luint constinArgument0,
-                                        class GGS_uint constinArgument1,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public: void method_first (class GGS_luint & outArgument0,
-                             Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) const ;
-
-  public: void method_last (class GGS_luint & outArgument0,
-                            Compiler * inCompiler
-                            COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
-
-  public: class GGS_luint getter_mValueAtIndex (const class GGS_uint & constinOperand0,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_range getter_range (LOCATION_ARGS) const ;
-
-  public: class GGS_luintlist getter_subListFromIndex (const class GGS_uint & constinOperand0,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_luintlist getter_subListToIndex (const class GGS_uint & constinOperand0,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_luintlist getter_subListWithRange (const class GGS_range & constinOperand0,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
-//--------------------------------- Friend
-  friend class UpEnumerator_luintlist ;
-  friend class DownEnumerator_luintlist ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_luintlist ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @lstringlist list enumerator
-//--------------------------------------------------------------------------------------------------
-
-class DownEnumerator_lstringlist final {
-  public: DownEnumerator_lstringlist (const class GGS_lstringlist & inList) ;
-
-  public: ~ DownEnumerator_lstringlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex >= 0 ; }
-
-  public: inline void gotoNextObject (void) { mIndex -= 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_lstring current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_lstringlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_lstringlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: DownEnumerator_lstringlist (const DownEnumerator_lstringlist &) = delete ;
-  private: DownEnumerator_lstringlist & operator = (const DownEnumerator_lstringlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class UpEnumerator_lstringlist final {
-  public: UpEnumerator_lstringlist (const class GGS_lstringlist & inList)  ;
-
-  public: ~ UpEnumerator_lstringlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex < mArray.count () ; }
-
-  public: inline void gotoNextObject (void) { mIndex += 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_lstring current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_lstringlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_lstringlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: UpEnumerator_lstringlist (const UpEnumerator_lstringlist &) = delete ;
-  private: UpEnumerator_lstringlist & operator = (const UpEnumerator_lstringlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-// @lstringlist list
-//--------------------------------------------------------------------------------------------------
-
-class GGS_lstringlist : public AC_GALGAS_root {
-//--- Private property
-  private: GenericArray <GGS_lstringlist_2E_element> mArray ;
-
-//--- Default constructor
-  public: GGS_lstringlist (void) ;
-
-//--- Destructor
-  public: virtual ~ GGS_lstringlist (void) = default ;
-
-//--- Copy
-  public: GGS_lstringlist (const GGS_lstringlist &) = default ;
-  public: GGS_lstringlist & operator = (const GGS_lstringlist &) = default ;
-
-//--- Is valid
-  public: inline bool isValid (void) const override { return mArray.isAllocated () ; }
-
-//--- Drop
-  public: inline virtual void drop (void) override { mArray.removeAll () ; }
-
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-//--- Count
-  public: inline uint32_t count (void) const { return uint32_t (mArray.count ()) ; }
- 
-//--- sortedElementArray
-  public : inline GenericArray <GGS_lstringlist_2E_element> sortedElementArray (void) const {
-    return mArray ;
-  }
-
-//--- subList
-  private: GGS_lstringlist subList (const int32_t inStart,
-                                    const int32_t inLength,
-                                    Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) const ;
-
-
-//--- List constructor for graph
-  public: GGS_lstringlist (const CollectionElementArray & inSharedArray) ;
-
-//--- Element constructor
-  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
-                                                 const class GGS_lstring & in_mValue
-                                                 COMMA_LOCATION_ARGS) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_lstringlist init (Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_lstringlist extractObject (const GGS_object & inObject,
-                                                Compiler * inCompiler
+  public: static GGS__5B_uint_36__34__5D_ init (Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_lstringlist class_func_listWithValue (const class GGS_lstring & inOperand0
-                                                                 COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_lstringlist inOperand,
+  public: void plusAssignOperation (const GGS__5B_uint_36__34__5D_ inOperand,
                                     class Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- += operator (with list of field expressions)
-  public: void addAssignOperation (const class GGS_lstring & inOperand0
-                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- ++= operator, collection value
-  public: void plusPlusAssignOperation (const GGS_lstringlist_2E_element & inOperand
+  public: void plusPlusAssignOperation (const GGS_uint_36__34_ & inOperand
                                         COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
-  public: GGS_lstringlist add_operation (const GGS_lstringlist & inOperand,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_lstringlist & inOperand) const ;
-
-//--------------------------------- Setters
-  public: void setter_append (class GGS_lstring constinArgument0,
-                              Compiler * inCompiler
-                              COMMA_LOCATION_ARGS) ;
-
-  public: void setter_insertAtIndex (class GGS_lstring constinArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popFirst (class GGS_lstring & outArgument0,
-                                Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popLast (class GGS_lstring & outArgument0,
-                               Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-  public: void setter_removeAtIndex (class GGS_lstring & outArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_setMValueAtIndex (class GGS_lstring constinArgument0,
-                                        class GGS_uint constinArgument1,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public: void method_first (class GGS_lstring & outArgument0,
-                             Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) const ;
-
-  public: void method_last (class GGS_lstring & outArgument0,
-                            Compiler * inCompiler
-                            COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
-
-  public: class GGS_lstring getter_mValueAtIndex (const class GGS_uint & constinOperand0,
+  public: GGS__5B_uint_36__34__5D_ add_operation (const GGS__5B_uint_36__34__5D_ & inOperand,
                                                   Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
-  public: class GGS_range getter_range (LOCATION_ARGS) const ;
-
-  public: class GGS_lstringlist getter_subListFromIndex (const class GGS_uint & constinOperand0,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_lstringlist getter_subListToIndex (const class GGS_uint & constinOperand0,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_lstringlist getter_subListWithRange (const class GGS_range & constinOperand0,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
-//--------------------------------- Friend
-  friend class UpEnumerator_lstringlist ;
-  friend class DownEnumerator_lstringlist ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_lstringlist ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @objectlist list enumerator
-//--------------------------------------------------------------------------------------------------
-
-class DownEnumerator_objectlist final {
-  public: DownEnumerator_objectlist (const class GGS_objectlist & inList) ;
-
-  public: ~ DownEnumerator_objectlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex >= 0 ; }
-
-  public: inline void gotoNextObject (void) { mIndex -= 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_object current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_objectlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_objectlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: DownEnumerator_objectlist (const DownEnumerator_objectlist &) = delete ;
-  private: DownEnumerator_objectlist & operator = (const DownEnumerator_objectlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class UpEnumerator_objectlist final {
-  public: UpEnumerator_objectlist (const class GGS_objectlist & inList)  ;
-
-  public: ~ UpEnumerator_objectlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex < mArray.count () ; }
-
-  public: inline void gotoNextObject (void) { mIndex += 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_object current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_objectlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_objectlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: UpEnumerator_objectlist (const UpEnumerator_objectlist &) = delete ;
-  private: UpEnumerator_objectlist & operator = (const UpEnumerator_objectlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-// @objectlist list
-//--------------------------------------------------------------------------------------------------
-
-class GGS_objectlist : public AC_GALGAS_root {
-//--- Private property
-  private: GenericArray <GGS_objectlist_2E_element> mArray ;
-
-//--- Default constructor
-  public: GGS_objectlist (void) ;
-
-//--- Destructor
-  public: virtual ~ GGS_objectlist (void) = default ;
-
-//--- Copy
-  public: GGS_objectlist (const GGS_objectlist &) = default ;
-  public: GGS_objectlist & operator = (const GGS_objectlist &) = default ;
-
-//--- Is valid
-  public: inline bool isValid (void) const override { return mArray.isAllocated () ; }
-
-//--- Drop
-  public: inline virtual void drop (void) override { mArray.removeAll () ; }
-
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-//--- Count
-  public: inline uint32_t count (void) const { return uint32_t (mArray.count ()) ; }
- 
-//--- sortedElementArray
-  public : inline GenericArray <GGS_objectlist_2E_element> sortedElementArray (void) const {
-    return mArray ;
-  }
-
-//--- subList
-  private: GGS_objectlist subList (const int32_t inStart,
-                                   const int32_t inLength,
-                                   Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) const ;
-
-
-//--- List constructor for graph
-  public: GGS_objectlist (const CollectionElementArray & inSharedArray) ;
-
-//--- Element constructor
-  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
-                                                 const class GGS_object & in_mValue
-                                                 COMMA_LOCATION_ARGS) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_objectlist init (Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_objectlist extractObject (const GGS_object & inObject,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_objectlist class_func_listWithValue (const class GGS_object & inOperand0
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_objectlist inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public: void addAssignOperation (const class GGS_object & inOperand0
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- ++= operator, collection value
-  public: void plusPlusAssignOperation (const GGS_objectlist_2E_element & inOperand
-                                        COMMA_LOCATION_ARGS) ;
-//--------------------------------- + operator
-  public: GGS_objectlist add_operation (const GGS_objectlist & inOperand,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_objectlist & inOperand) const ;
-
-//--------------------------------- Setters
-  public: void setter_append (class GGS_object constinArgument0,
-                              Compiler * inCompiler
-                              COMMA_LOCATION_ARGS) ;
-
-  public: void setter_insertAtIndex (class GGS_object constinArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popFirst (class GGS_object & outArgument0,
-                                Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popLast (class GGS_object & outArgument0,
-                               Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-  public: void setter_removeAtIndex (class GGS_object & outArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_setMValueAtIndex (class GGS_object constinArgument0,
-                                        class GGS_uint constinArgument1,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public: void method_first (class GGS_object & outArgument0,
-                             Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) const ;
-
-  public: void method_last (class GGS_object & outArgument0,
-                            Compiler * inCompiler
-                            COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
-
-  public: class GGS_object getter_mValueAtIndex (const class GGS_uint & constinOperand0,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_range getter_range (LOCATION_ARGS) const ;
-
-  public: class GGS_objectlist getter_subListFromIndex (const class GGS_uint & constinOperand0,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_objectlist getter_subListToIndex (const class GGS_uint & constinOperand0,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_objectlist getter_subListWithRange (const class GGS_range & constinOperand0,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
-//--------------------------------- Friend
-  friend class UpEnumerator_objectlist ;
-  friend class DownEnumerator_objectlist ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_objectlist ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @stringlist list enumerator
-//--------------------------------------------------------------------------------------------------
-
-class DownEnumerator_stringlist final {
-  public: DownEnumerator_stringlist (const class GGS_stringlist & inList) ;
-
-  public: ~ DownEnumerator_stringlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex >= 0 ; }
-
-  public: inline void gotoNextObject (void) { mIndex -= 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_string current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_stringlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_stringlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: DownEnumerator_stringlist (const DownEnumerator_stringlist &) = delete ;
-  private: DownEnumerator_stringlist & operator = (const DownEnumerator_stringlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class UpEnumerator_stringlist final {
-  public: UpEnumerator_stringlist (const class GGS_stringlist & inList)  ;
-
-  public: ~ UpEnumerator_stringlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex < mArray.count () ; }
-
-  public: inline void gotoNextObject (void) { mIndex += 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_string current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_stringlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_stringlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: UpEnumerator_stringlist (const UpEnumerator_stringlist &) = delete ;
-  private: UpEnumerator_stringlist & operator = (const UpEnumerator_stringlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-// @stringlist list
-//--------------------------------------------------------------------------------------------------
-
-class GGS_stringlist : public AC_GALGAS_root {
-//--- Private property
-  private: GenericArray <GGS_stringlist_2E_element> mArray ;
-
-//--- Default constructor
-  public: GGS_stringlist (void) ;
-
-//--- Destructor
-  public: virtual ~ GGS_stringlist (void) = default ;
-
-//--- Copy
-  public: GGS_stringlist (const GGS_stringlist &) = default ;
-  public: GGS_stringlist & operator = (const GGS_stringlist &) = default ;
-
-//--- Is valid
-  public: inline bool isValid (void) const override { return mArray.isAllocated () ; }
-
-//--- Drop
-  public: inline virtual void drop (void) override { mArray.removeAll () ; }
-
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-//--- Count
-  public: inline uint32_t count (void) const { return uint32_t (mArray.count ()) ; }
- 
-//--- sortedElementArray
-  public : inline GenericArray <GGS_stringlist_2E_element> sortedElementArray (void) const {
-    return mArray ;
-  }
-
-//--- subList
-  private: GGS_stringlist subList (const int32_t inStart,
-                                   const int32_t inLength,
-                                   Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) const ;
-
-
-//--- List constructor for graph
-  public: GGS_stringlist (const CollectionElementArray & inSharedArray) ;
-
-//--- Element constructor
-  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
-                                                 const class GGS_string & in_mValue
-                                                 COMMA_LOCATION_ARGS) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_stringlist init (Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_stringlist extractObject (const GGS_object & inObject,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_stringlist class_func_listWithValue (const class GGS_string & inOperand0
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_stringlist inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public: void addAssignOperation (const class GGS_string & inOperand0
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- ++= operator, collection value
-  public: void plusPlusAssignOperation (const GGS_stringlist_2E_element & inOperand
-                                        COMMA_LOCATION_ARGS) ;
-//--------------------------------- + operator
-  public: GGS_stringlist add_operation (const GGS_stringlist & inOperand,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_stringlist & inOperand) const ;
-
-//--------------------------------- Setters
-  public: void setter_append (class GGS_string constinArgument0,
-                              Compiler * inCompiler
-                              COMMA_LOCATION_ARGS) ;
-
-  public: void setter_insertAtIndex (class GGS_string constinArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popFirst (class GGS_string & outArgument0,
-                                Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popLast (class GGS_string & outArgument0,
-                               Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-  public: void setter_removeAtIndex (class GGS_string & outArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_setMValueAtIndex (class GGS_string constinArgument0,
-                                        class GGS_uint constinArgument1,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public: void method_first (class GGS_string & outArgument0,
-                             Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) const ;
-
-  public: void method_last (class GGS_string & outArgument0,
-                            Compiler * inCompiler
-                            COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
-
-  public: class GGS_string getter_mValueAtIndex (const class GGS_uint & constinOperand0,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_range getter_range (LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_subListFromIndex (const class GGS_uint & constinOperand0,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_subListToIndex (const class GGS_uint & constinOperand0,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_stringlist getter_subListWithRange (const class GGS_range & constinOperand0,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
-//--------------------------------- Friend
-  friend class UpEnumerator_stringlist ;
-  friend class DownEnumerator_stringlist ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_stringlist ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @typelist list enumerator
-//--------------------------------------------------------------------------------------------------
-
-class DownEnumerator_typelist final {
-  public: DownEnumerator_typelist (const class GGS_typelist & inList) ;
-
-  public: ~ DownEnumerator_typelist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex >= 0 ; }
-
-  public: inline void gotoNextObject (void) { mIndex -= 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_type current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_typelist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_typelist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: DownEnumerator_typelist (const DownEnumerator_typelist &) = delete ;
-  private: DownEnumerator_typelist & operator = (const DownEnumerator_typelist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class UpEnumerator_typelist final {
-  public: UpEnumerator_typelist (const class GGS_typelist & inList)  ;
-
-  public: ~ UpEnumerator_typelist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex < mArray.count () ; }
-
-  public: inline void gotoNextObject (void) { mIndex += 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_type current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_typelist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_typelist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: UpEnumerator_typelist (const UpEnumerator_typelist &) = delete ;
-  private: UpEnumerator_typelist & operator = (const UpEnumerator_typelist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-// @typelist list
-//--------------------------------------------------------------------------------------------------
-
-class GGS_typelist : public AC_GALGAS_root {
-//--- Private property
-  private: GenericArray <GGS_typelist_2E_element> mArray ;
-
-//--- Default constructor
-  public: GGS_typelist (void) ;
-
-//--- Destructor
-  public: virtual ~ GGS_typelist (void) = default ;
-
-//--- Copy
-  public: GGS_typelist (const GGS_typelist &) = default ;
-  public: GGS_typelist & operator = (const GGS_typelist &) = default ;
-
-//--- Is valid
-  public: inline bool isValid (void) const override { return mArray.isAllocated () ; }
-
-//--- Drop
-  public: inline virtual void drop (void) override { mArray.removeAll () ; }
-
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-//--- Count
-  public: inline uint32_t count (void) const { return uint32_t (mArray.count ()) ; }
- 
-//--- sortedElementArray
-  public : inline GenericArray <GGS_typelist_2E_element> sortedElementArray (void) const {
-    return mArray ;
-  }
-
-//--- subList
-  private: GGS_typelist subList (const int32_t inStart,
-                                 const int32_t inLength,
-                                 Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) const ;
-
-
-//--- List constructor for graph
-  public: GGS_typelist (const CollectionElementArray & inSharedArray) ;
-
-//--- Element constructor
-  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
-                                                 const class GGS_type & in_mValue
-                                                 COMMA_LOCATION_ARGS) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_typelist init (Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_typelist extractObject (const GGS_object & inObject,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_typelist class_func_listWithValue (const class GGS_type & inOperand0
-                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_typelist inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public: void addAssignOperation (const class GGS_type & inOperand0
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- ++= operator, collection value
-  public: void plusPlusAssignOperation (const GGS_typelist_2E_element & inOperand
-                                        COMMA_LOCATION_ARGS) ;
-//--------------------------------- + operator
-  public: GGS_typelist add_operation (const GGS_typelist & inOperand,
-                                      Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_typelist & inOperand) const ;
-
-//--------------------------------- Setters
-  public: void setter_append (class GGS_type constinArgument0,
-                              Compiler * inCompiler
-                              COMMA_LOCATION_ARGS) ;
-
-  public: void setter_insertAtIndex (class GGS_type constinArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popFirst (class GGS_type & outArgument0,
-                                Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popLast (class GGS_type & outArgument0,
-                               Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-  public: void setter_removeAtIndex (class GGS_type & outArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_setMValueAtIndex (class GGS_type constinArgument0,
-                                        class GGS_uint constinArgument1,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public: void method_first (class GGS_type & outArgument0,
-                             Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) const ;
-
-  public: void method_last (class GGS_type & outArgument0,
-                            Compiler * inCompiler
-                            COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
-
-  public: class GGS_type getter_mValueAtIndex (const class GGS_uint & constinOperand0,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_range getter_range (LOCATION_ARGS) const ;
-
-  public: class GGS_typelist getter_subListFromIndex (const class GGS_uint & constinOperand0,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_typelist getter_subListToIndex (const class GGS_uint & constinOperand0,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_typelist getter_subListWithRange (const class GGS_range & constinOperand0,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
-//--------------------------------- Friend
-  friend class UpEnumerator_typelist ;
-  friend class DownEnumerator_typelist ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_typelist ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @uintlist list enumerator
-//--------------------------------------------------------------------------------------------------
-
-class DownEnumerator_uintlist final {
-  public: DownEnumerator_uintlist (const class GGS_uintlist & inList) ;
-
-  public: ~ DownEnumerator_uintlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex >= 0 ; }
-
-  public: inline void gotoNextObject (void) { mIndex -= 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_uint current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_uintlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_uintlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: DownEnumerator_uintlist (const DownEnumerator_uintlist &) = delete ;
-  private: DownEnumerator_uintlist & operator = (const DownEnumerator_uintlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class UpEnumerator_uintlist final {
-  public: UpEnumerator_uintlist (const class GGS_uintlist & inList)  ;
-
-  public: ~ UpEnumerator_uintlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex < mArray.count () ; }
-
-  public: inline void gotoNextObject (void) { mIndex += 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_uint current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_uintlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_uintlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: UpEnumerator_uintlist (const UpEnumerator_uintlist &) = delete ;
-  private: UpEnumerator_uintlist & operator = (const UpEnumerator_uintlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-// @uintlist list
-//--------------------------------------------------------------------------------------------------
-
-class GGS_uintlist : public AC_GALGAS_root {
-//--- Private property
-  private: GenericArray <GGS_uintlist_2E_element> mArray ;
-
-//--- Default constructor
-  public: GGS_uintlist (void) ;
-
-//--- Destructor
-  public: virtual ~ GGS_uintlist (void) = default ;
-
-//--- Copy
-  public: GGS_uintlist (const GGS_uintlist &) = default ;
-  public: GGS_uintlist & operator = (const GGS_uintlist &) = default ;
-
-//--- Is valid
-  public: inline bool isValid (void) const override { return mArray.isAllocated () ; }
-
-//--- Drop
-  public: inline virtual void drop (void) override { mArray.removeAll () ; }
-
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-//--- Count
-  public: inline uint32_t count (void) const { return uint32_t (mArray.count ()) ; }
- 
-//--- sortedElementArray
-  public : inline GenericArray <GGS_uintlist_2E_element> sortedElementArray (void) const {
-    return mArray ;
-  }
-
-//--- subList
-  private: GGS_uintlist subList (const int32_t inStart,
-                                 const int32_t inLength,
-                                 Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) const ;
-
-
-//--- List constructor for graph
-  public: GGS_uintlist (const CollectionElementArray & inSharedArray) ;
-
-//--- Element constructor
-  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
-                                                 const class GGS_uint & in_mValue
-                                                 COMMA_LOCATION_ARGS) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_uintlist init (Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_uintlist extractObject (const GGS_object & inObject,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_uintlist class_func_listWithValue (const class GGS_uint & inOperand0
-                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_uintlist inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public: void addAssignOperation (const class GGS_uint & inOperand0
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- ++= operator, collection value
-  public: void plusPlusAssignOperation (const GGS_uintlist_2E_element & inOperand
-                                        COMMA_LOCATION_ARGS) ;
-//--------------------------------- + operator
-  public: GGS_uintlist add_operation (const GGS_uintlist & inOperand,
-                                      Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_uintlist & inOperand) const ;
-
-//--------------------------------- Setters
-  public: void setter_append (class GGS_uint constinArgument0,
-                              Compiler * inCompiler
-                              COMMA_LOCATION_ARGS) ;
-
-  public: void setter_insertAtIndex (class GGS_uint constinArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popFirst (class GGS_uint & outArgument0,
-                                Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popLast (class GGS_uint & outArgument0,
-                               Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-  public: void setter_removeAtIndex (class GGS_uint & outArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_setMValueAtIndex (class GGS_uint constinArgument0,
-                                        class GGS_uint constinArgument1,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public: void method_first (class GGS_uint & outArgument0,
-                             Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) const ;
-
-  public: void method_last (class GGS_uint & outArgument0,
-                            Compiler * inCompiler
-                            COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
-
-  public: class GGS_uint getter_mValueAtIndex (const class GGS_uint & constinOperand0,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_range getter_range (LOCATION_ARGS) const ;
-
-  public: class GGS_uintlist getter_subListFromIndex (const class GGS_uint & constinOperand0,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uintlist getter_subListToIndex (const class GGS_uint & constinOperand0,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uintlist getter_subListWithRange (const class GGS_range & constinOperand0,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
-//--------------------------------- Friend
-  friend class UpEnumerator_uintlist ;
-  friend class DownEnumerator_uintlist ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_uintlist ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @uint_36__34_list list enumerator
-//--------------------------------------------------------------------------------------------------
-
-class DownEnumerator_uint_36__34_list final {
-  public: DownEnumerator_uint_36__34_list (const class GGS_uint_36__34_list & inList) ;
-
-  public: ~ DownEnumerator_uint_36__34_list (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex >= 0 ; }
-
-  public: inline void gotoNextObject (void) { mIndex -= 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_uint_36__34_ current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_uint_36__34_list_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_uint_36__34_list_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: DownEnumerator_uint_36__34_list (const DownEnumerator_uint_36__34_list &) = delete ;
-  private: DownEnumerator_uint_36__34_list & operator = (const DownEnumerator_uint_36__34_list &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class UpEnumerator_uint_36__34_list final {
-  public: UpEnumerator_uint_36__34_list (const class GGS_uint_36__34_list & inList)  ;
-
-  public: ~ UpEnumerator_uint_36__34_list (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex < mArray.count () ; }
-
-  public: inline void gotoNextObject (void) { mIndex += 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_uint_36__34_ current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_uint_36__34_list_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_uint_36__34_list_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: UpEnumerator_uint_36__34_list (const UpEnumerator_uint_36__34_list &) = delete ;
-  private: UpEnumerator_uint_36__34_list & operator = (const UpEnumerator_uint_36__34_list &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-// @uint64list list
-//--------------------------------------------------------------------------------------------------
-
-class GGS_uint_36__34_list : public AC_GALGAS_root {
-//--- Private property
-  private: GenericArray <GGS_uint_36__34_list_2E_element> mArray ;
-
-//--- Default constructor
-  public: GGS_uint_36__34_list (void) ;
-
-//--- Destructor
-  public: virtual ~ GGS_uint_36__34_list (void) = default ;
-
-//--- Copy
-  public: GGS_uint_36__34_list (const GGS_uint_36__34_list &) = default ;
-  public: GGS_uint_36__34_list & operator = (const GGS_uint_36__34_list &) = default ;
-
-//--- Is valid
-  public: inline bool isValid (void) const override { return mArray.isAllocated () ; }
-
-//--- Drop
-  public: inline virtual void drop (void) override { mArray.removeAll () ; }
-
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-//--- Count
-  public: inline uint32_t count (void) const { return uint32_t (mArray.count ()) ; }
- 
-//--- sortedElementArray
-  public : inline GenericArray <GGS_uint_36__34_list_2E_element> sortedElementArray (void) const {
-    return mArray ;
-  }
-
-//--- subList
-  private: GGS_uint_36__34_list subList (const int32_t inStart,
-                                         const int32_t inLength,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const ;
-
-
-//--- List constructor for graph
-  public: GGS_uint_36__34_list (const CollectionElementArray & inSharedArray) ;
-
-//--- Element constructor
-  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
-                                                 const class GGS_uint_36__34_ & in_mValue
-                                                 COMMA_LOCATION_ARGS) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_uint_36__34_list init (Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_uint_36__34_list extractObject (const GGS_object & inObject,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_uint_36__34_list class_func_listWithValue (const class GGS_uint_36__34_ & inOperand0
-                                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_uint_36__34_list inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public: void addAssignOperation (const class GGS_uint_36__34_ & inOperand0
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- ++= operator, collection value
-  public: void plusPlusAssignOperation (const GGS_uint_36__34_list_2E_element & inOperand
-                                        COMMA_LOCATION_ARGS) ;
-//--------------------------------- + operator
-  public: GGS_uint_36__34_list add_operation (const GGS_uint_36__34_list & inOperand,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_uint_36__34_list & inOperand) const ;
 
 //--------------------------------- Setters
   public: void setter_append (class GGS_uint_36__34_ constinArgument0,
                               Compiler * inCompiler
                               COMMA_LOCATION_ARGS) ;
 
-  public: void setter_insertAtIndex (class GGS_uint_36__34_ constinArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popFirst (class GGS_uint_36__34_ & outArgument0,
-                                Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popLast (class GGS_uint_36__34_ & outArgument0,
-                               Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-  public: void setter_removeAtIndex (class GGS_uint_36__34_ & outArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_setMValueAtIndex (class GGS_uint_36__34_ constinArgument0,
-                                        class GGS_uint constinArgument1,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public: void method_first (class GGS_uint_36__34_ & outArgument0,
-                             Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) const ;
-
-  public: void method_last (class GGS_uint_36__34_ & outArgument0,
-                            Compiler * inCompiler
-                            COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_ getter_mValueAtIndex (const class GGS_uint & constinOperand0,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_range getter_range (LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_list getter_subListFromIndex (const class GGS_uint & constinOperand0,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_list getter_subListToIndex (const class GGS_uint & constinOperand0,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_uint_36__34_list getter_subListWithRange (const class GGS_range & constinOperand0,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
-//--------------------------------- Friend
-  friend class UpEnumerator_uint_36__34_list ;
-  friend class DownEnumerator_uint_36__34_list ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_uint_36__34_list ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @bigintlist list enumerator
-//--------------------------------------------------------------------------------------------------
-
-class DownEnumerator_bigintlist final {
-  public: DownEnumerator_bigintlist (const class GGS_bigintlist & inList) ;
-
-  public: ~ DownEnumerator_bigintlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex >= 0 ; }
-
-  public: inline void gotoNextObject (void) { mIndex -= 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_bigint current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_bigintlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_bigintlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: DownEnumerator_bigintlist (const DownEnumerator_bigintlist &) = delete ;
-  private: DownEnumerator_bigintlist & operator = (const DownEnumerator_bigintlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class UpEnumerator_bigintlist final {
-  public: UpEnumerator_bigintlist (const class GGS_bigintlist & inList)  ;
-
-  public: ~ UpEnumerator_bigintlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex < mArray.count () ; }
-
-  public: inline void gotoNextObject (void) { mIndex += 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_bigint current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_bigintlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_bigintlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: UpEnumerator_bigintlist (const UpEnumerator_bigintlist &) = delete ;
-  private: UpEnumerator_bigintlist & operator = (const UpEnumerator_bigintlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-// @bigintlist list
-//--------------------------------------------------------------------------------------------------
-
-class GGS_bigintlist : public AC_GALGAS_root {
-//--- Private property
-  private: GenericArray <GGS_bigintlist_2E_element> mArray ;
-
-//--- Default constructor
-  public: GGS_bigintlist (void) ;
-
-//--- Destructor
-  public: virtual ~ GGS_bigintlist (void) = default ;
-
-//--- Copy
-  public: GGS_bigintlist (const GGS_bigintlist &) = default ;
-  public: GGS_bigintlist & operator = (const GGS_bigintlist &) = default ;
-
-//--- Is valid
-  public: inline bool isValid (void) const override { return mArray.isAllocated () ; }
-
-//--- Drop
-  public: inline virtual void drop (void) override { mArray.removeAll () ; }
-
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-//--- Count
-  public: inline uint32_t count (void) const { return uint32_t (mArray.count ()) ; }
- 
-//--- sortedElementArray
-  public : inline GenericArray <GGS_bigintlist_2E_element> sortedElementArray (void) const {
-    return mArray ;
-  }
-
-//--- subList
-  private: GGS_bigintlist subList (const int32_t inStart,
-                                   const int32_t inLength,
-                                   Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) const ;
-
-
-//--- List constructor for graph
-  public: GGS_bigintlist (const CollectionElementArray & inSharedArray) ;
-
-//--- Element constructor
-  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
-                                                 const class GGS_bigint & in_mValue
-                                                 COMMA_LOCATION_ARGS) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_bigintlist init (Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_bigintlist extractObject (const GGS_object & inObject,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_bigintlist class_func_listWithValue (const class GGS_bigint & inOperand0
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_bigintlist inOperand,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public: void addAssignOperation (const class GGS_bigint & inOperand0
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- ++= operator, collection value
-  public: void plusPlusAssignOperation (const GGS_bigintlist_2E_element & inOperand
-                                        COMMA_LOCATION_ARGS) ;
-//--------------------------------- + operator
-  public: GGS_bigintlist add_operation (const GGS_bigintlist & inOperand,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_bigintlist & inOperand) const ;
-
-//--------------------------------- Setters
-  public: void setter_append (class GGS_bigint constinArgument0,
+  public: void setter_insert (class GGS_uint_36__34_ constinArgument0,
+                              class GGS_uint constinArgument1,
                               Compiler * inCompiler
                               COMMA_LOCATION_ARGS) ;
 
-  public: void setter_insertAtIndex (class GGS_bigint constinArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
+  public: void setter_remove (class GGS_uint_36__34_ & outArgument0,
+                              class GGS_uint constinArgument1,
+                              Compiler * inCompiler
+                              COMMA_LOCATION_ARGS) ;
 
-  public: void setter_popFirst (class GGS_bigint & outArgument0,
-                                Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
+  public: void setter_removeAll (Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
 
-  public: void setter_popLast (class GGS_bigint & outArgument0,
-                               Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
+  public: void setter_removeFirst (class GGS_uint_36__34_ & outArgument0,
+                                   Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
 
-  public: void setter_removeAtIndex (class GGS_bigint & outArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_setMValueAtIndex (class GGS_bigint constinArgument0,
-                                        class GGS_uint constinArgument1,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
+  public: void setter_removeLast (class GGS_uint_36__34_ & outArgument0,
+                                  Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
-  public: void method_first (class GGS_bigint & outArgument0,
-                             Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) const ;
-
-  public: void method_last (class GGS_bigint & outArgument0,
-                            Compiler * inCompiler
-                            COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
   public: class GGS_uint getter_count (LOCATION_ARGS) const ;
 
-  public: class GGS_bigint getter_mValueAtIndex (const class GGS_uint & constinOperand0,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
+  public: class GGS_uint_36__34_ getter_first (Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
 
-  public: class GGS_range getter_range (LOCATION_ARGS) const ;
+  public: class GGS_uint_36__34_ getter_last (Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
 
-  public: class GGS_bigintlist getter_subListFromIndex (const class GGS_uint & constinOperand0,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
+  public: class GGS__5B_uint_36__34__5D_ getter_removingFirst (const class GGS_uint & constinOperand0,
+                                                               Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) const ;
 
-  public: class GGS_bigintlist getter_subListToIndex (const class GGS_uint & constinOperand0,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_bigintlist getter_subListWithRange (const class GGS_range & constinOperand0,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
+  public: class GGS__5B_uint_36__34__5D_ getter_sublist (const class GGS_uint & constinOperand0,
+                                                         const class GGS_uint & constinOperand1,
+                                                         Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
+  public: class GGS_uint_36__34_ readSubscript__3F_ (const class GGS_uint & in0,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const ;
+
 
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
 //--------------------------------- Friend
-  friend class UpEnumerator_bigintlist ;
-  friend class DownEnumerator_bigintlist ;
- 
+  friend class UpEnumerator__5B_uint_36__34__5D_ ;
+  friend class DownEnumerator__5B_uint_36__34__5D_ ;
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
 
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_bigintlist ;
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS__5B_uint_36__34__5D_ ;
 
 //--------------------------------------------------------------------------------------------------
-// Phase 1: @lbigintlist list enumerator
+// Phase 1: [string] array
 //--------------------------------------------------------------------------------------------------
 
-class DownEnumerator_lbigintlist final {
-  public: DownEnumerator_lbigintlist (const class GGS_lbigintlist & inList) ;
+class DownEnumerator__5B_string_5D_ final {
+//--- Constructor
+  public: DownEnumerator__5B_string_5D_ (const class GGS__5B_string_5D_ & inOperand) ;
 
-  public: ~ DownEnumerator_lbigintlist (void) = default ;
+//--- No copy
+  private: DownEnumerator__5B_string_5D_ (const DownEnumerator__5B_string_5D_ &) = delete ;
+  private: DownEnumerator__5B_string_5D_ & operator = (const DownEnumerator__5B_string_5D_ &) = delete ;
 
-  public: inline bool hasCurrentObject (void) const { return mIndex >= 0 ; }
-
-  public: inline void gotoNextObject (void) { mIndex -= 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_lbigint current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_lbigintlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_lbigintlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: DownEnumerator_lbigintlist (const DownEnumerator_lbigintlist &) = delete ;
-  private: DownEnumerator_lbigintlist & operator = (const DownEnumerator_lbigintlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class UpEnumerator_lbigintlist final {
-  public: UpEnumerator_lbigintlist (const class GGS_lbigintlist & inList)  ;
-
-  public: ~ UpEnumerator_lbigintlist (void) = default ;
-
-  public: inline bool hasCurrentObject (void) const { return mIndex < mArray.count () ; }
-
-  public: inline void gotoNextObject (void) { mIndex += 1 ; }
-
-  public: inline void rewind (void) { mIndex = 0 ; }
-
-  public: inline uint32_t index (void) { return uint32_t (mIndex) ; }
-
-  public: class GGS_lbigint current_mValue (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GGS_lbigintlist_2E_element current (LOCATION_ARGS) const ;
-
-  private: GenericArray <GGS_lbigintlist_2E_element> mArray ;
-  private: int32_t mIndex ;
-
-  private: UpEnumerator_lbigintlist (const UpEnumerator_lbigintlist &) = delete ;
-  private: UpEnumerator_lbigintlist & operator = (const UpEnumerator_lbigintlist &) = delete ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-// @lbigintlist list
-//--------------------------------------------------------------------------------------------------
-
-class GGS_lbigintlist : public AC_GALGAS_root {
-//--- Private property
-  private: GenericArray <GGS_lbigintlist_2E_element> mArray ;
-
-//--- Default constructor
-  public: GGS_lbigintlist (void) ;
-
-//--- Destructor
-  public: virtual ~ GGS_lbigintlist (void) = default ;
-
-//--- Copy
-  public: GGS_lbigintlist (const GGS_lbigintlist &) = default ;
-  public: GGS_lbigintlist & operator = (const GGS_lbigintlist &) = default ;
-
-//--- Is valid
-  public: inline bool isValid (void) const override { return mArray.isAllocated () ; }
-
-//--- Drop
-  public: inline virtual void drop (void) override { mArray.removeAll () ; }
-
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-//--- Count
-  public: inline uint32_t count (void) const { return uint32_t (mArray.count ()) ; }
- 
-//--- sortedElementArray
-  public : inline GenericArray <GGS_lbigintlist_2E_element> sortedElementArray (void) const {
-    return mArray ;
+//---
+  public: inline bool hasCurrentObject (void) const {
+    return mCurrent >= 0 ;
   }
 
-//--- subList
-  private: GGS_lbigintlist subList (const int32_t inStart,
-                                    const int32_t inLength,
-                                    Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) const ;
+//---
+  public: inline void gotoNextObject (void) {
+    mCurrent -= 1 ;
+  }
 
+//--- Current element access
+  public: class GGS_string current (LOCATION_ARGS) const ;
+  public: class GGS_string current_entry (LOCATION_ARGS) const ; // Pour instruction for dans template
 
-//--- List constructor for graph
-  public: GGS_lbigintlist (const CollectionElementArray & inSharedArray) ;
+//---- Properties
+  private: const GenericArray <GGS_string> mSharedArray ;
+  private: int32_t mCurrent ;
+} ;
 
-//--- Element constructor
-  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
-                                                 const class GGS_lbigint & in_mValue
-                                                 COMMA_LOCATION_ARGS) ;
+//--------------------------------------------------------------------------------------------------
+
+class UpEnumerator__5B_string_5D_ final {
+//--- Constructor
+  public: UpEnumerator__5B_string_5D_ (const class GGS__5B_string_5D_ & inOperand) ;
+
+//--- No copy
+  private: UpEnumerator__5B_string_5D_ (const UpEnumerator__5B_string_5D_ &) = delete ;
+  private: UpEnumerator__5B_string_5D_ & operator = (const UpEnumerator__5B_string_5D_ &) = delete ;
+
+//---
+  public: inline bool hasCurrentObject (void) const {
+    return mCurrent < mSharedArray.count () ;
+  }
+
+//---
+  public: inline void gotoNextObject (void) {
+    mCurrent += 1 ;
+  }
+
+//--- Current element access
+  public: class GGS_string current (LOCATION_ARGS) const ;
+  public: class GGS_string current_entry (LOCATION_ARGS) const ;
+
+//---- Properties
+  private: const GenericArray <GGS_string> mSharedArray ;
+  private: int32_t mCurrent ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+class GGS__5B_string_5D_ final : public AC_GALGAS_root {
+//--------------------------------- Private property
+  private: GenericArray <GGS_string> mSharedArray ;
+  private: bool mIsValid ;
+
+//--------------------------------- Default constructor
+  public: GGS__5B_string_5D_ (void) ;
+
+//--------------------------------- Handle copy
+  public: GGS__5B_string_5D_ (const GGS__5B_string_5D_ & inSource) ;
+  public: GGS__5B_string_5D_ & operator = (const GGS__5B_string_5D_ & inSource) ;
+
+//--------------------------------- Direct access
+  public: void removeAll (void) ;
+  public: inline uint32_t count (void) const { return uint32_t (mSharedArray.count ()) ; }
+
+//--- Methods that every type should implement
+  public: virtual bool isValid (void) const override { return mIsValid ; }
+
+  public: virtual void drop (void) override ;
+
+  public: virtual void description (String & ioString,
+                                    const int32_t inIndentation) const override ;
 
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GGS_lbigintlist init (Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_lbigintlist extractObject (const GGS_object & inObject,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_lbigintlist class_func_listWithValue (const class GGS_lbigint & inOperand0
-                                                                 COMMA_LOCATION_ARGS) ;
-
+  public: static GGS__5B_string_5D_ init (Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 //--------------------------------- += operator (with expression)
-  public: void plusAssignOperation (const GGS_lbigintlist inOperand,
+  public: void plusAssignOperation (const GGS__5B_string_5D_ inOperand,
                                     class Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- += operator (with list of field expressions)
-  public: void addAssignOperation (const class GGS_lbigint & inOperand0
-                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- ++= operator, collection value
-  public: void plusPlusAssignOperation (const GGS_lbigintlist_2E_element & inOperand
+  public: void plusPlusAssignOperation (const GGS_string & inOperand
                                         COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
-  public: GGS_lbigintlist add_operation (const GGS_lbigintlist & inOperand,
-                                         Compiler * inCompiler
+  public: GGS__5B_string_5D_ add_operation (const GGS__5B_string_5D_ & inOperand,
+                                            Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public: void setter_append (class GGS_string constinArgument0,
+                              Compiler * inCompiler
+                              COMMA_LOCATION_ARGS) ;
+
+  public: void setter_insert (class GGS_string constinArgument0,
+                              class GGS_uint constinArgument1,
+                              Compiler * inCompiler
+                              COMMA_LOCATION_ARGS) ;
+
+  public: void setter_remove (class GGS_string & outArgument0,
+                              class GGS_uint constinArgument1,
+                              Compiler * inCompiler
+                              COMMA_LOCATION_ARGS) ;
+
+  public: void setter_removeAll (Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
+
+  public: void setter_removeFirst (class GGS_string & outArgument0,
+                                   Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+  public: void setter_removeLast (class GGS_string & outArgument0,
+                                  Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
+
+  public: class GGS_string getter_first (Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) const ;
 
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_lbigintlist & inOperand) const ;
+  public: class GGS_string getter_last (Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) const ;
 
-//--------------------------------- Setters
-  public: void setter_append (class GGS_lbigint constinArgument0,
-                              Compiler * inCompiler
-                              COMMA_LOCATION_ARGS) ;
-
-  public: void setter_insertAtIndex (class GGS_lbigint constinArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popFirst (class GGS_lbigint & outArgument0,
-                                Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
-
-  public: void setter_popLast (class GGS_lbigint & outArgument0,
-                               Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-  public: void setter_removeAtIndex (class GGS_lbigint & outArgument0,
-                                     class GGS_uint constinArgument1,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-  public: void setter_setMValueAtIndex (class GGS_lbigint constinArgument0,
-                                        class GGS_uint constinArgument1,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public: void method_first (class GGS_lbigint & outArgument0,
-                             Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) const ;
-
-  public: void method_last (class GGS_lbigint & outArgument0,
-                            Compiler * inCompiler
-                            COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
-
-  public: class GGS_lbigint getter_mValueAtIndex (const class GGS_uint & constinOperand0,
-                                                  Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_range getter_range (LOCATION_ARGS) const ;
-
-  public: class GGS_lbigintlist getter_subListFromIndex (const class GGS_uint & constinOperand0,
+  public: class GGS__5B_string_5D_ getter_removingFirst (const class GGS_uint & constinOperand0,
                                                          Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const ;
 
-  public: class GGS_lbigintlist getter_subListToIndex (const class GGS_uint & constinOperand0,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: class GGS_lbigintlist getter_subListWithRange (const class GGS_range & constinOperand0,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const ;
+  public: class GGS__5B_string_5D_ getter_sublist (const class GGS_uint & constinOperand0,
+                                                   const class GGS_uint & constinOperand1,
+                                                   Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
+  public: class GGS_string readSubscript__3F_ (const class GGS_uint & in0,
+                                               Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
 
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
 //--------------------------------- Friend
-  friend class UpEnumerator_lbigintlist ;
-  friend class DownEnumerator_lbigintlist ;
- 
+  friend class UpEnumerator__5B_string_5D_ ;
+  friend class DownEnumerator__5B_string_5D_ ;
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
 
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_lbigintlist ;
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS__5B_string_5D_ ;
 
 //--------------------------------------------------------------------------------------------------
-// Phase 1: @lbigint struct
+// Phase 1: @lstring struct
 //--------------------------------------------------------------------------------------------------
 
-class GGS_lbigint : public AC_GALGAS_root {
+class GGS_lstring : public AC_GALGAS_root {
 //--------------------------------- Properties
-  public: GGS_bigint mProperty_bigint ;
-  public: inline GGS_bigint readProperty_bigint (void) const {
-    return mProperty_bigint ;
+  public: GGS_string mProperty_string ;
+  public: inline GGS_string readProperty_string (void) const {
+    return mProperty_string ;
   }
 
   public: GGS_location mProperty_location ;
@@ -5576,11 +3356,11 @@ class GGS_lbigint : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void drop (void) override ;
 
 //--------------------------------- Default constructor
-  public: GGS_lbigint (void) ;
+  public: GGS_lstring (void) ;
 
 //--------------------------------- Property setters
-  public: inline void setter_setBigint (const GGS_bigint & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_bigint = inValue ;
+  public: inline void setter_setString (const GGS_string & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_string = inValue ;
   }
 
   public: inline void setter_setLocation (const GGS_location & inValue COMMA_UNUSED_LOCATION_ARGS) {
@@ -5591,36 +3371,27 @@ class GGS_lbigint : public AC_GALGAS_root {
   private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
-  public: GGS_lbigint (const GGS_bigint & in_bigint,
+  public: GGS_lstring (const GGS_string & in_string,
                        const GGS_location & in_location) ;
 
 //--------------------------------- Copy constructor
-  public: GGS_lbigint (const GGS_lbigint & inSource) ;
+  public: GGS_lstring (const GGS_lstring & inSource) ;
 
 //--------------------------------- Assignment operator
-  public: GGS_lbigint & operator = (const GGS_lbigint & inSource) ;
+  public: GGS_lstring & operator = (const GGS_lstring & inSource) ;
 
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GGS_lbigint init_21__21_ (const class GGS_bigint & inOperand0,
+  public: static GGS_lstring init_21__21_ (const class GGS_string & inOperand0,
                                            const class GGS_location & inOperand1,
                                            Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_lbigint extractObject (const GGS_object & inObject,
-                                            Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_lbigint & inOperand) const ;
+  public: ComparisonResult objectCompare (const GGS_lstring & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5634,12 +3405,360 @@ class GGS_lbigint : public AC_GALGAS_root {
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
 
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_lbigint ;
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_lstring ;
+
+//--------------------------------------------------------------------------------------------------
+// Phase 1: [lstring] array
+//--------------------------------------------------------------------------------------------------
+
+class DownEnumerator__5B_lstring_5D_ final {
+//--- Constructor
+  public: DownEnumerator__5B_lstring_5D_ (const class GGS__5B_lstring_5D_ & inOperand) ;
+
+//--- No copy
+  private: DownEnumerator__5B_lstring_5D_ (const DownEnumerator__5B_lstring_5D_ &) = delete ;
+  private: DownEnumerator__5B_lstring_5D_ & operator = (const DownEnumerator__5B_lstring_5D_ &) = delete ;
+
+//---
+  public: inline bool hasCurrentObject (void) const {
+    return mCurrent >= 0 ;
+  }
+
+//---
+  public: inline void gotoNextObject (void) {
+    mCurrent -= 1 ;
+  }
+
+//--- Current element access
+  public: class GGS_lstring current (LOCATION_ARGS) const ;
+  public: class GGS_lstring current_entry (LOCATION_ARGS) const ; // Pour instruction for dans template
+
+//---- Properties
+  private: const GenericArray <GGS_lstring> mSharedArray ;
+  private: int32_t mCurrent ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+class UpEnumerator__5B_lstring_5D_ final {
+//--- Constructor
+  public: UpEnumerator__5B_lstring_5D_ (const class GGS__5B_lstring_5D_ & inOperand) ;
+
+//--- No copy
+  private: UpEnumerator__5B_lstring_5D_ (const UpEnumerator__5B_lstring_5D_ &) = delete ;
+  private: UpEnumerator__5B_lstring_5D_ & operator = (const UpEnumerator__5B_lstring_5D_ &) = delete ;
+
+//---
+  public: inline bool hasCurrentObject (void) const {
+    return mCurrent < mSharedArray.count () ;
+  }
+
+//---
+  public: inline void gotoNextObject (void) {
+    mCurrent += 1 ;
+  }
+
+//--- Current element access
+  public: class GGS_lstring current (LOCATION_ARGS) const ;
+  public: class GGS_lstring current_entry (LOCATION_ARGS) const ;
+
+//---- Properties
+  private: const GenericArray <GGS_lstring> mSharedArray ;
+  private: int32_t mCurrent ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+class GGS__5B_lstring_5D_ final : public AC_GALGAS_root {
+//--------------------------------- Private property
+  private: GenericArray <GGS_lstring> mSharedArray ;
+  private: bool mIsValid ;
+
+//--------------------------------- Default constructor
+  public: GGS__5B_lstring_5D_ (void) ;
+
+//--------------------------------- Handle copy
+  public: GGS__5B_lstring_5D_ (const GGS__5B_lstring_5D_ & inSource) ;
+  public: GGS__5B_lstring_5D_ & operator = (const GGS__5B_lstring_5D_ & inSource) ;
+
+//--------------------------------- Direct access
+  public: void removeAll (void) ;
+  public: inline uint32_t count (void) const { return uint32_t (mSharedArray.count ()) ; }
+
+//--- Methods that every type should implement
+  public: virtual bool isValid (void) const override { return mIsValid ; }
+
+  public: virtual void drop (void) override ;
+
+  public: virtual void description (String & ioString,
+                                    const int32_t inIndentation) const override ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GGS__5B_lstring_5D_ init (Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+//--------------------------------- += operator (with expression)
+  public: void plusAssignOperation (const GGS__5B_lstring_5D_ inOperand,
+                                    class Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- ++= operator, collection value
+  public: void plusPlusAssignOperation (const GGS_lstring & inOperand
+                                        COMMA_LOCATION_ARGS) ;
+//--------------------------------- + operator
+  public: GGS__5B_lstring_5D_ add_operation (const GGS__5B_lstring_5D_ & inOperand,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public: void setter_append (class GGS_lstring constinArgument0,
+                              Compiler * inCompiler
+                              COMMA_LOCATION_ARGS) ;
+
+  public: void setter_insert (class GGS_lstring constinArgument0,
+                              class GGS_uint constinArgument1,
+                              Compiler * inCompiler
+                              COMMA_LOCATION_ARGS) ;
+
+  public: void setter_remove (class GGS_lstring & outArgument0,
+                              class GGS_uint constinArgument1,
+                              Compiler * inCompiler
+                              COMMA_LOCATION_ARGS) ;
+
+  public: void setter_removeAll (Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
+
+  public: void setter_removeFirst (class GGS_lstring & outArgument0,
+                                   Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+  public: void setter_removeLast (class GGS_lstring & outArgument0,
+                                  Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
+
+  public: class GGS_lstring getter_first (Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_lstring getter_last (Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_lstring_5D_ getter_removingFirst (const class GGS_uint & constinOperand0,
+                                                          Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_lstring_5D_ getter_sublist (const class GGS_uint & constinOperand0,
+                                                    const class GGS_uint & constinOperand1,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+  public: class GGS_lstring readSubscript__3F_ (const class GGS_uint & in0,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const ;
+
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+//--------------------------------- Friend
+  friend class UpEnumerator__5B_lstring_5D_ ;
+  friend class DownEnumerator__5B_lstring_5D_ ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS__5B_lstring_5D_ ;
+
+//--------------------------------------------------------------------------------------------------
+// Phase 1: [uint] array
+//--------------------------------------------------------------------------------------------------
+
+class DownEnumerator__5B_uint_5D_ final {
+//--- Constructor
+  public: DownEnumerator__5B_uint_5D_ (const class GGS__5B_uint_5D_ & inOperand) ;
+
+//--- No copy
+  private: DownEnumerator__5B_uint_5D_ (const DownEnumerator__5B_uint_5D_ &) = delete ;
+  private: DownEnumerator__5B_uint_5D_ & operator = (const DownEnumerator__5B_uint_5D_ &) = delete ;
+
+//---
+  public: inline bool hasCurrentObject (void) const {
+    return mCurrent >= 0 ;
+  }
+
+//---
+  public: inline void gotoNextObject (void) {
+    mCurrent -= 1 ;
+  }
+
+//--- Current element access
+  public: class GGS_uint current (LOCATION_ARGS) const ;
+  public: class GGS_uint current_entry (LOCATION_ARGS) const ; // Pour instruction for dans template
+
+//---- Properties
+  private: const GenericArray <GGS_uint> mSharedArray ;
+  private: int32_t mCurrent ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+class UpEnumerator__5B_uint_5D_ final {
+//--- Constructor
+  public: UpEnumerator__5B_uint_5D_ (const class GGS__5B_uint_5D_ & inOperand) ;
+
+//--- No copy
+  private: UpEnumerator__5B_uint_5D_ (const UpEnumerator__5B_uint_5D_ &) = delete ;
+  private: UpEnumerator__5B_uint_5D_ & operator = (const UpEnumerator__5B_uint_5D_ &) = delete ;
+
+//---
+  public: inline bool hasCurrentObject (void) const {
+    return mCurrent < mSharedArray.count () ;
+  }
+
+//---
+  public: inline void gotoNextObject (void) {
+    mCurrent += 1 ;
+  }
+
+//--- Current element access
+  public: class GGS_uint current (LOCATION_ARGS) const ;
+  public: class GGS_uint current_entry (LOCATION_ARGS) const ;
+
+//---- Properties
+  private: const GenericArray <GGS_uint> mSharedArray ;
+  private: int32_t mCurrent ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+class GGS__5B_uint_5D_ final : public AC_GALGAS_root {
+//--------------------------------- Private property
+  private: GenericArray <GGS_uint> mSharedArray ;
+  private: bool mIsValid ;
+
+//--------------------------------- Default constructor
+  public: GGS__5B_uint_5D_ (void) ;
+
+//--------------------------------- Handle copy
+  public: GGS__5B_uint_5D_ (const GGS__5B_uint_5D_ & inSource) ;
+  public: GGS__5B_uint_5D_ & operator = (const GGS__5B_uint_5D_ & inSource) ;
+
+//--------------------------------- Direct access
+  public: void removeAll (void) ;
+  public: inline uint32_t count (void) const { return uint32_t (mSharedArray.count ()) ; }
+
+//--- Methods that every type should implement
+  public: virtual bool isValid (void) const override { return mIsValid ; }
+
+  public: virtual void drop (void) override ;
+
+  public: virtual void description (String & ioString,
+                                    const int32_t inIndentation) const override ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GGS__5B_uint_5D_ init (Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+//--------------------------------- += operator (with expression)
+  public: void plusAssignOperation (const GGS__5B_uint_5D_ inOperand,
+                                    class Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- ++= operator, collection value
+  public: void plusPlusAssignOperation (const GGS_uint & inOperand
+                                        COMMA_LOCATION_ARGS) ;
+//--------------------------------- + operator
+  public: GGS__5B_uint_5D_ add_operation (const GGS__5B_uint_5D_ & inOperand,
+                                          Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public: void setter_append (class GGS_uint constinArgument0,
+                              Compiler * inCompiler
+                              COMMA_LOCATION_ARGS) ;
+
+  public: void setter_insert (class GGS_uint constinArgument0,
+                              class GGS_uint constinArgument1,
+                              Compiler * inCompiler
+                              COMMA_LOCATION_ARGS) ;
+
+  public: void setter_remove (class GGS_uint & outArgument0,
+                              class GGS_uint constinArgument1,
+                              Compiler * inCompiler
+                              COMMA_LOCATION_ARGS) ;
+
+  public: void setter_removeAll (Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
+
+  public: void setter_removeFirst (class GGS_uint & outArgument0,
+                                   Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+  public: void setter_removeLast (class GGS_uint & outArgument0,
+                                  Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: class GGS_uint getter_count (LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_first (Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS_uint getter_last (Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_uint_5D_ getter_removingFirst (const class GGS_uint & constinOperand0,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public: class GGS__5B_uint_5D_ getter_sublist (const class GGS_uint & constinOperand0,
+                                                 const class GGS_uint & constinOperand1,
+                                                 Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+  public: class GGS_uint readSubscript__3F_ (const class GGS_uint & in0,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const ;
+
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+//--------------------------------- Friend
+  friend class UpEnumerator__5B_uint_5D_ ;
+  friend class DownEnumerator__5B_uint_5D_ ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS__5B_uint_5D_ ;
 
 //--------------------------------------------------------------------------------------------------
 // Phase 1: @lbool struct
@@ -5693,15 +3812,6 @@ class GGS_lbool : public AC_GALGAS_root {
                                          const class GGS_location & inOperand1,
                                          Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_lbool extractObject (const GGS_object & inObject,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
@@ -5720,12 +3830,89 @@ class GGS_lbool : public AC_GALGAS_root {
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
 
 extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_lbool ;
+
+//--------------------------------------------------------------------------------------------------
+// Phase 1: @lbigint struct
+//--------------------------------------------------------------------------------------------------
+
+class GGS_lbigint : public AC_GALGAS_root {
+//--------------------------------- Properties
+  public: GGS_bigint mProperty_bigint ;
+  public: inline GGS_bigint readProperty_bigint (void) const {
+    return mProperty_bigint ;
+  }
+
+  public: GGS_location mProperty_location ;
+  public: inline GGS_location readProperty_location (void) const {
+    return mProperty_location ;
+  }
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
+  public: VIRTUAL_IN_DEBUG void drop (void) override ;
+
+//--------------------------------- Default constructor
+  public: GGS_lbigint (void) ;
+
+//--------------------------------- Property setters
+  public: inline void setter_setBigint (const GGS_bigint & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_bigint = inValue ;
+  }
+
+  public: inline void setter_setLocation (const GGS_location & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_location = inValue ;
+  }
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
+
+//--------------------------------- Native constructor
+  public: GGS_lbigint (const GGS_bigint & in_bigint,
+                       const GGS_location & in_location) ;
+
+//--------------------------------- Copy constructor
+  public: GGS_lbigint (const GGS_lbigint & inSource) ;
+
+//--------------------------------- Assignment operator
+  public: GGS_lbigint & operator = (const GGS_lbigint & inSource) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GGS_lbigint init_21__21_ (const class GGS_bigint & inOperand0,
+                                           const class GGS_location & inOperand1,
+                                           Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_lbigint & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_lbigint ;
 
 //--------------------------------------------------------------------------------------------------
 // Phase 1: @lchar struct
@@ -5779,15 +3966,6 @@ class GGS_lchar : public AC_GALGAS_root {
                                          const class GGS_location & inOperand1,
                                          Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_lchar extractObject (const GGS_object & inObject,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
@@ -5806,7 +3984,7 @@ class GGS_lchar : public AC_GALGAS_root {
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
@@ -5865,15 +4043,6 @@ class GGS_ldouble : public AC_GALGAS_root {
                                            const class GGS_location & inOperand1,
                                            Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_ldouble extractObject (const GGS_object & inObject,
-                                            Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
@@ -5892,7 +4061,7 @@ class GGS_ldouble : public AC_GALGAS_root {
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
@@ -5951,15 +4120,6 @@ class GGS_lsint : public AC_GALGAS_root {
                                          const class GGS_location & inOperand1,
                                          Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_lsint extractObject (const GGS_object & inObject,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
@@ -5978,7 +4138,7 @@ class GGS_lsint : public AC_GALGAS_root {
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
@@ -6037,15 +4197,6 @@ class GGS_lsint_36__34_ : public AC_GALGAS_root {
                                                  const class GGS_location & inOperand1,
                                                  Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_lsint_36__34_ extractObject (const GGS_object & inObject,
-                                                  Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
@@ -6064,12 +4215,89 @@ class GGS_lsint_36__34_ : public AC_GALGAS_root {
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
 
 extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_lsint_36__34_ ;
+
+//--------------------------------------------------------------------------------------------------
+// Phase 1: @luint struct
+//--------------------------------------------------------------------------------------------------
+
+class GGS_luint : public AC_GALGAS_root {
+//--------------------------------- Properties
+  public: GGS_uint mProperty_uint ;
+  public: inline GGS_uint readProperty_uint (void) const {
+    return mProperty_uint ;
+  }
+
+  public: GGS_location mProperty_location ;
+  public: inline GGS_location readProperty_location (void) const {
+    return mProperty_location ;
+  }
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
+  public: VIRTUAL_IN_DEBUG void drop (void) override ;
+
+//--------------------------------- Default constructor
+  public: GGS_luint (void) ;
+
+//--------------------------------- Property setters
+  public: inline void setter_setUint (const GGS_uint & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_uint = inValue ;
+  }
+
+  public: inline void setter_setLocation (const GGS_location & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_location = inValue ;
+  }
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
+
+//--------------------------------- Native constructor
+  public: GGS_luint (const GGS_uint & in_uint,
+                     const GGS_location & in_location) ;
+
+//--------------------------------- Copy constructor
+  public: GGS_luint (const GGS_luint & inSource) ;
+
+//--------------------------------- Assignment operator
+  public: GGS_luint & operator = (const GGS_luint & inSource) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GGS_luint init_21__21_ (const class GGS_uint & inOperand0,
+                                         const class GGS_location & inOperand1,
+                                         Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
+//--------------------------------- Implementation of func 'description'
+  public: void description (String & ioString,
+                            const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_luint & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_luint ;
 
 //--------------------------------------------------------------------------------------------------
 // Phase 1: @luint_36__34_ struct
@@ -6123,15 +4351,6 @@ class GGS_luint_36__34_ : public AC_GALGAS_root {
                                                  const class GGS_location & inOperand1,
                                                  Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_luint_36__34_ extractObject (const GGS_object & inObject,
-                                                  Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
@@ -6150,7 +4369,7 @@ class GGS_luint_36__34_ : public AC_GALGAS_root {
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
@@ -6270,15 +4489,6 @@ class GGS__32_stringlist : public AC_GALGAS_root {
 //--------------------------------- Initializers
   public: static GGS__32_stringlist init (Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS__32_stringlist extractObject (const GGS_object & inObject,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- GALGAS class functions
   public: static class GGS__32_stringlist class_func_listWithValue (const class GGS_string & inOperand0,
                                                                     const class GGS_string & inOperand1
@@ -6391,7 +4601,7 @@ class GGS__32_stringlist : public AC_GALGAS_root {
 //--------------------------------- Friend
   friend class UpEnumerator__32_stringlist ;
   friend class DownEnumerator__32_stringlist ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
@@ -6450,15 +4660,6 @@ class GGS_range : public AC_GALGAS_root {
                                          const class GGS_uint & inOperand1,
                                          Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_range extractObject (const GGS_object & inObject,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
@@ -6477,7 +4678,7 @@ class GGS_range : public AC_GALGAS_root {
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
@@ -6532,15 +4733,6 @@ class GGS_bigint_3F_ : public AC_GALGAS_root {
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_bigint_3F_ extractObject (const GGS_object & inObject,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_bigint_3F_ & inOperand) const ;
 
@@ -6556,612 +4748,12 @@ class GGS_bigint_3F_ : public AC_GALGAS_root {
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
 
 extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_bigint_3F_ ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @functionlist_2E_element struct
-//--------------------------------------------------------------------------------------------------
-
-class GGS_functionlist_2E_element : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public: GGS_function mProperty_mValue ;
-  public: inline GGS_function readProperty_mValue (void) const {
-    return mProperty_mValue ;
-  }
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_functionlist_2E_element (void) ;
-
-//--------------------------------- Property setters
-  public: inline void setter_setMValue (const GGS_function & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_mValue = inValue ;
-  }
-
-//--------------------------------- Set initialized properties
-  private: void setInitializedProperties (Compiler * inCompiler) ;
-
-//--------------------------------- Native constructor
-  public: GGS_functionlist_2E_element (const GGS_function & in_mValue) ;
-
-//--------------------------------- Copy constructor
-  public: GGS_functionlist_2E_element (const GGS_functionlist_2E_element & inSource) ;
-
-//--------------------------------- Assignment operator
-  public: GGS_functionlist_2E_element & operator = (const GGS_functionlist_2E_element & inSource) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_functionlist_2E_element init_21_ (const class GGS_function & inOperand0,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_functionlist_2E_element extractObject (const GGS_object & inObject,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_functionlist_2E_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_functionlist_2E_element ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @objectlist_2E_element struct
-//--------------------------------------------------------------------------------------------------
-
-class GGS_objectlist_2E_element : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public: GGS_object mProperty_mValue ;
-  public: inline GGS_object readProperty_mValue (void) const {
-    return mProperty_mValue ;
-  }
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_objectlist_2E_element (void) ;
-
-//--------------------------------- Property setters
-  public: inline void setter_setMValue (const GGS_object & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_mValue = inValue ;
-  }
-
-//--------------------------------- Set initialized properties
-  private: void setInitializedProperties (Compiler * inCompiler) ;
-
-//--------------------------------- Native constructor
-  public: GGS_objectlist_2E_element (const GGS_object & in_mValue) ;
-
-//--------------------------------- Copy constructor
-  public: GGS_objectlist_2E_element (const GGS_objectlist_2E_element & inSource) ;
-
-//--------------------------------- Assignment operator
-  public: GGS_objectlist_2E_element & operator = (const GGS_objectlist_2E_element & inSource) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_objectlist_2E_element init_21_ (const class GGS_object & inOperand0,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_objectlist_2E_element extractObject (const GGS_object & inObject,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_objectlist_2E_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_objectlist_2E_element ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @stringlist_2E_element struct
-//--------------------------------------------------------------------------------------------------
-
-class GGS_stringlist_2E_element : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public: GGS_string mProperty_mValue ;
-  public: inline GGS_string readProperty_mValue (void) const {
-    return mProperty_mValue ;
-  }
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_stringlist_2E_element (void) ;
-
-//--------------------------------- Property setters
-  public: inline void setter_setMValue (const GGS_string & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_mValue = inValue ;
-  }
-
-//--------------------------------- Set initialized properties
-  private: void setInitializedProperties (Compiler * inCompiler) ;
-
-//--------------------------------- Native constructor
-  public: GGS_stringlist_2E_element (const GGS_string & in_mValue) ;
-
-//--------------------------------- Copy constructor
-  public: GGS_stringlist_2E_element (const GGS_stringlist_2E_element & inSource) ;
-
-//--------------------------------- Assignment operator
-  public: GGS_stringlist_2E_element & operator = (const GGS_stringlist_2E_element & inSource) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_stringlist_2E_element init_21_ (const class GGS_string & inOperand0,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_stringlist_2E_element extractObject (const GGS_object & inObject,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_stringlist_2E_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_stringlist_2E_element ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @typelist_2E_element struct
-//--------------------------------------------------------------------------------------------------
-
-class GGS_typelist_2E_element : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public: GGS_type mProperty_mValue ;
-  public: inline GGS_type readProperty_mValue (void) const {
-    return mProperty_mValue ;
-  }
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_typelist_2E_element (void) ;
-
-//--------------------------------- Property setters
-  public: inline void setter_setMValue (const GGS_type & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_mValue = inValue ;
-  }
-
-//--------------------------------- Set initialized properties
-  private: void setInitializedProperties (Compiler * inCompiler) ;
-
-//--------------------------------- Native constructor
-  public: GGS_typelist_2E_element (const GGS_type & in_mValue) ;
-
-//--------------------------------- Copy constructor
-  public: GGS_typelist_2E_element (const GGS_typelist_2E_element & inSource) ;
-
-//--------------------------------- Assignment operator
-  public: GGS_typelist_2E_element & operator = (const GGS_typelist_2E_element & inSource) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_typelist_2E_element init_21_ (const class GGS_type & inOperand0,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_typelist_2E_element extractObject (const GGS_object & inObject,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_typelist_2E_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_typelist_2E_element ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @uintlist_2E_element struct
-//--------------------------------------------------------------------------------------------------
-
-class GGS_uintlist_2E_element : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public: GGS_uint mProperty_mValue ;
-  public: inline GGS_uint readProperty_mValue (void) const {
-    return mProperty_mValue ;
-  }
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_uintlist_2E_element (void) ;
-
-//--------------------------------- Property setters
-  public: inline void setter_setMValue (const GGS_uint & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_mValue = inValue ;
-  }
-
-//--------------------------------- Set initialized properties
-  private: void setInitializedProperties (Compiler * inCompiler) ;
-
-//--------------------------------- Native constructor
-  public: GGS_uintlist_2E_element (const GGS_uint & in_mValue) ;
-
-//--------------------------------- Copy constructor
-  public: GGS_uintlist_2E_element (const GGS_uintlist_2E_element & inSource) ;
-
-//--------------------------------- Assignment operator
-  public: GGS_uintlist_2E_element & operator = (const GGS_uintlist_2E_element & inSource) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_uintlist_2E_element init_21_ (const class GGS_uint & inOperand0,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_uintlist_2E_element extractObject (const GGS_object & inObject,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_uintlist_2E_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_uintlist_2E_element ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @uint_36__34_list_2E_element struct
-//--------------------------------------------------------------------------------------------------
-
-class GGS_uint_36__34_list_2E_element : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public: GGS_uint_36__34_ mProperty_mValue ;
-  public: inline GGS_uint_36__34_ readProperty_mValue (void) const {
-    return mProperty_mValue ;
-  }
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_uint_36__34_list_2E_element (void) ;
-
-//--------------------------------- Property setters
-  public: inline void setter_setMValue (const GGS_uint_36__34_ & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_mValue = inValue ;
-  }
-
-//--------------------------------- Set initialized properties
-  private: void setInitializedProperties (Compiler * inCompiler) ;
-
-//--------------------------------- Native constructor
-  public: GGS_uint_36__34_list_2E_element (const GGS_uint_36__34_ & in_mValue) ;
-
-//--------------------------------- Copy constructor
-  public: GGS_uint_36__34_list_2E_element (const GGS_uint_36__34_list_2E_element & inSource) ;
-
-//--------------------------------- Assignment operator
-  public: GGS_uint_36__34_list_2E_element & operator = (const GGS_uint_36__34_list_2E_element & inSource) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_uint_36__34_list_2E_element init_21_ (const class GGS_uint_36__34_ & inOperand0,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_uint_36__34_list_2E_element extractObject (const GGS_object & inObject,
-                                                                Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_uint_36__34_list_2E_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_uint_36__34_list_2E_element ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @bigintlist_2E_element struct
-//--------------------------------------------------------------------------------------------------
-
-class GGS_bigintlist_2E_element : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public: GGS_bigint mProperty_mValue ;
-  public: inline GGS_bigint readProperty_mValue (void) const {
-    return mProperty_mValue ;
-  }
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_bigintlist_2E_element (void) ;
-
-//--------------------------------- Property setters
-  public: inline void setter_setMValue (const GGS_bigint & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_mValue = inValue ;
-  }
-
-//--------------------------------- Set initialized properties
-  private: void setInitializedProperties (Compiler * inCompiler) ;
-
-//--------------------------------- Native constructor
-  public: GGS_bigintlist_2E_element (const GGS_bigint & in_mValue) ;
-
-//--------------------------------- Copy constructor
-  public: GGS_bigintlist_2E_element (const GGS_bigintlist_2E_element & inSource) ;
-
-//--------------------------------- Assignment operator
-  public: GGS_bigintlist_2E_element & operator = (const GGS_bigintlist_2E_element & inSource) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_bigintlist_2E_element init_21_ (const class GGS_bigint & inOperand0,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_bigintlist_2E_element extractObject (const GGS_object & inObject,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_bigintlist_2E_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_bigintlist_2E_element ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @lbigintlist_2E_element struct
-//--------------------------------------------------------------------------------------------------
-
-class GGS_lbigintlist_2E_element : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public: GGS_lbigint mProperty_mValue ;
-  public: inline GGS_lbigint readProperty_mValue (void) const {
-    return mProperty_mValue ;
-  }
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_lbigintlist_2E_element (void) ;
-
-//--------------------------------- Property setters
-  public: inline void setter_setMValue (const GGS_lbigint & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_mValue = inValue ;
-  }
-
-//--------------------------------- Set initialized properties
-  private: void setInitializedProperties (Compiler * inCompiler) ;
-
-//--------------------------------- Native constructor
-  public: GGS_lbigintlist_2E_element (const GGS_lbigint & in_mValue) ;
-
-//--------------------------------- Copy constructor
-  public: GGS_lbigintlist_2E_element (const GGS_lbigintlist_2E_element & inSource) ;
-
-//--------------------------------- Assignment operator
-  public: GGS_lbigintlist_2E_element & operator = (const GGS_lbigintlist_2E_element & inSource) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_lbigintlist_2E_element init_21_ (const class GGS_lbigint & inOperand0,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_lbigintlist_2E_element extractObject (const GGS_object & inObject,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_lbigintlist_2E_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_lbigintlist_2E_element ;
 
 //--------------------------------------------------------------------------------------------------
 // Phase 1: @_32_stringlist_2E_element struct
@@ -7215,15 +4807,6 @@ class GGS__32_stringlist_2E_element : public AC_GALGAS_root {
                                                              const class GGS_string & inOperand1,
                                                              Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS__32_stringlist_2E_element extractObject (const GGS_object & inObject,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of func 'description'
   public: void description (String & ioString,
                             const int32_t inIndentation) const override ;
@@ -7242,7 +4825,7 @@ class GGS__32_stringlist_2E_element : public AC_GALGAS_root {
 
 //--------------------------------- Introspection
   public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
+
 } ;
 
 //--------------------------------------------------------------------------------------------------
@@ -7250,350 +4833,10 @@ class GGS__32_stringlist_2E_element : public AC_GALGAS_root {
 extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS__32_stringlist_2E_element ;
 
 //--------------------------------------------------------------------------------------------------
-// Phase 1: @lstring struct
-//--------------------------------------------------------------------------------------------------
-
-class GGS_lstring : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public: GGS_string mProperty_string ;
-  public: inline GGS_string readProperty_string (void) const {
-    return mProperty_string ;
-  }
-
-  public: GGS_location mProperty_location ;
-  public: inline GGS_location readProperty_location (void) const {
-    return mProperty_location ;
-  }
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_lstring (void) ;
-
-//--------------------------------- Property setters
-  public: inline void setter_setString (const GGS_string & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_string = inValue ;
-  }
-
-  public: inline void setter_setLocation (const GGS_location & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_location = inValue ;
-  }
-
-//--------------------------------- Set initialized properties
-  private: void setInitializedProperties (Compiler * inCompiler) ;
-
-//--------------------------------- Native constructor
-  public: GGS_lstring (const GGS_string & in_string,
-                       const GGS_location & in_location) ;
-
-//--------------------------------- Copy constructor
-  public: GGS_lstring (const GGS_lstring & inSource) ;
-
-//--------------------------------- Assignment operator
-  public: GGS_lstring & operator = (const GGS_lstring & inSource) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_lstring init_21__21_ (const class GGS_string & inOperand0,
-                                           const class GGS_location & inOperand1,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_lstring extractObject (const GGS_object & inObject,
-                                            Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_lstring & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_lstring ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @luint struct
-//--------------------------------------------------------------------------------------------------
-
-class GGS_luint : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public: GGS_uint mProperty_uint ;
-  public: inline GGS_uint readProperty_uint (void) const {
-    return mProperty_uint ;
-  }
-
-  public: GGS_location mProperty_location ;
-  public: inline GGS_location readProperty_location (void) const {
-    return mProperty_location ;
-  }
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_luint (void) ;
-
-//--------------------------------- Property setters
-  public: inline void setter_setUint (const GGS_uint & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_uint = inValue ;
-  }
-
-  public: inline void setter_setLocation (const GGS_location & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_location = inValue ;
-  }
-
-//--------------------------------- Set initialized properties
-  private: void setInitializedProperties (Compiler * inCompiler) ;
-
-//--------------------------------- Native constructor
-  public: GGS_luint (const GGS_uint & in_uint,
-                     const GGS_location & in_location) ;
-
-//--------------------------------- Copy constructor
-  public: GGS_luint (const GGS_luint & inSource) ;
-
-//--------------------------------- Assignment operator
-  public: GGS_luint & operator = (const GGS_luint & inSource) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_luint init_21__21_ (const class GGS_uint & inOperand0,
-                                         const class GGS_location & inOperand1,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_luint extractObject (const GGS_object & inObject,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_luint & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_luint ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @luintlist_2E_element struct
-//--------------------------------------------------------------------------------------------------
-
-class GGS_luintlist_2E_element : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public: GGS_luint mProperty_mValue ;
-  public: inline GGS_luint readProperty_mValue (void) const {
-    return mProperty_mValue ;
-  }
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_luintlist_2E_element (void) ;
-
-//--------------------------------- Property setters
-  public: inline void setter_setMValue (const GGS_luint & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_mValue = inValue ;
-  }
-
-//--------------------------------- Set initialized properties
-  private: void setInitializedProperties (Compiler * inCompiler) ;
-
-//--------------------------------- Native constructor
-  public: GGS_luintlist_2E_element (const GGS_luint & in_mValue) ;
-
-//--------------------------------- Copy constructor
-  public: GGS_luintlist_2E_element (const GGS_luintlist_2E_element & inSource) ;
-
-//--------------------------------- Assignment operator
-  public: GGS_luintlist_2E_element & operator = (const GGS_luintlist_2E_element & inSource) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_luintlist_2E_element init_21_ (const class GGS_luint & inOperand0,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_luintlist_2E_element extractObject (const GGS_object & inObject,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_luintlist_2E_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_luintlist_2E_element ;
-
-//--------------------------------------------------------------------------------------------------
-// Phase 1: @lstringlist_2E_element struct
-//--------------------------------------------------------------------------------------------------
-
-class GGS_lstringlist_2E_element : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public: GGS_lstring mProperty_mValue ;
-  public: inline GGS_lstring readProperty_mValue (void) const {
-    return mProperty_mValue ;
-  }
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--------------------------------- Default constructor
-  public: GGS_lstringlist_2E_element (void) ;
-
-//--------------------------------- Property setters
-  public: inline void setter_setMValue (const GGS_lstring & inValue COMMA_UNUSED_LOCATION_ARGS) {
-    mProperty_mValue = inValue ;
-  }
-
-//--------------------------------- Set initialized properties
-  private: void setInitializedProperties (Compiler * inCompiler) ;
-
-//--------------------------------- Native constructor
-  public: GGS_lstringlist_2E_element (const GGS_lstring & in_mValue) ;
-
-//--------------------------------- Copy constructor
-  public: GGS_lstringlist_2E_element (const GGS_lstringlist_2E_element & inSource) ;
-
-//--------------------------------- Assignment operator
-  public: GGS_lstringlist_2E_element & operator = (const GGS_lstringlist_2E_element & inSource) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GGS_lstringlist_2E_element init_21_ (const class GGS_lstring & inOperand0,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GGS_lstringlist_2E_element extractObject (const GGS_object & inObject,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of func 'description'
-  public: void description (String & ioString,
-                            const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_lstringlist_2E_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Read subscripts
-
-
-//--------------------------------- Introspection
-  public: const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
- 
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_lstringlist_2E_element ;
-
-//--------------------------------------------------------------------------------------------------
 
 #include "CollectionElementPtr.h"
 
 //--------------------------------------------------------------------------------------------------
-
-class cMapElement : public CollectionElementPtr {
-//--- Attribut
-  public: GGS_lstring mProperty_lkey ;
-
-//--- Default constructor
-  public: cMapElement (const GGS_lstring & inLKey
-                       COMMA_LOCATION_ARGS) ;
-
-//--- No copy
-  private: cMapElement (const cMapElement &) ;
-  private: cMapElement & operator = (const cMapElement &) ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-#include "C_galgas_function_descriptor.h"
-#include "GALGAS_ObjectArray.h"
 
 
 //--- START OF USER ZONE 2

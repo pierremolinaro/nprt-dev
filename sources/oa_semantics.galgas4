@@ -7,19 +7,19 @@
   map @M_processor {
     public var @uint mIndex
     public var @luint mStep
-    insert insertKey error message "the processor '%K' has been already declared in %L"
-    search searchKey error message "the processor '%K' is not declared"
+    #insertSetter insertKey #errorMessage "the processor '%K' has been already declared in %L"
+    #searchMethod searchKey #errorMessage "the processor '%K' is not declared"
   }
 
   map @M_network {
     public var @uint mIndex
     public var @bool mCANnetwork
     public var @luint mScalingFactor
-    insert insertKey error message "the processor '%K' has been already declared in %L"
-    search searchKey error message "the processor '%K' is not declared"
+    #insertSetter insertKey #errorMessage "the processor '%K' has been already declared in %L"
+    #searchMethod searchKey #errorMessage "the processor '%K' is not declared"
   }
 
-  abstract class @AC_canMessage %generatedInSeparateFile {
+  abstract class @AC_canMessage #generatedInSeparateFile {
   }
   
   class @C_canIndependantMessage : @AC_canMessage  {
@@ -43,11 +43,11 @@
     public var @luint mDeadline
     public var @luint mPeriod
     public var @AC_canMessage mMessageKind
-    insert insertKey error message "the CAN message '%K' has been already declared in %L"
-    search searchKey error message "the CAN message '%K' is not declared"
+    #insertSetter insertKey #errorMessage "the CAN message '%K' has been already declared in %L"
+    #searchMethod searchKey #errorMessage "the CAN message '%K' is not declared"
   }
   
-  abstract class @AC_task %generatedInSeparateFile {
+  abstract class @AC_task #generatedInSeparateFile {
   }
   
   class @C_independantTask : @AC_task  {
@@ -73,8 +73,8 @@
     public var @uint mProcessor
     public var @luint mPeriod
     public var @AC_task mTaskKind
-    insert insertKey error message "the task '%K' has been already declared in %L"
-    search searchKey error message "the task '%K' is not declared"
+    #insertSetter insertKey #errorMessage "the task '%K' has been already declared in %L"
+    #searchMethod searchKey #errorMessage "the task '%K' is not declared"
   }
 
 extern proc performComputations
